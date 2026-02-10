@@ -1,5 +1,5 @@
 """
-rewriter.py — Переписує новини українською через Groq API (Llama 3.3 70B)
+rewriter.py — Переписує новини українською через OpenRouter API (безкоштовні моделі)
 """
 
 import json
@@ -11,20 +11,20 @@ import urllib.error
 from config import GEMINI_SYSTEM_PROMPT
 
 
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
-GROQ_MODEL = "llama-3.3-70b-versatile"
-GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 
 def rewrite_article(title, summary, source_url):
     """
-    Відправляє статтю в Groq API і отримує рерайт українською.
+    Відправляє статтю в OpenRouter API і отримує рерайт українською.
     Повертає dict з ключами: title, summary, content, category, tags
     Або None якщо помилка.
     """
-    api_key = os.environ.get("GROQ_API_KEY", GROQ_API_KEY)
+    api_key = os.environ.get("OPENROUTER_API_KEY", API_KEY)
     if not api_key:
-        print("[ERROR] GROQ_API_KEY not set")
+        print("[ERROR] OPENROUTER_API_KEY not set")
         return None
 
     user_prompt = f"""Перепиши цю новину:
@@ -36,7 +36,7 @@ def rewrite_article(title, summary, source_url):
 Джерело: {source_url}"""
 
     payload = {
-        "model": GROQ_MODEL,
+        "model": MODEL,
         "messages": [
             {"role": "system", "content": GEMINI_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}
@@ -50,11 +50,13 @@ def rewrite_article(title, summary, source_url):
     for attempt in range(3):
         try:
             req = urllib.request.Request(
-                GROQ_URL,
+                API_URL,
                 data=data,
                 headers={
                     "Content-Type": "application/json",
-                    "Authorization": f"Bearer {api_key}"
+                    "Authorization": f"Bearer {api_key}",
+                    "HTTP-Referer": "https://konopla.ua",
+                    "X-Title": "Konopla.UA News Pipeline"
                 },
                 method="POST"
             )
@@ -62,7 +64,7 @@ def rewrite_article(title, summary, source_url):
             with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode("utf-8"))
 
-            # Extract text from Groq response (OpenAI format)
+            # Extract text from OpenRouter response (OpenAI format)
             text = result["choices"][0]["message"]["content"]
 
             # Clean up: remove markdown code blocks if present
@@ -82,7 +84,7 @@ def rewrite_article(title, summary, source_url):
 
         except urllib.error.HTTPError as e:
             error_body = e.read().decode("utf-8") if e.readable() else ""
-            print(f"[WARN] Groq API error (attempt {attempt+1}): {e.code} {error_body[:200]}")
+            print(f"[WARN] OpenRouter API error (attempt {attempt+1}): {e.code} {error_body[:200]}")
             if e.code == 429:  # Rate limited
                 time.sleep(10 * (attempt + 1))
             elif e.code >= 500:
@@ -96,7 +98,7 @@ def rewrite_article(title, summary, source_url):
                 time.sleep(2)
 
         except Exception as e:
-            print(f"[WARN] Groq request failed (attempt {attempt+1}): {e}")
+            print(f"[WARN] Request failed (attempt {attempt+1}): {e}")
             if attempt < 2:
                 time.sleep(3)
 
