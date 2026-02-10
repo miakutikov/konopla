@@ -12,15 +12,21 @@ from config import GEMINI_SYSTEM_PROMPT
 
 
 API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# Безкоштовні моделі — пробуємо по черзі, якщо одна недоступна
+MODELS = [
+    "google/gemma-3n-e4b-it:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "z-ai/glm-4.5-air:free",
+]
 
 
 def rewrite_article(title, summary, source_url):
     """
     Відправляє статтю в OpenRouter API і отримує рерайт українською.
-    Повертає dict з ключами: title, summary, content, category, tags
-    Або None якщо помилка.
+    Пробує кілька моделей по черзі.
+    Повертає dict або None.
     """
     api_key = os.environ.get("OPENROUTER_API_KEY", API_KEY)
     if not api_key:
@@ -35,8 +41,21 @@ def rewrite_article(title, summary, source_url):
 
 Джерело: {source_url}"""
 
+    for model in MODELS:
+        result = _try_model(api_key, model, user_prompt)
+        if result is not None:
+            return result
+
+    print("[ERROR] All models failed")
+    return None
+
+
+def _try_model(api_key, model, user_prompt):
+    """Пробує одну модель, повертає dict або None."""
+    print(f"   🤖 Model: {model}")
+
     payload = {
-        "model": MODEL,
+        "model": model,
         "messages": [
             {"role": "system", "content": GEMINI_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}
@@ -47,7 +66,7 @@ def rewrite_article(title, summary, source_url):
 
     data = json.dumps(payload).encode("utf-8")
 
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             req = urllib.request.Request(
                 API_URL,
@@ -64,52 +83,48 @@ def rewrite_article(title, summary, source_url):
             with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode("utf-8"))
 
-            # Extract text from OpenRouter response (OpenAI format)
             text = result["choices"][0]["message"]["content"]
 
-            # Clean up: remove markdown code blocks if present
+            # Clean up markdown code blocks
             text = re.sub(r"^```json\s*", "", text.strip())
             text = re.sub(r"\s*```$", "", text.strip())
 
-            # Parse JSON
             article_data = json.loads(text)
 
-            # Validate required fields
             required = ["title", "summary", "content", "category", "tags"]
             if not all(key in article_data for key in required):
-                print(f"[WARN] Missing fields in response: {article_data.keys()}")
+                print(f"   [WARN] Missing fields: {list(article_data.keys())}")
                 return None
 
+            print(f"   ✅ OK")
             return article_data
 
         except urllib.error.HTTPError as e:
             error_body = e.read().decode("utf-8") if e.readable() else ""
-            print(f"[WARN] OpenRouter API error (attempt {attempt+1}): {e.code} {error_body[:200]}")
-            if e.code == 429:  # Rate limited
-                time.sleep(10 * (attempt + 1))
-            elif e.code >= 500:
+            print(f"   [WARN] {model} error (attempt {attempt+1}): {e.code} {error_body[:150]}")
+            if e.code == 429:
                 time.sleep(5)
+                continue  # retry
             else:
-                return None
+                return None  # try next model
 
         except json.JSONDecodeError as e:
-            print(f"[WARN] Failed to parse response as JSON (attempt {attempt+1}): {e}")
-            if attempt < 2:
+            print(f"   [WARN] JSON parse error (attempt {attempt+1}): {e}")
+            if attempt < 1:
                 time.sleep(2)
 
         except Exception as e:
-            print(f"[WARN] Request failed (attempt {attempt+1}): {e}")
-            if attempt < 2:
+            print(f"   [WARN] Request failed (attempt {attempt+1}): {e}")
+            if attempt < 1:
                 time.sleep(3)
 
     return None
 
 
 if __name__ == "__main__":
-    # Test
     result = rewrite_article(
         "Hemp concrete blocks now available for European construction market",
-        "A new factory in Germany has started mass production of hempcrete blocks for residential construction. The blocks are carbon-negative and provide excellent insulation.",
+        "A new factory in Germany has started mass production of hempcrete blocks.",
         "https://example.com/test"
     )
     if result:
