@@ -1,0 +1,22 @@
+<article class="news-card {{ if .featured }}news-card-featured{{ end }}">
+  <a href="{{ .Permalink }}" class="news-card-image-link">
+    {{ if .Params.image }}
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img">
+    {{ else }}
+    <div class="news-card-img-placeholder">🌿</div>
+    {{ end }}
+  </a>
+  <div class="news-card-body">
+    {{ if .Params.categories }}
+    <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="card-category">{{ index .Params.categories 0 | title }}</a>
+    {{ end }}
+    <h2 class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <p class="card-summary">{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
+    <div class="card-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+      {{ if .Params.source }}
+      <span class="card-source">{{ .Params.source }}</span>
+      {{ end }}
+    </div>
+  </div>
+</article>

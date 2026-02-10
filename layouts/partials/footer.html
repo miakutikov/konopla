@@ -1,0 +1,44 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">🌿 Konopla.UA</div>
+        <p class="footer-desc">Автоматичний новинний портал про промислові коноплі. Технології, текстиль, будівництво, біопластик та інше.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Категорії</h4>
+        <ul>
+          <li><a href="{{ "/categories/текстиль/" | relURL }}">Текстиль</a></li>
+          <li><a href="{{ "/categories/будівництво/" | relURL }}">Будівництво</a></li>
+          <li><a href="{{ "/categories/агро/" | relURL }}">Агро</a></li>
+          <li><a href="{{ "/categories/біопластик/" | relURL }}">Біопластик</a></li>
+          <li><a href="{{ "/categories/наука/" | relURL }}">Наука</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ще</h4>
+        <ul>
+          <li><a href="{{ "/categories/харчова/" | relURL }}">Харчова промисловість</a></li>
+          <li><a href="{{ "/categories/екологія/" | relURL }}">Екологія</a></li>
+          <li><a href="{{ "/categories/бізнес/" | relURL }}">Бізнес</a></li>
+          <li><a href="{{ "/categories/законодавство/" | relURL }}">Законодавство</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакти</h4>
+        <ul>
+          <li><a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener">📨 Telegram-канал</a></li>
+          <li><a href="{{ "/about/" | relURL }}">📄 Про нас</a></li>
+          <li><a href="{{ "feed.xml" | absURL }}">📡 RSS-стрічка</a></li>
+        </ul>
+        <div class="footer-ad-note">
+          <a href="mailto:ads@konopla.ua">📩 Реклама на сайті</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ now.Year }} Konopla.UA — Усі права захищені</p>
+      <p class="footer-disclaimer">Портал висвітлює виключно промислове використання технічних конопель. Вся інформація носить інформаційний характер.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+{{/* 
+  Analytics partial — підключається в baseof.html
+  
+  Щоб увімкнути Google Analytics:
+  1. Створи акаунт на analytics.google.com
+  2. Отримай Measurement ID (виглядає як G-XXXXXXXXXX)
+  3. Додай в hugo.toml: [params] googleAnalytics = "G-XXXXXXXXXX"
+  
+  Або додай в GitHub Secrets як GA_MEASUREMENT_ID і передавай через env.
+*/}}
+
+{{ if .Site.Params.googleAnalytics }}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
+{{ end }}

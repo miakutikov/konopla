@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="container">
+
+  {{ partial "ad-banner" (dict "position" "top" "context" .) }}
+
+  {{ $allNews := where .Site.RegularPages "Section" "news" }}
+  {{ $news := $allNews.ByDate.Reverse }}
+
+  {{ if $news }}
+  <!-- Featured (latest article) -->
+  {{ with index $news 0 }}
+  <section class="featured-section">
+    <article class="featured-card">
+      <a href="{{ .Permalink }}" class="featured-image-link">
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img">
+        {{ else }}
+        <div class="featured-img-placeholder">🌿</div>
+        {{ end }}
+      </a>
+      <div class="featured-body">
+        {{ if .Params.categories }}
+        <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="card-category">{{ index .Params.categories 0 | title }}</a>
+        {{ end }}
+        <h1 class="featured-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+        <p class="featured-summary">{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
+        <div class="card-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+        </div>
+      </div>
+    </article>
+  </section>
+  {{ end }}
+
+  <!-- News grid -->
+  <section class="news-section">
+    <h2 class="section-title">Останні новини</h2>
+    <div class="news-grid">
+      {{ range $index, $page := after 1 $news }}
+        {{ if eq $index 4 }}
+          {{ partial "ad-banner" (dict "position" "in-feed" "context" $) }}
+        {{ end }}
+        {{ partial "article-card.html" $page }}
+      {{ end }}
+    </div>
+  </section>
+  {{ else }}
+  <section class="empty-state">
+    <h2>Поки що новин немає</h2>
+    <p>Робот вже працює — перші новини з'являться протягом кількох годин.</p>
+    <p>Підписуйтесь на <a href="{{ .Site.Params.telegram }}">Telegram-канал</a>, щоб не пропустити!</p>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

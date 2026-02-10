@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
+.env
+
+# Hugo build output
+public/
+
+# Generated images
+static/instagram/*.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

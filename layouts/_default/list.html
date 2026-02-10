@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="container">
+
+  <section class="list-header">
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}<p>{{ .Description }}</p>{{ end }}
+    <p class="list-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}новина{{ else }}новин{{ end }}</p>
+  </section>
+
+  {{ partial "ad-banner" (dict "position" "top" "context" .) }}
+
+  <section class="news-grid">
+    {{ range .Pages.ByDate.Reverse }}
+      {{ partial "article-card.html" . }}
+    {{ end }}
+  </section>
+
+  <!-- Pagination -->
+  {{ if gt .Paginator.TotalPages 1 }}
+  <nav class="pagination">
+    {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}" class="page-btn">← Новіші</a>
+    {{ end }}
+    
+    <span class="page-info">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
+    
+    {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}" class="page-btn">Старіші →</a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
+</div>
+{{ end }}

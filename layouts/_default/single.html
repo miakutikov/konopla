@@ -1,0 +1,90 @@
+{{ define "main" }}
+<div class="container article-layout">
+  
+  <article class="article">
+    <header class="article-header">
+      {{ if .Params.categories }}
+      <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="card-category">{{ index .Params.categories 0 | title }}</a>
+      {{ end }}
+      <h1>{{ .Title }}</h1>
+      <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 January 2006" }}</time>
+        {{ if .Params.source }}
+        <span class="meta-sep">·</span>
+        <span class="source">Джерело: {{ .Params.source }}</span>
+        {{ end }}
+      </div>
+    </header>
+
+    {{ if .Params.image }}
+    <figure class="article-figure">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image">
+      {{ if .Params.image_author }}
+      <figcaption class="image-credit">
+        Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> / 
+        <a href="{{ .Params.image_source_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>
+      </figcaption>
+      {{ end }}
+    </figure>
+    {{ end }}
+
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+
+    <!-- Share buttons -->
+    <div class="share-buttons">
+      <span class="share-label">Поділитись:</span>
+      <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn share-tg" title="Telegram">📨 Telegram</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener" class="share-btn share-fb" title="Facebook">📘 Facebook</a>
+      <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn share-tw" title="Twitter/X">🐦 X</a>
+    </div>
+
+    {{ if .Params.tags }}
+    <div class="tags">
+      {{ range .Params.tags }}
+      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">#{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ partial "ad-banner" (dict "position" "article-bottom" "context" .) }}
+
+    {{ if .Params.source_url }}
+    <div class="original-source">
+      <a href="{{ .Params.source_url }}" target="_blank" rel="noopener nofollow">Читати оригінал →</a>
+    </div>
+    {{ end }}
+
+    <a href="{{ "/" | relURL }}" class="back-link">← Всі новини</a>
+  </article>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    {{ partial "ad-banner" (dict "position" "sidebar" "context" .) }}
+    
+    <!-- Related articles -->
+    {{ $related := .Site.RegularPages.Related . | first 4 }}
+    {{ if $related }}
+    <div class="sidebar-section">
+      <h3>Схожі новини</h3>
+      {{ range $related }}
+      <a href="{{ .Permalink }}" class="related-item">
+        <span class="related-title">{{ .Title }}</span>
+        <time>{{ .Date.Format "02.01.2006" }}</time>
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <!-- Telegram CTA -->
+    <div class="sidebar-cta">
+      <div class="cta-emoji">📨</div>
+      <h3>Telegram-канал</h3>
+      <p>Отримуйте новини першими</p>
+      <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener" class="cta-btn">Підписатись</a>
+    </div>
+  </aside>
+
+</div>
+{{ end }}

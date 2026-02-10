@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+
+<!-- SEO Meta -->
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="uk_UA">
+{{ if .Params.image }}
+<meta property="og:image" content="{{ .Params.image }}">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="720">
+{{ else }}
+<meta property="og:image" content="{{ "images/og-default.png" | absURL }}">
+{{ end }}
+
+{{ if .IsPage }}
+<!-- Article specific -->
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:section" content="{{ if .Params.categories }}{{ index .Params.categories 0 }}{{ end }}">
+{{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
+{{ end }}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ if .Params.image }}<meta name="twitter:image" content="{{ .Params.image }}">{{ end }}
+
+<!-- Favicon -->
+<link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "feed.xml" | absURL }}">
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}?v=3">
+
+<!-- JSON-LD Structured Data -->
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ .Site.Params.description }}",
+  "inLanguage": "uk"
+}
+</script>
+{{ end }}
+{{ if .IsPage }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Params.summary }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Konopla.UA",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  {{ if .Params.image }}"image": "{{ .Params.image }}",{{ end }}
+  "mainEntityOfPage": "{{ .Permalink }}",
+  "inLanguage": "uk"
+}
+</script>
+{{ end }}

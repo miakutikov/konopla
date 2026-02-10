@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  {{ partial "seo-head.html" . }}
+  {{ partial "analytics.html" . }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <script>
+  // Mobile menu toggle
+  document.querySelector('.menu-toggle')?.addEventListener('click', function() {
+    document.querySelector('.category-nav').classList.toggle('open');
+  });
+  </script>
+</body>
+</html>

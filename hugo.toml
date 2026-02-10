@@ -1,0 +1,57 @@
+baseURL = "https://konopla.ua/"
+languageCode = "uk"
+title = "Konopla.UA — Новини промислових конопель"
+defaultContentLanguage = "uk"
+theme = ""
+
+# Pagination
+[pagination]
+  pagerSize = 12
+
+[params]
+  description = "Новини та технології промислових конопель: текстиль, будівництво, біопластик, агро, харчова промисловість"
+  author = "Konopla.UA"
+  dateFormat = "2 January 2006"
+  telegram = "https://t.me/konopla_ua"
+  # Google Analytics — розкоментуй і встав свій ID:
+  # googleAnalytics = "G-XXXXXXXXXX"
+  # Google Analytics — розкоментуй і встав свій ID:
+  # google_analytics = "G-XXXXXXXXXX"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# Sitemap
+[sitemap]
+  changefreq = "daily"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# Related content (for "similar articles" in sidebar)
+[related]
+  includeNewer = true
+  threshold = 60
+  toLower = true
+  [[related.indices]]
+    name = "categories"
+    weight = 100
+  [[related.indices]]
+    name = "tags"
+    weight = 80
+  [[related.indices]]
+    name = "date"
+    weight = 10
