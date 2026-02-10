@@ -2,7 +2,6 @@ baseURL = "https://konopla.ua/"
 languageCode = "uk"
 title = "Konopla.UA — Новини промислових конопель"
 defaultContentLanguage = "uk"
-theme = ""
 
 # Pagination
 [pagination]
