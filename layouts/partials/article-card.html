@@ -1,4 +1,4 @@
-<article class="news-card {{ if .featured }}news-card-featured{{ end }}">
+<article class="news-card {{ if .Params.featured }}news-card-featured{{ end }}">
   <a href="{{ .Permalink }}" class="news-card-image-link">
     {{ if .Params.image }}
     <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img">
