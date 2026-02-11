@@ -55,9 +55,72 @@ RSS_FEEDS = [
     "https://news.google.com/rss/search?q=hemp+sustainability+eco+carbon&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=hemp+environment+green+planet&hl=en&gl=US&ceid=US:en",
     
-    # === European sources (important for UA context) ===
+    # === Additional hemp media ===
+    "https://hemptoday.net/feed/",
+    "https://www.mjbizdaily.com/hemp/feed/",
+
+    # === Google News — by country ===
+
+    # 🇨🇦 Canada
+    "https://news.google.com/rss/search?q=hemp+canada+industry&hl=en&gl=CA&ceid=CA:en",
+    "https://news.google.com/rss/search?q=hemp+farming+canada&hl=en&gl=CA&ceid=CA:en",
+
+    # 🇬🇧 United Kingdom
+    "https://news.google.com/rss/search?q=hemp+uk+industry&hl=en&gl=GB&ceid=GB:en",
+
+    # 🇪🇺 Europe (general)
     "https://news.google.com/rss/search?q=hemp+europe+industry&hl=en&gl=GB&ceid=GB:en",
+    "https://news.google.com/rss/search?q=industrial+hemp+EU+regulation&hl=en&gl=GB&ceid=GB:en",
+
+    # 🇳🇱 Netherlands
+    "https://news.google.com/rss/search?q=hemp+netherlands+industry&hl=en&gl=NL&ceid=NL:en",
+
+    # 🇩🇪 Germany
+    "https://news.google.com/rss/search?q=Hanf+Industrie+Deutschland&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=hemp+germany+industry&hl=en&gl=DE&ceid=DE:en",
+
+    # 🇫🇷 France
+    "https://news.google.com/rss/search?q=chanvre+industriel+france&hl=fr&gl=FR&ceid=FR:fr",
+
+    # 🇮🇹 Italy
+    "https://news.google.com/rss/search?q=canapa+industriale+italia&hl=it&gl=IT&ceid=IT:it",
+
+    # 🇨🇿 Czech Republic
+    "https://news.google.com/rss/search?q=konop%C3%AD+pr%C5%AFmyslov%C3%A9&hl=cs&gl=CZ&ceid=CZ:cs",
+    "https://news.google.com/rss/search?q=hemp+czech+republic&hl=en&gl=CZ&ceid=CZ:en",
+
+    # 🇵🇱 Poland
+    "https://news.google.com/rss/search?q=konopie+przemys%C5%82owe+polska&hl=pl&gl=PL&ceid=PL:pl",
+
+    # 🇺🇦 Ukraine
     "https://news.google.com/rss/search?q=hemp+ukraine+конопля&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=промислові+коноплі+Україна&hl=uk&gl=UA&ceid=UA:uk",
+
+    # 🇨🇳 China
+    "https://news.google.com/rss/search?q=hemp+china+industry&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=china+hemp+textile+production&hl=en&gl=US&ceid=US:en",
+
+    # 🇮🇳 India
+    "https://news.google.com/rss/search?q=hemp+india+industry&hl=en&gl=IN&ceid=IN:en",
+    "https://news.google.com/rss/search?q=hemp+india+textile+agriculture&hl=en&gl=IN&ceid=IN:en",
+
+    # 🇦🇺 Australia
+    "https://news.google.com/rss/search?q=hemp+australia+industry&hl=en&gl=AU&ceid=AU:en",
+
+    # 🇯🇵 Japan
+    "https://news.google.com/rss/search?q=hemp+industry+japan&hl=en&gl=JP&ceid=JP:en",
+
+    # 🇰🇷 South Korea
+    "https://news.google.com/rss/search?q=hemp+industry+korea&hl=en&gl=KR&ceid=KR:en",
+
+    # 🇧🇷 Brazil
+    "https://news.google.com/rss/search?q=c%C3%A2nhamo+industrial+brasil&hl=pt&gl=BR&ceid=BR:pt",
+
+    # === Additional thematic queries (global) ===
+    "https://news.google.com/rss/search?q=hemp+startup+investment+funding&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=hemp+legislation+law+2025+2026&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=hemp+bioplastic+automotive+composite&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en",
 ]
 
 # === CONTENT FILTERING ===

@@ -48,7 +48,7 @@
     </div>
     {{ end }}
 
-    {{ partial "ad-banner" (dict "position" "article-bottom" "context" .) }}
+    {{/* partial "ad-banner" (dict "position" "article-bottom" "context" .) */}}
 
     {{ if .Params.source_url }}
     <div class="original-source">
@@ -61,7 +61,7 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
-    {{ partial "ad-banner" (dict "position" "sidebar" "context" .) }}
+    {{/* partial "ad-banner" (dict "position" "sidebar" "context" .) */}}
     
     <!-- Related articles -->
     {{ $related := .Site.RegularPages.Related . | first 4 }}

@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="container">
 
-  {{ partial "ad-banner" (dict "position" "top" "context" .) }}
+  {{/* partial "ad-banner" (dict "position" "top" "context" .) */}}
 
   {{ $allNews := where .Site.RegularPages "Section" "news" }}
   {{ $news := $allNews.ByDate.Reverse }}
@@ -38,7 +38,7 @@
     <div class="news-grid">
       {{ range $index, $page := after 1 $news }}
         {{ if eq $index 4 }}
-          {{ partial "ad-banner" (dict "position" "in-feed" "context" $) }}
+          {{/* partial "ad-banner" (dict "position" "in-feed" "context" $) */}}
         {{ end }}
         {{ partial "article-card.html" $page }}
       {{ end }}

@@ -7,7 +7,7 @@
     <p class="list-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}новина{{ else }}новин{{ end }}</p>
   </section>
 
-  {{ partial "ad-banner" (dict "position" "top" "context" .) }}
+  {{/* partial "ad-banner" (dict "position" "top" "context" .) */}}
 
   <section class="news-grid">
     {{ range .Pages.ByDate.Reverse }}
