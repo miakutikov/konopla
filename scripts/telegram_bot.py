@@ -167,7 +167,7 @@ def send_for_moderation(article_data, article_id):
 
 
 def get_updates(offset=0):
-    """Опитує Telegram API для callback_query оновлень."""
+    """Опитує Telegram API для callback_query та message оновлень."""
     if not TELEGRAM_TOKEN:
         return []
 
@@ -175,7 +175,7 @@ def get_updates(offset=0):
     payload = {
         "offset": offset,
         "timeout": 5,
-        "allowed_updates": ["callback_query"],
+        "allowed_updates": ["callback_query", "message"],
     }
 
     result = _send_request_raw(url, payload)

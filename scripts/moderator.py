@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """
-moderator.py — Обробляє рішення адміна з Telegram.
-Опитує getUpdates, для схвалених статей: створює Hugo файли + постить в канал.
+moderator.py — Обробляє рішення адміна з Telegram + команди бота.
+
+Команди:
+  /run     — запустити pipeline (збір новин)
+  /status  — статус pending статей
+  /help    — список команд
 """
 
 import json
 import os
 import sys
 import time
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,6 +24,9 @@ from telegram_bot import (
     send_message, send_photo, ADMIN_CHAT_ID
 )
 from publisher import create_article_file, create_telegram_message
+
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "miakutikov/konopla")
 
 
 def load_json(filepath, default):
@@ -33,6 +42,89 @@ def save_json(filepath, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
+# ---------------------------------------------------------------------------
+# Bot commands
+# ---------------------------------------------------------------------------
+
+def trigger_pipeline():
+    """Тригерить pipeline workflow через GitHub API."""
+    if not GITHUB_TOKEN:
+        print("[WARN] GITHUB_TOKEN not set, cannot trigger pipeline")
+        return False
+
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/pipeline.yml/dispatches"
+    payload = json.dumps({"ref": "main"}).encode("utf-8")
+
+    try:
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {GITHUB_TOKEN}",
+                "Accept": "application/vnd.github+json",
+                "Content-Type": "application/json",
+                "X-GitHub-Api-Version": "2022-11-28",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            # 204 No Content = success
+            print(f"[OK] Pipeline triggered, status={resp.status}")
+            return True
+    except urllib.error.HTTPError as e:
+        body = ""
+        try:
+            body = e.read().decode("utf-8")[:200]
+        except Exception:
+            pass
+        print(f"[ERROR] Failed to trigger pipeline: {e.code} {body}")
+        return False
+    except Exception as e:
+        print(f"[ERROR] Failed to trigger pipeline: {e}")
+        return False
+
+
+def handle_command(text, pending_articles):
+    """Обробляє команду від адміна. Повертає текст відповіді."""
+    cmd = text.strip().lower().split()[0] if text.strip() else ""
+
+    if cmd == "/run":
+        ok = trigger_pipeline()
+        if ok:
+            return "🚀 Pipeline запущено! Нові новини з'являться через кілька хвилин."
+        return "❌ Не вдалось запустити pipeline. Перевір GitHub Token."
+
+    elif cmd == "/status":
+        count = len(pending_articles)
+        if count == 0:
+            return "📋 Немає статей на модерації."
+
+        lines = [f"📋 <b>На модерації: {count} статей</b>\n"]
+        for i, a in enumerate(pending_articles[:10], 1):
+            title = a.get("rewritten", {}).get("title", "?")[:50]
+            created = a.get("created_at", "")[:16].replace("T", " ")
+            lines.append(f"{i}. {title}\n   <i>{created}</i>")
+        if count > 10:
+            lines.append(f"\n... та ще {count - 10}")
+        return "\n".join(lines)
+
+    elif cmd == "/help" or cmd == "/start":
+        return (
+            "🌿 <b>KONOPLA.UA Bot</b>\n\n"
+            "Доступні команди:\n\n"
+            "/run — запустити збір новин\n"
+            "/status — статус модерації\n"
+            "/help — ця довідка\n\n"
+            "Для модерації — використовуй кнопки ✅/❌ під статтями."
+        )
+
+    return None  # Unknown command — ignore
+
+
+# ---------------------------------------------------------------------------
+# Main moderator logic
+# ---------------------------------------------------------------------------
+
 def run_moderator():
     print("=" * 60)
     print("🔍 KONOPLA.UA — Moderator")
@@ -40,11 +132,6 @@ def run_moderator():
 
     # Load pending articles
     pending = load_json(PENDING_FILE, {"articles": []})
-    if not pending["articles"]:
-        print("[INFO] No pending articles. Done.")
-        save_result(0)
-        return 0
-
     pending_map = {a["id"]: a for a in pending["articles"] if a.get("status") == "pending"}
     print(f"[INFO] {len(pending_map)} pending articles")
 
@@ -52,7 +139,7 @@ def run_moderator():
     offset_data = load_json(TELEGRAM_OFFSET_FILE, {"offset": 0})
     offset = offset_data.get("offset", 0)
 
-    # Poll Telegram for callback_query updates
+    # Poll Telegram for updates (callback_query + message)
     updates = get_updates(offset=offset)
     print(f"[INFO] Got {len(updates)} Telegram updates")
 
@@ -63,35 +150,62 @@ def run_moderator():
         update_id = update.get("update_id", 0)
         offset = max(offset, update_id + 1)
 
+        # --- Handle callback_query (moderation buttons) ---
         callback = update.get("callback_query")
-        if not callback:
+        if callback:
+            callback_id = callback.get("id")
+            data = callback.get("data", "")
+            message = callback.get("message", {})
+            chat_id = message.get("chat", {}).get("id")
+            message_id = message.get("message_id")
+
+            if data.startswith("approve_"):
+                article_id = data.replace("approve_", "")
+                if article_id in pending_map:
+                    approved_ids.append(article_id)
+                    answer_callback_query(callback_id, "✅ Схвалено!")
+                else:
+                    answer_callback_query(callback_id, "⚠️ Стаття не знайдена")
+                if chat_id and message_id:
+                    edit_message_reply_markup(chat_id, message_id)
+
+            elif data.startswith("reject_"):
+                article_id = data.replace("reject_", "")
+                rejected_ids.append(article_id)
+                answer_callback_query(callback_id, "❌ Відхилено")
+                if chat_id and message_id:
+                    edit_message_reply_markup(chat_id, message_id)
+
             continue
 
-        callback_id = callback.get("id")
-        data = callback.get("data", "")
-        message = callback.get("message", {})
-        chat_id = message.get("chat", {}).get("id")
-        message_id = message.get("message_id")
+        # --- Handle message (bot commands) ---
+        msg = update.get("message")
+        if not msg:
+            continue
 
-        if data.startswith("approve_"):
-            article_id = data.replace("approve_", "")
-            if article_id in pending_map:
-                approved_ids.append(article_id)
-                answer_callback_query(callback_id, "✅ Схвалено!")
-            else:
-                answer_callback_query(callback_id, "⚠️ Стаття не знайдена")
-            if chat_id and message_id:
-                edit_message_reply_markup(chat_id, message_id)
+        chat_id = str(msg.get("chat", {}).get("id", ""))
+        text = msg.get("text", "")
 
-        elif data.startswith("reject_"):
-            article_id = data.replace("reject_", "")
-            rejected_ids.append(article_id)
-            answer_callback_query(callback_id, "❌ Відхилено")
-            if chat_id and message_id:
-                edit_message_reply_markup(chat_id, message_id)
+        # Only accept commands from admin
+        if chat_id != str(ADMIN_CHAT_ID):
+            continue
+
+        if not text.startswith("/"):
+            continue
+
+        print(f"[CMD] {text}")
+        reply = handle_command(text, pending["articles"])
+        if reply:
+            send_message(reply, chat_id=ADMIN_CHAT_ID)
 
     # Save updated offset
     save_json(TELEGRAM_OFFSET_FILE, {"offset": offset})
+
+    # Early exit if no pending articles
+    if not pending["articles"]:
+        print("[INFO] No pending articles. Done.")
+        save_result(0)
+        return 0
 
     # Process approved articles
     content_dir = os.path.join(
