@@ -101,8 +101,9 @@ def generate_gemini_image(query, article_id="img"):
         # Determine file extension
         ext = "png" if "png" in mime_type else "jpg"
 
-        # Save to static/images/generated/
-        gen_dir = os.path.join("static", "images", "generated")
+        # Save to static/images/generated/ (use project root)
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        gen_dir = os.path.join(project_root, "static", "images", "generated")
         os.makedirs(gen_dir, exist_ok=True)
 
         filename = f"{article_id}.{ext}"

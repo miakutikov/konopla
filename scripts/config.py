@@ -5,10 +5,8 @@ import os
 # RSS feeds — industrial hemp news sources
 RSS_FEEDS = [
     # === Dedicated hemp industry media ===
-    "https://hempindustrydaily.com/feed/",
     "https://www.hemptodaymag.com/feed/",
     "https://hempbuildermag.com/feed/",
-    "https://www.forbes.com/hemp/feed/",
     "https://hempgazette.com/feed/",
     
     # === Google News — specific industrial hemp queries ===

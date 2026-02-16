@@ -2,13 +2,14 @@ name: Moderate & Deploy
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: "pages"
@@ -39,11 +40,11 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python scripts/moderator.py
-          echo "approved=$(python -c 'import json; d=json.load(open("data/moderate_result.json")); print(d.get("approved",0))')" >> $GITHUB_OUTPUT
+          echo "approved=$(python -c 'import json,os; f="data/moderate_result.json"; d=json.load(open(f)) if os.path.exists(f) else {"approved":0}; print(d.get("approved",0))')" >> $GITHUB_OUTPUT
 
       - name: Commit approved articles
         if: steps.moderate.outputs.approved != '0'

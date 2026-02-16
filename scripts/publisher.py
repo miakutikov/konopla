@@ -81,21 +81,28 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
                     f'\nimage_source_url: "{image_data.get("unsplash_url", "")}"'
                 )
         
-        front_matter = f"""---
-title: "{title.replace('"', "'")}"
-date: {date_str}
-summary: "{summary.replace('"', "'")}"
-categories: ["{category}"]
-tags: [{tags_str}]
-source: "{source_name.replace('"', "'")}"
-source_url: "{source_url}"
-{image_line}
-{image_credit}
-draft: false
----
+        # Build front matter lines
+        fm_lines = [
+            "---",
+            f'title: "{title.replace(chr(34), chr(39))}"',
+            f"date: {date_str}",
+            f'summary: "{summary.replace(chr(34), chr(39))}"',
+            f'categories: ["{category}"]',
+            f"tags: [{tags_str}]",
+            f'source: "{source_name.replace(chr(34), chr(39))}"',
+            f'source_url: "{source_url}"',
+        ]
+        if image_line:
+            fm_lines.append(image_line)
+        if image_credit:
+            fm_lines.append(image_credit)
+        fm_lines.append("draft: false")
+        fm_lines.append("---")
+        fm_lines.append("")
+        fm_lines.append(content)
+        fm_lines.append("")
 
-{content}
-"""
+        front_matter = "\n".join(fm_lines)
         
         # Add image credit at the bottom if available
         if image_data:
@@ -152,9 +159,7 @@ def create_telegram_message(article_data, site_url="https://konopla.ua"):
 
 {summary}
 
-<a href="{article_url}">Читати повністю →</a>
-
-🌿 @uakonopla"""
+<a href="{article_url}">Читати повністю →</a>"""
     
     return message
 
