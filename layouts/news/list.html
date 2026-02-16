@@ -27,7 +27,6 @@
           (dict "name" "законодавство" "emoji" "📋")
         }}
         {{ range $categories }}
-        {{ $catPages := where $.Site.Taxonomies.categories (lower .name) }}
         {{ $count := 0 }}
         {{ with index $.Site.Taxonomies.categories (lower .name) }}
           {{ $count = .Count }}
