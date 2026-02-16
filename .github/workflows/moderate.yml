@@ -1,0 +1,79 @@
+name: Moderate & Deploy
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  moderate:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install feedparser
+
+      - name: Run moderator
+        id: moderate
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: |
+          python scripts/moderator.py
+          echo "approved=$(python -c 'import json; d=json.load(open("data/moderate_result.json")); print(d.get("approved",0))')" >> $GITHUB_OUTPUT
+
+      - name: Commit approved articles
+        if: steps.moderate.outputs.approved != '0'
+        run: |
+          git config user.name "Konopla Bot"
+          git config user.email "bot@konopla.ua"
+          git add -A
+          git diff --staged --quiet || git commit -m "📰 Published: approved articles $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+
+      - name: Setup Hugo
+        if: steps.moderate.outputs.approved != '0'
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Hugo site
+        if: steps.moderate.outputs.approved != '0'
+        run: hugo --minify
+
+      - name: Setup Pages
+        if: steps.moderate.outputs.approved != '0'
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        if: steps.moderate.outputs.approved != '0'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        if: steps.moderate.outputs.approved != '0'
+        id: deployment
+        uses: actions/deploy-pages@v4

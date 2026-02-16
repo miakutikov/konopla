@@ -3,7 +3,9 @@
     {{ if .Params.image }}
     <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img">
     {{ else }}
-    <div class="news-card-img-placeholder">🌿</div>
+    <div class="news-card-img-placeholder">
+      <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
+    </div>
     {{ end }}
   </a>
   <div class="news-card-body">

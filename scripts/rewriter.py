@@ -1,5 +1,6 @@
 """
-rewriter.py — Переписує новини українською через OpenRouter API (безкоштовні моделі)
+rewriter.py — Переписує новини українською.
+Primary: Gemini API (безкоштовний). Fallback: OpenRouter (безкоштовні моделі).
 """
 
 import json
@@ -11,11 +12,14 @@ import urllib.error
 from config import GEMINI_SYSTEM_PROMPT
 
 
-API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+# === Gemini API ===
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 
-# Безкоштовні моделі — пробуємо по черзі, якщо одна недоступна
-MODELS = [
+# === OpenRouter API (fallback) ===
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_MODELS = [
     "google/gemma-3n-e4b-it:free",
     "meta-llama/llama-3.3-70b-instruct:free",
     "z-ai/glm-4.5-air:free",
@@ -24,15 +28,9 @@ MODELS = [
 
 def rewrite_article(title, summary, source_url):
     """
-    Відправляє статтю в OpenRouter API і отримує рерайт українською.
-    Пробує кілька моделей по черзі.
+    Рерайтить статтю українською. Спочатку Gemini, потім OpenRouter.
     Повертає dict або None.
     """
-    api_key = os.environ.get("OPENROUTER_API_KEY", API_KEY)
-    if not api_key:
-        print("[ERROR] OPENROUTER_API_KEY not set")
-        return None
-
     user_prompt = f"""Перепиши цю новину:
 
 Заголовок: {title}
@@ -41,17 +39,75 @@ def rewrite_article(title, summary, source_url):
 
 Джерело: {source_url}"""
 
-    for model in MODELS:
-        result = _try_model(api_key, model, user_prompt)
-        if result is not None:
+    # Try Gemini first
+    gemini_key = os.environ.get("GEMINI_API_KEY", GEMINI_API_KEY)
+    if gemini_key:
+        result = _try_gemini(gemini_key, user_prompt)
+        if result:
             return result
 
-    print("[ERROR] All models failed")
+    # Fallback to OpenRouter
+    openrouter_key = os.environ.get("OPENROUTER_API_KEY", OPENROUTER_API_KEY)
+    if openrouter_key:
+        for model in OPENROUTER_MODELS:
+            result = _try_openrouter(openrouter_key, model, user_prompt)
+            if result is not None:
+                return result
+
+    print("[ERROR] All rewrite methods failed")
     return None
 
 
-def _try_model(api_key, model, user_prompt):
-    """Пробує одну модель, повертає dict або None."""
+def _try_gemini(api_key, user_prompt):
+    """Пробує Gemini API напряму."""
+    print("   🤖 Trying: Gemini 2.5 Flash")
+
+    url = f"{GEMINI_API_URL}?key={api_key}"
+    payload = {
+        "contents": [{
+            "parts": [{"text": GEMINI_SYSTEM_PROMPT + "\n\n" + user_prompt}]
+        }],
+        "generationConfig": {
+            "temperature": 0.7,
+            "maxOutputTokens": 2048
+        }
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+
+    for attempt in range(2):
+        try:
+            req = urllib.request.Request(
+                url, data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                result = json.loads(resp.read().decode("utf-8"))
+
+            text = result["candidates"][0]["content"]["parts"][0]["text"]
+            return _parse_json_response(text)
+
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode("utf-8") if e.readable() else ""
+            print(f"   [WARN] Gemini error (attempt {attempt+1}): {e.code} {error_body[:150]}")
+            if e.code == 429:
+                time.sleep(5)
+                continue
+            else:
+                return None
+
+        except Exception as e:
+            print(f"   [WARN] Gemini request failed (attempt {attempt+1}): {e}")
+            if attempt < 1:
+                time.sleep(3)
+
+    return None
+
+
+def _try_openrouter(api_key, model, user_prompt):
+    """Пробує одну модель через OpenRouter."""
     print(f"   🤖 Model: {model}")
 
     payload = {
@@ -69,13 +125,12 @@ def _try_model(api_key, model, user_prompt):
     for attempt in range(2):
         try:
             req = urllib.request.Request(
-                API_URL,
-                data=data,
+                OPENROUTER_URL, data=data,
                 headers={
                     "Content-Type": "application/json",
                     "Authorization": f"Bearer {api_key}",
                     "HTTP-Referer": "https://konopla.ua",
-                    "X-Title": "Konopla.UA News Pipeline"
+                    "X-Title": "KONOPLA.UA"
                 },
                 method="POST"
             )
@@ -84,34 +139,16 @@ def _try_model(api_key, model, user_prompt):
                 result = json.loads(resp.read().decode("utf-8"))
 
             text = result["choices"][0]["message"]["content"]
-
-            # Clean up markdown code blocks
-            text = re.sub(r"^```json\s*", "", text.strip())
-            text = re.sub(r"\s*```$", "", text.strip())
-
-            article_data = json.loads(text)
-
-            required = ["title", "summary", "content", "category", "tags"]
-            if not all(key in article_data for key in required):
-                print(f"   [WARN] Missing fields: {list(article_data.keys())}")
-                return None
-
-            print(f"   ✅ OK")
-            return article_data
+            return _parse_json_response(text)
 
         except urllib.error.HTTPError as e:
             error_body = e.read().decode("utf-8") if e.readable() else ""
             print(f"   [WARN] {model} error (attempt {attempt+1}): {e.code} {error_body[:150]}")
             if e.code == 429:
                 time.sleep(5)
-                continue  # retry
+                continue
             else:
-                return None  # try next model
-
-        except json.JSONDecodeError as e:
-            print(f"   [WARN] JSON parse error (attempt {attempt+1}): {e}")
-            if attempt < 1:
-                time.sleep(2)
+                return None
 
         except Exception as e:
             print(f"   [WARN] Request failed (attempt {attempt+1}): {e}")
@@ -119,6 +156,26 @@ def _try_model(api_key, model, user_prompt):
                 time.sleep(3)
 
     return None
+
+
+def _parse_json_response(text):
+    """Парсить JSON-відповідь від моделі."""
+    text = re.sub(r"^```json\s*", "", text.strip())
+    text = re.sub(r"\s*```$", "", text.strip())
+
+    try:
+        article_data = json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"   [WARN] JSON parse error: {e}")
+        return None
+
+    required = ["title", "summary", "content", "category", "tags"]
+    if not all(key in article_data for key in required):
+        print(f"   [WARN] Missing fields: {list(article_data.keys())}")
+        return None
+
+    print("   ✅ OK")
+    return article_data
 
 
 if __name__ == "__main__":

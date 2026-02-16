@@ -1,8 +1,6 @@
 {{ define "main" }}
 <div class="container">
 
-  {{/* partial "ad-banner" (dict "position" "top" "context" .) */}}
-
   {{ $allNews := where .Site.RegularPages "Section" "news" }}
   {{ $news := $allNews.ByDate.Reverse }}
 
@@ -15,7 +13,9 @@
         {{ if .Params.image }}
         <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img">
         {{ else }}
-        <div class="featured-img-placeholder">🌿</div>
+        <div class="featured-img-placeholder">
+          <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
+        </div>
         {{ end }}
       </a>
       <div class="featured-body">
@@ -36,18 +36,15 @@
   <section class="news-section">
     <h2 class="section-title">Останні новини</h2>
     <div class="news-grid">
-      {{ range $index, $page := after 1 $news }}
-        {{ if eq $index 4 }}
-          {{/* partial "ad-banner" (dict "position" "in-feed" "context" $) */}}
-        {{ end }}
-        {{ partial "article-card.html" $page }}
+      {{ range after 1 $news }}
+        {{ partial "article-card.html" . }}
       {{ end }}
     </div>
   </section>
   {{ else }}
   <section class="empty-state">
     <h2>Поки що новин немає</h2>
-    <p>Робот вже працює — перші новини з'являться протягом кількох годин.</p>
+    <p>Перші новини з'являться найближчим часом.</p>
     <p>Підписуйтесь на <a href="{{ .Site.Params.telegram }}">Telegram-канал</a>, щоб не пропустити!</p>
   </section>
   {{ end }}

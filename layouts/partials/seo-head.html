@@ -44,7 +44,7 @@
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "feed.xml" | absURL }}">
 
 <!-- Styles -->
-<link rel="stylesheet" href="{{ "css/style.css" | relURL }}?v=3">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}?v=4">
 
 <!-- JSON-LD Structured Data -->
 {{ if .IsHome }}
@@ -69,7 +69,7 @@
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "publisher": {
     "@type": "Organization",
-    "name": "Konopla.UA",
+    "name": "KONOPLA.UA",
     "url": "{{ .Site.BaseURL }}"
   },
   {{ if .Params.image }}"image": "{{ .Params.image }}",{{ end }}

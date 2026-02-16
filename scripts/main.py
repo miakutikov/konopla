@@ -1,57 +1,48 @@
 #!/usr/bin/env python3
 """
-main.py — Головний скрипт Konopla.UA v4 (final)
+main.py — KONOPLA.UA News Pipeline
 
-Pipeline: RSS → фільтрація → Gemini рерайт → Unsplash фото → Hugo markdown → Telegram → Instagram
-З повним error handling та моніторингом.
+Pipeline: RSS → фільтрація → рерайт → зображення → збереження в pending → відправка на модерацію адміну.
+Публікація відбувається тільки після схвалення адміном (moderator.py).
 """
 
+import json
 import os
 import sys
 import time
 import traceback
+import uuid
+from datetime import datetime, timezone
 
-# Add scripts directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config import API_DELAY_SECONDS, TELEGRAM_DELAY_SECONDS
+from config import API_DELAY_SECONDS, PENDING_FILE
 
 
 def run_pipeline():
-    """Запускає повний pipeline з error handling."""
-    
+    """Запускає pipeline: збір, рерайт, збереження в pending."""
+
     start_time = time.time()
-    
+
     print("=" * 60)
-    print("🌿 KONOPLA.UA — News Pipeline v4 (final)")
+    print("🌿 KONOPLA.UA — News Pipeline")
     print("=" * 60)
-    
-    # Import modules (wrapped to catch missing dependencies)
+
     try:
         from fetcher import fetch_all_feeds, load_processed, save_processed
         from rewriter import rewrite_article
-        from publisher import create_article_file, create_telegram_message
-        from telegram_bot import send_message, send_photo
         from images import get_unsplash_image
+        from telegram_bot import send_for_moderation
         from monitor import send_pipeline_report, send_crash_alert
     except ImportError as e:
         print(f"[CRITICAL] Missing dependency: {e}")
         print("Run: pip install feedparser Pillow")
         return 1
-    
-    # Try importing Instagram (optional — needs Pillow)
-    try:
-        from instagram import generate_story_image
-        has_instagram = True
-        print("[INFO] Instagram Stories: enabled")
-    except ImportError:
-        has_instagram = False
-        print("[INFO] Instagram Stories: disabled (install Pillow to enable)")
-    
-    published_count = 0
-    failed_count = 0
+
     total_found = 0
-    
+    rewritten_count = 0
+    failed_count = 0
+
     try:
         # === STEP 1: Fetch articles ===
         print("\n📡 Step 1: Fetching RSS feeds...")
@@ -61,36 +52,31 @@ def run_pipeline():
             print(f"[ERROR] RSS fetching failed: {e}")
             send_crash_alert(f"RSS fetching failed: {e}")
             return 1
-        
+
         total_found = len(articles)
-        
+
         if not articles:
             print("[INFO] No new articles found. Done.")
             duration = time.time() - start_time
             send_pipeline_report(0, 0, 0, duration)
             return 0
-        
+
         print(f"[INFO] Processing {len(articles)} articles...\n")
-        
-        # === STEP 2: Process each article ===
+
+        # === STEP 2: Load pending ===
+        pending = {"articles": []}
+        if os.path.exists(PENDING_FILE):
+            with open(PENDING_FILE, "r", encoding="utf-8") as f:
+                pending = json.load(f)
+
         processed = load_processed()
-        
-        content_dir = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "content", "news"
-        )
-        
-        ig_dir = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "static", "instagram"
-        )
-        
+
         for i, article in enumerate(articles):
             print(f"\n{'='*40}")
             print(f"📰 Article {i+1}/{len(articles)}")
             print(f"   Title: {article['title'][:70]}...")
-            
-            # --- 2a: Rewrite with Gemini ---
+
+            # --- 2a: Rewrite ---
             rewritten = None
             try:
                 print("   ✍️  Rewriting...")
@@ -100,15 +86,15 @@ def run_pipeline():
                     source_url=article["link"]
                 )
             except Exception as e:
-                print(f"   ❌ Gemini error: {e}")
-            
+                print(f"   ❌ Rewrite error: {e}")
+
             if not rewritten:
                 print("   ⏭️  Skipping — rewrite failed")
                 failed_count += 1
                 continue
-            
+
             print(f"   ✅ {rewritten['title'][:60]}...")
-            
+
             # --- 2b: Get image (non-critical) ---
             image_data = None
             try:
@@ -122,67 +108,53 @@ def run_pipeline():
                     )
             except Exception as e:
                 print(f"   ⚠️  Image error (non-critical): {e}")
-            
-            # --- 2c: Create Hugo file ---
-            filepath = None
+
+            # --- 2c: Save to pending + send for moderation ---
+            article_id = str(uuid.uuid4())[:8]
+
+            pending_article = {
+                "id": article_id,
+                "rewritten": rewritten,
+                "source_url": article["link"],
+                "source_name": article["source"],
+                "image_data": image_data,
+                "status": "pending",
+                "created_at": datetime.now(timezone.utc).isoformat(),
+            }
+
+            # Send preview to admin
             try:
-                print("   📝 Creating article...")
-                filepath = create_article_file(
-                    article_data=rewritten,
-                    source_url=article["link"],
-                    source_name=article["source"],
-                    image_data=image_data,
-                    content_dir=content_dir
-                )
+                print("   📨 Sending for moderation...")
+                msg_id = send_for_moderation(rewritten, article_id)
+                if msg_id:
+                    pending_article["telegram_message_id"] = msg_id
             except Exception as e:
-                print(f"   ❌ File creation error: {e}")
-            
-            if not filepath:
-                failed_count += 1
-                continue
-            
-            # --- 2d: Telegram (non-critical) ---
-            try:
-                print("   📨 Telegram...")
-                tg_message = create_telegram_message(rewritten)
-                if image_data and image_data.get("url"):
-                    send_photo(photo_url=image_data["url"], caption=tg_message)
-                else:
-                    send_message(tg_message)
-            except Exception as e:
-                print(f"   ⚠️  Telegram error (non-critical): {e}")
-            
-            # --- 2e: Instagram Story (non-critical) ---
-            if has_instagram:
-                try:
-                    print("   📸 Instagram Story...")
-                    generate_story_image(
-                        title=rewritten["title"],
-                        category=rewritten.get("category", "інше"),
-                        summary=rewritten.get("summary", ""),
-                        output_dir=ig_dir
-                    )
-                except Exception as e:
-                    print(f"   ⚠️  Instagram error (non-critical): {e}")
-            
-            # Mark as processed
+                print(f"   ⚠️  Moderation send error: {e}")
+
+            pending["articles"].append(pending_article)
+
+            # Mark as processed (to avoid re-fetching)
             processed["articles"].append(article["hash"])
-            published_count += 1
-            
-            # Rate limiting
+            # Store title for dedup
+            if "recent_titles" not in processed:
+                processed["recent_titles"] = []
+            processed["recent_titles"].append(rewritten["title"])
+            processed["recent_titles"] = processed["recent_titles"][-200:]
+
+            rewritten_count += 1
+
             if i < len(articles) - 1:
-                delay = max(API_DELAY_SECONDS, TELEGRAM_DELAY_SECONDS)
-                print(f"   ⏳ {delay}s...")
-                time.sleep(delay)
-        
-        # Save processed articles
-        try:
-            save_processed(processed)
-        except Exception as e:
-            print(f"[WARN] Failed to save processed list: {e}")
-        
+                print(f"   ⏳ {API_DELAY_SECONDS}s...")
+                time.sleep(API_DELAY_SECONDS)
+
+        # Save pending and processed
+        os.makedirs(os.path.dirname(PENDING_FILE), exist_ok=True)
+        with open(PENDING_FILE, "w", encoding="utf-8") as f:
+            json.dump(pending, f, ensure_ascii=False, indent=2)
+
+        save_processed(processed)
+
     except Exception as e:
-        # Catch-all for unexpected errors
         error_msg = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"
         print(f"\n[CRITICAL] Pipeline crashed: {error_msg}")
         try:
@@ -190,26 +162,24 @@ def run_pipeline():
         except Exception:
             pass
         return 1
-    
+
     # === SUMMARY ===
     duration = time.time() - start_time
-    
+
     print("\n" + "=" * 60)
     print(f"📊 Pipeline complete!")
-    print(f"   ✅ Published: {published_count}")
-    print(f"   ❌ Failed: {failed_count}")
     print(f"   📰 Total found: {total_found}")
+    print(f"   ✍️  Rewritten: {rewritten_count}")
+    print(f"   ❌ Failed: {failed_count}")
     print(f"   ⏱  Duration: {duration:.0f}s")
-    if has_instagram:
-        print(f"   📸 Instagram stories: {published_count}")
+    print(f"   📋 Sent for moderation (waiting for admin approval)")
     print("=" * 60)
-    
-    # Send monitoring report
+
     try:
-        send_pipeline_report(published_count, failed_count, total_found, duration)
+        send_pipeline_report(rewritten_count, failed_count, total_found, duration)
     except Exception:
         pass
-    
+
     return 0
 
 

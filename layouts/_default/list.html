@@ -7,8 +7,6 @@
     <p class="list-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}новина{{ else }}новин{{ end }}</p>
   </section>
 
-  {{/* partial "ad-banner" (dict "position" "top" "context" .) */}}
-
   <section class="news-grid">
     {{ range .Pages.ByDate.Reverse }}
       {{ partial "article-card.html" . }}
@@ -19,13 +17,13 @@
   {{ if gt .Paginator.TotalPages 1 }}
   <nav class="pagination">
     {{ if .Paginator.HasPrev }}
-    <a href="{{ .Paginator.Prev.URL }}" class="page-btn">← Новіші</a>
+    <a href="{{ .Paginator.Prev.URL }}" class="page-btn">&larr; Новіші</a>
     {{ end }}
-    
+
     <span class="page-info">{{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}</span>
-    
+
     {{ if .Paginator.HasNext }}
-    <a href="{{ .Paginator.Next.URL }}" class="page-btn">Старіші →</a>
+    <a href="{{ .Paginator.Next.URL }}" class="page-btn">Старіші &rarr;</a>
     {{ end }}
   </nav>
   {{ end }}

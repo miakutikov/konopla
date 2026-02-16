@@ -274,7 +274,19 @@ MIN_TITLE_LENGTH = 20
 # File to track already processed articles (prevents duplicates)
 PROCESSED_FILE = "data/processed.json"
 
-# Delay between Gemini API calls (seconds) to stay within free tier
+# Pending articles awaiting moderation
+PENDING_FILE = "data/pending.json"
+
+# Telegram offset for moderator polling
+TELEGRAM_OFFSET_FILE = "data/telegram_offset.json"
+
+# Auto-reject pending articles after N hours
+PENDING_MAX_AGE_HOURS = 48
+
+# Semantic deduplication threshold (0.0 - 1.0)
+SIMILARITY_THRESHOLD = 0.6
+
+# Delay between API calls (seconds) to stay within free tier
 API_DELAY_SECONDS = 5
 
 # Delay between Telegram messages (seconds)

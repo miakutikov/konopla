@@ -148,7 +148,7 @@ def create_telegram_message(article_data, site_url="https://konopla.ua"):
 
 <a href="{article_url}">Читати повністю →</a>
 
-🌿 @konopla_ua"""
+🌿 @uakonopla"""
     
     return message
 

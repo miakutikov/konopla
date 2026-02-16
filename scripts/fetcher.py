@@ -10,7 +10,8 @@ import re
 from datetime import datetime, timedelta, timezone
 from config import (
     RSS_FEEDS, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
-    MAX_AGE_DAYS, MIN_TITLE_LENGTH, PROCESSED_FILE, MAX_ARTICLES_PER_RUN
+    MAX_AGE_DAYS, MIN_TITLE_LENGTH, PROCESSED_FILE, MAX_ARTICLES_PER_RUN,
+    SIMILARITY_THRESHOLD
 )
 
 
@@ -42,6 +43,36 @@ def clean_html(text):
     clean = re.sub(r"<[^>]+>", " ", text)
     clean = re.sub(r"\s+", " ", clean).strip()
     return clean
+
+
+def normalize_title(title):
+    """Нормалізує заголовок для порівняння."""
+    title = title.lower().strip()
+    title = re.sub(r'^(breaking|update|new|report|exclusive)[:\s-]+', '', title)
+    title = re.sub(r'[^\w\s]', '', title)
+    title = re.sub(r'\s+', ' ', title)
+    return title.strip()
+
+
+def word_overlap_similarity(title1, title2):
+    """Обчислює схожість заголовків за збігом слів."""
+    words1 = set(normalize_title(title1).split())
+    words2 = set(normalize_title(title2).split())
+    if not words1 or not words2:
+        return 0.0
+    intersection = words1 & words2
+    smaller = min(len(words1), len(words2))
+    return len(intersection) / smaller if smaller > 0 else 0.0
+
+
+def is_semantically_duplicate(title, existing_titles, threshold=None):
+    """Перевіряє чи заголовок дублює існуючий."""
+    if threshold is None:
+        threshold = SIMILARITY_THRESHOLD
+    for existing in existing_titles:
+        if word_overlap_similarity(title, existing) > threshold:
+            return True
+    return False
 
 
 def is_drug_related(title, summary):
@@ -88,7 +119,8 @@ def fetch_all_feeds():
     
     all_articles = []
     seen_hashes = set()
-    
+    accepted_titles = list(processed.get("recent_titles", []))
+
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
@@ -116,8 +148,14 @@ def fetch_all_feeds():
                 # Drug filter
                 if is_drug_related(title, summary):
                     continue
-                
+
+                # Semantic dedup
+                if is_semantically_duplicate(title, accepted_titles):
+                    print(f"[DEDUP] Skipping similar: {title[:60]}...")
+                    continue
+
                 seen_hashes.add(article_hash)
+                accepted_titles.append(title)
                 all_articles.append({
                     "title": title,
                     "link": link,

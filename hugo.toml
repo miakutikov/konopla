@@ -1,6 +1,6 @@
 baseURL = "https://konopla.ua/"
 languageCode = "uk"
-title = "Konopla.UA — Новини промислових конопель"
+title = "KONOPLA.UA — Новини промислових конопель"
 defaultContentLanguage = "uk"
 
 # Pagination
@@ -9,9 +9,9 @@ defaultContentLanguage = "uk"
 
 [params]
   description = "Новини та технології промислових конопель: текстиль, будівництво, біопластик, агро, харчова промисловість"
-  author = "Konopla.UA"
+  author = "KONOPLA.UA"
   dateFormat = "2 January 2006"
-  telegram = "https://t.me/konopla_ua"
+  telegram = "https://t.me/uakonopla"
   # Google Analytics — розкоментуй і встав свій ID:
   # googleAnalytics = "G-XXXXXXXXXX"
   # Google Analytics — розкоментуй і встав свій ID:

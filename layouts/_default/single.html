@@ -1,6 +1,6 @@
 {{ define "main" }}
 <div class="container article-layout">
-  
+
   <article class="article">
     <header class="article-header">
       {{ if .Params.categories }}
@@ -10,7 +10,7 @@
       <div class="article-meta">
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 January 2006" }}</time>
         {{ if .Params.source }}
-        <span class="meta-sep">·</span>
+        <span class="meta-sep">&middot;</span>
         <span class="source">Джерело: {{ .Params.source }}</span>
         {{ end }}
       </div>
@@ -21,7 +21,7 @@
       <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image">
       {{ if .Params.image_author }}
       <figcaption class="image-credit">
-        Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> / 
+        Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> /
         <a href="{{ .Params.image_source_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>
       </figcaption>
       {{ end }}
@@ -48,21 +48,17 @@
     </div>
     {{ end }}
 
-    {{/* partial "ad-banner" (dict "position" "article-bottom" "context" .) */}}
-
     {{ if .Params.source_url }}
     <div class="original-source">
-      <a href="{{ .Params.source_url }}" target="_blank" rel="noopener nofollow">Читати оригінал →</a>
+      <a href="{{ .Params.source_url }}" target="_blank" rel="noopener nofollow">Читати оригінал &rarr;</a>
     </div>
     {{ end }}
 
-    <a href="{{ "/" | relURL }}" class="back-link">← Всі новини</a>
+    <a href="{{ "/" | relURL }}" class="back-link">&larr; Всі новини</a>
   </article>
 
   <!-- Sidebar -->
   <aside class="sidebar">
-    {{/* partial "ad-banner" (dict "position" "sidebar" "context" .) */}}
-    
     <!-- Related articles -->
     {{ $related := .Site.RegularPages.Related . | first 4 }}
     {{ if $related }}
