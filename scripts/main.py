@@ -83,7 +83,8 @@ def run_pipeline():
                 rewritten = rewrite_article(
                     title=article["title"],
                     summary=article["summary"],
-                    source_url=article["link"]
+                    source_url=article["link"],
+                    content=article.get("content", "")
                 )
             except Exception as e:
                 print(f"   ❌ Rewrite error: {e}")

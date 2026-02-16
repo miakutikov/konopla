@@ -26,16 +26,19 @@ OPENROUTER_MODELS = [
 ]
 
 
-def rewrite_article(title, summary, source_url):
+def rewrite_article(title, summary, source_url, content=""):
     """
     Рерайтить статтю українською. Спочатку Gemini, потім OpenRouter.
     Повертає dict або None.
     """
+    # Use full content if available, otherwise summary
+    article_body = content if content and len(content) > len(summary) else summary
+
     user_prompt = f"""Перепиши цю новину:
 
 Заголовок: {title}
 
-Зміст: {summary}
+Повний текст: {article_body}
 
 Джерело: {source_url}"""
 
@@ -69,7 +72,7 @@ def _try_gemini(api_key, user_prompt):
         }],
         "generationConfig": {
             "temperature": 0.7,
-            "maxOutputTokens": 2048
+            "maxOutputTokens": 4096
         }
     }
 
@@ -117,7 +120,7 @@ def _try_openrouter(api_key, model, user_prompt):
             {"role": "user", "content": user_prompt}
         ],
         "temperature": 0.7,
-        "max_tokens": 2048,
+        "max_tokens": 4096,
     }
 
     data = json.dumps(payload).encode("utf-8")

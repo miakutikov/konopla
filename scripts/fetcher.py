@@ -129,6 +129,11 @@ def fetch_all_feeds():
             for entry in feed.entries:
                 title = clean_html(entry.get("title", ""))
                 link = entry.get("link", "")
+                # Get full content if available, otherwise summary
+                content_parts = entry.get("content", [])
+                full_content = ""
+                if content_parts and isinstance(content_parts, list):
+                    full_content = clean_html(content_parts[0].get("value", ""))
                 summary = clean_html(entry.get("summary", entry.get("description", "")))
                 
                 # Basic quality checks
@@ -156,10 +161,13 @@ def fetch_all_feeds():
 
                 seen_hashes.add(article_hash)
                 accepted_titles.append(title)
+                # Use full content if available, otherwise summary
+                article_text = full_content if len(full_content) > len(summary) else summary
                 all_articles.append({
                     "title": title,
                     "link": link,
-                    "summary": summary[:1000],
+                    "summary": summary[:500],
+                    "content": article_text[:5000],
                     "date": pub_date.isoformat() if pub_date else datetime.now(timezone.utc).isoformat(),
                     "source": source,
                     "hash": article_hash,
