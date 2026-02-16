@@ -211,6 +211,21 @@ def edit_message_reply_markup(chat_id, message_id):
     return _send_request(url, payload)
 
 
+def edit_message_text(chat_id, message_id, new_text, parse_mode="HTML"):
+    """Редагує текст повідомлення (без кнопок)."""
+    if not TELEGRAM_TOKEN:
+        return False
+
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/editMessageText"
+    payload = {
+        "chat_id": chat_id,
+        "message_id": message_id,
+        "text": new_text,
+        "parse_mode": parse_mode,
+    }
+    return _send_request(url, payload)
+
+
 def _send_request_raw(url, payload):
     """Відправляє запит і повертає повну відповідь JSON."""
     data = json.dumps(payload).encode("utf-8")

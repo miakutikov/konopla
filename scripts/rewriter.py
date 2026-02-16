@@ -72,7 +72,7 @@ def _try_gemini(api_key, user_prompt):
         }],
         "generationConfig": {
             "temperature": 0.7,
-            "maxOutputTokens": 4096
+            "maxOutputTokens": 8192
         }
     }
 
@@ -120,7 +120,7 @@ def _try_openrouter(api_key, model, user_prompt):
             {"role": "user", "content": user_prompt}
         ],
         "temperature": 0.7,
-        "max_tokens": 4096,
+        "max_tokens": 8192,
     }
 
     data = json.dumps(payload).encode("utf-8")

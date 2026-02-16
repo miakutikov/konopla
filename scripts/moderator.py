@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import PENDING_FILE, TELEGRAM_OFFSET_FILE, PENDING_MAX_AGE_HOURS, API_DELAY_SECONDS
 from telegram_bot import (
     get_updates, answer_callback_query, edit_message_reply_markup,
-    send_message, send_photo, ADMIN_CHAT_ID
+    edit_message_text, send_message, send_photo, ADMIN_CHAT_ID
 )
 from publisher import create_article_file, create_telegram_message
 
@@ -164,17 +164,25 @@ def run_moderator():
                 if article_id in pending_map:
                     approved_ids.append(article_id)
                     answer_callback_query(callback_id, "✅ Схвалено!")
+                    # Update message with visible status
+                    if chat_id and message_id:
+                        original_text = message.get("text", "")
+                        new_text = f"✅ <b>СХВАЛЕНО</b>\n\n{original_text}"
+                        edit_message_text(chat_id, message_id, new_text)
                 else:
                     answer_callback_query(callback_id, "⚠️ Стаття не знайдена")
-                if chat_id and message_id:
-                    edit_message_reply_markup(chat_id, message_id)
+                    if chat_id and message_id:
+                        edit_message_reply_markup(chat_id, message_id)
 
             elif data.startswith("reject_"):
                 article_id = data.replace("reject_", "")
                 rejected_ids.append(article_id)
                 answer_callback_query(callback_id, "❌ Відхилено")
+                # Update message with visible status
                 if chat_id and message_id:
-                    edit_message_reply_markup(chat_id, message_id)
+                    original_text = message.get("text", "")
+                    new_text = f"❌ <b>ВІДХИЛЕНО</b>\n\n{original_text}"
+                    edit_message_text(chat_id, message_id, new_text)
 
             continue
 
@@ -240,6 +248,7 @@ def run_moderator():
             continue
 
         # Post to Telegram channel
+        channel_ok = False
         try:
             tg_message = create_telegram_message(rewritten)
             if image_data:
@@ -247,15 +256,23 @@ def run_moderator():
                 img_url = image_data.get("url", "")
                 is_gemini = image_data.get("source") == "gemini"
                 if is_gemini and local_path:
-                    send_photo(photo_path=local_path, caption=tg_message)
+                    channel_ok = send_photo(photo_path=local_path, caption=tg_message)
                 elif img_url and not img_url.startswith("/"):
-                    send_photo(photo_url=img_url, caption=tg_message)
+                    channel_ok = send_photo(photo_url=img_url, caption=tg_message)
                 else:
-                    send_message(tg_message)
+                    channel_ok = send_message(tg_message)
             else:
-                send_message(tg_message)
+                channel_ok = send_message(tg_message)
         except Exception as e:
             print(f"   ⚠️ Telegram channel error: {e}")
+
+        # Notify admin about publication status
+        title = rewritten.get("title", "?")
+        if channel_ok:
+            status_msg = f"✅ <b>Опубліковано:</b> {title}"
+        else:
+            status_msg = f"⚠️ <b>Файл створено, але Telegram не відправлено:</b> {title}"
+        send_message(status_msg, chat_id=ADMIN_CHAT_ID)
 
         published_count += 1
 
