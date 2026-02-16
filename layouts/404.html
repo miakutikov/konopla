@@ -1,0 +1,73 @@
+{{ define "main" }}
+<div class="container">
+  <div class="error-page">
+    <div class="error-logo">
+      <img src="/images/logo.png" alt="KONOPLA.UA" class="error-logo-img">
+    </div>
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Сторінку не знайдено</h2>
+    <p class="error-text">Можливо, вона ще не опублікована або була видалена.</p>
+    <a href="/" class="error-btn">На головну</a>
+  </div>
+</div>
+
+<style>
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.error-logo {
+  margin-bottom: 2rem;
+}
+.error-logo-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.error-code {
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--green-accent);
+  margin: 0;
+  letter-spacing: -4px;
+}
+.error-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1rem 0 0.5rem;
+}
+.error-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem;
+  max-width: 400px;
+}
+.error-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: var(--green-accent);
+  color: #000;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.error-btn:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+}
+@media (max-width: 480px) {
+  .error-code { font-size: 5rem; }
+  .error-title { font-size: 1.2rem; }
+}
+</style>
+{{ end }}
