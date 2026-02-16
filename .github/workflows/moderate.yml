@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: write
@@ -16,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  moderate:
+  moderate-and-deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -34,6 +36,7 @@ jobs:
         run: pip install feedparser
 
       - name: Run moderator
+        if: github.event_name != 'push'
         id: moderate
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -47,7 +50,7 @@ jobs:
           echo "approved=$(python -c 'import json,os; f="data/moderate_result.json"; d=json.load(open(f)) if os.path.exists(f) else {"approved":0}; print(d.get("approved",0))')" >> $GITHUB_OUTPUT
 
       - name: Commit approved articles
-        if: steps.moderate.outputs.approved != '0'
+        if: github.event_name != 'push' && steps.moderate.outputs.approved != '0'
         run: |
           git config user.name "Konopla Bot"
           git config user.email "bot@konopla.ua"
@@ -56,27 +59,22 @@ jobs:
           git push
 
       - name: Setup Hugo
-        if: steps.moderate.outputs.approved != '0'
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
       - name: Build Hugo site
-        if: steps.moderate.outputs.approved != '0'
         run: hugo --minify
 
       - name: Setup Pages
-        if: steps.moderate.outputs.approved != '0'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        if: steps.moderate.outputs.approved != '0'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './public'
 
       - name: Deploy to GitHub Pages
-        if: steps.moderate.outputs.approved != '0'
         id: deployment
         uses: actions/deploy-pages@v4
