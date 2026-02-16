@@ -32,15 +32,24 @@
   </section>
   {{ end }}
 
-  <!-- News grid -->
+  <!-- News grid (limited to latest 12, excl. featured) -->
+  {{ $rest := after 1 $news }}
+  {{ if $rest }}
   <section class="news-section">
     <h2 class="section-title">Останні новини</h2>
     <div class="news-grid">
-      {{ range after 1 $news }}
+      {{ range first 11 $rest }}
         {{ partial "article-card.html" . }}
       {{ end }}
     </div>
+    {{ if gt (len $rest) 11 }}
+    <div class="more-news">
+      <a href="{{ "/news/" | relURL }}" class="more-news-btn">Усі новини &rarr;</a>
+    </div>
+    {{ end }}
   </section>
+  {{ end }}
+
   {{ else }}
   <section class="empty-state">
     <h2>Поки що новин немає</h2>

@@ -9,20 +9,20 @@
         <p class="footer-desc">Українське інформаційне агентство промислових конопель. Технології, текстиль, будівництво, біопластик та інше.</p>
       </div>
       <div class="footer-col">
+        <h4>Навігація</h4>
+        <ul>
+          <li><a href="{{ "/news/" | relURL }}">Новини</a></li>
+          <li><a href="{{ "/catalog/" | relURL }}">Каталог</a></li>
+          <li><a href="{{ "/about/" | relURL }}">Про нас</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
         <h4>Категорії</h4>
         <ul>
           <li><a href="{{ "/categories/текстиль/" | relURL }}">Текстиль</a></li>
           <li><a href="{{ "/categories/будівництво/" | relURL }}">Будівництво</a></li>
           <li><a href="{{ "/categories/агро/" | relURL }}">Агро</a></li>
-          <li><a href="{{ "/categories/біопластик/" | relURL }}">Біопластик</a></li>
           <li><a href="{{ "/categories/наука/" | relURL }}">Наука</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Ще</h4>
-        <ul>
-          <li><a href="{{ "/categories/харчова/" | relURL }}">Харчова промисловість</a></li>
-          <li><a href="{{ "/categories/екологія/" | relURL }}">Екологія</a></li>
           <li><a href="{{ "/categories/бізнес/" | relURL }}">Бізнес</a></li>
           <li><a href="{{ "/categories/законодавство/" | relURL }}">Законодавство</a></li>
         </ul>
@@ -31,7 +31,6 @@
         <h4>Контакти</h4>
         <ul>
           <li><a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener">📨 Telegram-канал</a></li>
-          <li><a href="{{ "/about/" | relURL }}">📄 Про нас</a></li>
           <li><a href="{{ "feed.xml" | absURL }}">📡 RSS-стрічка</a></li>
         </ul>
       </div>

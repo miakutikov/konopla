@@ -7,12 +7,11 @@
       <h3 class="sidebar-heading">Категорії</h3>
       <ul class="categories-list">
         <li>
-          <a href="{{ "/news/" | relURL }}" class="category-item">
+          <a href="{{ "/news/" | relURL }}" class="category-item active">
             <span class="category-name">Усі новини</span>
             <span class="category-count">{{ len (where .Site.RegularPages "Section" "news") }}</span>
           </a>
         </li>
-        {{ $currentTitle := .Title | lower }}
         {{ $categories := slice
           (dict "name" "текстиль" "emoji" "🧵")
           (dict "name" "будівництво" "emoji" "🏗️")
@@ -28,13 +27,14 @@
           (dict "name" "законодавство" "emoji" "📋")
         }}
         {{ range $categories }}
+        {{ $catPages := where $.Site.Taxonomies.categories (lower .name) }}
         {{ $count := 0 }}
         {{ with index $.Site.Taxonomies.categories (lower .name) }}
           {{ $count = .Count }}
         {{ end }}
         {{ if gt $count 0 }}
         <li>
-          <a href="{{ "/categories/" | relURL }}{{ .name | urlize }}/" class="category-item {{ if eq (lower .name) $currentTitle }}active{{ end }}">
+          <a href="{{ "/categories/" | relURL }}{{ .name | urlize }}/" class="category-item">
             <span class="category-emoji">{{ .emoji }}</span>
             <span class="category-name">{{ .name | title }}</span>
             <span class="category-count">{{ $count }}</span>
@@ -48,9 +48,8 @@
     <!-- News content -->
     <div class="news-content">
       <div class="news-content-header">
-        <h1>{{ .Title }}</h1>
-        {{ if .Description }}<p>{{ .Description }}</p>{{ end }}
-        <p class="list-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}новина{{ else }}новин{{ end }}</p>
+        <h1>Новини</h1>
+        <p class="list-count">{{ len .Pages }} новин</p>
       </div>
 
       <div class="news-grid">

@@ -5,39 +5,17 @@
         <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="logo-img">
         <span class="logo-text">KONOPLA<span class="logo-dot">.UA</span></span>
       </a>
+      <nav class="main-nav">
+        <a href="{{ "/news/" | relURL }}" class="nav-link {{ if or (eq .Section "news") (.IsHome) }}active{{ end }}">Новини</a>
+        <a href="{{ "/catalog/" | relURL }}" class="nav-link {{ if eq .Section "catalog" }}active{{ end }}">Каталог</a>
+      </nav>
       <div class="header-right">
         <a href="{{ .Site.Params.telegram }}" target="_blank" rel="noopener" class="tg-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.357.14-.488.072l.21-2.958 5.37-4.853c.235-.21-.054-.326-.362-.117l-6.633 4.174-2.856-.892c-.621-.194-.633-.621.13-.92l11.16-4.3c.517-.187.97.126.8.822z"/></svg>
-          Telegram
+          <span>Telegram</span>
         </a>
         <button class="menu-toggle" aria-label="Меню">&#9776;</button>
       </div>
     </div>
   </div>
-  <nav class="category-nav">
-    <div class="container">
-      <div class="category-nav-inner">
-        <a href="{{ "/" | relURL }}" class="cat-link {{ if .IsHome }}active{{ end }}">Всі новини</a>
-        {{ $categories := slice
-          (dict "name" "текстиль" "emoji" "🧵")
-          (dict "name" "будівництво" "emoji" "🏗️")
-          (dict "name" "агро" "emoji" "🌱")
-          (dict "name" "біопластик" "emoji" "♻️")
-          (dict "name" "харчова" "emoji" "🥗")
-          (dict "name" "автопром" "emoji" "🚗")
-          (dict "name" "енергетика" "emoji" "⚡")
-          (dict "name" "косметика" "emoji" "✨")
-          (dict "name" "наука" "emoji" "🔬")
-          (dict "name" "екологія" "emoji" "🌍")
-          (dict "name" "бізнес" "emoji" "💼")
-          (dict "name" "законодавство" "emoji" "📋")
-        }}
-        {{ range $categories }}
-        <a href="{{ "/categories/" | relURL }}{{ .name | urlize }}/" class="cat-link">
-          <span class="cat-emoji">{{ .emoji }}</span> {{ .name | title }}
-        </a>
-        {{ end }}
-      </div>
-    </div>
-  </nav>
 </header>

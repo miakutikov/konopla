@@ -5,7 +5,7 @@ defaultContentLanguage = "uk"
 
 # Pagination
 [pagination]
-  pagerSize = 12
+  pagerSize = 9
 
 [params]
   description = "Новини та технології промислових конопель: текстиль, будівництво, біопластик, агро, харчова промисловість"
