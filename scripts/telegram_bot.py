@@ -35,8 +35,12 @@ def send_message(text, chat_id=None, parse_mode="HTML"):
     return _send_request(url, payload)
 
 
-def send_photo(photo_url, caption, chat_id=None, parse_mode="HTML"):
-    """Відправляє фото з підписом. За замовчуванням — в канал."""
+def send_photo(photo_url=None, caption="", chat_id=None, parse_mode="HTML", photo_path=None):
+    """
+    Відправляє фото з підписом. За замовчуванням — в канал.
+    photo_url: URL зображення (для Unsplash)
+    photo_path: локальний шлях до файлу (для Gemini-генерованих)
+    """
     if not TELEGRAM_TOKEN:
         print("[WARN] TELEGRAM_TOKEN not set, skipping")
         return False
@@ -51,18 +55,71 @@ def send_photo(photo_url, caption, chat_id=None, parse_mode="HTML"):
     if len(caption) > 1024:
         caption = caption[:1020] + "..."
 
-    payload = {
-        "chat_id": chat,
-        "photo": photo_url,
-        "caption": caption,
-        "parse_mode": parse_mode,
-    }
+    # If local file — send via multipart/form-data
+    if photo_path and os.path.exists(photo_path):
+        success = _send_photo_file(url, chat, photo_path, caption, parse_mode)
+        if success:
+            return True
+        print("[INFO] Photo file send failed, trying URL fallback")
 
-    success = _send_request(url, payload)
-    if not success:
-        print("[INFO] Photo send failed, falling back to text message")
-        return send_message(caption, chat_id=chat)
-    return success
+    # URL-based send (Unsplash or fallback)
+    if photo_url:
+        payload = {
+            "chat_id": chat,
+            "photo": photo_url,
+            "caption": caption,
+            "parse_mode": parse_mode,
+        }
+        success = _send_request(url, payload)
+        if success:
+            return True
+
+    print("[INFO] Photo send failed, falling back to text message")
+    return send_message(caption, chat_id=chat)
+
+
+def _send_photo_file(url, chat_id, photo_path, caption, parse_mode="HTML"):
+    """Відправляє локальний файл зображення через multipart/form-data."""
+    import mimetypes
+
+    boundary = "----KonoplaUploadBoundary"
+    mime_type = mimetypes.guess_type(photo_path)[0] or "image/png"
+    filename = os.path.basename(photo_path)
+
+    with open(photo_path, "rb") as f:
+        file_data = f.read()
+
+    # Build multipart body
+    body = b""
+    # chat_id field
+    body += f"--{boundary}\r\n".encode()
+    body += f'Content-Disposition: form-data; name="chat_id"\r\n\r\n{chat_id}\r\n'.encode()
+    # caption field
+    body += f"--{boundary}\r\n".encode()
+    body += f'Content-Disposition: form-data; name="caption"\r\n\r\n{caption}\r\n'.encode()
+    # parse_mode field
+    body += f"--{boundary}\r\n".encode()
+    body += f'Content-Disposition: form-data; name="parse_mode"\r\n\r\n{parse_mode}\r\n'.encode()
+    # photo file
+    body += f"--{boundary}\r\n".encode()
+    body += f'Content-Disposition: form-data; name="photo"; filename="{filename}"\r\n'.encode()
+    body += f"Content-Type: {mime_type}\r\n\r\n".encode()
+    body += file_data
+    body += f"\r\n--{boundary}--\r\n".encode()
+
+    try:
+        req = urllib.request.Request(
+            url,
+            data=body,
+            headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        return result.get("ok", False)
+    except Exception as e:
+        print(f"[WARN] Photo file upload failed: {e}")
+        return False
 
 
 def send_for_moderation(article_data, article_id):

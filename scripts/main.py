@@ -31,7 +31,7 @@ def run_pipeline():
     try:
         from fetcher import fetch_all_feeds, load_processed, save_processed
         from rewriter import rewrite_article
-        from images import get_unsplash_image
+        from images import get_article_image
         from telegram_bot import send_for_moderation
         from monitor import send_pipeline_report, send_crash_alert
     except ImportError as e:
@@ -96,21 +96,21 @@ def run_pipeline():
             print(f"   ✅ {rewritten['title'][:60]}...")
 
             # --- 2b: Get image (non-critical) ---
+            article_id = str(uuid.uuid4())[:8]
             image_data = None
             try:
-                if os.environ.get("UNSPLASH_ACCESS_KEY"):
-                    image_query = rewritten.get("image_query", "")
-                    category = rewritten.get("category", "інше")
-                    print(f"   🖼️  Image: {image_query or category}...")
-                    image_data = get_unsplash_image(
-                        query=image_query,
-                        fallback_category=category
-                    )
+                image_query = rewritten.get("image_query", "")
+                category = rewritten.get("category", "інше")
+                print(f"   🖼️  Image: {image_query or category}...")
+                image_data = get_article_image(
+                    query=image_query,
+                    fallback_category=category,
+                    article_id=article_id
+                )
             except Exception as e:
                 print(f"   ⚠️  Image error (non-critical): {e}")
 
             # --- 2c: Save to pending + send for moderation ---
-            article_id = str(uuid.uuid4())[:8]
 
             pending_article = {
                 "id": article_id,

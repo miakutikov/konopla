@@ -68,12 +68,18 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
         image_credit = ""
         if image_data:
             image_line = f'image: "{image_data["url"]}"'
-            image_credit = (
-                f'image_author: "{image_data["author"]}"'
-                f'\nimage_author_url: "{image_data["author_url"]}"'
-                f'\nimage_source: "Unsplash"'
-                f'\nimage_source_url: "{image_data["unsplash_url"]}"'
-            )
+            img_source = image_data.get("source", "unsplash")
+            if img_source == "gemini":
+                image_credit = (
+                    f'image_source: "AI Generated"'
+                )
+            else:
+                image_credit = (
+                    f'image_author: "{image_data.get("author", "")}"'
+                    f'\nimage_author_url: "{image_data.get("author_url", "")}"'
+                    f'\nimage_source: "Unsplash"'
+                    f'\nimage_source_url: "{image_data.get("unsplash_url", "")}"'
+                )
         
         front_matter = f"""---
 title: "{title.replace('"', "'")}"

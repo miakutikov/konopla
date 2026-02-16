@@ -128,8 +128,16 @@ def run_moderator():
         # Post to Telegram channel
         try:
             tg_message = create_telegram_message(rewritten)
-            if image_data and image_data.get("url"):
-                send_photo(photo_url=image_data["url"], caption=tg_message)
+            if image_data:
+                local_path = image_data.get("local_path", "")
+                img_url = image_data.get("url", "")
+                is_gemini = image_data.get("source") == "gemini"
+                if is_gemini and local_path:
+                    send_photo(photo_path=local_path, caption=tg_message)
+                elif img_url and not img_url.startswith("/"):
+                    send_photo(photo_url=img_url, caption=tg_message)
+                else:
+                    send_message(tg_message)
             else:
                 send_message(tg_message)
         except Exception as e:
