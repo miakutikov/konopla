@@ -80,11 +80,8 @@ def send_alert(message, level="WARN"):
 def send_pipeline_report(published, failed, total, duration_sec):
     """Відправляє звіт про роботу pipeline."""
     if published == 0 and total == 0:
-        # No news found — not an error, just info
-        send_alert(
-            "Запуск завершено. Нових новин не знайдено.",
-            level="INFO"
-        )
+        # No news found — not an error, just log (don't spam Telegram)
+        print("[INFO] Запуск завершено. Нових новин не знайдено.")
         return
     
     if failed > 0 and published == 0:

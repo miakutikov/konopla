@@ -1,6 +1,7 @@
 {{ define "main" }}
 <div class="container">
-  {{ with site.Data.catalog }}
+  {{ $catalog := site.Data.catalog }}
+  {{ if $catalog }}
   <section class="catalog-page-layout">
     <!-- Category sidebar -->
     <aside class="categories-sidebar">
@@ -10,14 +11,14 @@
           <a href="#" class="category-item active" data-filter="all">
             <span class="category-name">Усі компанії</span>
             {{ $activeCount := 0 }}
-            {{ range .companies }}{{ if eq .status "active" }}{{ $activeCount = add $activeCount 1 }}{{ end }}{{ end }}
+            {{ range $catalog.companies }}{{ if eq .status "active" }}{{ $activeCount = add $activeCount 1 }}{{ end }}{{ end }}
             <span class="category-count">{{ $activeCount }}</span>
           </a>
         </li>
-        {{ range sort .categories "order" }}
+        {{ range sort $catalog.categories "order" }}
           {{ $catId := .id }}
           {{ $count := 0 }}
-          {{ range $.companies }}
+          {{ range $catalog.companies }}
             {{ if and (eq .category_id $catId) (eq .status "active") }}
               {{ $count = add $count 1 }}
             {{ end }}
@@ -42,12 +43,12 @@
         <p>Українські компанії промислової конопляної індустрії</p>
       </div>
 
-      {{ range sort .categories "order" }}
+      {{ range sort $catalog.categories "order" }}
         {{ $catId := .id }}
         {{ $catName := .name }}
         {{ $catEmoji := .emoji }}
         {{ $companies := slice }}
-        {{ range $.companies }}
+        {{ range $catalog.companies }}
           {{ if and (eq .category_id $catId) (eq .status "active") }}
             {{ $companies = $companies | append . }}
           {{ end }}

@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: write
@@ -36,13 +34,13 @@ jobs:
         run: pip install feedparser
 
       - name: Run moderator
-        if: github.event_name != 'push'
         id: moderate
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
@@ -50,7 +48,6 @@ jobs:
           echo "approved=$(python -c 'import json,os; f="data/moderate_result.json"; d=json.load(open(f)) if os.path.exists(f) else {"approved":0}; print(d.get("approved",0))')" >> $GITHUB_OUTPUT
 
       - name: Commit changes
-        if: github.event_name != 'push'
         run: |
           git config user.name "Konopla Bot"
           git config user.email "bot@konopla.ua"
