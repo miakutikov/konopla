@@ -3,9 +3,12 @@
 moderator.py — Обробляє рішення адміна з Telegram + команди бота.
 
 Команди:
-  /run     — запустити pipeline (збір новин)
-  /status  — статус pending статей
-  /help    — список команд
+  /run      — запустити pipeline (збір новин)
+  /status   — статус pending статей
+  /catalog  — список компаній у каталозі
+  /add      — додати компанію
+  /del      — видалити компанію
+  /help     — список команд
 """
 
 import json
@@ -27,6 +30,9 @@ from publisher import create_article_file, create_telegram_message
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "miakutikov/konopla")
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CATALOG_FILE = os.path.join(PROJECT_ROOT, "data", "catalog.json")
 
 
 def load_json(filepath, default):
@@ -108,14 +114,111 @@ def handle_command(text, pending_articles):
             lines.append(f"\n... та ще {count - 10}")
         return "\n".join(lines)
 
+    elif cmd == "/catalog":
+        catalog = load_json(CATALOG_FILE, {"categories": [], "companies": []})
+        active = [c for c in catalog["companies"] if c.get("status") == "active"]
+        if not active:
+            return "📂 Каталог порожній."
+
+        cat_map = {c["id"]: c["name"] for c in catalog["categories"]}
+        groups = {}
+        for comp in active:
+            cat_name = cat_map.get(comp["category_id"], "Інше")
+            groups.setdefault(cat_name, []).append(comp["name"])
+
+        lines = [f"📂 <b>Каталог: {len(active)} компаній</b>\n"]
+        for cat_name, names in groups.items():
+            lines.append(f"\n<b>{cat_name}</b> ({len(names)}):")
+            for name in names[:5]:
+                lines.append(f"  • {name}")
+            if len(names) > 5:
+                lines.append(f"  ... та ще {len(names) - 5}")
+        return "\n".join(lines)
+
+    elif text.startswith("/add "):
+        parts_str = text[5:].strip()
+        parts = [p.strip() for p in parts_str.split("|")]
+        if len(parts) < 4:
+            cat_ids = "vyroshuvannya, tekstyl, budivnytstvo, kharchova, kosmetyka, nasinnevi, naukovi, torgivlia, hromadski"
+            return (
+                "❌ Формат:\n"
+                "<code>/add Назва | category_id | Опис | Місто | Сайт | Тел | Email</code>\n\n"
+                f"Категорії:\n<code>{cat_ids}</code>\n\n"
+                "Сайт, тел, email — необов'язкові (можна пропустити)"
+            )
+
+        name = parts[0]
+        category_id = parts[1].lower().strip()
+        description = parts[2]
+        location = parts[3]
+        website = parts[4].strip() if len(parts) > 4 and parts[4].strip() not in ("", "-") else ""
+        phone = parts[5].strip() if len(parts) > 5 and parts[5].strip() not in ("", "-") else ""
+        email = parts[6].strip() if len(parts) > 6 and parts[6].strip() not in ("", "-") else ""
+
+        catalog = load_json(CATALOG_FILE, {"categories": [], "companies": []})
+        valid_cat_ids = {c["id"] for c in catalog["categories"]}
+        if category_id not in valid_cat_ids:
+            return f"❌ Невідома категорія: {category_id}\n\nДоступні: {', '.join(sorted(valid_cat_ids))}"
+
+        existing_names = {c["name"].lower() for c in catalog["companies"]}
+        if name.lower() in existing_names:
+            return f"❌ Компанія «{name}» вже існує в каталозі."
+
+        max_num = 0
+        for c in catalog["companies"]:
+            if c["id"].startswith("hemp-ua-"):
+                try:
+                    max_num = max(max_num, int(c["id"].replace("hemp-ua-", "")))
+                except ValueError:
+                    pass
+        new_id = f"hemp-ua-{max_num + 1:03d}"
+
+        catalog["companies"].append({
+            "id": new_id,
+            "name": name,
+            "category_id": category_id,
+            "description": description,
+            "location": location,
+            "website": website,
+            "phone": phone,
+            "email": email,
+            "status": "active",
+            "added_at": datetime.now(timezone.utc).isoformat(),
+        })
+        save_json(CATALOG_FILE, catalog)
+        return f"✅ Додано: <b>{name}</b>\nКатегорія: {category_id}\nID: {new_id}"
+
+    elif text.startswith("/del "):
+        name_to_del = text[5:].strip()
+        if not name_to_del:
+            return "❌ Формат: /del Назва компанії"
+
+        catalog = load_json(CATALOG_FILE, {"categories": [], "companies": []})
+        found = False
+        for comp in catalog["companies"]:
+            if comp["name"].lower() == name_to_del.lower() and comp.get("status") == "active":
+                comp["status"] = "inactive"
+                found = True
+                break
+
+        if not found:
+            return f"❌ Компанію «{name_to_del}» не знайдено серед активних."
+
+        save_json(CATALOG_FILE, catalog)
+        return f"🗑️ Видалено: <b>{name_to_del}</b>"
+
     elif cmd == "/help" or cmd == "/start":
         return (
             "🌿 <b>KONOPLA.UA Bot</b>\n\n"
             "Доступні команди:\n\n"
+            "📰 <b>Новини:</b>\n"
             "/run — запустити збір новин\n"
-            "/status — статус модерації\n"
-            "/help — ця довідка\n\n"
-            "Для модерації — використовуй кнопки ✅/❌ під статтями."
+            "/status — статус модерації\n\n"
+            "📂 <b>Каталог:</b>\n"
+            "/catalog — список компаній\n"
+            "/add — додати компанію\n"
+            "/del — видалити компанію\n\n"
+            "/help — ця довідка"
         )
 
     return None  # Unknown command — ignore

@@ -1,11 +1,118 @@
 {{ define "main" }}
 <div class="container">
-  <div class="catalog-placeholder">
-    <div class="catalog-icon">🏗️</div>
-    <h1>Каталог</h1>
-    <p class="catalog-desc">Каталог виробників та продукції з промислових конопель. Цей розділ наразі в розробці.</p>
-    <p class="catalog-sub">Ми працюємо над тим, щоб зібрати найкращих виробників текстилю, будматеріалів, біопластику та інших продуктів з конопель.</p>
-    <a href="{{ "/news/" | relURL }}" class="catalog-btn">Перейти до новин</a>
+  {{ with site.Data.catalog }}
+  <section class="catalog-page-layout">
+    <!-- Category sidebar -->
+    <aside class="categories-sidebar">
+      <h3 class="sidebar-heading">Категорії</h3>
+      <ul class="categories-list">
+        <li>
+          <a href="#" class="category-item active" data-filter="all">
+            <span class="category-name">Усі компанії</span>
+            {{ $activeCount := 0 }}
+            {{ range .companies }}{{ if eq .status "active" }}{{ $activeCount = add $activeCount 1 }}{{ end }}{{ end }}
+            <span class="category-count">{{ $activeCount }}</span>
+          </a>
+        </li>
+        {{ range sort .categories "order" }}
+          {{ $catId := .id }}
+          {{ $count := 0 }}
+          {{ range $.companies }}
+            {{ if and (eq .category_id $catId) (eq .status "active") }}
+              {{ $count = add $count 1 }}
+            {{ end }}
+          {{ end }}
+          {{ if gt $count 0 }}
+          <li>
+            <a href="#{{ .id }}" class="category-item" data-filter="{{ .id }}">
+              <span class="category-emoji">{{ .emoji }}</span>
+              <span class="category-name">{{ .name }}</span>
+              <span class="category-count">{{ $count }}</span>
+            </a>
+          </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </aside>
+
+    <!-- Catalog content -->
+    <div class="catalog-content">
+      <div class="news-content-header">
+        <h1>Каталог компаній</h1>
+        <p>Українські компанії промислової конопляної індустрії</p>
+      </div>
+
+      {{ range sort .categories "order" }}
+        {{ $catId := .id }}
+        {{ $catName := .name }}
+        {{ $catEmoji := .emoji }}
+        {{ $companies := slice }}
+        {{ range $.companies }}
+          {{ if and (eq .category_id $catId) (eq .status "active") }}
+            {{ $companies = $companies | append . }}
+          {{ end }}
+        {{ end }}
+        {{ if $companies }}
+        <section class="catalog-category-section" id="{{ .id }}" data-category="{{ .id }}">
+          <h2 class="catalog-category-heading">
+            <span>{{ $catEmoji }}</span>
+            {{ $catName }}
+            <span class="catalog-category-count">({{ len $companies }})</span>
+          </h2>
+          <div class="catalog-grid">
+            {{ range $companies }}
+            <div class="company-card">
+              <h3 class="company-name">{{ .name }}</h3>
+              <p class="company-location">📍 {{ .location }}</p>
+              <p class="company-description">{{ .description }}</p>
+              <div class="company-contacts">
+                {{ with .website }}
+                <a href="{{ . }}" target="_blank" rel="noopener" class="company-link">🌐 Сайт</a>
+                {{ end }}
+                {{ with .phone }}
+                <a href="tel:{{ . }}" class="company-link">📞 {{ . }}</a>
+                {{ end }}
+                {{ with .email }}
+                <a href="mailto:{{ . }}" class="company-link">✉️ Email</a>
+                {{ end }}
+              </div>
+            </div>
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+  {{ else }}
+  <div class="empty-state">
+    <h2>Каталог порожній</h2>
+    <p>Компанії з'являться найближчим часом.</p>
   </div>
+  {{ end }}
 </div>
+
+<script>
+(function() {
+  var sidebar = document.querySelector('.categories-sidebar');
+  if (!sidebar) return;
+  sidebar.addEventListener('click', function(e) {
+    var link = e.target.closest('[data-filter]');
+    if (!link) return;
+    e.preventDefault();
+    var filter = link.dataset.filter;
+    var sections = document.querySelectorAll('.catalog-category-section');
+    var items = document.querySelectorAll('.category-item');
+    items.forEach(function(i) { i.classList.remove('active'); });
+    link.classList.add('active');
+    if (filter === 'all') {
+      sections.forEach(function(s) { s.style.display = ''; });
+    } else {
+      sections.forEach(function(s) {
+        s.style.display = s.dataset.category === filter ? '' : 'none';
+      });
+    }
+  });
+})();
+</script>
 {{ end }}
