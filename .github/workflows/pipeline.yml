@@ -39,4 +39,8 @@ jobs:
           git config user.email "bot@konopla.ua"
           git add data/pending.json data/processed.json static/images/generated/ || true
           git diff --staged --quiet || git commit -m "📋 Pending: new articles for moderation $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+          for i in 1 2 3; do
+            git push && break
+            echo "Push failed (attempt $i), pulling and retrying..."
+            git pull --rebase
+          done
