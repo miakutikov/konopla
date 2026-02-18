@@ -7,6 +7,41 @@ import re
 from datetime import datetime, timezone
 
 
+def fix_double_utf8(text):
+    """
+    Fix double-encoded UTF-8 text.
+
+    When UTF-8 bytes are mistakenly interpreted as Latin-1 and then
+    re-encoded to UTF-8, we get sequences like c3 90 c2 92 instead of d0 92.
+    This function detects and reverses that process.
+
+    Safe to call on already-correct text — returns it unchanged.
+    """
+    if not isinstance(text, str):
+        return text
+    try:
+        # Try to encode as Latin-1: this only succeeds if every character
+        # is in the 0x00-0xFF range (which is the symptom of double-encoding).
+        raw = text.encode('latin-1')
+        # Now decode those bytes as UTF-8 to recover the original text.
+        fixed = raw.decode('utf-8')
+        return fixed
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        # Not double-encoded — return as-is
+        return text
+
+
+def fix_article_encoding(article_data):
+    """Apply fix_double_utf8 to all text fields in article data."""
+    fixed = dict(article_data)
+    for key in ('title', 'summary', 'content', 'category'):
+        if key in fixed and isinstance(fixed[key], str):
+            fixed[key] = fix_double_utf8(fixed[key])
+    if 'tags' in fixed and isinstance(fixed['tags'], list):
+        fixed['tags'] = [fix_double_utf8(t) if isinstance(t, str) else t for t in fixed['tags']]
+    return fixed
+
+
 def slugify(text):
     """Створює URL-friendly slug з українського тексту."""
     # Transliteration map for Ukrainian
@@ -47,10 +82,13 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
     Повертає шлях до створеного файлу або None.
     """
     try:
+        # Fix potential double-encoded UTF-8 from pipeline
+        article_data = fix_article_encoding(article_data)
+
         now = datetime.now(timezone.utc)
         date_str = now.strftime("%Y-%m-%dT%H:%M:%S+00:00")
         date_prefix = now.strftime("%Y%m%d-%H%M")
-        
+
         title = article_data["title"]
         summary = article_data["summary"]
         content = article_data["content"]
@@ -130,6 +168,7 @@ def create_telegram_message(article_data, site_url="https://konopla.ua"):
     Формує повідомлення для Telegram-каналу.
     Повертає текст повідомлення.
     """
+    article_data = fix_article_encoding(article_data)
     title = article_data["title"]
     summary = article_data["summary"]
     category = article_data.get("category", "")
