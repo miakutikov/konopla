@@ -8,7 +8,7 @@ source: "'hemp textile fabric clothing' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMijwFBVV95cUxNS1lLMmNRQ18tSGdBdHNrblJWbWI0cnBXWWcyV2FNemZoUjFqRlpBRXZwaTdsX2Yxc2szdTFsWFUtTDdWMjhzaTQyOEZEcDY0Nkl2aURBMjRFZ2V0MjBFVlJXWFZ1aXpiQmZSVTk2UG0xTDczb0pjWWtwejFnQ0J4LUNTNjNQekdETEIteVBUOA?oc=5"
 image: "/images/generated/b34c9403.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 До 2035 року обсяг світового ринку конопляної тканини досягне вражаючих $1.6 мільярда, зростаючи із середньорічним темпом у 18.7% протягом наступного десятиліття. Ця цифра суттєво перевищує показник 2024 року, коли ринок оцінювався у $280 мільйонів, що свідчить про стрімке відродження та визнання промислових конопель у текстильній індустрії.
