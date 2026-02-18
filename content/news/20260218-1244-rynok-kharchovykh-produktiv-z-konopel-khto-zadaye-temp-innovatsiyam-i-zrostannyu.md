@@ -8,7 +8,7 @@ source: "'hemp industry market business' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMingFBVV95cUxQS3ZQUUs0SVVDa0hnSDZER19oVmZKWThsNGl3YUllMlp4TzNSeFg4RWQ4U0o5NU9sOEY4elhrd0JrcHRpVHlSb1dCNUJvcmNPalFRQmIyTWoxd2xWWWVLem1hSE00RHVnem5TZkY0NndOd0VrQ2R5QkZRc1RYTUlWZi1kWF9DaW5yalU4MHlnU1hvcUVTNy1zR3NLRXdQQQ?oc=5"
 image: "/images/generated/8c610007.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Глобальний ринок харчових продуктів з технічних конопель переживає період стрімкого зростання, зумовленого підвищеним інтересом споживачів до користі цих продуктів та зростаючим попитом на рослинні джерела білка. Нещодавній звіт провідної дослідницької компанії виділяє ключових гравців, які стоять на чолі цієї індустрії, демонструючи їхні стратегії інновацій та розширення ринку.
