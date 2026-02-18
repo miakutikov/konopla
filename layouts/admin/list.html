@@ -504,7 +504,7 @@
       if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
 
       var data = await resp.json();
-      var content = JSON.parse(atob(data.content));
+      var content = JSON.parse(b64DecodeUtf8(data.content));
       var articles = (content.articles || []).filter(function(a) { return a && a.filename; });
 
       if (articles.length === 0) {
@@ -573,7 +573,7 @@
       var fileData = await fileResp.json();
 
       // 2. Decode content, replace draft: true → draft: false
-      var decoded = atob(fileData.content);
+      var decoded = b64DecodeUtf8(fileData.content);
       var updated = decoded.replace(/^draft:\s*true$/m, 'draft: false');
 
       if (updated === decoded) {
@@ -585,7 +585,7 @@
       // 3. PUT updated file back
       var putResp = await ghApi('PUT', '/contents/content/news/' + filename, {
         message: '✅ Approve: ' + filename,
-        content: btoa(unescape(encodeURIComponent(updated))),
+        content: b64EncodeUtf8(updated),
         sha: fileData.sha
       });
 
@@ -713,13 +713,13 @@
       if (!resp.ok) return;
 
       var data = await resp.json();
-      var content = JSON.parse(atob(data.content));
+      var content = JSON.parse(b64DecodeUtf8(data.content));
 
       content.articles = (content.articles || []).filter(function(a) {
         return a.id !== articleId;
       });
 
-      var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+      var encoded = b64EncodeUtf8(JSON.stringify(content, null, 2));
 
       await ghApi('PUT', '/contents/data/drafts.json', {
         message: '📋 Update drafts.json',
@@ -739,6 +739,25 @@
     } catch (e) {
       console.warn('Failed to trigger deploy:', e);
     }
+  }
+
+  // UTF-8 safe base64 decode/encode
+  function b64DecodeUtf8(b64) {
+    var binStr = atob(b64);
+    var bytes = new Uint8Array(binStr.length);
+    for (var i = 0; i < binStr.length; i++) {
+      bytes[i] = binStr.charCodeAt(i);
+    }
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+
+  function b64EncodeUtf8(str) {
+    var bytes = new TextEncoder().encode(str);
+    var binStr = '';
+    for (var i = 0; i < bytes.length; i++) {
+      binStr += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binStr);
   }
 
   async function ghApi(method, path, body) {
