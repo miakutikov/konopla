@@ -8,7 +8,7 @@ source: "'Hanf Industrie Deutschland' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMingFBVV95cUxNaTVHd2FiNlFxSVZGVVRUZVlSUlI2bWJqVHZOVXU5M2IwMWJtWThhQjV3LWxheGJVUWx6dUZ0cDRKWE1ZLVRVTG9MOWpJZEJna0NURU5yTVFtN0lKLVdjb0hZdnpydWhxQ1lEZXdzcVJvSXhEejZZM0JwZ2d5bDFJRmdMVm43NDg3Y3FwZUd1NEhQSi03YXJVQkoyNTZZdw?oc=5"
 image: "/images/generated/98891266.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Німеччина ризикує втратити свої позиції на світовому ринку промислових конопель, якщо не проведе термінові реформи. Саме з таким закликом виступили три ключові німецькі асоціації: Федеральна асоціація конопель (Bundesverband Hanf), Nova-Institut та Німецька асоціація конопель (Deutscher Hanf Verband).
