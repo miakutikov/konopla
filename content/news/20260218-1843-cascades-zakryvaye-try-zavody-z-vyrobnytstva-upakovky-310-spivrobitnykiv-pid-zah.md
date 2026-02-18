@@ -8,7 +8,7 @@ source: "'hemp paper pulp packaging' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMihgFBVV95cUxNRnZUeWswbjlyc3VlckVJdjd0MC16WG0wVFV5TXZNbmxVWTc1RzAxVDB0TmxHNnpkUm1fWVJrelpzSTNmZEFXMGVMTjIzSzg4czlXSkhjNWFpa3BZTHdtdnIyc3dzSlExYnF1M1ZJN2gtc2lsS2o3Yi1RSWN3dlZ5MjVSRVpPQQ?oc=5"
 image: "/images/generated/4abc3068.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Канадська компанія Cascades Inc., один із провідних гравців на ринку упаковки та паперової продукції, оголосила про закриття трьох своїх заводів у Північній Америці. До 31 липня 2023 року припинять роботу підприємства з виробництва гофрованої упаковки в Баррі (Онтаріо, Канада) та Ньютоні (Північна Кароліна, США), а також завод з переробки контейнерного картону в Сент-Меріс (Пенсильванія, США). Це рішення призведе до скорочення 310 робочих місць і є частиною масштабної стратегії оптимізації бізнес-платформи компанії.
