@@ -36,6 +36,18 @@
         <h2>📭 Немає статей на модерації</h2>
         <p>Натисніть «Запустити збір» для отримання нових новин</p>
       </div>
+
+      <!-- Deploy queue -->
+      <div id="deploy-queue" class="deploy-queue" style="display:none">
+        <div class="deploy-queue-header">
+          <h2>🚀 Черга на деплой</h2>
+          <div class="deploy-queue-actions">
+            <button class="admin-btn admin-btn-green" onclick="deployAll()">🚀 Задеплоїти (<span id="queue-count">0</span>)</button>
+            <button class="admin-btn admin-btn-dim" onclick="clearQueue()">Очистити</button>
+          </div>
+        </div>
+        <div id="queue-items" class="queue-items"></div>
+      </div>
     </div>
 
   </div>
@@ -337,6 +349,73 @@
   border-color: var(--green-accent);
 }
 
+/* Deploy queue */
+.deploy-queue {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--green-accent);
+}
+.deploy-queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.deploy-queue-header h2 {
+  font-size: 1.15rem;
+  color: var(--green-accent);
+}
+.deploy-queue-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.queue-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.queue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background: var(--green-subtle);
+  border: 1px solid rgba(52, 211, 153, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+.queue-item-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.queue-item-cat {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+.queue-item-remove {
+  margin-left: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.queue-item-remove:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .draft-card-inner {
@@ -371,6 +450,7 @@
 
   var ghToken = '';
   var adminKey = '';
+  var approvedQueue = [];
 
   // =========================================================================
   // Auth
@@ -406,6 +486,10 @@
 
     // Load GitHub PAT from localStorage
     ghToken = localStorage.getItem('konopla_gh_token') || '';
+
+    // Load deploy queue from localStorage
+    loadQueue();
+    renderQueue();
 
     if (!ghToken) {
       showPatSetup();
@@ -560,11 +644,17 @@
   // =========================================================================
 
   window.approveArticle = async function(filename, articleId) {
-    if (!confirm('Опублікувати цю статтю?')) return;
+    if (!confirm('Схвалити цю статтю?')) return;
 
     var card = document.querySelector('[data-filename="' + filename + '"]');
+    // Get title from card before disabling
+    var titleEl = card ? card.querySelector('.draft-title a') : null;
+    var title = titleEl ? titleEl.textContent : filename;
+    var catEl = card ? card.querySelector('.draft-meta span') : null;
+    var category = catEl ? catEl.textContent : '';
+
     disableCard(card);
-    showStatus('⏳ Публікуємо...', 'info');
+    showStatus('⏳ Схвалюємо...', 'info');
 
     try {
       // 1. Get the .md file
@@ -597,10 +687,17 @@
       // 4. Remove from drafts.json
       await removeDraftEntry(articleId);
 
-      // 5. Trigger redeploy
-      await triggerDeploy();
+      // 5. Add to deploy queue (NO deploy yet!)
+      approvedQueue.push({
+        title: title,
+        filename: filename,
+        category: category,
+        approvedAt: new Date().toISOString()
+      });
+      saveQueue();
+      renderQueue();
 
-      showStatus('✅ Стаття опублікована! Сайт оновиться за 1-2 хв.', 'success');
+      showStatus('✅ Схвалено! Додано в чергу на деплой.', 'success');
 
       // Remove card from UI
       if (card) card.remove();
@@ -651,9 +748,6 @@
 
       // 3. Remove from drafts.json
       await removeDraftEntry(articleId);
-
-      // 4. Trigger redeploy
-      await triggerDeploy();
 
       showStatus('🗑️ Стаття видалена.', 'success');
 
@@ -730,6 +824,76 @@
       console.warn('Failed to update drafts.json:', e);
     }
   }
+
+  // =========================================================================
+  // Deploy queue
+  // =========================================================================
+
+  function loadQueue() {
+    try {
+      var saved = localStorage.getItem('konopla_deploy_queue');
+      approvedQueue = saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      approvedQueue = [];
+    }
+  }
+
+  function saveQueue() {
+    localStorage.setItem('konopla_deploy_queue', JSON.stringify(approvedQueue));
+  }
+
+  function renderQueue() {
+    var container = document.getElementById('deploy-queue');
+    var itemsEl = document.getElementById('queue-items');
+    var countEl = document.getElementById('queue-count');
+
+    if (!approvedQueue.length) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'block';
+    countEl.textContent = approvedQueue.length;
+
+    itemsEl.innerHTML = approvedQueue.map(function(item, idx) {
+      return '<div class="queue-item">' +
+        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+        '<button class="queue-item-remove" onclick="removeFromQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.removeFromQueue = function(idx) {
+    approvedQueue.splice(idx, 1);
+    saveQueue();
+    renderQueue();
+  };
+
+  window.clearQueue = function() {
+    if (!confirm('Очистити чергу? (Статті вже схвалені, але деплой не запуститься)')) return;
+    approvedQueue = [];
+    saveQueue();
+    renderQueue();
+  };
+
+  window.deployAll = async function() {
+    if (!approvedQueue.length) return;
+    if (!confirm('Задеплоїти ' + approvedQueue.length + ' статей?')) return;
+
+    showStatus('⏳ Запуск деплою...', 'info');
+
+    try {
+      await triggerDeploy();
+      var count = approvedQueue.length;
+      approvedQueue = [];
+      saveQueue();
+      renderQueue();
+      showStatus('🚀 Деплой запущено! ' + count + ' статей з\'являться на сайті за 1-2 хв.', 'success');
+    } catch (e) {
+      showStatus('❌ Помилка деплою: ' + e.message, 'error');
+    }
+  };
 
   async function triggerDeploy() {
     try {
