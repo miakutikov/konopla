@@ -33,15 +33,16 @@ def slugify(text):
     return slug[:80]  # Limit length
 
 
-def create_article_file(article_data, source_url, source_name, image_data=None, content_dir="content/news"):
+def create_article_file(article_data, source_url, source_name, image_data=None, content_dir="content/news", draft=False):
     """
     Створює Hugo markdown файл для статті.
-    
+
     article_data: dict from Gemini (title, summary, content, category, tags)
     source_url: URL оригінальної статті
     source_name: назва джерела
     image_data: dict from Unsplash (url, author, author_url, unsplash_url) or None
     content_dir: папка для зберігання
+    draft: якщо True, стаття створюється як чернетка (draft: true)
     
     Повертає шлях до створеного файлу або None.
     """
@@ -96,7 +97,7 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
             fm_lines.append(image_line)
         if image_credit:
             fm_lines.append(image_credit)
-        fm_lines.append("draft: false")
+        fm_lines.append(f"draft: {'true' if draft else 'false'}")
         fm_lines.append("---")
         fm_lines.append("")
         fm_lines.append(content)

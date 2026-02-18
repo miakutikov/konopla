@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="container">
 
-  {{ $allNews := where .Site.RegularPages "Section" "news" }}
+  {{ $allNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
   {{ $news := $allNews.ByDate.Reverse }}
 
   {{ if $news }}

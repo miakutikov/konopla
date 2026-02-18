@@ -120,6 +120,9 @@ def generate_gemini_image(query, article_id="img"):
         # Hugo uses relative path from static/
         relative_url = f"/images/generated/{filename}"
 
+        # local_path: relative from project root (for git add + Telegram photo upload)
+        relative_path = os.path.join("static", "images", "generated", filename)
+
         return {
             "url": relative_url,
             "thumb": relative_url,
@@ -127,7 +130,7 @@ def generate_gemini_image(query, article_id="img"):
             "author_url": "",
             "unsplash_url": "",
             "source": "gemini",
-            "local_path": filepath,
+            "local_path": relative_path,
         }
 
     except urllib.error.HTTPError as e:

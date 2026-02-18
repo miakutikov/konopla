@@ -2,6 +2,7 @@ baseURL = "https://konopla.ua/"
 languageCode = "uk"
 title = "KONOPLA.UA — Новини промислових конопель"
 defaultContentLanguage = "uk"
+buildDrafts = true
 
 # Pagination
 [pagination]
@@ -12,6 +13,8 @@ defaultContentLanguage = "uk"
   author = "KONOPLA.UA"
   dateFormat = "2 January 2006"
   telegram = "https://t.me/uakonopla"
+  admin_key_hash = "2738babb7ac0919565144b506470c0d84356b9ce14f367fb81b798528a4511be"
+  github_repo = "miakutikov/konopla"
   # Google Analytics — розкоментуй і встав свій ID:
   # googleAnalytics = "G-XXXXXXXXXX"
   # Google Analytics — розкоментуй і встав свій ID:

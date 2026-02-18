@@ -2,8 +2,8 @@
 """
 main.py — KONOPLA.UA News Pipeline
 
-Pipeline: RSS → фільтрація → рерайт → зображення → збереження в pending → відправка на модерацію адміну.
-Публікація відбувається тільки після схвалення адміном (moderator.py).
+Pipeline: RSS → фільтрація → рерайт → зображення → створення draft .md → деплой.
+Статті створюються як draft (чернетка) — адмін модерує через /admin/ панель на сайті.
 """
 
 import json
@@ -16,11 +16,28 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config import API_DELAY_SECONDS, PENDING_FILE
+from config import API_DELAY_SECONDS
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
+CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
+
+
+def load_json(filepath, default):
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return default
+
+
+def save_json(filepath, data):
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 def run_pipeline():
-    """Запускає pipeline: збір, рерайт, збереження в pending."""
+    """Запускає pipeline: збір, рерайт, створення draft-статей."""
 
     start_time = time.time()
 
@@ -32,7 +49,8 @@ def run_pipeline():
         from fetcher import fetch_all_feeds, load_processed, save_processed
         from rewriter import rewrite_article
         from images import get_article_image
-        from telegram_bot import send_for_moderation
+        from publisher import create_article_file
+        from telegram_bot import send_message, ADMIN_CHAT_ID
         from monitor import send_pipeline_report, send_crash_alert
     except ImportError as e:
         print(f"[CRITICAL] Missing dependency: {e}")
@@ -63,12 +81,8 @@ def run_pipeline():
 
         print(f"[INFO] Processing {len(articles)} articles...\n")
 
-        # === STEP 2: Load pending ===
-        pending = {"articles": []}
-        if os.path.exists(PENDING_FILE):
-            with open(PENDING_FILE, "r", encoding="utf-8") as f:
-                pending = json.load(f)
-
+        # Load drafts tracking file
+        drafts = load_json(DRAFTS_FILE, {"articles": []})
         processed = load_processed()
 
         for i, article in enumerate(articles):
@@ -76,7 +90,7 @@ def run_pipeline():
             print(f"📰 Article {i+1}/{len(articles)}")
             print(f"   Title: {article['title'][:70]}...")
 
-            # --- 2a: Rewrite ---
+            # --- Rewrite ---
             rewritten = None
             try:
                 print("   ✍️  Rewriting...")
@@ -96,7 +110,7 @@ def run_pipeline():
 
             print(f"   ✅ {rewritten['title'][:60]}...")
 
-            # --- 2b: Get image (non-critical) ---
+            # --- Get image (non-critical) ---
             article_id = str(uuid.uuid4())[:8]
             image_data = None
             try:
@@ -111,32 +125,49 @@ def run_pipeline():
             except Exception as e:
                 print(f"   ⚠️  Image error (non-critical): {e}")
 
-            # --- 2c: Save to pending + send for moderation ---
+            # --- Create draft Hugo .md file ---
+            print("   📝 Creating draft article...")
+            filepath = create_article_file(
+                article_data=rewritten,
+                source_url=article["link"],
+                source_name=article["source"],
+                image_data=image_data,
+                content_dir=CONTENT_DIR,
+                draft=True,
+            )
 
-            pending_article = {
+            if not filepath:
+                print(f"   ❌ Failed to create draft file")
+                failed_count += 1
+                continue
+
+            filename = os.path.basename(filepath)
+
+            # Track draft for admin panel
+            drafts["articles"].append({
                 "id": article_id,
-                "rewritten": rewritten,
-                "source_url": article["link"],
-                "source_name": article["source"],
-                "image_data": image_data,
-                "status": "pending",
+                "filename": filename,
+                "title": rewritten.get("title", ""),
+                "summary": rewritten.get("summary", ""),
+                "category": rewritten.get("category", ""),
+                "image": image_data.get("url", "") if image_data else "",
                 "created_at": datetime.now(timezone.utc).isoformat(),
-            }
+            })
 
-            # Send preview to admin
+            # Notify admin (simple message, no buttons)
             try:
-                print("   📨 Sending for moderation...")
-                msg_id = send_for_moderation(rewritten, article_id)
-                if msg_id:
-                    pending_article["telegram_message_id"] = msg_id
+                title = rewritten.get("title", "?")
+                notify_text = (
+                    f"📰 <b>Нова стаття на модерації</b>\n\n"
+                    f"<b>{title}</b>\n\n"
+                    f"👉 <a href=\"https://konopla.ua/admin/\">Модерувати</a>"
+                )
+                send_message(notify_text, chat_id=ADMIN_CHAT_ID)
             except Exception as e:
-                print(f"   ⚠️  Moderation send error: {e}")
+                print(f"   ⚠️  Admin notification error: {e}")
 
-            pending["articles"].append(pending_article)
-
-            # Mark as processed (to avoid re-fetching)
+            # Mark as processed
             processed["articles"].append(article["hash"])
-            # Store title for dedup
             if "recent_titles" not in processed:
                 processed["recent_titles"] = []
             processed["recent_titles"].append(rewritten["title"])
@@ -148,11 +179,8 @@ def run_pipeline():
                 print(f"   ⏳ {API_DELAY_SECONDS}s...")
                 time.sleep(API_DELAY_SECONDS)
 
-        # Save pending and processed
-        os.makedirs(os.path.dirname(PENDING_FILE), exist_ok=True)
-        with open(PENDING_FILE, "w", encoding="utf-8") as f:
-            json.dump(pending, f, ensure_ascii=False, indent=2)
-
+        # Save drafts and processed
+        save_json(DRAFTS_FILE, drafts)
         save_processed(processed)
 
     except Exception as e:
@@ -173,7 +201,7 @@ def run_pipeline():
     print(f"   ✍️  Rewritten: {rewritten_count}")
     print(f"   ❌ Failed: {failed_count}")
     print(f"   ⏱  Duration: {duration:.0f}s")
-    print(f"   📋 Sent for moderation (waiting for admin approval)")
+    print(f"   📋 Draft articles created (waiting for admin approval at /admin/)")
     print("=" * 60)
 
     try:

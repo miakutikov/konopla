@@ -1,6 +1,9 @@
 {{ define "main" }}
 <div class="container">
 
+  {{ $publishedNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
+  {{ $publishedPages := where .Pages ".Params.draft" "ne" true }}
+
   <section class="news-page-layout">
     <!-- Category sidebar -->
     <aside class="categories-sidebar">
@@ -9,7 +12,7 @@
         <li>
           <a href="{{ "/news/" | relURL }}" class="category-item">
             <span class="category-name">Усі новини</span>
-            <span class="category-count">{{ len (where .Site.RegularPages "Section" "news") }}</span>
+            <span class="category-count">{{ len $publishedNews }}</span>
           </a>
         </li>
         {{ $currentTitle := .Title | lower }}
@@ -50,27 +53,28 @@
       <div class="news-content-header">
         <h1>{{ .Title }}</h1>
         {{ if .Description }}<p>{{ .Description }}</p>{{ end }}
-        <p class="list-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}новина{{ else }}новин{{ end }}</p>
+        <p class="list-count">{{ len $publishedPages }} {{ if eq (len $publishedPages) 1 }}новина{{ else }}новин{{ end }}</p>
       </div>
 
+      {{ $paginator := .Paginate $publishedPages }}
       <div class="news-grid">
-        {{ range .Paginator.Pages }}
+        {{ range $paginator.Pages }}
           {{ partial "article-card.html" . }}
         {{ end }}
       </div>
 
       <!-- Pagination -->
-      {{ if gt .Paginator.TotalPages 1 }}
+      {{ if gt $paginator.TotalPages 1 }}
       <nav class="pagination">
-        {{ if .Paginator.HasPrev }}
-        <a href="{{ .Paginator.Prev.URL }}" class="page-btn">&larr; Новіші</a>
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" class="page-btn">&larr; Новіші</a>
         {{ else }}
         <span class="page-btn disabled">&larr; Новіші</span>
         {{ end }}
 
         <div class="page-numbers">
-          {{ range .Paginator.Pagers }}
-          {{ if eq . $.Paginator }}
+          {{ range $paginator.Pagers }}
+          {{ if eq . $paginator }}
           <span class="page-num current">{{ .PageNumber }}</span>
           {{ else }}
           <a href="{{ .URL }}" class="page-num">{{ .PageNumber }}</a>
@@ -78,8 +82,8 @@
           {{ end }}
         </div>
 
-        {{ if .Paginator.HasNext }}
-        <a href="{{ .Paginator.Next.URL }}" class="page-btn">Старіші &rarr;</a>
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}" class="page-btn">Старіші &rarr;</a>
         {{ else }}
         <span class="page-btn disabled">Старіші &rarr;</span>
         {{ end }}

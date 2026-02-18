@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-moderator.py — Обробляє рішення адміна з Telegram + команди бота.
+moderator.py — Telegram bot commands + deploy pipeline.
+
+Модерація тепер відбувається через адмін-панель на сайті (konopla.ua/admin/).
+Цей скрипт обробляє тільки Telegram-команди бота та деплоїть сайт.
 
 Команди:
   /run      — запустити pipeline (збір новин)
-  /status   — статус pending статей
+  /status   — статус draft-статей
   /catalog  — список компаній у каталозі
   /add      — додати компанію
   /del      — видалити компанію
@@ -14,25 +17,21 @@ moderator.py — Обробляє рішення адміна з Telegram + ко
 import json
 import os
 import sys
-import time
 import urllib.request
 import urllib.error
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config import PENDING_FILE, TELEGRAM_OFFSET_FILE, PENDING_MAX_AGE_HOURS, API_DELAY_SECONDS
-from telegram_bot import (
-    get_updates, answer_callback_query, edit_message_reply_markup,
-    edit_message_text, send_message, send_photo, ADMIN_CHAT_ID
-)
-from publisher import create_article_file, create_telegram_message
+from config import TELEGRAM_OFFSET_FILE
+from telegram_bot import get_updates, send_message, ADMIN_CHAT_ID
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "miakutikov/konopla")
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CATALOG_FILE = os.path.join(PROJECT_ROOT, "data", "catalog.json")
+DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
 
 
 def load_json(filepath, default):
@@ -74,7 +73,6 @@ def trigger_pipeline():
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=15) as resp:
-            # 204 No Content = success
             print(f"[OK] Pipeline triggered, status={resp.status}")
             return True
     except urllib.error.HTTPError as e:
@@ -90,7 +88,7 @@ def trigger_pipeline():
         return False
 
 
-def handle_command(text, pending_articles):
+def handle_command(text):
     """Обробляє команду від адміна. Повертає текст відповіді."""
     cmd = text.strip().lower().split()[0] if text.strip() else ""
 
@@ -101,17 +99,19 @@ def handle_command(text, pending_articles):
         return "❌ Не вдалось запустити pipeline. Перевір GitHub Token."
 
     elif cmd == "/status":
-        count = len(pending_articles)
+        drafts = load_json(DRAFTS_FILE, {"articles": []})
+        count = len(drafts["articles"])
         if count == 0:
-            return "📋 Немає статей на модерації."
+            return "📋 Немає статей на модерації.\n\n👉 <a href=\"https://konopla.ua/admin/\">Адмін-панель</a>"
 
         lines = [f"📋 <b>На модерації: {count} статей</b>\n"]
-        for i, a in enumerate(pending_articles[:10], 1):
-            title = a.get("rewritten", {}).get("title", "?")[:50]
+        for i, a in enumerate(drafts["articles"][:10], 1):
+            title = a.get("title", "?")[:50]
             created = a.get("created_at", "")[:16].replace("T", " ")
             lines.append(f"{i}. {title}\n   <i>{created}</i>")
         if count > 10:
             lines.append(f"\n... та ще {count - 10}")
+        lines.append(f"\n👉 <a href=\"https://konopla.ua/admin/\">Модерувати</a>")
         return "\n".join(lines)
 
     elif cmd == "/catalog":
@@ -218,6 +218,9 @@ def handle_command(text, pending_articles):
             "/catalog — список компаній\n"
             "/add — додати компанію\n"
             "/del — видалити компанію\n\n"
+            "🔧 <b>Модерація:</b>\n"
+            "Через адмін-панель на сайті:\n"
+            "👉 https://konopla.ua/admin/\n\n"
             "/help — ця довідка"
         )
 
@@ -230,66 +233,22 @@ def handle_command(text, pending_articles):
 
 def run_moderator():
     print("=" * 60)
-    print("🔍 KONOPLA.UA — Moderator")
+    print("🔍 KONOPLA.UA — Moderator (commands only)")
     print("=" * 60)
-
-    # Load pending articles
-    pending = load_json(PENDING_FILE, {"articles": []})
-    pending_map = {a["id"]: a for a in pending["articles"] if a.get("status") == "pending"}
-    print(f"[INFO] {len(pending_map)} pending articles")
 
     # Load Telegram offset
     offset_data = load_json(TELEGRAM_OFFSET_FILE, {"offset": 0})
     offset = offset_data.get("offset", 0)
 
-    # Poll Telegram for updates (callback_query + message)
+    # Poll Telegram for updates (bot commands only)
     updates = get_updates(offset=offset)
     print(f"[INFO] Got {len(updates)} Telegram updates")
-
-    approved_ids = []
-    rejected_ids = []
 
     for update in updates:
         update_id = update.get("update_id", 0)
         offset = max(offset, update_id + 1)
 
-        # --- Handle callback_query (moderation buttons) ---
-        callback = update.get("callback_query")
-        if callback:
-            callback_id = callback.get("id")
-            data = callback.get("data", "")
-            message = callback.get("message", {})
-            chat_id = message.get("chat", {}).get("id")
-            message_id = message.get("message_id")
-
-            if data.startswith("approve_"):
-                article_id = data.replace("approve_", "")
-                if article_id in pending_map:
-                    approved_ids.append(article_id)
-                    answer_callback_query(callback_id, "✅ Схвалено!")
-                    # Update message with visible status
-                    if chat_id and message_id:
-                        original_text = message.get("text", "")
-                        new_text = f"✅ <b>СХВАЛЕНО</b>\n\n{original_text}"
-                        edit_message_text(chat_id, message_id, new_text)
-                else:
-                    answer_callback_query(callback_id, "⚠️ Стаття не знайдена")
-                    if chat_id and message_id:
-                        edit_message_reply_markup(chat_id, message_id)
-
-            elif data.startswith("reject_"):
-                article_id = data.replace("reject_", "")
-                rejected_ids.append(article_id)
-                answer_callback_query(callback_id, "❌ Відхилено")
-                # Update message with visible status
-                if chat_id and message_id:
-                    original_text = message.get("text", "")
-                    new_text = f"❌ <b>ВІДХИЛЕНО</b>\n\n{original_text}"
-                    edit_message_text(chat_id, message_id, new_text)
-
-            continue
-
-        # --- Handle message (bot commands) ---
+        # Handle message (bot commands)
         msg = update.get("message")
         if not msg:
             continue
@@ -305,122 +264,15 @@ def run_moderator():
             continue
 
         print(f"[CMD] {text}")
-        reply = handle_command(text, pending["articles"])
+        reply = handle_command(text)
         if reply:
             send_message(reply, chat_id=ADMIN_CHAT_ID)
 
     # Save updated offset
     save_json(TELEGRAM_OFFSET_FILE, {"offset": offset})
 
-    # Early exit if no pending articles
-    if not pending["articles"]:
-        print("[INFO] No pending articles. Done.")
-        save_result(0)
-        return 0
-
-    # Process approved articles
-    content_dir = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "content", "news"
-    )
-
-    published_count = 0
-    for article_id in approved_ids:
-        article = pending_map.get(article_id)
-        if not article:
-            continue
-
-        rewritten = article.get("rewritten", {})
-        source_url = article.get("source_url", "")
-        source_name = article.get("source_name", "")
-        image_data = article.get("image_data")
-
-        print(f"\n📰 Publishing: {rewritten.get('title', '?')[:60]}...")
-
-        # Create Hugo file
-        filepath = create_article_file(
-            article_data=rewritten,
-            source_url=source_url,
-            source_name=source_name,
-            image_data=image_data,
-            content_dir=content_dir
-        )
-
-        if not filepath:
-            print(f"   ❌ Failed to create file for {article_id}")
-            continue
-
-        # Post to Telegram channel
-        channel_ok = False
-        try:
-            tg_message = create_telegram_message(rewritten)
-            if image_data:
-                local_path = image_data.get("local_path", "")
-                img_url = image_data.get("url", "")
-                is_gemini = image_data.get("source") == "gemini"
-                if is_gemini and local_path:
-                    channel_ok = send_photo(photo_path=local_path, caption=tg_message)
-                elif img_url and not img_url.startswith("/"):
-                    channel_ok = send_photo(photo_url=img_url, caption=tg_message)
-                else:
-                    channel_ok = send_message(tg_message)
-            else:
-                channel_ok = send_message(tg_message)
-        except Exception as e:
-            print(f"   ⚠️ Telegram channel error: {e}")
-
-        # Notify admin about publication status
-        title = rewritten.get("title", "?")
-        if channel_ok:
-            status_msg = f"✅ <b>Опубліковано:</b> {title}"
-        else:
-            status_msg = f"⚠️ <b>Файл створено, але Telegram не відправлено:</b> {title}"
-        send_message(status_msg, chat_id=ADMIN_CHAT_ID)
-
-        published_count += 1
-
-        if published_count < len(approved_ids):
-            time.sleep(API_DELAY_SECONDS)
-
-    # Update pending: remove approved and rejected
-    processed_ids = set(approved_ids) | set(rejected_ids)
-
-    # Also clean up stale articles (>48h old)
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=PENDING_MAX_AGE_HOURS)
-    remaining = []
-    for article in pending["articles"]:
-        if article["id"] in processed_ids:
-            continue
-        created = article.get("created_at", "")
-        try:
-            created_dt = datetime.fromisoformat(created)
-            if created_dt < cutoff:
-                print(f"[INFO] Expired: {article.get('rewritten', {}).get('title', '?')[:50]}")
-                continue
-        except (ValueError, TypeError):
-            pass
-        remaining.append(article)
-
-    pending["articles"] = remaining
-    save_json(PENDING_FILE, pending)
-
-    print(f"\n{'='*60}")
-    print(f"✅ Published: {published_count}")
-    print(f"❌ Rejected: {len(rejected_ids)}")
-    print(f"⏳ Still pending: {len(remaining)}")
-    print(f"{'='*60}")
-
-    save_result(published_count)
+    print("[INFO] Moderator done.")
     return 0
-
-
-def save_result(approved_count):
-    """Зберігає результат для GitHub Actions output."""
-    result_file = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "data", "moderate_result.json"
-    )
-    save_json(result_file, {"approved": approved_count})
 
 
 if __name__ == "__main__":
