@@ -8,7 +8,7 @@ source: "'hemp textile fabric clothing' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMiowFBVV95cUxNcE1rZGo1N2p6Wll3UmJLYXNvcl8tRDlBdmplaU1pSVZ1TktMcm9oMWxLcTB5bXMzbFZLNEJDTl9QSDZQTG8ycFJqOXVFVEtRNmZpX2lUV3F5bHVEcFRIRm90SUJQcDVmbjJTc3hwQkZhOVhVMFNlb18za2NGeE1KcGlIaTN6MGxyLUdSOXR2WjJBR3BMTWpFZXZFTC12WmVwRkZB?oc=5"
 image: "/images/generated/ee5ce3e0.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Понад три роки знадобилося подружжю Дена та Сари Макалпайнів із Північної Кароліни, щоб реалізувати амбітну мету: створити першу повністю американську конопляну сорочку. Цей унікальний проєкт, що охопив весь ланцюжок виробництва – від вирощування насіння до пошиття готового виробу – став яскравим доказом потенціалу та водночас викликів, які стоять перед відродженням конопляної індустрії в Сполучених Штатах.
