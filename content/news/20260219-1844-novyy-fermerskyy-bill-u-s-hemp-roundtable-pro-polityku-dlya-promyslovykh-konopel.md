@@ -8,7 +8,7 @@ source: "'hemp legislation regulation farm bill' - Google N"
 source_url: "https://news.google.com/rss/articles/CBMidEFVX3lxTFBBSGJFVzc2TVgyTDVTMFlRLWN6WG0zVUhGWmFzam5NczZUZGJzUHhpSW9zN29sZ1Y1TWhXMzNrQ1hvc1ozcXp6NldCYzgtOExaQ0xIaWNOUEVGbmFaNUxjT0MyTFFmeVY2U3N0aGNudDJJOHpI?oc=5"
 image: "/images/generated/50b84f30.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Індустрія промислових конопель у США стоїть на порозі значних змін: асоціація U.S. Hemp Roundtable нещодавно оприлюднила ключові оновлення щодо державної політики, акцентуючи увагу на майбутньому Фермерському біллі. Цей законодавчий акт має вирішальне значення для формування регуляторного ландшафту та подальшого розвитку всієї галузі.
