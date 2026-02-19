@@ -8,7 +8,7 @@ source: "'hemp paper pulp packaging' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMingFBVV95cUxQend1QlFOWnQ3X1RGdzNua3JQSmR0bEZlTThWOU4yeURnYWlOU3ZWaTh6Rjd0VkxmX1pEQXpKamRUZmRPQ3dTX3NRTW1DNWl0d2lQMDZYTVh5NW9xbnRZQ2pOaG9KVEpXbXhBOVhldG9qd0phckVhVUphM2dkZ0NFb2NwYUp0anduWmlEdG1mRGxIaG1jTGZiX0xmMzZQUQ?oc=5"
 image: "/images/generated/47071de1.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Ринок маси з манільської коноплі (Abaca) продовжить зростати і досягне нових висот до 2031 року. Такі висновки містяться у новому аналітичному звіті, який детально розглядає драйвери зростання, що формують цю динамічну галузь.
