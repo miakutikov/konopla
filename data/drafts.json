@@ -1,3 +1,22 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "47071de1",
+      "filename": "20260219-1234-rynok-masy-z-manilskoyi-konopli-zrostatyme-do-2031-roku.md",
+      "title": "Ринок маси з манільської коноплі зростатиме до 2031 року",
+      "summary": "Новий прогноз показує значне зростання ринку конопляної маси до 2031 року за рахунок нових технологій та зростаючого попиту.",
+      "category": "агро",
+      "image": "/images/generated/47071de1.png",
+      "created_at": "2026-02-19T12:34:01.961636+00:00"
+    },
+    {
+      "id": "411b8c3d",
+      "filename": "20260219-1234-novyy-sort-konopel-carmanecta-vid-enecta-mozhe-zminyty-rynok-volokna-v-yes.md",
+      "title": "Новий сорт конопель Carmanecta від Enecta може змінити ринок волокна в ЄС",
+      "summary": "Нідерландсько-італійський сорт Carmanecta, розроблений Enecta, отримав схвалення в ЄС і демонструє потенціал перевершити чинні європейські сорти технічних конопель для волокна.",
+      "category": "агро",
+      "image": "/images/generated/411b8c3d.png",
+      "created_at": "2026-02-19T12:34:30.928605+00:00"
+    }
+  ]
 }
