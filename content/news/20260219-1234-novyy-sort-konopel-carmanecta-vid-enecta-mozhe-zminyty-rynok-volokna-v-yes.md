@@ -8,7 +8,7 @@ source: "HempToday®"
 source_url: "https://hemptoday.net/newly-listed-dutch-variety-shows-potential-to-challenge-europes-fiber-hemp-incumbents/"
 image: "/images/generated/411b8c3d.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 В Європейському Союзі з'явився новий сорт технічних конопель Carmanecta, який має всі шанси потіснити лідерів на ринку волокнистої сировини. Цей сорт, розроблений нідерландсько-італійським генетичним спеціалістом Enecta, вже отримав офіційне схвалення і демонструє видатні результати, що ставить під сумнів домінування традиційних європейських культур для виробництва волокна.
