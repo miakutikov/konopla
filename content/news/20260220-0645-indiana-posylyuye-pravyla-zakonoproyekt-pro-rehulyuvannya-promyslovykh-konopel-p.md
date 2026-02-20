@@ -8,7 +8,7 @@ source: "'hemp legislation regulation farm bill' - Google N"
 source_url: "https://news.google.com/rss/articles/CBMizAFBVV95cUxQNHA0dUpUem8zcFRZUmhGRlJHU1Fna243Q1FBTlh1VEVia1lueU0wcmlqRnVxTDJnOEktR3VHM0RZa2hwd0s0cXR5aTkwMUo4RVBoSHBLS3UwalVVYl9rLVZhUU9pRjlsdjk1eFhfLVBjQmZPd2d5bWRJbzM1RG8yTlp5ckpTbHlYMXVTWlZuNl9qUGh5MHdscmZweW00MjNfcTBHbm5WQjEyQzNoQTJkY3ZzWFc4WVVWaWVvbXh2ZWlZVWp6Ul9Kd2V6M2w?oc=5"
 image: "/images/generated/7edd154c.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Комітет Палати представників американського штату Індіана нещодавно зробив важливий крок, просунувши законопроєкт, який кардинально переглядає визначення промислових конопель та запроваджує низку нових обмежень. Ця ініціатива, що отримала підтримку на рівні комітету, ставить Індіану на шлях посилення регулювання галузі, що може мати значні наслідки для місцевого бізнесу та споживачів продукції з конопель.
