@@ -8,7 +8,7 @@ source: "'hemp seed food nutrition' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMioAFBVV95cUxOZkNpM3E0VEF5dnVPWU16emVlbEREVGp1a3dNeEtuMmJjV0JFejUwUTdfbXFfd3dFWTREZWdDZFVMbmJhMnliTHRZRjRWQ0hHQ0oyRnExTi16ckhHc2hWclFRNUJJSEh3X0R4aFoyMjJDRnhuQXZfejZSQUhGRTlaRG00NzBObmNJWVp4bDJkNHhQYUlpajdPREl5SThwekl2?oc=5"
 image: "/images/generated/50b7a775.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Суперфуди вже давно стали невід'ємною частиною раціону тих, хто дбає про своє здоров'я. Проте, виявляється, навіть серед визнаних лідерів є свої чемпіони. Конопляне насіння, за останніми даними, містить значно більше білка, ніж такі популярні джерела рослинного протеїну, як насіння чіа та льону, що робить його новим фаворитом серед поживних добавок.
