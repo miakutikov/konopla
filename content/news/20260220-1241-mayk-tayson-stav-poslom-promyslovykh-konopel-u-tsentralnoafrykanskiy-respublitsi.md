@@ -8,7 +8,7 @@ source: "'konopí průmyslové' - Zprávy Google"
 source_url: "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQWXB2VkJDaHBsYzdIQks5bS1fS1BIOVFpZmhXWWFfMkxXMDZrN1BNWWNpOWJFaThfaGEtOUJlYXlfSWZCREpBVnd5YnJ5bUM5OHFkZUU2cGVKV1lnREViQ1JjTVdoeS12QmtNMVBrb1JsUmIwekdxWnp2VmtpVVJDVEJleXBaMGl5QlY0?oc=5"
 image: "/images/generated/a2818596.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Легенда світового боксу, Майк Тайсон, бере на себе нову роль: він став офіційним послом з розвитку промислових конопель у Центральноафриканській Республіці (ЦАР). Ця несподівана новина, вперше поширена виданням Indeksonline, знаменує амбітний крок африканської країни у пошуку нових шляхів економічного зростання та диверсифікації.
