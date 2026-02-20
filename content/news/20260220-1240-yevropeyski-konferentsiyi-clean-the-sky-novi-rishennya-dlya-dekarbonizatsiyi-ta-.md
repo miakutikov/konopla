@@ -8,7 +8,7 @@ source: "'hemp sustainability eco carbon' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMid0FVX3lxTE9EZ3J2M3pYX1paUk5PUE9JYlV0ZzJfX1ZXQzZWYnBDOVU5RnFzN2xrcVF4MXBQaktpRUJLc2FQcDV0R0JRWlJWQUhEVHFmRGh6cmw3bkhwZ01zdmpRYjR5OUVxTUc4Um9sem5EMlgxckdBWUJlVE5v?oc=5"
 image: "/images/generated/4a4e676e.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 У Європі тривають важливі дискусії щодо майбутнього клімату: серія конференцій під назвою Clean the Sky (Очистимо Небо) збирає ключових гравців вуглецевого ринку. Ці заходи покликані об’єднати політиків, лідерів індустрії та науковців для спільного пошуку стратегій зі скорочення викидів вуглецю та досягнення амбітних кліматичних цілей.
