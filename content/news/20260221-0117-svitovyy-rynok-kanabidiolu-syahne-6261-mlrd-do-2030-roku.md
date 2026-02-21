@@ -8,7 +8,7 @@ source: "'industrial hemp technology' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMikgFBVV95cUxOVzd5YlRKM0M0d2xjbWdoLTIyNEYtQWJteVA1RHZ3UDhId2tISlI5d0V0blQ0SEtaR01YeVJrVEhGeDQyeTltREhhVWMtZWtlT013NjV2eVFCMC0tWWFZSUhuTFVycG9LM2NvV29VMnp2Vm1DNGtYR1Z5U0NwUURvdFF4eHYxTFZlUEVNcXM3Q3FIdw?oc=5"
 image: "/images/generated/62d32d49.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Світовий ринок канабідіолу (КБД) має вражаючі перспективи зростання, прогнозуючи досягнення обсягу в $62,61 мільярда до 2030 року. Такі дані представлено в новому аналітичному звіті «Cannabidiol Market Analysis Report 2026-2035», який підкреслює ключові фактори, що стимулюватимуть цю безпрецедентну експансію. Серед головних рушіїв названо тенденції легалізації, розширення культивації технічних конопель та розвиток передових технологій екстракції.
