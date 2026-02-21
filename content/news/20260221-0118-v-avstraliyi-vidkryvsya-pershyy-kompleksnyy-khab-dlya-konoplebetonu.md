@@ -8,7 +8,7 @@ source: "'hemp australia industry' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMie0FVX3lxTE9Edng4eWpHYmgxVUctaUFKOTRRa3pwX1doVUpOUUpwZXgzbFFhTGVDTVJ3V2wzMDdKVlBlTlltZVFqM2J1WXJZV0xjZXJreHhEVlhJYU9aTUw2X2dZaTBpQkJMSkRQV3VzNW0xWlFhS3diUkVuUHV0Z0Z4QQ?oc=5"
 image: "/images/generated/6f30d532.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Дефіцит якісних будівельних матеріалів та кваліфікованих фахівців у сфері конопляного будівництва в Австралії добігає кінця. В регіоні Гантер-Веллі, штат Новий Південний Уельс, офіційно відкрився перший у країні комплексний хаб для коноплебетону (hempcrete). Цей інноваційний центр, що став результатом співпраці між компаніями Hemp Masonry Australia (HMA) та The Hemp Building Company (THBC), покликаний спростити постачання сировини та навчання спеціалістів, прискорюючи впровадження екологічно чистих будівельних рішень.
