@@ -8,7 +8,7 @@ source: "'hemp australia industry' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMUVISUhBcHZMS1k4ejIwYUVjeEYtT0kwTXY1QTV4ZnNTcEZvUFh0R2U2UENwaEdvRWNfc19TeHNueEdSb0hncm1zX3FvZTdGYjFweHZuRF9mb0RtRmJmYnNuRE5hN056Sm40RW5DSnMyWTdsckdUaUoyUzg0Ny0xR3FuOVRxWEFSX1VNdWdDSFdRQTZFUUhxSHBYYi03UUVpMmY0YnZnNFc2QTBsbUlSeWcwRV9uQQ?oc=5"
 image: "/images/generated/97c8148c.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Вже 23 жовтня в австралійському Лонгфорді, Тасманія, відбудеться ключове публічне слухання в рамках Сенатського розслідування, присвяченого вивченню можливостей та викликів індустрії промислових конопель в Австралії. Засідання Комітету Сенату з питань сільських та регіональних справ і транспорту пройде в місцевому відділенні RSL з 9:30 ранку до 15:30 дня за місцевим часом.
