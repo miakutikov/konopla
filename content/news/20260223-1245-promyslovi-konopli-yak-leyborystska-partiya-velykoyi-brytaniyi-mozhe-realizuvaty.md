@@ -8,7 +8,7 @@ source: "'hemp uk industry' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPMXVINkY0ZklvZkg1MnpjMnc4b3AtUXg2b2t5T0pPaWtrNlVZNmhQcFpybmhrbWd5S0tCazNmY1lvZXFPTjBXMGVyZEdSbm5zcWpqVzZpQWpNc00zaV9xTEhPRGIyX0piOG5jekNaNmloWlk5SWtzdmpDSXF3VHhMOUVQdEthOFJrdFQ5QTYyVjNpbWNmTHBUU0ZyM3ZDTGhDcFl5MFRGSlB2Y1BCaGpmRkNWWHFmX2JsWXRV0gHAAUFVX3lxTE1hQ3BIVXdoeE9UWXppUTBSMG5fQ0FfRndjQkFwb3RaYTU0SlFBb0VmMHl1WXhpWER1WnVJQU1WY0o3Rk5KSmNsWDlQSm1nb0VaM01LNl9sTHFPb2M4WVpfQUdqLXo3RjNHQ3pDU1daREd3eWZtSWowRVNGMi1UR25XbGNCMVp2dG4yYzJyeGk5UFhCNTk1VWkxeXNDekNwc2d1aUpSV0prdXJsWm9LYThHcXI5TVBwQy1VWWs5Z3ZoTw?oc=5"
 image: "/images/generated/390fe7f7.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Індустрія промислових конопель стоїть на порозі масштабного зростання, пропонуючи Великій Британії унікальну можливість реалізувати свої амбітні цілі щодо зеленої економіки та створення робочих місць. Саме на цьому наголошує спонсорований матеріал, опублікований на платформі LabourList, який закликає Лейбористську партію перетворити свої передвиборчі обіцянки на практичні кроки для підтримки цього екологічно чистого та економічно вигідного сектора.
