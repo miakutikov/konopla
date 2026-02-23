@@ -8,7 +8,7 @@ source: "HempToday®"
 source_url: "https://hemptoday.net/european-hemp-stalwart-hempflax-group-is-departing-romania-after-historic-14-year-run/"
 image: "/images/generated/a34f7046.png"
 image_source: "AI Generated"
-draft: true
+draft: false
 ---
 
 Після 14 років активної діяльності на румунському ринку, один з європейських лідерів у сфері промислових конопель, компанія HempFlax Group, оголосила про повне згортання своїх операцій у країні. Ця новина, яка з'явилася на початку місяця у формі оголошення про продаж нерухомості, стала значним сигналом для всієї індустрії та підкреслює складнощі ведення бізнесу в регіоні.
