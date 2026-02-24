@@ -107,6 +107,62 @@ def parse_date(entry):
     return None
 
 
+def extract_images(entry):
+    """
+    Витягує URL зображень з RSS-запису.
+    Повертає список dict: [{"url": "...", "alt": "..."}, ...]
+    """
+    images = []
+    seen_urls = set()
+
+    # Filter out tracking pixels and tiny images
+    skip_patterns = ['pixel', 'tracker', '1x1', 'beacon', 'analytics', 'favicon', '.gif', 'spacer']
+
+    def add_image(url, alt=""):
+        if not url or url in seen_urls:
+            return
+        # Only HTTPS
+        if not url.startswith('https://'):
+            return
+        # Skip tracking images
+        url_lower = url.lower()
+        if any(p in url_lower for p in skip_patterns):
+            return
+        seen_urls.add(url)
+        images.append({"url": url, "alt": alt or ""})
+
+    # 1. Check entry.content HTML for <img> tags
+    content_parts = entry.get("content", [])
+    if content_parts and isinstance(content_parts, list):
+        html = content_parts[0].get("value", "")
+        for match in re.finditer(r'<img[^>]+src=["\']([^"\']+)["\']', html):
+            alt_match = re.search(r'alt=["\']([^"\']*)["\']', match.group(0))
+            add_image(match.group(1), alt_match.group(1) if alt_match else "")
+
+    # 2. Check entry.summary for <img> tags
+    summary_html = entry.get("summary", "")
+    if summary_html:
+        for match in re.finditer(r'<img[^>]+src=["\']([^"\']+)["\']', summary_html):
+            alt_match = re.search(r'alt=["\']([^"\']*)["\']', match.group(0))
+            add_image(match.group(1), alt_match.group(1) if alt_match else "")
+
+    # 3. Check media_content
+    media = entry.get("media_content", [])
+    if media:
+        for m in media:
+            url = m.get("url", "")
+            mtype = m.get("type", "")
+            if url and ("image" in mtype or url.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))):
+                add_image(url)
+
+    # 4. Check enclosures
+    for link in entry.get("links", []):
+        if link.get("rel") == "enclosure" and "image" in link.get("type", ""):
+            add_image(link.get("href", ""))
+
+    return images[:5]
+
+
 def fetch_all_feeds():
     """
     Збирає всі нові статті з RSS-фідів.
@@ -163,6 +219,8 @@ def fetch_all_feeds():
                 accepted_titles.append(title)
                 # Use full content if available, otherwise summary
                 article_text = full_content if len(full_content) > len(summary) else summary
+                # Extract images from source article
+                source_images = extract_images(entry)
                 all_articles.append({
                     "title": title,
                     "link": link,
@@ -171,6 +229,7 @@ def fetch_all_feeds():
                     "date": pub_date.isoformat() if pub_date else datetime.now(timezone.utc).isoformat(),
                     "source": source,
                     "hash": article_hash,
+                    "source_images": source_images,
                 })
                 
         except Exception as e:

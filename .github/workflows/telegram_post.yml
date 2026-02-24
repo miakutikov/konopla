@@ -1,0 +1,35 @@
+name: Post to Telegram
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Post to Telegram
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PYTHONIOENCODING: utf-8
+          LANG: en_US.UTF-8
+        run: python scripts/telegram_poster.py
+
+      - name: Commit cleared queue
+        run: |
+          git config user.name "Konopla Bot"
+          git config user.email "bot@konopla.ua"
+          git add data/telegram_queue.json || true
+          git diff --staged --quiet || git commit -m "📨 Telegram queue cleared"
+          git push || true

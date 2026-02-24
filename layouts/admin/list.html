@@ -1,4 +1,9 @@
 {{ define "main" }}
+<!-- Quill WYSIWYG editor -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/turndown@7.2.0/dist/turndown.js"></script>
+
 <div class="container">
   <div id="admin-app">
 
@@ -20,6 +25,7 @@
       <div class="admin-header">
         <h1>🌿 KONOPLA.UA — Модерація</h1>
         <div class="admin-actions-top">
+          <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
           <button id="btn-refresh" class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
           <button id="btn-run-pipeline" class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
           <button id="btn-logout" class="admin-btn admin-btn-dim" onclick="logout()">Вийти</button>
@@ -27,6 +33,90 @@
       </div>
 
       <div id="status-bar" class="admin-status" style="display:none"></div>
+
+      <!-- Create article form (hidden by default) -->
+      <div id="create-form" class="create-form" style="display:none">
+        <div class="create-form-card">
+          <div class="create-form-header">
+            <h2>✍️ Нова стаття</h2>
+            <button class="admin-btn admin-btn-dim" onclick="toggleCreateForm()">✕ Закрити</button>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field cf-field-wide">
+              <label>Заголовок *</label>
+              <input type="text" id="cf-title" maxlength="120" placeholder="Чіткий інформативний заголовок">
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label>Категорія *</label>
+              <select id="cf-category">
+                <option value="текстиль">🧵 текстиль</option>
+                <option value="будівництво">🏗️ будівництво</option>
+                <option value="агро">🌱 агро</option>
+                <option value="біопластик">♻️ біопластик</option>
+                <option value="харчова">🥗 харчова</option>
+                <option value="автопром">🚗 автопром</option>
+                <option value="енергетика">⚡ енергетика</option>
+                <option value="косметика">✨ косметика</option>
+                <option value="наука">🔬 наука</option>
+                <option value="екологія">🌍 екологія</option>
+                <option value="бізнес">💼 бізнес</option>
+                <option value="законодавство">📋 законодавство</option>
+                <option value="відео">🎬 відео</option>
+                <option value="інше">📰 інше</option>
+              </select>
+            </div>
+            <div class="cf-field">
+              <label>Теги (через кому)</label>
+              <input type="text" id="cf-tags" placeholder="коноплі, технології, Україна">
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field cf-field-wide">
+              <label>Анонс (summary)</label>
+              <textarea id="cf-summary" rows="2" maxlength="300" placeholder="1-2 речення для картки на головній"></textarea>
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field cf-field-wide">
+              <label>Текст статті *</label>
+              <div id="cf-editor"></div>
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label>URL зображення</label>
+              <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg">
+            </div>
+            <div class="cf-field">
+              <label>YouTube ID</label>
+              <input type="text" id="cf-youtube" placeholder="dQw4w9WgXcQ">
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label>Джерело</label>
+              <input type="text" id="cf-source" placeholder="KONOPLA.UA" value="KONOPLA.UA">
+            </div>
+            <div class="cf-field">
+              <label>URL джерела</label>
+              <input type="text" id="cf-source-url" placeholder="https://konopla.ua">
+            </div>
+          </div>
+
+          <div class="cf-actions">
+            <button class="admin-btn admin-btn-green cf-submit-btn" onclick="createArticle()">📝 Створити статтю</button>
+            <button class="admin-btn admin-btn-dim" onclick="toggleCreateForm()">Скасувати</button>
+          </div>
+        </div>
+      </div>
 
       <div id="drafts-list" class="drafts-list">
         <div class="loading">Завантаження...</div>
@@ -47,6 +137,30 @@
           </div>
         </div>
         <div id="queue-items" class="queue-items"></div>
+      </div>
+
+      <!-- Telegram queue -->
+      <div id="tg-queue" class="deploy-queue tg-queue" style="display:none">
+        <div class="deploy-queue-header">
+          <h2>📨 Черга Telegram</h2>
+          <div class="deploy-queue-actions">
+            <button class="admin-btn admin-btn-tg" onclick="postToTelegram()">📨 Постити в Telegram (<span id="tg-queue-count">0</span>)</button>
+            <button class="admin-btn admin-btn-dim" onclick="clearTgQueue()">Очистити</button>
+          </div>
+        </div>
+        <div id="tg-queue-items" class="queue-items"></div>
+      </div>
+
+      <!-- Threads queue -->
+      <div id="threads-queue" class="deploy-queue threads-queue" style="display:none">
+        <div class="deploy-queue-header">
+          <h2>🧵 Черга Threads</h2>
+          <div class="deploy-queue-actions">
+            <button class="admin-btn admin-btn-threads" onclick="postToThreads()">🧵 Постити в Threads (<span id="threads-queue-count">0</span>)</button>
+            <button class="admin-btn admin-btn-dim" onclick="clearThreadsQueue()">Очистити</button>
+          </div>
+        </div>
+        <div id="threads-queue-items" class="queue-items"></div>
       </div>
     </div>
 
@@ -416,6 +530,182 @@
   background: rgba(239, 68, 68, 0.1);
 }
 
+/* Telegram queue styling */
+.tg-queue {
+  border-top-color: #0088cc !important;
+}
+.tg-queue .deploy-queue-header h2 {
+  color: #0088cc;
+}
+.admin-btn-tg {
+  background: rgba(0, 136, 204, 0.15) !important;
+  border-color: #0088cc !important;
+  color: #0088cc !important;
+}
+.admin-btn-tg:hover {
+  background: #0088cc !important;
+  color: #fff !important;
+}
+
+/* Threads queue styling */
+.threads-queue {
+  border-top-color: #833AB4 !important;
+}
+.threads-queue .deploy-queue-header h2 {
+  color: #833AB4;
+}
+.admin-btn-threads {
+  background: rgba(131, 58, 180, 0.15) !important;
+  border-color: #833AB4 !important;
+  color: #833AB4 !important;
+}
+.admin-btn-threads:hover {
+  background: #833AB4 !important;
+  color: #fff !important;
+}
+
+/* Create article form */
+.create-form {
+  margin-bottom: 2rem;
+}
+.create-form-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--green-accent);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+.create-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.create-form-header h2 {
+  font-size: 1.15rem;
+  color: var(--green-accent);
+}
+.cf-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.cf-field {
+  flex: 1;
+  min-width: 0;
+}
+.cf-field-wide {
+  flex: 1 1 100%;
+}
+.cf-field label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+.cf-field input,
+.cf-field textarea,
+.cf-field select {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color var(--transition);
+  font-family: inherit;
+}
+.cf-field input:focus,
+.cf-field textarea:focus,
+.cf-field select:focus {
+  border-color: var(--green-accent);
+}
+.cf-field select {
+  cursor: pointer;
+}
+.cf-field select option {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+.cf-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.cf-submit-btn {
+  font-size: 0.95rem !important;
+  padding: 0.65rem 1.5rem !important;
+}
+
+/* Quill editor overrides for dark theme */
+#cf-editor {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  min-height: 250px;
+}
+.ql-toolbar.ql-snow {
+  background: var(--bg-elevated) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+}
+.ql-container.ql-snow {
+  border: none !important;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+.ql-editor {
+  min-height: 200px;
+  color: var(--text-primary) !important;
+  line-height: 1.6;
+}
+.ql-editor.ql-blank::before {
+  color: var(--text-tertiary) !important;
+  font-style: normal !important;
+}
+.ql-snow .ql-stroke {
+  stroke: var(--text-secondary) !important;
+}
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: var(--text-secondary) !important;
+}
+.ql-snow .ql-picker-label {
+  color: var(--text-secondary) !important;
+}
+.ql-snow .ql-picker-options {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border) !important;
+}
+.ql-snow .ql-picker-item {
+  color: var(--text-primary) !important;
+}
+.ql-snow .ql-active .ql-stroke {
+  stroke: var(--green-accent) !important;
+}
+.ql-snow .ql-active .ql-fill {
+  fill: var(--green-accent) !important;
+}
+.ql-snow .ql-active {
+  color: var(--green-accent) !important;
+}
+.ql-snow a {
+  color: var(--green-accent) !important;
+}
+.ql-editor blockquote {
+  border-left: 3px solid var(--green-accent);
+  padding-left: 12px;
+  color: var(--text-secondary);
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .draft-card-inner {
@@ -437,6 +727,12 @@
     flex: 1;
     text-align: center;
   }
+  .cf-row {
+    flex-direction: column;
+  }
+  .create-form-card {
+    padding: 1rem;
+  }
 }
 </style>
 
@@ -451,6 +747,8 @@
   var ghToken = '';
   var adminKey = '';
   var approvedQueue = [];
+  var telegramQueue = [];
+  var threadsQueue = [];
 
   // =========================================================================
   // Auth
@@ -487,9 +785,13 @@
     // Load GitHub PAT from localStorage
     ghToken = localStorage.getItem('konopla_gh_token') || '';
 
-    // Load deploy queue from localStorage
+    // Load queues from localStorage
     loadQueue();
     renderQueue();
+    loadTgQueue();
+    renderTgQueue();
+    loadThreadsQueue();
+    renderThreadsQueue();
 
     if (!ghToken) {
       showPatSetup();
@@ -687,17 +989,26 @@
       // 4. Remove from drafts.json
       await removeDraftEntry(articleId);
 
-      // 5. Add to deploy queue (NO deploy yet!)
-      approvedQueue.push({
+      // 5. Add to deploy queue AND telegram queue
+      var queueItem = {
         title: title,
         filename: filename,
         category: category,
         approvedAt: new Date().toISOString()
-      });
+      };
+      approvedQueue.push(queueItem);
       saveQueue();
       renderQueue();
 
-      showStatus('✅ Схвалено! Додано в чергу на деплой.', 'success');
+      telegramQueue.push(queueItem);
+      saveTgQueue();
+      renderTgQueue();
+
+      threadsQueue.push(queueItem);
+      saveThreadsQueue();
+      renderThreadsQueue();
+
+      showStatus('✅ Схвалено! Додано в черги деплой + Telegram + Threads.', 'success');
 
       // Remove card from UI
       if (card) card.remove();
@@ -905,6 +1216,202 @@
     }
   }
 
+  // =========================================================================
+  // Telegram queue
+  // =========================================================================
+
+  function loadTgQueue() {
+    try {
+      var saved = localStorage.getItem('konopla_tg_queue');
+      telegramQueue = saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      telegramQueue = [];
+    }
+  }
+
+  function saveTgQueue() {
+    localStorage.setItem('konopla_tg_queue', JSON.stringify(telegramQueue));
+  }
+
+  function renderTgQueue() {
+    var container = document.getElementById('tg-queue');
+    var itemsEl = document.getElementById('tg-queue-items');
+    var countEl = document.getElementById('tg-queue-count');
+
+    if (!telegramQueue.length) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'block';
+    countEl.textContent = telegramQueue.length;
+
+    itemsEl.innerHTML = telegramQueue.map(function(item, idx) {
+      return '<div class="queue-item">' +
+        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+        '<button class="queue-item-remove" onclick="removeFromTgQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.removeFromTgQueue = function(idx) {
+    telegramQueue.splice(idx, 1);
+    saveTgQueue();
+    renderTgQueue();
+  };
+
+  window.clearTgQueue = function() {
+    if (!confirm('Очистити Telegram чергу?')) return;
+    telegramQueue = [];
+    saveTgQueue();
+    renderTgQueue();
+  };
+
+  window.postToTelegram = async function() {
+    if (!telegramQueue.length) return;
+    if (!confirm('Постити ' + telegramQueue.length + ' статей в Telegram?')) return;
+
+    showStatus('⏳ Готуємо Telegram постинг...', 'info');
+
+    try {
+      // 1. Write telegram_queue.json to repo
+      var queueData = {
+        articles: telegramQueue.map(function(item) {
+          return { filename: item.filename, title: item.title, category: item.category };
+        })
+      };
+
+      // Get current file to get SHA (or handle 404 for new file)
+      var getResp = await ghApi('GET', '/contents/data/telegram_queue.json');
+      var sha = null;
+      if (getResp.ok) {
+        var existing = await getResp.json();
+        sha = existing.sha;
+      }
+
+      var putBody = {
+        message: '📨 Telegram queue: ' + telegramQueue.length + ' articles',
+        content: b64EncodeUtf8(JSON.stringify(queueData, null, 2))
+      };
+      if (sha) putBody.sha = sha;
+
+      var putResp = await ghApi('PUT', '/contents/data/telegram_queue.json', putBody);
+      if (!putResp.ok) throw new Error('Failed to write queue: ' + putResp.status);
+
+      // 2. Trigger telegram_post.yml workflow
+      await ghApi('POST', '/actions/workflows/telegram_post.yml/dispatches', {
+        ref: 'main'
+      });
+
+      var count = telegramQueue.length;
+      telegramQueue = [];
+      saveTgQueue();
+      renderTgQueue();
+      showStatus('📨 Telegram постинг запущено! ' + count + ' статей.', 'success');
+    } catch (e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // Threads queue
+  // =========================================================================
+
+  function loadThreadsQueue() {
+    try {
+      var saved = localStorage.getItem('konopla_threads_queue');
+      threadsQueue = saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      threadsQueue = [];
+    }
+  }
+
+  function saveThreadsQueue() {
+    localStorage.setItem('konopla_threads_queue', JSON.stringify(threadsQueue));
+  }
+
+  function renderThreadsQueue() {
+    var container = document.getElementById('threads-queue');
+    var itemsEl = document.getElementById('threads-queue-items');
+    var countEl = document.getElementById('threads-queue-count');
+
+    if (!threadsQueue.length) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'block';
+    countEl.textContent = threadsQueue.length;
+
+    itemsEl.innerHTML = threadsQueue.map(function(item, idx) {
+      return '<div class="queue-item">' +
+        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+        '<button class="queue-item-remove" onclick="removeFromThreadsQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.removeFromThreadsQueue = function(idx) {
+    threadsQueue.splice(idx, 1);
+    saveThreadsQueue();
+    renderThreadsQueue();
+  };
+
+  window.clearThreadsQueue = function() {
+    if (!confirm('Очистити Threads чергу?')) return;
+    threadsQueue = [];
+    saveThreadsQueue();
+    renderThreadsQueue();
+  };
+
+  window.postToThreads = async function() {
+    if (!threadsQueue.length) return;
+    if (!confirm('Постити ' + threadsQueue.length + ' статей в Threads?')) return;
+
+    showStatus('⏳ Готуємо Threads постинг...', 'info');
+
+    try {
+      // 1. Write threads_queue.json to repo
+      var queueData = {
+        articles: threadsQueue.map(function(item) {
+          return { filename: item.filename, title: item.title, category: item.category };
+        })
+      };
+
+      // Get current file to get SHA (or handle 404 for new file)
+      var getResp = await ghApi('GET', '/contents/data/threads_queue.json');
+      var sha = null;
+      if (getResp.ok) {
+        var existing = await getResp.json();
+        sha = existing.sha;
+      }
+
+      var putBody = {
+        message: '🧵 Threads queue: ' + threadsQueue.length + ' articles',
+        content: b64EncodeUtf8(JSON.stringify(queueData, null, 2))
+      };
+      if (sha) putBody.sha = sha;
+
+      var putResp = await ghApi('PUT', '/contents/data/threads_queue.json', putBody);
+      if (!putResp.ok) throw new Error('Failed to write queue: ' + putResp.status);
+
+      // 2. Trigger threads_post.yml workflow
+      await ghApi('POST', '/actions/workflows/threads_post.yml/dispatches', {
+        ref: 'main'
+      });
+
+      var count = threadsQueue.length;
+      threadsQueue = [];
+      saveThreadsQueue();
+      renderThreadsQueue();
+      showStatus('🧵 Threads постинг запущено! ' + count + ' статей.', 'success');
+    } catch (e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
   // UTF-8 safe base64 decode/encode
   function b64DecodeUtf8(b64) {
     var binStr = atob(b64);
@@ -970,6 +1477,172 @@
     card.style.opacity = '1';
     card.style.pointerEvents = '';
   }
+
+  // =========================================================================
+  // Create article (WYSIWYG)
+  // =========================================================================
+
+  var quillEditor = null;
+  var turndownService = null;
+
+  function initQuill() {
+    if (quillEditor) return;
+    quillEditor = new Quill('#cf-editor', {
+      theme: 'snow',
+      placeholder: 'Пишіть тут текст статті...',
+      modules: {
+        toolbar: [
+          [{ 'header': [2, 3, false] }],
+          ['bold', 'italic'],
+          ['blockquote'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          ['link', 'image'],
+          ['clean']
+        ]
+      }
+    });
+    turndownService = new TurndownService({
+      headingStyle: 'atx',
+      bulletListMarker: '-',
+      codeBlockStyle: 'fenced'
+    });
+    // Keep blockquotes as > in markdown
+    turndownService.addRule('blockquote', {
+      filter: 'blockquote',
+      replacement: function(content) {
+        var lines = content.trim().split('\n');
+        return '\n' + lines.map(function(l) { return '> ' + l; }).join('\n') + '\n\n';
+      }
+    });
+  }
+
+  window.toggleCreateForm = function() {
+    var form = document.getElementById('create-form');
+    var visible = form.style.display !== 'none';
+    form.style.display = visible ? 'none' : 'block';
+    if (!visible) {
+      initQuill();
+    }
+  };
+
+  function slugifyUA(text) {
+    var translit = {
+      'а':'a','б':'b','в':'v','г':'h','ґ':'g','д':'d','е':'e',
+      'є':'ye','ж':'zh','з':'z','и':'y','і':'i','ї':'yi','й':'y',
+      'к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r',
+      'с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch',
+      'ш':'sh','щ':'shch','ь':'','ю':'yu','я':'ya','ъ':'','ы':'y','э':'e'
+    };
+    var result = '';
+    var lower = text.toLowerCase().trim();
+    for (var i = 0; i < lower.length; i++) {
+      var c = lower[i];
+      if (translit[c] !== undefined) {
+        result += translit[c];
+      } else if (/[a-z0-9]/.test(c)) {
+        result += c;
+      } else if (c === ' ' || c === '_' || c === '.') {
+        result += '-';
+      } else if (c === '-') {
+        result += '-';
+      }
+    }
+    return result.replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+  }
+
+  window.createArticle = async function() {
+    var title = document.getElementById('cf-title').value.trim();
+    var category = document.getElementById('cf-category').value;
+    var tagsRaw = document.getElementById('cf-tags').value.trim();
+    var summary = document.getElementById('cf-summary').value.trim();
+    var imageUrl = document.getElementById('cf-image').value.trim();
+    var youtubeId = document.getElementById('cf-youtube').value.trim();
+    var source = document.getElementById('cf-source').value.trim() || 'KONOPLA.UA';
+    var sourceUrl = document.getElementById('cf-source-url').value.trim();
+
+    // Validate
+    if (!title) { showStatus('❌ Введіть заголовок', 'error'); return; }
+    if (!quillEditor || quillEditor.getText().trim().length < 10) {
+      showStatus('❌ Текст статті занадто короткий', 'error'); return;
+    }
+
+    // Convert Quill HTML to Markdown
+    var html = quillEditor.root.innerHTML;
+    var content = turndownService.turndown(html);
+
+    // Build tags array
+    var tags = tagsRaw ? tagsRaw.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : [];
+    var tagsStr = tags.map(function(t) { return '"' + t.replace(/"/g, "'") + '"'; }).join(', ');
+
+    // Generate filename
+    var now = new Date();
+    var pad = function(n) { return n.toString().padStart(2, '0'); };
+    var datePrefix = now.getUTCFullYear().toString() +
+      pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + '-' +
+      pad(now.getUTCHours()) + pad(now.getUTCMinutes());
+    var dateStr = now.toISOString().replace(/\.\d{3}Z$/, '+00:00');
+    var slug = slugifyUA(title);
+    var filename = datePrefix + '-' + slug + '.md';
+
+    // Build frontmatter
+    var fm = '---\n';
+    fm += 'title: "' + title.replace(/"/g, "'") + '"\n';
+    fm += 'date: ' + dateStr + '\n';
+    fm += 'summary: "' + (summary || title).replace(/"/g, "'") + '"\n';
+    fm += 'categories: ["' + category + '"]\n';
+    fm += 'tags: [' + tagsStr + ']\n';
+    fm += 'source: "' + source.replace(/"/g, "'") + '"\n';
+    if (sourceUrl) fm += 'source_url: "' + sourceUrl + '"\n';
+    if (imageUrl) fm += 'image: "' + imageUrl + '"\n';
+    if (youtubeId) fm += 'youtube_id: "' + youtubeId + '"\n';
+    fm += 'draft: false\n';
+    fm += '---\n\n';
+    fm += content + '\n';
+
+    showStatus('⏳ Створюємо статтю...', 'info');
+
+    try {
+      var encoded = b64EncodeUtf8(fm);
+
+      var resp = await ghApi('PUT', '/contents/content/news/' + filename, {
+        message: '✍️ Custom article: ' + filename,
+        content: encoded
+      });
+
+      if (!resp.ok) {
+        var err = await resp.json().catch(function() { return {}; });
+        throw new Error(err.message || 'PUT failed: ' + resp.status);
+      }
+
+      // Add to deploy queue
+      approvedQueue.push({
+        title: title,
+        filename: filename,
+        category: category,
+        approvedAt: now.toISOString()
+      });
+      saveQueue();
+      renderQueue();
+
+      showStatus('✅ Стаття створена та додана в чергу на деплой!', 'success');
+
+      // Reset form
+      document.getElementById('cf-title').value = '';
+      document.getElementById('cf-tags').value = '';
+      document.getElementById('cf-summary').value = '';
+      document.getElementById('cf-image').value = '';
+      document.getElementById('cf-youtube').value = '';
+      document.getElementById('cf-source-url').value = '';
+      if (quillEditor) quillEditor.setText('');
+
+      // Hide form
+      document.getElementById('create-form').style.display = 'none';
+
+    } catch (e) {
+      console.error('Create article error:', e);
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
 
   // Expose for onclick
   window.logout = logout;

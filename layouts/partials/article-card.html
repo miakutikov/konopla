@@ -1,6 +1,9 @@
 <article class="news-card {{ if .Params.featured }}news-card-featured{{ end }}">
   <a href="{{ .Permalink }}" class="news-card-image-link">
-    {{ if .Params.image }}
+    {{ if .Params.youtube_id }}
+    <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg" alt="{{ .Title }}" loading="lazy" class="news-card-img">
+    <div class="news-card-play">▶</div>
+    {{ else if .Params.image }}
     <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img">
     {{ else }}
     <div class="news-card-img-placeholder">

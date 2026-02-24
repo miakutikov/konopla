@@ -33,9 +33,9 @@ GEMINI_API_URL = (
 # Prompt template for hemp industry images
 GEMINI_IMAGE_PROMPT = (
     "Generate a high-quality photo-realistic image for a news article. "
-    "The image should be in landscape orientation (16:9 aspect ratio), "
-    "professional looking, suitable for a news website about industrial hemp. "
-    "Do NOT include any text, watermarks, or logos in the image. "
+    "The image MUST be in wide landscape format with exact 16:9 aspect ratio (1280x720 resolution). "
+    "Make it look professional, cinematic, suitable for a premium news website about industrial hemp. "
+    "Do NOT include any text, watermarks, logos, or UI elements in the image. "
     "Topic: {query}"
 )
 
@@ -110,8 +110,44 @@ def generate_gemini_image(query, article_id="img"):
         filepath = os.path.join(gen_dir, filename)
 
         image_bytes = base64.b64decode(image_b64)
-        with open(filepath, "wb") as f:
-            f.write(image_bytes)
+
+        # Post-process: enforce 16:9 aspect ratio (1280x720)
+        try:
+            from PIL import Image
+            import io
+            img = Image.open(io.BytesIO(image_bytes))
+            target_ratio = 16 / 9
+            current_ratio = img.width / img.height
+
+            if abs(current_ratio - target_ratio) > 0.05:  # Only crop if significantly off
+                if current_ratio > target_ratio:
+                    # Too wide — crop sides
+                    new_width = int(img.height * target_ratio)
+                    left = (img.width - new_width) // 2
+                    img = img.crop((left, 0, left + new_width, img.height))
+                else:
+                    # Too tall — crop top/bottom
+                    new_height = int(img.width / target_ratio)
+                    top = (img.height - new_height) // 2
+                    img = img.crop((0, top, img.width, top + new_height))
+
+            # Resize to standard 1280x720
+            img = img.resize((1280, 720), Image.LANCZOS)
+
+            # Save as optimized JPEG for smaller file size
+            ext = "jpg"
+            filename = f"{article_id}.{ext}"
+            filepath = os.path.join(gen_dir, filename)
+            img.save(filepath, "JPEG", quality=88, optimize=True)
+
+            with open(filepath, "rb") as f:
+                image_bytes = f.read()
+
+            print(f"   ✅ Image cropped to 16:9 (1280x720)")
+        except ImportError:
+            print("   [INFO] Pillow not available, saving raw image")
+            with open(filepath, "wb") as f:
+                f.write(image_bytes)
 
         size_kb = len(image_bytes) / 1024
         print(f"   ✅ Gemini image saved: {filepath} ({size_kb:.0f} KB)")
