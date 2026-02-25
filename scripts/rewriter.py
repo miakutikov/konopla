@@ -183,6 +183,12 @@ def _parse_json_response(text):
         print(f"   [WARN] JSON parse error: {e}")
         return None
 
+    # Check if AI rejected the article as irrelevant
+    if article_data.get("rejected"):
+        reason = article_data.get("reason", "невідома причина")
+        print(f"   🚫 AI rejected: {reason}")
+        return None
+
     required = ["title", "summary", "content", "category", "tags"]
     if not all(key in article_data for key in required):
         print(f"   [WARN] Missing fields: {list(article_data.keys())}")

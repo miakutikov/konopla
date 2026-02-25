@@ -4,15 +4,19 @@ scheduler.py — Перевіряє заплановані дії та вико�
 
 Запускається через cron (кожні 30 хв). Читає data/scheduled.json,
 порівнює scheduled_at з поточним часом UTC, та:
-- deploy → triggers moderate.yml
+- deploy → triggers moderate.yml (через trigger file)
 - telegram → пише telegram_queue.json + triggers telegram_post.yml
 - threads → пише threads_queue.json + triggers threads_post.yml
+
+ВАЖЛИВО: scheduler.py НЕ тригерить workflows напряму!
+Натомість записує список workflows у data/trigger_workflows.json.
+Workflow scheduler.yml тригерить їх ПІСЛЯ git commit+push,
+щоб уникнути race condition.
 """
 
 import json
 import os
 import sys
-import requests
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -21,9 +25,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCHEDULED_FILE = os.path.join(PROJECT_ROOT, "data", "scheduled.json")
 TELEGRAM_QUEUE_FILE = os.path.join(PROJECT_ROOT, "data", "telegram_queue.json")
 THREADS_QUEUE_FILE = os.path.join(PROJECT_ROOT, "data", "threads_queue.json")
-
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
-GITHUB_REPO = os.environ.get("GITHUB_REPO", "miakutikov/konopla")
+TRIGGER_FILE = os.path.join(PROJECT_ROOT, "data", "trigger_workflows.json")
 
 
 def load_scheduled():
@@ -56,35 +58,15 @@ def save_queue_file(filepath, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def trigger_workflow(workflow_filename):
-    """Triggers a GitHub Actions workflow via workflow_dispatch."""
-    if not GITHUB_TOKEN:
-        print(f"[WARN] No GITHUB_TOKEN, cannot trigger {workflow_filename}")
-        return False
-
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/{workflow_filename}/dispatches"
-    headers = {
-        "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "Accept": "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-    payload = {"ref": "main"}
-
-    try:
-        resp = requests.post(url, json=payload, headers=headers, timeout=30)
-        if resp.status_code == 204:
-            print(f"[OK] Triggered {workflow_filename}")
-            return True
-        else:
-            print(f"[ERROR] Failed to trigger {workflow_filename}: {resp.status_code} {resp.text[:200]}")
-            return False
-    except Exception as e:
-        print(f"[ERROR] Exception triggering {workflow_filename}: {e}")
-        return False
+def save_trigger_list(workflows):
+    """Зберігає список workflows для тригера у trigger_workflows.json."""
+    os.makedirs(os.path.dirname(TRIGGER_FILE), exist_ok=True)
+    with open(TRIGGER_FILE, "w", encoding="utf-8") as f:
+        json.dump({"workflows": workflows}, f, ensure_ascii=False, indent=2)
 
 
 def process_deploy(items, now):
-    """Обробляє заплановані деплої."""
+    """Обробляє заплановані деплої. Повертає (remaining, triggered_workflows)."""
     due = []
     remaining = []
 
@@ -95,15 +77,16 @@ def process_deploy(items, now):
         else:
             remaining.append(item)
 
+    triggered = []
     if due:
         print(f"[DEPLOY] {len(due)} scheduled deploy(s) due")
-        trigger_workflow("moderate.yml")
+        triggered.append("moderate.yml")
 
-    return remaining
+    return remaining, triggered
 
 
 def process_telegram(items, now):
-    """Обробляє заплановані Telegram постинги."""
+    """Обробляє заплановані Telegram постинги. Повертає (remaining, triggered_workflows)."""
     due = []
     remaining = []
 
@@ -114,6 +97,7 @@ def process_telegram(items, now):
         else:
             remaining.append(item)
 
+    triggered = []
     if due:
         print(f"[TELEGRAM] {len(due)} scheduled Telegram post(s) due")
 
@@ -122,6 +106,13 @@ def process_telegram(items, now):
         for item in due:
             for article in item.get("articles", []):
                 all_articles.append(article)
+            # Also support per-article format (item itself is the article)
+            if "filename" in item and "articles" not in item:
+                all_articles.append({
+                    "filename": item["filename"],
+                    "title": item.get("title", ""),
+                    "category": item.get("category", ""),
+                })
 
         if all_articles:
             # Write telegram_queue.json
@@ -130,13 +121,13 @@ def process_telegram(items, now):
             save_queue_file(TELEGRAM_QUEUE_FILE, queue)
             print(f"[TELEGRAM] Wrote {len(all_articles)} articles to telegram_queue.json")
 
-            trigger_workflow("telegram_post.yml")
+            triggered.append("telegram_post.yml")
 
-    return remaining
+    return remaining, triggered
 
 
 def process_threads(items, now):
-    """Обробляє заплановані Threads постинги."""
+    """Обробляє заплановані Threads постинги. Повертає (remaining, triggered_workflows)."""
     due = []
     remaining = []
 
@@ -147,6 +138,7 @@ def process_threads(items, now):
         else:
             remaining.append(item)
 
+    triggered = []
     if due:
         print(f"[THREADS] {len(due)} scheduled Threads post(s) due")
 
@@ -155,6 +147,13 @@ def process_threads(items, now):
         for item in due:
             for article in item.get("articles", []):
                 all_articles.append(article)
+            # Also support per-article format
+            if "filename" in item and "articles" not in item:
+                all_articles.append({
+                    "filename": item["filename"],
+                    "title": item.get("title", ""),
+                    "category": item.get("category", ""),
+                })
 
         if all_articles:
             # Write threads_queue.json
@@ -163,9 +162,9 @@ def process_threads(items, now):
             save_queue_file(THREADS_QUEUE_FILE, queue)
             print(f"[THREADS] Wrote {len(all_articles)} articles to threads_queue.json")
 
-            trigger_workflow("threads_post.yml")
+            triggered.append("threads_post.yml")
 
-    return remaining
+    return remaining, triggered
 
 
 def run_scheduler():
@@ -188,19 +187,35 @@ def run_scheduler():
 
     if total_scheduled == 0:
         print("[INFO] No scheduled items. Done.")
+        # Clean up any stale trigger file
+        save_trigger_list([])
         return 0
 
-    # Process each queue
-    scheduled["deploy"] = process_deploy(deploy_items, now)
-    scheduled["telegram"] = process_telegram(telegram_items, now)
-    scheduled["threads"] = process_threads(threads_items, now)
+    # Process each queue — collect workflows to trigger
+    all_triggered = []
 
-    # Save updated scheduled.json
+    scheduled["deploy"], deploy_triggered = process_deploy(deploy_items, now)
+    all_triggered.extend(deploy_triggered)
+
+    scheduled["telegram"], telegram_triggered = process_telegram(telegram_items, now)
+    all_triggered.extend(telegram_triggered)
+
+    scheduled["threads"], threads_triggered = process_threads(threads_items, now)
+    all_triggered.extend(threads_triggered)
+
+    # Save updated scheduled.json FIRST (before any triggers)
     save_scheduled(scheduled)
+
+    # Save trigger list for scheduler.yml to process AFTER commit+push
+    # Deduplicate workflows
+    unique_workflows = list(dict.fromkeys(all_triggered))
+    save_trigger_list(unique_workflows)
 
     remaining = len(scheduled["deploy"]) + len(scheduled["telegram"]) + len(scheduled["threads"])
     executed = total_scheduled - remaining
     print(f"\n[INFO] Executed: {executed}, Remaining: {remaining}")
+    if unique_workflows:
+        print(f"[INFO] Workflows to trigger: {', '.join(unique_workflows)}")
 
     return 0
 

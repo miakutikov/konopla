@@ -137,6 +137,17 @@ def run_pipeline(ua_only=False):
             except Exception as e:
                 print(f"   ⚠️  Image error (non-critical): {e}")
 
+            # --- Fallback: use first source image if no generated/Unsplash image ---
+            if not image_data and article.get("source_images"):
+                first_img = article["source_images"][0]
+                image_data = {
+                    "url": first_img["url"],
+                    "source": "original",
+                    "author": "",
+                    "author_url": "",
+                }
+                print(f"   🖼️  Using source image: {first_img['url'][:60]}...")
+
             # --- Create draft Hugo .md file ---
             print("   📝 Creating draft article...")
             filepath = create_article_file(

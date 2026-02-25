@@ -112,6 +112,10 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
                 image_credit = (
                     f'image_source: "AI Generated"'
                 )
+            elif img_source == "original":
+                image_credit = (
+                    f'image_source: "Original"'
+                )
             else:
                 image_credit = (
                     f'image_author: "{image_data.get("author", "")}"'
