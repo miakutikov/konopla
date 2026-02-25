@@ -1,0 +1,79 @@
+name: KONOPLA.UA — YouTube Monitor
+
+on:
+  schedule:
+    - cron: '0 8,20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  youtube-monitor:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install feedparser Pillow
+
+      - name: Run YouTube monitor
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          PYTHONIOENCODING: utf-8
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
+        run: python scripts/youtube_monitor.py
+
+      - name: Commit new video drafts
+        run: |
+          git config user.name "Konopla Bot"
+          git config user.email "bot@konopla.ua"
+          git add content/news/ data/ || true
+          git diff --staged --quiet || git commit -m "🎬 YouTube video drafts $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3; do
+            git push && break
+            echo "Push failed (attempt $i), pulling and retrying..."
+            git pull --rebase
+          done
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Hugo site
+        run: hugo --minify
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

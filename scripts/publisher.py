@@ -34,7 +34,7 @@ def fix_double_utf8(text):
 def fix_article_encoding(article_data):
     """Apply fix_double_utf8 to all text fields in article data."""
     fixed = dict(article_data)
-    for key in ('title', 'summary', 'content', 'category', 'telegram_hook', 'threads_hook'):
+    for key in ('title', 'summary', 'content', 'category', 'telegram_hook', 'threads_hook', 'youtube_id'):
         if key in fixed and isinstance(fixed[key], str):
             fixed[key] = fix_double_utf8(fixed[key])
     if 'tags' in fixed and isinstance(fixed['tags'], list):
@@ -135,6 +135,11 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
             fm_lines.append(image_line)
         if image_credit:
             fm_lines.append(image_credit)
+        # YouTube video ID (optional)
+        youtube_id = article_data.get("youtube_id", "")
+        if youtube_id:
+            fm_lines.append(f'youtube_id: "{youtube_id}"')
+
         # Social media hooks (optional, from Gemini)
         telegram_hook = article_data.get("telegram_hook", "")
         if telegram_hook:

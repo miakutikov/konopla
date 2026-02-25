@@ -6,6 +6,7 @@ Pipeline: RSS → фільтрація → рерайт → зображення
 Статті створюються як draft (чернетка) — адмін модерує через /admin/ панель на сайті.
 """
 
+import argparse
 import json
 import os
 import sys
@@ -36,13 +37,17 @@ def save_json(filepath, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def run_pipeline():
-    """Запускає pipeline: збір, рерайт, створення draft-статей."""
+def run_pipeline(ua_only=False):
+    """Запускає pipeline: збір, рерайт, створення draft-статей.
+
+    ua_only: якщо True, використовує тільки українські RSS-фіди (UA_RSS_FEEDS)
+    """
 
     start_time = time.time()
 
+    mode_label = "🇺🇦 UA-only" if ua_only else "🌍 Full"
     print("=" * 60)
-    print("🌿 KONOPLA.UA — News Pipeline")
+    print(f"🌿 KONOPLA.UA — News Pipeline ({mode_label})")
     print("=" * 60)
 
     try:
@@ -63,9 +68,15 @@ def run_pipeline():
 
     try:
         # === STEP 1: Fetch articles ===
-        print("\n📡 Step 1: Fetching RSS feeds...")
+        feeds_override = None
+        if ua_only:
+            from config import UA_RSS_FEEDS
+            feeds_override = UA_RSS_FEEDS
+            print(f"\n📡 Step 1: Fetching UA-only feeds ({len(UA_RSS_FEEDS)} feeds)...")
+        else:
+            print("\n📡 Step 1: Fetching RSS feeds...")
         try:
-            articles = fetch_all_feeds()
+            articles = fetch_all_feeds(feeds_override=feeds_override)
         except Exception as e:
             print(f"[ERROR] RSS fetching failed: {e}")
             send_crash_alert(f"RSS fetching failed: {e}")
@@ -214,5 +225,10 @@ def run_pipeline():
 
 
 if __name__ == "__main__":
-    exit_code = run_pipeline()
+    parser = argparse.ArgumentParser(description="KONOPLA.UA News Pipeline")
+    parser.add_argument("--ua-only", action="store_true",
+                        help="Use only Ukrainian RSS feeds (UA_RSS_FEEDS)")
+    args = parser.parse_args()
+
+    exit_code = run_pipeline(ua_only=args.ua_only)
     sys.exit(exit_code)

@@ -121,6 +121,27 @@ RSS_FEEDS = [
     "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en",
 ]
 
+# Ukrainian-only RSS feeds (subset for --ua-only mode)
+UA_RSS_FEEDS = [
+    # === Google News UA — конопляні запити ===
+    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=%D0%BF%D1%80%D0%BE%D0%BC%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=hemp+ukraine&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9+%D0%B1%D0%B5%D1%82%D0%BE%D0%BD&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=%D1%82%D0%B5%D1%85%D0%BD%D1%96%D1%87%D0%BD%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
+
+    # === Existing Ukraine feeds from RSS_FEEDS ===
+    "https://news.google.com/rss/search?q=hemp+ukraine+конопля&hl=uk&gl=UA&ceid=UA:uk",
+    "https://news.google.com/rss/search?q=промислові+коноплі+Україна&hl=uk&gl=UA&ceid=UA:uk",
+
+    # === Українські агро-портали (RSS feeds) ===
+    "https://agrotimes.ua/feed/",
+    "https://latifundist.com/feed",
+    "https://agroportal.ua/rss",
+    "https://superagronom.com/rss",
+]
+
 # === CONTENT FILTERING ===
 
 # Stop words — if ANY of these appear in title or content, article is REJECTED

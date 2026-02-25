@@ -1,0 +1,47 @@
+name: KONOPLA.UA — Scheduler
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: "scheduler"
+  cancel-in-progress: false
+
+jobs:
+  check-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scheduler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: python scripts/scheduler.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "Konopla Bot"
+          git config user.email "bot@konopla.ua"
+          git add data/scheduled.json data/telegram_queue.json data/threads_queue.json || true
+          git diff --staged --quiet || git commit -m "⏰ Scheduler update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3; do
+            git push && break
+            echo "Push failed (attempt $i), pulling and retrying..."
+            git pull --rebase
+          done

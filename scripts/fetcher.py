@@ -163,21 +163,24 @@ def extract_images(entry):
     return images[:5]
 
 
-def fetch_all_feeds():
+def fetch_all_feeds(feeds_override=None):
     """
     Збирає всі нові статті з RSS-фідів.
     Повертає список словників з ключами: title, link, summary, date, source, hash
+
+    feeds_override: якщо передано, використовує цей список фідів замість RSS_FEEDS
     """
     processed = load_processed()
     processed_hashes = set(processed["articles"])
-    
+
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
-    
+
     all_articles = []
     seen_hashes = set()
     accepted_titles = list(processed.get("recent_titles", []))
 
-    for feed_url in RSS_FEEDS:
+    feeds_to_use = feeds_override if feeds_override is not None else RSS_FEEDS
+    for feed_url in feeds_to_use:
         try:
             feed = feedparser.parse(feed_url)
             source = feed.feed.get("title", feed_url)[:50]
@@ -240,7 +243,7 @@ def fetch_all_feeds():
     all_articles.sort(key=lambda x: x["date"], reverse=True)
     all_articles = all_articles[:MAX_ARTICLES_PER_RUN]
     
-    print(f"[INFO] Found {len(all_articles)} new articles from {len(RSS_FEEDS)} feeds")
+    print(f"[INFO] Found {len(all_articles)} new articles from {len(feeds_to_use)} feeds")
     return all_articles
 
 
