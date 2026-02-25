@@ -1603,7 +1603,11 @@
       var putResp = await ghApi('PUT', '/contents/data/telegram_queue.json', putBody);
       if (!putResp.ok) throw new Error('Failed to write queue: ' + putResp.status);
 
-      // 2. Trigger telegram_post.yml workflow
+      // 2. Wait for GitHub to process the commit before triggering workflow
+      showStatus('⏳ Чекаємо синхронізацію GitHub...', 'info');
+      await new Promise(function(r) { setTimeout(r, 5000); });
+
+      // 3. Trigger telegram_post.yml workflow
       await ghApi('POST', '/actions/workflows/telegram_post.yml/dispatches', {
         ref: 'main'
       });
@@ -1701,7 +1705,11 @@
       var putResp = await ghApi('PUT', '/contents/data/threads_queue.json', putBody);
       if (!putResp.ok) throw new Error('Failed to write queue: ' + putResp.status);
 
-      // 2. Trigger threads_post.yml workflow
+      // 2. Wait for GitHub to process the commit before triggering workflow
+      showStatus('⏳ Чекаємо синхронізацію GitHub...', 'info');
+      await new Promise(function(r) { setTimeout(r, 5000); });
+
+      // 3. Trigger threads_post.yml workflow
       await ghApi('POST', '/actions/workflows/threads_post.yml/dispatches', {
         ref: 'main'
       });
