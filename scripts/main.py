@@ -122,23 +122,12 @@ def run_pipeline(ua_only=False):
 
             print(f"   ✅ {rewritten['title'][:60]}...")
 
-            # --- Get image (non-critical) ---
+            # --- Get image: prefer original source, fallback to Unsplash/Gemini ---
             article_id = str(uuid.uuid4())[:8]
             image_data = None
-            try:
-                image_query = rewritten.get("image_query", "")
-                category = rewritten.get("category", "інше")
-                print(f"   🖼️  Image: {image_query or category}...")
-                image_data = get_article_image(
-                    query=image_query,
-                    fallback_category=category,
-                    article_id=article_id
-                )
-            except Exception as e:
-                print(f"   ⚠️  Image error (non-critical): {e}")
 
-            # --- Fallback: use first source image if no generated/Unsplash image ---
-            if not image_data and article.get("source_images"):
+            # Priority 1: use first image from original RSS article
+            if article.get("source_images"):
                 first_img = article["source_images"][0]
                 image_data = {
                     "url": first_img["url"],
@@ -147,6 +136,20 @@ def run_pipeline(ua_only=False):
                     "author_url": "",
                 }
                 print(f"   🖼️  Using source image: {first_img['url'][:60]}...")
+
+            # Priority 2: fallback to Unsplash/Gemini if no source image
+            if not image_data:
+                try:
+                    image_query = rewritten.get("image_query", "")
+                    category = rewritten.get("category", "інше")
+                    print(f"   🖼️  No source image, searching: {image_query or category}...")
+                    image_data = get_article_image(
+                        query=image_query,
+                        fallback_category=category,
+                        article_id=article_id
+                    )
+                except Exception as e:
+                    print(f"   ⚠️  Image error (non-critical): {e}")
 
             # --- Create draft Hugo .md file ---
             print("   📝 Creating draft article...")
