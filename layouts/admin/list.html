@@ -28,7 +28,6 @@
           <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
           <button id="btn-refresh" class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
           <button id="btn-run-pipeline" class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
-          <button id="btn-ua-pipeline" class="admin-btn admin-btn-ua" onclick="runUaPipeline()">🇺🇦 UA новини</button>
           <button id="btn-yt-panel" class="admin-btn admin-btn-yt" onclick="toggleYtPanel()">🎬 YouTube</button>
           <button id="btn-logout" class="admin-btn admin-btn-dim" onclick="logout()">Вийти</button>
         </div>
@@ -812,18 +811,6 @@
   background: rgba(239, 68, 68, 0.1);
 }
 
-/* UA pipeline button styling */
-.admin-btn-ua {
-  background: rgba(0, 87, 183, 0.15) !important;
-  border-color: #0057B7 !important;
-  color: #FFD700 !important;
-  font-weight: 600;
-}
-.admin-btn-ua:hover {
-  background: #0057B7 !important;
-  color: #FFD700 !important;
-}
-
 /* Threads queue styling */
 .threads-queue {
   border-top-color: #833AB4 !important;
@@ -1379,57 +1366,30 @@
       return;
     }
 
-    showStatus('⏳ Запуск pipeline...', 'info');
+    showStatus('⏳ Запуск збору новин (світ + UA)...', 'info');
     document.getElementById('btn-run-pipeline').disabled = true;
 
+    var results = [];
     try {
-      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
-        ref: 'main'
-      });
+      // Trigger both pipelines in parallel
+      var [resp1, resp2] = await Promise.all([
+        ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', { ref: 'main' }),
+        ghApi('POST', '/actions/workflows/ua_pipeline.yml/dispatches', { ref: 'main' })
+      ]);
 
-      if (resp.status === 204 || resp.ok) {
-        showStatus('🚀 Pipeline запущено! Нові статті з\'являться через кілька хвилин.', 'success');
-      } else {
-        throw new Error('Status: ' + resp.status);
-      }
+      if (resp1.status === 204 || resp1.ok) results.push('🌍 Світ');
+      else results.push('❌ Світ: ' + resp1.status);
+
+      if (resp2.status === 204 || resp2.ok) results.push('🇺🇦 UA');
+      else results.push('❌ UA: ' + resp2.status);
+
+      showStatus('🚀 Збір запущено: ' + results.join(', ') + '. Нові статті з\'являться через кілька хвилин.', 'success');
     } catch (e) {
       showStatus('❌ Помилка запуску: ' + e.message, 'error');
     }
 
     setTimeout(function() {
       document.getElementById('btn-run-pipeline').disabled = false;
-    }, 10000);
-  };
-
-  // =========================================================================
-  // Run UA pipeline
-  // =========================================================================
-
-  window.runUaPipeline = async function() {
-    if (!ghToken) {
-      showStatus('❌ Потрібен GitHub Token', 'error');
-      return;
-    }
-
-    showStatus('⏳ Запуск UA pipeline...', 'info');
-    document.getElementById('btn-ua-pipeline').disabled = true;
-
-    try {
-      var resp = await ghApi('POST', '/actions/workflows/ua_pipeline.yml/dispatches', {
-        ref: 'main'
-      });
-
-      if (resp.status === 204 || resp.ok) {
-        showStatus('🇺🇦 UA Pipeline запущено! Українські новини з\'являться через кілька хвилин.', 'success');
-      } else {
-        throw new Error('Status: ' + resp.status);
-      }
-    } catch (e) {
-      showStatus('❌ Помилка запуску UA pipeline: ' + e.message, 'error');
-    }
-
-    setTimeout(function() {
-      document.getElementById('btn-ua-pipeline').disabled = false;
     }, 10000);
   };
 
