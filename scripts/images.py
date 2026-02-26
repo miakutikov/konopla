@@ -320,7 +320,7 @@ def format_image_credit(image_data):
         return ""
     source = image_data.get("source", "unsplash")
     if source == "gemini":
-        return "🎨 Зображення згенеровано AI"
+        return ""
     if source in ("original", "youtube"):
         return ""
     return (
@@ -336,7 +336,7 @@ def format_image_credit_md(image_data):
         return ""
     source = image_data.get("source", "unsplash")
     if source == "gemini":
-        return "*🎨 Зображення згенеровано AI*"
+        return ""
     if source in ("original", "youtube"):
         return ""
     return (
