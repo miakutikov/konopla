@@ -118,6 +118,9 @@ def run_pipeline(ua_only=False):
             if not rewritten:
                 print("   ⏭️  Skipping — rewrite failed")
                 failed_count += 1
+                # Mark as processed to avoid re-fetching rejected/failed articles
+                processed["articles"].append(article["hash"])
+                save_processed(processed)
                 continue
 
             print(f"   ✅ {rewritten['title'][:60]}...")
@@ -165,6 +168,9 @@ def run_pipeline(ua_only=False):
             if not filepath:
                 print(f"   ❌ Failed to create draft file")
                 failed_count += 1
+                # Mark as processed to avoid re-fetching
+                processed["articles"].append(article["hash"])
+                save_processed(processed)
                 continue
 
             filename = os.path.basename(filepath)

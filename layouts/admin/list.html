@@ -113,6 +113,7 @@
           </div>
 
           <div class="cf-actions">
+            <button id="btn-autoformat" class="admin-btn admin-btn-ai" onclick="autoFormat()">✨ Автооформлення</button>
             <button class="admin-btn admin-btn-green cf-submit-btn" onclick="createArticle()">📝 Створити статтю</button>
             <button class="admin-btn admin-btn-dim" onclick="toggleCreateForm()">Скасувати</button>
           </div>
@@ -445,6 +446,28 @@
 .btn-delete:hover {
   background: #ef4444 !important;
   color: #fff !important;
+}
+.btn-edit {
+  color: #3b82f6 !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+.btn-edit:hover {
+  background: #3b82f6 !important;
+  color: #fff !important;
+}
+.admin-btn-ai {
+  background: rgba(168, 85, 247, 0.15) !important;
+  border-color: #a855f7 !important;
+  color: #a855f7 !important;
+}
+.admin-btn-ai:hover {
+  background: #a855f7 !important;
+  color: #fff !important;
+}
+.admin-btn-ai:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* GitHub PAT setup */
@@ -1024,6 +1047,36 @@
   var approvedQueue = [];
   var telegramQueue = [];
   var threadsQueue = [];
+  var editingFile = null;
+
+  var AUTOFORMAT_PROMPT = 'Ти — досвідчений редактор українського новинного порталу KONOPLA.UA про промислові коноплі.\n\n' +
+    'Твоє завдання: переформатувати та покращити наданий текст у журнальному стилі.\n\n' +
+    '## Стиль написання\n' +
+    '- Пиши як сучасний український журналіст. Мова жива, зрозуміла, без канцеляриту\n' +
+    '- Перше речення має чіпляти — починай з факту або цифри\n' +
+    '- Коротші речення краще за довгі. Один абзац = одна думка\n' +
+    '- Якщо є цифри, дати, імена компаній — обов\'язково збережи\n\n' +
+    '## Структура\n' +
+    '- Текст: 400-800 слів, 5-10 абзаців\n' +
+    '- Перший абзац: головна новина (хто, що, де, коли)\n' +
+    '- Далі: деталі, подробиці, цитати, цифри\n' +
+    '- Останній абзац: чому це важливо для індустрії\n\n' +
+    '## Форматування (ВАЖЛИВО!)\n' +
+    '- **жирний текст** для ключових фактів, цифр, термінів\n' +
+    '- > цитати (blockquote) для прямих цитат\n' +
+    '- --- (горизонтальна лінія) між великими тематичними блоками\n' +
+    '- Маркований список (-) коли є 3+ факти/цифри\n' +
+    '- НЕ використовуй заголовки (## або ###) всередині тексту\n' +
+    '- Абзаци: 2-4 речення максимум\n' +
+    '- Зображення між абзацами: ![опис](URL) — якщо є в оригіналі\n\n' +
+    '## Обмеження\n' +
+    '- НЕ вигадуй факти, яких немає в оригіналі\n' +
+    '- Збережи ВСІ факти, деталі та цифри з оригіналу\n' +
+    '- Конвертуй одиниці: акри->гектари, фунти->кілограми, Фаренгейт->Цельсій\n' +
+    '- Долари залишай доларами\n\n' +
+    '## Категорії: текстиль, будівництво, агро, біопластик, автопром, харчова, енергетика, косметика, законодавство, наука, екологія, бізнес, відео, інше\n\n' +
+    '## Формат відповіді — СТРОГО JSON:\n' +
+    '{"title":"Заголовок до 80 символів","summary":"1-2 речення анонс","content":"Повний текст з \\n\\n між абзацами","category":"категорія","tags":["тег1","тег2","тег3"]}';
 
   // =========================================================================
   // Auth
@@ -1203,6 +1256,7 @@
           '</div>' +
           '<div class="draft-actions">' +
             '<button class="admin-btn btn-approve" onclick="approveArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">✅ Опублікувати</button>' +
+            '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">✏️ Редагувати</button>' +
             '<button class="admin-btn btn-delete" onclick="deleteArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">❌ Видалити</button>' +
             '<a href="/news/' + escHtml(a.filename.replace('.md', '')) + '/" target="_blank" class="admin-btn">👁 Preview</a>' +
           '</div>' +
@@ -2173,7 +2227,91 @@
   }
 
   // =========================================================================
-  // Create article (WYSIWYG)
+  // Helpers: frontmatter parser, markdown-to-HTML, form reset
+  // =========================================================================
+
+  function parseFrontmatter(raw) {
+    var match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!match) return null;
+    var fmBlock = match[1];
+    var body = match[2].trim();
+    var fm = {};
+    var lines = fmBlock.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var colonIdx = line.indexOf(':');
+      if (colonIdx === -1) continue;
+      var key = line.substring(0, colonIdx).trim();
+      var val = line.substring(colonIdx + 1).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      if (val.startsWith('[') && val.endsWith(']')) {
+        var inner = val.slice(1, -1);
+        val = inner.split(',').map(function(s) {
+          s = s.trim();
+          if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+            s = s.slice(1, -1);
+          }
+          return s;
+        }).filter(Boolean);
+      }
+      fm[key] = val;
+    }
+    return { frontmatter: fm, body: body };
+  }
+
+  function markdownToHtml(md) {
+    if (!md) return '';
+    var html = md
+      .replace(/^---$/gm, '<hr>')
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    var blocks = html.split(/\n\n+/);
+    var result = [];
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i].trim();
+      if (!block) continue;
+      if (block === '<hr>') { result.push(block); continue; }
+      if (block.match(/^>/m)) {
+        var quoteLines = block.split('\n').map(function(l) { return l.replace(/^>\s?/, ''); });
+        result.push('<blockquote>' + quoteLines.join('<br>') + '</blockquote>');
+        continue;
+      }
+      if (block.match(/^- /m)) {
+        var listItems = block.split('\n').map(function(l) {
+          var m = l.match(/^- (.+)$/);
+          return m ? '<li>' + m[1] + '</li>' : '';
+        }).filter(Boolean);
+        result.push('<ul>' + listItems.join('') + '</ul>');
+        continue;
+      }
+      if (block.startsWith('<img ') || block.startsWith('<hr')) { result.push(block); continue; }
+      result.push('<p>' + block.replace(/\n/g, '<br>') + '</p>');
+    }
+    return result.join('\n');
+  }
+
+  function resetCreateForm() {
+    document.getElementById('cf-title').value = '';
+    document.getElementById('cf-tags').value = '';
+    document.getElementById('cf-summary').value = '';
+    document.getElementById('cf-image').value = '';
+    document.getElementById('cf-youtube').value = '';
+    document.getElementById('cf-source-url').value = '';
+    document.getElementById('cf-source').value = 'KONOPLA.UA';
+    if (quillEditor) quillEditor.setText('');
+    document.getElementById('create-form').style.display = 'none';
+    var headerEl = document.querySelector('.create-form-header h2');
+    if (headerEl) headerEl.textContent = String.fromCodePoint(0x270D, 0xFE0F) + ' ' + 'Нова стаття';
+    var submitBtn = document.querySelector('.cf-submit-btn');
+    if (submitBtn) submitBtn.textContent = String.fromCodePoint(0x1F4DD) + ' ' + 'Створити статтю';
+    editingFile = null;
+  }
+
+  // =========================================================================
+  // Create / Edit article (WYSIWYG)
   // =========================================================================
 
   var quillEditor = null;
@@ -2213,8 +2351,15 @@
   window.toggleCreateForm = function() {
     var form = document.getElementById('create-form');
     var visible = form.style.display !== 'none';
-    form.style.display = visible ? 'none' : 'block';
-    if (!visible) {
+    if (visible) {
+      resetCreateForm();
+    } else {
+      editingFile = null;
+      var headerEl = document.querySelector('.create-form-header h2');
+      if (headerEl) headerEl.textContent = String.fromCodePoint(0x270D, 0xFE0F) + ' Нова стаття';
+      var submitBtn = document.querySelector('.cf-submit-btn');
+      if (submitBtn) submitBtn.textContent = String.fromCodePoint(0x1F4DD) + ' Створити статтю';
+      form.style.display = 'block';
       initQuill();
     }
   };
@@ -2254,31 +2399,34 @@
     var source = document.getElementById('cf-source').value.trim() || 'KONOPLA.UA';
     var sourceUrl = document.getElementById('cf-source-url').value.trim();
 
-    // Validate
     if (!title) { showStatus('❌ Введіть заголовок', 'error'); return; }
     if (!quillEditor || quillEditor.getText().trim().length < 10) {
       showStatus('❌ Текст статті занадто короткий', 'error'); return;
     }
 
-    // Convert Quill HTML to Markdown
     var html = quillEditor.root.innerHTML;
     var content = turndownService.turndown(html);
 
-    // Build tags array
     var tags = tagsRaw ? tagsRaw.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : [];
     var tagsStr = tags.map(function(t) { return '"' + t.replace(/"/g, "'") + '"'; }).join(', ');
 
-    // Generate filename
-    var now = new Date();
-    var pad = function(n) { return n.toString().padStart(2, '0'); };
-    var datePrefix = now.getUTCFullYear().toString() +
-      pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + '-' +
-      pad(now.getUTCHours()) + pad(now.getUTCMinutes());
-    var dateStr = now.toISOString().replace(/\.\d{3}Z$/, '+00:00');
-    var slug = slugifyUA(title);
-    var filename = datePrefix + '-' + slug + '.md';
+    var isEdit = !!editingFile;
+    var filename, dateStr;
 
-    // Build frontmatter
+    if (isEdit) {
+      filename = editingFile.filename;
+      dateStr = editingFile.date || new Date().toISOString().replace(/\.\d{3}Z$/, '+00:00');
+    } else {
+      var now = new Date();
+      var pad = function(n) { return n.toString().padStart(2, '0'); };
+      var datePrefix = now.getUTCFullYear().toString() +
+        pad(now.getUTCMonth() + 1) + pad(now.getUTCDate()) + '-' +
+        pad(now.getUTCHours()) + pad(now.getUTCMinutes());
+      dateStr = now.toISOString().replace(/\.\d{3}Z$/, '+00:00');
+      var slug = slugifyUA(title);
+      filename = datePrefix + '-' + slug + '.md';
+    }
+
     var fm = '---\n';
     fm += 'title: "' + title.replace(/"/g, "'") + '"\n';
     fm += 'date: ' + dateStr + '\n';
@@ -2289,61 +2437,224 @@
     if (sourceUrl) fm += 'source_url: "' + sourceUrl + '"\n';
     if (imageUrl) fm += 'image: "' + imageUrl + '"\n';
     if (youtubeId) fm += 'youtube_id: "' + youtubeId + '"\n';
-    fm += 'draft: false\n';
+    fm += 'draft: ' + (isEdit ? (editingFile.draft || 'true') : 'false') + '\n';
     fm += '---\n\n';
     fm += content + '\n';
 
-    showStatus('⏳ Створюємо статтю...', 'info');
+    showStatus(isEdit ? '⏳ Зберігаємо зміни...' : '⏳ Створюємо статтю...', 'info');
 
     try {
       var encoded = b64EncodeUtf8(fm);
-
-      var resp = await ghApi('PUT', '/contents/content/news/' + filename, {
-        message: '✍️ Custom article: ' + filename,
+      var putBody = {
+        message: (isEdit ? '✏️ Edit: ' : '✍️ Custom article: ') + filename,
         content: encoded
-      });
+      };
+      if (isEdit) putBody.sha = editingFile.sha;
+
+      var resp = await ghApi('PUT', '/contents/content/news/' + filename, putBody);
 
       if (!resp.ok) {
         var err = await resp.json().catch(function() { return {}; });
         throw new Error(err.message || 'PUT failed: ' + resp.status);
       }
 
-      // Add to all queues (deploy + Telegram + Threads)
-      var queueItem = {
-        title: title,
-        filename: filename,
-        category: category,
-        approvedAt: now.toISOString()
-      };
-      approvedQueue.push(queueItem);
-      saveQueue();
-      renderQueue();
+      if (isEdit) {
+        // Update drafts.json if article was a draft
+        if (editingFile.draft === 'true') {
+          try {
+            var dResp = await ghApi('GET', '/contents/data/drafts.json');
+            if (dResp.ok) {
+              var dData = await dResp.json();
+              var dContent = JSON.parse(b64DecodeUtf8(dData.content));
+              var dArticles = dContent.articles || [];
+              for (var di = 0; di < dArticles.length; di++) {
+                if (dArticles[di].filename === filename) {
+                  dArticles[di].title = title;
+                  dArticles[di].summary = summary;
+                  dArticles[di].category = category;
+                  if (imageUrl) dArticles[di].image = imageUrl;
+                  break;
+                }
+              }
+              var dEncoded = b64EncodeUtf8(JSON.stringify(dContent, null, 2));
+              await ghApi('PUT', '/contents/data/drafts.json', {
+                message: '✏️ Update draft: ' + filename,
+                content: dEncoded,
+                sha: dData.sha
+              });
+            }
+          } catch (de) { console.warn('drafts.json update failed:', de); }
+        }
+        showStatus('✅ Статтю оновлено!', 'success');
+        resetCreateForm();
+        loadDrafts();
+      } else {
+        var queueItem = {
+          title: title,
+          filename: filename,
+          category: category,
+          approvedAt: new Date().toISOString()
+        };
+        approvedQueue.push(queueItem);
+        saveQueue();
+        renderQueue();
+        telegramQueue.push(Object.assign({}, queueItem));
+        saveTgQueue();
+        renderTgQueue();
+        threadsQueue.push(Object.assign({}, queueItem));
+        saveThreadsQueue();
+        renderThreadsQueue();
 
-      telegramQueue.push(Object.assign({}, queueItem));
-      saveTgQueue();
-      renderTgQueue();
-
-      threadsQueue.push(Object.assign({}, queueItem));
-      saveThreadsQueue();
-      renderThreadsQueue();
-
-      showStatus('✅ Стаття створена та додана в усі черги!', 'success');
-
-      // Reset form
-      document.getElementById('cf-title').value = '';
-      document.getElementById('cf-tags').value = '';
-      document.getElementById('cf-summary').value = '';
-      document.getElementById('cf-image').value = '';
-      document.getElementById('cf-youtube').value = '';
-      document.getElementById('cf-source-url').value = '';
-      if (quillEditor) quillEditor.setText('');
-
-      // Hide form
-      document.getElementById('create-form').style.display = 'none';
+        showStatus('✅ Стаття створена та додана в усі черги!', 'success');
+        resetCreateForm();
+      }
 
     } catch (e) {
-      console.error('Create article error:', e);
+      console.error('Save error:', e);
       showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // Edit existing article
+  // =========================================================================
+
+  window.editArticle = async function(filename) {
+    showStatus('⏳ Завантажуємо статтю...', 'info');
+    try {
+      var fileResp = await ghApi('GET', '/contents/content/news/' + filename);
+      if (!fileResp.ok) throw new Error('Cannot fetch file: ' + fileResp.status);
+      var fileData = await fileResp.json();
+
+      var raw = b64DecodeUtf8(fileData.content);
+      var parsed = parseFrontmatter(raw);
+      if (!parsed) throw new Error('Cannot parse frontmatter');
+      var fm = parsed.frontmatter;
+      var body = parsed.body;
+
+      editingFile = {
+        filename: filename,
+        sha: fileData.sha,
+        date: fm.date || new Date().toISOString(),
+        draft: fm.draft || 'true'
+      };
+
+      document.getElementById('create-form').style.display = 'block';
+      initQuill();
+
+      var headerEl = document.querySelector('.create-form-header h2');
+      if (headerEl) headerEl.textContent = '✏️ Редагування статті';
+      var submitBtn = document.querySelector('.cf-submit-btn');
+      if (submitBtn) submitBtn.textContent = '💾 Зберегти зміни';
+
+      document.getElementById('cf-title').value = fm.title || '';
+      document.getElementById('cf-summary').value = fm.summary || '';
+      document.getElementById('cf-image').value = fm.image || '';
+      document.getElementById('cf-youtube').value = fm.youtube_id || '';
+      document.getElementById('cf-source').value = fm.source || 'KONOPLA.UA';
+      document.getElementById('cf-source-url').value = fm.source_url || '';
+
+      var cat = Array.isArray(fm.categories) ? fm.categories[0] : (fm.categories || 'інше');
+      document.getElementById('cf-category').value = cat;
+      var tagsVal = Array.isArray(fm.tags) ? fm.tags.join(', ') : (fm.tags || '');
+      document.getElementById('cf-tags').value = tagsVal;
+
+      var bodyHtml = markdownToHtml(body);
+      quillEditor.clipboard.dangerouslyPasteHTML(bodyHtml);
+
+      showStatus('✏️ Статтю завантажено для редагування', 'success');
+      document.getElementById('create-form').scrollIntoView({ behavior: 'smooth' });
+
+    } catch (e) {
+      console.error('Edit error:', e);
+      showStatus('❌ Помилка завантаження: ' + e.message, 'error');
+      editingFile = null;
+    }
+  };
+
+  // =========================================================================
+  // Auto-format with AI
+  // =========================================================================
+
+  window.autoFormat = async function() {
+    var geminiKey = localStorage.getItem('konopla_gemini_key');
+    if (!geminiKey) {
+      geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
+      if (!geminiKey) return;
+      localStorage.setItem('konopla_gemini_key', geminiKey);
+    }
+
+    if (!quillEditor) { showStatus('❌ Редактор не ініціалізований', 'error'); return; }
+
+    var rawText = quillEditor.getText().trim();
+    if (rawText.length < 20) {
+      showStatus('❌ Введіть текст для автооформлення (мінімум 20 символів)', 'error');
+      return;
+    }
+
+    var existingTitle = document.getElementById('cf-title').value.trim();
+    var userPrompt = 'Переформатуй цей текст у журнальному стилі:\n\n';
+    if (existingTitle) userPrompt += 'Заголовок: ' + existingTitle + '\n\n';
+    userPrompt += 'Текст:\n' + rawText;
+
+    var btn = document.getElementById('btn-autoformat');
+    var originalBtnText = btn.textContent;
+    btn.textContent = '⏳ AI обробляє...';
+    btn.disabled = true;
+    showStatus('⏳ AI форматує текст... (10-30 сек)', 'info');
+
+    try {
+      var geminiResp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(geminiKey),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: AUTOFORMAT_PROMPT + '\n\n' + userPrompt }] }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 8192, responseMimeType: 'application/json' }
+          })
+        }
+      );
+
+      if (!geminiResp.ok) {
+        if (geminiResp.status === 400 || geminiResp.status === 403) localStorage.removeItem('konopla_gemini_key');
+        throw new Error('Gemini API error: ' + geminiResp.status);
+      }
+
+      var geminiData = await geminiResp.json();
+      var aiText = geminiData.candidates[0].content.parts[0].text;
+      aiText = aiText.replace(/^```json\s*/, '').replace(/\s*```$/, '').trim();
+      var aiResult = JSON.parse(aiText);
+
+      if (aiResult.rejected) {
+        showStatus('🚫 AI відхилив: ' + (aiResult.reason || 'невідома причина'), 'error');
+        return;
+      }
+
+      if (aiResult.title) document.getElementById('cf-title').value = aiResult.title;
+      if (aiResult.summary) document.getElementById('cf-summary').value = aiResult.summary;
+      if (aiResult.category) document.getElementById('cf-category').value = aiResult.category;
+      if (aiResult.tags && Array.isArray(aiResult.tags)) {
+        document.getElementById('cf-tags').value = aiResult.tags.join(', ');
+      }
+
+      if (aiResult.content) {
+        var formattedHtml = markdownToHtml(aiResult.content);
+        quillEditor.clipboard.dangerouslyPasteHTML(formattedHtml);
+      }
+
+      showStatus('✨ Текст автоматично оформлено! Перевірте та відредагуйте за потреби.', 'success');
+
+    } catch (e) {
+      console.error('Autoformat error:', e);
+      if (e instanceof SyntaxError) {
+        showStatus('❌ AI повернув невалідний JSON. Спробуйте ще раз.', 'error');
+      } else {
+        showStatus('❌ Помилка автооформлення: ' + e.message, 'error');
+      }
+    } finally {
+      btn.textContent = originalBtnText;
+      btn.disabled = false;
     }
   };
 
