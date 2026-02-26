@@ -53,7 +53,11 @@ jobs:
           for i in 1 2 3; do
             git push && break
             echo "Push failed (attempt $i), pulling and retrying..."
-            git pull --rebase
+            git pull --rebase -X theirs || {
+              echo "Rebase conflict, aborting rebase and merging..."
+              git rebase --abort
+              git pull --no-edit -X theirs
+            }
           done
 
       - name: Setup Hugo
