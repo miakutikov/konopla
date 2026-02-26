@@ -174,16 +174,15 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: rgba(131, 58, 180, 0.15);
-  color: #833AB4;
-  border: 1px solid rgba(131, 58, 180, 0.3);
+  background: #833AB4;
+  color: #fff;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   transition: all var(--transition);
 }
 .threads-btn:hover {
-  background: #833AB4;
+  background: #6d2b9e;
   color: #fff;
   transform: scale(1.02);
 }
