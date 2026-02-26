@@ -106,7 +106,8 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
         image_line = ""
         image_credit = ""
         if image_data:
-            image_line = f'image: "{image_data["url"]}"'
+            safe_url = image_data["url"].replace(chr(34), chr(39))
+            image_line = f'image: "{safe_url}"'
             img_source = image_data.get("source", "unsplash")
             if img_source == "gemini":
                 image_credit = (
@@ -117,8 +118,9 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
                     f'image_source: "Original"'
                 )
             else:
+                safe_author = image_data.get("author", "").replace(chr(34), chr(39))
                 image_credit = (
-                    f'image_author: "{image_data.get("author", "")}"'
+                    f'image_author: "{safe_author}"'
                     f'\nimage_author_url: "{image_data.get("author_url", "")}"'
                     f'\nimage_source: "Unsplash"'
                     f'\nimage_source_url: "{image_data.get("unsplash_url", "")}"'

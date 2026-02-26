@@ -45,7 +45,7 @@ jobs:
 
       - name: Trigger due workflows
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           GITHUB_REPO: ${{ github.repository }}
         run: |
           TRIGGER_FILE="data/trigger_workflows.json"

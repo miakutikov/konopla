@@ -314,14 +314,17 @@ MAX_AGE_DAYS = 3
 # Minimum article title length (filter out garbage)
 MIN_TITLE_LENGTH = 20
 
+# Project root (for absolute paths)
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # File to track already processed articles (prevents duplicates)
-PROCESSED_FILE = "data/processed.json"
+PROCESSED_FILE = os.path.join(_PROJECT_ROOT, "data", "processed.json")
 
 # Pending articles awaiting moderation
-PENDING_FILE = "data/pending.json"
+PENDING_FILE = os.path.join(_PROJECT_ROOT, "data", "pending.json")
 
 # Telegram offset for moderator polling
-TELEGRAM_OFFSET_FILE = "data/telegram_offset.json"
+TELEGRAM_OFFSET_FILE = os.path.join(_PROJECT_ROOT, "data", "telegram_offset.json")
 
 # Auto-reject pending articles after N hours
 PENDING_MAX_AGE_HOURS = 48

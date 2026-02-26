@@ -32,4 +32,8 @@ jobs:
           git config user.email "bot@konopla.ua"
           git add data/threads_queue.json || true
           git diff --staged --quiet || git commit -m "🧵 Threads queue cleared"
-          git push || true
+          for i in 1 2 3; do
+            git push && break
+            echo "Push failed (attempt $i), pulling and retrying..."
+            git pull --rebase
+          done

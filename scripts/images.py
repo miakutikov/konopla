@@ -318,8 +318,11 @@ def format_image_credit(image_data):
     """Форматує кредит для HTML (Telegram, тощо)."""
     if not image_data:
         return ""
-    if image_data.get("source") == "gemini":
+    source = image_data.get("source", "unsplash")
+    if source == "gemini":
         return "🎨 Зображення згенеровано AI"
+    if source in ("original", "youtube"):
+        return ""
     return (
         f'Фото: <a href="{image_data["author_url"]}?utm_source=konopla_ua&utm_medium=referral">'
         f'{image_data["author"]}</a> / '
@@ -331,8 +334,11 @@ def format_image_credit_md(image_data):
     """Markdown версія кредиту для Hugo статей."""
     if not image_data:
         return ""
-    if image_data.get("source") == "gemini":
+    source = image_data.get("source", "unsplash")
+    if source == "gemini":
         return "*🎨 Зображення згенеровано AI*"
+    if source in ("original", "youtube"):
+        return ""
     return (
         f'*Фото: [{image_data["author"]}]({image_data["author_url"]}?utm_source=konopla_ua&utm_medium=referral) / '
         f'[Unsplash]({image_data["unsplash_url"]}?utm_source=konopla_ua&utm_medium=referral)*'

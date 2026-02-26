@@ -12,6 +12,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
 from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -82,7 +83,7 @@ def youtube_api_request(endpoint, params):
     """Робить запит до YouTube Data API v3."""
     params["key"] = YOUTUBE_API_KEY
 
-    query_string = "&".join(f"{k}={urllib.request.quote(str(v))}" for k, v in params.items())
+    query_string = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in params.items())
     url = f"https://www.googleapis.com/youtube/v3/{endpoint}?{query_string}"
 
     req = urllib.request.Request(url)

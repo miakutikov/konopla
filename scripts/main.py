@@ -201,13 +201,13 @@ def run_pipeline(ua_only=False):
 
             rewritten_count += 1
 
+            # Save after each article to prevent data loss on crash
+            save_json(DRAFTS_FILE, drafts)
+            save_processed(processed)
+
             if i < len(articles) - 1:
                 print(f"   ⏳ {API_DELAY_SECONDS}s...")
                 time.sleep(API_DELAY_SECONDS)
-
-        # Save drafts and processed
-        save_json(DRAFTS_FILE, drafts)
-        save_processed(processed)
 
     except Exception as e:
         error_msg = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"

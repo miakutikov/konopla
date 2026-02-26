@@ -104,7 +104,10 @@ def _try_gemini(api_key, user_prompt):
             return _parse_json_response(text)
 
         except urllib.error.HTTPError as e:
-            error_body = e.read().decode("utf-8") if e.readable() else ""
+            try:
+                error_body = e.read().decode("utf-8")
+            except Exception:
+                error_body = ""
             print(f"   [WARN] Gemini error (attempt {attempt+1}): {e.code} {error_body[:150]}")
             if e.code == 429:
                 time.sleep(5)
@@ -156,7 +159,10 @@ def _try_openrouter(api_key, model, user_prompt):
             return _parse_json_response(text)
 
         except urllib.error.HTTPError as e:
-            error_body = e.read().decode("utf-8") if e.readable() else ""
+            try:
+                error_body = e.read().decode("utf-8")
+            except Exception:
+                error_body = ""
             print(f"   [WARN] {model} error (attempt {attempt+1}): {e.code} {error_body[:150]}")
             if e.code == 429:
                 time.sleep(5)

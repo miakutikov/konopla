@@ -71,7 +71,7 @@ def process_deploy(items, now):
     remaining = []
 
     for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"]).replace(tzinfo=timezone.utc)
+        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
         if scheduled_at <= now:
             due.append(item)
         else:
@@ -91,7 +91,7 @@ def process_telegram(items, now):
     remaining = []
 
     for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"]).replace(tzinfo=timezone.utc)
+        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
         if scheduled_at <= now:
             due.append(item)
         else:
@@ -132,7 +132,7 @@ def process_threads(items, now):
     remaining = []
 
     for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"]).replace(tzinfo=timezone.utc)
+        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
         if scheduled_at <= now:
             due.append(item)
         else:

@@ -17,7 +17,11 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:locale" content="uk_UA">
 {{ if .Params.image }}
+{{ if hasPrefix .Params.image "http" }}
 <meta property="og:image" content="{{ .Params.image }}">
+{{ else }}
+<meta property="og:image" content="{{ .Params.image | absURL }}">
+{{ end }}
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="720">
 {{ else }}
@@ -35,7 +39,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-{{ if .Params.image }}<meta name="twitter:image" content="{{ .Params.image }}">{{ end }}
+{{ if .Params.image }}{{ if hasPrefix .Params.image "http" }}<meta name="twitter:image" content="{{ .Params.image }}">{{ else }}<meta name="twitter:image" content="{{ .Params.image | absURL }}">{{ end }}{{ end }}
 
 <!-- Favicon -->
 <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
@@ -72,7 +76,7 @@
     "name": "KONOPLA.UA",
     "url": "{{ .Site.BaseURL }}"
   },
-  {{ if .Params.image }}"image": "{{ .Params.image }}",{{ end }}
+  {{ if .Params.image }}{{ if hasPrefix .Params.image "http" }}"image": "{{ .Params.image }}",{{ else }}"image": "{{ .Params.image | absURL }}",{{ end }}{{ end }}
   "mainEntityOfPage": "{{ .Permalink }}",
   "inLanguage": "uk"
 }

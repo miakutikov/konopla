@@ -34,11 +34,15 @@ def parse_frontmatter(filepath):
 
     fm = {}
     for line in match.group(1).split('\n'):
-        # Simple key: "value" parsing
-        m = re.match(r'^(\w+):\s*"?(.*?)"?\s*$', line)
+        # Parse key: "quoted value" (greedy inside quotes)
+        m = re.match(r'^(\w+):\s*"(.*)"\s*$', line)
         if m:
-            key, val = m.group(1), m.group(2)
-            fm[key] = val.strip('"').strip("'")
+            fm[m.group(1)] = m.group(2)
+        else:
+            # Parse key: unquoted value (skip arrays like [...])
+            m = re.match(r'^(\w+):\s*(.+?)\s*$', line)
+            if m and not m.group(2).startswith('['):
+                fm[m.group(1)] = m.group(2).strip("'").strip('"')
 
     # Parse categories
     cat_match = re.search(r'categories:\s*\["([^"]+)"\]', match.group(1))

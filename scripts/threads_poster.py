@@ -15,6 +15,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,10 +40,15 @@ def parse_frontmatter(filepath):
 
     fm = {}
     for line in match.group(1).split('\n'):
-        m = re.match(r'^(\w+):\s*"?(.*?)"?\s*$', line)
+        # Parse key: "quoted value" (greedy inside quotes)
+        m = re.match(r'^(\w+):\s*"(.*)"\s*$', line)
         if m:
-            key, val = m.group(1), m.group(2)
-            fm[key] = val.strip('"').strip("'")
+            fm[m.group(1)] = m.group(2)
+        else:
+            # Parse key: unquoted value (skip arrays like [...])
+            m = re.match(r'^(\w+):\s*(.+?)\s*$', line)
+            if m and not m.group(2).startswith('['):
+                fm[m.group(1)] = m.group(2).strip("'").strip('"')
 
     cat_match = re.search(r'categories:\s*\["([^"]+)"\]', match.group(1))
     if cat_match:
@@ -138,9 +144,6 @@ def run():
 
     print(f"🧵 Posting {len(articles)} articles to Threads...")
 
-    # Need urllib.parse for encoding
-    import urllib.parse
-
     posted = 0
     for item in articles:
         filename = item.get("filename", "")
@@ -182,5 +185,4 @@ def run():
 
 
 if __name__ == "__main__":
-    import urllib.parse
     sys.exit(run())

@@ -10,7 +10,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: "pages"
+  group: "ua-pipeline"
   cancel-in-progress: false
 
 jobs:

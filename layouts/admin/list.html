@@ -1371,15 +1371,12 @@
 
     var results = [];
     try {
-      // Trigger both pipelines in parallel
-      var [resp1, resp2] = await Promise.all([
-        ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', { ref: 'main' }),
-        ghApi('POST', '/actions/workflows/ua_pipeline.yml/dispatches', { ref: 'main' })
-      ]);
-
+      // Trigger pipelines sequentially to avoid race on data/drafts.json
+      var resp1 = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', { ref: 'main' });
       if (resp1.status === 204 || resp1.ok) results.push('🌍 Світ');
       else results.push('❌ Світ: ' + resp1.status);
 
+      var resp2 = await ghApi('POST', '/actions/workflows/ua_pipeline.yml/dispatches', { ref: 'main' });
       if (resp2.status === 204 || resp2.ok) results.push('🇺🇦 UA');
       else results.push('❌ UA: ' + resp2.status);
 
@@ -2111,7 +2108,7 @@
 
   // UTF-8 safe base64 decode/encode
   function b64DecodeUtf8(b64) {
-    var binStr = atob(b64);
+    var binStr = atob(b64.replace(/\s/g, ''));
     var bytes = new Uint8Array(binStr.length);
     for (var i = 0; i < binStr.length; i++) {
       bytes[i] = binStr.charCodeAt(i);
@@ -2160,7 +2157,7 @@
 
   function escHtml(str) {
     if (!str) return '';
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return str.replace(/&/g, '&amp;').replace(/\\/g, '&#92;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function disableCard(card) {
@@ -2311,17 +2308,26 @@
         throw new Error(err.message || 'PUT failed: ' + resp.status);
       }
 
-      // Add to deploy queue
-      approvedQueue.push({
+      // Add to all queues (deploy + Telegram + Threads)
+      var queueItem = {
         title: title,
         filename: filename,
         category: category,
         approvedAt: now.toISOString()
-      });
+      };
+      approvedQueue.push(queueItem);
       saveQueue();
       renderQueue();
 
-      showStatus('✅ Стаття створена та додана в чергу на деплой!', 'success');
+      telegramQueue.push(Object.assign({}, queueItem));
+      saveTgQueue();
+      renderTgQueue();
+
+      threadsQueue.push(Object.assign({}, queueItem));
+      saveThreadsQueue();
+      renderThreadsQueue();
+
+      showStatus('✅ Стаття створена та додана в усі черги!', 'success');
 
       // Reset form
       document.getElementById('cf-title').value = '';

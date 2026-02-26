@@ -12,7 +12,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: "pages"
+  group: "moderate"
   cancel-in-progress: false
 
 jobs:
@@ -43,11 +43,17 @@ jobs:
         run: python scripts/moderator.py
 
       - name: Commit changes
+        id: commit
         run: |
           git config user.name "Konopla Bot"
           git config user.email "bot@konopla.ua"
-          git add data/ || true
-          git diff --staged --quiet || git commit -m "🤖 Bot update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git add data/ content/news/ || true
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "🤖 Bot update $(date -u +'%Y-%m-%d %H:%M UTC')"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
           for i in 1 2 3; do
             git push && break
             echo "Push failed (attempt $i), pulling and retrying..."
@@ -55,22 +61,27 @@ jobs:
           done
 
       - name: Setup Hugo
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
       - name: Build Hugo site
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         run: hugo --minify
 
       - name: Setup Pages
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './public'
 
       - name: Deploy to GitHub Pages
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         id: deployment
         uses: actions/deploy-pages@v4
