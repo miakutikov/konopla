@@ -29,6 +29,7 @@
           <button id="btn-refresh" class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
           <button id="btn-run-pipeline" class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
           <button id="btn-ua-pipeline" class="admin-btn admin-btn-ua" onclick="runUaPipeline()">🇺🇦 UA новини</button>
+          <button id="btn-yt-panel" class="admin-btn admin-btn-yt" onclick="toggleYtPanel()">🎬 YouTube</button>
           <button id="btn-logout" class="admin-btn admin-btn-dim" onclick="logout()">Вийти</button>
         </div>
       </div>
@@ -97,10 +98,7 @@
             </div>
             <div class="cf-field">
               <label>YouTube ID</label>
-              <div class="yt-field-row">
-                <input type="text" id="cf-youtube" placeholder="dQw4w9WgXcQ">
-                <button type="button" class="admin-btn admin-btn-yt-search" onclick="openYtSearch()">🎬 Знайти</button>
-              </div>
+              <input type="text" id="cf-youtube" placeholder="dQw4w9WgXcQ">
             </div>
           </div>
 
@@ -137,10 +135,6 @@
           <h2>🚀 Черга на деплой</h2>
           <div class="deploy-queue-actions">
             <button class="admin-btn admin-btn-green" onclick="deployAll()">🚀 Задеплоїти (<span id="queue-count">0</span>)</button>
-            <div class="schedule-row">
-              <input type="datetime-local" id="schedule-deploy-time" class="schedule-input">
-              <button class="admin-btn admin-btn-schedule" onclick="scheduleAction('deploy')">⏰ Запланувати</button>
-            </div>
             <button class="admin-btn admin-btn-dim" onclick="clearQueue()">Очистити</button>
           </div>
         </div>
@@ -154,10 +148,6 @@
           <h2>📨 Черга Telegram</h2>
           <div class="deploy-queue-actions">
             <button class="admin-btn admin-btn-tg" onclick="postToTelegram()">📨 Постити в Telegram (<span id="tg-queue-count">0</span>)</button>
-            <div class="schedule-row">
-              <input type="datetime-local" id="schedule-telegram-time" class="schedule-input">
-              <button class="admin-btn admin-btn-schedule" onclick="scheduleAction('telegram')">⏰ Запланувати</button>
-            </div>
             <button class="admin-btn admin-btn-dim" onclick="clearTgQueue()">Очистити</button>
           </div>
         </div>
@@ -171,10 +161,6 @@
           <h2>🧵 Черга Threads</h2>
           <div class="deploy-queue-actions">
             <button class="admin-btn admin-btn-threads" onclick="postToThreads()">🧵 Постити в Threads (<span id="threads-queue-count">0</span>)</button>
-            <div class="schedule-row">
-              <input type="datetime-local" id="schedule-threads-time" class="schedule-input">
-              <button class="admin-btn admin-btn-schedule" onclick="scheduleAction('threads')">⏰ Запланувати</button>
-            </div>
             <button class="admin-btn admin-btn-dim" onclick="clearThreadsQueue()">Очистити</button>
           </div>
         </div>
@@ -182,21 +168,18 @@
         <div id="scheduled-threads" class="scheduled-items"></div>
       </div>
 
-      <!-- YouTube search modal -->
-      <div id="yt-modal" class="yt-modal" style="display:none">
-        <div class="yt-modal-overlay" onclick="closeYtSearch()"></div>
-        <div class="yt-modal-content">
-          <div class="yt-modal-header">
-            <h2>🎬 Пошук YouTube</h2>
-            <button class="admin-btn admin-btn-dim" onclick="closeYtSearch()">✕</button>
-          </div>
-          <div class="yt-search-row">
-            <input type="text" id="yt-search-input" placeholder="Промислові коноплі, hemp textile..." class="yt-search-input">
-            <button class="admin-btn admin-btn-green" onclick="searchYoutube()">🔍 Шукати</button>
-          </div>
-          <div id="yt-search-results" class="yt-search-results">
-            <p class="yt-placeholder">Введіть запит для пошуку відео</p>
-          </div>
+      <!-- YouTube panel (full tab) -->
+      <div id="yt-panel" class="yt-panel" style="display:none">
+        <div class="yt-panel-header">
+          <h2>🎬 YouTube — пошук відео</h2>
+          <button class="admin-btn admin-btn-dim" onclick="toggleYtPanel()">✕ Закрити</button>
+        </div>
+        <div class="yt-search-row">
+          <input type="text" id="yt-search-input" placeholder="Промислові коноплі, hemp textile, hempcrete..." class="yt-search-input">
+          <button class="admin-btn admin-btn-yt" onclick="ytPanelSearch()">🔍 Шукати</button>
+        </div>
+        <div id="yt-panel-results" class="yt-panel-results">
+          <p class="yt-placeholder">Введіть запит для пошуку відео про коноплі</p>
         </div>
       </div>
     </div>
@@ -567,6 +550,43 @@
   background: rgba(239, 68, 68, 0.1);
 }
 
+/* Per-article queue items */
+.queue-item-per-article {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+}
+.queue-item-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.queue-item-schedule {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.schedule-input-sm {
+  flex: 1;
+  font-size: 0.75rem !important;
+  padding: 0.3rem 0.5rem !important;
+}
+.scheduled-section-title {
+  font-size: 0.8rem;
+  color: #f59e0b;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  padding-top: 0.5rem;
+}
+.scheduled-item-title-text {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Telegram queue styling */
 .tg-queue {
   border-top-color: #0088cc !important;
@@ -584,57 +604,26 @@
   color: #fff !important;
 }
 
-/* YouTube search */
-.yt-field-row {
-  display: flex;
-  gap: 0.4rem;
-}
-.yt-field-row input {
-  flex: 1;
-}
-.admin-btn-yt-search {
+/* YouTube panel button */
+.admin-btn-yt {
   background: rgba(255, 0, 0, 0.12) !important;
   border-color: #c00 !important;
   color: #f44 !important;
-  font-size: 0.8rem !important;
-  padding: 0.4rem 0.6rem !important;
-  white-space: nowrap;
 }
-.admin-btn-yt-search:hover {
+.admin-btn-yt:hover {
   background: #c00 !important;
   color: #fff !important;
 }
-.yt-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.yt-modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.7);
-}
-.yt-modal-content {
-  position: relative;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+
+/* YouTube panel (full section) */
+.yt-panel {
+  margin-top: 2rem;
   padding: 1.5rem;
-  width: 90%;
-  max-width: 700px;
-  max-height: 80vh;
-  overflow-y: auto;
+  background: var(--bg-secondary);
+  border: 2px solid #c00;
+  border-radius: var(--radius-lg);
 }
-.yt-modal-header {
+.yt-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -642,9 +631,41 @@
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
-.yt-modal-header h2 {
+.yt-panel-header h2 {
   font-size: 1.15rem;
   color: #f44;
+}
+.yt-panel-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.yt-video-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+.yt-btn-raw {
+  background: var(--green-dim) !important;
+  border-color: var(--green-accent) !important;
+  color: var(--green-accent) !important;
+  font-size: 0.75rem !important;
+  padding: 0.3rem 0.6rem !important;
+}
+.yt-btn-raw:hover {
+  background: var(--green-accent) !important;
+  color: #000 !important;
+}
+.yt-btn-ai {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border-color: #8B5CF6 !important;
+  color: #8B5CF6 !important;
+  font-size: 0.75rem !important;
+  padding: 0.3rem 0.6rem !important;
+}
+.yt-btn-ai:hover {
+  background: #8B5CF6 !important;
+  color: #fff !important;
 }
 .yt-search-row {
   display: flex;
@@ -1471,10 +1492,16 @@
     countEl.textContent = approvedQueue.length;
 
     itemsEl.innerHTML = approvedQueue.map(function(item, idx) {
-      return '<div class="queue-item">' +
-        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
-        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
-        '<button class="queue-item-remove" onclick="removeFromQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      return '<div class="queue-item queue-item-per-article">' +
+        '<div class="queue-item-main">' +
+          '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+          '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+          '<button class="queue-item-remove" onclick="removeFromQueue(' + idx + ')" title="Прибрати">✕</button>' +
+        '</div>' +
+        '<div class="queue-item-schedule">' +
+          '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-deploy-' + idx + '">' +
+          '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'deploy\',' + idx + ')">⏰</button>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
@@ -1551,10 +1578,16 @@
     countEl.textContent = telegramQueue.length;
 
     itemsEl.innerHTML = telegramQueue.map(function(item, idx) {
-      return '<div class="queue-item">' +
-        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
-        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
-        '<button class="queue-item-remove" onclick="removeFromTgQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      return '<div class="queue-item queue-item-per-article">' +
+        '<div class="queue-item-main">' +
+          '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+          '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+          '<button class="queue-item-remove" onclick="removeFromTgQueue(' + idx + ')" title="Прибрати">✕</button>' +
+        '</div>' +
+        '<div class="queue-item-schedule">' +
+          '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-telegram-' + idx + '">' +
+          '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'telegram\',' + idx + ')">⏰</button>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
@@ -1653,10 +1686,16 @@
     countEl.textContent = threadsQueue.length;
 
     itemsEl.innerHTML = threadsQueue.map(function(item, idx) {
-      return '<div class="queue-item">' +
-        '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
-        '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
-        '<button class="queue-item-remove" onclick="removeFromThreadsQueue(' + idx + ')" title="Прибрати">✕</button>' +
+      return '<div class="queue-item queue-item-per-article">' +
+        '<div class="queue-item-main">' +
+          '<span class="queue-item-title">' + escHtml(item.title) + '</span>' +
+          '<span class="queue-item-cat">' + escHtml(item.category || '') + '</span>' +
+          '<button class="queue-item-remove" onclick="removeFromThreadsQueue(' + idx + ')" title="Прибрати">✕</button>' +
+        '</div>' +
+        '<div class="queue-item-schedule">' +
+          '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-threads-' + idx + '">' +
+          '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'threads\',' + idx + ')">⏰</button>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
@@ -1728,26 +1767,27 @@
   // Scheduler
   // =========================================================================
 
-  window.scheduleAction = async function(type) {
-    var inputId = 'schedule-' + type + '-time';
+  // Per-article scheduling: schedule one article from a queue
+  window.scheduleArticle = async function(type, idx) {
+    var inputId = 'sched-' + type + '-' + idx;
     var input = document.getElementById(inputId);
     if (!input || !input.value) {
-      showStatus('❌ Оберіть дату та час', 'error');
+      showStatus('❌ Оберіть дату та час для цієї статті', 'error');
       return;
     }
 
-    // Get the queue items based on type
+    // Get the queue and article
     var queue;
     if (type === 'deploy') queue = approvedQueue;
     else if (type === 'telegram') queue = telegramQueue;
     else if (type === 'threads') queue = threadsQueue;
 
-    if (!queue || !queue.length) {
-      showStatus('❌ Черга порожня — немає що планувати', 'error');
+    if (!queue || !queue[idx]) {
+      showStatus('❌ Стаття не знайдена в черзі', 'error');
       return;
     }
 
-    // Convert local datetime to UTC ISO
+    var article = queue[idx];
     var localDate = new Date(input.value);
     var scheduledAt = localDate.toISOString();
 
@@ -1757,7 +1797,7 @@
     }
 
     var typeLabels = { deploy: 'деплой', telegram: 'Telegram', threads: 'Threads' };
-    if (!confirm('Запланувати ' + typeLabels[type] + ' на ' + localDate.toLocaleString('uk-UA') + '?')) return;
+    if (!confirm('Запланувати "' + article.title + '" (' + typeLabels[type] + ') на ' + localDate.toLocaleString('uk-UA') + '?')) return;
 
     showStatus('⏳ Зберігаємо розклад...', 'info');
 
@@ -1773,12 +1813,12 @@
         scheduled = JSON.parse(b64DecodeUtf8(fileData.content));
       }
 
-      // Create scheduled item
+      // Create per-article scheduled item
       var schedItem = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-        articles: queue.map(function(item) {
-          return { filename: item.filename, title: item.title, category: item.category };
-        }),
+        filename: article.filename,
+        title: article.title,
+        category: article.category || '',
         scheduled_at: scheduledAt,
         created_at: new Date().toISOString()
       };
@@ -1788,7 +1828,7 @@
 
       // Write back to repo
       var putBody = {
-        message: '⏰ Schedule ' + type + ': ' + localDate.toLocaleString('uk-UA'),
+        message: '⏰ Schedule ' + type + ': ' + article.title.slice(0, 40),
         content: b64EncodeUtf8(JSON.stringify(scheduled, null, 2))
       };
       if (sha) putBody.sha = sha;
@@ -1796,18 +1836,16 @@
       var putResp = await ghApi('PUT', '/contents/data/scheduled.json', putBody);
       if (!putResp.ok) throw new Error('Failed to save schedule: ' + putResp.status);
 
-      // Clear the queue (items are now scheduled)
-      if (type === 'deploy') { approvedQueue = []; saveQueue(); renderQueue(); }
-      else if (type === 'telegram') { telegramQueue = []; saveTgQueue(); renderTgQueue(); }
-      else if (type === 'threads') { threadsQueue = []; saveThreadsQueue(); renderThreadsQueue(); }
-
-      // Reset input
-      input.value = '';
+      // Remove article from local queue
+      queue.splice(idx, 1);
+      if (type === 'deploy') { saveQueue(); renderQueue(); }
+      else if (type === 'telegram') { saveTgQueue(); renderTgQueue(); }
+      else if (type === 'threads') { saveThreadsQueue(); renderThreadsQueue(); }
 
       // Reload scheduled items display
       loadScheduledItems();
 
-      showStatus('⏰ ' + typeLabels[type] + ' заплановано на ' + localDate.toLocaleString('uk-UA') + '!', 'success');
+      showStatus('⏰ "' + article.title + '" заплановано на ' + localDate.toLocaleString('uk-UA') + '!', 'success');
     } catch (e) {
       showStatus('❌ Помилка планування: ' + e.message, 'error');
     }
@@ -1867,57 +1905,78 @@
 
     if (!items.length) {
       container.innerHTML = '';
+      // Show the parent queue section if there are scheduled items even when queue is empty
       return;
     }
 
+    // Make parent queue visible if it has scheduled items
+    var parentId = type === 'deploy' ? 'deploy-queue' : (type === 'telegram' ? 'tg-queue' : 'threads-queue');
+    var parentEl = document.getElementById(parentId);
+    if (parentEl) parentEl.style.display = 'block';
+
     var typeEmoji = { deploy: '🚀', telegram: '📨', threads: '🧵' };
 
-    container.innerHTML = items.map(function(item) {
-      var dt = new Date(item.scheduled_at);
-      var articlesCount = (item.articles || []).length;
-      var titles = (item.articles || []).map(function(a) { return a.title; }).join(', ');
+    container.innerHTML = '<div class="scheduled-section-title">⏰ Заплановані:</div>' +
+      items.map(function(item) {
+        var dt = new Date(item.scheduled_at);
 
-      return '<div class="scheduled-item">' +
-        '<div class="scheduled-item-info">' +
-          '<span class="scheduled-item-time">' + typeEmoji[type] + ' ' + dt.toLocaleString('uk-UA') + '</span>' +
-          '<span class="scheduled-item-count">' + articlesCount + ' стат.' + (titles ? ' — ' + escHtml(titles).slice(0, 60) : '') + '</span>' +
-        '</div>' +
-        '<button class="scheduled-item-cancel" onclick="cancelScheduled(\'' + type + '\', \'' + escHtml(item.id) + '\')" title="Скасувати">✕</button>' +
-      '</div>';
-    }).join('');
+        // Per-article format: item has filename directly
+        if (item.filename) {
+          return '<div class="scheduled-item">' +
+            '<div class="scheduled-item-info">' +
+              '<span class="scheduled-item-time">' + typeEmoji[type] + ' ' + dt.toLocaleString('uk-UA') + '</span>' +
+              '<span class="scheduled-item-title-text">' + escHtml(item.title || item.filename) + '</span>' +
+            '</div>' +
+            '<button class="scheduled-item-cancel" onclick="cancelScheduled(\'' + type + '\', \'' + escHtml(item.id) + '\')" title="Скасувати">✕</button>' +
+          '</div>';
+        }
+
+        // Legacy batch format: item has articles array
+        var articlesCount = (item.articles || []).length;
+        var titles = (item.articles || []).map(function(a) { return a.title; }).join(', ');
+
+        return '<div class="scheduled-item">' +
+          '<div class="scheduled-item-info">' +
+            '<span class="scheduled-item-time">' + typeEmoji[type] + ' ' + dt.toLocaleString('uk-UA') + '</span>' +
+            '<span class="scheduled-item-count">' + articlesCount + ' стат.' + (titles ? ' — ' + escHtml(titles).slice(0, 60) : '') + '</span>' +
+          '</div>' +
+          '<button class="scheduled-item-cancel" onclick="cancelScheduled(\'' + type + '\', \'' + escHtml(item.id) + '\')" title="Скасувати">✕</button>' +
+        '</div>';
+      }).join('');
   }
 
   // =========================================================================
-  // YouTube Search
+  // YouTube Panel
   // =========================================================================
 
-  window.openYtSearch = function() {
-    // Check for YouTube API key
-    var ytKey = localStorage.getItem('konopla_yt_key');
-    if (!ytKey) {
-      ytKey = prompt('Введіть YouTube Data API Key (зберігається локально):');
-      if (!ytKey) return;
-      localStorage.setItem('konopla_yt_key', ytKey);
+  window.toggleYtPanel = function() {
+    var panel = document.getElementById('yt-panel');
+    var visible = panel.style.display !== 'none';
+    panel.style.display = visible ? 'none' : 'block';
+    if (!visible) {
+      // Check for YouTube API key
+      var ytKey = localStorage.getItem('konopla_yt_key');
+      if (!ytKey) {
+        ytKey = prompt('Введіть YouTube Data API Key (зберігається локально):');
+        if (!ytKey) { panel.style.display = 'none'; return; }
+        localStorage.setItem('konopla_yt_key', ytKey);
+      }
+      document.getElementById('yt-search-input').focus();
     }
-    document.getElementById('yt-modal').style.display = 'flex';
-    document.getElementById('yt-search-input').focus();
   };
 
-  window.closeYtSearch = function() {
-    document.getElementById('yt-modal').style.display = 'none';
-  };
-
-  window.searchYoutube = async function() {
+  window.ytPanelSearch = async function() {
     var query = document.getElementById('yt-search-input').value.trim();
     if (!query) return;
 
     var ytKey = localStorage.getItem('konopla_yt_key');
     if (!ytKey) {
-      openYtSearch();
-      return;
+      ytKey = prompt('Введіть YouTube Data API Key:');
+      if (!ytKey) return;
+      localStorage.setItem('konopla_yt_key', ytKey);
     }
 
-    var resultsEl = document.getElementById('yt-search-results');
+    var resultsEl = document.getElementById('yt-panel-results');
     resultsEl.innerHTML = '<p class="yt-placeholder">⏳ Пошук...</p>';
 
     try {
@@ -1933,14 +1992,14 @@
       }
 
       var data = await resp.json();
-      var items = data.items || [];
+      var videos = data.items || [];
 
-      if (!items.length) {
+      if (!videos.length) {
         resultsEl.innerHTML = '<p class="yt-placeholder">Нічого не знайдено</p>';
         return;
       }
 
-      resultsEl.innerHTML = items.map(function(item) {
+      resultsEl.innerHTML = videos.map(function(item) {
         var vid = item.id.videoId;
         var snippet = item.snippet;
         var thumb = snippet.thumbnails.medium ? snippet.thumbnails.medium.url : '';
@@ -1948,12 +2007,16 @@
         var channel = snippet.channelTitle;
         var published = new Date(snippet.publishedAt).toLocaleDateString('uk-UA');
 
-        return '<div class="yt-result" onclick="selectYtVideo(\'' + escHtml(vid) + '\', \'' + escHtml(title.replace(/'/g, '')) + '\')">' +
+        return '<div class="yt-result">' +
           '<img class="yt-result-thumb" src="' + escHtml(thumb) + '" alt="">' +
           '<div class="yt-result-info">' +
             '<div class="yt-result-title">' + escHtml(title) + '</div>' +
             '<div class="yt-result-channel">' + escHtml(channel) + '</div>' +
             '<div class="yt-result-date">' + escHtml(published) + '</div>' +
+            '<div class="yt-video-actions">' +
+              '<button class="admin-btn yt-btn-raw" onclick="addYtVideo(\'' + escHtml(vid) + '\', \'raw\')">📋 Як є</button>' +
+              '<button class="admin-btn yt-btn-ai" onclick="addYtVideo(\'' + escHtml(vid) + '\', \'ai\')">🤖 AI стаття</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -1963,28 +2026,127 @@
     }
   };
 
-  // Handle Enter key in search input
+  // Handle Enter key in YouTube search input
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'yt-search-input') {
       e.preventDefault();
-      searchYoutube();
+      ytPanelSearch();
     }
   });
 
-  window.selectYtVideo = function(videoId, title) {
-    document.getElementById('cf-youtube').value = videoId;
+  window.addYtVideo = async function(videoId, mode) {
+    if (mode === 'raw') {
+      // Open create form, fill in YouTube ID and set category
+      document.getElementById('create-form').style.display = 'block';
+      initQuill();
+      document.getElementById('cf-youtube').value = videoId;
+      document.getElementById('cf-category').value = 'відео';
 
-    // Auto-fill title if empty
-    var titleInput = document.getElementById('cf-title');
-    if (!titleInput.value.trim() && title) {
-      titleInput.value = title;
+      // Fetch video details to auto-fill title/summary
+      try {
+        var ytKey = localStorage.getItem('konopla_yt_key');
+        if (ytKey) {
+          var detResp = await fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + videoId + '&key=' + encodeURIComponent(ytKey));
+          if (detResp.ok) {
+            var detData = await detResp.json();
+            if (detData.items && detData.items.length > 0) {
+              var snippet = detData.items[0].snippet;
+              var titleInput = document.getElementById('cf-title');
+              if (!titleInput.value.trim()) titleInput.value = snippet.title || '';
+              var summaryInput = document.getElementById('cf-summary');
+              if (!summaryInput.value.trim()) summaryInput.value = (snippet.description || '').slice(0, 280);
+              document.getElementById('cf-image').value = snippet.thumbnails.high ? snippet.thumbnails.high.url : '';
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to fetch video details:', e);
+      }
+
+      showStatus('🎬 Відео додано в форму: ' + videoId, 'success');
+
+    } else if (mode === 'ai') {
+      // AI mode: use Gemini to generate article from video
+      var geminiKey = localStorage.getItem('konopla_gemini_key');
+      if (!geminiKey) {
+        geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
+        if (!geminiKey) return;
+        localStorage.setItem('konopla_gemini_key', geminiKey);
+      }
+
+      showStatus('⏳ AI генерує статтю з відео...', 'info');
+
+      try {
+        // 1. Fetch video details
+        var ytKey = localStorage.getItem('konopla_yt_key');
+        var detResp = await fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + videoId + '&key=' + encodeURIComponent(ytKey));
+        if (!detResp.ok) throw new Error('Cannot fetch video details');
+
+        var detData = await detResp.json();
+        if (!detData.items || !detData.items.length) throw new Error('Video not found');
+
+        var snippet = detData.items[0].snippet;
+        var videoTitle = snippet.title || '';
+        var videoDesc = snippet.description || '';
+        var videoChannel = snippet.channelTitle || '';
+
+        // 2. Send to Gemini for article generation
+        var geminiPrompt = 'На основі цього YouTube відео напиши коротку інформативну статтю українською мовою для новинного порталу про коноплі (промислові, медичні, легалізація).\n\n' +
+          'Відео: "' + videoTitle + '"\n' +
+          'Канал: ' + videoChannel + '\n' +
+          'Опис: ' + videoDesc.slice(0, 1000) + '\n\n' +
+          'Поверни JSON:\n' +
+          '{\n  "title": "заголовок українською",\n  "summary": "1-2 речення анонс",\n  "body": "текст статті в markdown (3-5 абзаців)",\n  "tags": ["тег1", "тег2"],\n  "category": "одна з: текстиль, будівництво, агро, біопластик, харчова, автопром, енергетика, косметика, наука, екологія, бізнес, законодавство, відео, інше"\n}\n\n' +
+          'ВАЖЛИВО: Якщо відео НЕ стосується коноплів — поверни {"rejected": true, "reason": "причина"}';
+
+        var geminiResp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(geminiKey), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: geminiPrompt }] }],
+            generationConfig: { temperature: 0.4, responseMimeType: 'application/json' }
+          })
+        });
+
+        if (!geminiResp.ok) {
+          if (geminiResp.status === 400 || geminiResp.status === 403) {
+            localStorage.removeItem('konopla_gemini_key');
+          }
+          throw new Error('Gemini API error: ' + geminiResp.status);
+        }
+
+        var geminiData = await geminiResp.json();
+        var aiText = geminiData.candidates[0].content.parts[0].text;
+        var aiArticle = JSON.parse(aiText);
+
+        if (aiArticle.rejected) {
+          showStatus('🚫 AI відхилив: ' + (aiArticle.reason || 'не стосується коноплів'), 'error');
+          return;
+        }
+
+        // 3. Fill create form with AI-generated content
+        document.getElementById('create-form').style.display = 'block';
+        initQuill();
+
+        document.getElementById('cf-title').value = aiArticle.title || videoTitle;
+        document.getElementById('cf-summary').value = aiArticle.summary || '';
+        document.getElementById('cf-youtube').value = videoId;
+        document.getElementById('cf-category').value = aiArticle.category || 'відео';
+        document.getElementById('cf-tags').value = (aiArticle.tags || []).join(', ');
+        document.getElementById('cf-image').value = snippet.thumbnails.high ? snippet.thumbnails.high.url : '';
+
+        // Set body in Quill
+        if (quillEditor && aiArticle.body) {
+          quillEditor.clipboard.dangerouslyPasteHTML(aiArticle.body.replace(/\n/g, '<br>'));
+        }
+
+        showStatus('🤖 AI стаття згенерована! Перевірте та відредагуйте.', 'success');
+
+      } catch (e) {
+        console.error('AI article error:', e);
+        showStatus('❌ Помилка AI: ' + e.message, 'error');
+      }
     }
-
-    // Auto-set category to "відео"
-    document.getElementById('cf-category').value = 'відео';
-
-    closeYtSearch();
-    showStatus('🎬 Відео вибрано: ' + videoId, 'success');
   };
 
   // UTF-8 safe base64 decode/encode
