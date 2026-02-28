@@ -27,6 +27,7 @@
         <div class="admin-actions-top">
           <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
           <button id="btn-refresh" class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
+          <button class="admin-btn" onclick="triggerManualDeploy()">🚀 Деплой</button>
           <button id="btn-run-pipeline" class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
           <button id="btn-yt-panel" class="admin-btn admin-btn-yt" onclick="toggleYtPanel()">🎬 YouTube</button>
           <button id="btn-logout" class="admin-btn admin-btn-dim" onclick="logout()">Вийти</button>
@@ -93,7 +94,10 @@
           <div class="cf-row">
             <div class="cf-field">
               <label>URL зображення</label>
-              <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg">
+              <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
+              <div id="cf-image-preview" class="cf-image-preview" style="display:none">
+                <img id="cf-image-preview-img" src="" alt="Preview">
+              </div>
             </div>
             <div class="cf-field">
               <label>YouTube ID</label>
@@ -1121,6 +1125,16 @@
   background: var(--bg-tertiary);
   color: var(--text-primary);
 }
+.cf-image-preview {
+  margin-top: 0.5rem;
+}
+.cf-image-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
 .cf-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1765,6 +1779,37 @@
     }
   }
 
+  window.triggerManualDeploy = async function() {
+    if (!confirm('Запустити деплой сайту?')) return;
+    showStatus(String.fromCodePoint(9203) + ' Запуск деплою...', 'info');
+    try {
+      await triggerDeploy();
+      showStatus(String.fromCodePoint(128640) + ' Деплой запущено! Зміни з\'являться за 1-2 хв.', 'success');
+    } catch (e) {
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // Image preview
+  // =========================================================================
+
+  window.updateImagePreview = function() {
+    var input = document.getElementById('cf-image');
+    var previewDiv = document.getElementById('cf-image-preview');
+    var previewImg = document.getElementById('cf-image-preview-img');
+    if (!input || !previewDiv || !previewImg) return;
+    var url = input.value.trim();
+    if (url) {
+      previewImg.onload = function() { previewDiv.style.display = 'block'; };
+      previewImg.onerror = function() { previewDiv.style.display = 'none'; };
+      previewImg.src = url;
+    } else {
+      previewDiv.style.display = 'none';
+      previewImg.src = '';
+    }
+  };
+
   // =========================================================================
   // Telegram queue
   // =========================================================================
@@ -2274,6 +2319,7 @@
               var summaryInput = document.getElementById('cf-summary');
               if (!summaryInput.value.trim()) summaryInput.value = (snippet.description || '').slice(0, 280);
               document.getElementById('cf-image').value = snippet.thumbnails.high ? snippet.thumbnails.high.url : '';
+              updateImagePreview();
             }
           }
         }
@@ -2352,6 +2398,7 @@
         document.getElementById('cf-category').value = aiArticle.category || 'відео';
         document.getElementById('cf-tags').value = (aiArticle.tags || []).join(', ');
         document.getElementById('cf-image').value = snippet.thumbnails.high ? snippet.thumbnails.high.url : '';
+        updateImagePreview();
 
         // Set body in Quill
         if (quillEditor && aiArticle.body) {
@@ -2508,6 +2555,10 @@
     document.getElementById('cf-youtube').value = '';
     document.getElementById('cf-source-url').value = '';
     document.getElementById('cf-source').value = 'KONOPLA.UA';
+    var imgPreview = document.getElementById('cf-image-preview');
+    if (imgPreview) imgPreview.style.display = 'none';
+    var imgPreviewImg = document.getElementById('cf-image-preview-img');
+    if (imgPreviewImg) imgPreviewImg.src = '';
     if (quillEditor) quillEditor.setText('');
     document.getElementById('create-form').style.display = 'none';
     var headerEl = document.querySelector('.create-form-header h2');
@@ -2760,6 +2811,7 @@
       document.getElementById('cf-youtube').value = fm.youtube_id || '';
       document.getElementById('cf-source').value = fm.source || 'KONOPLA.UA';
       document.getElementById('cf-source-url').value = fm.source_url || '';
+      updateImagePreview();
 
       var cat = Array.isArray(fm.categories) ? fm.categories[0] : (fm.categories || 'інше');
       document.getElementById('cf-category').value = cat;
@@ -2894,7 +2946,7 @@
 
   window.articlesGoTo = function(page) {
     articlesPage = page;
-    filterArticles();
+    filterArticles(false);
     var sec = document.getElementById('articles-section');
     if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -3019,7 +3071,8 @@
 
       PINNED_FILENAME = filename;
       filterArticles();
-      showStatus(String.fromCodePoint(128204) + ' Статтю закріплено! Зміни з\'являться після деплою.', 'success');
+      await triggerDeploy();
+      showStatus(String.fromCodePoint(128204) + ' Статтю закріплено + деплой запущено!', 'success');
     } catch (e) {
       console.error('Pin error:', e);
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
@@ -3047,7 +3100,8 @@
 
       PINNED_FILENAME = '';
       filterArticles();
-      showStatus(String.fromCodePoint(9989) + ' Статтю відкріплено!', 'success');
+      await triggerDeploy();
+      showStatus(String.fromCodePoint(9989) + ' Статтю відкріплено + деплой запущено!', 'success');
     } catch (e) {
       console.error('Unpin error:', e);
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
@@ -3135,6 +3189,7 @@
 
       var imageUrl = '/images/generated/' + imgFilename;
       document.getElementById('cf-image').value = imageUrl;
+      updateImagePreview();
       showStatus(String.fromCodePoint(9989) + ' Зображення згенеровано та завантажено!', 'success');
 
     } catch (e) {
