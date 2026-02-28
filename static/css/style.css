@@ -172,6 +172,27 @@ img { max-width: 100%; height: auto; display: block; }
 .social-btn svg { width: 16px; height: 16px; }
 .search-btn svg { width: 18px; height: 18px; }
 .sidebar-tags { margin-top: 1.5rem; }
+.sidebar-tags .tags {
+  max-height: 150px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.sidebar-tags .tags.expanded {
+  max-height: 2000px;
+}
+.tags-toggle {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--green-accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+  border: none;
+  background: none;
+  padding: 0;
+}
+.tags-toggle:hover {
+  text-decoration: underline;
+}
 
 .menu-toggle {
   display: none;

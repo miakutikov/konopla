@@ -50,10 +50,11 @@
       <div class="sidebar-tags">
         <h3 class="sidebar-heading">Теги</h3>
         <div class="tags">
-          {{ range $name, $pages := $.Site.Taxonomies.tags }}
-          <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}/" class="tag">#{{ $name }}</a>
+          {{ range $.Site.Taxonomies.tags.ByCount }}
+          <a href="{{ "/tags/" | relURL }}{{ .Name | urlize }}/" class="tag">#{{ .Name }}</a>
           {{ end }}
         </div>
+        <button class="tags-toggle" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? 'Згорнути ▲' : 'Показати всі ▼'">Показати всі ▼</button>
       </div>
       {{ end }}
     </aside>
