@@ -1192,6 +1192,9 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   min-height: 250px;
+  max-height: 50vh;
+  display: flex;
+  flex-direction: column;
 }
 .ql-toolbar.ql-snow {
   background: var(--bg-elevated) !important;
@@ -1204,11 +1207,14 @@
   font-size: 0.95rem;
   font-family: inherit;
   color: var(--text-primary);
+  flex: 1;
+  overflow: hidden;
 }
 .ql-editor {
   min-height: 200px;
   color: var(--text-primary) !important;
   line-height: 1.6;
+  overflow-y: auto;
 }
 .ql-editor.ql-blank::before {
   color: var(--text-tertiary) !important;
