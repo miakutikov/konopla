@@ -38,7 +38,6 @@
   <section class="featured-section">
     <article class="featured-card">
       <a href="{{ .Permalink }}" class="featured-image-link">
-        {{ if $isPinned }}<div class="pinned-badge">📌 Закріплено</div>{{ end }}
         {{ if .Params.image }}
         <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img">
         {{ else }}
