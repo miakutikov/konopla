@@ -94,9 +94,11 @@
           <div class="cf-row">
             <div class="cf-field">
               <label>URL зображення</label>
-              <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
-              <div id="cf-image-preview" class="cf-image-preview" style="display:none">
-                <img id="cf-image-preview-img" src="" alt="Preview">
+              <div class="cf-image-input-row">
+                <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
+                <div id="cf-image-preview" class="cf-image-preview" style="display:none">
+                  <img id="cf-image-preview-img" src="" alt="Preview">
+                </div>
               </div>
             </div>
             <div class="cf-field">
@@ -1125,15 +1127,25 @@
   background: var(--bg-tertiary);
   color: var(--text-primary);
 }
+.cf-image-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cf-image-input-row input {
+  flex: 1;
+  min-width: 0;
+}
 .cf-image-preview {
-  margin-top: 0.5rem;
+  flex-shrink: 0;
 }
 .cf-image-preview img {
-  width: 100%;
-  max-height: 200px;
+  width: 48px;
+  height: 48px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
+  display: block;
 }
 .cf-actions {
   display: flex;
