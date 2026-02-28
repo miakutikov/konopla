@@ -96,20 +96,18 @@
               <label>URL зображення</label>
               <div class="cf-image-input-row">
                 <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
-                <div id="cf-image-preview" class="cf-image-preview" style="display:none">
+                <div id="cf-image-preview" class="cf-image-preview" style="display:none" onclick="openImageLightbox()">
                   <img id="cf-image-preview-img" src="" alt="Preview">
                 </div>
               </div>
             </div>
           </div>
+
           <div class="cf-row">
             <div class="cf-field">
               <label>YouTube ID</label>
               <input type="text" id="cf-youtube" placeholder="dQw4w9WgXcQ">
             </div>
-          </div>
-
-          <div class="cf-row">
             <div class="cf-field">
               <label>Джерело</label>
               <input type="text" id="cf-source" placeholder="KONOPLA.UA" value="KONOPLA.UA">
@@ -118,6 +116,11 @@
               <label>URL джерела</label>
               <input type="text" id="cf-source-url" placeholder="https://konopla.ua">
             </div>
+          </div>
+
+          <!-- Lightbox -->
+          <div id="image-lightbox" class="image-lightbox" style="display:none" onclick="closeImageLightbox()">
+            <img id="image-lightbox-img" src="" alt="Preview">
           </div>
 
           <div class="cf-actions">
@@ -1140,6 +1143,7 @@
 }
 .cf-image-preview {
   flex-shrink: 0;
+  cursor: pointer;
 }
 .cf-image-preview img {
   width: 48px;
@@ -1148,6 +1152,26 @@
   border-radius: 6px;
   border: 1px solid var(--border);
   display: block;
+  transition: opacity 0.15s;
+}
+.cf-image-preview:hover img {
+  opacity: 0.7;
+}
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.image-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
 }
 .cf-actions {
   display: flex;
@@ -1822,6 +1846,18 @@
       previewDiv.style.display = 'none';
       previewImg.src = '';
     }
+  };
+
+  window.openImageLightbox = function() {
+    var src = document.getElementById('cf-image-preview-img').src;
+    if (!src) return;
+    var lb = document.getElementById('image-lightbox');
+    document.getElementById('image-lightbox-img').src = src;
+    lb.style.display = 'flex';
+  };
+
+  window.closeImageLightbox = function() {
+    document.getElementById('image-lightbox').style.display = 'none';
   };
 
   // =========================================================================
