@@ -1,0 +1,82 @@
+{{ define "main" }}
+<div class="container">
+  <div class="search-page">
+    <h1>Пошук</h1>
+    <div class="search-input-wrap">
+      <input type="text" id="search-input" class="search-input" placeholder="Шукати новини..." autofocus>
+    </div>
+    <div id="search-results" class="search-results">
+      <p class="search-hint">Введіть запит для пошуку серед усіх новин</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script>
+(function() {
+  var searchInput = document.getElementById('search-input');
+  var resultsEl = document.getElementById('search-results');
+  var fuse = null;
+
+  fetch('/index.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      fuse = new Fuse(data, {
+        keys: [
+          { name: 'title', weight: 0.4 },
+          { name: 'summary', weight: 0.3 },
+          { name: 'categories', weight: 0.15 },
+          { name: 'tags', weight: 0.15 }
+        ],
+        threshold: 0.35,
+        ignoreLocation: true,
+        minMatchCharLength: 2
+      });
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('q');
+      if (q) { searchInput.value = q; doSearch(q); }
+    });
+
+  var debounceTimer;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    var q = this.value.trim();
+    debounceTimer = setTimeout(function() { doSearch(q); }, 200);
+  });
+
+  function doSearch(query) {
+    if (!fuse || query.length < 2) {
+      resultsEl.innerHTML = '<p class="search-hint">Введіть запит для пошуку серед усіх новин</p>';
+      return;
+    }
+    var results = fuse.search(query, { limit: 30 });
+    if (results.length === 0) {
+      resultsEl.innerHTML = '<p class="search-empty">Нічого не знайдено за запитом \u00ab' + escHtml(query) + '\u00bb</p>';
+      return;
+    }
+    var html = '<p class="search-count">Знайдено: ' + results.length + '</p><div class="news-grid">';
+    results.forEach(function(r) {
+      var item = r.item;
+      var img = item.image
+        ? '<img src="' + escHtml(item.image) + '" alt="" loading="lazy" class="news-card-img">'
+        : '<div class="news-card-img-placeholder"><img src="/images/logo.png" alt="" class="placeholder-logo"></div>';
+      html += '<article class="news-card"><a href="' + escHtml(item.url) + '" class="news-card-image-link">' + img + '</a>' +
+        '<div class="news-card-body">' +
+        (item.categories.length ? '<span class="card-category">' + escHtml(item.categories[0]) + '</span>' : '') +
+        '<h2 class="card-title"><a href="' + escHtml(item.url) + '">' + escHtml(item.title) + '</a></h2>' +
+        '<p class="card-summary">' + escHtml(item.summary) + '</p>' +
+        '<div class="card-meta"><time>' + escHtml(item.date) + '</time></div>' +
+        '</div></article>';
+    });
+    html += '</div>';
+    resultsEl.innerHTML = html;
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+})();
+</script>
+{{ end }}

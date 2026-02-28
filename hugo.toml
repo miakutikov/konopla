@@ -27,7 +27,7 @@ buildDrafts = true
       unsafe = true
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
 
 [outputFormats]
   [outputFormats.RSS]

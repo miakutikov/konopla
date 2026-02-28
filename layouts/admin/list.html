@@ -3,6 +3,7 @@
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/turndown@7.2.0/dist/turndown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
 <div class="container">
   <div id="admin-app">
@@ -158,6 +159,56 @@
           </div>
         </div>
         <div id="articles-list"></div>
+      </div>
+
+      <!-- Statistics -->
+      <div id="stats-section" class="stats-section">
+        <h2>📊 Статистика</h2>
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Усього статей</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number stat-published" id="stat-published">0</div>
+            <div class="stat-label">Опубліковано</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number stat-drafts" id="stat-drafts">0</div>
+            <div class="stat-label">Чернетки</div>
+          </div>
+        </div>
+        <div class="stats-charts">
+          <div class="chart-container">
+            <h3>Статті за категоріями</h3>
+            <canvas id="chart-categories"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Публікації за місяць (останні 12 місяців)</h3>
+            <canvas id="chart-monthly"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div id="calendar-section" class="calendar-section">
+        <div class="calendar-header-row">
+          <h2>📅 Календар публікацій</h2>
+          <div class="calendar-nav">
+            <button class="admin-btn admin-btn-dim" onclick="calendarPrev()">&larr;</button>
+            <span id="calendar-month-label" class="calendar-month-label"></span>
+            <button class="admin-btn admin-btn-dim" onclick="calendarNext()">&rarr;</button>
+            <button class="admin-btn admin-btn-dim" onclick="calendarToday()">Сьогодні</button>
+          </div>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+        <div id="calendar-detail" class="calendar-detail" style="display:none">
+          <h3 id="calendar-detail-title"></h3>
+          <div id="calendar-detail-list"></div>
+        </div>
       </div>
 
       <!-- Deploy queue -->
@@ -1255,8 +1306,170 @@
   color: var(--text-secondary);
 }
 
+/* Statistics */
+.stats-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.stats-section h2 {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  text-align: center;
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.stat-number.stat-published { color: var(--green-accent); }
+.stat-number.stat-drafts { color: #f59e0b; }
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.stats-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.chart-container {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+.chart-container h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Calendar */
+.calendar-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.calendar-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.calendar-header-row h2 { font-size: 1.15rem; margin: 0; }
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.calendar-month-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-width: 140px;
+  text-align: center;
+}
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.cal-day {
+  min-height: 60px;
+  padding: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.cal-day:hover { background: var(--bg-primary); }
+.cal-day.today { border: 1px solid var(--green-accent); }
+.cal-day.other-month { opacity: 0.3; }
+.cal-day-number {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.cal-day.today .cal-day-number { color: var(--green-accent); }
+.cal-day-count {
+  display: inline-block;
+  margin-top: 4px;
+  background: var(--green-dim);
+  color: var(--green-accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+.cal-day-scheduled {
+  display: inline-block;
+  margin-top: 2px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+.calendar-detail {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+.calendar-detail h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+.cal-detail-item {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.cal-detail-item:last-child { border-bottom: none; }
+.cal-detail-item a { color: var(--text-primary); }
+.cal-detail-item a:hover { color: var(--green-accent); }
+.cal-detail-status {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-left: 8px;
+}
+
 /* Responsive */
 @media (max-width: 820px) {
+  .stats-cards { grid-template-columns: 1fr; }
+  .stats-charts { grid-template-columns: 1fr; }
   .draft-card-inner {
     flex-direction: column;
     gap: 1rem;
@@ -1396,6 +1609,8 @@
       loadDrafts();
     }
     renderArticles();
+    renderStats();
+    initCalendar();
   }
 
   async function checkAuth(key) {
@@ -3255,6 +3470,194 @@
       btn.textContent = originalBtnText;
       btn.disabled = false;
     }
+  };
+
+  // =========================================================================
+  // Statistics (Chart.js)
+  // =========================================================================
+
+  function renderStats() {
+    if (typeof ALL_ARTICLES === 'undefined' || !ALL_ARTICLES.length) return;
+    var total = ALL_ARTICLES.length;
+    var published = ALL_ARTICLES.filter(function(a) { return !a.draft; }).length;
+    var drafts = total - published;
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-published').textContent = published;
+    document.getElementById('stat-drafts').textContent = drafts;
+
+    // Categories chart
+    var catCounts = {};
+    ALL_ARTICLES.forEach(function(a) {
+      if (a.category) catCounts[a.category] = (catCounts[a.category] || 0) + 1;
+    });
+    var catLabels = Object.keys(catCounts).sort(function(a, b) { return catCounts[b] - catCounts[a]; });
+    var catData = catLabels.map(function(c) { return catCounts[c]; });
+
+    if (typeof Chart !== 'undefined') {
+      new Chart(document.getElementById('chart-categories'), {
+        type: 'bar',
+        data: {
+          labels: catLabels,
+          datasets: [{ data: catData, backgroundColor: 'rgba(52, 211, 153, 0.6)', borderColor: '#34d399', borderWidth: 1 }]
+        },
+        options: {
+          indexAxis: 'y',
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#86868b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#f5f5f7', font: { size: 11 } }, grid: { display: false } }
+          }
+        }
+      });
+
+      // Monthly chart (last 12 months)
+      var now = new Date();
+      var months = [];
+      var monthLabels = [];
+      for (var i = 11; i >= 0; i--) {
+        var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        var key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        months.push(key);
+        monthLabels.push(d.toLocaleDateString('uk-UA', { month: 'short', year: '2-digit' }));
+      }
+      var monthCounts = {};
+      months.forEach(function(m) { monthCounts[m] = 0; });
+      ALL_ARTICLES.forEach(function(a) {
+        if (a.date) {
+          var m = a.date.substring(0, 7);
+          if (monthCounts[m] !== undefined) monthCounts[m]++;
+        }
+      });
+      var monthData = months.map(function(m) { return monthCounts[m]; });
+
+      new Chart(document.getElementById('chart-monthly'), {
+        type: 'bar',
+        data: {
+          labels: monthLabels,
+          datasets: [{ data: monthData, backgroundColor: 'rgba(52, 211, 153, 0.5)', borderColor: '#34d399', borderWidth: 1, borderRadius: 4 }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#86868b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { beginAtZero: true, ticks: { color: '#86868b', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+    }
+  }
+
+  // =========================================================================
+  // Content Calendar
+  // =========================================================================
+
+  var calendarYear, calendarMonth;
+
+  function initCalendar() {
+    var now = new Date();
+    calendarYear = now.getFullYear();
+    calendarMonth = now.getMonth();
+    renderCalendar();
+  }
+
+  window.calendarPrev = function() {
+    calendarMonth--;
+    if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+    renderCalendar();
+  };
+  window.calendarNext = function() {
+    calendarMonth++;
+    if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+    renderCalendar();
+  };
+  window.calendarToday = function() {
+    var now = new Date();
+    calendarYear = now.getFullYear();
+    calendarMonth = now.getMonth();
+    renderCalendar();
+  };
+
+  function renderCalendar() {
+    var label = new Date(calendarYear, calendarMonth, 1)
+      .toLocaleDateString('uk-UA', { month: 'long', year: 'numeric' });
+    document.getElementById('calendar-month-label').textContent =
+      label.charAt(0).toUpperCase() + label.slice(1);
+
+    var dateMap = {};
+    ALL_ARTICLES.forEach(function(a) {
+      if (a.date) {
+        if (!dateMap[a.date]) dateMap[a.date] = [];
+        dateMap[a.date].push(a);
+      }
+    });
+
+    var firstDay = new Date(calendarYear, calendarMonth, 1);
+    var lastDay = new Date(calendarYear, calendarMonth + 1, 0);
+    var startWeekday = (firstDay.getDay() + 6) % 7;
+
+    var today = new Date();
+    var todayStr = today.getFullYear() + '-' +
+      String(today.getMonth() + 1).padStart(2, '0') + '-' +
+      String(today.getDate()).padStart(2, '0');
+
+    var grid = document.getElementById('calendar-grid');
+    var html = '';
+
+    var prevLast = new Date(calendarYear, calendarMonth, 0).getDate();
+    for (var i = startWeekday - 1; i >= 0; i--) {
+      html += '<div class="cal-day other-month"><span class="cal-day-number">' + (prevLast - i) + '</span></div>';
+    }
+
+    for (var d = 1; d <= lastDay.getDate(); d++) {
+      var dateStr = calendarYear + '-' + String(calendarMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      var isToday = dateStr === todayStr;
+      var articles = dateMap[dateStr] || [];
+
+      html += '<div class="cal-day' + (isToday ? ' today' : '') + '" onclick="showCalendarDay(\'' + dateStr + '\')">';
+      html += '<span class="cal-day-number">' + d + '</span>';
+      if (articles.length > 0) {
+        html += '<div><span class="cal-day-count">' + articles.length + ' ст.</span></div>';
+      }
+      html += '</div>';
+    }
+
+    var totalCells = startWeekday + lastDay.getDate();
+    var remaining = (7 - (totalCells % 7)) % 7;
+    for (var r = 1; r <= remaining; r++) {
+      html += '<div class="cal-day other-month"><span class="cal-day-number">' + r + '</span></div>';
+    }
+
+    grid.innerHTML = html;
+    document.getElementById('calendar-detail').style.display = 'none';
+  }
+
+  window.showCalendarDay = function(dateStr) {
+    var detail = document.getElementById('calendar-detail');
+    var titleEl = document.getElementById('calendar-detail-title');
+    var listEl = document.getElementById('calendar-detail-list');
+
+    var articles = ALL_ARTICLES.filter(function(a) { return a.date === dateStr; });
+
+    if (articles.length === 0) {
+      detail.style.display = 'none';
+      return;
+    }
+
+    var d = new Date(dateStr + 'T00:00:00');
+    titleEl.textContent = d.toLocaleDateString('uk-UA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) +
+      ' (' + articles.length + ')';
+
+    var html = articles.map(function(a) {
+      var slug = a.filename.replace('.md', '');
+      var status = a.draft ? 'чернетка' : 'опубліковано';
+      return '<div class="cal-detail-item"><a href="/news/' + slug + '/" target="_blank">' +
+        escHtml((a.title || '').replace(/^"+|"+$/g, '')) + '</a>' +
+        '<span class="cal-detail-status">' + escHtml(a.category || '') + ' \u00b7 ' + status + '</span></div>';
+    }).join('');
+
+    listEl.innerHTML = html;
+    detail.style.display = 'block';
   };
 
   // Expose for onclick

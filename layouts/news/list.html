@@ -1,6 +1,8 @@
 {{ define "main" }}
 <div class="container">
 
+  {{ partial "breadcrumbs.html" . }}
+
   {{ $publishedNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
 
   <section class="news-page-layout">
@@ -60,31 +62,58 @@
         {{ end }}
       </div>
 
-      <!-- Pagination -->
+      <!-- Load more -->
       {{ if gt $paginator.TotalPages 1 }}
-      <nav class="pagination">
-        {{ if $paginator.HasPrev }}
-        <a href="{{ $paginator.Prev.URL }}" class="page-btn">&larr; Новіші</a>
-        {{ else }}
-        <span class="page-btn disabled">&larr; Новіші</span>
-        {{ end }}
-
-        <div class="page-numbers">
-          {{ range $paginator.Pagers }}
-          {{ if eq . $paginator }}
-          <span class="page-num current">{{ .PageNumber }}</span>
-          {{ else }}
-          <a href="{{ .URL }}" class="page-num">{{ .PageNumber }}</a>
-          {{ end }}
-          {{ end }}
+      <div id="load-more-container" class="load-more-container">
+        <button id="load-more-btn" class="load-more-btn" data-total-pages="{{ $paginator.TotalPages }}">
+          Показати ще
+        </button>
+        <div id="load-more-spinner" class="load-more-spinner" style="display:none">
+          <div class="spinner"></div>
+          <span>Завантаження...</span>
         </div>
+      </div>
+      <script>
+      (function() {
+        var btn = document.getElementById('load-more-btn');
+        if (!btn) return;
+        var currentPage = 1;
+        var totalPages = parseInt(btn.dataset.totalPages, 10);
+        var grid = document.querySelector('.news-content .news-grid');
+        var spinner = document.getElementById('load-more-spinner');
+        var container = document.getElementById('load-more-container');
 
-        {{ if $paginator.HasNext }}
-        <a href="{{ $paginator.Next.URL }}" class="page-btn">Старіші &rarr;</a>
-        {{ else }}
-        <span class="page-btn disabled">Старіші &rarr;</span>
-        {{ end }}
-      </nav>
+        btn.addEventListener('click', async function() {
+          if (currentPage >= totalPages) return;
+          btn.style.display = 'none';
+          spinner.style.display = 'flex';
+          currentPage++;
+          var nextUrl = '/news/page/' + currentPage + '/';
+          try {
+            var resp = await fetch(nextUrl);
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            var html = await resp.text();
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(html, 'text/html');
+            var newCards = doc.querySelectorAll('.news-grid .news-card');
+            newCards.forEach(function(card) {
+              grid.appendChild(document.importNode(card, true));
+            });
+            if (currentPage >= totalPages) {
+              container.style.display = 'none';
+            } else {
+              btn.style.display = 'inline-block';
+              spinner.style.display = 'none';
+            }
+          } catch (e) {
+            console.error('Load more error:', e);
+            btn.textContent = 'Помилка. Спробувати знову?';
+            btn.style.display = 'inline-block';
+            spinner.style.display = 'none';
+          }
+        });
+      })();
+      </script>
       {{ end }}
     </div>
   </section>

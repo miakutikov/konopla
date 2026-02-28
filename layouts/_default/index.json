@@ -1,0 +1,15 @@
+[
+  {{ $pages := where .Site.RegularPages "Section" "news" }}
+  {{ range $i, $p := $pages }}
+  {{ if $i }},{{ end }}
+  {
+    "title": {{ .Title | jsonify }},
+    "url": "{{ .Permalink }}",
+    "summary": {{ .Params.summary | default "" | jsonify }},
+    "date": "{{ .Date.Format "02.01.2006" }}",
+    "categories": [{{ range $j, $c := .Params.categories }}{{ if $j }},{{ end }}{{ $c | jsonify }}{{ end }}],
+    "tags": [{{ range $j, $t := .Params.tags }}{{ if $j }},{{ end }}{{ $t | jsonify }}{{ end }}],
+    "image": "{{ .Params.image | default "" }}"
+  }
+  {{ end }}
+]

@@ -1,6 +1,8 @@
 {{ define "main" }}
 <div class="container article-layout">
 
+  {{ partial "breadcrumbs.html" . }}
+
   <article class="article">
     <header class="article-header">
       {{ if .Params.categories }}
@@ -44,7 +46,11 @@
       <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn share-tg" title="Telegram">📨 Telegram</a>
       <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener" class="share-btn share-fb" title="Facebook">📘 Facebook</a>
       <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" class="share-btn share-tw" title="Twitter/X">🐦 X</a>
+      <a href="https://api.whatsapp.com/send?text={{ .Title | urlquery }}%20{{ .Permalink }}" target="_blank" rel="noopener" class="share-btn share-wa" title="WhatsApp">💬 WhatsApp</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener" class="share-btn share-li" title="LinkedIn">💼 LinkedIn</a>
+      <button class="share-btn share-copy" onclick="copyLink()" title="Копіювати посилання">🔗 Копіювати</button>
     </div>
+    <div id="copy-toast" class="copy-toast">Скопійовано!</div>
 
     {{ if .Params.tags }}
     <div class="tags">
@@ -89,4 +95,13 @@
   </aside>
 
 </div>
+<script>
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    var toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2000);
+  });
+}
+</script>
 {{ end }}
