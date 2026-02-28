@@ -5,11 +5,40 @@
   {{ $news := $allNews.ByDate.Reverse }}
 
   {{ if $news }}
-  <!-- Featured (latest article) -->
-  {{ with index $news 0 }}
+
+  {{/* --- Pinned article logic --- */}}
+  {{ $pinned := .Site.Data.pinned }}
+  {{ $pinnedArticle := false }}
+  {{ $pinnedFilename := "" }}
+  {{ if and $pinned $pinned.filename (ne $pinned.filename "") }}
+    {{ $pinnedFilename = $pinned.filename }}
+    {{ range $news }}
+      {{ if eq .File.LogicalName $pinnedFilename }}
+        {{ $pinnedArticle = . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* --- Determine featured article and rest --- */}}
+  {{ $featuredArticle := false }}
+  {{ $rest := $news }}
+  {{ $isPinned := false }}
+
+  {{ if $pinnedArticle }}
+    {{ $featuredArticle = $pinnedArticle }}
+    {{ $rest = where $news ".File.LogicalName" "ne" $pinnedFilename }}
+    {{ $isPinned = true }}
+  {{ else }}
+    {{ $featuredArticle = index $news 0 }}
+    {{ $rest = after 1 $news }}
+  {{ end }}
+
+  {{/* --- Featured section --- */}}
+  {{ with $featuredArticle }}
   <section class="featured-section">
     <article class="featured-card">
       <a href="{{ .Permalink }}" class="featured-image-link">
+        {{ if $isPinned }}<div class="pinned-badge">📌 Закріплено</div>{{ end }}
         {{ if .Params.image }}
         <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img">
         {{ else }}
@@ -32,8 +61,7 @@
   </section>
   {{ end }}
 
-  <!-- News grid (limited to latest 12, excl. featured) -->
-  {{ $rest := after 1 $news }}
+  <!-- News grid -->
   {{ if $rest }}
   <section class="news-section">
     <h2 class="section-title">Останні новини</h2>

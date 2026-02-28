@@ -503,6 +503,29 @@
   cursor: not-allowed;
 }
 
+.btn-pin {
+  background: rgba(234, 179, 8, 0.15) !important;
+  border-color: #eab308 !important;
+  color: #eab308 !important;
+}
+.btn-pin:hover {
+  background: #eab308 !important;
+  color: #000 !important;
+}
+.btn-unpin {
+  background: rgba(234, 179, 8, 0.9) !important;
+  border-color: #eab308 !important;
+  color: #000 !important;
+}
+.btn-unpin:hover {
+  background: rgba(234, 179, 8, 0.6) !important;
+}
+.pinned-info {
+  font-size: 0.85rem;
+  color: #eab308;
+  margin-left: 0.5rem;
+}
+
 /* All articles section */
 .articles-section {
   margin-top: 2rem;
@@ -608,6 +631,33 @@
   padding: 3px 8px !important;
   font-size: 0.75rem !important;
   min-height: auto !important;
+}
+.articles-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1rem 0 0.5rem;
+}
+.articles-pager .admin-btn {
+  padding: 4px 10px !important;
+  font-size: 0.8rem !important;
+  min-height: auto !important;
+}
+.articles-pager .admin-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.articles-page-active {
+  background: #a855f7 !important;
+  border-color: #a855f7 !important;
+  color: #fff !important;
+  cursor: default;
+}
+.articles-page-info {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 }
 @media (max-width: 768px) {
   .article-row {
@@ -1027,12 +1077,13 @@
 }
 .cf-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 .cf-field {
   flex: 1;
-  min-width: 0;
+  min-width: 200px;
 }
 .cf-field-wide {
   flex: 1 1 100%;
@@ -1146,7 +1197,7 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: 820px) {
   .draft-card-inner {
     flex-direction: column;
     gap: 1rem;
@@ -1203,9 +1254,11 @@
 
   var ALL_ARTICLES = [
     {{ range where .Site.RegularPages "Section" "news" }}
-    { title: {{ .Title | jsonify }}, filename: {{ .File.LogicalName | jsonify }}, date: {{ .Date.Format "2006-01-02" | jsonify }}, category: {{ with index .Params.categories 0 }}{{ . | jsonify }}{{ else }}""{{ end }}, image: {{ .Params.image | default "" | jsonify }}, draft: {{ if .Draft }}true{{ else }}false{{ end }}, summary: {{ .Params.summary | default "" | jsonify }} },
+    { title: "{{ .Title | replaceRE `\"` `\\\"` | replaceRE `^\"(.*)\"$` `$1` }}", filename: "{{ .File.LogicalName }}", date: "{{ .Date.Format "2006-01-02" }}", category: "{{ with index .Params.categories 0 }}{{ . }}{{ end }}", image: "{{ .Params.image | default "" }}", draft: {{ if .Draft }}true{{ else }}false{{ end }}, summary: "{{ .Params.summary | default "" | replaceRE `\"` `\\\"` | replaceRE `^\"(.*)\"$` `$1` }}" },
     {{ end }}
   ];
+
+  var PINNED_FILENAME = "{{ with .Site.Data.pinned }}{{ .filename }}{{ end }}";
 
   var AUTOFORMAT_PROMPT = 'Ти — типограф та верстальник українського новинного порталу KONOPLA.UA.\n\n' +
     'Твоє завдання: оформити наданий текст типографічно та структурно. НЕ змінюй сам текст — лише покращ його оформлення.\n\n' +
@@ -2812,16 +2865,17 @@
   };
 
   // =========================================================================
-  // All articles list
+  // All articles list (paginated)
   // =========================================================================
 
+  var ARTICLES_PER_PAGE = 20;
+  var articlesPage = 1;
+
   function renderArticles() {
-    // Sort newest first
     ALL_ARTICLES.sort(function(a, b) {
       return (b.date || '').localeCompare(a.date || '');
     });
 
-    // Populate category filter
     var cats = {};
     ALL_ARTICLES.forEach(function(a) { if (a.category) cats[a.category] = true; });
     var catSelect = document.getElementById('articles-filter-cat');
@@ -2833,10 +2887,20 @@
       });
     }
 
+    articlesPage = 1;
     filterArticles();
   }
 
-  window.filterArticles = function() {
+  window.articlesGoTo = function(page) {
+    articlesPage = page;
+    filterArticles();
+    var sec = document.getElementById('articles-section');
+    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.filterArticles = function(resetPage) {
+    if (resetPage !== false) articlesPage = 1;
+
     var query = (document.getElementById('articles-search').value || '').toLowerCase();
     var status = document.getElementById('articles-filter-status').value;
     var cat = document.getElementById('articles-filter-cat').value;
@@ -2850,33 +2914,143 @@
       return true;
     });
 
-    document.getElementById('articles-count').textContent = filtered.length;
+    var total = filtered.length;
+    var totalPages = Math.ceil(total / ARTICLES_PER_PAGE) || 1;
+    if (articlesPage > totalPages) articlesPage = totalPages;
+
+    var start = (articlesPage - 1) * ARTICLES_PER_PAGE;
+    var pageItems = filtered.slice(start, start + ARTICLES_PER_PAGE);
+
+    document.getElementById('articles-count').textContent = total;
 
     var listEl = document.getElementById('articles-list');
     if (!listEl) return;
 
-    if (filtered.length === 0) {
+    if (total === 0) {
       listEl.innerHTML = '<div style="padding:1rem;color:var(--text-muted);text-align:center;">Нічого не знайдено</div>';
       return;
     }
 
-    listEl.innerHTML = filtered.map(function(a) {
+    var rows = pageItems.map(function(a) {
       var statusClass = a.draft ? 'draft' : 'published';
       var statusText = a.draft ? 'Чернетка' : 'Опубліковано';
       var slug = a.filename.replace('.md', '');
       var cleanTitle = (a.title || '').replace(/^"+|"+$/g, '');
+      var isPinned = (a.filename === PINNED_FILENAME);
+
+      var pinBtn = '';
+      if (!a.draft) {
+        if (isPinned) {
+          pinBtn = '<button class="admin-btn btn-unpin" onclick="unpinArticle()">' + String.fromCodePoint(128204) + '</button>';
+        } else {
+          pinBtn = '<button class="admin-btn btn-pin" onclick="pinArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(128204) + '</button>';
+        }
+      }
+
+      var pinnedLabel = isPinned ? ' <span class="pinned-info">' + String.fromCodePoint(128204) + ' Закріплено</span>' : '';
 
       return '<div class="article-row">' +
         '<span class="article-date">' + escHtml(a.date) + '</span>' +
         '<span class="article-status ' + statusClass + '">' + statusText + '</span>' +
         '<span class="article-category">' + escHtml(a.category || '') + '</span>' +
-        '<span class="article-title"><a href="/news/' + escHtml(slug) + '/" target="_blank">' + escHtml(cleanTitle) + '</a></span>' +
+        '<span class="article-title"><a href="/news/' + escHtml(slug) + '/" target="_blank">' + escHtml(cleanTitle) + '</a>' + pinnedLabel + '</span>' +
         '<span class="article-actions">' +
+          pinBtn +
           '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(9999, 65039) + '</button>' +
           '<a href="/news/' + escHtml(slug) + '/" target="_blank" class="admin-btn">' + String.fromCodePoint(128065) + '</a>' +
         '</span>' +
       '</div>';
     }).join('');
+
+    // Pagination controls
+    var pager = '';
+    if (totalPages > 1) {
+      pager = '<div class="articles-pager">';
+      pager += '<button class="admin-btn admin-btn-dim" onclick="articlesGoTo(' + (articlesPage - 1) + ')"' + (articlesPage <= 1 ? ' disabled' : '') + '>&laquo;</button>';
+
+      var startP = Math.max(1, articlesPage - 2);
+      var endP = Math.min(totalPages, startP + 4);
+      if (endP - startP < 4) startP = Math.max(1, endP - 4);
+
+      for (var p = startP; p <= endP; p++) {
+        if (p === articlesPage) {
+          pager += '<button class="admin-btn articles-page-active">' + p + '</button>';
+        } else {
+          pager += '<button class="admin-btn admin-btn-dim" onclick="articlesGoTo(' + p + ')">' + p + '</button>';
+        }
+      }
+
+      pager += '<button class="admin-btn admin-btn-dim" onclick="articlesGoTo(' + (articlesPage + 1) + ')"' + (articlesPage >= totalPages ? ' disabled' : '') + '>&raquo;</button>';
+      pager += '<span class="articles-page-info">' + articlesPage + ' / ' + totalPages + '</span>';
+      pager += '</div>';
+    }
+
+    listEl.innerHTML = rows + pager;
+  };
+
+  // =========================================================================
+  // Pin / Unpin article
+  // =========================================================================
+
+  window.pinArticle = async function(filename) {
+    if (!ghToken) { showStatus(String.fromCodePoint(10060) + ' GitHub PAT не налаштовано', 'error'); return; }
+    if (!confirm('Закріпити цю статтю на головній сторінці?')) return;
+
+    showStatus(String.fromCodePoint(9203) + ' Закріплюємо статтю...', 'info');
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/pinned.json');
+      var sha = '';
+      if (resp.ok) {
+        var data = await resp.json();
+        sha = data.sha;
+      }
+
+      var pinData = JSON.stringify({ filename: filename, pinned_at: new Date().toISOString() }, null, 2);
+      var putBody = {
+        message: String.fromCodePoint(128204) + ' Pin: ' + filename,
+        content: b64EncodeUtf8(pinData)
+      };
+      if (sha) putBody.sha = sha;
+
+      var putResp = await ghApi('PUT', '/contents/data/pinned.json', putBody);
+      if (!putResp.ok) throw new Error('PUT failed: ' + putResp.status);
+
+      PINNED_FILENAME = filename;
+      filterArticles();
+      showStatus(String.fromCodePoint(128204) + ' Статтю закріплено! Зміни з\'являться після деплою.', 'success');
+    } catch (e) {
+      console.error('Pin error:', e);
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.unpinArticle = async function() {
+    if (!ghToken) { showStatus(String.fromCodePoint(10060) + ' GitHub PAT не налаштовано', 'error'); return; }
+    if (!confirm('Відкріпити статтю?')) return;
+
+    showStatus(String.fromCodePoint(9203) + ' Відкріплюємо...', 'info');
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/pinned.json');
+      if (!resp.ok) throw new Error('GET failed: ' + resp.status);
+      var data = await resp.json();
+
+      var pinData = JSON.stringify({ filename: '', pinned_at: '' }, null, 2);
+      var putResp = await ghApi('PUT', '/contents/data/pinned.json', {
+        message: String.fromCodePoint(128204) + ' Unpin article',
+        content: b64EncodeUtf8(pinData),
+        sha: data.sha
+      });
+      if (!putResp.ok) throw new Error('PUT failed: ' + putResp.status);
+
+      PINNED_FILENAME = '';
+      filterArticles();
+      showStatus(String.fromCodePoint(9989) + ' Статтю відкріплено!', 'success');
+    } catch (e) {
+      console.error('Unpin error:', e);
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    }
   };
 
   window.generateImage = async function() {

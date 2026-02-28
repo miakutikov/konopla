@@ -150,43 +150,26 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 12px;
 }
 
-.tg-btn {
+.social-btn {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: var(--green-accent);
-  color: #000;
+  background: #000;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   transition: all var(--transition);
 }
-.tg-btn:hover {
-  background: var(--green-hover);
-  color: #000;
+.social-btn:hover {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #fff;
   transform: scale(1.02);
 }
-.tg-btn svg { width: 16px; height: 16px; }
-
-.threads-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: #833AB4;
-  color: #fff;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all var(--transition);
-}
-.threads-btn:hover {
-  background: #6d2b9e;
-  color: #fff;
-  transform: scale(1.02);
-}
-.threads-btn svg { width: 16px; height: 16px; }
+.social-btn svg { width: 16px; height: 16px; }
 
 .menu-toggle {
   display: none;
@@ -200,6 +183,23 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* === FEATURED SECTION === */
 .featured-section { margin: 32px 0; }
+
+.featured-image-link {
+  position: relative;
+}
+.pinned-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(234, 179, 8, 0.92);
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 2;
+  pointer-events: none;
+}
 
 .featured-card {
   display: grid;
@@ -1121,8 +1121,7 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 10px 16px;
     font-size: 1rem;
   }
-  .tg-btn span { display: none; }
-  .threads-btn span { display: none; }
+  .social-btn span { display: none; }
   .logo-slogan { display: none; }
   .news-page-layout,
   .catalog-page-layout {
