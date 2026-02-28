@@ -46,6 +46,16 @@
         {{ end }}
         {{ end }}
       </ul>
+      {{ if $.Site.Taxonomies.tags }}
+      <div class="sidebar-tags">
+        <h3 class="sidebar-heading">Теги</h3>
+        <div class="tags">
+          {{ range $name, $pages := $.Site.Taxonomies.tags }}
+          <a href="{{ "/tags/" | relURL }}{{ $name | urlize }}/" class="tag">#{{ $name }}</a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
     </aside>
 
     <!-- News content -->

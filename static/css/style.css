@@ -170,6 +170,8 @@ img { max-width: 100%; height: auto; display: block; }
   transform: scale(1.02);
 }
 .social-btn svg { width: 16px; height: 16px; }
+.search-btn svg { width: 18px; height: 18px; }
+.sidebar-tags { margin-top: 1.5rem; }
 
 .menu-toggle {
   display: none;
