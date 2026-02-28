@@ -114,6 +114,7 @@
 
           <div class="cf-actions">
             <button id="btn-autoformat" class="admin-btn admin-btn-ai" onclick="autoFormat()">✨ Автооформлення</button>
+            <button id="btn-genimage" class="admin-btn admin-btn-img" onclick="generateImage()">🖼️ Згенерувати зображення</button>
             <button class="admin-btn admin-btn-green cf-submit-btn" onclick="createArticle()">📝 Створити статтю</button>
             <button class="admin-btn admin-btn-dim" onclick="toggleCreateForm()">Скасувати</button>
           </div>
@@ -127,6 +128,25 @@
       <div id="empty-state" class="admin-empty" style="display:none">
         <h2>📭 Немає статей на модерації</h2>
         <p>Натисніть «Запустити збір» для отримання нових новин</p>
+      </div>
+
+      <!-- All articles -->
+      <div id="articles-section" class="articles-section">
+        <div class="articles-header">
+          <h2>📚 Усі статті (<span id="articles-count">0</span>)</h2>
+          <div class="articles-filters">
+            <input type="text" id="articles-search" placeholder="Пошук за назвою..." oninput="filterArticles()">
+            <select id="articles-filter-status" onchange="filterArticles()">
+              <option value="all">Усі</option>
+              <option value="published">Опубліковані</option>
+              <option value="draft">Чернетки</option>
+            </select>
+            <select id="articles-filter-cat" onchange="filterArticles()">
+              <option value="all">Усі категорії</option>
+            </select>
+          </div>
+        </div>
+        <div id="articles-list"></div>
       </div>
 
       <!-- Deploy queue -->
@@ -468,6 +488,138 @@
 .admin-btn-ai:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+.admin-btn-img {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+}
+.admin-btn-img:hover {
+  background: #10b981 !important;
+  color: #fff !important;
+}
+.admin-btn-img:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* All articles section */
+.articles-section {
+  margin-top: 2rem;
+}
+.articles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.articles-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+.articles-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+#articles-search,
+#articles-filter-status,
+#articles-filter-cat {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+#articles-search {
+  width: 200px;
+}
+#articles-search:focus,
+#articles-filter-status:focus,
+#articles-filter-cat:focus {
+  outline: none;
+  border-color: #a855f7;
+}
+.article-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.article-row:hover {
+  background: var(--bg-secondary);
+}
+.article-date {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  min-width: 80px;
+}
+.article-status {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.article-status.published {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+.article-status.draft {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+}
+.article-category {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  min-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.article-title {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.article-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+.article-title a:hover {
+  color: #a855f7;
+}
+.article-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.article-actions .admin-btn {
+  padding: 3px 8px !important;
+  font-size: 0.75rem !important;
+  min-height: auto !important;
+}
+@media (max-width: 768px) {
+  .article-row {
+    flex-wrap: wrap;
+  }
+  .article-title {
+    width: 100%;
+    order: -1;
+  }
+  #articles-search {
+    width: 140px;
+  }
 }
 
 /* GitHub PAT setup */
@@ -1049,34 +1201,34 @@
   var threadsQueue = [];
   var editingFile = null;
 
-  var AUTOFORMAT_PROMPT = 'Ти — досвідчений редактор українського новинного порталу KONOPLA.UA про промислові коноплі.\n\n' +
-    'Твоє завдання: переформатувати та покращити наданий текст у журнальному стилі.\n\n' +
-    '## Стиль написання\n' +
-    '- Пиши як сучасний український журналіст. Мова жива, зрозуміла, без канцеляриту\n' +
-    '- Перше речення має чіпляти — починай з факту або цифри\n' +
-    '- Коротші речення краще за довгі. Один абзац = одна думка\n' +
-    '- Якщо є цифри, дати, імена компаній — обов\'язково збережи\n\n' +
-    '## Структура\n' +
-    '- Текст: 400-800 слів, 5-10 абзаців\n' +
-    '- Перший абзац: головна новина (хто, що, де, коли)\n' +
-    '- Далі: деталі, подробиці, цитати, цифри\n' +
-    '- Останній абзац: чому це важливо для індустрії\n\n' +
-    '## Форматування (ВАЖЛИВО!)\n' +
-    '- **жирний текст** для ключових фактів, цифр, термінів\n' +
-    '- > цитати (blockquote) для прямих цитат\n' +
-    '- --- (горизонтальна лінія) між великими тематичними блоками\n' +
-    '- Маркований список (-) коли є 3+ факти/цифри\n' +
-    '- НЕ використовуй заголовки (## або ###) всередині тексту\n' +
-    '- Абзаци: 2-4 речення максимум\n' +
+  var ALL_ARTICLES = [
+    {{ range where .Site.RegularPages "Section" "news" }}
+    { title: {{ .Title | jsonify }}, filename: {{ .File.LogicalName | jsonify }}, date: {{ .Date.Format "2006-01-02" | jsonify }}, category: {{ with index .Params.categories 0 }}{{ . | jsonify }}{{ else }}""{{ end }}, image: {{ .Params.image | default "" | jsonify }}, draft: {{ if .Draft }}true{{ else }}false{{ end }}, summary: {{ .Params.summary | default "" | jsonify }} },
+    {{ end }}
+  ];
+
+  var AUTOFORMAT_PROMPT = 'Ти — типограф та верстальник українського новинного порталу KONOPLA.UA.\n\n' +
+    'Твоє завдання: оформити наданий текст типографічно та структурно. НЕ змінюй сам текст — лише покращ його оформлення.\n\n' +
+    '## Що МОЖНА робити:\n' +
+    '- Розбити текст на логічні абзаци (2-4 речення кожен)\n' +
+    '- Додати **жирний текст** для ключових фактів, цифр, назв компаній\n' +
+    '- Додати > цитати (blockquote) для прямих цитат\n' +
+    '- Додати --- (горизонтальна лінія) між великими тематичними блоками\n' +
+    '- Додати маркований список (-) де є перелік 3+ пунктів\n' +
+    '- Виправити очевидні друкарські помилки\n' +
     '- Зображення між абзацами: ![опис](URL) — якщо є в оригіналі\n\n' +
-    '## Обмеження\n' +
-    '- НЕ вигадуй факти, яких немає в оригіналі\n' +
-    '- Збережи ВСІ факти, деталі та цифри з оригіналу\n' +
-    '- Конвертуй одиниці: акри->гектари, фунти->кілограми, Фаренгейт->Цельсій\n' +
-    '- Долари залишай доларами\n\n' +
+    '## Що НЕ МОЖНА робити:\n' +
+    '- НЕ переписуй текст іншими словами\n' +
+    '- НЕ додавай нову інформацію\n' +
+    '- НЕ видаляй речення чи факти\n' +
+    '- НЕ змінюй стиль автора\n' +
+    '- НЕ використовуй заголовки (## або ###) всередині тексту\n\n' +
+    '## Додатково:\n' +
+    '- Згенеруй title (до 80 символів) та summary (1-2 речення) на основі тексту\n' +
+    '- Визнач category та tags\n\n' +
     '## Категорії: текстиль, будівництво, агро, біопластик, автопром, харчова, енергетика, косметика, законодавство, наука, екологія, бізнес, відео, інше\n\n' +
     '## Формат відповіді — СТРОГО JSON:\n' +
-    '{"title":"Заголовок до 80 символів","summary":"1-2 речення анонс","content":"Повний текст з \\n\\n між абзацами","category":"категорія","tags":["тег1","тег2","тег3"]}';
+    '{"title":"Заголовок","summary":"Анонс","content":"Оформлений текст з \\n\\n між абзацами","category":"категорія","tags":["тег1","тег2","тег3"]}';
 
   // =========================================================================
   // Auth
@@ -1131,6 +1283,7 @@
     } else {
       loadDrafts();
     }
+    renderArticles();
   }
 
   async function checkAuth(key) {
@@ -2652,6 +2805,166 @@
       } else {
         showStatus('❌ Помилка автооформлення: ' + e.message, 'error');
       }
+    } finally {
+      btn.textContent = originalBtnText;
+      btn.disabled = false;
+    }
+  };
+
+  // =========================================================================
+  // All articles list
+  // =========================================================================
+
+  function renderArticles() {
+    // Sort newest first
+    ALL_ARTICLES.sort(function(a, b) {
+      return (b.date || '').localeCompare(a.date || '');
+    });
+
+    // Populate category filter
+    var cats = {};
+    ALL_ARTICLES.forEach(function(a) { if (a.category) cats[a.category] = true; });
+    var catSelect = document.getElementById('articles-filter-cat');
+    if (catSelect) {
+      var catKeys = Object.keys(cats).sort();
+      catSelect.innerHTML = '<option value="all">Усі категорії</option>';
+      catKeys.forEach(function(c) {
+        catSelect.innerHTML += '<option value="' + escHtml(c) + '">' + escHtml(c) + '</option>';
+      });
+    }
+
+    filterArticles();
+  }
+
+  window.filterArticles = function() {
+    var query = (document.getElementById('articles-search').value || '').toLowerCase();
+    var status = document.getElementById('articles-filter-status').value;
+    var cat = document.getElementById('articles-filter-cat').value;
+
+    var filtered = ALL_ARTICLES.filter(function(a) {
+      if (status === 'published' && a.draft) return false;
+      if (status === 'draft' && !a.draft) return false;
+      if (cat !== 'all' && a.category !== cat) return false;
+      if (query && (a.title || '').replace(/^"+|"+$/g, '').toLowerCase().indexOf(query) === -1 &&
+          (a.category || '').toLowerCase().indexOf(query) === -1) return false;
+      return true;
+    });
+
+    document.getElementById('articles-count').textContent = filtered.length;
+
+    var listEl = document.getElementById('articles-list');
+    if (!listEl) return;
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div style="padding:1rem;color:var(--text-muted);text-align:center;">Нічого не знайдено</div>';
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(function(a) {
+      var statusClass = a.draft ? 'draft' : 'published';
+      var statusText = a.draft ? 'Чернетка' : 'Опубліковано';
+      var slug = a.filename.replace('.md', '');
+      var cleanTitle = (a.title || '').replace(/^"+|"+$/g, '');
+
+      return '<div class="article-row">' +
+        '<span class="article-date">' + escHtml(a.date) + '</span>' +
+        '<span class="article-status ' + statusClass + '">' + statusText + '</span>' +
+        '<span class="article-category">' + escHtml(a.category || '') + '</span>' +
+        '<span class="article-title"><a href="/news/' + escHtml(slug) + '/" target="_blank">' + escHtml(cleanTitle) + '</a></span>' +
+        '<span class="article-actions">' +
+          '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(9999, 65039) + '</button>' +
+          '<a href="/news/' + escHtml(slug) + '/" target="_blank" class="admin-btn">' + String.fromCodePoint(128065) + '</a>' +
+        '</span>' +
+      '</div>';
+    }).join('');
+  };
+
+  window.generateImage = async function() {
+    var geminiKey = localStorage.getItem('konopla_gemini_key');
+    if (!geminiKey) {
+      geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
+      if (!geminiKey) return;
+      localStorage.setItem('konopla_gemini_key', geminiKey);
+    }
+
+    if (!ghToken) { showStatus('❌ Спочатку налаштуйте GitHub PAT', 'error'); return; }
+
+    var textSource = '';
+    if (quillEditor && quillEditor.getText().trim().length > 10) {
+      textSource = quillEditor.getText().trim().substring(0, 500);
+    }
+    var titleVal = document.getElementById('cf-title').value.trim();
+    if (!textSource && !titleVal) {
+      showStatus('❌ Введіть заголовок або текст для генерації зображення', 'error');
+      return;
+    }
+
+    var imagePrompt = 'Generate a high-quality photo-realistic image for a news article. ' +
+      'The image MUST be in wide landscape format with exact 16:9 aspect ratio (1280x720 resolution). ' +
+      'Make it look professional, cinematic, suitable for a premium news website about industrial hemp. ' +
+      'Do NOT include any text, watermarks, logos, or UI elements in the image. ' +
+      'Topic: ' + (titleVal || textSource.substring(0, 200));
+
+    var btn = document.getElementById('btn-genimage');
+    var originalBtnText = btn.textContent;
+    btn.textContent = String.fromCodePoint(9203) + ' Генерація...';
+    btn.disabled = true;
+    showStatus(String.fromCodePoint(9203) + ' AI генерує зображення... (15-40 сек)', 'info');
+
+    try {
+      var geminiResp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=' + encodeURIComponent(geminiKey),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: imagePrompt }] }],
+            generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+          })
+        }
+      );
+
+      if (!geminiResp.ok) {
+        if (geminiResp.status === 400 || geminiResp.status === 403) localStorage.removeItem('konopla_gemini_key');
+        throw new Error('Gemini API error: ' + geminiResp.status);
+      }
+
+      var geminiData = await geminiResp.json();
+      var parts = geminiData.candidates[0].content.parts;
+      var imageB64 = null;
+      for (var pi = 0; pi < parts.length; pi++) {
+        if (parts[pi].inlineData) {
+          imageB64 = parts[pi].inlineData.data;
+          break;
+        }
+      }
+
+      if (!imageB64) throw new Error('Gemini не повернув зображення');
+
+      // Generate unique filename
+      var imgId = Date.now().toString(36) + Math.random().toString(36).substring(2, 6);
+      var imgFilename = 'gen-' + imgId + '.jpg';
+      var imgPath = 'static/images/generated/' + imgFilename;
+
+      showStatus(String.fromCodePoint(9203) + ' Завантаження зображення в репозиторій...', 'info');
+
+      var putResp = await ghApi('PUT', '/contents/' + imgPath, {
+        message: String.fromCodePoint(128248) + ' Generated image: ' + imgFilename,
+        content: imageB64
+      });
+
+      if (!putResp.ok) {
+        var errData = await putResp.json().catch(function() { return {}; });
+        throw new Error(errData.message || 'Upload failed: ' + putResp.status);
+      }
+
+      var imageUrl = '/images/generated/' + imgFilename;
+      document.getElementById('cf-image').value = imageUrl;
+      showStatus(String.fromCodePoint(9989) + ' Зображення згенеровано та завантажено!', 'success');
+
+    } catch (e) {
+      console.error('Image generation error:', e);
+      showStatus(String.fromCodePoint(10060) + ' Помилка генерації: ' + e.message, 'error');
     } finally {
       btn.textContent = originalBtnText;
       btn.disabled = false;
