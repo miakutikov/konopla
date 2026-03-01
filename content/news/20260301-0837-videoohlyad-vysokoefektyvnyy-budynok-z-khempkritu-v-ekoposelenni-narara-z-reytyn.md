@@ -8,7 +8,7 @@ source: "YouTube: Jeremy Thomas Environmentarian"
 source_url: "https://www.youtube.com/watch?v=jGTYrKC2mt0"
 image: "https://i.ytimg.com/vi/jGTYrKC2mt0/hqdefault.jpg"
 youtube_id: "jGTYrKC2mt0"
-draft: true
+draft: false
 ---
 
 Новий стандарт енергоефективності у будівництві з конопель демонструє будинок в австралійському екопоселенні Narara, який з гордістю отримав вражаючий рейтинг **8.8 NatHERS**. Еколог Джеремі Томас у своєму відео на YouTube каналі Jeremy Thomas Environmentarian запрошує на екскурсію цим унікальним житлом, зведеним повністю з **хемпкріту** (конопляного бетону).
