@@ -8,7 +8,7 @@ source: "YouTube: Unique Design"
 source_url: "https://www.youtube.com/watch?v=k17jxxPOLwk"
 image: "https://i.ytimg.com/vi/k17jxxPOLwk/hqdefault.jpg"
 youtube_id: "k17jxxPOLwk"
-draft: true
+draft: false
 ---
 
 На YouTube-каналі Unique Design з'явилося захопливе відео, що пропонує візуальний тур унікальним будинком **Hexagon Hempcrete House**. Цей інноваційний архітектурний концепт, відтворений у чіткій **4K роздільній здатності**, демонструє, як сучасна естетика може гармонійно поєднуватися з принципами сталого розвитку.
