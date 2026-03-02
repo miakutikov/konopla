@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "7c8aab60",
+      "filename": "20260302-2041-hempcrete-u-minecraft-yak-gregtech-pokazuye-potentsial-konopel-u-budivnytstvi.md",
+      "title": "Hempcrete у Minecraft: Як Gregtech показує потенціал конопель у будівництві",
+      "summary": "Ютуб-канал HerMajestysGamer випустив відеоогляд, де конопляний хемпкріт інтегровано в надскладний модпак Gregtech для Minecraft, демонструючи екологічні будівельні рішення навіть у віртуальному світі.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/9IRiuVYq0a8/hqdefault.jpg",
+      "created_at": "2026-03-02T20:41:49.681158+00:00"
+    },
+    {
+      "id": "0289d644",
+      "filename": "20260302-2042-davni-sekrety-khempkritu-akatheprofessional-rozkryvaye-prykhovani-znannya.md",
+      "title": "**«Давні секрети хемпкріту»**: akaTheProfessional розкриває приховані знання",
+      "summary": "На YouTube-каналі akaTheProfessional вийшло нове відео «Hempcrete's Ancient Secret», яке обіцяє розкрити приховані знання про конопляний бетон. Будьте серед перших, хто дізнається про давні таємниці цього інноваційного матеріалу.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/mdmLVAqIHcA/hqdefault.jpg",
+      "created_at": "2026-03-02T20:42:26.747371+00:00"
+    },
+    {
+      "id": "9047e1e6",
+      "filename": "20260302-2042-khempkrit-budivelnyy-material-shcho-sluzhyt-600-rokiv-i-chomu-vin-dosi-poza-zako.md",
+      "title": "Хемпкріт: Будівельний Матеріал, що Служить 600 Років, і Чому Він досі Поза Законом?",
+      "summary": "Нове відео від каналу Clara’s Forbidden Garden розкриває дивовижні властивості хемпкріту – екологічного будівельного матеріалу з промислових конопель, що здатен простояти понад 600 років, та аналізує, чому він досі стикається з обмеженнями.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/4GjVU99_lpY/hqdefault.jpg",
+      "created_at": "2026-03-02T20:42:47.872279+00:00"
+    }
+  ]
 }
