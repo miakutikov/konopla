@@ -1507,6 +1507,105 @@
     padding: 1rem;
   }
 }
+/* =========================================================================
+   ДОДАТКОВА ОПТИМІЗАЦІЯ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (Смартфони)
+   ========================================================================= */
+@media (max-width: 768px) {
+  /* 1. Збільшуємо зони кліку (touch targets) для зручного тапу пальцем */
+  .admin-btn, 
+  .auth-btn, 
+  .cf-field input, 
+  .cf-field select, 
+  .cf-field textarea, 
+  .yt-search-input,
+  .auth-input {
+    min-height: 44px; /* Стандарт UI для мобільних */
+  }
+
+  /* 2. Оптимізація картки авторизації */
+  .auth-card {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  /* 3. Компактніший заголовок та кнопки керування */
+  .admin-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .admin-actions-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* По 2 кнопки в ряд замість стовпця */
+    gap: 0.5rem;
+  }
+
+  /* 4. Адаптація YouTube результатів (вертикальні картки) */
+  .yt-result {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  .yt-result-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* 5. Фільтри статей на всю ширину */
+  .articles-filters {
+    flex-direction: column;
+    width: 100%;
+  }
+  #articles-search, 
+  #articles-filter-status, 
+  #articles-filter-cat {
+    width: 100% !important;
+  }
+
+  /* 6. Адаптація черги деплою (щоб текст не налізав на кнопки) */
+  .queue-item-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .queue-item-cat {
+    margin-left: 0;
+  }
+  .queue-item-remove {
+    position: absolute;
+    right: 1rem;
+    margin-top: 0;
+  }
+  .queue-item-per-article {
+    position: relative;
+  }
+  
+  /* 7. Календар: зменшуємо шрифти для компактності */
+  .calendar-weekdays span {
+    font-size: 0.7rem;
+  }
+  .cal-day {
+    padding: 4px;
+    min-height: 50px;
+  }
+  .cal-day-count, .cal-day-scheduled {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+}
+
+/* =========================================================================
+   ДЛЯ ДУЖЕ МАЛЕНЬКИХ ЕКРАНІВ (iPhone SE тощо, < 380px)
+   ========================================================================= */
+@media (max-width: 380px) {
+  .admin-actions-top {
+    grid-template-columns: 1fr; /* По 1 кнопці, якщо екран зовсім вузький */
+  }
+  .articles-pager .admin-btn {
+    padding: 4px 6px !important;
+    font-size: 0.75rem !important;
+  }
+}
 </style>
 
 <script>
