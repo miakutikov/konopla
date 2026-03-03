@@ -7,7 +7,7 @@ tags: ["конопляні цеглини", "будівництво", "ПАР", 
 source: "'industrial hemp technology' - Google News"
 source_url: "https://news.google.com/rss/articles/CBMitwFBVV95cUxNbGR2UGI2SXcxVF83eXMyQTdJdmRBMnNLVmV2bzc1ell0Sm1ZemR3M0xjcERHbWNiR0dZOWNvSXhYYmY5T0djQVN4UlpTTXJpbGplT2tPZURyelJkV0ZSUzEzdmlsbng3UzlsNWFJN0VGeFNFRDRtN2tFVmtZcHE5STZwcXc4X0ktb21YWjQ0dTNwc2hMUU1JTW9vVE1Nbm5XU2RNa2FxNXZvU1p0aG5nLVFoaHctTnM?oc=5"
 image: "/images/generated/c12ea689.jpg"
-draft: true
+draft: false
 ---
 
 Університет Йоганнесбурга (UJ) представив **революційну інновацію**: конопляні цеглини, розроблені для створення доступного та сталого житла в сільських громадах Південної Африки. Ця ініціатива, очолювана **доктором Альфредом Нгові** та його командою з Департаменту управління будівництвом та кошторисного оцінювання, є значним кроком уперед. Вона має на меті вирішити гостру житлову кризу в країні, одночасно сприяючи екологічно чистим будівельним практикам.
