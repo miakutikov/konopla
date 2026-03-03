@@ -5,243 +5,8 @@
 
   {{ $publishedNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
 
-  <style>
-    /* ==========================================
-       СТИЛІ ДЛЯ СТОРІНКИ НОВИН
-       Рекомендую перенести це у ваш головний CSS файл
-       ========================================== */
-    
-    .news-page-layout {
-      display: flex;
-      flex-direction: column; /* На мобільному блоки йдуть один під одним */
-      gap: 2.5rem;
-      margin-top: 1.5rem;
-    }
-
-    @media (min-width: 992px) {
-      .news-page-layout {
-        flex-direction: row; /* На десктопі розташовуємо поруч */
-        align-items: start;
-      }
-    }
-
-    /* --- Сайдбар (Категорії та Теги) --- */
-    .categories-sidebar {
-      width: 100%;
-      order: 2; /* На мобільному сайдбар опускається ПІД новини */
-      background: #f8fafc;
-      padding: 1.5rem;
-      border-radius: 12px;
-    }
-
-    @media (min-width: 992px) {
-      .categories-sidebar {
-        width: 320px;
-        flex-shrink: 0;
-        order: 1; /* На десктопі сайдбар зліва */
-        position: sticky;
-        top: 2rem; /* Фіксуємо при скролі */
-      }
-      .news-content {
-        order: 2;
-      }
-    }
-
-    .sidebar-heading {
-      margin-top: 0;
-      margin-bottom: 1.25rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #0f172a;
-    }
-
-    .categories-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 2rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .category-item {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #334155;
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .category-item:hover, .category-item.active {
-      background-color: #e2e8f0;
-      color: #0f172a;
-    }
-
-    .category-item.active {
-      font-weight: 600;
-    }
-
-    .category-emoji {
-      margin-right: 12px;
-      font-size: 1.2em;
-    }
-
-    .category-count {
-      margin-left: auto;
-      background-color: #cbd5e1;
-      color: #334155;
-      font-size: 0.75rem;
-      padding: 0.15rem 0.6rem;
-      border-radius: 99px;
-      font-weight: 600;
-    }
-
-    /* --- Теги --- */
-    .sidebar-tags .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      max-height: 110px;
-      overflow: hidden;
-      position: relative;
-      transition: max-height 0.3s ease;
-    }
-
-    .sidebar-tags .tags.expanded {
-      max-height: 1000px; /* Достатньо велике значення для розкриття */
-    }
-
-    /* Ефект "згасання" для нерозкритих тегів */
-    .sidebar-tags .tags:not(.expanded)::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: linear-gradient(to bottom, transparent, #f8fafc);
-      pointer-events: none;
-    }
-
-    .tag {
-      text-decoration: none;
-      background: #e2e8f0;
-      color: #475569;
-      padding: 0.35rem 0.75rem;
-      border-radius: 16px;
-      font-size: 0.85rem;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .tag:hover {
-      background: #94a3b8;
-      color: #fff;
-    }
-
-    .tags-toggle {
-      background: none;
-      border: none;
-      color: #3b82f6;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      padding: 0;
-    }
-
-    /* --- Блок Новин --- */
-    .news-content {
-      flex: 1;
-      width: 100%;
-    }
-
-    .news-content-header {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 0.75rem;
-    }
-
-    .news-content-header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #0f172a;
-    }
-
-    .list-count {
-      color: #64748b;
-      margin: 0;
-      font-weight: 500;
-    }
-
-    /* --- Сітка карток --- */
-    .news-grid {
-      display: grid;
-      /* Автоматично підбирає кількість колонок залежно від ширини екрану */
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* --- Кнопка завантаження (Load More) --- */
-    .load-more-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 3rem;
-      min-height: 50px; /* Запобігає стрибкам верстки */
-    }
-
-    .load-more-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0.75rem 2rem;
-      background-color: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s, opacity 0.2s;
-      min-width: 200px;
-    }
-
-    .load-more-btn:hover {
-      background-color: #2563eb;
-    }
-
-    .load-more-btn:disabled, .load-more-btn.loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .btn-spinner {
-      display: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    .load-more-btn.loading .btn-spinner {
-      display: inline-block;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
-
   <section class="news-page-layout">
-    
+    <!-- Category sidebar -->
     <aside class="categories-sidebar">
       <h3 class="sidebar-heading">Категорії</h3>
       <ul class="categories-list">
@@ -281,7 +46,6 @@
         {{ end }}
         {{ end }}
       </ul>
-
       {{ if $.Site.Taxonomies.tags }}
       <div class="sidebar-tags">
         <h3 class="sidebar-heading">Теги</h3>
@@ -295,6 +59,7 @@
       {{ end }}
     </aside>
 
+    <!-- News content -->
     <div class="news-content">
       <div class="news-content-header">
         <h1>Новини</h1>
@@ -308,14 +73,17 @@
         {{ end }}
       </div>
 
+      <!-- Load more -->
       {{ if gt $paginator.TotalPages 1 }}
       <div id="load-more-container" class="load-more-container">
         <button id="load-more-btn" class="load-more-btn" data-total-pages="{{ $paginator.TotalPages }}">
-          <span class="btn-spinner"></span>
-          <span class="btn-text">Показати ще</span>
+          Показати ще
         </button>
+        <div id="load-more-spinner" class="load-more-spinner" style="display:none">
+          <div class="spinner"></div>
+          <span>Завантаження...</span>
+        </div>
       </div>
-      
       <script>
       (function() {
         var btn = document.getElementById('load-more-btn');
@@ -323,44 +91,36 @@
         var currentPage = 1;
         var totalPages = parseInt(btn.dataset.totalPages, 10);
         var grid = document.querySelector('.news-content .news-grid');
+        var spinner = document.getElementById('load-more-spinner');
         var container = document.getElementById('load-more-container');
-        var btnText = btn.querySelector('.btn-text');
 
         btn.addEventListener('click', async function() {
           if (currentPage >= totalPages) return;
-          
-          // Вмикаємо візуальний стан завантаження
-          btn.classList.add('loading');
-          btnText.textContent = 'Завантаження...';
-          
+          btn.style.display = 'none';
+          spinner.style.display = 'flex';
           currentPage++;
           var nextUrl = '/news/page/' + currentPage + '/';
-          
           try {
             var resp = await fetch(nextUrl);
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
             var html = await resp.text();
-            
             var parser = new DOMParser();
             var doc = parser.parseFromString(html, 'text/html');
-            // Беремо всі дочірні елементи нової сітки (картки)
-            var newCards = doc.querySelectorAll('.news-grid > *'); 
-            
+            var newCards = doc.querySelectorAll('.news-grid .news-card');
             newCards.forEach(function(card) {
               grid.appendChild(document.importNode(card, true));
             });
-            
             if (currentPage >= totalPages) {
-              container.style.display = 'none'; // Ховаємо, якщо сторінки закінчились
+              container.style.display = 'none';
             } else {
-              // Повертаємо кнопку в нормальний стан
-              btn.classList.remove('loading');
-              btnText.textContent = 'Показати ще';
+              btn.style.display = 'inline-block';
+              spinner.style.display = 'none';
             }
           } catch (e) {
             console.error('Load more error:', e);
-            btn.classList.remove('loading');
-            btnText.textContent = 'Помилка. Спробувати знову?';
+            btn.textContent = 'Помилка. Спробувати знову?';
+            btn.style.display = 'inline-block';
+            spinner.style.display = 'none';
           }
         });
       })();
