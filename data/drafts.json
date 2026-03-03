@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "acd782b8",
+      "filename": "20260303-0848-yak-stvoryuyut-konoplyanyy-beton-dosvid-arkhitektora-yezhy-slominskoho.md",
+      "title": "Як створюють конопляний бетон: досвід архітектора Єжи Сломінського",
+      "summary": "Відомий польський архітектор, музикант та ентузіаст конопляної індустрії Єжи Сломінський ділиться своїм досвідом у створенні інноваційного будівельного матеріалу – конопляного бетону (hempcrete) – у новому відео на каналі Happy FreeQ Friends.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/3rI-78b6d8Q/hqdefault.jpg",
+      "created_at": "2026-03-03T08:48:15.264748+00:00"
+    },
+    {
+      "id": "f53249d7",
+      "filename": "20260303-0848-ekspert-volokno-konopel-nerozkrytyy-potentsial-dlya-ekonomiky-ssha.md",
+      "title": "Експерт: Волокно конопель — нерозкритий потенціал для економіки США",
+      "summary": "Відомий економіст Бо Вітні з Whitney Economics пояснює, чому промислове конопляне волокно є величезною, але недооціненою економічною можливістю для США, попри те, що зараз під нього відведено менше чверті посівних площ.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/pPh5gaAx05I/hqdefault.jpg",
+      "created_at": "2026-03-03T08:48:35.405829+00:00"
+    },
+    {
+      "id": "3a1d3738",
+      "filename": "20260303-0849-yak-zberehty-svizhist-konoplyanykh-pidhuznykiv-porady-vid-kanga-care.md",
+      "title": "Як зберегти свіжість конопляних підгузників: поради від Kanga Care",
+      "summary": "Відомий виробник дитячих товарів Kanga Care поділився цінним лайфхаком у своєму YouTube-відео: просте щоденне ополіскування холодною водою допомагає уникнути неприємного запаху аміаку в багаторазових підгузниках з конопель та бамбука.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/BM3pncBRf-0/hqdefault.jpg",
+      "created_at": "2026-03-03T08:49:03.622724+00:00"
+    }
+  ]
 }
