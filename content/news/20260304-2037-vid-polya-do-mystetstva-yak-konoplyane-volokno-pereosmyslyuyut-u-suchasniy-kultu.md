@@ -8,7 +8,7 @@ source: "YouTube: Lancaster Farming"
 source_url: "https://www.youtube.com/watch?v=NqbuDs9g7ZI"
 image: "https://i.ytimg.com/vi/NqbuDs9g7ZI/hqdefault.jpg"
 youtube_id: "NqbuDs9g7ZI"
-draft: true
+draft: false
 ---
 
 У новому відео від **Lancaster Farming** під назвою «The Mythic Possibilities of Hemp Fiber» розкривається незвичайний погляд на промислові коноплі. Цей випуск програми «The Hemp Show» знайомить глядачів із **Лаурою Салліван** — фермеркою, викладачкою Університету Вермонту та художницею по волокну, яка перетворює конопляне волокно не просто на сировину, а на матеріал із глибоким культурним та екологічним значенням.
