@@ -8,7 +8,7 @@ source: "YouTube: Future of Farming"
 source_url: "https://www.youtube.com/watch?v=u1lWNNttfDs"
 image: "https://i.ytimg.com/vi/u1lWNNttfDs/hqdefault.jpg"
 youtube_id: "u1lWNNttfDs"
-draft: true
+draft: false
 ---
 
 Якість конопляного волокна, яке ми бачимо у готових продуктах, насправді закладається задовго до потрапляння на переробний завод. Саме цьому важливому, але часто недооціненому аспекту присвячене відео під назвою **«Fibre starts here»** від популярного YouTube-каналу **Future of Farming**.
