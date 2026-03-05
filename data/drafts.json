@@ -1,3 +1,22 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "5b4226aa",
+      "filename": "20260305-2041-praktychnyy-pohlyad-zmishuvannya-konoplyanoho-khempkritu-na-budmaydanchyku.md",
+      "title": "Практичний погляд: змішування конопляного хемпкріту на будмайданчику",
+      "summary": "Канал Next Genesis Design опублікував відео, що демонструє процес змішування конопляного хемпкріту безпосередньо на будівельному об'єкті, підкреслюючи важливість природних рішень у сталому будівництві.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/__uanC8crRA/hqdefault.jpg",
+      "created_at": "2026-03-05T20:41:30.717344+00:00"
+    },
+    {
+      "id": "71658ba1",
+      "filename": "20260305-2042-vid-orhanichnykh-konoplyanykh-produktiv-do-khempkritu-intervyu-z-pidpryyemtsem-d.md",
+      "title": "Від органічних конопляних продуктів до «хемпкріту»: інтерв'ю з підприємцем Джей-Джеєм",
+      "summary": "Підприємець Джей-Джей, відомий як JJ Hempcrete Bear, розкриває секрети вирощування органічних конопель та використання хемпкріту у будівництві в інтерв'ю на YouTube каналі The Flat Out Truth.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/diMQe8HkdIA/hqdefault_live.jpg",
+      "created_at": "2026-03-05T20:42:04.304722+00:00"
+    }
+  ]
 }
