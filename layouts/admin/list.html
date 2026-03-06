@@ -2049,6 +2049,44 @@
   };
 
   // =========================================================================
+  // Delete article from article list (Статті tab)
+  // =========================================================================
+
+  window.deleteArticleRow = async function(filename, articleId) {
+    if (!confirm('Видалити статтю "' + filename + '"?\nЦю дію не можна скасувати.')) return;
+
+    var row = document.querySelector('.article-row[data-filename="' + filename + '"]');
+    if (row) { row.style.opacity = '0.4'; row.style.pointerEvents = 'none'; }
+    showStatus('⏳ Видаляємо...', 'info');
+
+    try {
+      var fileResp = await ghApi('GET', '/contents/content/news/' + filename);
+      if (!fileResp.ok) throw new Error('Файл не знайдено: ' + fileResp.status);
+      var fileData = await fileResp.json();
+
+      var delResp = await ghApi('DELETE', '/contents/content/news/' + filename, {
+        message: '\uD83D\uDDD1 Delete: ' + filename,
+        sha: fileData.sha
+      });
+      if (!delResp.ok) {
+        var err = await delResp.json().catch(function() { return {}; });
+        throw new Error(err.message || delResp.status);
+      }
+
+      await removeDraftEntry(articleId);
+
+      if (row) row.remove();
+      showStatus('\uD83D\uDDD1\uFE0F Стаття видалена.', 'success');
+      loadAllArticles();
+
+    } catch (e) {
+      console.error('Delete error:', e);
+      showStatus('❌ Помилка: ' + e.message, 'error');
+      if (row) { row.style.opacity = ''; row.style.pointerEvents = ''; }
+    }
+  };
+
+  // =========================================================================
   // Run pipeline
   // =========================================================================
 
@@ -3497,7 +3535,7 @@
 
       var pinnedLabel = isPinned ? ' <span class="pinned-info">' + String.fromCodePoint(128204) + ' Закріплено</span>' : '';
 
-      return '<div class="article-row">' +
+      return '<div class="article-row" data-filename="' + escHtml(a.filename) + '" data-id="' + escHtml(a.id) + '">' +
         '<span class="article-date">' + escHtml(a.date) + '</span>' +
         '<span class="article-status ' + statusClass + '">' + statusText + '</span>' +
         '<span class="article-category">' + escHtml(a.category || '') + '</span>' +
@@ -3506,6 +3544,7 @@
           pinBtn +
           '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(9999, 65039) + '</button>' +
           '<a href="/news/' + escHtml(slug) + '/" target="_blank" class="admin-btn">' + String.fromCodePoint(128065) + '</a>' +
+          '<button class="admin-btn btn-delete" onclick="deleteArticleRow(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')" title="Видалити статтю">' + String.fromCodePoint(128465, 65039) + '</button>' +
         '</span>' +
       '</div>';
     }
