@@ -286,6 +286,103 @@ img { max-width: 100%; height: auto; display: block; }
   line-height: 1.5;
 }
 
+/* === VIDEO SECTION === */
+.video-section {
+  margin: 40px 0;
+  padding: 24px;
+  background: rgba(52, 211, 153, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(52, 211, 153, 0.1);
+}
+.video-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+.video-grid .news-card {
+  min-width: 300px;
+  max-width: 340px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+.video-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.video-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.video-grid::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* === KNOWLEDGE SECTION === */
+.knowledge-section {
+  margin: 48px 0;
+  padding: 32px 24px;
+  background: rgba(52, 211, 153, 0.06);
+  border-radius: 16px;
+  border: 1px solid rgba(52, 211, 153, 0.12);
+}
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: -12px;
+  margin-bottom: 24px;
+}
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.knowledge-card {
+  display: block;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+.knowledge-card:hover {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: var(--green-accent);
+  transform: translateY(-2px);
+}
+.knowledge-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.knowledge-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.knowledge-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.knowledge-read {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--green-accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.knowledge-page { margin: 20px 0; }
+.knowledge-page-title { font-size: 1.6rem; margin-bottom: 8px; }
+.knowledge-page-desc { color: var(--text-muted); margin-bottom: 24px; }
+.knowledge-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 /* === NEWS GRID === */
 .news-section { margin: 40px 0; }
 
@@ -704,11 +801,14 @@ img { max-width: 100%; height: auto; display: block; }
   transition: all var(--transition);
 }
 .share-btn:hover {
-  background: var(--bg-secondary);
-  border-color: var(--border-hover);
-  color: var(--text-primary);
   transform: translateY(-1px);
 }
+.share-btn.share-tg:hover { background: #0088cc; color: #fff; border-color: #0088cc; }
+.share-btn.share-fb:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
+.share-btn.share-tw:hover { background: #000; color: #fff; border-color: #000; }
+.share-btn.share-wa:hover { background: #25D366; color: #fff; border-color: #25D366; }
+.share-btn.share-li:hover { background: #0A66C2; color: #fff; border-color: #0A66C2; }
+.share-btn.share-copy:hover { background: var(--green-accent); color: #000; border-color: var(--green-accent); }
 
 /* Tags */
 .tags {
@@ -1108,6 +1208,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 768px) {
+  .video-grid .news-card { min-width: 260px; }
   .featured-card {
     grid-template-columns: 1fr;
   }
@@ -1225,7 +1326,7 @@ img { max-width: 100%; height: auto; display: block; }
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
 }
 .breadcrumbs-list li {
   color: var(--text-tertiary);
@@ -1321,6 +1422,13 @@ img { max-width: 100%; height: auto; display: block; }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.news-card-new {
+  animation: cardFadeIn 0.3s ease forwards;
+}
 
 /* === SEARCH PAGE === */
 .search-page {
@@ -1347,6 +1455,9 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: inherit;
   outline: none;
   transition: border-color var(--transition);
+}
+.search-input::placeholder {
+  color: var(--text-tertiary);
 }
 .search-input:focus {
   border-color: var(--green-accent);

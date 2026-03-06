@@ -108,7 +108,9 @@
             var doc = parser.parseFromString(html, 'text/html');
             var newCards = doc.querySelectorAll('.news-grid .news-card');
             newCards.forEach(function(card) {
-              grid.appendChild(document.importNode(card, true));
+              var imported = document.importNode(card, true);
+              imported.classList.add('news-card-new');
+              grid.appendChild(imported);
             });
             if (currentPage >= totalPages) {
               container.style.display = 'none';

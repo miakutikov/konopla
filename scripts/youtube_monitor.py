@@ -89,16 +89,25 @@ def youtube_api_request(endpoint, params):
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/json")
 
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8", errors="replace")
-        print(f"[ERROR] YouTube API {e.code}: {error_body[:300]}")
-        return None
-    except Exception as e:
-        print(f"[ERROR] YouTube API request failed: {e}")
-        return None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode("utf-8", errors="replace")
+            print(f"[ERROR] YouTube API {e.code}: {error_body[:300]}")
+            if e.code in (429, 500, 503) and attempt < 2:
+                wait = 2 ** (attempt + 1)
+                print(f"[RETRY] Waiting {wait}s before retry {attempt + 2}/3...")
+                time.sleep(wait)
+                continue
+            return None
+        except Exception as e:
+            print(f"[ERROR] YouTube API request failed: {e}")
+            if attempt < 2:
+                time.sleep(2 ** (attempt + 1))
+                continue
+            return None
 
 
 def search_videos(query, published_after, max_results=5):

@@ -82,19 +82,39 @@
   </section>
   {{ end }}
 
-  {{ if $rest }}
+  {{/* --- Split: videos vs text articles --- */}}
+  {{ $videos := where $rest ".Params.youtube_id" "ne" "" }}
+  {{ $textNews := where $rest ".Params.youtube_id" "eq" "" }}
+
+  <!-- Video section -->
+  {{ if $videos }}
+  <section class="video-section">
+    <h2 class="section-title">Відео</h2>
+    <div class="video-grid">
+      {{ range first 6 $videos }}
+        {{ partial "article-card.html" . }}
+      {{ end }}
+    </div>
+    {{ if gt (len $videos) 6 }}
+    <div class="more-news">
+      <a href="{{ "/news/" | relURL }}" class="more-news-btn">Усі відео &rarr;</a>
+    </div>
+    {{ end }}
+  </section>
+  {{ end }}
+
+  <!-- News grid -->
+  {{ if $textNews }}
   <section class="news-section" aria-labelledby="latest-news-title">
     <header class="section-header">
       <h2 id="latest-news-title" class="section-title">Останні новини</h2>
     </header>
-    
     <div class="news-grid">
-      {{ range first 11 $rest }}
+      {{ range first 11 $textNews }}
         {{ partial "article-card.html" . }}
       {{ end }}
     </div>
-    
-    {{ if gt (len $rest) 11 }}
+    {{ if gt (len $textNews) 11 }}
     <div class="more-news">
       <a href="{{ "/news/" | relURL }}" class="more-news-btn btn-primary">
         Усі новини 
@@ -102,6 +122,24 @@
       </a>
     </div>
     {{ end }}
+  </section>
+  {{ end }}
+
+  <!-- Knowledge base -->
+  {{ $knowledge := where .Site.RegularPages "Section" "knowledge" }}
+  {{ if $knowledge }}
+  <section class="knowledge-section">
+    <h2 class="section-title">База знань</h2>
+    <p class="section-subtitle">Все про промислові коноплі для новачків</p>
+    <div class="knowledge-grid">
+      {{ range $knowledge.ByWeight }}
+      <a href="{{ .Permalink }}" class="knowledge-card">
+        {{ if .Params.icon }}<span class="knowledge-icon">{{ .Params.icon }}</span>{{ end }}
+        <h3>{{ .Title }}</h3>
+        {{ if .Params.summary }}<p>{{ .Params.summary }}</p>{{ end }}
+      </a>
+      {{ end }}
+    </div>
   </section>
   {{ end }}
 

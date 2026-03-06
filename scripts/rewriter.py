@@ -82,7 +82,7 @@ def _try_gemini(api_key, user_prompt):
             "parts": [{"text": GEMINI_SYSTEM_PROMPT + "\n\n" + user_prompt}]
         }],
         "generationConfig": {
-            "temperature": 0.7,
+            "temperature": 0.4,
             "maxOutputTokens": 8192
         }
     }
@@ -133,7 +133,7 @@ def _try_openrouter(api_key, model, user_prompt):
             {"role": "system", "content": GEMINI_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}
         ],
-        "temperature": 0.7,
+        "temperature": 0.4,
         "max_tokens": 8192,
     }
 

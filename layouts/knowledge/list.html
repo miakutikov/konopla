@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container">
+
+  {{ partial "breadcrumbs.html" . }}
+
+  <section class="knowledge-page">
+    <h1 class="knowledge-page-title">{{ .Title }}</h1>
+    {{ if .Description }}<p class="knowledge-page-desc">{{ .Description }}</p>{{ end }}
+
+    <div class="knowledge-cards">
+      {{ range .Pages.ByWeight }}
+      <a href="{{ .Permalink }}" class="knowledge-card">
+        {{ if .Params.icon }}<span class="knowledge-icon">{{ .Params.icon }}</span>{{ end }}
+        <h2>{{ .Title }}</h2>
+        {{ if .Params.summary }}<p>{{ .Params.summary }}</p>{{ end }}
+        <span class="knowledge-read">Читати &rarr;</span>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+
+</div>
+{{ end }}

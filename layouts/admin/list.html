@@ -97,6 +97,10 @@
               <label>URL зображення</label>
               <div class="cf-image-input-row">
                 <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
+                <label class="cf-upload-btn" title="Завантажити фото (max 2MB)">
+                  📷
+                  <input type="file" id="cf-image-upload" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadImage(this)">
+                </label>
                 <div id="cf-image-preview" class="cf-image-preview" style="display:none" onclick="openImageLightbox()">
                   <img id="cf-image-preview-img" src="" alt="Preview">
                 </div>
@@ -388,6 +392,8 @@
   margin-bottom: 1.5rem;
   font-size: 0.875rem;
   animation: fadeIn 0.3s;
+  position: relative;
+  z-index: 10000;
 }
 .admin-status.info {
   background: rgba(59, 130, 246, 0.15);
@@ -628,6 +634,40 @@
 #articles-filter-cat:focus {
   outline: none;
   border-color: #a855f7;
+}
+.articles-group {
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.articles-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  user-select: none;
+  list-style: none;
+}
+.articles-group-title::-webkit-details-marker { display: none; }
+.articles-group-title::before {
+  content: '▶';
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+.articles-group[open] > .articles-group-title::before {
+  transform: rotate(90deg);
+}
+.articles-group-count {
+  background: var(--green-dim);
+  color: var(--green-accent);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 .article-row {
   display: flex;
@@ -1191,6 +1231,24 @@
 .cf-image-input-row input {
   flex: 1;
   min-width: 0;
+}
+.cf-upload-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.15s;
+}
+.cf-upload-btn:hover {
+  background: var(--green-dim);
+  border-color: var(--green-accent);
 }
 .cf-image-preview {
   flex-shrink: 0;
@@ -2180,6 +2238,65 @@
     document.getElementById('image-lightbox').style.display = 'none';
   };
 
+  window.uploadImage = async function(fileInput) {
+    var file = fileInput.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      showStatus(String.fromCodePoint(10060) + ' Файл занадто великий (max 2MB)', 'error');
+      fileInput.value = '';
+      return;
+    }
+
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      showStatus(String.fromCodePoint(10060) + ' Тільки JPG, PNG або WebP', 'error');
+      fileInput.value = '';
+      return;
+    }
+
+    if (!ghToken) {
+      showStatus(String.fromCodePoint(10060) + ' GitHub PAT не налаштовано', 'error');
+      fileInput.value = '';
+      return;
+    }
+
+    showStatus(String.fromCodePoint(9203) + ' Завантаження фото...', 'info');
+
+    try {
+      var reader = new FileReader();
+      var b64 = await new Promise(function(resolve, reject) {
+        reader.onload = function() { resolve(reader.result.split(',')[1]); };
+        reader.onerror = function() { reject(new Error('File read error')); };
+        reader.readAsDataURL(file);
+      });
+
+      var ext = file.name.split('.').pop().toLowerCase();
+      if (ext === 'jpeg') ext = 'jpg';
+      var imgFilename = 'upload-' + Date.now().toString(36) + '.' + ext;
+      var imgPath = 'static/images/uploads/' + imgFilename;
+
+      var putResp = await ghApi('PUT', '/contents/' + imgPath, {
+        message: String.fromCodePoint(128247) + ' Upload: ' + imgFilename,
+        content: b64
+      });
+
+      if (!putResp.ok) {
+        var errData = await putResp.json().catch(function() { return {}; });
+        throw new Error(errData.message || 'Upload failed: ' + putResp.status);
+      }
+
+      var imageUrl = '/images/uploads/' + imgFilename;
+      document.getElementById('cf-image').value = imageUrl;
+      updateImagePreview();
+      showStatus(String.fromCodePoint(9989) + ' Фото завантажено!', 'success');
+    } catch (e) {
+      console.error('Upload error:', e);
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    } finally {
+      fileInput.value = '';
+    }
+  };
+
   // =========================================================================
   // Telegram queue
   // =========================================================================
@@ -2443,7 +2560,7 @@
       if (getResp.ok) {
         var fileData = await getResp.json();
         sha = fileData.sha;
-        scheduled = JSON.parse(b64DecodeUtf8(fileData.content));
+        try { scheduled = JSON.parse(b64DecodeUtf8(fileData.content)); } catch (e) { scheduled = { deploy: [], telegram: [], threads: [] }; }
       }
 
       // Create per-article scheduled item
@@ -3028,6 +3145,7 @@
     var sourceUrl = document.getElementById('cf-source-url').value.trim();
 
     if (!title) { showStatus('❌ Введіть заголовок', 'error'); return; }
+    if (!category) { showStatus('❌ Оберіть категорію', 'error'); return; }
     if (!quillEditor || quillEditor.getText().trim().length < 10) {
       showStatus('❌ Текст статті занадто короткий', 'error'); return;
     }
@@ -3251,9 +3369,15 @@
       }
 
       var geminiData = await geminiResp.json();
+      if (!geminiData.candidates || !geminiData.candidates[0] || !geminiData.candidates[0].content || !geminiData.candidates[0].content.parts) {
+        throw new Error('Gemini повернув неочікувану відповідь');
+      }
       var aiText = geminiData.candidates[0].content.parts[0].text;
       aiText = aiText.replace(/^```json\s*/, '').replace(/\s*```$/, '').trim();
-      var aiResult = JSON.parse(aiText);
+      var aiResult;
+      try { aiResult = JSON.parse(aiText); } catch (parseErr) {
+        throw new Error('Gemini повернув невалідний JSON: ' + aiText.substring(0, 100));
+      }
 
       if (aiResult.rejected) {
         showStatus('🚫 AI відхилив: ' + (aiResult.reason || 'невідома причина'), 'error');
@@ -3354,7 +3478,7 @@
       return;
     }
 
-    var rows = pageItems.map(function(a) {
+    function buildRow(a) {
       var statusClass = a.draft ? 'draft' : 'published';
       var statusText = a.draft ? 'Чернетка' : 'Опубліковано';
       var slug = a.filename.replace('.md', '');
@@ -3383,7 +3507,22 @@
           '<a href="/news/' + escHtml(slug) + '/" target="_blank" class="admin-btn">' + String.fromCodePoint(128065) + '</a>' +
         '</span>' +
       '</div>';
-    }).join('');
+    }
+
+    var published = pageItems.filter(function(a) { return !a.draft; });
+    var drafts = pageItems.filter(function(a) { return a.draft; });
+
+    var rows = '';
+    if (drafts.length > 0) {
+      rows += '<details open class="articles-group"><summary class="articles-group-title">' + String.fromCodePoint(128221) + ' Чернетки <span class="articles-group-count">' + drafts.length + '</span></summary>';
+      rows += drafts.map(buildRow).join('');
+      rows += '</details>';
+    }
+    if (published.length > 0) {
+      rows += '<details class="articles-group"' + (drafts.length === 0 ? ' open' : '') + '><summary class="articles-group-title">' + String.fromCodePoint(9989) + ' Опубліковані <span class="articles-group-count">' + published.length + '</span></summary>';
+      rows += published.map(buildRow).join('');
+      rows += '</details>';
+    }
 
     // Pagination controls
     var pager = '';
@@ -3529,6 +3668,9 @@
       }
 
       var geminiData = await geminiResp.json();
+      if (!geminiData.candidates || !geminiData.candidates[0] || !geminiData.candidates[0].content || !geminiData.candidates[0].content.parts) {
+        throw new Error('Gemini повернув неочікувану відповідь');
+      }
       var parts = geminiData.candidates[0].content.parts;
       var imageB64 = null;
       for (var pi = 0; pi < parts.length; pi++) {
