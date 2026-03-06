@@ -63,7 +63,9 @@
           <button class="admin-btn admin-btn-dim" onclick="hideCompanyForm()">✕ Закрити</button>
         </div>
 
+        <!-- Основна інформація -->
         <div class="cf-row">
+          <div class="cf-section-label">Основна інформація</div>
           <div class="cf-field cf-field-wide">
             <label>Назва *</label>
             <input type="text" id="cf-name" placeholder="Назва компанії" oninput="autoSlug()">
@@ -72,13 +74,22 @@
             <label>Slug (URL)</label>
             <input type="text" id="cf-slug" placeholder="nazva-kompaniyi">
           </div>
-        </div>
-
-        <div class="cf-row">
           <div class="cf-field">
             <label>Категорія *</label>
             <select id="cf-category"></select>
           </div>
+          <div class="cf-field">
+            <label>Статус</label>
+            <select id="cf-status">
+              <option value="active">Активна</option>
+              <option value="inactive">Неактивна</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Розташування -->
+        <div class="cf-row">
+          <div class="cf-section-label">Розташування</div>
           <div class="cf-field">
             <label>Регіон *</label>
             <select id="cf-region"></select>
@@ -87,38 +98,36 @@
             <label>Місто / Адреса</label>
             <input type="text" id="cf-location" placeholder="Київ, вул. Хрещатик 1">
           </div>
-        </div>
-
-        <div class="cf-row">
-          <div class="cf-field">
-            <label>Координати — Широта</label>
-            <input type="number" id="cf-lat" placeholder="50.4501" step="0.0001">
-          </div>
-          <div class="cf-field">
-            <label>Координати — Довгота</label>
-            <input type="number" id="cf-lng" placeholder="30.5234" step="0.0001">
-          </div>
           <div class="cf-field">
             <label>Рік заснування</label>
             <input type="number" id="cf-founded" placeholder="2015" min="1800" max="2030">
           </div>
+          <div class="cf-field">
+            <label>Широта</label>
+            <input type="number" id="cf-lat" placeholder="50.4501" step="0.0001">
+          </div>
+          <div class="cf-field">
+            <label>Довгота</label>
+            <input type="number" id="cf-lng" placeholder="30.5234" step="0.0001">
+          </div>
         </div>
 
+        <!-- Опис -->
         <div class="cf-row">
+          <div class="cf-section-label">Опис</div>
           <div class="cf-field cf-field-wide">
             <label>Короткий опис *</label>
             <textarea id="cf-description" rows="3" placeholder="Короткий опис компанії (до 300 символів)..."></textarea>
           </div>
-        </div>
-
-        <div class="cf-row">
           <div class="cf-field cf-field-wide">
             <label>Повний опис</label>
-            <textarea id="cf-full-desc" rows="5" placeholder="Повний опис компанії для сторінки компанії..."></textarea>
+            <textarea id="cf-full-desc" rows="5" placeholder="Повний опис для сторінки компанії..."></textarea>
           </div>
         </div>
 
+        <!-- Контакти -->
         <div class="cf-row">
+          <div class="cf-section-label">Контакти</div>
           <div class="cf-field">
             <label>Веб-сайт</label>
             <input type="url" id="cf-website" placeholder="https://example.com">
@@ -133,7 +142,9 @@
           </div>
         </div>
 
+        <!-- Соцмережі -->
         <div class="cf-row">
+          <div class="cf-section-label">Соцмережі</div>
           <div class="cf-field">
             <label>Telegram</label>
             <input type="text" id="cf-telegram" placeholder="@channel або https://t.me/...">
@@ -148,7 +159,9 @@
           </div>
         </div>
 
+        <!-- Медіа та теги -->
         <div class="cf-row">
+          <div class="cf-section-label">Медіа, теги та продукти</div>
           <div class="cf-field">
             <label>Логотип (URL або завантажити)</label>
             <div style="display:flex;gap:8px;align-items:center">
@@ -159,7 +172,7 @@
               </label>
             </div>
             <div id="cf-logo-preview" style="display:none;margin-top:8px">
-              <img id="cf-logo-preview-img" src="" alt="Logo" style="max-height:60px;border-radius:6px;">
+              <img id="cf-logo-preview-img" src="" alt="Logo">
             </div>
           </div>
           <div class="cf-field">
@@ -170,19 +183,9 @@
             <label>Продукти/послуги (через кому)</label>
             <input type="text" id="cf-products" placeholder="волокно, костра, насіння">
           </div>
-        </div>
-
-        <div class="cf-row">
-          <div class="cf-field">
-            <label>Статус</label>
-            <select id="cf-status">
-              <option value="active">Активна</option>
-              <option value="inactive">Неактивна</option>
-            </select>
-          </div>
-          <div class="cf-field" style="display:flex;align-items:flex-end;padding-bottom:4px">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-              <input type="checkbox" id="cf-featured" style="width:18px;height:18px">
+          <div class="cf-field" style="justify-content:flex-end;padding-bottom:2px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-primary)">
+              <input type="checkbox" id="cf-featured">
               ⭐ Виділена компанія
             </label>
           </div>
@@ -380,6 +383,135 @@
   flex-shrink: 0;
 }
 .cf-upload-btn:hover { border-color: var(--green-accent); background: var(--green-dim); }
+
+/* ---- Form layout ---- */
+.cf-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cf-field.cf-field-wide {
+  grid-column: 1 / -1;
+}
+.cf-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.cf-field input,
+.cf-field select,
+.cf-field textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.cf-field input:focus,
+.cf-field select:focus,
+.cf-field textarea:focus {
+  outline: none;
+  border-color: var(--green-accent);
+  background: var(--bg-secondary);
+}
+.cf-field input::placeholder,
+.cf-field textarea::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.6;
+}
+.cf-field textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+.cf-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+.cf-field input[type="number"] {
+  appearance: textfield;
+}
+.cf-field input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--green-accent);
+}
+
+/* Section dividers in form */
+.cf-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  grid-column: 1 / -1;
+}
+
+/* Form actions */
+.cf-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.cf-submit-btn {
+  min-width: 140px;
+}
+
+/* Logo preview */
+#cf-logo-preview-img {
+  max-height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 4px;
+  background: var(--bg-primary);
+}
+
+/* Header layout fix */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.admin-header h1 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+.admin-actions-top {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 </style>
 
 <script>
