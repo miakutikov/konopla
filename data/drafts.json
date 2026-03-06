@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "f390ece1",
+      "filename": "20260306-0843-vohnestiykist-khempkritu-nove-video-vid-next-genesis-design-demonstruye-klyuchov.md",
+      "title": "Вогнестійкість хемпкріту: Нове відео від Next Genesis Design демонструє ключові переваги",
+      "summary": "Канал Next Genesis Design випустив відео, що детально розкриває одну з найважливіших характеристик хемпкріту — його виняткову вогнестійкість, яка робить цей матеріал перспективним для будівництва.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/Y0haP_tFsRE/hqdefault.jpg",
+      "created_at": "2026-03-06T08:43:00.183813+00:00"
+    },
+    {
+      "id": "ad65fc24",
+      "filename": "20260306-0843-maysternya-rukodillya-yak-farbuyut-konoplyane-volokno-na-blendynh-bordi.md",
+      "title": "Майстерня рукоділля: як фарбують конопляне волокно на блендинг-борді",
+      "summary": "YouTube-канал Michelebuttons представив відео, де демонструється процес ручного фарбування конопляного волокна на блендинг-борді, розкриваючи його потенціал у крафтовому рукоділлі.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/n68xors5vEk/hqdefault.jpg",
+      "created_at": "2026-03-06T08:43:29.766221+00:00"
+    },
+    {
+      "id": "71701d29",
+      "filename": "20260306-0843-tradytsiyi-khmonhiv-yak-u-vyetnami-stvoryuyut-tkanyny-z-konopel.md",
+      "title": "Традиції хмонгів: як у В'єтнамі створюють тканини з конопель",
+      "summary": "Відео від Dusty Feet показує, як жінки народу хмонг у В'єтнамі зберігають вікові традиції виготовлення текстилю з конопель, від збору до ткацтва на дерев'яних верстатах.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/D2AdcDYaCaM/hqdefault.jpg",
+      "created_at": "2026-03-06T08:43:54.107001+00:00"
+    }
+  ]
 }
