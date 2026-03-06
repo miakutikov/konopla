@@ -83,8 +83,15 @@
   {{ end }}
 
   {{/* --- Split: videos vs text articles --- */}}
-  {{ $videos := where $rest ".Params.youtube_id" "ne" "" }}
-  {{ $textNews := where $rest ".Params.youtube_id" "eq" "" }}
+  {{ $videos := slice }}
+  {{ $textNews := slice }}
+  {{ range $rest }}
+    {{ if .Params.youtube_id }}
+      {{ $videos = $videos | append . }}
+    {{ else }}
+      {{ $textNews = $textNews | append . }}
+    {{ end }}
+  {{ end }}
 
   <!-- Video section -->
   {{ if $videos }}
