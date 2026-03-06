@@ -422,7 +422,7 @@ function showStatus(msg, type) {
   if (type !== 'error') setTimeout(function(){ el.style.display='none'; }, 4000);
 }
 function slugify(text) {
-  var map = {а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ye',ж:'zh',з:'z',и:'y',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ь:'',ю:'yu',я:'ya',ʼ:'',\'':''};
+  var map = {а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ye',ж:'zh',з:'z',и:'y',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ь:'',ю:'yu',я:'ya',"\u02BC":'',"\u0027":''};
   return text.toLowerCase().split('').map(function(c){ return map[c]||(/[a-z0-9]/.test(c)?c:'-'); }).join('').replace(/-+/g,'-').replace(/^-|-$/g,'');
 }
 
