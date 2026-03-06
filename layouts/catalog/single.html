@@ -1,0 +1,228 @@
+{{ define "main" }}
+{{ $catalog := site.Data.catalog }}
+{{ $company := false }}
+{{ $catData := false }}
+{{ $regionData := false }}
+
+{{/* Find company in catalog.json by id */}}
+{{ range $catalog.companies }}
+  {{ if eq .id $.Params.company_id }}{{ $company = . }}{{ end }}
+{{ end }}
+{{ range $catalog.categories }}
+  {{ if eq .id $.Params.category_id }}{{ $catData = . }}{{ end }}
+{{ end }}
+{{ range $catalog.regions }}
+  {{ if eq .id $.Params.region }}{{ $regionData = . }}{{ end }}
+{{ end }}
+
+<div class="container">
+
+  {{/* Breadcrumbs */}}
+  <nav class="breadcrumbs" aria-label="Навігація">
+    <a href="{{ "/" | relURL }}">Головна</a>
+    <span class="bc-sep">›</span>
+    <a href="{{ "/catalog/" | relURL }}">Каталог</a>
+    {{ if $catData }}
+    <span class="bc-sep">›</span>
+    <a href="{{ "/catalog/" | relURL }}?category={{ .Params.category_id }}">{{ $catData.emoji }} {{ $catData.name }}</a>
+    {{ end }}
+    <span class="bc-sep">›</span>
+    <span class="bc-current">{{ .Title }}</span>
+  </nav>
+
+  {{ if $company }}
+  <div class="company-page">
+
+    {{/* Header */}}
+    <div class="company-page-header">
+      <div class="company-page-logo-wrap">
+        {{ if $company.logo }}
+        <img src="{{ $company.logo }}" alt="{{ $company.name }}" class="company-page-logo">
+        {{ else }}
+        <div class="company-page-logo-placeholder">
+          {{ if $catData }}{{ $catData.emoji }}{{ else }}🌿{{ end }}
+        </div>
+        {{ end }}
+      </div>
+
+      <div class="company-page-meta">
+        {{ if $company.featured }}<span class="company-featured-badge">⭐ Виділена</span>{{ end }}
+        {{ if $catData }}
+        <div class="company-page-category">
+          <a href="{{ "/catalog/" | relURL }}?category={{ $company.category_id }}" class="company-cat-link">
+            {{ $catData.emoji }} {{ $catData.name }}
+          </a>
+        </div>
+        {{ end }}
+        <h1 class="company-page-name">{{ $company.name }}</h1>
+        <div class="company-page-info-row">
+          {{ if $company.location }}<span class="company-info-item">📍 {{ $company.location }}</span>{{ end }}
+          {{ if $regionData }}<span class="company-info-item">🗺 {{ $regionData.name }}</span>{{ end }}
+          {{ if and $company.founded_year (gt $company.founded_year 0) }}<span class="company-info-item">📅 Засновано {{ $company.founded_year }}</span>{{ end }}
+        </div>
+
+        {{/* Contacts */}}
+        <div class="company-page-contacts">
+          {{ if $company.website }}
+          <a href="{{ $company.website }}" target="_blank" rel="noopener" class="company-contact-btn company-contact-web">🌐 Веб-сайт</a>
+          {{ end }}
+          {{ if $company.phone }}
+          <a href="tel:{{ $company.phone }}" class="company-contact-btn">📞 {{ $company.phone }}</a>
+          {{ end }}
+          {{ if $company.email }}
+          <a href="mailto:{{ $company.email }}" class="company-contact-btn">✉️ {{ $company.email }}</a>
+          {{ end }}
+          {{ with $company.social }}
+            {{ if .telegram }}<a href="{{ .telegram }}" target="_blank" rel="noopener" class="company-contact-btn company-contact-tg">📱 Telegram</a>{{ end }}
+            {{ if .instagram }}<a href="{{ .instagram }}" target="_blank" rel="noopener" class="company-contact-btn company-contact-ig">📸 Instagram</a>{{ end }}
+            {{ if .facebook }}<a href="{{ .facebook }}" target="_blank" rel="noopener" class="company-contact-btn company-contact-fb">👤 Facebook</a>{{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    {{/* Description */}}
+    <div class="company-page-body">
+      <div class="company-page-main">
+
+        {{ if $company.full_description }}
+        <section class="company-section">
+          <p class="company-page-full-desc">{{ $company.full_description }}</p>
+        </section>
+        {{ else if $company.description }}
+        <section class="company-section">
+          <p class="company-page-full-desc">{{ $company.description }}</p>
+        </section>
+        {{ end }}
+
+        {{/* Content from markdown body */}}
+        {{ if .Content }}
+        <section class="company-section company-page-content">
+          {{ .Content }}
+        </section>
+        {{ end }}
+
+        {{/* Products */}}
+        {{ if $company.products }}
+        <section class="company-section">
+          <h2 class="company-section-title">Продукти та послуги</h2>
+          <div class="company-products">
+            {{ range $company.products }}
+            <span class="company-product-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+        {{/* Tags */}}
+        {{ if $company.tags }}
+        <section class="company-section">
+          <h2 class="company-section-title">Теги</h2>
+          <div class="company-tags-list">
+            {{ range $company.tags }}
+            <span class="company-tag-item">{{ . }}</span>
+            {{ end }}
+          </div>
+        </section>
+        {{ end }}
+
+      </div>{{/* /company-page-main */}}
+    </div>{{/* /company-page-body */}}
+
+    {{/* Related news via tags */}}
+    {{ $companyTags := $company.tags }}
+    {{ $relatedNews := slice }}
+    {{ if $companyTags }}
+      {{ range where site.RegularPages "Section" "news" }}
+        {{ $page := . }}
+        {{ $articleTags := .Params.tags }}
+        {{ range $companyTags }}
+          {{ if in $articleTags . }}
+            {{ $relatedNews = $relatedNews | append $page }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ $relatedNews = $relatedNews | uniq }}
+    {{ end }}
+
+    {{ if $relatedNews }}
+    <section class="company-section company-news-section">
+      <h2 class="company-section-title">📰 Новини про компанію</h2>
+      <div class="company-news-grid">
+        {{ range first 6 $relatedNews }}
+        <a href="{{ .Permalink }}" class="company-news-card">
+          {{ if .Params.image }}
+          <div class="company-news-img-wrap">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+          </div>
+          {{ end }}
+          <div class="company-news-body">
+            {{ if .Params.categories }}<span class="company-news-cat">{{ index .Params.categories 0 | upper }}</span>{{ end }}
+            <h3 class="company-news-title">{{ .Title }}</h3>
+            <time class="company-news-date">{{ .Date.Format "02.01.2006" }}</time>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+    {{/* Similar companies (same category) */}}
+    {{ $similar := slice }}
+    {{ range $catalog.companies }}
+      {{ if and (eq .category_id $company.category_id) (ne .id $company.id) (eq .status "active") }}
+        {{ $similar = $similar | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $similar }}
+    <section class="company-section company-similar-section">
+      <h2 class="company-section-title">🏢 Схожі компанії</h2>
+      <div class="catalog-grid">
+        {{ range first 3 $similar }}
+        {{ $slug := .slug }}
+        <a href="{{ "/catalog/" | relURL }}{{ $slug }}/" class="company-card company-card-link">
+          <div class="company-card-cat">
+            {{ if $catData }}{{ $catData.emoji }}{{ end }}
+            <span>{{ .category_id }}</span>
+          </div>
+          <h3 class="company-name">{{ .name }}</h3>
+          <p class="company-location">📍 {{ .location }}</p>
+          <p class="company-description">{{ .description | truncate 120 }}</p>
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+  </div>{{/* /company-page */}}
+
+  {{ else }}
+  <div class="empty-state">
+    <h2>Компанію не знайдено</h2>
+    <a href="{{ "/catalog/" | relURL }}" class="more-news-btn">← Повернутись до каталогу</a>
+  </div>
+  {{ end }}
+
+</div>
+
+{{/* JSON-LD LocalBusiness */}}
+{{ if $company }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": {{ $company.name | jsonify }},
+  "description": {{ $company.description | jsonify }},
+  {{ if $company.website }}"url": {{ $company.website | jsonify }},{{ end }}
+  {{ if $company.phone }}"telephone": {{ $company.phone | jsonify }},{{ end }}
+  {{ if $company.email }}"email": {{ $company.email | jsonify }},{{ end }}
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": {{ $company.location | jsonify }},
+    "addressCountry": "UA"
+  }
+}
+</script>
+{{ end }}
+{{ end }}

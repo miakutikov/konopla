@@ -2,89 +2,128 @@
 <div class="container">
   {{ $catalog := site.Data.catalog }}
   {{ if $catalog }}
-  <section class="catalog-page-layout">
-    <!-- Category sidebar -->
-    <aside class="categories-sidebar">
-      <h3 class="sidebar-heading">Категорії</h3>
-      <ul class="categories-list">
-        <li>
-          <a href="#" class="category-item active" data-filter="all">
-            <span class="category-name">Усі компанії</span>
-            {{ $activeCount := 0 }}
-            {{ range $catalog.companies }}{{ if eq .status "active" }}{{ $activeCount = add $activeCount 1 }}{{ end }}{{ end }}
-            <span class="category-count">{{ $activeCount }}</span>
-          </a>
-        </li>
-        {{ range sort $catalog.categories "order" }}
-          {{ $catId := .id }}
-          {{ $count := 0 }}
-          {{ range $catalog.companies }}
-            {{ if and (eq .category_id $catId) (eq .status "active") }}
-              {{ $count = add $count 1 }}
-            {{ end }}
-          {{ end }}
-          {{ if gt $count 0 }}
-          <li>
-            <a href="#{{ .id }}" class="category-item" data-filter="{{ .id }}">
-              <span class="category-emoji">{{ .emoji }}</span>
-              <span class="category-name">{{ .name }}</span>
-              <span class="category-count">{{ $count }}</span>
-            </a>
-          </li>
-          {{ end }}
-        {{ end }}
-      </ul>
-    </aside>
 
-    <!-- Catalog content -->
-    <div class="catalog-content">
-      <div class="news-content-header">
-        <h1>Каталог компаній</h1>
-        <p>Українські компанії промислової конопляної індустрії</p>
+  <div class="catalog-page-header">
+    <h1>Каталог компаній</h1>
+    <p>Українські компанії промислової конопляної індустрії</p>
+  </div>
+
+  {{/* --- Compute news-count map per company tag --- */}}
+  {{ $newsPages := where site.RegularPages "Section" "news" }}
+
+  {{/* --- Filters bar --- */}}
+  <div class="catalog-filters-bar">
+    <input type="text" id="catalog-search" placeholder="🔍 Пошук компанії..." oninput="filterCatalog()" class="catalog-search-input">
+    <select id="catalog-cat" onchange="filterCatalog()" class="catalog-filter-select">
+      <option value="all">Всі категорії</option>
+      {{ range sort $catalog.categories "order" }}
+      <option value="{{ .id }}">{{ .emoji }} {{ .name }}</option>
+      {{ end }}
+    </select>
+    <select id="catalog-region" onchange="filterCatalog()" class="catalog-filter-select">
+      <option value="all">Всі регіони</option>
+      {{ range $catalog.regions }}
+      <option value="{{ .id }}">{{ .name }}</option>
+      {{ end }}
+    </select>
+    <select id="catalog-sort" onchange="filterCatalog()" class="catalog-filter-select">
+      <option value="name">За назвою</option>
+      <option value="region">За регіоном</option>
+      <option value="featured">Виділені першими</option>
+    </select>
+    <span id="catalog-count" class="catalog-results-count">
+      {{ $activeCount := 0 }}{{ range $catalog.companies }}{{ if eq .status "active" }}{{ $activeCount = add $activeCount 1 }}{{ end }}{{ end }}
+      {{ $activeCount }} компаній
+    </span>
+  </div>
+
+  {{/* --- Hidden data for JS --- */}}
+  <script id="catalog-data" type="application/json">
+  {
+    "companies": [
+      {{ range $i, $c := $catalog.companies }}{{ if gt $i 0 }},{{ end }}
+      {
+        "id": {{ $c.id | jsonify }},
+        "slug": {{ $c.slug | jsonify }},
+        "name": {{ $c.name | jsonify }},
+        "category_id": {{ $c.category_id | jsonify }},
+        "region": {{ $c.region | jsonify }},
+        "location": {{ $c.location | jsonify }},
+        "description": {{ $c.description | jsonify }},
+        "website": {{ $c.website | jsonify }},
+        "phone": {{ $c.phone | jsonify }},
+        "email": {{ $c.email | jsonify }},
+        "logo": {{ $c.logo | jsonify }},
+        "featured": {{ $c.featured }},
+        "status": {{ $c.status | jsonify }},
+        "tags": {{ $c.tags | jsonify }},
+        "products": {{ $c.products | jsonify }}
+      }
+      {{ end }}
+    ]
+  }
+  </script>
+
+  {{/* --- Cards container --- */}}
+  <div id="catalog-grid" class="catalog-grid catalog-grid-full">
+    {{ range sort $catalog.companies "name" }}
+    {{ if eq .status "active" }}
+    {{ $co := . }}
+    {{ $slug := $co.slug }}
+    {{ $catData := false }}
+    {{ range $catalog.categories }}{{ if eq .id $co.category_id }}{{ $catData = . }}{{ end }}{{ end }}
+
+    {{/* Count related news */}}
+    {{ $newsCount := 0 }}
+    {{ $compTags := $co.tags }}
+    {{ range $newsPages }}
+      {{ $artTags := .Params.tags }}
+      {{ range $compTags }}
+        {{ if in $artTags . }}{{ $newsCount = add $newsCount 1 }}{{ end }}
+      {{ end }}
+    {{ end }}
+
+    <a href="{{ "/catalog/" | relURL }}{{ $slug }}/"
+       class="company-card company-card-link{{ if $co.featured }} company-card-featured{{ end }}"
+       data-category="{{ $co.category_id }}"
+       data-region="{{ $co.region }}"
+       data-name="{{ $co.name | lower }}"
+       data-featured="{{ $co.featured }}">
+
+      {{ if $co.logo }}
+      <div class="company-card-logo">
+        <img src="{{ $co.logo }}" alt="{{ $co.name }}" loading="lazy">
+      </div>
+      {{ end }}
+
+      <div class="company-card-top">
+        {{ if $catData }}<span class="company-cat-badge">{{ $catData.emoji }} {{ $catData.name }}</span>{{ end }}
+        {{ if $co.featured }}<span class="company-featured-star">⭐</span>{{ end }}
       </div>
 
-      {{ range sort $catalog.categories "order" }}
-        {{ $catId := .id }}
-        {{ $catName := .name }}
-        {{ $catEmoji := .emoji }}
-        {{ $companies := slice }}
-        {{ range $catalog.companies }}
-          {{ if and (eq .category_id $catId) (eq .status "active") }}
-            {{ $companies = $companies | append . }}
-          {{ end }}
+      <h3 class="company-name">{{ $co.name }}</h3>
+      <p class="company-location">📍 {{ $co.location }}</p>
+      <p class="company-description">{{ $co.description }}</p>
+
+      <div class="company-card-footer">
+        <div class="company-contacts">
+          {{ if $co.website }}<span class="company-link">🌐</span>{{ end }}
+          {{ if $co.phone }}<span class="company-link">📞</span>{{ end }}
+          {{ if $co.email }}<span class="company-link">✉️</span>{{ end }}
+        </div>
+        {{ if gt $newsCount 0 }}
+        <span class="company-news-badge">📰 {{ $newsCount }}</span>
         {{ end }}
-        {{ if $companies }}
-        <section class="catalog-category-section" id="{{ .id }}" data-category="{{ .id }}">
-          <h2 class="catalog-category-heading">
-            <span>{{ $catEmoji }}</span>
-            {{ $catName }}
-            <span class="catalog-category-count">({{ len $companies }})</span>
-          </h2>
-          <div class="catalog-grid">
-            {{ range $companies }}
-            <div class="company-card">
-              <h3 class="company-name">{{ .name }}</h3>
-              <p class="company-location">📍 {{ .location }}</p>
-              <p class="company-description">{{ .description }}</p>
-              <div class="company-contacts">
-                {{ with .website }}
-                <a href="{{ . }}" target="_blank" rel="noopener" class="company-link">🌐 Сайт</a>
-                {{ end }}
-                {{ with .phone }}
-                <a href="tel:{{ . }}" class="company-link">📞 {{ . }}</a>
-                {{ end }}
-                {{ with .email }}
-                <a href="mailto:{{ . }}" class="company-link">✉️ Email</a>
-                {{ end }}
-              </div>
-            </div>
-            {{ end }}
-          </div>
-        </section>
-        {{ end }}
-      {{ end }}
-    </div>
-  </section>
+      </div>
+    </a>
+    {{ end }}
+    {{ end }}
+  </div>
+
+  <div id="catalog-empty" style="display:none" class="empty-state">
+    <p>Нічого не знайдено. Спробуйте змінити фільтри.</p>
+  </div>
+
   {{ else }}
   <div class="empty-state">
     <h2>Каталог порожній</h2>
@@ -95,25 +134,48 @@
 
 <script>
 (function() {
-  var sidebar = document.querySelector('.categories-sidebar');
-  if (!sidebar) return;
-  sidebar.addEventListener('click', function(e) {
-    var link = e.target.closest('[data-filter]');
-    if (!link) return;
-    e.preventDefault();
-    var filter = link.dataset.filter;
-    var sections = document.querySelectorAll('.catalog-category-section');
-    var items = document.querySelectorAll('.category-item');
-    items.forEach(function(i) { i.classList.remove('active'); });
-    link.classList.add('active');
-    if (filter === 'all') {
-      sections.forEach(function(s) { s.style.display = ''; });
-    } else {
-      sections.forEach(function(s) {
-        s.style.display = s.dataset.category === filter ? '' : 'none';
-      });
+  function filterCatalog() {
+    var search  = (document.getElementById('catalog-search').value || '').toLowerCase().trim();
+    var cat     = document.getElementById('catalog-cat').value;
+    var region  = document.getElementById('catalog-region').value;
+    var sort    = document.getElementById('catalog-sort').value;
+    var grid    = document.getElementById('catalog-grid');
+    var cards   = Array.from(grid.querySelectorAll('.company-card-link'));
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var matchCat    = cat    === 'all' || card.dataset.category === cat;
+      var matchRegion = region === 'all' || card.dataset.region   === region;
+      var matchSearch = !search || card.dataset.name.indexOf(search) !== -1;
+      var show = matchCat && matchRegion && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    /* Sort */
+    if (sort === 'name') {
+      cards.sort(function(a, b) { return a.dataset.name.localeCompare(b.dataset.name, 'uk'); });
+    } else if (sort === 'region') {
+      cards.sort(function(a, b) { return (a.dataset.region||'').localeCompare(b.dataset.region||'', 'uk'); });
+    } else if (sort === 'featured') {
+      cards.sort(function(a, b) { return (b.dataset.featured === 'true' ? 1 : 0) - (a.dataset.featured === 'true' ? 1 : 0); });
     }
-  });
+    cards.forEach(function(c) { grid.appendChild(c); });
+
+    document.getElementById('catalog-count').textContent = visible + ' компаній';
+    document.getElementById('catalog-empty').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  window.filterCatalog = filterCatalog;
+
+  /* URL params sync */
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('category')) { var el = document.getElementById('catalog-cat'); if (el) el.value = params.get('category'); }
+    if (params.get('region'))   { var el = document.getElementById('catalog-region'); if (el) el.value = params.get('region'); }
+    if (params.get('q'))        { var el = document.getElementById('catalog-search'); if (el) el.value = params.get('q'); }
+    filterCatalog();
+  })();
 })();
 </script>
 {{ end }}
