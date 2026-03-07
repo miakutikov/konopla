@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import re
+import tempfile
 from datetime import datetime, timedelta, timezone
 from config import (
     RSS_FEEDS, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
@@ -24,12 +25,17 @@ def load_processed():
 
 
 def save_processed(data):
-    """Зберігає список оброблених статей."""
-    os.makedirs(os.path.dirname(PROCESSED_FILE), exist_ok=True)
+    """Зберігає список оброблених статей. Атомарний запис через tmp-файл."""
     # Keep only last 500 entries to prevent file from growing forever
     data["articles"] = data["articles"][-500:]
-    with open(PROCESSED_FILE, "w", encoding="utf-8") as f:
+    dirpath = os.path.dirname(PROCESSED_FILE)
+    os.makedirs(dirpath, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, PROCESSED_FILE)
 
 
 def make_hash(title, link):

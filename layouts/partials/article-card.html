@@ -1,10 +1,10 @@
 <article class="news-card {{ if .Params.featured }}news-card-featured{{ end }}">
   <a href="{{ .Permalink }}" class="news-card-image-link">
     {{ if .Params.youtube_id }}
-    <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg" alt="{{ .Title }}" loading="lazy" class="news-card-img">
+    <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg" alt="{{ .Title }}" loading="lazy" class="news-card-img" onerror="this.style.display='none';this.parentElement.classList.add('news-card-img-placeholder')">
     <div class="news-card-play">▶</div>
     {{ else if .Params.image }}
-    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img">
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="news-card-img" onerror="this.outerHTML='<div class=news-card-img-placeholder><img src=/images/logo.png alt=KONOPLA.UA class=placeholder-logo></div>'">
     {{ else }}
     <div class="news-card-img-placeholder">
       <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">

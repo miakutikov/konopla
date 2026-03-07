@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import API_DELAY_SECONDS
 from rewriter import rewrite_article
 from publisher import create_article_file
+from fetcher import is_drug_related
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_FILE = os.path.join(PROJECT_ROOT, "data", "processed_videos.json")
@@ -212,6 +213,11 @@ def run_youtube_monitor():
 
             if not is_hemp_relevant(title, description):
                 print(f"  [SKIP] Not relevant: {title[:60]}")
+                continue
+
+            # Also run through the shared drug-content filter from fetcher
+            if is_drug_related(title, description):
+                print(f"  [SKIP] Drug-related content: {title[:60]}")
                 continue
 
             candidates[video_id] = snippet

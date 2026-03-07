@@ -3,7 +3,8 @@
   <div class="search-page">
     <h1>Пошук</h1>
     <div class="search-input-wrap">
-      <input type="text" id="search-input" class="search-input" placeholder="Шукати новини..." autofocus>
+      <input type="text" id="search-input" class="search-input" placeholder="Шукати новини..." autofocus autocomplete="off">
+      <button id="search-clear" class="search-clear" aria-label="Очистити" style="display:none">✕</button>
     </div>
     <div id="search-results" class="search-results">
       <p class="search-hint">Введіть запит для пошуку серед усіх новин</p>
@@ -36,6 +37,20 @@
       var q = params.get('q');
       if (q) { searchInput.value = q; doSearch(q); }
     });
+
+  // Clear button
+  var clearBtn = document.getElementById('search-clear');
+  searchInput.addEventListener('input', function() {
+    clearBtn.style.display = this.value ? 'flex' : 'none';
+  });
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      clearBtn.style.display = 'none';
+      resultsEl.innerHTML = '<p class="search-hint">Введіть запит для пошуку серед усіх новин</p>';
+      searchInput.focus();
+    });
+  }
 
   var debounceTimer;
   searchInput.addEventListener('input', function() {
