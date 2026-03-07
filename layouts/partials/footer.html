@@ -1,19 +1,22 @@
 <footer class="site-footer">
   <div class="container">
+
+    <div class="footer-brand">
+      <a href="{{ "/" | relURL }}" class="footer-brand-link">
+        <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="footer-brand-logo">
+        <span class="footer-brand-name">KONOPLA<span class="footer-brand-dot">.UA</span></span>
+      </a>
+      <p class="footer-desc">Еко-портал промислових конопель України. Об'єднуємо інноваційні технології, зелений бізнес та свідоме виробництво.</p>
+      <p class="footer-slogan">З повагою до природи. З любов'ю до життя.</p>
+    </div>
+
     <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-logo">
-          <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="footer-logo-img">
-          <span>KONOPLA.UA</span>
-        </div>
-        <p class="footer-desc">Konopla.ua — еко-портал промислових конопель України. Об'єднуємо інноваційні технології, зелений бізнес та свідоме виробництво: від текстилю і будівництва до біопластику.</p>
-        <p class="footer-slogan">З повагою до природи. З любов'ю до життя.</p>
-      </div>
       <div class="footer-col">
         <h4>Навігація</h4>
         <ul>
           <li><a href="{{ "/news/" | relURL }}">Новини</a></li>
           <li><a href="{{ "/catalog/" | relURL }}">Каталог</a></li>
+          <li><a href="{{ "/knowledge/" | relURL }}">База знань</a></li>
           <li><a href="{{ "/about/" | relURL }}">Про нас</a></li>
         </ul>
       </div>
@@ -37,9 +40,11 @@
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p>&copy; {{ now.Year }} KONOPLA.UA — Усі права захищені</p>
       <p class="footer-disclaimer">Портал висвітлює виключно промислове використання технічних конопель. Вся інформація носить інформаційний характер.</p>
     </div>
+
   </div>
 </footer>
