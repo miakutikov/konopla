@@ -2,7 +2,7 @@ baseURL = "https://konopla.ua/"
 languageCode = "uk"
 title = "KONOPLA.UA — Новини промислових конопель"
 defaultContentLanguage = "uk"
-buildDrafts = true
+buildDrafts = false
 
 # Pagination
 [pagination]
@@ -18,8 +18,10 @@ buildDrafts = true
   github_repo = "miakutikov/konopla"
   # Google Analytics — розкоментуй і встав свій ID:
   # googleAnalytics = "G-XXXXXXXXXX"
-  # Google Analytics — розкоментуй і встав свій ID:
-  # google_analytics = "G-XXXXXXXXXX"
+  # Google Search Console — розкоментуй і встав свій verification token:
+  # googleSiteVerification = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  # Bing Webmaster Tools — розкоментуй і встав свій verification token:
+  # bingVerification = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 [markup]
   [markup.goldmark]
