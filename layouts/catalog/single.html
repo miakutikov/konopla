@@ -46,14 +46,14 @@
       </div>
 
       <div class="company-page-meta">
-        {{ if $company.featured }}<span class="company-featured-badge">⭐ Виділена</span>{{ end }}
-        {{ if $catData }}
-        <div class="company-page-category">
+        <div class="company-page-meta-top">
+          {{ if $catData }}
           <a href="{{ "/catalog/" | relURL }}?category={{ $company.category_id }}" class="company-cat-link">
             {{ $catData.emoji }} {{ $catData.name }}
           </a>
+          {{ end }}
+          {{ if $company.featured }}<span class="company-featured-badge">⭐ Виділена</span>{{ end }}
         </div>
-        {{ end }}
         <h1 class="company-page-name">{{ $company.name }}</h1>
         <div class="company-page-info-row">
           {{ if $company.location }}<span class="company-info-item">📍 {{ $company.location }}</span>{{ end }}
@@ -129,44 +129,6 @@
       </div>{{/* /company-page-main */}}
     </div>{{/* /company-page-body */}}
 
-    {{/* Related news via tags */}}
-    {{ $companyTags := $company.tags }}
-    {{ $relatedNews := slice }}
-    {{ if $companyTags }}
-      {{ range where site.RegularPages "Section" "news" }}
-        {{ $page := . }}
-        {{ $articleTags := .Params.tags }}
-        {{ range $companyTags }}
-          {{ if in $articleTags . }}
-            {{ $relatedNews = $relatedNews | append $page }}
-          {{ end }}
-        {{ end }}
-      {{ end }}
-      {{ $relatedNews = $relatedNews | uniq }}
-    {{ end }}
-
-    {{ if $relatedNews }}
-    <section class="company-section company-news-section">
-      <h2 class="company-section-title">📰 Новини про компанію</h2>
-      <div class="company-news-grid">
-        {{ range first 6 $relatedNews }}
-        <a href="{{ .Permalink }}" class="company-news-card">
-          {{ if .Params.image }}
-          <div class="company-news-img-wrap">
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
-          </div>
-          {{ end }}
-          <div class="company-news-body">
-            {{ if .Params.categories }}<span class="company-news-cat">{{ index .Params.categories 0 | upper }}</span>{{ end }}
-            <h3 class="company-news-title">{{ .Title }}</h3>
-            <time class="company-news-date">{{ .Date.Format "02.01.2006" }}</time>
-          </div>
-        </a>
-        {{ end }}
-      </div>
-    </section>
-    {{ end }}
-
     {{/* Similar companies (same category) */}}
     {{ $similar := slice }}
     {{ range $catalog.companies }}
@@ -177,14 +139,13 @@
 
     {{ if $similar }}
     <section class="company-section company-similar-section">
-      <h2 class="company-section-title">🏢 Схожі компанії</h2>
+      <h2 class="company-section-title">Схожі компанії</h2>
       <div class="catalog-grid">
         {{ range first 3 $similar }}
         {{ $slug := .slug }}
         <a href="{{ "/catalog/" | relURL }}{{ $slug }}/" class="company-card company-card-link">
           <div class="company-card-cat">
-            {{ if $catData }}{{ $catData.emoji }}{{ end }}
-            <span>{{ .category_id }}</span>
+            {{ if $catData }}<span>{{ $catData.emoji }} {{ $catData.name }}</span>{{ else }}<span>{{ .category_id }}</span>{{ end }}
           </div>
           <h3 class="company-name">{{ .name }}</h3>
           <p class="company-location">📍 {{ .location }}</p>
