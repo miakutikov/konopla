@@ -95,16 +95,25 @@
 
           <div class="cf-row">
             <div class="cf-field cf-field-wide">
-              <label>URL зображення</label>
-              <div class="cf-image-input-row">
-                <input type="text" id="cf-image" placeholder="https://example.com/photo.jpg" oninput="updateImagePreview()">
-                <label class="cf-upload-btn" title="Завантажити фото (max 2MB)">
-                  📷
+              <label>Зображення</label>
+              <div class="cf-image-area">
+                <label class="cf-image-dropzone" id="cf-image-dropzone">
                   <input type="file" id="cf-image-upload" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadImage(this)">
+                  <span class="cf-dropzone-icon">📷</span>
+                  <span class="cf-dropzone-text">Обрати фото</span>
+                  <span class="cf-dropzone-hint">JPEG, PNG, WebP · max 2 МБ</span>
                 </label>
-                <div id="cf-image-preview" class="cf-image-preview" style="display:none" onclick="openImageLightbox()">
-                  <img id="cf-image-preview-img" src="" alt="Preview">
+                <div id="cf-image-preview" class="cf-image-preview" style="display:none">
+                  <img id="cf-image-preview-img" src="" alt="Preview" onclick="openImageLightbox()">
+                  <div class="cf-image-preview-actions">
+                    <label class="cf-img-action-btn" title="Замінити фото">
+                      📷
+                      <input type="file" id="cf-image-upload-replace" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadImage(this)">
+                    </label>
+                    <button class="cf-img-action-btn" onclick="clearImage()" title="Видалити фото">✕</button>
+                  </div>
                 </div>
+                <input type="text" id="cf-image" placeholder="або вставте URL зображення" oninput="updateImagePreview()" class="cf-image-url-input">
               </div>
             </div>
           </div>
@@ -1224,48 +1233,72 @@
   background: var(--bg-tertiary);
   color: var(--text-primary);
 }
-.cf-image-input-row {
+.cf-image-area {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cf-image-dropzone {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 5px;
+  padding: 20px 16px;
+  background: var(--bg-tertiary);
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
 }
-.cf-image-input-row input {
-  flex: 1;
-  min-width: 0;
+.cf-image-dropzone:hover {
+  border-color: var(--green-accent);
+  background: var(--green-dim);
 }
-.cf-upload-btn {
+.cf-dropzone-icon { font-size: 1.5rem; line-height: 1; }
+.cf-dropzone-text { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+.cf-dropzone-hint { font-size: 0.72rem; color: var(--text-tertiary); }
+.cf-image-preview {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.cf-image-preview img {
+  width: 140px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  display: block;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+}
+.cf-image-preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cf-img-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   transition: all 0.15s;
+  padding: 0;
+  font-family: inherit;
 }
-.cf-upload-btn:hover {
-  background: var(--green-dim);
-  border-color: var(--green-accent);
-}
-.cf-image-preview {
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.cf-image-preview img {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  display: block;
-  transition: opacity 0.15s;
-}
-.cf-image-preview:hover img {
-  opacity: 0.7;
+.cf-img-action-btn:hover { border-color: var(--green-accent); color: var(--green-accent); }
+.cf-image-url-input {
+  font-size: 0.8rem !important;
+  color: var(--text-tertiary) !important;
 }
 .image-lightbox {
   position: fixed;
@@ -2251,18 +2284,31 @@
 
   window.updateImagePreview = function() {
     var input = document.getElementById('cf-image');
+    var dropzone = document.getElementById('cf-image-dropzone');
     var previewDiv = document.getElementById('cf-image-preview');
     var previewImg = document.getElementById('cf-image-preview-img');
     if (!input || !previewDiv || !previewImg) return;
     var url = input.value.trim();
     if (url) {
-      previewImg.onload = function() { previewDiv.style.display = 'block'; };
-      previewImg.onerror = function() { previewDiv.style.display = 'none'; };
+      previewImg.onload = function() {
+        previewDiv.style.display = 'inline-flex';
+        if (dropzone) dropzone.style.display = 'none';
+      };
+      previewImg.onerror = function() {
+        previewDiv.style.display = 'none';
+        if (dropzone) dropzone.style.display = 'flex';
+      };
       previewImg.src = url;
     } else {
       previewDiv.style.display = 'none';
+      if (dropzone) dropzone.style.display = 'flex';
       previewImg.src = '';
     }
+  };
+
+  window.clearImage = function() {
+    document.getElementById('cf-image').value = '';
+    updateImagePreview();
   };
 
   window.openImageLightbox = function() {
@@ -3085,6 +3131,8 @@
     if (imgPreview) imgPreview.style.display = 'none';
     var imgPreviewImg = document.getElementById('cf-image-preview-img');
     if (imgPreviewImg) imgPreviewImg.src = '';
+    var dropzone = document.getElementById('cf-image-dropzone');
+    if (dropzone) dropzone.style.display = 'flex';
     if (quillEditor) quillEditor.setText('');
     document.getElementById('create-form').style.display = 'none';
     var headerEl = document.querySelector('.create-form-header h2');
