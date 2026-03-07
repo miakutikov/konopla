@@ -29,7 +29,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install feedparser Pillow
+        run: pip install -r requirements.txt
 
       - name: Run UA-only news pipeline
         env:

@@ -12,6 +12,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -27,27 +28,29 @@ def parse_frontmatter(filepath):
     with open(filepath, "r", encoding="utf-8") as f:
         text = f.read()
 
-    # Extract frontmatter between --- markers
-    match = re.match(r'^---\n(.*?)\n---', text, re.DOTALL)
-    if not match:
+    # Split on --- markers
+    parts = text.split('---', 2)
+    if len(parts) < 3:
         return {}
 
     fm = {}
-    for line in match.group(1).split('\n'):
-        # Parse key: "quoted value" (greedy inside quotes)
-        m = re.match(r'^(\w+):\s*"(.*)"\s*$', line)
-        if m:
-            fm[m.group(1)] = m.group(2)
+    for line in parts[1].splitlines():
+        if ':' not in line:
+            continue
+        key, _, val = line.partition(':')
+        key = key.strip()
+        val = val.strip()
+        if not key:
+            continue
+        if val.startswith('['):
+            # Array like categories: ["value"] — extract first element
+            m = re.search(r'"([^"]+)"', val)
+            if m:
+                fm['category'] = m.group(1)
+            fm[key] = val
         else:
-            # Parse key: unquoted value (skip arrays like [...])
-            m = re.match(r'^(\w+):\s*(.+?)\s*$', line)
-            if m and not m.group(2).startswith('['):
-                fm[m.group(1)] = m.group(2).strip("'").strip('"')
-
-    # Parse categories
-    cat_match = re.search(r'categories:\s*\["([^"]+)"\]', match.group(1))
-    if cat_match:
-        fm['category'] = cat_match.group(1)
+            # Strip surrounding quotes if present
+            fm[key] = val.strip('"\'')
 
     return fm
 
@@ -165,9 +168,14 @@ def run():
         # Delay between messages to avoid rate limits
         time.sleep(3)
 
-    # Clear queue
-    with open(QUEUE_FILE, "w", encoding="utf-8") as f:
+    # Clear queue atomically
+    dirpath = os.path.dirname(QUEUE_FILE)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
         json.dump({"articles": []}, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, QUEUE_FILE)
 
     print(f"\n✅ Posted {posted}/{len(articles)} articles to Telegram")
     return 0

@@ -17,6 +17,7 @@ Workflow scheduler.yml тригерить їх ПІСЛЯ git commit+push,
 import json
 import os
 import sys
+import tempfile
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -36,11 +37,21 @@ def load_scheduled():
     return {"deploy": [], "telegram": [], "threads": []}
 
 
+def _atomic_write_json(filepath, data):
+    """Атомарний запис JSON: спочатку tmp-файл, потім rename."""
+    dirpath = os.path.dirname(filepath)
+    os.makedirs(dirpath, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, filepath)
+
+
 def save_scheduled(data):
     """Зберігає scheduled.json."""
-    os.makedirs(os.path.dirname(SCHEDULED_FILE), exist_ok=True)
-    with open(SCHEDULED_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(SCHEDULED_FILE, data)
 
 
 def load_queue_file(filepath):
@@ -53,16 +64,12 @@ def load_queue_file(filepath):
 
 def save_queue_file(filepath, data):
     """Зберігає queue JSON файл."""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(filepath, data)
 
 
 def save_trigger_list(workflows):
     """Зберігає список workflows для тригера у trigger_workflows.json."""
-    os.makedirs(os.path.dirname(TRIGGER_FILE), exist_ok=True)
-    with open(TRIGGER_FILE, "w", encoding="utf-8") as f:
-        json.dump({"workflows": workflows}, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(TRIGGER_FILE, {"workflows": workflows})
 
 
 def process_deploy(items, now):

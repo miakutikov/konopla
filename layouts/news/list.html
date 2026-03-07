@@ -120,6 +120,7 @@
             }
           } catch (e) {
             console.error('Load more error:', e);
+            currentPage--; // rollback so retry works correctly
             btn.textContent = 'Помилка. Спробувати знову?';
             btn.style.display = 'inline-block';
             spinner.style.display = 'none';

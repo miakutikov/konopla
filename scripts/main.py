@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import sys
+import tempfile
 import time
 import traceback
 import uuid
@@ -32,9 +33,15 @@ def load_json(filepath, default):
 
 
 def save_json(filepath, data):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
+    """Atomic JSON write: write to tmp then rename to prevent corruption on crash."""
+    dirpath = os.path.dirname(filepath)
+    os.makedirs(dirpath, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, filepath)
 
 
 def run_pipeline(ua_only=False):
@@ -42,6 +49,11 @@ def run_pipeline(ua_only=False):
 
     ua_only: якщо True, використовує тільки українські RSS-фіди (UA_RSS_FEEDS)
     """
+
+    # Validate required API keys before starting
+    if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("OPENROUTER_API_KEY"):
+        print("[CRITICAL] Neither GEMINI_API_KEY nor OPENROUTER_API_KEY is set — aborting")
+        return 1
 
     start_time = time.time()
 

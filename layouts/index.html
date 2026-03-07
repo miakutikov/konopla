@@ -41,7 +41,7 @@
       
       <a href="{{ .Permalink }}" class="featured-image-link" aria-hidden="true" tabindex="-1">
         {{ if .Params.image }}
-        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img" fetchpriority="high" decoding="async">
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img" fetchpriority="high" decoding="async" onerror="this.outerHTML='<div class=featured-img-placeholder><img src=/images/logo.png alt=KONOPLA.UA class=placeholder-logo></div>'">
         {{ else }}
         <div class="featured-img-placeholder">
           <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
