@@ -1338,6 +1338,7 @@
   border-radius: var(--radius-sm);
   min-height: 250px;
   max-height: 50vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -1346,6 +1347,7 @@
   border: none !important;
   border-bottom: 1px solid var(--border) !important;
   border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  flex-shrink: 0;
 }
 .ql-container.ql-snow {
   border: none !important;
@@ -1353,10 +1355,12 @@
   font-family: inherit;
   color: var(--text-primary);
   flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 .ql-editor {
-  min-height: 200px;
+  min-height: 160px;
+  height: 100%;
   color: var(--text-primary) !important;
   line-height: 1.6;
   overflow-y: auto;
