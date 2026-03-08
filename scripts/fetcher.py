@@ -8,6 +8,7 @@ import json
 import os
 import re
 import tempfile
+import urllib.request
 from datetime import datetime, timedelta, timezone
 from config import (
     RSS_FEEDS, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
@@ -188,7 +189,13 @@ def fetch_all_feeds(feeds_override=None):
     feeds_to_use = feeds_override if feeds_override is not None else RSS_FEEDS
     for feed_url in feeds_to_use:
         try:
-            feed = feedparser.parse(feed_url)
+            req = urllib.request.Request(
+                feed_url,
+                headers={"User-Agent": "Mozilla/5.0 (compatible; KONOPLA.UA/1.0)"}
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                feed_content = resp.read()
+            feed = feedparser.parse(feed_content)
             source = feed.feed.get("title", feed_url)[:50]
             
             for entry in feed.entries:

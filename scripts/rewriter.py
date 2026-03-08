@@ -200,6 +200,15 @@ def _parse_json_response(text):
         print(f"   [WARN] Missing fields: {list(article_data.keys())}")
         return None
 
+    allowed_categories = {
+        "бізнес", "агро", "текстиль", "будівництво", "харчова",
+        "екологія", "законодавство", "відео", "наука", "косметика",
+        "біопластик", "автопром", "енергетика", "інше"
+    }
+    if article_data.get("category", "інше") not in allowed_categories:
+        print(f"   [WARN] Invalid category '{article_data['category']}', defaulting to 'інше'")
+        article_data["category"] = "інше"
+
     print("   ✅ OK")
     return article_data
 
