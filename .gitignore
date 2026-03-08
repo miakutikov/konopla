@@ -5,6 +5,12 @@ __pycache__/
 
 # Environment
 .env
+.env.*
+*.key
+*.secret
+secrets/
+secrets.json
+*.pem
 
 # Hugo build output
 public/

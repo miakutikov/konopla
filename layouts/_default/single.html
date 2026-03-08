@@ -29,7 +29,7 @@
     </div>
     {{ else if .Params.image }}
     <figure class="article-figure">
-      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image" onerror="this.onerror=null;this.src='/images/logo.png';this.classList.add('article-image-fallback')">
       {{ if .Params.image_author }}
       <figcaption class="image-credit">
         Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> /

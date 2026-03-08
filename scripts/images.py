@@ -111,6 +111,10 @@ def generate_gemini_image(query, article_id="img"):
 
         image_bytes = base64.b64decode(image_b64)
 
+        if not image_bytes:
+            print("[WARN] Gemini returned empty image data")
+            return None
+
         # Post-process: enforce 16:9 aspect ratio (1280x720)
         try:
             from PIL import Image
