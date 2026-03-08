@@ -1,25 +1,47 @@
 <header class="site-header">
-  <div class="header-top">
-    <div class="container header-top-inner">
-      <a href="{{ "/" | relURL }}" class="logo">
-        <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="logo-img">
-        <span class="logo-text">KONOPLA<span class="logo-dot">.UA</span></span>
+  <div class="header-inner container">
+
+    <a href="{{ "/" | relURL }}" class="logo" aria-label="KONOPLA.UA — на головну">
+      <img src="{{ "images/logo.png" | relURL }}" alt="" class="logo-img" aria-hidden="true">
+      <span class="logo-text">KONOPLA<span class="logo-dot">.UA</span></span>
+    </a>
+
+    <nav class="header-nav" role="navigation" aria-label="Головна навігація">
+      <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">Новини</a>
+      <a href="{{ "/knowledge/" | relURL }}" class="nav-link{{ if eq .Section "knowledge" }} active{{ end }}">База знань</a>
+      <a href="{{ "/catalog/" | relURL }}" class="nav-link{{ if eq .Section "catalog" }} active{{ end }}">Каталог</a>
+      <a href="{{ "/search/" | relURL }}" class="nav-link nav-search-link{{ if eq .RelPermalink "/search/" }} active{{ end }}" aria-label="Пошук">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </a>
-      <button class="menu-toggle" aria-label="Меню" aria-expanded="false">
+    </nav>
+
+    <div class="header-actions">
+      <a href="{{ .Site.Params.telegram }}" class="header-tg-btn" target="_blank" rel="noopener" aria-label="Telegram-канал KONOPLA.UA">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.235.235 0 0 0-.07-.19c-.08-.05-.19-.02-.27 0-.11.03-1.88 1.2-5.32 3.53-.5.35-.95.52-1.36.51-.45-.01-1.3-.25-1.93-.46-.78-.26-1.39-.4-1.34-.84.03-.23.36-.47 1-.73 3.91-1.7 6.52-2.77 7.84-3.32 3.73-1.56 4.51-1.83 5.02-1.84.11 0 .37.03.51.14.12.09.15.22.16.32-.01.07-.01.16-.03.26z"/></svg>
+        <span>Telegram</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </button>
     </div>
-    <nav class="main-nav" role="navigation" aria-label="Головна навігація">
-      <div class="container">
-        <a href="{{ "/news/" | relURL }}" class="nav-link">Новини</a>
-        <a href="{{ "/knowledge/" | relURL }}" class="nav-link">База знань</a>
-        <a href="{{ "/catalog/" | relURL }}" class="nav-link">Каталог</a>
-        <a href="{{ "/search/" | relURL }}" class="nav-link">Пошук</a>
-        <a href="{{ .Site.Params.telegram }}" class="nav-link" target="_blank" rel="noopener">Telegram</a>
-        <a href="{{ .Site.Params.threads }}" class="nav-link" target="_blank" rel="noopener">Threads</a>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="container">
+      <nav class="mobile-nav" aria-label="Мобільна навігація">
+        <a href="{{ "/news/" | relURL }}" class="mobile-nav-link{{ if eq .Section "news" }} active{{ end }}">Новини</a>
+        <a href="{{ "/knowledge/" | relURL }}" class="mobile-nav-link{{ if eq .Section "knowledge" }} active{{ end }}">База знань</a>
+        <a href="{{ "/catalog/" | relURL }}" class="mobile-nav-link{{ if eq .Section "catalog" }} active{{ end }}">Каталог</a>
+        <a href="{{ "/search/" | relURL }}" class="mobile-nav-link{{ if eq .RelPermalink "/search/" }} active{{ end }}">Пошук</a>
+      </nav>
+      <div class="mobile-menu-socials">
+        <a href="{{ .Site.Params.telegram }}" class="mobile-social-btn" target="_blank" rel="noopener">📨 Telegram</a>
+        <a href="{{ .Site.Params.threads }}" class="mobile-social-btn" target="_blank" rel="noopener">🧵 Threads</a>
       </div>
-    </nav>
+    </div>
   </div>
 </header>
