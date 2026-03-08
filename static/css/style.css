@@ -374,6 +374,43 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.85rem;
   font-weight: 500;
 }
+/* Compact list for homepage */
+.knowledge-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.knowledge-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.knowledge-list-item:hover {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: var(--green-accent);
+  transform: translateX(2px);
+}
+.knowledge-list-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.knowledge-all-link {
+  font-size: 0.9rem;
+  color: var(--green-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.knowledge-all-link:hover { text-decoration: underline; }
+
 .knowledge-page { margin: 20px 0; }
 .knowledge-page-title { font-size: 1.6rem; margin-bottom: 8px; }
 .knowledge-page-desc { color: var(--text-muted); margin-bottom: 24px; }
