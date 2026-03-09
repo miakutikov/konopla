@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "edc6df92",
+      "filename": "20260309-2039-amerykanskyy-pioner-khempkritu-rey-kaderli-rozkryvaye-sekrety-budivnytstva-z-kon.md",
+      "title": "Американський піонер хемпкріту Рей Кадерлі розкриває секрети будівництва з конопель",
+      "summary": "Відомий американський будівельник Рей Кадерлі у новому відео пояснює, як зводити екологічні та економічні споруди з хемпкріту, попри відсутність будівельних норм у США.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/aQKIPPEbxus/hqdefault.jpg",
+      "created_at": "2026-03-09T20:39:02.681008+00:00"
+    },
+    {
+      "id": "f29359b0",
+      "filename": "20260309-2039-vesna-2026-intensyvni-treninhy-z-proektuvannya-ta-budivnytstva-z-khempkritu.md",
+      "title": "Весна 2026: Інтенсивні тренінги з проектування та будівництва з хемпкріту",
+      "summary": "Канал Next Genesis Design анонсував серію інтенсивних тренінгів з проектування та будівництва з хемпкріту, що відбудуться навесні 2026 року на Тихоокеанському північному заході США. Курси призначені для будівельників, архітекторів та власників будинків, які прагнуть освоїти екологічні технології.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/f1g3Cp5aeg8/hqdefault.jpg",
+      "created_at": "2026-03-09T20:39:21.270051+00:00"
+    },
+    {
+      "id": "3a60c179",
+      "filename": "20260309-2039-maybutnye-zelenoho-budivnytstva-indiyski-shkolyari-doslidzhuyut-konoplyanyy-khem.md",
+      "title": "Майбутнє зеленого будівництва: індійські школярі досліджують конопляний хемпкріт",
+      "summary": "Учні міжнародної школи Podar з Індії створили відео, де через поезію та адвокацію досліджують конопляний хемпкріт як інноваційний та сталий матеріал для будівництва.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/6m53kDxAv68/hqdefault.jpg",
+      "created_at": "2026-03-09T20:39:40.360218+00:00"
+    }
+  ]
 }
