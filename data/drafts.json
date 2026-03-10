@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "49fb88b5",
+      "filename": "20260310-2039-navchannya-z-khempkritu-praktychnyy-mayster-klas-v-orehoni-vid-next-genesis-desi.md",
+      "title": "Навчання з хемпкріту: практичний майстер-клас в Орегоні від Next Genesis Design",
+      "summary": "Відеоогляд практичного семінару з будівництва з **хемпкріту** в Орегоні. Канал Next Genesis Design демонструє, як учасники навчаються створювати екологічні споруди.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/oe_I4dmwkIk/hqdefault.jpg",
+      "created_at": "2026-03-10T20:39:55.609842+00:00"
+    },
+    {
+      "id": "2fa14f14",
+      "filename": "20260310-2040-maybutnye-budivel-konoplyanyy-khempkrit-u-fokusi-timothy-tasker-architects.md",
+      "title": "Майбутнє будівель: Конопляний хемпкріт у фокусі Timothy Tasker Architects",
+      "summary": "Британська архітектурна компанія Timothy Tasker Architects випустила відео, де досліджує потенціал конопляного хемпкріту як екологічного будівельного матеріалу, що здатний поглинати вуглець.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/RO55TXk6bFU/hqdefault.jpg",
+      "created_at": "2026-03-10T20:40:16.244327+00:00"
+    },
+    {
+      "id": "1add9df5",
+      "filename": "20260310-2040-maybutnye-mody-shkolyari-predstavyly-konoplyanu-tkanynu-yak-ekolohichnu-alternat.md",
+      "title": "Майбутнє моди: школярі представили конопляну тканину як екологічну альтернативу",
+      "summary": "Учні міжнародної школи Podar International School дослідили конопляну тканину як сталу альтернативу для індустрії моди, підкреслюючи її екологічні переваги над традиційними матеріалами.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/o8b83ZuILEk/hqdefault.jpg",
+      "created_at": "2026-03-10T20:40:35.215006+00:00"
+    }
+  ]
 }
