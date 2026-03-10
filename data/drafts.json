@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "cd70741d",
+      "filename": "20260310-0850-kanadski-fermery-pokazaly-shlyakh-konopel-vid-polya-do-tekstylyu-u-novomu-video.md",
+      "title": "Канадські фермери показали шлях конопель від поля до текстилю у новому відео",
+      "summary": "Канадська спільнота фермерів Canadian Hemp Farmers Alliance випустила відео, що детально демонструє весь процес перетворення промислових конопель на екологічний текстиль. Дізнайтеся, як волокно з поля стає міцною тканиною.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/bilA77RHTPM/hqdefault.jpg",
+      "created_at": "2026-03-10T08:50:25.442183+00:00"
+    },
+    {
+      "id": "ba7921d9",
+      "filename": "20260310-0850-videoohlyad-yak-vyroblyayut-konoplyane-volokno-kanal-emli.md",
+      "title": "Відеоогляд: Як виробляють конопляне волокно – канал Emli",
+      "summary": "Канал Emli опублікував відео, що демонструє процес виробництва конопляного волокна, а також імбирного м'яса. Зазирніть за лаштунки переробки промислових конопель.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/ogD8UB-KUjA/hqdefault.jpg",
+      "created_at": "2026-03-10T08:50:48.936995+00:00"
+    },
+    {
+      "id": "a5c65a58",
+      "filename": "20260310-0851-konopli-naturalne-volokno-dlya-suchasnoho-tekstylyu.md",
+      "title": "Коноплі: натуральне волокно для сучасного текстилю",
+      "summary": "Іспанський канал ATEXLIER випустив освітнє відео, що пояснює, чому коноплі вважаються натуральним текстильним волокном.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/BLxhIrpM4CQ/hqdefault.jpg",
+      "created_at": "2026-03-10T08:51:54.071938+00:00"
+    }
+  ]
 }
