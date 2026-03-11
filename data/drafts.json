@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "25e60c36",
+      "filename": "20260311-2038-vid-stebla-do-eko-tkanyny-yak-konopli-peretvoryuyutsya-na-odyah-na-suchasniy-fab.md",
+      "title": "Від стебла до еко-тканини: Як коноплі перетворюються на одяг на сучасній фабриці",
+      "summary": "YouTube-канал Making Zone показав ексклюзивне відео про те, як промислові коноплі перетворюються на екологічну тканину на високотехнологічній фабриці, розкриваючи всі етапи виробництва.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/jrwGqNRwSHw/hqdefault.jpg",
+      "created_at": "2026-03-11T20:38:08.413435+00:00"
+    },
+    {
+      "id": "c73125e4",
+      "filename": "20260311-2038-zatural-hemp-hearts-videoohlyad-konoplyanoho-nasinnya-idealnyy-roslynnyy-bilok.md",
+      "title": "Zatural Hemp Hearts: Відеоогляд конопляного насіння – ідеальний рослинний білок?",
+      "summary": "Канал Rock City Reviews & Tips опублікував детальний відеоогляд конопляного насіння Zatural Hemp Hearts, розглядаючи його як універсальне джерело рослинного білка та здорових жирів для щоденного раціону.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/4LDyp95H7WY/hqdefault.jpg",
+      "created_at": "2026-03-11T20:38:26.435345+00:00"
+    },
+    {
+      "id": "53482ed4",
+      "filename": "20260311-2038-videoohlyad-nasinnya-konopel-zatural-idealnyy-roslynnyy-bilok.md",
+      "title": "Відеоогляд: Насіння конопель Zatural – ідеальний рослинний білок?",
+      "summary": "На YouTube-каналі Rock City Reviews & Tips з'явився огляд насіння конопель Zatural Hemp Hearts, яке позиціонується як джерело рослинного білка та омега-кислот для здорового харчування.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/RzduU22ok_E/hqdefault.jpg",
+      "created_at": "2026-03-11T20:38:42.254909+00:00"
+    }
+  ]
 }
