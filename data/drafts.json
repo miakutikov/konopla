@@ -1,3 +1,31 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "473e1354",
+      "filename": "20260311-0849-eco-endeavour-budivnytstvo-z-khempkritu-poza-normamy-na-ostrovi-vankuver.md",
+      "title": "Eco Endeavour: Будівництво з хемпкріту поза нормами на острові Ванкувер",
+      "summary": "Команда YouTube-каналу Eco Endeavour готується до зведення стін з хемпкріту на острові Ванкувер, стикаючись із зимовими викликами та працюючи поза стандартними будівельними нормами.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/7jRdUnZBxQo/hqdefault.jpg",
+      "created_at": "2026-03-11T08:49:42.678807+00:00"
+    },
+    {
+      "id": "8f5001e0",
+      "filename": "20260311-0849-konoplyane-volokno-u-fokusi-osvitniy-ohlyad-naturalnykh-tekstylnykh-materialiv.md",
+      "title": "Конопляне волокно у фокусі: освітній огляд натуральних текстильних матеріалів",
+      "summary": "Нове відео від каналу Study with Kavita детально розглядає **конопляне волокно** та інші натуральні матеріали, важливі для текстильної науки.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/uyLe9FUVz9Y/hqdefault.jpg",
+      "created_at": "2026-03-11T08:49:58.532827+00:00"
+    },
+    {
+      "id": "8dde3277",
+      "filename": "20260311-0850-hempmadeinua-prezentuvav-ekolohichni-aksesuary-z-presovanoho-konoplyanoho-volokn.md",
+      "title": "HempMadeInUA презентував екологічні аксесуари з пресованого конопляного волокна у новому відео",
+      "summary": "Український бренд HempMadeInUA випустив відеоогляд своїх нових продуктів: капелюха для сауни та сумки, виготовлених з інноваційного пресованого конопляного волокна.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/8fRekV1RLx8/hqdefault.jpg",
+      "created_at": "2026-03-11T08:50:21.611705+00:00"
+    }
+  ]
 }
