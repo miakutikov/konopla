@@ -14,7 +14,7 @@ image_source_url: "https://www.youtube.com/watch?v=RzduU22ok_E"
 youtube_id: "RzduU22ok_E"
 telegram_hook: "Чи може насіння конопель бути ідеальним рослинним білком? Дивіться новий відеоогляд Zatural Hemp Hearts на Konopla.UA!"
 threads_hook: "Шукаєте ідеальний рослинний білок? 🌱 Новий відеоогляд насіння конопель Zatural Hemp Hearts показує, як легко додати його до смузі, салатів та випічки. Це справжній суперфуд!"
-draft: true
+draft: false
 ---
 
 На YouTube-каналі Rock City Reviews & Tips вийшов новий відеоогляд, присвячений **насінню конопель Zatural Hemp Hearts**. Автор каналу досліджує, чи справді цей продукт є **ідеальним джерелом рослинного білка** та незамінних жирів для здорового харчування.
