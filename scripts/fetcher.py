@@ -11,7 +11,7 @@ import tempfile
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from config import (
-    RSS_FEEDS, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
+    load_sources, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
     MAX_AGE_DAYS, MIN_TITLE_LENGTH, PROCESSED_FILE, MAX_ARTICLES_PER_RUN,
     SIMILARITY_THRESHOLD
 )
@@ -170,12 +170,12 @@ def extract_images(entry):
     return images[:5]
 
 
-def fetch_all_feeds(feeds_override=None):
+def fetch_all_feeds(region='all'):
     """
     Збирає всі нові статті з RSS-фідів.
     Повертає список словників з ключами: title, link, summary, date, source, hash
 
-    feeds_override: якщо передано, використовує цей список фідів замість RSS_FEEDS
+    region: 'all' | 'global' | 'ua' — фільтрує джерела за регіоном
     """
     processed = load_processed()
     processed_hashes = set(processed["articles"])
@@ -186,7 +186,7 @@ def fetch_all_feeds(feeds_override=None):
     seen_hashes = set()
     accepted_titles = list(processed.get("recent_titles", []))
 
-    feeds_to_use = feeds_override if feeds_override is not None else RSS_FEEDS
+    feeds_to_use = load_sources(region=region)
     for feed_url in feeds_to_use:
         try:
             req = urllib.request.Request(

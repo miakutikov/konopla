@@ -44,10 +44,10 @@ def save_json(filepath, data):
     os.replace(tmp_path, filepath)
 
 
-def run_pipeline(ua_only=False):
+def run_pipeline(region='all'):
     """Запускає pipeline: збір, рерайт, створення draft-статей.
 
-    ua_only: якщо True, використовує тільки українські RSS-фіди (UA_RSS_FEEDS)
+    region: 'all' | 'global' | 'ua' — які джерела сканувати (з data/sources.json)
     """
 
     # Validate required API keys before starting
@@ -57,7 +57,8 @@ def run_pipeline(ua_only=False):
 
     start_time = time.time()
 
-    mode_label = "🇺🇦 UA-only" if ua_only else "🌍 Full"
+    region_labels = {'ua': '🇺🇦 UA', 'global': '🌍 Global', 'all': '🌐 All'}
+    mode_label = region_labels.get(region, f'🌐 {region}')
     print("=" * 60)
     print(f"🌿 KONOPLA.UA — News Pipeline ({mode_label})")
     print("=" * 60)
@@ -80,15 +81,11 @@ def run_pipeline(ua_only=False):
 
     try:
         # === STEP 1: Fetch articles ===
-        feeds_override = None
-        if ua_only:
-            from config import UA_RSS_FEEDS
-            feeds_override = UA_RSS_FEEDS
-            print(f"\n📡 Step 1: Fetching UA-only feeds ({len(UA_RSS_FEEDS)} feeds)...")
-        else:
-            print("\n📡 Step 1: Fetching RSS feeds...")
+        from config import load_sources
+        feeds = load_sources(region=region)
+        print(f"\n📡 Step 1: Fetching feeds [{mode_label}] ({len(feeds)} sources)...")
         try:
-            articles = fetch_all_feeds(feeds_override=feeds_override)
+            articles = fetch_all_feeds(region=region)
         except Exception as e:
             print(f"[ERROR] RSS fetching failed: {e}")
             send_crash_alert(f"RSS fetching failed: {e}")
@@ -258,9 +255,9 @@ def run_pipeline(ua_only=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="KONOPLA.UA News Pipeline")
-    parser.add_argument("--ua-only", action="store_true",
-                        help="Use only Ukrainian RSS feeds (UA_RSS_FEEDS)")
+    parser.add_argument("--region", default="all", choices=["all", "global", "ua"],
+                        help="Які джерела сканувати: all (default) | global | ua")
     args = parser.parse_args()
 
-    exit_code = run_pipeline(ua_only=args.ua_only)
+    exit_code = run_pipeline(region=args.region)
     sys.exit(exit_code)
