@@ -3,6 +3,7 @@
 <head>
   {{ partial "seo-head.html" . }}
   {{ partial "analytics.html" . }}
+  {{ block "head-extra" . }}{{ end }}
 </head>
 <body>
   {{ partial "header.html" . }}

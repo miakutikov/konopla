@@ -1,3 +1,10 @@
+{{- define "head-extra" -}}
+  {{- $pages := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true -}}
+  {{- $pag := .Paginate $pages -}}
+  {{- if $pag.HasPrev }}<link rel="prev" href="{{ $pag.Prev.URL | absURL }}">{{ end -}}
+  {{- if $pag.HasNext }}<link rel="next" href="{{ $pag.Next.URL | absURL }}">{{ end -}}
+{{- end -}}
+
 {{ define "main" }}
 <div class="container">
 
