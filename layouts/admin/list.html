@@ -1765,8 +1765,8 @@
       return;
     }
 
-    // Check sessionStorage
-    var saved = sessionStorage.getItem('konopla_admin_key');
+    // Check localStorage
+    var saved = localStorage.getItem('konopla_admin_key');
     if (saved) {
       checkAuth(saved);
       return;
@@ -1784,8 +1784,8 @@
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
 
-    // Load GitHub PAT from sessionStorage
-    ghToken = sessionStorage.getItem('konopla_gh_token') || '';
+    // Load GitHub PAT from localStorage
+    ghToken = localStorage.getItem('konopla_gh_token') || '';
 
     // Load queues from localStorage
     loadQueue();
@@ -1814,22 +1814,22 @@
     var hash = await sha256(key);
     if (hash === ADMIN_KEY_HASH) {
       adminKey = key;
-      sessionStorage.setItem('konopla_admin_key', key);
+      localStorage.setItem('konopla_admin_key', key);
       // Clean URL
       if (window.location.search) {
         window.history.replaceState({}, '', window.location.pathname);
       }
       showPanel();
     } else {
-      sessionStorage.removeItem('konopla_admin_key');
+      localStorage.removeItem('konopla_admin_key');
       showAuth();
       document.getElementById('auth-error').style.display = 'block';
     }
   }
 
   function logout() {
-    sessionStorage.removeItem('konopla_admin_key');
-    sessionStorage.removeItem('konopla_gh_token');
+    localStorage.removeItem('konopla_admin_key');
+    localStorage.removeItem('konopla_gh_token');
     adminKey = '';
     ghToken = '';
     showAuth();
@@ -1868,7 +1868,7 @@
     var token = document.getElementById('pat-input').value.trim();
     if (!token) return;
     ghToken = token;
-    sessionStorage.setItem('konopla_gh_token', token);
+    localStorage.setItem('konopla_gh_token', token);
     showStatus('Token збережено!', 'success');
     loadDrafts();
   };
@@ -1956,7 +1956,7 @@
       el.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
 
       if (e.message && e.message.indexOf('401') !== -1) {
-        sessionStorage.removeItem('konopla_gh_token');
+        localStorage.removeItem('konopla_gh_token');
         ghToken = '';
         showPatSetup();
       }
@@ -2807,11 +2807,11 @@
     panel.style.display = visible ? 'none' : 'block';
     if (!visible) {
       // Check for YouTube API key
-      var ytKey = sessionStorage.getItem('konopla_yt_key');
+      var ytKey = localStorage.getItem('konopla_yt_key');
       if (!ytKey) {
         ytKey = prompt('Введіть YouTube Data API Key (зберігається локально):');
         if (!ytKey) { panel.style.display = 'none'; return; }
-        sessionStorage.setItem('konopla_yt_key', ytKey);
+        localStorage.setItem('konopla_yt_key', ytKey);
       }
       document.getElementById('yt-search-input').focus();
     }
@@ -2821,11 +2821,11 @@
     var query = document.getElementById('yt-search-input').value.trim();
     if (!query) return;
 
-    var ytKey = sessionStorage.getItem('konopla_yt_key');
+    var ytKey = localStorage.getItem('konopla_yt_key');
     if (!ytKey) {
       ytKey = prompt('Введіть YouTube Data API Key:');
       if (!ytKey) return;
-      sessionStorage.setItem('konopla_yt_key', ytKey);
+      localStorage.setItem('konopla_yt_key', ytKey);
     }
 
     var resultsEl = document.getElementById('yt-panel-results');
@@ -2837,7 +2837,7 @@
       var resp = await fetch(url);
       if (!resp.ok) {
         if (resp.status === 403 || resp.status === 400) {
-          sessionStorage.removeItem('konopla_yt_key');
+          localStorage.removeItem('konopla_yt_key');
           throw new Error('Невірний API ключ. Спробуйте знову.');
         }
         throw new Error('YouTube API error: ' + resp.status);
@@ -2896,7 +2896,7 @@
 
       // Fetch video details to auto-fill title/summary
       try {
-        var ytKey = sessionStorage.getItem('konopla_yt_key');
+        var ytKey = localStorage.getItem('konopla_yt_key');
         if (ytKey) {
           var detResp = await fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + videoId + '&key=' + encodeURIComponent(ytKey));
           if (detResp.ok) {
@@ -2920,18 +2920,18 @@
 
     } else if (mode === 'ai') {
       // AI mode: use Gemini to generate article from video
-      var geminiKey = sessionStorage.getItem('konopla_gemini_key');
+      var geminiKey = localStorage.getItem('konopla_gemini_key');
       if (!geminiKey) {
         geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
         if (!geminiKey) return;
-        sessionStorage.setItem('konopla_gemini_key', geminiKey);
+        localStorage.setItem('konopla_gemini_key', geminiKey);
       }
 
       showStatus('⏳ AI генерує статтю з відео...', 'info');
 
       try {
         // 1. Fetch video details
-        var ytKey = sessionStorage.getItem('konopla_yt_key');
+        var ytKey = localStorage.getItem('konopla_yt_key');
         var detResp = await fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + videoId + '&key=' + encodeURIComponent(ytKey));
         if (!detResp.ok) throw new Error('Cannot fetch video details');
 
@@ -2963,7 +2963,7 @@
 
         if (!geminiResp.ok) {
           if (geminiResp.status === 400 || geminiResp.status === 403) {
-            sessionStorage.removeItem('konopla_gemini_key');
+            localStorage.removeItem('konopla_gemini_key');
           }
           throw new Error('Gemini API error: ' + geminiResp.status);
         }
@@ -3440,11 +3440,11 @@
   // =========================================================================
 
   window.autoFormat = async function() {
-    var geminiKey = sessionStorage.getItem('konopla_gemini_key');
+    var geminiKey = localStorage.getItem('konopla_gemini_key');
     if (!geminiKey) {
       geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
       if (!geminiKey) return;
-      sessionStorage.setItem('konopla_gemini_key', geminiKey);
+      localStorage.setItem('konopla_gemini_key', geminiKey);
     }
 
     if (!quillEditor) { showStatus('❌ Редактор не ініціалізований', 'error'); return; }
@@ -3480,7 +3480,7 @@
       );
 
       if (!geminiResp.ok) {
-        if (geminiResp.status === 400 || geminiResp.status === 403) sessionStorage.removeItem('konopla_gemini_key');
+        if (geminiResp.status === 400 || geminiResp.status === 403) localStorage.removeItem('konopla_gemini_key');
         throw new Error('Gemini API error: ' + geminiResp.status);
       }
 
@@ -3735,11 +3735,11 @@
   };
 
   window.generateImage = async function() {
-    var geminiKey = sessionStorage.getItem('konopla_gemini_key');
+    var geminiKey = localStorage.getItem('konopla_gemini_key');
     if (!geminiKey) {
       geminiKey = prompt('Введіть Gemini API Key (зберігається локально):');
       if (!geminiKey) return;
-      sessionStorage.setItem('konopla_gemini_key', geminiKey);
+      localStorage.setItem('konopla_gemini_key', geminiKey);
     }
 
     if (!ghToken) { showStatus('❌ Спочатку налаштуйте GitHub PAT', 'error'); return; }
@@ -3780,7 +3780,7 @@
       );
 
       if (!geminiResp.ok) {
-        if (geminiResp.status === 400 || geminiResp.status === 403) sessionStorage.removeItem('konopla_gemini_key');
+        if (geminiResp.status === 400 || geminiResp.status === 403) localStorage.removeItem('konopla_gemini_key');
         throw new Error('Gemini API error: ' + geminiResp.status);
       }
 
