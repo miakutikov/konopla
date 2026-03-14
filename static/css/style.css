@@ -2340,3 +2340,24 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: 1.2rem;
   }
 }
+
+/* Social links with SVG icons */
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.footer-social-link svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.footer-social-link:hover svg { opacity: 1; }
+
+.about-contact-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: inherit;
+}
+.about-contact-card__icon svg { display: block; }
