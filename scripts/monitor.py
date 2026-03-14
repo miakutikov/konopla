@@ -77,32 +77,44 @@ def send_alert(message, level="WARN"):
         return False
 
 
-def send_pipeline_report(published, failed, total, duration_sec):
-    """Відправляє звіт про роботу pipeline."""
+def send_pipeline_report(published, failed, total, duration_sec, skipped=0):
+    """Відправляє звіт про роботу pipeline.
+
+    published - успішно оброблено і збережено як draft
+    failed    - справжні помилки (API недоступний, JSON parse error тощо)
+    total     - знайдено в RSS
+    skipped   - AI відхилив як нерелевантне (нормальна поведінка, не помилка)
+    """
     if published == 0 and total == 0:
         # No news found — not an error, just log (don't spam Telegram)
         print("[INFO] Запуск завершено. Нових новин не знайдено.")
         return
-    
+
+    skipped_line = f"🚫 Нерелевантних: {skipped}\n" if skipped > 0 else ""
+
     if failed > 0 and published == 0:
+        # All found articles failed with real errors — serious problem
         send_alert(
             f"Pipeline завершився з помилками!\n"
             f"📰 Знайдено: {total}\n"
-            f"❌ Помилок: {failed}\n"
+            f"❌ Помилок API: {failed}\n"
+            f"{skipped_line}"
             f"✅ Опубліковано: 0\n"
             f"⏱ Час: {duration_sec:.0f}с",
             level="ERROR"
         )
-    elif failed > published:
+    elif failed > 2:
+        # More than 2 real API errors — worth knowing about
         send_alert(
-            f"Багато помилок у pipeline:\n"
+            f"Помилки API у pipeline:\n"
             f"📰 Знайдено: {total}\n"
-            f"❌ Помилок: {failed}\n"
+            f"❌ Помилок API: {failed}\n"
+            f"{skipped_line}"
             f"✅ Опубліковано: {published}\n"
             f"⏱ Час: {duration_sec:.0f}с",
             level="WARN"
         )
-    # If mostly successful — no alert needed, don't spam
+    # Skipped (irrelevant) articles are normal — no alert needed
 
 
 def send_crash_alert(error_message):
