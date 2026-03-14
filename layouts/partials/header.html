@@ -10,6 +10,7 @@
       <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">Новини</a>
       <a href="{{ "/knowledge/" | relURL }}" class="nav-link{{ if eq .Section "knowledge" }} active{{ end }}">База знань</a>
       <a href="{{ "/catalog/" | relURL }}" class="nav-link{{ if eq .Section "catalog" }} active{{ end }}">Каталог</a>
+      <a href="{{ "/about/" | relURL }}" class="nav-link{{ if eq .RelPermalink "/about/" }} active{{ end }}">Про нас</a>
       <a href="{{ "/search/" | relURL }}" class="nav-link nav-search-link{{ if eq .RelPermalink "/search/" }} active{{ end }}" aria-label="Пошук">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </a>
@@ -36,6 +37,7 @@
         <a href="{{ "/news/" | relURL }}" class="mobile-nav-link{{ if eq .Section "news" }} active{{ end }}">Новини</a>
         <a href="{{ "/knowledge/" | relURL }}" class="mobile-nav-link{{ if eq .Section "knowledge" }} active{{ end }}">База знань</a>
         <a href="{{ "/catalog/" | relURL }}" class="mobile-nav-link{{ if eq .Section "catalog" }} active{{ end }}">Каталог</a>
+        <a href="{{ "/about/" | relURL }}" class="mobile-nav-link{{ if eq .RelPermalink "/about/" }} active{{ end }}">Про нас</a>
         <a href="{{ "/search/" | relURL }}" class="mobile-nav-link{{ if eq .RelPermalink "/search/" }} active{{ end }}">Пошук</a>
       </nav>
       <div class="mobile-menu-socials">
