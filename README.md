@@ -1,55 +1,66 @@
-# 🌿 Konopla.UA — Автоматичний новинний портал
+# 🌿 Konopla.UA — Портал промислових конопель
 
-Повністю автономна система збору, рерайту та публікації новин про промислові коноплі.
+Автономна система збору, рерайту та публікації новин + база знань + каталог компаній конопляної галузі.
 
 ---
 
-## 🚀 Розгортання (один раз)
+## 🗂 Структура сайту
+
+| Розділ | URL | Опис |
+|---|---|---|
+| Головна | `/` | Стрічка свіжих новин |
+| Новини | `/news/` | Всі новини з тегами |
+| База знань | `/knowledge/` | Статті-посібники |
+| Каталог | `/catalog/` | Компанії галузі |
+| Про нас | `/about/` | Інформація |
+| Пошук | `/search/` | Пошук по сайту |
+| Адмін | `/admin/` | Модерація новин |
+| Адмін каталогу | `/admin/catalog/` | Управління компаніями |
+
+---
+
+## 🚀 Розгортання
 
 ### Крок 1 — GitHub репозиторій
 
 1. github.com → **"+"** → **"New repository"**
-2. Назва: `konopla-ua`
+2. Назва: `konopla`
 3. Тип: **Public**
-4. НЕ додавай README — ми маємо свій
-5. **"Create repository"**
+4. **"Create repository"**
 
-### Крок 2 — Завантаж файли
-
-**Через браузер:**
-1. Відкрий репозиторій → **"Add file"** → **"Upload files"**
-2. Перетягни ВСІ файли і папки з архіву
-3. **"Commit changes"**
-
-**Через Git:**
 ```bash
-cd konopla-ua
 git init && git add . && git commit -m "Init"
-git remote add origin https://github.com/USERNAME/konopla-ua.git
+git remote add origin https://github.com/USERNAME/konopla.git
 git push -u origin main
 ```
 
-### Крок 3 — Секрети (найважливіше!)
+### Крок 2 — Секрети
 
 Settings → Secrets and variables → Actions → New repository secret:
 
 | Secret | Що це | Де взяти | Обов'язковий |
 |---|---|---|---|
-| `GEMINI_API_KEY` | Ключ AI для рерайту | aistudio.google.dev → Get API Key | ✅ Так |
-| `TELEGRAM_TOKEN` | Токен бота | @BotFather → /newbot | ✅ Так |
-| `TELEGRAM_CHAT_ID` | Канал для новин | @your_channel або число | ✅ Так |
-| `UNSPLASH_ACCESS_KEY` | Ключ для картинок | unsplash.com/developers | Ні (без нього працює, але без фото) |
-| `ADMIN_CHAT_ID` | Куди слати алерти | Твій особистий @username або chat ID | Ні (алерти підуть у канал) |
+| `GEMINI_API_KEY` | Gemini AI для рерайту | aistudio.google.dev | ✅ Або OPENROUTER |
+| `OPENROUTER_API_KEY` | OpenRouter AI (альтернатива) | openrouter.ai | ✅ Або GEMINI |
+| `TELEGRAM_TOKEN` | Токен Telegram-бота | @BotFather → /newbot | ✅ |
+| `TELEGRAM_CHAT_ID` | ID каналу новин | @your_channel або число | ✅ |
+| `ADMIN_CHAT_ID` | ID чату для алертів | особистий chat ID | Ні |
+| `UNSPLASH_ACCESS_KEY` | Фото для статей | unsplash.com/developers | Ні |
+| `YOUTUBE_API_KEY` | Моніторинг YouTube | console.cloud.google.com | Ні |
+| `THREADS_USER_ID` | ID акаунту Threads | Meta API | Ні |
+| `THREADS_ACCESS_TOKEN` | Токен Threads | Meta API | Ні |
 
-### Крок 4 — GitHub Pages
+> **AI:** достатньо одного з двох — Gemini (безкоштовний) або OpenRouter (платний, кращий рерайт).
+
+### Крок 3 — GitHub Pages
 
 Settings → Pages → Source: **"GitHub Actions"** → Save
 
-### Крок 5 — Перший запуск
+### Крок 4 — Перший запуск
 
-Actions → "Konopla.UA News Pipeline" → **"Run workflow"**
+Actions → "KONOPLA.UA News Pipeline" → **"Run workflow"** → вибери `all`
 
-### Крок 6 — Домен konopla.ua
+### Крок 5 — Домен konopla.ua
 
 Settings → Pages → Custom domain: `konopla.ua`
 
@@ -66,61 +77,39 @@ A      @     → 185.199.111.153
 
 ---
 
-## 📊 Google Analytics
-
-1. Зайди на analytics.google.com
-2. Створи акаунт → властивість для konopla.ua
-3. Отримай ID (починається на G-)
-4. Відкрий файл `hugo.toml` у репозиторії
-5. Розкоментуй рядок і встав свій ID:
-```toml
-google_analytics = "G-XXXXXXXXXX"
-```
-6. Commit — аналітика працює
-
----
-
-## 📸 Instagram Stories
-
-Кожен запуск pipeline генерує готові картинки для Stories (1080×1920).
-
-**Де знаходяться:** папка `static/instagram/` в репозиторії
-
-**Як постити:**
-1. Зайди в репозиторій → `static/instagram/`
-2. Завантаж потрібну картинку
-3. Відкрий Instagram → створи Story → додай картинку
-4. Додай стікер-посилання на konopla.ua
-
-**Або автоматично:** підключи Later.com або Buffer.com ($15/міс) — вони можуть постити по розкладу.
-
----
-
 ## 🔧 Керування
 
-### Ручний запуск
-Actions → Konopla.UA News Pipeline → Run workflow
-
-### Змінити частоту
-Файл `.github/workflows/pipeline.yml`, рядок cron:
+### Розклад pipeline
+Файл `.github/workflows/pipeline.yml`, параметр `cron`:
 - `0 */6 * * *` — кожні 6 годин (за замовчуванням)
 - `0 */3 * * *` — кожні 3 години
 - `0 8,14,20 * * *` — о 8:00, 14:00, 20:00
 
+Або ручний запуск: Actions → KONOPLA.UA News Pipeline → Run workflow (вибір: `all` / `global` / `ua`)
+
 ### Додати RSS джерело
-Файл `scripts/config.py` → масив `RSS_FEEDS` → додай URL
+`scripts/config.py` → масив `RSS_FEEDS` → додай URL
 
 ### Видалити новину
 Видали файл з `content/news/` → commit → сайт перебудується
 
-### Додати стоп-слова
+### Стоп-слова
 `scripts/config.py` → `STOP_WORDS` (жорсткі) або `SOFT_STOP_WORDS` (контекстні)
+
+### Каталог компаній
+Керується через `/admin/catalog/` — захищено паролем. Дані зберігаються в `data/catalog.json`.
+
+---
+
+## 📋 Модерація
+
+Система підтримує режим чернеток: нові статті спочатку потрапляють у `data/drafts.json`, де їх можна переглянути і схвалити через адмін-панель (`/admin/`) перед публікацією.
 
 ---
 
 ## 🔍 Моніторинг
 
-Система автоматично відправляє алерти в Telegram:
+Автоматичні алерти в Telegram:
 
 | Ситуація | Рівень | Повідомлення |
 |---|---|---|
@@ -129,48 +118,60 @@ Actions → Konopla.UA News Pipeline → Run workflow
 | Всі статті зафейлились | ❌ ERROR | Зі звуком |
 | Pipeline впав | 🚨 CRITICAL | Зі звуком |
 
-Алерти йдуть у `ADMIN_CHAT_ID` (якщо заданий) або в канал.
-
-**Рекомендація:** створи окрему групу/чат з ботом і встанови `ADMIN_CHAT_ID` = ID цієї групи. Тоді алерти не будуть змішуватись з новинами.
+Алерти йдуть у `ADMIN_CHAT_ID` (якщо заданий) або в канал новин.
 
 ---
 
 ## 📁 Структура проєкту
 
 ```
-konopla-ua/
+konopla/
 ├── .github/workflows/pipeline.yml   ← Розклад + деплой
 ├── hugo.toml                        ← Конфігурація сайту
+├── CLAUDE.md                        ← Інструкції для AI асистента
 ├── content/
 │   ├── about.md                     ← Сторінка "Про нас"
-│   └── news/                        ← Новини (автоматично)
-├── data/processed.json              ← Трекер дублікатів
+│   ├── news/                        ← Новини (автоматично)
+│   ├── knowledge/                   ← База знань (статті)
+│   └── catalog/                     ← Сторінки компаній
+├── data/
+│   ├── processed.json               ← Трекер дублікатів
+│   ├── drafts.json                  ← Чернетки (модерація)
+│   ├── catalog.json                 ← База компаній каталогу
+│   └── sources.json                 ← Налаштування джерел RSS
 ├── layouts/
-│   ├── _default/
-│   │   ├── baseof.html              ← Базовий шаблон
-│   │   ├── single.html              ← Стаття
-│   │   ├── list.html                ← Список/категорія
-│   │   └── about.html               ← Про нас
+│   ├── _default/                    ← Базові шаблони
 │   ├── index.html                   ← Головна
+│   ├── news/                        ← Шаблони новин
+│   ├── catalog/                     ← Шаблони каталогу
+│   ├── knowledge/                   ← Шаблони бази знань
+│   ├── admin/                       ← Адмін-панель новин
+│   │   └── catalog/                 ← Адмін-панель каталогу
 │   └── partials/
 │       ├── seo-head.html            ← SEO, OG, JSON-LD
 │       ├── header.html              ← Шапка + навігація
 │       ├── footer.html              ← Підвал
-│       ├── article-card.html        ← Картка новини
-│       └── ad-banner.html           ← Рекламні зони
+│       └── article-card.html        ← Картка новини
 ├── scripts/
 │   ├── config.py                    ← Всі налаштування
 │   ├── fetcher.py                   ← Збір RSS
-│   ├── rewriter.py                  ← Gemini AI рерайт
+│   ├── rewriter.py                  ← AI рерайт (Gemini / OpenRouter)
 │   ├── publisher.py                 ← Генерація markdown
-│   ├── images.py                    ← Unsplash фото
-│   ├── telegram_bot.py              ← Постинг Telegram
+│   ├── moderator.py                 ← Управління чернетками
+│   ├── images.py                    ← Unsplash / AI фото
+│   ├── telegram_bot.py              ← Постинг у Telegram
+│   ├── telegram_poster.py           ← Розширений Telegram постинг
+│   ├── threads_poster.py            ← Постинг у Threads
+│   ├── youtube_monitor.py           ← Моніторинг YouTube каналів
 │   ├── instagram.py                 ← Генерація Stories
 │   ├── monitor.py                   ← Алерти та моніторинг
+│   ├── scheduler.py                 ← Планувальник завдань
 │   └── main.py                      ← Оркестратор
 └── static/
-    ├── css/style.css                ← Стилі
-    ├── images/favicon.svg           ← Іконка
+    ├── css/style.css                ← Стилі (CSS змінні + темна тема)
+    ├── images/
+    │   └── generated/               ← AI-згенеровані зображення
+    ├── favicon.svg                  ← Іконка
     ├── robots.txt                   ← SEO
     └── instagram/                   ← Згенеровані Stories
 ```
@@ -184,6 +185,7 @@ konopla-ua/
 | GitHub Pages | $0 |
 | GitHub Actions | $0 (2000 хв/міс) |
 | Gemini API | $0 (free tier) |
+| OpenRouter API | від $0.001/запит (опційно) |
 | Unsplash API | $0 (50 req/hr) |
 | Домен konopla.ua | ~$10/рік |
 | **Разом** | **~$10/рік** |
@@ -192,7 +194,7 @@ konopla-ua/
 
 ## ❓ FAQ
 
-**Робот не запускається**
+**Pipeline не запускається**
 → Перевір Actions → чи увімкнені workflows → чи правильні секрети
 
 **Новини не з'являються**
@@ -207,28 +209,11 @@ konopla-ua/
 **Як змінити дизайн?**
 → Редагуй `static/css/style.css`. Кольори задані через CSS змінні на початку файлу.
 
-**Як додати рекламу?**
-→ Редагуй `layouts/partials/ad-banner.html`. Заміни плейсхолдер на HTML код банера.
-
 **Скільки новин на день?**
 → В середньому 8-16 новин (2-4 за кожен запуск, 4 запуски на день).
 
 **Gemini перестав працювати**
-→ Можливо перевищено ліміт. Безкоштовний tier: 15 запитів/хв. Скрипт має retry.
+→ Можливо перевищено ліміт (15 req/min). Як альтернатива — підключи `OPENROUTER_API_KEY`.
 
----
-
-## 🔮 Можливі покращення
-
-- Підключити Claude API замість Gemini (кращий рерайт, але платний)
-- Генерувати зображення через DALL-E / Stable Diffusion
-- Додати коментарі через Disqus або Giscus
-- Email-розсилка (Mailchimp / Buttondown)
-- Повнотекстовий пошук по сайту
-- Мультимовність (EN/UK)
-
----
-
-## 📘 Повна документація
-
-Детальна інструкція з керування, налаштування реклами, Instagram Stories, моніторингу, Google Analytics і всього іншого — у файлі **[DOCS.md](DOCS.md)**.
+**Як додати компанію до каталогу?**
+→ Зайди на `/admin/catalog/`, авторизуйся паролем, натисни "+ Додати компанію".
