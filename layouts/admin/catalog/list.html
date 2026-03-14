@@ -512,6 +512,123 @@
   flex-wrap: wrap;
   align-items: center;
 }
+
+/* ---- Group title accent ---- */
+.cat-group-title {
+  border-left: 3px solid var(--green-accent);
+}
+
+/* =====================
+   MOBILE RESPONSIVE
+   ===================== */
+@media (max-width: 640px) {
+
+  /* Header */
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0 14px;
+  }
+  .admin-header h1 {
+    font-size: 1.05rem;
+  }
+  .admin-actions-top {
+    width: 100%;
+    gap: 6px;
+  }
+  .admin-actions-top .admin-btn {
+    padding: 0.38rem 0.65rem;
+    font-size: 0.79rem;
+  }
+
+  /* Filters */
+  .cat-filters {
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 12px;
+  }
+  .cat-search-input,
+  .cat-select {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+  }
+  .cat-count {
+    text-align: right;
+  }
+
+  /* Group title */
+  .cat-group-title {
+    font-size: 0.9rem;
+    padding: 9px 12px;
+  }
+
+  /* Table → Card layout */
+  .cat-company-table thead {
+    display: none;
+  }
+  .cat-company-table,
+  .cat-company-table tbody,
+  .cat-company-table tr,
+  .cat-company-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .cat-company-table {
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+  .cat-company-table tr {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .cat-company-table tr:last-child {
+    border-bottom: none;
+  }
+  .cat-company-table tr:hover {
+    background: var(--bg-tertiary);
+  }
+  .cat-company-table tr:hover td {
+    background: transparent;
+  }
+  .cat-company-table td {
+    padding: 0;
+    border: none;
+    font-size: 0.85rem;
+  }
+
+  /* Name */
+  .cat-company-table td:nth-child(1) {
+    padding-right: 80px; /* room for status badge */
+    margin-bottom: 5px;
+  }
+  /* Region */
+  .cat-company-table td:nth-child(2) {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  /* Tags */
+  .cat-company-table td:nth-child(3) {
+    margin-bottom: 8px;
+  }
+  /* Status — float top-right */
+  .cat-company-table td:nth-child(4) {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: auto;
+  }
+  /* Actions */
+  .cat-company-table td:nth-child(5) {
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+}
 </style>
 
 <script>
