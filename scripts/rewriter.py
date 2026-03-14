@@ -193,7 +193,7 @@ def _parse_json_response(text):
     if article_data.get("rejected"):
         reason = article_data.get("reason", "невідома причина")
         print(f"   🚫 AI rejected: {reason}")
-        return None
+        return {"rejected": True, "reason": reason}
 
     required = ["title", "summary", "content", "category", "tags"]
     if not all(key in article_data for key in required):

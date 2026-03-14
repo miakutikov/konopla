@@ -77,6 +77,7 @@ def run_pipeline(ua_only=False):
     total_found = 0
     rewritten_count = 0
     failed_count = 0
+    skipped_count = 0
 
     try:
         # === STEP 1: Fetch articles ===
@@ -128,9 +129,17 @@ def run_pipeline(ua_only=False):
                 print(f"   ❌ Rewrite error: {e}")
 
             if not rewritten:
-                print("   ⏭️  Skipping — rewrite failed")
+                print("   ⏭️  Skipping — rewrite failed (API error)")
                 failed_count += 1
-                # Mark as processed to avoid re-fetching rejected/failed articles
+                # Mark as processed to avoid re-fetching failed articles
+                processed["articles"].append(article["hash"])
+                save_processed(processed)
+                continue
+
+            if rewritten.get("rejected"):
+                print(f"   ⏭️  Skipping — AI rejected as irrelevant")
+                skipped_count += 1
+                # Mark as processed to avoid re-fetching rejected articles
                 processed["articles"].append(article["hash"])
                 save_processed(processed)
                 continue
@@ -243,13 +252,14 @@ def run_pipeline(ua_only=False):
     print(f"📊 Pipeline complete!")
     print(f"   📰 Total found: {total_found}")
     print(f"   ✍️  Rewritten: {rewritten_count}")
-    print(f"   ❌ Failed: {failed_count}")
+    print(f"   🚫 Skipped (irrelevant): {skipped_count}")
+    print(f"   ❌ Failed (API errors): {failed_count}")
     print(f"   ⏱  Duration: {duration:.0f}s")
     print(f"   📋 Draft articles created (waiting for admin approval at /admin/)")
     print("=" * 60)
 
     try:
-        send_pipeline_report(rewritten_count, failed_count, total_found, duration)
+        send_pipeline_report(rewritten_count, failed_count, total_found, duration, skipped_count)
     except Exception:
         pass
 
