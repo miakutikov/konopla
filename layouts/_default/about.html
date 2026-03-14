@@ -1,10 +1,180 @@
 {{ define "main" }}
-<div class="container">
-  <article class="about-page">
-    <h1>{{ .Title }}</h1>
-    <div class="about-content">
-      {{ .Content }}
+<div class="about-page">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero__inner">
+      <p class="about-hero__eyebrow">Про нас</p>
+      <h1 class="about-hero__title">З повагою до природи.<br>З любов'ю до життя.</h1>
+      <p class="about-hero__subtitle">Ми віримо, що майбутнє належить тим ресурсам, які здатні відновлюватися. <strong>Промислові коноплі</strong> — це не просто сировина. Це універсальний інструмент, створений самою природою для того, щоб ми могли будувати, одягатися, харчуватися та розвивати технології, не руйнуючи планету.</p>
     </div>
-  </article>
+  </section>
+
+  <!-- MISSION -->
+  <section class="about-mission">
+    <div class="container">
+      <div class="about-mission__card">
+        <p class="about-mission__text"><strong>Konopla.ua</strong> — це більше, ніж просто портал чи каталог. Це простір для тих, хто обирає <strong>екологічність як стиль життя</strong> та основу для бізнесу. Ми об'єднуємо українських виробників, підприємців та споживачів навколо ідеї свідомого споживання.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 PILLARS -->
+  <section class="about-pillars">
+    <div class="container">
+      <h2 class="about-section-title">Тут ви знайдете</h2>
+      <div class="about-pillars__grid">
+        <div class="about-pillar">
+          <div class="about-pillar__icon">📰</div>
+          <h3 class="about-pillar__title">Достовірну інформацію</h3>
+          <p class="about-pillar__text">Актуальні новини конопляної індустрії з усього світу</p>
+        </div>
+        <div class="about-pillar">
+          <div class="about-pillar__icon">🏭</div>
+          <h3 class="about-pillar__title">Перевірені компанії</h3>
+          <p class="about-pillar__text">Каталог українських виробників та постачальників</p>
+        </div>
+        <div class="about-pillar">
+          <div class="about-pillar__icon">🌿</div>
+          <h3 class="about-pillar__title">Якісні еко-товари</h3>
+          <p class="about-pillar__text">Продукція з промислових конопель для свідомих споживачів</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section class="about-topics">
+    <div class="container">
+      <h2 class="about-section-title">Що ми висвітлюємо</h2>
+      <p class="about-section-subtitle">Все, що пов'язано з легальним комерційним використанням конопель</p>
+      <div class="about-topics__grid">
+        <div class="about-topic">
+          <span class="about-topic__icon">👗</span>
+          <div>
+            <strong>Текстиль і мода</strong>
+            <span>тканини, одяг, аксесуари</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">🏗️</span>
+          <div>
+            <strong>Будівництво</strong>
+            <span>hempcrete, ізоляція, матеріали</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">🌾</span>
+          <div>
+            <strong>Агро</strong>
+            <span>вирощування, переробка, технології</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">♻️</span>
+          <div>
+            <strong>Біопластик</strong>
+            <span>заміна пластику, пакування</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">🥗</span>
+          <div>
+            <strong>Харчова промисловість</strong>
+            <span>насіння, олія, протеїн, суперфуд</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">🚗</span>
+          <div>
+            <strong>Автопром</strong>
+            <span>конопляні композити</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">⚡</span>
+          <div>
+            <strong>Енергетика</strong>
+            <span>батареї, суперконденсатори, біопаливо</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">💚</span>
+          <div>
+            <strong>Косметика</strong>
+            <span>натуральна косметика на основі конопель</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">🔬</span>
+          <div>
+            <strong>Наука</strong>
+            <span>дослідження, патенти, розробки</span>
+          </div>
+        </div>
+        <div class="about-topic">
+          <span class="about-topic__icon">⚖️</span>
+          <div>
+            <strong>Законодавство</strong>
+            <span>регулювання в Україні та світі</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="about-disclaimer-section">
+    <div class="container">
+      <div class="about-disclaimer__card">
+        <div class="about-disclaimer__header">
+          <span class="about-disclaimer__dicon">✋</span>
+          <h3>Що ми НЕ висвітлюємо</h3>
+        </div>
+        <p>Портал <strong>не має жодного відношення</strong> до наркотичних речовин, марихуани, рекреаційного використання канабісу. Весь контент стосується виключно легальної промислової конопляної індустрії.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="about-quote-section">
+    <div class="container">
+      <blockquote class="about-quote__text">
+        Ми створюємо екосистему, де інновації працюють у злагоді з традиціями, а кожен вибір робиться:
+        <strong>З повагою до природи. З любов'ю до життя.</strong>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="about-contacts">
+    <div class="container">
+      <h2 class="about-section-title">Контакти</h2>
+      <div class="about-contacts__grid">
+        <a href="https://t.me/uakonopla" class="about-contact-card" target="_blank" rel="noopener">
+          <span class="about-contact-card__icon">✈️</span>
+          <div>
+            <strong>Telegram-канал</strong>
+            <span>@uakonopla</span>
+          </div>
+        </a>
+        <a href="https://www.threads.net/@konopla.ua" class="about-contact-card" target="_blank" rel="noopener">
+          <span class="about-contact-card__icon">🧵</span>
+          <div>
+            <strong>Threads</strong>
+            <span>@konopla.ua</span>
+          </div>
+        </a>
+        <a href="/feed.xml" class="about-contact-card">
+          <span class="about-contact-card__icon">📡</span>
+          <div>
+            <strong>RSS-стрічка</strong>
+            <span>Підписатись</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
 </div>
 {{ end }}
