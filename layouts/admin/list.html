@@ -14,7 +14,7 @@
         <h1>🔐 Адмін-панель</h1>
         <p>Введіть пароль для доступу</p>
         <form id="auth-form">
-          <input type="password" id="auth-key" placeholder="Пароль" autocomplete="off" class="auth-input">
+          <input type="password" id="auth-key" placeholder="Пароль" autocomplete="off" class="auth-input" autofocus>
           <button type="submit" class="auth-btn">Увійти</button>
         </form>
         <p id="auth-error" class="auth-error" style="display:none">Невірний пароль</p>
@@ -48,8 +48,8 @@
 
           <div class="cf-row">
             <div class="cf-field cf-field-wide">
-              <label>Заголовок *</label>
-              <input type="text" id="cf-title" maxlength="120" placeholder="Чіткий інформативний заголовок">
+              <label>Заголовок * <span id="cf-title-counter" style="font-weight:normal;color:var(--text-tertiary);font-size:0.8rem">0/120</span></label>
+              <input type="text" id="cf-title" maxlength="120" placeholder="Чіткий інформативний заголовок" oninput="document.getElementById('cf-title-counter').textContent=this.value.length+'/120'">
             </div>
           </div>
 
@@ -3030,7 +3030,13 @@
 
   function showStatus(msg, type) {
     var el = document.getElementById('status-bar');
-    el.textContent = msg;
+    el.innerHTML = '';
+    el.appendChild(document.createTextNode(msg));
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '\u2715';
+    closeBtn.style.cssText = 'background:none;border:none;color:inherit;font-size:1rem;cursor:pointer;margin-left:12px;padding:0 4px;opacity:0.7';
+    closeBtn.onclick = function() { el.style.display = 'none'; };
+    el.appendChild(closeBtn);
     el.className = 'admin-status ' + (type || 'info');
     el.style.display = 'block';
 
@@ -3133,6 +3139,7 @@
     document.getElementById('cf-youtube').value = '';
     document.getElementById('cf-source-url').value = '';
     document.getElementById('cf-source').value = 'KONOPLA.UA';
+    document.getElementById('cf-title-counter').textContent = '0/120';
     var imgPreview = document.getElementById('cf-image-preview');
     if (imgPreview) imgPreview.style.display = 'none';
     var imgPreviewImg = document.getElementById('cf-image-preview-img');
@@ -3146,6 +3153,7 @@
     var submitBtn = document.querySelector('.cf-submit-btn');
     if (submitBtn) submitBtn.textContent = String.fromCodePoint(0x1F4DD) + ' ' + 'Створити статтю';
     editingFile = null;
+    window._formDirty = false;
   }
 
   // =========================================================================
@@ -3184,12 +3192,34 @@
         return '\n' + lines.map(function(l) { return '> ' + l; }).join('\n') + '\n\n';
       }
     });
+    // Track dirty state for unsaved changes warning
+    quillEditor.on('text-change', function() { window._formDirty = true; });
   }
+
+  // --- Form dirty tracking & keyboard shortcut ---
+  window._formDirty = false;
+  document.getElementById('create-form').addEventListener('input', function() { window._formDirty = true; });
+  window.addEventListener('beforeunload', function(e) {
+    if (window._formDirty && document.getElementById('create-form').style.display !== 'none') {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      var form = document.getElementById('create-form');
+      if (form && form.style.display !== 'none') {
+        e.preventDefault();
+        if (typeof window.createArticle === 'function') window.createArticle();
+      }
+    }
+  });
 
   window.toggleCreateForm = function() {
     var form = document.getElementById('create-form');
     var visible = form.style.display !== 'none';
     if (visible) {
+      if (window._formDirty && !confirm('Ви маєте незбережені зміни. Закрити форму?')) return;
       resetCreateForm();
     } else {
       editingFile = null;

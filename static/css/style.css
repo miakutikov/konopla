@@ -1073,6 +1073,7 @@ img { max-width: 100%; height: auto; display: block; }
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .company-contacts {
@@ -1148,8 +1149,9 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .company-card-link:hover { text-decoration: none; }
 .company-card-featured {
-  border-color: rgba(52, 211, 153, 0.4) !important;
-  background: rgba(52, 211, 153, 0.03) !important;
+  border-color: rgba(52, 211, 153, 0.5) !important;
+  background: rgba(52, 211, 153, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.15), 0 2px 8px rgba(52, 211, 153, 0.1);
 }
 .company-card-logo {
   margin-bottom: 12px;
@@ -1579,6 +1581,8 @@ img { max-width: 100%; height: auto; display: block; }
   .share-buttons { gap: 6px; }
   .share-btn { padding: 5px 10px; font-size: 0.78rem; }
   .news-content-header h1 { font-size: 1.4rem; }
+  .article-content { font-size: 1rem; }
+  .article-content > p:first-of-type { font-size: 1.08rem; }
 }
 
 /* === SCROLLBAR (for webkit) === */
