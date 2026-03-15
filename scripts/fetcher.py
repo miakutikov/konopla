@@ -9,6 +9,7 @@ import os
 import re
 import tempfile
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from config import (
     load_sources, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
@@ -170,6 +171,64 @@ def extract_images(entry):
     return images[:5]
 
 
+MAX_FETCH_THREADS = 5
+
+
+def _fetch_single_feed(feed_url, processed_hashes, cutoff):
+    """Завантажує та парсить один RSS-фід. Повертає список сирих статей (без dedup)."""
+    raw_articles = []
+    try:
+        req = urllib.request.Request(
+            feed_url,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; KONOPLA.UA/1.0)"}
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            feed_content = resp.read()
+        feed = feedparser.parse(feed_content)
+        source = feed.feed.get("title", feed_url)[:50]
+
+        for entry in feed.entries:
+            title = clean_html(entry.get("title", ""))
+            link = entry.get("link", "")
+            content_parts = entry.get("content", [])
+            full_content = ""
+            if content_parts and isinstance(content_parts, list):
+                full_content = clean_html(content_parts[0].get("value", ""))
+            summary = clean_html(entry.get("summary", entry.get("description", "")))
+
+            if len(title) < MIN_TITLE_LENGTH:
+                continue
+
+            pub_date = parse_date(entry)
+            if pub_date and pub_date < cutoff:
+                continue
+
+            article_hash = make_hash(title, link)
+            if article_hash in processed_hashes:
+                continue
+
+            if is_drug_related(title, summary):
+                continue
+
+            article_text = full_content if len(full_content) > len(summary) else summary
+            source_images = extract_images(entry)
+            raw_articles.append({
+                "title": title,
+                "link": link,
+                "summary": summary[:500],
+                "content": article_text[:5000],
+                "date": pub_date.isoformat() if pub_date else datetime.now(timezone.utc).isoformat(),
+                "source": source,
+                "hash": article_hash,
+                "source_images": source_images,
+            })
+
+    except Exception as e:
+        print(f"[WARN] Failed to parse feed {feed_url}: {e}")
+
+    return raw_articles
+
+
 def fetch_all_feeds(region='all'):
     """
     Збирає всі нові статті з RSS-фідів.
@@ -179,83 +238,45 @@ def fetch_all_feeds(region='all'):
     """
     processed = load_processed()
     processed_hashes = set(processed["articles"])
-
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
 
-    all_articles = []
+    feeds_to_use = load_sources(region=region)
+
+    # === Паралельний fetch ===
+    raw_articles = []
+    with ThreadPoolExecutor(max_workers=MAX_FETCH_THREADS) as executor:
+        futures = {
+            executor.submit(_fetch_single_feed, url, processed_hashes, cutoff): url
+            for url in feeds_to_use
+        }
+        for future in as_completed(futures):
+            try:
+                raw_articles.extend(future.result())
+            except Exception as e:
+                print(f"[WARN] Feed thread error: {e}")
+
+    # === Однопотокова дедуплікація ===
     seen_hashes = set()
     accepted_titles = list(processed.get("recent_titles", []))
+    all_articles = []
 
-    feeds_to_use = load_sources(region=region)
-    for feed_url in feeds_to_use:
-        try:
-            req = urllib.request.Request(
-                feed_url,
-                headers={"User-Agent": "Mozilla/5.0 (compatible; KONOPLA.UA/1.0)"}
-            )
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                feed_content = resp.read()
-            feed = feedparser.parse(feed_content)
-            source = feed.feed.get("title", feed_url)[:50]
-            
-            for entry in feed.entries:
-                title = clean_html(entry.get("title", ""))
-                link = entry.get("link", "")
-                # Get full content if available, otherwise summary
-                content_parts = entry.get("content", [])
-                full_content = ""
-                if content_parts and isinstance(content_parts, list):
-                    full_content = clean_html(content_parts[0].get("value", ""))
-                summary = clean_html(entry.get("summary", entry.get("description", "")))
-                
-                # Basic quality checks
-                if len(title) < MIN_TITLE_LENGTH:
-                    continue
-                
-                # Check date
-                pub_date = parse_date(entry)
-                if pub_date and pub_date < cutoff:
-                    continue
-                
-                # Deduplication
-                article_hash = make_hash(title, link)
-                if article_hash in processed_hashes or article_hash in seen_hashes:
-                    continue
-                
-                # Drug filter
-                if is_drug_related(title, summary):
-                    continue
-
-                # Semantic dedup
-                if is_semantically_duplicate(title, accepted_titles):
-                    print(f"[DEDUP] Skipping similar: {title[:60]}...")
-                    continue
-
-                seen_hashes.add(article_hash)
-                accepted_titles.append(title)
-                # Use full content if available, otherwise summary
-                article_text = full_content if len(full_content) > len(summary) else summary
-                # Extract images from source article
-                source_images = extract_images(entry)
-                all_articles.append({
-                    "title": title,
-                    "link": link,
-                    "summary": summary[:500],
-                    "content": article_text[:5000],
-                    "date": pub_date.isoformat() if pub_date else datetime.now(timezone.utc).isoformat(),
-                    "source": source,
-                    "hash": article_hash,
-                    "source_images": source_images,
-                })
-                
-        except Exception as e:
-            print(f"[WARN] Failed to parse feed {feed_url}: {e}")
+    for article in raw_articles:
+        article_hash = article["hash"]
+        if article_hash in seen_hashes:
             continue
-    
+
+        if is_semantically_duplicate(article["title"], accepted_titles):
+            print(f"[DEDUP] Skipping similar: {article['title'][:60]}...")
+            continue
+
+        seen_hashes.add(article_hash)
+        accepted_titles.append(article["title"])
+        all_articles.append(article)
+
     # Sort by date (newest first) and limit
     all_articles.sort(key=lambda x: x["date"], reverse=True)
     all_articles = all_articles[:MAX_ARTICLES_PER_RUN]
-    
+
     print(f"[INFO] Found {len(all_articles)} new articles from {len(feeds_to_use)} feeds")
     return all_articles
 

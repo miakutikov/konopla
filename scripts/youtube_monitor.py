@@ -21,6 +21,7 @@ from config import API_DELAY_SECONDS
 from rewriter import rewrite_article
 from publisher import create_article_file
 from fetcher import is_drug_related
+from utils import load_json, save_json
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_FILE = os.path.join(PROJECT_ROOT, "data", "processed_videos.json")
@@ -30,7 +31,11 @@ CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
 
 # Maximum videos to process per run (conserve API quota)
-MAX_VIDEOS_PER_RUN = 3
+MAX_VIDEOS_PER_RUN = 5
+
+# TTL-кеш для YouTube пошукових запитів (години)
+SEARCH_CACHE_TTL_HOURS = 12
+SEARCH_CACHE_FILE = os.path.join(PROJECT_ROOT, "data", "youtube_search_cache.json")
 
 # How many days to look back for videos
 SEARCH_DAYS_BACK = 7
@@ -50,34 +55,63 @@ SEARCH_QUERIES = [
 
 def load_processed():
     """Завантажує список оброблених відео."""
-    if os.path.exists(PROCESSED_FILE):
-        with open(PROCESSED_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"video_ids": []}
+    return load_json(PROCESSED_FILE, {"video_ids": []})
 
 
 def save_processed(data):
-    """Зберігає список оброблених відео."""
-    os.makedirs(os.path.dirname(PROCESSED_FILE), exist_ok=True)
+    """Зберігає список оброблених відео (атомарний запис)."""
     # Keep only last 500 entries
     data["video_ids"] = data["video_ids"][-500:]
-    with open(PROCESSED_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    save_json(PROCESSED_FILE, data)
 
 
-def load_json(filepath, default):
-    """Завантажує JSON файл."""
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return default
 
 
-def save_json(filepath, data):
-    """Зберігає JSON файл."""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def _get_cached_search(query, published_after):
+    """Повертає кешовані результати або None якщо кеш відсутній/expired."""
+    import hashlib as _hashlib
+    cache = load_json(SEARCH_CACHE_FILE, {"queries": {}})
+    cache_key = _hashlib.md5(f"{query}|{published_after}".encode()).hexdigest()
+
+    entry = cache["queries"].get(cache_key)
+    if not entry:
+        return None
+
+    try:
+        cached_at = datetime.fromisoformat(entry["cached_at"])
+        age_hours = (datetime.now(timezone.utc) - cached_at).total_seconds() / 3600
+        if age_hours < SEARCH_CACHE_TTL_HOURS:
+            return entry["results"]
+    except (KeyError, ValueError):
+        pass
+
+    return None
+
+
+def _set_cached_search(query, published_after, results):
+    """Кешує результати пошуку (тільки непорожні)."""
+    if not results:
+        return
+    import hashlib as _hashlib
+    cache = load_json(SEARCH_CACHE_FILE, {"queries": {}})
+    cache_key = _hashlib.md5(f"{query}|{published_after}".encode()).hexdigest()
+
+    cache["queries"][cache_key] = {
+        "query": query,
+        "results": results,
+        "cached_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+    # Прибрати старі записи (більше 50)
+    if len(cache["queries"]) > 50:
+        sorted_keys = sorted(
+            cache["queries"].keys(),
+            key=lambda k: cache["queries"][k].get("cached_at", ""),
+        )
+        for old_key in sorted_keys[:-50]:
+            del cache["queries"][old_key]
+
+    save_json(SEARCH_CACHE_FILE, cache)
 
 
 def youtube_api_request(endpoint, params):
@@ -195,7 +229,14 @@ def run_youtube_monitor():
     candidates = {}  # video_id -> snippet data
     for query in SEARCH_QUERIES:
         print(f"\n🔍 Query: {query}")
-        results = search_videos(query, published_after, max_results=5)
+
+        # Спробувати кеш
+        results = _get_cached_search(query, published_after)
+        if results is not None:
+            print(f"  [CACHE HIT] {len(results)} results")
+        else:
+            results = search_videos(query, published_after, max_results=5)
+            _set_cached_search(query, published_after, results)
 
         for item in results:
             video_id = item.get("id", {}).get("videoId")

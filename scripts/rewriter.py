@@ -72,6 +72,38 @@ def rewrite_article(title, summary, source_url, content="", source_images=None):
     return None
 
 
+def _api_request_with_retry(url, payload, headers, label, max_attempts=2):
+    """Загальний HTTP POST з retry. Повертає розпарсений JSON або None."""
+    data = json.dumps(payload).encode("utf-8")
+
+    for attempt in range(max_attempts):
+        try:
+            req = urllib.request.Request(
+                url, data=data, headers=headers, method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+
+        except urllib.error.HTTPError as e:
+            try:
+                error_body = e.read().decode("utf-8")
+            except Exception:
+                error_body = ""
+            print(f"   [WARN] {label} error (attempt {attempt+1}): {e.code} {error_body[:150]}")
+            if e.code == 429:
+                time.sleep(5)
+                continue
+            else:
+                return None
+
+        except Exception as e:
+            print(f"   [WARN] {label} request failed (attempt {attempt+1}): {e}")
+            if attempt < max_attempts - 1:
+                time.sleep(3)
+
+    return None
+
+
 def _try_gemini(api_key, user_prompt):
     """Пробує Gemini API напряму."""
     print("   🤖 Trying: Gemini 2.5 Flash")
@@ -87,40 +119,18 @@ def _try_gemini(api_key, user_prompt):
         }
     }
 
-    data = json.dumps(payload).encode("utf-8")
+    result = _api_request_with_retry(
+        url, payload, {"Content-Type": "application/json"}, "Gemini"
+    )
+    if not result:
+        return None
 
-    for attempt in range(2):
-        try:
-            req = urllib.request.Request(
-                url, data=data,
-                headers={"Content-Type": "application/json"},
-                method="POST"
-            )
-
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                result = json.loads(resp.read().decode("utf-8"))
-
-            text = result["candidates"][0]["content"]["parts"][0]["text"]
-            return _parse_json_response(text)
-
-        except urllib.error.HTTPError as e:
-            try:
-                error_body = e.read().decode("utf-8")
-            except Exception:
-                error_body = ""
-            print(f"   [WARN] Gemini error (attempt {attempt+1}): {e.code} {error_body[:150]}")
-            if e.code == 429:
-                time.sleep(5)
-                continue
-            else:
-                return None
-
-        except Exception as e:
-            print(f"   [WARN] Gemini request failed (attempt {attempt+1}): {e}")
-            if attempt < 1:
-                time.sleep(3)
-
-    return None
+    try:
+        text = result["candidates"][0]["content"]["parts"][0]["text"]
+        return _parse_json_response(text)
+    except (KeyError, IndexError) as e:
+        print(f"   [WARN] Gemini response parse error: {e}")
+        return None
 
 
 def _try_openrouter(api_key, model, user_prompt):
@@ -137,45 +147,25 @@ def _try_openrouter(api_key, model, user_prompt):
         "max_tokens": 8192,
     }
 
-    data = json.dumps(payload).encode("utf-8")
+    result = _api_request_with_retry(
+        OPENROUTER_URL, payload,
+        {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+            "HTTP-Referer": "https://konopla.ua",
+            "X-Title": "KONOPLA.UA"
+        },
+        model
+    )
+    if not result:
+        return None
 
-    for attempt in range(2):
-        try:
-            req = urllib.request.Request(
-                OPENROUTER_URL, data=data,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": f"Bearer {api_key}",
-                    "HTTP-Referer": "https://konopla.ua",
-                    "X-Title": "KONOPLA.UA"
-                },
-                method="POST"
-            )
-
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                result = json.loads(resp.read().decode("utf-8"))
-
-            text = result["choices"][0]["message"]["content"]
-            return _parse_json_response(text)
-
-        except urllib.error.HTTPError as e:
-            try:
-                error_body = e.read().decode("utf-8")
-            except Exception:
-                error_body = ""
-            print(f"   [WARN] {model} error (attempt {attempt+1}): {e.code} {error_body[:150]}")
-            if e.code == 429:
-                time.sleep(5)
-                continue
-            else:
-                return None
-
-        except Exception as e:
-            print(f"   [WARN] Request failed (attempt {attempt+1}): {e}")
-            if attempt < 1:
-                time.sleep(3)
-
-    return None
+    try:
+        text = result["choices"][0]["message"]["content"]
+        return _parse_json_response(text)
+    except (KeyError, IndexError) as e:
+        print(f"   [WARN] {model} response parse error: {e}")
+        return None
 
 
 def _parse_json_response(text):

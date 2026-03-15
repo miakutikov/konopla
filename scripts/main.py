@@ -10,7 +10,6 @@ import argparse
 import json
 import os
 import sys
-import tempfile
 import time
 import traceback
 import uuid
@@ -19,29 +18,11 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import API_DELAY_SECONDS
+from utils import load_json, save_json
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
-
-
-def load_json(filepath, default):
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return default
-
-
-def save_json(filepath, data):
-    """Atomic JSON write: write to tmp then rename to prevent corruption on crash."""
-    dirpath = os.path.dirname(filepath)
-    os.makedirs(dirpath, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
-    ) as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-        tmp_path = f.name
-    os.replace(tmp_path, filepath)
 
 
 def run_pipeline(region='all'):

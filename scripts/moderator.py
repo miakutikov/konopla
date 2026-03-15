@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import TELEGRAM_OFFSET_FILE
 from telegram_bot import get_updates, send_message, ADMIN_CHAT_ID
+from utils import load_json, save_json
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "miakutikov/konopla")
@@ -32,19 +33,6 @@ GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "miakutikov/konopla")
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CATALOG_FILE = os.path.join(PROJECT_ROOT, "data", "catalog.json")
 DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
-
-
-def load_json(filepath, default):
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return default
-
-
-def save_json(filepath, data):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 # ---------------------------------------------------------------------------
