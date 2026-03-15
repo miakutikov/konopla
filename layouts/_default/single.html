@@ -24,7 +24,7 @@
     {{ if .Params.youtube_id }}
     <div class="article-video">
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/{{ .Params.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <iframe src="https://www.youtube.com/embed/{{ .Params.youtube_id }}" title="{{ .Title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
     {{ else if .Params.image }}
@@ -53,7 +53,7 @@
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener" class="share-btn share-li" title="LinkedIn">💼 LinkedIn</a>
       <button class="share-btn share-copy" onclick="copyLink()" title="Копіювати посилання">🔗 Копіювати</button>
     </div>
-    <div id="copy-toast" class="copy-toast">Скопійовано!</div>
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Скопійовано!</div>
 
     {{ if .Params.tags }}
     <div class="tags">
@@ -69,7 +69,7 @@
     </div>
     {{ end }}
 
-    <a href="{{ "/" | relURL }}" class="back-link">&larr; Всі новини</a>
+    <a href="{{ "/news/" | relURL }}" class="back-link">&larr; Всі новини</a>
   </article>
 
   <!-- Sidebar -->

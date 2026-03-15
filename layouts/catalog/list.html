@@ -3,6 +3,8 @@
   {{ $catalog := site.Data.catalog }}
   {{ if $catalog }}
 
+  {{ partial "breadcrumbs.html" . }}
+
   <div class="catalog-page-header">
     <h1>Каталог компаній</h1>
     <p>Українські компанії промислової конопляної індустрії</p>
@@ -14,10 +16,12 @@
   {{/* --- Filters bar --- */}}
   <div class="catalog-filters-bar">
     <input type="text" id="catalog-search" placeholder="🔍 Пошук компанії..." oninput="filterCatalog()" class="catalog-search-input">
+    {{ $s := newScratch }}
+    {{ range $catalog.companies }}{{ if eq .status "active" }}{{ $s.Add .category_id 1 }}{{ end }}{{ end }}
     <select id="catalog-cat" onchange="filterCatalog()" class="catalog-filter-select">
       <option value="all">Всі категорії</option>
       {{ range sort $catalog.categories "order" }}
-      <option value="{{ .id }}">{{ .emoji }} {{ .name }}</option>
+      <option value="{{ .id }}">{{ .emoji }} {{ .name }} ({{ $s.Get .id | default 0 }})</option>
       {{ end }}
     </select>
     <select id="catalog-region" onchange="filterCatalog()" class="catalog-filter-select">
@@ -88,6 +92,8 @@
        data-category="{{ $co.category_id }}"
        data-region="{{ $co.region }}"
        data-name="{{ $co.name | lower }}"
+       data-description="{{ $co.description | lower }}"
+       data-tags="{{ delimit $co.tags "," | lower }}"
        data-featured="{{ $co.featured }}">
 
       {{ if $co.logo }}
@@ -107,9 +113,9 @@
 
       <div class="company-card-footer">
         <div class="company-contacts">
-          {{ if $co.website }}<span class="company-link">🌐</span>{{ end }}
-          {{ if $co.phone }}<span class="company-link">📞</span>{{ end }}
-          {{ if $co.email }}<span class="company-link">✉️</span>{{ end }}
+          {{ if $co.website }}<span class="company-link" title="Має вебсайт">🌐</span>{{ end }}
+          {{ if $co.phone }}<span class="company-link" title="Є телефон">📞</span>{{ end }}
+          {{ if $co.email }}<span class="company-link" title="Є email">✉️</span>{{ end }}
         </div>
         {{ if gt $newsCount 0 }}
         <span class="company-news-badge">📰 {{ $newsCount }}</span>
@@ -146,7 +152,7 @@
     cards.forEach(function(card) {
       var matchCat    = cat    === 'all' || card.dataset.category === cat;
       var matchRegion = region === 'all' || card.dataset.region   === region;
-      var matchSearch = !search || card.dataset.name.indexOf(search) !== -1;
+      var matchSearch = !search || card.dataset.name.indexOf(search) !== -1 || (card.dataset.description || '').indexOf(search) !== -1 || (card.dataset.tags || '').indexOf(search) !== -1;
       var show = matchCat && matchRegion && matchSearch;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
