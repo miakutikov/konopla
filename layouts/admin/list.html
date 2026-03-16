@@ -1077,6 +1077,32 @@
 }
 
 /* Scheduler UI */
+.schedule-presets {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-right: 0.3rem;
+}
+.sched-preset {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.sched-preset:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: var(--text-primary);
+}
+.sched-preset.active {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgb(245, 158, 11);
+  color: rgb(245, 158, 11);
+}
 .schedule-row {
   display: flex;
   gap: 0.4rem;
@@ -2236,6 +2262,11 @@
           '<button class="queue-item-remove" onclick="removeFromQueue(' + idx + ')" title="Прибрати">✕</button>' +
         '</div>' +
         '<div class="queue-item-schedule">' +
+          '<span class="schedule-presets">' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'deploy\',' + idx + ',8)" title="08:00 Київ">\uD83C\uDF05 08</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'deploy\',' + idx + ',14)" title="14:00 Київ">\u2600\uFE0F 14</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'deploy\',' + idx + ',20)" title="20:00 Київ">\uD83C\uDF19 20</button>' +
+          '</span>' +
           '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-deploy-' + idx + '">' +
           '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'deploy\',' + idx + ')">⏰</button>' +
         '</div>' +
@@ -2437,6 +2468,11 @@
           '<button class="queue-item-remove" onclick="removeFromTgQueue(' + idx + ')" title="Прибрати">✕</button>' +
         '</div>' +
         '<div class="queue-item-schedule">' +
+          '<span class="schedule-presets">' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'telegram\',' + idx + ',8)" title="08:00 Київ">\uD83C\uDF05 08</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'telegram\',' + idx + ',14)" title="14:00 Київ">\u2600\uFE0F 14</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'telegram\',' + idx + ',20)" title="20:00 Київ">\uD83C\uDF19 20</button>' +
+          '</span>' +
           '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-telegram-' + idx + '">' +
           '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'telegram\',' + idx + ')">⏰</button>' +
         '</div>' +
@@ -2545,6 +2581,11 @@
           '<button class="queue-item-remove" onclick="removeFromThreadsQueue(' + idx + ')" title="Прибрати">✕</button>' +
         '</div>' +
         '<div class="queue-item-schedule">' +
+          '<span class="schedule-presets">' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'threads\',' + idx + ',8)" title="08:00 Київ">\uD83C\uDF05 08</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'threads\',' + idx + ',14)" title="14:00 Київ">\u2600\uFE0F 14</button>' +
+            '<button class="sched-preset" onclick="setSchedulePreset(\'threads\',' + idx + ',20)" title="20:00 Київ">\uD83C\uDF19 20</button>' +
+          '</span>' +
           '<input type="datetime-local" class="schedule-input schedule-input-sm" id="sched-threads-' + idx + '">' +
           '<button class="admin-btn admin-btn-schedule" onclick="scheduleArticle(\'threads\',' + idx + ')">⏰</button>' +
         '</div>' +
@@ -2618,6 +2659,36 @@
   // =========================================================================
   // Scheduler
   // =========================================================================
+
+  // Preset schedule buttons: set datetime-local to next 08:00/14:00/20:00 Kyiv time
+  window.setSchedulePreset = function(type, idx, hourKyiv) {
+    var KYIV_OFFSET = 3; // UTC+3 (EEST)
+    var now = new Date();
+    // Target date in UTC
+    var target = new Date(now);
+    target.setUTCHours(hourKyiv - KYIV_OFFSET, 0, 0, 0);
+    // If that time already passed today, move to tomorrow
+    if (target <= now) {
+      target.setUTCDate(target.getUTCDate() + 1);
+    }
+    // Format as local datetime-local value (YYYY-MM-DDTHH:MM)
+    var y = target.getFullYear();
+    var m = String(target.getMonth() + 1).padStart(2, '0');
+    var d = String(target.getDate()).padStart(2, '0');
+    var hh = String(target.getHours()).padStart(2, '0');
+    var mm = String(target.getMinutes()).padStart(2, '0');
+    var val = y + '-' + m + '-' + d + 'T' + hh + ':' + mm;
+    var input = document.getElementById('sched-' + type + '-' + idx);
+    if (input) input.value = val;
+    // Highlight active preset
+    var row = input && input.closest('.queue-item-schedule');
+    if (row) {
+      row.querySelectorAll('.sched-preset').forEach(function(btn) { btn.classList.remove('active'); });
+      row.querySelectorAll('.sched-preset').forEach(function(btn) {
+        if (btn.textContent.trim().endsWith(String(hourKyiv))) btn.classList.add('active');
+      });
+    }
+  };
 
   // Per-article scheduling: schedule one article from a queue
   window.scheduleArticle = async function(type, idx) {
