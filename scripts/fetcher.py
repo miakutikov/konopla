@@ -11,11 +11,14 @@ import tempfile
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
+import time
 from config import (
     load_sources, STOP_WORDS, SOFT_STOP_WORDS, ALLOW_CONTEXT,
+    HEMP_KEYWORDS, FEED_HEALTH_FILE,
     MAX_AGE_DAYS, MIN_TITLE_LENGTH, PROCESSED_FILE, MAX_ARTICLES_PER_RUN,
     SIMILARITY_THRESHOLD
 )
+from utils import load_json, save_json
 
 
 def load_processed():
@@ -29,7 +32,7 @@ def load_processed():
 def save_processed(data):
     """Зберігає список оброблених статей. Атомарний запис через tmp-файл."""
     # Keep only last 500 entries to prevent file from growing forever
-    data["articles"] = data["articles"][-500:]
+    data["articles"] = data["articles"][-1000:]
     dirpath = os.path.dirname(PROCESSED_FILE)
     os.makedirs(dirpath, exist_ok=True)
     with tempfile.NamedTemporaryFile(
@@ -103,6 +106,14 @@ def is_drug_related(title, summary):
     return False
 
 
+def is_hemp_relevant(title, content):
+    """Швидка перевірка: чи містить стаття хоча б одне конопляне ключове слово.
+    Використовується як пре-фільтр ПЕРЕД відправкою на AI.
+    """
+    text = f"{title} {content}".lower()
+    return any(kw in text for kw in HEMP_KEYWORDS)
+
+
 def parse_date(entry):
     """Витягує дату публікації зі запису RSS."""
     for field in ["published_parsed", "updated_parsed"]:
@@ -174,7 +185,7 @@ def extract_images(entry):
 MAX_FETCH_THREADS = 5
 
 
-def _fetch_single_feed(feed_url, processed_hashes, cutoff):
+def _fetch_single_feed(feed_url, processed_hashes, cutoff, trusted=False):
     """Завантажує та парсить один RSS-фід. Повертає список сирих статей (без dedup)."""
     raw_articles = []
     try:
@@ -211,12 +222,31 @@ def _fetch_single_feed(feed_url, processed_hashes, cutoff):
                 continue
 
             article_text = full_content if len(full_content) > len(summary) else summary
+
+            # === Пре-фільтр за ключовими словами ===
+            # Trusted feeds (hemptoday.net, hempgazette.com) пропускають цю перевірку
+            if not trusted and not is_hemp_relevant(title, article_text):
+                print(f"[PRE-FILTER] Skipped: \"{title[:70]}...\" (no hemp keywords)")
+                continue
+
+            # === Скрейпінг повного тексту якщо RSS-контент короткий ===
+            if len(article_text) < 500:
+                try:
+                    from scraper import scrape_article
+                    scraped = scrape_article(link)
+                    if scraped and len(scraped) > len(article_text):
+                        article_text = scraped
+                        print(f"[SCRAPER] Enriched: \"{title[:50]}...\" ({len(article_text)} chars)")
+                except Exception as e:
+                    print(f"[SCRAPER] Failed for {link[:60]}: {e}")
+                time.sleep(1)  # Be polite to origin servers
+
             source_images = extract_images(entry)
             raw_articles.append({
                 "title": title,
                 "link": link,
                 "summary": summary[:500],
-                "content": article_text[:5000],
+                "content": article_text[:8000],
                 "date": pub_date.isoformat() if pub_date else datetime.now(timezone.utc).isoformat(),
                 "source": source,
                 "hash": article_hash,
@@ -227,6 +257,28 @@ def _fetch_single_feed(feed_url, processed_hashes, cutoff):
         print(f"[WARN] Failed to parse feed {feed_url}: {e}")
 
     return raw_articles
+
+
+def _update_feed_health(health, feed_url, success, articles_found=0, hemp_relevant=0):
+    """Оновлює статистику здоров'я фіду."""
+    now = datetime.now(timezone.utc).isoformat()
+    entry = health.get(feed_url, {
+        "last_ok": None, "last_fail": None,
+        "fail_count": 0, "consecutive_fails": 0,
+        "articles_found": 0, "hemp_relevant": 0
+    })
+    if success:
+        entry["last_ok"] = now
+        entry["consecutive_fails"] = 0
+        entry["articles_found"] += articles_found
+        entry["hemp_relevant"] += hemp_relevant
+    else:
+        entry["last_fail"] = now
+        entry["fail_count"] += 1
+        entry["consecutive_fails"] += 1
+        if entry["consecutive_fails"] >= 10:
+            print(f"[HEALTH] ⚠️ Feed has {entry['consecutive_fails']} consecutive failures: {feed_url[:60]}")
+    health[feed_url] = entry
 
 
 def fetch_all_feeds(region='all'):
@@ -240,20 +292,36 @@ def fetch_all_feeds(region='all'):
     processed_hashes = set(processed["articles"])
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
 
-    feeds_to_use = load_sources(region=region)
+    sources = load_sources(region=region, full=True)
+    feed_health = load_json(FEED_HEALTH_FILE, default={})
 
     # === Паралельний fetch ===
     raw_articles = []
+    feed_fail_count = 0
     with ThreadPoolExecutor(max_workers=MAX_FETCH_THREADS) as executor:
-        futures = {
-            executor.submit(_fetch_single_feed, url, processed_hashes, cutoff): url
-            for url in feeds_to_use
-        }
+        futures = {}
+        for src in sources:
+            url = src["url"]
+            trusted = src.get("trusted", False)
+            futures[executor.submit(_fetch_single_feed, url, processed_hashes, cutoff, trusted)] = src
+
         for future in as_completed(futures):
+            src = futures[future]
             try:
-                raw_articles.extend(future.result())
+                articles = future.result()
+                raw_articles.extend(articles)
+                _update_feed_health(feed_health, src["url"], success=True,
+                                   articles_found=len(articles), hemp_relevant=len(articles))
             except Exception as e:
-                print(f"[WARN] Feed thread error: {e}")
+                print(f"[WARN] Feed thread error ({src.get('name', '?')}): {e}")
+                _update_feed_health(feed_health, src["url"], success=False)
+                feed_fail_count += 1
+
+    # Save feed health
+    try:
+        save_json(FEED_HEALTH_FILE, feed_health)
+    except Exception:
+        pass
 
     # === Однопотокова дедуплікація ===
     seen_hashes = set()
@@ -277,7 +345,9 @@ def fetch_all_feeds(region='all'):
     all_articles.sort(key=lambda x: x["date"], reverse=True)
     all_articles = all_articles[:MAX_ARTICLES_PER_RUN]
 
-    print(f"[INFO] Found {len(all_articles)} new articles from {len(feeds_to_use)} feeds")
+    total_rss = len(raw_articles)
+    print(f"[INFO] Found {len(all_articles)} new articles from {len(sources)} feeds ({feed_fail_count} failed)")
+    print(f"[INFO] RSS entries total: {total_rss}, after dedup: {len(all_articles)}")
     return all_articles
 
 

@@ -4,11 +4,12 @@ import json
 import os
 
 
-def load_sources(region=None):
+def load_sources(region=None, full=False):
     """Завантажує RSS-джерела з data/sources.json.
 
     region: 'global' | 'ua' | 'all' | None  — фільтр за регіоном.
-    Повертає список URL активних джерел.
+    full: якщо True — повертає повні об'єкти (з name, trusted тощо).
+    Повертає список URL або повних об'єктів активних джерел.
     """
     sources_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'sources.json')
     with open(sources_path, encoding='utf-8') as f:
@@ -16,7 +17,34 @@ def load_sources(region=None):
     sources = [s for s in data['sources'] if s.get('active', True)]
     if region and region != 'all':
         sources = [s for s in sources if s['region'] == region]
+    if full:
+        return sources
     return [s['url'] for s in sources]
+
+# === HEMP RELEVANCE PRE-FILTER ===
+# If title+content contains NONE of these → skip without calling AI
+# Roots/substrings to catch all morphological forms
+HEMP_KEYWORDS = [
+    # English
+    "hemp", "hempcrete", "hempseed", "hempwood",
+    # Ukrainian (root match: конопля/конопляний/коноплі/конопель)
+    "коноп",
+    "коноплян",
+    # German
+    "hanf",
+    # French
+    "chanvre",
+    # Italian
+    "canapa",
+    # Czech/Slovak
+    "konop",
+    # Polish
+    "konopi",
+    # Portuguese
+    "cânhamo",
+    # Spanish
+    "cáñamo",
+]
 
 # === CONTENT FILTERING ===
 
@@ -185,10 +213,10 @@ CATEGORY_IMAGE_QUERIES = {
 # === PIPELINE SETTINGS ===
 
 # How many articles to process per run
-MAX_ARTICLES_PER_RUN = 8
+MAX_ARTICLES_PER_RUN = 15
 
 # How many days to look back for articles
-MAX_AGE_DAYS = 3
+MAX_AGE_DAYS = 5
 
 # Minimum article title length (filter out garbage)
 MIN_TITLE_LENGTH = 20
@@ -198,6 +226,9 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # File to track already processed articles (prevents duplicates)
 PROCESSED_FILE = os.path.join(_PROJECT_ROOT, "data", "processed.json")
+
+# Feed health tracking
+FEED_HEALTH_FILE = os.path.join(_PROJECT_ROOT, "data", "feed_health.json")
 
 # Pending articles awaiting moderation
 PENDING_FILE = os.path.join(_PROJECT_ROOT, "data", "pending.json")
