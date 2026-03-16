@@ -210,6 +210,9 @@ def create_telegram_message(article_data, site_url="https://konopla.ua"):
         "косметика": "✨",
         "законодавство": "📋",
         "наука": "🔬",
+        "екологія": "🌍",
+        "бізнес": "💼",
+        "відео": "🎬",
         "інше": "📰",
     }
     emoji = emoji_map.get(category, "📰")

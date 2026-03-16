@@ -10,7 +10,10 @@
       {{ end }}
       <h1>{{ .Title }}</h1>
       <div class="article-meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 January 2006" }}</time>
+        {{ $months := dict "January" "січня" "February" "лютого" "March" "березня" "April" "квітня" "May" "травня" "June" "червня" "July" "липня" "August" "серпня" "September" "вересня" "October" "жовтня" "November" "листопада" "December" "грудня" }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02" }} {{ index $months (.Date.Format "January") }} {{ .Date.Format "2006" }}</time>
+        <span class="meta-sep">&middot;</span>
+        <span class="reading-time">{{ .ReadingTime }} хв читання</span>
         {{ if .Params.source }}
         <span class="meta-sep">&middot;</span>
         <span class="source">Джерело: {{ .Params.source }}</span>
@@ -26,7 +29,7 @@
     </div>
     {{ else if .Params.image }}
     <figure class="article-figure">
-      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image">
+      <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image" onerror="this.onerror=null;this.src='/images/logo.png';this.classList.add('article-image-fallback')">
       {{ if .Params.image_author }}
       <figcaption class="image-credit">
         Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> /
@@ -55,7 +58,7 @@
     {{ if .Params.tags }}
     <div class="tags">
       {{ range .Params.tags }}
-      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">#{{ . }}</a>
+      <span class="tag">#{{ . }}</span>
       {{ end }}
     </div>
     {{ end }}
@@ -86,10 +89,23 @@
     {{ end }}
 
     <!-- Telegram CTA -->
- 
+    <div class="sidebar-section sidebar-tg-cta">
+      <div class="tg-cta-inner">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="tg-cta-icon" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.357.14-.488.072l.21-2.958 5.37-4.853c.235-.21-.054-.326-.362-.117l-6.633 4.174-2.856-.892c-.621-.194-.633-.621.13-.92l11.16-4.3c.517-.187.97.126.8.822z"/></svg>
+        <h3 class="tg-cta-title">Слідкуйте за нами</h3>
+        <p class="tg-cta-text">Новини про промислові коноплі — першими у Telegram</p>
+        <a href="{{ .Site.Params.telegram }}" class="tg-cta-btn" target="_blank" rel="noopener">
+          Підписатись →
+        </a>
+      </div>
+    </div>
   </aside>
 
 </div>
+
+<!-- Reading progress bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
 <script>
 function copyLink() {
   navigator.clipboard.writeText(window.location.href).then(function() {
@@ -98,5 +114,21 @@ function copyLink() {
     setTimeout(function() { toast.classList.remove('show'); }, 2000);
   });
 }
+
+// Reading progress bar
+(function() {
+  var bar = document.getElementById('reading-progress');
+  var content = document.querySelector('.article-content');
+  if (!bar || !content) return;
+  function updateProgress() {
+    var rect = content.getBoundingClientRect();
+    var total = content.offsetHeight;
+    var scrolled = Math.max(0, -rect.top);
+    var pct = Math.min(100, total > 0 ? (scrolled / total) * 100 : 0);
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+})();
 </script>
 {{ end }}

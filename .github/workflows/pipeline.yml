@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '0 5,11,17 * * *'
   workflow_dispatch:
+    inputs:
+      region:
+        description: 'Які джерела сканувати'
+        type: choice
+        options: [all, global, ua]
+        default: all
 
 permissions:
   contents: write
@@ -31,7 +37,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install feedparser Pillow
+        run: pip install -r requirements.txt
 
       - name: Run news pipeline
         env:
@@ -44,7 +50,7 @@ jobs:
           PYTHONIOENCODING: utf-8
           LANG: en_US.UTF-8
           LC_ALL: en_US.UTF-8
-        run: python scripts/main.py
+        run: python scripts/main.py --region ${{ github.event.inputs.region || 'all' }}
 
       - name: Commit new drafts
         run: |

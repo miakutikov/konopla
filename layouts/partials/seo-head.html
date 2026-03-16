@@ -1,13 +1,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Resource hints -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
 
 <!-- SEO Meta -->
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta name="author" content="{{ .Site.Params.author }}">
-<meta name="robots" content="index, follow">
+{{ if .Params.keywords }}<meta name="keywords" content="{{ delimit .Params.keywords ", " }}">{{ end }}
+<meta name="robots" content="{{ if or .Params.draft (eq .Section "admin") (and (eq .Kind "taxonomy") (eq .Data.Singular "tag")) }}noindex, nofollow{{ else }}index, follow{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="uk" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{ if .Site.Params.googleSiteVerification }}<meta name="google-site-verification" content="{{ .Site.Params.googleSiteVerification }}">{{ end }}
+{{ if .Site.Params.bingVerification }}<meta name="msvalidate.01" content="{{ .Site.Params.bingVerification }}">{{ end }}
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="{{ .Site.Title }}">

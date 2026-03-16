@@ -2,7 +2,7 @@ baseURL = "https://konopla.ua/"
 languageCode = "uk"
 title = "KONOPLA.UA — Новини промислових конопель"
 defaultContentLanguage = "uk"
-buildDrafts = true
+buildDrafts = false
 
 # Pagination
 [pagination]
@@ -16,10 +16,11 @@ buildDrafts = true
   threads = "https://www.threads.net/@konopla.ua"
   admin_key_hash = "2738babb7ac0919565144b506470c0d84356b9ce14f367fb81b798528a4511be"
   github_repo = "miakutikov/konopla"
-  # Google Analytics — розкоментуй і встав свій ID:
-  # googleAnalytics = "G-XXXXXXXXXX"
-  # Google Analytics — розкоментуй і встав свій ID:
-  # google_analytics = "G-XXXXXXXXXX"
+  googleAnalytics = "G-XPRY9YLDBD"
+  # Google Search Console — розкоментуй і встав свій verification token:
+  # googleSiteVerification = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  # Bing Webmaster Tools — розкоментуй і встав свій verification token:
+  # bingVerification = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 [markup]
   [markup.goldmark]
@@ -36,7 +37,7 @@ buildDrafts = true
 
 [taxonomies]
   category = "categories"
-  tag = "tags"
+  # tag = "tags" — вимкнено: 186 унікальних тегів генерували ~186 порожніх сторінок у sitemap
 
 # Sitemap
 [sitemap]

@@ -31,7 +31,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install feedparser
+        run: pip install -r requirements.txt
 
       - name: Run bot commands
         env:

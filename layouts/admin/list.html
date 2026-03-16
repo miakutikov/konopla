@@ -24,7 +24,7 @@
     <!-- Admin panel (hidden until auth) -->
     <div id="admin-panel" style="display:none">
       <div class="admin-header">
-        <h1>Модерація</h1>
+        <h1>Модерація <span id="drafts-count" style="display:none;font-size:0.85rem;background:#f59e0b;color:#fff;border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle;"></span></h1>
         <div class="admin-actions-top">
           <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
           <button id="btn-refresh" class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
@@ -1920,6 +1920,8 @@
       if (resp.status === 404) {
         el.innerHTML = '';
         document.getElementById('empty-state').style.display = 'block';
+        var cb = document.getElementById('drafts-count');
+        if (cb) cb.style.display = 'none';
         return;
       }
 
@@ -1932,7 +1934,16 @@
       if (articles.length === 0) {
         el.innerHTML = '';
         document.getElementById('empty-state').style.display = 'block';
+        var countBadge = document.getElementById('drafts-count');
+        if (countBadge) countBadge.style.display = 'none';
         return;
+      }
+
+      // Update drafts count badge
+      var countBadge = document.getElementById('drafts-count');
+      if (countBadge) {
+        countBadge.textContent = articles.length + ' на модерації';
+        countBadge.style.display = 'inline';
       }
 
       // Sort newest first
@@ -3082,7 +3093,7 @@
     return btoa(binStr);
   }
 
-  async function ghApi(method, path, body) {
+  async function ghApi(method, path, body, _retries) {
     var url = 'https://api.github.com/repos/' + GITHUB_REPO + path;
     var opts = {
       method: method,
@@ -3096,7 +3107,19 @@
       opts.headers['Content-Type'] = 'application/json';
       opts.body = JSON.stringify(body);
     }
-    return fetch(url, opts);
+    var resp = await fetch(url, opts);
+    // Handle rate limit: retry once after the specified delay
+    if (resp.status === 429 || resp.status === 403) {
+      var retries = _retries || 0;
+      if (retries < 2) {
+        var retryAfter = parseInt(resp.headers.get('Retry-After') || resp.headers.get('X-RateLimit-Reset') || '10');
+        var delay = isNaN(retryAfter) ? 10 : Math.min(retryAfter, 60);
+        showStatus('⏳ GitHub rate limit. Повтор через ' + delay + ' сек…', 'info');
+        await new Promise(function(r) { setTimeout(r, delay * 1000); });
+        return ghApi(method, path, body, retries + 1);
+      }
+    }
+    return resp;
   }
 
   function showStatus(msg, type) {

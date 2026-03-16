@@ -3,6 +3,7 @@
 <head>
   {{ partial "seo-head.html" . }}
   {{ partial "analytics.html" . }}
+  {{ block "head-extra" . }}{{ end }}
 </head>
 <body>
   {{ partial "header.html" . }}
@@ -13,11 +14,38 @@
 
   {{ partial "footer.html" . }}
 
+  <!-- Back to top button -->
+  <button id="back-to-top" aria-label="Нагору" class="back-to-top">↑</button>
+
   <script>
   // Mobile menu toggle
-  document.querySelector('.menu-toggle')?.addEventListener('click', function() {
-    document.querySelector('.main-nav').classList.toggle('open');
-  });
+  var menuToggle = document.getElementById('menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    });
+    mobileMenu.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
+  // Back to top
+  var backBtn = document.getElementById('back-to-top');
+  if (backBtn) {
+    window.addEventListener('scroll', function() {
+      backBtn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
   </script>
 </body>
 </html>

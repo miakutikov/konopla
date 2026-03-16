@@ -41,7 +41,7 @@
       
       <a href="{{ .Permalink }}" class="featured-image-link" aria-hidden="true" tabindex="-1">
         {{ if .Params.image }}
-        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img" fetchpriority="high" decoding="async">
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img" fetchpriority="high" decoding="async" onerror="this.outerHTML='<div class=featured-img-placeholder><img src=/images/logo.png alt=KONOPLA.UA class=placeholder-logo></div>'">
         {{ else }}
         <div class="featured-img-placeholder">
           <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
@@ -138,14 +138,16 @@
   <section class="knowledge-section">
     <h2 class="section-title">База знань</h2>
     <p class="section-subtitle">Все про промислові коноплі для новачків</p>
-    <div class="knowledge-grid">
+    <div class="knowledge-list">
       {{ range $knowledge.ByWeight }}
-      <a href="{{ .Permalink }}" class="knowledge-card">
-        {{ if .Params.icon }}<span class="knowledge-icon">{{ .Params.icon }}</span>{{ end }}
-        <h3>{{ .Title }}</h3>
-        {{ if .Params.summary }}<p>{{ .Params.summary }}</p>{{ end }}
+      <a href="{{ .Permalink }}" class="knowledge-list-item">
+        {{ if .Params.icon }}<span class="knowledge-list-icon">{{ .Params.icon }}</span>{{ end }}
+        <span>{{ .Title }}</span>
       </a>
       {{ end }}
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <a href="/knowledge/" class="knowledge-all-link">Вся база знань &rarr;</a>
     </div>
   </section>
   {{ end }}

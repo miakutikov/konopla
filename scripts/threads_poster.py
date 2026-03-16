@@ -12,6 +12,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 import urllib.request
 import urllib.error
@@ -176,9 +177,14 @@ def run():
 
         time.sleep(3)
 
-    # Clear queue
-    with open(QUEUE_FILE, "w", encoding="utf-8") as f:
+    # Clear queue atomically
+    dirpath = os.path.dirname(QUEUE_FILE)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
         json.dump({"articles": []}, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, QUEUE_FILE)
 
     print(f"\n✅ Posted {posted}/{len(articles)} articles to Threads")
     return 0

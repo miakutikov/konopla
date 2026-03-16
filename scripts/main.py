@@ -18,34 +18,28 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import API_DELAY_SECONDS
+from utils import load_json, save_json
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 
 
-def load_json(filepath, default):
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return default
-
-
-def save_json(filepath, data):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-
-def run_pipeline(ua_only=False):
+def run_pipeline(region='all'):
     """Запускає pipeline: збір, рерайт, створення draft-статей.
 
-    ua_only: якщо True, використовує тільки українські RSS-фіди (UA_RSS_FEEDS)
+    region: 'all' | 'global' | 'ua' — які джерела сканувати (з data/sources.json)
     """
+
+    # Validate required API keys before starting
+    if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("OPENROUTER_API_KEY"):
+        print("[CRITICAL] Neither GEMINI_API_KEY nor OPENROUTER_API_KEY is set — aborting")
+        return 1
 
     start_time = time.time()
 
-    mode_label = "🇺🇦 UA-only" if ua_only else "🌍 Full"
+    region_labels = {'ua': '🇺🇦 UA', 'global': '🌍 Global', 'all': '🌐 All'}
+    mode_label = region_labels.get(region, f'🌐 {region}')
     print("=" * 60)
     print(f"🌿 KONOPLA.UA — News Pipeline ({mode_label})")
     print("=" * 60)
@@ -65,18 +59,15 @@ def run_pipeline(ua_only=False):
     total_found = 0
     rewritten_count = 0
     failed_count = 0
+    skipped_count = 0
 
     try:
         # === STEP 1: Fetch articles ===
-        feeds_override = None
-        if ua_only:
-            from config import UA_RSS_FEEDS
-            feeds_override = UA_RSS_FEEDS
-            print(f"\n📡 Step 1: Fetching UA-only feeds ({len(UA_RSS_FEEDS)} feeds)...")
-        else:
-            print("\n📡 Step 1: Fetching RSS feeds...")
+        from config import load_sources
+        feeds = load_sources(region=region)
+        print(f"\n📡 Step 1: Fetching feeds [{mode_label}] ({len(feeds)} sources)...")
         try:
-            articles = fetch_all_feeds(feeds_override=feeds_override)
+            articles = fetch_all_feeds(region=region)
         except Exception as e:
             print(f"[ERROR] RSS fetching failed: {e}")
             send_crash_alert(f"RSS fetching failed: {e}")
@@ -116,9 +107,17 @@ def run_pipeline(ua_only=False):
                 print(f"   ❌ Rewrite error: {e}")
 
             if not rewritten:
-                print("   ⏭️  Skipping — rewrite failed")
+                print("   ⏭️  Skipping — rewrite failed (API error)")
                 failed_count += 1
-                # Mark as processed to avoid re-fetching rejected/failed articles
+                # Mark as processed to avoid re-fetching failed articles
+                processed["articles"].append(article["hash"])
+                save_processed(processed)
+                continue
+
+            if rewritten.get("rejected"):
+                print(f"   ⏭️  Skipping — AI rejected as irrelevant")
+                skipped_count += 1
+                # Mark as processed to avoid re-fetching rejected articles
                 processed["articles"].append(article["hash"])
                 save_processed(processed)
                 continue
@@ -231,13 +230,14 @@ def run_pipeline(ua_only=False):
     print(f"📊 Pipeline complete!")
     print(f"   📰 Total found: {total_found}")
     print(f"   ✍️  Rewritten: {rewritten_count}")
-    print(f"   ❌ Failed: {failed_count}")
+    print(f"   🚫 Skipped (irrelevant): {skipped_count}")
+    print(f"   ❌ Failed (API errors): {failed_count}")
     print(f"   ⏱  Duration: {duration:.0f}s")
     print(f"   📋 Draft articles created (waiting for admin approval at /admin/)")
     print("=" * 60)
 
     try:
-        send_pipeline_report(rewritten_count, failed_count, total_found, duration)
+        send_pipeline_report(rewritten_count, failed_count, total_found, duration, skipped_count)
     except Exception:
         pass
 
@@ -246,9 +246,9 @@ def run_pipeline(ua_only=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="KONOPLA.UA News Pipeline")
-    parser.add_argument("--ua-only", action="store_true",
-                        help="Use only Ukrainian RSS feeds (UA_RSS_FEEDS)")
+    parser.add_argument("--region", default="all", choices=["all", "global", "ua"],
+                        help="Які джерела сканувати: all (default) | global | ua")
     args = parser.parse_args()
 
-    exit_code = run_pipeline(ua_only=args.ua_only)
+    exit_code = run_pipeline(region=args.region)
     sys.exit(exit_code)

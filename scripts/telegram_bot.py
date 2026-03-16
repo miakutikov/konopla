@@ -26,6 +26,11 @@ def send_message(text, chat_id=None, parse_mode="HTML"):
         return False
 
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+
+    # Telegram limit: 4096 chars per message
+    if len(text) > 4096:
+        text = text[:4092] + "..."
+
     payload = {
         "chat_id": chat,
         "text": text,

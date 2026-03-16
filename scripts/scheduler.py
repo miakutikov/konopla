@@ -17,6 +17,7 @@ Workflow scheduler.yml тригерить їх ПІСЛЯ git commit+push,
 import json
 import os
 import sys
+import tempfile
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -36,11 +37,21 @@ def load_scheduled():
     return {"deploy": [], "telegram": [], "threads": []}
 
 
+def _atomic_write_json(filepath, data):
+    """Атомарний запис JSON: спочатку tmp-файл, потім rename."""
+    dirpath = os.path.dirname(filepath)
+    os.makedirs(dirpath, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "w", dir=dirpath, delete=False, suffix=".tmp", encoding="utf-8"
+    ) as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        tmp_path = f.name
+    os.replace(tmp_path, filepath)
+
+
 def save_scheduled(data):
     """Зберігає scheduled.json."""
-    os.makedirs(os.path.dirname(SCHEDULED_FILE), exist_ok=True)
-    with open(SCHEDULED_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(SCHEDULED_FILE, data)
 
 
 def load_queue_file(filepath):
@@ -53,29 +64,41 @@ def load_queue_file(filepath):
 
 def save_queue_file(filepath, data):
     """Зберігає queue JSON файл."""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(filepath, data)
 
 
 def save_trigger_list(workflows):
     """Зберігає список workflows для тригера у trigger_workflows.json."""
-    os.makedirs(os.path.dirname(TRIGGER_FILE), exist_ok=True)
-    with open(TRIGGER_FILE, "w", encoding="utf-8") as f:
-        json.dump({"workflows": workflows}, f, ensure_ascii=False, indent=2)
+    _atomic_write_json(TRIGGER_FILE, {"workflows": workflows})
+
+
+def _split_by_time(items, now):
+    """Розбиває items на due (час настав) та remaining (ще не час)."""
+    due, remaining = [], []
+    for item in items:
+        t = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
+        (due if t <= now else remaining).append(item)
+    return due, remaining
+
+
+def _collect_articles(due_items):
+    """Збирає всі статті з due items (підтримує обидва формати)."""
+    all_articles = []
+    for item in due_items:
+        for article in item.get("articles", []):
+            all_articles.append(article)
+        if "filename" in item and "articles" not in item:
+            all_articles.append({
+                "filename": item["filename"],
+                "title": item.get("title", ""),
+                "category": item.get("category", ""),
+            })
+    return all_articles
 
 
 def process_deploy(items, now):
     """Обробляє заплановані деплої. Повертає (remaining, triggered_workflows)."""
-    due = []
-    remaining = []
-
-    for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
-        if scheduled_at <= now:
-            due.append(item)
-        else:
-            remaining.append(item)
+    due, remaining = _split_by_time(items, now)
 
     triggered = []
     if due:
@@ -87,40 +110,18 @@ def process_deploy(items, now):
 
 def process_telegram(items, now):
     """Обробляє заплановані Telegram постинги. Повертає (remaining, triggered_workflows)."""
-    due = []
-    remaining = []
-
-    for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
-        if scheduled_at <= now:
-            due.append(item)
-        else:
-            remaining.append(item)
+    due, remaining = _split_by_time(items, now)
 
     triggered = []
     if due:
         print(f"[TELEGRAM] {len(due)} scheduled Telegram post(s) due")
 
-        # Collect all articles from due items
-        all_articles = []
-        for item in due:
-            for article in item.get("articles", []):
-                all_articles.append(article)
-            # Also support per-article format (item itself is the article)
-            if "filename" in item and "articles" not in item:
-                all_articles.append({
-                    "filename": item["filename"],
-                    "title": item.get("title", ""),
-                    "category": item.get("category", ""),
-                })
-
+        all_articles = _collect_articles(due)
         if all_articles:
-            # Write telegram_queue.json
             queue = load_queue_file(TELEGRAM_QUEUE_FILE)
             queue["articles"].extend(all_articles)
             save_queue_file(TELEGRAM_QUEUE_FILE, queue)
             print(f"[TELEGRAM] Wrote {len(all_articles)} articles to telegram_queue.json")
-
             triggered.append("telegram_post.yml")
 
     return remaining, triggered
@@ -128,40 +129,18 @@ def process_telegram(items, now):
 
 def process_threads(items, now):
     """Обробляє заплановані Threads постинги. Повертає (remaining, triggered_workflows)."""
-    due = []
-    remaining = []
-
-    for item in items:
-        scheduled_at = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
-        if scheduled_at <= now:
-            due.append(item)
-        else:
-            remaining.append(item)
+    due, remaining = _split_by_time(items, now)
 
     triggered = []
     if due:
         print(f"[THREADS] {len(due)} scheduled Threads post(s) due")
 
-        # Collect all articles from due items
-        all_articles = []
-        for item in due:
-            for article in item.get("articles", []):
-                all_articles.append(article)
-            # Also support per-article format
-            if "filename" in item and "articles" not in item:
-                all_articles.append({
-                    "filename": item["filename"],
-                    "title": item.get("title", ""),
-                    "category": item.get("category", ""),
-                })
-
+        all_articles = _collect_articles(due)
         if all_articles:
-            # Write threads_queue.json
             queue = load_queue_file(THREADS_QUEUE_FILE)
             queue["articles"].extend(all_articles)
             save_queue_file(THREADS_QUEUE_FILE, queue)
             print(f"[THREADS] Wrote {len(all_articles)} articles to threads_queue.json")
-
             triggered.append("threads_post.yml")
 
     return remaining, triggered

@@ -1,146 +1,22 @@
 # === KONOPLA.UA Configuration ===
 
+import json
 import os
 
-# RSS feeds — industrial hemp news sources
-RSS_FEEDS = [
-    # === Dedicated hemp industry media ===
-    "https://www.hemptodaymag.com/feed/",
-    "https://hempbuildermag.com/feed/",
-    "https://hempgazette.com/feed/",
-    
-    # === Google News — specific industrial hemp queries ===
-    # Technology & Innovation
-    "https://news.google.com/rss/search?q=industrial+hemp+technology&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+innovation+research&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+patent+invention&hl=en&gl=US&ceid=US:en",
-    
-    # Textile & Fashion
-    "https://news.google.com/rss/search?q=hemp+textile+fabric+clothing&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+fashion+sustainable&hl=en&gl=US&ceid=US:en",
-    
-    # Construction
-    "https://news.google.com/rss/search?q=hempcrete+hemp+construction+building&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+insulation+building+material&hl=en&gl=US&ceid=US:en",
-    
-    # Bioplastic & Materials
-    "https://news.google.com/rss/search?q=hemp+bioplastic+composite+material&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+fiber+biocomposite&hl=en&gl=US&ceid=US:en",
-    
-    # Agriculture
-    "https://news.google.com/rss/search?q=hemp+agriculture+farming+crop&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+cultivation+harvest&hl=en&gl=US&ceid=US:en",
-    
-    # Food & Nutrition
-    "https://news.google.com/rss/search?q=hemp+seed+food+nutrition&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+protein+oil+food&hl=en&gl=US&ceid=US:en",
-    
-    # Automotive & Industrial
-    "https://news.google.com/rss/search?q=hemp+automotive+car+industry&hl=en&gl=US&ceid=US:en",
-    
-    # Energy & Paper
-    "https://news.google.com/rss/search?q=hemp+battery+supercapacitor+energy&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+paper+pulp+packaging&hl=en&gl=US&ceid=US:en",
-    
-    # Cosmetics
-    "https://news.google.com/rss/search?q=hemp+cosmetics+skincare+beauty&hl=en&gl=US&ceid=US:en",
-    
-    # Legislation & Business
-    "https://news.google.com/rss/search?q=hemp+legislation+regulation+farm+bill&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+industry+market+business&hl=en&gl=US&ceid=US:en",
-    
-    # Sustainability
-    "https://news.google.com/rss/search?q=hemp+sustainability+eco+carbon&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+environment+green+planet&hl=en&gl=US&ceid=US:en",
-    
-    # === Additional hemp media ===
-    "https://hemptoday.net/feed/",
-    "https://www.mjbizdaily.com/hemp/feed/",
 
-    # === Google News — by country ===
+def load_sources(region=None):
+    """Завантажує RSS-джерела з data/sources.json.
 
-    # 🇨🇦 Canada
-    "https://news.google.com/rss/search?q=hemp+canada+industry&hl=en&gl=CA&ceid=CA:en",
-    "https://news.google.com/rss/search?q=hemp+farming+canada&hl=en&gl=CA&ceid=CA:en",
-
-    # 🇬🇧 United Kingdom
-    "https://news.google.com/rss/search?q=hemp+uk+industry&hl=en&gl=GB&ceid=GB:en",
-
-    # 🇪🇺 Europe (general)
-    "https://news.google.com/rss/search?q=hemp+europe+industry&hl=en&gl=GB&ceid=GB:en",
-    "https://news.google.com/rss/search?q=industrial+hemp+EU+regulation&hl=en&gl=GB&ceid=GB:en",
-
-    # 🇳🇱 Netherlands
-    "https://news.google.com/rss/search?q=hemp+netherlands+industry&hl=en&gl=NL&ceid=NL:en",
-
-    # 🇩🇪 Germany
-    "https://news.google.com/rss/search?q=Hanf+Industrie+Deutschland&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=hemp+germany+industry&hl=en&gl=DE&ceid=DE:en",
-
-    # 🇫🇷 France
-    "https://news.google.com/rss/search?q=chanvre+industriel+france&hl=fr&gl=FR&ceid=FR:fr",
-
-    # 🇮🇹 Italy
-    "https://news.google.com/rss/search?q=canapa+industriale+italia&hl=it&gl=IT&ceid=IT:it",
-
-    # 🇨🇿 Czech Republic
-    "https://news.google.com/rss/search?q=konop%C3%AD+pr%C5%AFmyslov%C3%A9&hl=cs&gl=CZ&ceid=CZ:cs",
-    "https://news.google.com/rss/search?q=hemp+czech+republic&hl=en&gl=CZ&ceid=CZ:en",
-
-    # 🇵🇱 Poland
-    "https://news.google.com/rss/search?q=konopie+przemys%C5%82owe+polska&hl=pl&gl=PL&ceid=PL:pl",
-
-    # 🇺🇦 Ukraine
-    "https://news.google.com/rss/search?q=hemp+ukraine+конопля&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=промислові+коноплі+Україна&hl=uk&gl=UA&ceid=UA:uk",
-
-    # 🇨🇳 China
-    "https://news.google.com/rss/search?q=hemp+china+industry&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=china+hemp+textile+production&hl=en&gl=US&ceid=US:en",
-
-    # 🇮🇳 India
-    "https://news.google.com/rss/search?q=hemp+india+industry&hl=en&gl=IN&ceid=IN:en",
-    "https://news.google.com/rss/search?q=hemp+india+textile+agriculture&hl=en&gl=IN&ceid=IN:en",
-
-    # 🇦🇺 Australia
-    "https://news.google.com/rss/search?q=hemp+australia+industry&hl=en&gl=AU&ceid=AU:en",
-
-    # 🇯🇵 Japan
-    "https://news.google.com/rss/search?q=hemp+industry+japan&hl=en&gl=JP&ceid=JP:en",
-
-    # 🇰🇷 South Korea
-    "https://news.google.com/rss/search?q=hemp+industry+korea&hl=en&gl=KR&ceid=KR:en",
-
-    # 🇧🇷 Brazil
-    "https://news.google.com/rss/search?q=c%C3%A2nhamo+industrial+brasil&hl=pt&gl=BR&ceid=BR:pt",
-
-    # === Additional thematic queries (global) ===
-    "https://news.google.com/rss/search?q=hemp+startup+investment+funding&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+legislation+law+2025+2026&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+bioplastic+automotive+composite&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en",
-]
-
-# Ukrainian-only RSS feeds (subset for --ua-only mode)
-UA_RSS_FEEDS = [
-    # === Google News UA — конопляні запити ===
-    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=%D0%BF%D1%80%D0%BE%D0%BC%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=hemp+ukraine&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9+%D0%B1%D0%B5%D1%82%D0%BE%D0%BD&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=%D1%82%D0%B5%D1%85%D0%BD%D1%96%D1%87%D0%BD%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
-
-    # === Existing Ukraine feeds from RSS_FEEDS ===
-    "https://news.google.com/rss/search?q=hemp+ukraine+конопля&hl=uk&gl=UA&ceid=UA:uk",
-    "https://news.google.com/rss/search?q=промислові+коноплі+Україна&hl=uk&gl=UA&ceid=UA:uk",
-
-    # === Українські агро-портали (RSS feeds) ===
-    "https://agrotimes.ua/feed/",
-    "https://latifundist.com/feed",
-    "https://agroportal.ua/rss",
-    "https://superagronom.com/rss",
-]
+    region: 'global' | 'ua' | 'all' | None  — фільтр за регіоном.
+    Повертає список URL активних джерел.
+    """
+    sources_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'sources.json')
+    with open(sources_path, encoding='utf-8') as f:
+        data = json.load(f)
+    sources = [s for s in data['sources'] if s.get('active', True)]
+    if region and region != 'all':
+        sources = [s for s in sources if s['region'] == region]
+    return [s['url'] for s in sources]
 
 # === CONTENT FILTERING ===
 
