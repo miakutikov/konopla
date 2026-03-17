@@ -1,14 +1,6 @@
 {
   "deploy": [
     {
-      "id": "mmu7ns4mrpi9",
-      "filename": "20260317-0557-polska-kombinat-konopny-hotuyetsya-do-ipo-demonstruyuchy-intehrovanu-model-konop.md",
-      "title": "Польська Kombinat Konopny готується до IPO, демонструючи інтегровану модель конопляного бізнесу",
-      "category": "бізнес",
-      "scheduled_at": "2026-03-17T11:00:00.000Z",
-      "created_at": "2026-03-17T06:07:53.638Z"
-    },
-    {
       "id": "mmu7nzsfnnhm",
       "filename": "20260315-2035-ekskursiya-na-konoplyanu-fabryku-studenty-doslidyly-vyrobnytstvo-v-katmandu.md",
       "title": "Екскурсія на конопляну фабрику: студенти дослідили виробництво в Катманду",
@@ -17,40 +9,6 @@
       "created_at": "2026-03-17T06:08:03.567Z"
     }
   ],
-  "telegram": [
-    {
-      "id": "mmu7o6m84o0d",
-      "filename": "20260317-0557-polska-kombinat-konopny-hotuyetsya-do-ipo-demonstruyuchy-intehrovanu-model-konop.md",
-      "title": "Польська Kombinat Konopny готується до IPO, демонструючи інтегровану модель конопляного бізнесу",
-      "category": "бізнес",
-      "scheduled_at": "2026-03-17T11:00:00.000Z",
-      "created_at": "2026-03-17T06:08:12.416Z"
-    },
-    {
-      "id": "mmu7oa9nza9i",
-      "filename": "20260315-2035-ekskursiya-na-konoplyanu-fabryku-studenty-doslidyly-vyrobnytstvo-v-katmandu.md",
-      "title": "Екскурсія на конопляну фабрику: студенти дослідили виробництво в Катманду",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T11:00:00.000Z",
-      "created_at": "2026-03-17T06:08:17.147Z"
-    }
-  ],
-  "threads": [
-    {
-      "id": "mmu7oful6zja",
-      "filename": "20260315-2035-ekskursiya-na-konoplyanu-fabryku-studenty-doslidyly-vyrobnytstvo-v-katmandu.md",
-      "title": "Екскурсія на конопляну фабрику: студенти дослідили виробництво в Катманду",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T11:00:00.000Z",
-      "created_at": "2026-03-17T06:08:24.381Z"
-    },
-    {
-      "id": "mmu7olnteggw",
-      "filename": "20260317-0557-polska-kombinat-konopny-hotuyetsya-do-ipo-demonstruyuchy-intehrovanu-model-konop.md",
-      "title": "Польська Kombinat Konopny готується до IPO, демонструючи інтегровану модель конопляного бізнесу",
-      "category": "бізнес",
-      "scheduled_at": "2026-03-17T11:00:00.000Z",
-      "created_at": "2026-03-17T06:08:31.913Z"
-    }
-  ]
+  "telegram": [],
+  "threads": []
 }
