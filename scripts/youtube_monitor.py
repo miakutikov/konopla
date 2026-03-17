@@ -325,9 +325,13 @@ def run_youtube_monitor():
             print(f"  ❌ Rewrite error: {e}")
             rewritten = None
 
-        if not rewritten or "title" not in rewritten:
+        if not isinstance(rewritten, dict) or "title" not in rewritten:
             reason = rewritten.get("reason", "rewrite failed") if isinstance(rewritten, dict) else "rewrite failed"
             print(f"  ⏭️ Skipping — {reason}")
+            processed["video_ids"].append(video_id)
+            continue
+        if rewritten.get("rejected"):
+            print(f"  ⏭️ Skipping — AI rejected: {rewritten.get('reason', 'irrelevant')}")
             processed["video_ids"].append(video_id)
             continue
 
