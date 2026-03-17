@@ -1,40 +1,5 @@
 {
-  "deploy": [
-    {
-      "id": "mmu7nzsfnnhm",
-      "filename": "20260315-2035-ekskursiya-na-konoplyanu-fabryku-studenty-doslidyly-vyrobnytstvo-v-katmandu.md",
-      "title": "Екскурсія на конопляну фабрику: студенти дослідили виробництво в Катманду",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T17:00:00.000Z",
-      "created_at": "2026-03-17T06:08:03.567Z"
-    },
-    {
-      "id": "mmukhg56n5vy",
-      "filename": "20260317-0859-hempmadeinua-prezentuye-sumku-z-presovanoho-konoplyanoho-volokna-minimalizm-ta-d.md",
-      "title": "HempMadeInUA презентує сумку з пресованого конопляного волокна: мінімалізм та довговічність",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T17:00:00.000Z",
-      "created_at": "2026-03-17T12:06:53.178Z"
-    }
-  ],
-  "telegram": [
-    {
-      "id": "mmukhmyzter1",
-      "filename": "20260317-0859-hempmadeinua-prezentuye-sumku-z-presovanoho-konoplyanoho-volokna-minimalizm-ta-d.md",
-      "title": "HempMadeInUA презентує сумку з пресованого конопляного волокна: мінімалізм та довговічність",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T17:00:00.000Z",
-      "created_at": "2026-03-17T12:07:02.028Z"
-    }
-  ],
-  "threads": [
-    {
-      "id": "mmukhu4vr33v",
-      "filename": "20260317-0859-hempmadeinua-prezentuye-sumku-z-presovanoho-konoplyanoho-volokna-minimalizm-ta-d.md",
-      "title": "HempMadeInUA презентує сумку з пресованого конопляного волокна: мінімалізм та довговічність",
-      "category": "відео",
-      "scheduled_at": "2026-03-17T17:00:00.000Z",
-      "created_at": "2026-03-17T12:07:11.311Z"
-    }
-  ]
+  "deploy": [],
+  "telegram": [],
+  "threads": []
 }
