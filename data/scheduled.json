@@ -1,5 +1,14 @@
 {
   "deploy": [],
-  "telegram": [],
+  "telegram": [
+    {
+      "id": "mmw2uqbl6o5t",
+      "filename": "20260318-1143-tekhnolohiyi-u-vyrobnytstvi-konopel-shlyakh-do-staloho-maybutnoho.md",
+      "title": "Технології у виробництві конопель: шлях до сталого майбутнього",
+      "category": "агро",
+      "scheduled_at": "2026-03-18T17:00:00.000Z",
+      "created_at": "2026-03-18T13:28:52.161Z"
+    }
+  ],
   "threads": []
 }
