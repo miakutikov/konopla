@@ -23,7 +23,6 @@ draft: false
 
 --- 
 
-![Будівництво купольного будинку з конопляного хемпкріту](https://images.unsplash.com/photo-1629858641907-7e6e7e0e7e0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aGVtcGNyZXRlJTIwZG9tZSUyMGhvdXNlJTIwQWZyaWNhfHx8fHx8MTY3MjU3OTIwMA&ixlib=rb-4.0.3&q=80&w=1080)
 
 Купольний дизайн будівель дозволяє використовувати менше матеріалів, зберігаючи при цьому виняткову структурну міцність. Це дає змогу зводити будинки швидше та економічніше у великих масштабах, що є критично важливим для регіонів, які потребують швидкого та масового житлового будівництва.
 
@@ -38,7 +37,6 @@ draft: false
 
 --- 
 
-![Зразок біоцегли з конопель та напірської трави](https://images.unsplash.com/photo-1629858641907-7e6e7e0e7e0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8YmlvYnJpY2slMjBoZW1wJTIwY29uc3RydWN0aW9ufHx8fHx8MTY3MjU3OTIwMA&ixlib=rb-4.0.3&q=80&w=1080)
 
 У перспективі розробляється революційна **нова біоцегла** (biobrick), виготовлена з напірської трави (Napier grass) та конопель. Як тільки цей прототип вийде на ринок, він зможе надати ще один низьковартісний, стійкий будівельний матеріал для Африки та Індії, що дозволить ще більше масштабувати екологічно чисте житло.
 

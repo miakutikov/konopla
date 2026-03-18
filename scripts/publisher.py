@@ -157,6 +157,8 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
         fm_lines.append(f"draft: {'true' if draft else 'false'}")
         fm_lines.append("---")
         fm_lines.append("")
+        # Strip any hallucinated inline image URLs from AI
+        content = re.sub(r'!\[.*?\]\(https?://[^\)]+\)', '', content).strip()
         fm_lines.append(content)
         fm_lines.append("")
 
