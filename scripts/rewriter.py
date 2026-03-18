@@ -42,17 +42,6 @@ def rewrite_article(title, summary, source_url, content="", source_images=None):
 
 Джерело: {source_url}"""
 
-    # Append source images for contextual placement
-    if source_images:
-        images_text = "\n".join(
-            f"- {img['url']}" + (f" ({img['alt']})" if img.get('alt') else "")
-            for img in source_images[:5]
-        )
-        user_prompt += f"""
-
-Оригінальні зображення з джерела (вбудуй 1-3 найкращих у текст статті між абзацами, формат: ![короткий опис](URL)):
-{images_text}"""
-
     # Try Gemini first
     gemini_key = os.environ.get("GEMINI_API_KEY", GEMINI_API_KEY)
     if gemini_key:
