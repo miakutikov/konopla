@@ -1,48 +1,5 @@
 {
-  "deploy": [
-    {
-      "id": "mmuxsomvyq7x",
-      "filename": "20260317-1758-lidery-svitovoyi-konoplyanoyi-industriyi-zberutsya-v-polshchi-na-23-tyu-konferen.md",
-      "title": "Лідери світової конопляної індустрії зберуться в Польщі на 23-тю конференцію EIHA",
-      "category": "інше",
-      "scheduled_at": "2026-03-18T05:00:00.000Z",
-      "created_at": "2026-03-17T18:19:32.407Z"
-    }
-  ],
-  "telegram": [
-    {
-      "id": "mmuxtcpg0itm",
-      "filename": "20260317-1758-konoplyarstvo-planuvannya-dozvoly-ta-tochne-zemlerobstvo-dlya-uspikhu.md",
-      "title": "Коноплярство: планування, дозволи та точне землеробство для успіху",
-      "category": "агро",
-      "scheduled_at": "2026-03-18T05:00:00.000Z",
-      "created_at": "2026-03-17T18:20:03.604Z"
-    },
-    {
-      "id": "mmuxtm8kww46",
-      "filename": "20260317-1758-lidery-svitovoyi-konoplyanoyi-industriyi-zberutsya-v-polshchi-na-23-tyu-konferen.md",
-      "title": "Лідери світової конопляної індустрії зберуться в Польщі на 23-тю конференцію EIHA",
-      "category": "інше",
-      "scheduled_at": "2026-03-18T05:00:00.000Z",
-      "created_at": "2026-03-17T18:20:15.956Z"
-    }
-  ],
-  "threads": [
-    {
-      "id": "mmuxtspyl631",
-      "filename": "20260317-1758-konoplyarstvo-planuvannya-dozvoly-ta-tochne-zemlerobstvo-dlya-uspikhu.md",
-      "title": "Коноплярство: планування, дозволи та точне землеробство для успіху",
-      "category": "агро",
-      "scheduled_at": "2026-03-18T05:00:00.000Z",
-      "created_at": "2026-03-17T18:20:24.358Z"
-    },
-    {
-      "id": "mmuxtwo2ddk9",
-      "filename": "20260317-1758-lidery-svitovoyi-konoplyanoyi-industriyi-zberutsya-v-polshchi-na-23-tyu-konferen.md",
-      "title": "Лідери світової конопляної індустрії зберуться в Польщі на 23-тю конференцію EIHA",
-      "category": "інше",
-      "scheduled_at": "2026-03-18T05:00:00.000Z",
-      "created_at": "2026-03-17T18:20:29.474Z"
-    }
-  ]
+  "deploy": [],
+  "telegram": [],
+  "threads": []
 }
