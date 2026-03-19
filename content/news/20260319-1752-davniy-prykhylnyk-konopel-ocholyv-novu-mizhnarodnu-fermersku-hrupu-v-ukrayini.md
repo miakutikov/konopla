@@ -6,10 +6,7 @@ categories: ["агро"]
 tags: ["промислові коноплі", "Україна", "фермерство", "асоціації", "ЄС"]
 source: "HempToday®"
 source_url: "https://hemptoday.net/long-time-hemp-advocate-named-president-of-new-international-farmers-group-in-ukraine/"
-image: "/images/generated/27e092b5.jpg"
-image_source: "AI Generated"
-telegram_hook: "Мішель Терещенко, відомий прихильник промислових конопель, очолив нову Міжнародну асоціацію фермерів України (IFA). Дізнайтеся про її цілі та склад."
-threads_hook: "Нова Міжнародна асоціація фермерів України (IFA) вже тут! 🇺🇦 🇪🇺 Очолив її Мішель Терещенко, відомий діяч у сфері промислових конопель. Це великий крок для українського агросектору!"
+image: "/images/uploads/upload-mmxry4n8.jpg"
 draft: false
 ---
 
