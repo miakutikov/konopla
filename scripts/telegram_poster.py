@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE_FILE = os.path.join(PROJECT_ROOT, "data", "telegram_queue.json")
+SOCIAL_STATUS_FILE = os.path.join(PROJECT_ROOT, "data", "social_status.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 SITE_URL = "https://konopla.ua"
 
@@ -106,15 +107,85 @@ def get_photo_path(fm):
     return None, None
 
 
+def _update_social_status(filename, platform, data=None):
+    """Оновлює social_status.json після публікації."""
+    from utils import load_json, save_json
+    status = load_json(SOCIAL_STATUS_FILE, default={})
+    if filename not in status:
+        status[filename] = {}
+    from datetime import datetime, timezone
+    entry = {"posted_at": datetime.now(timezone.utc).isoformat()}
+    if data:
+        entry.update(data)
+    status[filename][platform] = entry
+    save_json(SOCIAL_STATUS_FILE, status)
+
+
+def _post_single(filename, custom_text=None):
+    """Постить одну статтю в Telegram. Повертає True/False."""
+    from telegram_bot import send_photo, send_message, TELEGRAM_CHAT_ID
+
+    if not TELEGRAM_CHAT_ID:
+        print("[ERROR] TELEGRAM_CHAT_ID not set")
+        return False
+
+    filepath = os.path.join(CONTENT_DIR, filename)
+    if not os.path.exists(filepath):
+        print(f"   [WARN] File not found: {filename}")
+        return False
+
+    fm = parse_frontmatter(filepath)
+    if fm.get('draft') == 'true':
+        print(f"   [WARN] Article still draft: {filename}")
+        return False
+
+    if custom_text:
+        # Build message with custom text
+        slug = filename.replace('.md', '')
+        article_url = f"{SITE_URL}/news/{slug}/"
+        message = f"{custom_text}\n\n<a href=\"{article_url}\">Читати повністю →</a>"
+    else:
+        message = build_telegram_message(fm, filename)
+
+    photo_path, photo_url = get_photo_path(fm)
+    print(f"   📨 Posting: {fm.get('title', filename)[:60]}...")
+
+    success = False
+    if photo_path or photo_url:
+        success = send_photo(
+            photo_url=photo_url,
+            caption=message,
+            photo_path=photo_path
+        )
+    else:
+        success = send_message(message)
+
+    if success:
+        _update_social_status(filename, "telegram")
+
+    return success
+
+
 def run():
-    """Основна функція — постить все з черги."""
+    """Основна функція — постить все з черги або одну статтю."""
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--article", default="", help="Filename of single article to post")
+    parser.add_argument("--text", default="", help="Custom text for the post")
+    args, _ = parser.parse_known_args()
+
+    # Per-article mode
+    if args.article:
+        success = _post_single(args.article, custom_text=args.text or None)
+        return 0 if success else 1
+
+    # Batch mode (existing queue)
     from telegram_bot import send_photo, send_message, TELEGRAM_CHAT_ID
 
     if not TELEGRAM_CHAT_ID:
         print("[ERROR] TELEGRAM_CHAT_ID not set")
         return 1
 
-    # Load queue
     if not os.path.exists(QUEUE_FILE):
         print("[INFO] No telegram queue file found")
         return 0
@@ -135,37 +206,9 @@ def run():
         if not filename:
             continue
 
-        filepath = os.path.join(CONTENT_DIR, filename)
-        if not os.path.exists(filepath):
-            print(f"   [WARN] File not found: {filename}")
-            continue
-
-        fm = parse_frontmatter(filepath)
-        if fm.get('draft') == 'true':
-            print(f"   [WARN] Article still draft: {filename}")
-            continue
-
-        message = build_telegram_message(fm, filename)
-        photo_path, photo_url = get_photo_path(fm)
-
-        print(f"   📨 Posting: {fm.get('title', filename)[:60]}...")
-
-        success = False
-        if photo_path or photo_url:
-            success = send_photo(
-                photo_url=photo_url,
-                caption=message,
-                photo_path=photo_path
-            )
-        else:
-            success = send_message(message)
-
-        if success:
+        if _post_single(filename):
             posted += 1
-        else:
-            print(f"   [WARN] Failed to post: {filename}")
 
-        # Delay between messages to avoid rate limits
         time.sleep(3)
 
     # Clear queue atomically

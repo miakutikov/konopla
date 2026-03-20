@@ -22,6 +22,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE_FILE = os.path.join(PROJECT_ROOT, "data", "threads_queue.json")
+SOCIAL_STATUS_FILE = os.path.join(PROJECT_ROOT, "data", "social_status.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 SITE_URL = "https://konopla.ua"
 
@@ -124,13 +125,75 @@ def publish_threads_container(container_id):
         return False
 
 
+def _update_social_status(filename, platform, data=None):
+    """Оновлює social_status.json після публікації."""
+    from utils import load_json, save_json
+    from datetime import datetime, timezone as tz
+    status = load_json(SOCIAL_STATUS_FILE, default={})
+    if filename not in status:
+        status[filename] = {}
+    entry = {"posted_at": datetime.now(tz.utc).isoformat()}
+    if data:
+        entry.update(data)
+    status[filename][platform] = entry
+    save_json(SOCIAL_STATUS_FILE, status)
+
+
+def _post_single(filename, custom_text=None):
+    """Постить одну статтю в Threads. Повертає True/False."""
+    if not THREADS_USER_ID or not THREADS_ACCESS_TOKEN:
+        print("[ERROR] THREADS_USER_ID or THREADS_ACCESS_TOKEN not set")
+        return False
+
+    filepath = os.path.join(CONTENT_DIR, filename)
+    if not os.path.exists(filepath):
+        print(f"   [WARN] File not found: {filename}")
+        return False
+
+    fm = parse_frontmatter(filepath)
+
+    if custom_text:
+        slug = filename.replace('.md', '')
+        article_url = f"{SITE_URL}/news/{slug}/"
+        text = f"{custom_text}\n\nДеталі: {article_url}\n\n#коноплі"
+        text = text[:500]
+    else:
+        text = build_threads_post(fm, filename)
+
+    print(f"   🧵 Posting: {fm.get('title', filename)[:60]}...")
+
+    container_id = create_threads_container(text)
+    if not container_id:
+        return False
+
+    time.sleep(5)
+
+    success = publish_threads_container(container_id)
+    if success:
+        _update_social_status(filename, "threads")
+        print(f"   ✅ Published to Threads")
+
+    return success
+
+
 def run():
-    """Основна функція — постить все з черги."""
+    """Основна функція — постить все з черги або одну статтю."""
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--article", default="", help="Filename of single article to post")
+    parser.add_argument("--text", default="", help="Custom text for the post")
+    args, _ = parser.parse_known_args()
+
+    # Per-article mode
+    if args.article:
+        success = _post_single(args.article, custom_text=args.text or None)
+        return 0 if success else 1
+
+    # Batch mode (existing queue)
     if not THREADS_USER_ID or not THREADS_ACCESS_TOKEN:
         print("[ERROR] THREADS_USER_ID or THREADS_ACCESS_TOKEN not set")
         return 1
 
-    # Load queue
     if not os.path.exists(QUEUE_FILE):
         print("[INFO] No threads queue file found")
         return 0
@@ -151,29 +214,8 @@ def run():
         if not filename:
             continue
 
-        filepath = os.path.join(CONTENT_DIR, filename)
-        if not os.path.exists(filepath):
-            print(f"   [WARN] File not found: {filename}")
-            continue
-
-        fm = parse_frontmatter(filepath)
-        text = build_threads_post(fm, filename)
-
-        print(f"   🧵 Posting: {fm.get('title', filename)[:60]}...")
-
-        container_id = create_threads_container(text)
-        if not container_id:
-            continue
-
-        # Wait for container processing
-        time.sleep(5)
-
-        success = publish_threads_container(container_id)
-        if success:
+        if _post_single(filename):
             posted += 1
-            print(f"   ✅ Published to Threads")
-        else:
-            print(f"   [WARN] Publish failed for: {filename}")
 
         time.sleep(3)
 

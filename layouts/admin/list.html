@@ -31,6 +31,8 @@
           <button class="admin-btn" onclick="triggerManualDeploy()">🚀 Деплой</button>
           <button id="btn-run-pipeline" class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
           <button id="btn-yt-panel" class="admin-btn admin-btn-yt" onclick="toggleYtPanel()">🎬 YouTube</button>
+          <button id="btn-candidates" class="admin-btn admin-btn-candidates" onclick="toggleCandidatesTab()">📡 Кандидати</button>
+          <button id="btn-sources" class="admin-btn admin-btn-sources" onclick="toggleSourcesTab()">⚙️ Джерела</button>
           <a href="/admin/catalog/" class="admin-btn">📋 Каталог</a>
           <button id="btn-logout" class="admin-btn admin-btn-dim" onclick="logout()">Вийти</button>
         </div>
@@ -264,6 +266,90 @@
         <div id="scheduled-threads" class="scheduled-items"></div>
       </div>
 
+      <!-- Candidates tab -->
+      <div id="candidates-tab" class="candidates-tab" style="display:none">
+        <div class="candidates-header">
+          <h2>📡 Кандидати <span id="candidates-updated" class="candidates-updated"></span></h2>
+          <button class="admin-btn admin-btn-dim" onclick="toggleCandidatesTab()">✕ Закрити</button>
+        </div>
+        <div class="candidates-toolbar">
+          <label class="candidates-select-all">
+            <input type="checkbox" id="candidates-select-all-cb" onchange="candidatesToggleAll(this.checked)">
+            <span id="candidates-select-all-label">Виділити все</span>
+          </label>
+          <select id="candidates-filter-type" onchange="filterCandidates()">
+            <option value="all">Все</option>
+            <option value="article">📰 Статті</option>
+            <option value="video">🎬 Відео</option>
+          </select>
+          <span id="candidates-counter" class="candidates-counter">0 кандидатів</span>
+          <div class="candidates-toolbar-actions">
+            <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити</button>
+            <button class="admin-btn admin-btn-green" id="btn-process-candidates" onclick="processCandidates()" disabled>✅ Обробити вибрані (0)</button>
+          </div>
+        </div>
+        <div id="candidates-list" class="candidates-list">
+          <div class="loading">⏳ Завантаження...</div>
+        </div>
+        <div id="candidates-empty" class="admin-empty" style="display:none">
+          <h2>📭 Немає кандидатів</h2>
+          <p>Натисніть 🔄 Оновити для пошуку новин.</p>
+        </div>
+      </div>
+
+      <!-- Sources tab -->
+      <div id="sources-tab" class="sources-tab" style="display:none">
+        <div class="sources-header">
+          <h2>⚙️ Джерела пошуку <span id="sources-count-badge" class="sources-count-badge"></span></h2>
+          <button class="admin-btn admin-btn-dim" onclick="toggleSourcesTab()">✕ Закрити</button>
+        </div>
+        <div class="sources-toolbar">
+          <select id="sources-filter" onchange="filterSources()">
+            <option value="all">Всі</option>
+            <option value="global">🌍 Global</option>
+            <option value="ua">🇺🇦 UA</option>
+            <option value="inactive">🔴 Неактивні</option>
+          </select>
+          <button class="admin-btn admin-btn-green" onclick="toggleSourceAddForm()">➕ Додати джерело</button>
+        </div>
+        <div id="source-add-form" class="source-add-form" style="display:none">
+          <div class="source-form-card">
+            <h3 id="source-form-title">➕ Нове джерело</h3>
+            <div class="source-form-row">
+              <div class="source-form-field">
+                <label>Назва *</label>
+                <input type="text" id="src-name" placeholder="Hemp Today">
+              </div>
+              <div class="source-form-field source-form-field-wide">
+                <label>URL *</label>
+                <input type="text" id="src-url" placeholder="https://hemptoday.net/feed/">
+              </div>
+            </div>
+            <div class="source-form-row">
+              <div class="source-form-field">
+                <label>Регіон</label>
+                <select id="src-region">
+                  <option value="global">🌍 Global</option>
+                  <option value="ua">🇺🇦 UA</option>
+                </select>
+              </div>
+              <div class="source-form-field">
+                <label>
+                  <input type="checkbox" id="src-trusted"> Довірене джерело
+                </label>
+              </div>
+              <div class="source-form-field">
+                <button class="admin-btn admin-btn-green" onclick="saveSource()">💾 Зберегти</button>
+                <button class="admin-btn admin-btn-dim" onclick="cancelSourceForm()">Скасувати</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sources-list" class="sources-list">
+          <div class="loading">⏳ Завантаження...</div>
+        </div>
+      </div>
+
       <!-- YouTube panel (full tab) -->
       <div id="yt-panel" class="yt-panel" style="display:none">
         <div class="yt-panel-header">
@@ -386,6 +472,77 @@
 .admin-btn-green:hover {
   background: var(--green-accent);
   color: #000;
+}
+.admin-btn-sm {
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  border-radius: 4px;
+}
+/* Social badges in article rows */
+.social-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.social-badge {
+  font-size: 0.78rem;
+  padding: 1px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.social-done { color: var(--green-accent); }
+.social-pending { color: var(--text-tertiary); opacity: 0.6; }
+/* Social modal */
+.social-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+.social-modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 520px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.social-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.social-modal-header h3 { margin: 0; font-size: 1rem; }
+.social-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.social-modal-body {
+  padding: 20px;
+}
+.social-modal-body label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+.social-modal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
 }
 .admin-btn-dim {
   color: var(--text-secondary);
@@ -1730,6 +1887,415 @@
     font-size: 0.75rem !important;
   }
 }
+
+/* =========================================================================
+   Candidates tab
+   ========================================================================= */
+.admin-btn-candidates {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+.admin-btn-candidates:hover {
+  background: #3b82f6 !important;
+  color: #fff !important;
+}
+.candidates-tab {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid #3b82f6;
+  border-radius: var(--radius-lg);
+}
+.candidates-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.candidates-header h2 {
+  font-size: 1.15rem;
+  color: #3b82f6;
+}
+.candidates-updated {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+.candidates-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.candidates-select-all {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.candidates-select-all input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+#candidates-filter-type {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+.candidates-counter {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  flex: 1;
+}
+.candidates-toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.candidates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.candidate-card {
+  display: flex;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+.candidate-card:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.04);
+}
+.candidate-card.dimmed {
+  opacity: 0.7;
+}
+.candidate-cb {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
+}
+.candidate-cb input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.candidate-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+}
+.candidate-info {
+  flex: 1;
+  min-width: 0;
+}
+.candidate-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.candidate-type {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.candidate-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.candidate-meta {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  margin-bottom: 0.3rem;
+}
+.candidate-summary {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.candidate-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+.candidate-actions .admin-btn {
+  font-size: 0.75rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+.candidate-preview {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: none;
+}
+.candidate-preview.open {
+  display: block;
+}
+
+/* =========================================================================
+   Sources tab
+   ========================================================================= */
+.admin-btn-sources {
+  background: rgba(168, 85, 247, 0.15) !important;
+  border-color: #a855f7 !important;
+  color: #a855f7 !important;
+}
+.admin-btn-sources:hover {
+  background: #a855f7 !important;
+  color: #fff !important;
+}
+.sources-tab {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid #a855f7;
+  border-radius: var(--radius-lg);
+}
+.sources-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.sources-header h2 {
+  font-size: 1.15rem;
+  color: #a855f7;
+}
+.sources-count-badge {
+  font-size: 0.75rem;
+  background: rgba(168, 85, 247, 0.2);
+  color: #a855f7;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+.sources-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+#sources-filter {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+.source-add-form {
+  margin-bottom: 1rem;
+}
+.source-form-card {
+  background: var(--bg-tertiary);
+  border: 1px solid #a855f7;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+.source-form-card h3 {
+  font-size: 0.95rem;
+  color: #a855f7;
+  margin-bottom: 0.75rem;
+}
+.source-form-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+.source-form-row:last-child {
+  margin-bottom: 0;
+}
+.source-form-field {
+  flex: 1;
+  min-width: 150px;
+}
+.source-form-field-wide {
+  flex: 2;
+}
+.source-form-field label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+.source-form-field input[type="text"],
+.source-form-field select {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.source-form-field input[type="text"]:focus,
+.source-form-field select:focus {
+  border-color: #a855f7;
+}
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.source-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.source-row:hover {
+  background: var(--bg-tertiary);
+}
+.source-status-dot {
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.source-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 120px;
+}
+.source-url {
+  flex: 1;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.source-badge {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.source-badge.global {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+.source-badge.ua {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+}
+.source-badge.trusted {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+.source-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.source-actions .admin-btn {
+  padding: 3px 8px !important;
+  font-size: 0.75rem !important;
+  min-height: auto !important;
+}
+/* Source inline edit */
+.source-row.editing {
+  flex-wrap: wrap;
+  background: var(--bg-tertiary);
+  padding: 0.75rem;
+  border: 1px solid #a855f7;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.25rem;
+}
+.source-edit-fields {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.source-edit-fields input,
+.source-edit-fields select {
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  outline: none;
+}
+.source-edit-fields input:focus,
+.source-edit-fields select:focus {
+  border-color: #a855f7;
+}
+
+@media (max-width: 768px) {
+  .candidates-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .candidates-toolbar-actions {
+    width: 100%;
+  }
+  .candidate-card {
+    flex-wrap: wrap;
+  }
+  .candidate-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .source-row {
+    flex-wrap: wrap;
+  }
+  .source-url {
+    width: 100%;
+    order: 10;
+  }
+  .source-form-row {
+    flex-direction: column;
+  }
+}
 </style>
 
 <script>
@@ -1746,6 +2312,7 @@
   var telegramQueue = [];
   var threadsQueue = [];
   var editingFile = null;
+  var SOCIAL_STATUS = {};
 
   var ALL_ARTICLES = [
     {{ range where .Site.RegularPages "Section" "news" }}
@@ -1830,6 +2397,7 @@
       showPatSetup();
     } else {
       loadDrafts();
+      loadSocialStatus();
     }
     renderArticles();
     renderStats();
@@ -3713,11 +4281,30 @@
 
       var pinnedLabel = isPinned ? ' <span class="pinned-info">' + String.fromCodePoint(128204) + ' Закріплено</span>' : '';
 
+      // Social status indicators for published articles
+      var socialBadges = '';
+      if (!a.draft) {
+        var ss = SOCIAL_STATUS[a.filename] || {};
+        var tgDone = ss.telegram ? true : false;
+        var thDone = ss.threads ? true : false;
+        socialBadges = '<span class="social-badges">' +
+          '<span class="social-badge ' + (tgDone ? 'social-done' : 'social-pending') + '" title="' + (tgDone ? 'Telegram: ' + (ss.telegram.posted_at || '').slice(0, 10) : 'Не опубліковано в Telegram') + '">' +
+            String.fromCodePoint(128232) + (tgDone ? String.fromCodePoint(9989) : '\u2014') +
+          '</span>' +
+          '<span class="social-badge ' + (thDone ? 'social-done' : 'social-pending') + '" title="' + (thDone ? 'Threads: ' + (ss.threads.posted_at || '').slice(0, 10) : 'Не опубліковано в Threads') + '">' +
+            String.fromCodePoint(129525) + (thDone ? String.fromCodePoint(9989) : '\u2014') +
+          '</span>' +
+          (!tgDone ? '<button class="admin-btn admin-btn-sm" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'telegram\')" title="Опублікувати в Telegram">TG</button>' : '') +
+          (!thDone ? '<button class="admin-btn admin-btn-sm" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'threads\')" title="Опублікувати в Threads">' + String.fromCodePoint(129525) + '</button>' : '') +
+        '</span>';
+      }
+
       return '<div class="article-row" data-filename="' + escHtml(a.filename) + '" data-id="' + escHtml(a.id) + '">' +
         '<span class="article-date">' + escHtml(a.date) + '</span>' +
         '<span class="article-status ' + statusClass + '">' + statusText + '</span>' +
         '<span class="article-category">' + escHtml(a.category || '') + '</span>' +
         '<span class="article-title"><a href="/news/' + escHtml(slug) + '/" target="_blank">' + escHtml(cleanTitle) + '</a>' + pinnedLabel + '</span>' +
+        socialBadges +
         '<span class="article-actions">' +
           pinBtn +
           '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(9999, 65039) + '</button>' +
@@ -4117,6 +4704,632 @@
 
     listEl.innerHTML = html;
     detail.style.display = 'block';
+  };
+
+  // =========================================================================
+  // Candidates tab
+  // =========================================================================
+
+  var candidatesData = [];
+  var candidatesSelected = {};
+  var candidatesSha = null;
+
+  function timeAgo(dateStr) {
+    var diff = (Date.now() - new Date(dateStr).getTime()) / 1000;
+    if (diff < 60) return 'щойно';
+    if (diff < 3600) return Math.floor(diff / 60) + ' хв тому';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' год тому';
+    return Math.floor(diff / 86400) + ' дн тому';
+  }
+
+  window.toggleCandidatesTab = function() {
+    var tab = document.getElementById('candidates-tab');
+    var visible = tab.style.display !== 'none';
+    tab.style.display = visible ? 'none' : 'block';
+    if (!visible) {
+      loadCandidates();
+    }
+  };
+
+  window.loadCandidates = async function() {
+    if (!ghToken) {
+      showStatus('❌ Потрібен GitHub Token', 'error');
+      return;
+    }
+
+    var listEl = document.getElementById('candidates-list');
+    listEl.innerHTML = '<div class="loading">⏳ Завантаження кандидатів...</div>';
+    document.getElementById('candidates-empty').style.display = 'none';
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/candidates.json');
+
+      if (resp.status === 404) {
+        listEl.innerHTML = '';
+        document.getElementById('candidates-empty').style.display = 'block';
+        document.getElementById('candidates-updated').textContent = '';
+        updateCandidatesCounter();
+        return;
+      }
+
+      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+
+      var data = await resp.json();
+      candidatesSha = data.sha;
+      var content = JSON.parse(b64DecodeUtf8(data.content));
+      candidatesData = (content.items || []).filter(function(c) { return c && c.id; });
+
+      if (content.updated_at) {
+        document.getElementById('candidates-updated').textContent = 'оновлено ' + timeAgo(content.updated_at);
+      }
+
+      candidatesSelected = {};
+      document.getElementById('candidates-select-all-cb').checked = false;
+      renderCandidates();
+
+    } catch (e) {
+      console.error('Load candidates error:', e);
+      listEl.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
+    }
+  };
+
+  function renderCandidates() {
+    var filter = document.getElementById('candidates-filter-type').value;
+    var filtered = candidatesData;
+    if (filter !== 'all') {
+      filtered = candidatesData.filter(function(c) { return c.type === filter; });
+    }
+
+    var listEl = document.getElementById('candidates-list');
+
+    if (filtered.length === 0 && candidatesData.length === 0) {
+      listEl.innerHTML = '';
+      document.getElementById('candidates-empty').style.display = 'block';
+      updateCandidatesCounter();
+      return;
+    }
+
+    document.getElementById('candidates-empty').style.display = 'none';
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="loading">Немає кандидатів для обраного фільтру</div>';
+      updateCandidatesCounter();
+      return;
+    }
+
+    // Sort newest first
+    filtered.sort(function(a, b) {
+      return (b.date || '').localeCompare(a.date || '');
+    });
+
+    var now = Date.now();
+
+    listEl.innerHTML = filtered.map(function(c) {
+      var isOld = c.date && (now - new Date(c.date).getTime()) > 86400000;
+      var typeIcon = c.type === 'video' ? '🎬' : '📰';
+      var checked = candidatesSelected[c.id] ? ' checked' : '';
+      var thumbHtml = c.image_url
+        ? '<img src="' + escHtml(c.image_url) + '" alt="" class="candidate-thumb" onerror="this.style.display=\'none\'">'
+        : '';
+      var viewsInfo = c.views ? ' · ' + escHtml(c.views) + ' переглядів' : '';
+
+      return '<div class="candidate-card' + (isOld ? ' dimmed' : '') + '" data-id="' + escHtml(c.id) + '">' +
+        '<div class="candidate-cb"><input type="checkbox" onchange="candidateToggle(\'' + escHtml(c.id) + '\', this.checked)"' + checked + '></div>' +
+        thumbHtml +
+        '<div class="candidate-info">' +
+          '<div class="candidate-title-row">' +
+            '<span class="candidate-type">' + typeIcon + '</span>' +
+            '<span class="candidate-title">' + escHtml(c.title) + '</span>' +
+          '</div>' +
+          '<div class="candidate-meta">' + escHtml(c.source || '') + ' · ' + (c.date ? timeAgo(c.date) : '') + viewsInfo + '</div>' +
+          '<div class="candidate-summary">' + escHtml(c.summary || '') + '</div>' +
+          '<div class="candidate-actions">' +
+            '<a href="' + escHtml(c.link || '#') + '" target="_blank" class="admin-btn">↗ Відкрити</a>' +
+            (c.content_preview ? '<button class="admin-btn" onclick="toggleCandidatePreview(\'' + escHtml(c.id) + '\')">👁 Прев\'ю</button>' : '') +
+          '</div>' +
+          (c.content_preview ? '<div class="candidate-preview" id="preview-' + escHtml(c.id) + '">' + escHtml(c.content_preview) + '</div>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    updateCandidatesCounter();
+  }
+
+  function updateCandidatesCounter() {
+    var filter = document.getElementById('candidates-filter-type').value;
+    var filtered = candidatesData;
+    if (filter !== 'all') {
+      filtered = candidatesData.filter(function(c) { return c.type === filter; });
+    }
+
+    var selectedCount = Object.keys(candidatesSelected).length;
+    var counterEl = document.getElementById('candidates-counter');
+    counterEl.textContent = filtered.length + ' кандидатів' + (selectedCount > 0 ? ' · ' + selectedCount + ' вибрано' : '');
+
+    var processBtn = document.getElementById('btn-process-candidates');
+    processBtn.disabled = selectedCount === 0;
+    processBtn.textContent = '✅ Обробити вибрані (' + selectedCount + ')';
+  }
+
+  window.candidateToggle = function(id, checked) {
+    if (checked) {
+      candidatesSelected[id] = true;
+    } else {
+      delete candidatesSelected[id];
+    }
+    updateCandidatesCounter();
+  };
+
+  window.candidatesToggleAll = function(checked) {
+    var filter = document.getElementById('candidates-filter-type').value;
+    var filtered = candidatesData;
+    if (filter !== 'all') {
+      filtered = candidatesData.filter(function(c) { return c.type === filter; });
+    }
+
+    candidatesSelected = {};
+    if (checked) {
+      filtered.forEach(function(c) { candidatesSelected[c.id] = true; });
+    }
+
+    document.getElementById('candidates-select-all-label').textContent = checked ? 'Зняти все' : 'Виділити все';
+
+    // Update checkboxes in DOM
+    var cards = document.querySelectorAll('.candidate-card');
+    cards.forEach(function(card) {
+      var cb = card.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = checked;
+    });
+
+    updateCandidatesCounter();
+  };
+
+  window.filterCandidates = function() {
+    candidatesSelected = {};
+    document.getElementById('candidates-select-all-cb').checked = false;
+    document.getElementById('candidates-select-all-label').textContent = 'Виділити все';
+    renderCandidates();
+  };
+
+  window.toggleCandidatePreview = function(id) {
+    var el = document.getElementById('preview-' + id);
+    if (el) el.classList.toggle('open');
+  };
+
+  window.refreshCandidates = async function() {
+    if (!ghToken) {
+      showStatus('❌ Потрібен GitHub Token', 'error');
+      return;
+    }
+
+    showStatus('⏳ Запуск пошуку кандидатів...', 'info');
+
+    try {
+      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
+        ref: 'main',
+        inputs: { action: 'discover', region: 'all' }
+      });
+
+      if (resp.status === 204 || resp.ok) {
+        showStatus('🔄 Пошук кандидатів запущено! Оновіть сторінку через кілька хвилин.', 'success');
+      } else {
+        throw new Error('Dispatch failed: ' + resp.status);
+      }
+    } catch (e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.processCandidates = async function() {
+    var selectedIds = Object.keys(candidatesSelected);
+    if (!selectedIds.length) return;
+
+    if (!confirm('Обробити ' + selectedIds.length + ' кандидатів?')) return;
+
+    showStatus('⏳ Запуск обробки ' + selectedIds.length + ' кандидатів...', 'info');
+
+    try {
+      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
+        ref: 'main',
+        inputs: { action: 'process', candidate_ids: selectedIds.join(','), region: 'all' }
+      });
+
+      if (resp.status === 204 || resp.ok) {
+        showStatus('✅ Обробку ' + selectedIds.length + ' кандидатів запущено! Нові статті з\'являться через кілька хвилин.', 'success');
+        candidatesSelected = {};
+        updateCandidatesCounter();
+        // Uncheck all
+        var cbs = document.querySelectorAll('.candidate-card input[type="checkbox"]');
+        cbs.forEach(function(cb) { cb.checked = false; });
+        document.getElementById('candidates-select-all-cb').checked = false;
+      } else {
+        throw new Error('Dispatch failed: ' + resp.status);
+      }
+    } catch (e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // Sources tab
+  // =========================================================================
+
+  var sourcesData = [];
+  var sourcesSha = null;
+  var editingSourceIdx = -1;
+
+  window.toggleSourcesTab = function() {
+    var tab = document.getElementById('sources-tab');
+    var visible = tab.style.display !== 'none';
+    tab.style.display = visible ? 'none' : 'block';
+    if (!visible) {
+      loadSources();
+    }
+  };
+
+  window.loadSources = async function() {
+    if (!ghToken) {
+      showStatus('❌ Потрібен GitHub Token', 'error');
+      return;
+    }
+
+    var listEl = document.getElementById('sources-list');
+    listEl.innerHTML = '<div class="loading">⏳ Завантаження джерел...</div>';
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/sources.json');
+
+      if (resp.status === 404) {
+        sourcesData = [];
+        sourcesSha = null;
+        listEl.innerHTML = '<div class="loading">Файл sources.json не знайдено</div>';
+        return;
+      }
+
+      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+
+      var data = await resp.json();
+      sourcesSha = data.sha;
+      var content = JSON.parse(b64DecodeUtf8(data.content));
+      sourcesData = content.sources || [];
+
+      renderSources();
+
+    } catch (e) {
+      console.error('Load sources error:', e);
+      listEl.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
+    }
+  };
+
+  function renderSources() {
+    var filter = document.getElementById('sources-filter').value;
+    var filtered = sourcesData.map(function(s, i) { return { source: s, idx: i }; });
+
+    if (filter === 'global') {
+      filtered = filtered.filter(function(x) { return x.source.region === 'global'; });
+    } else if (filter === 'ua') {
+      filtered = filtered.filter(function(x) { return x.source.region === 'ua'; });
+    } else if (filter === 'inactive') {
+      filtered = filtered.filter(function(x) { return !x.source.active; });
+    }
+
+    var badge = document.getElementById('sources-count-badge');
+    badge.textContent = sourcesData.length + ' джерел';
+
+    var listEl = document.getElementById('sources-list');
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="loading">Немає джерел для обраного фільтру</div>';
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(function(x) {
+      var s = x.source;
+      var idx = x.idx;
+      var statusDot = s.active !== false ? '🟢' : '🔴';
+      var regionBadge = s.region === 'ua'
+        ? '<span class="source-badge ua">🇺🇦 UA</span>'
+        : '<span class="source-badge global">🌍 Global</span>';
+      var trustedBadge = s.trusted ? '<span class="source-badge trusted">✅ trusted</span>' : '';
+      var toggleLabel = s.active !== false ? '🔴' : '🟢';
+      var toggleTitle = s.active !== false ? 'Деактивувати' : 'Активувати';
+
+      return '<div class="source-row" data-idx="' + idx + '">' +
+        '<span class="source-status-dot">' + statusDot + '</span>' +
+        '<span class="source-name">' + escHtml(s.name) + '</span>' +
+        '<span class="source-url" title="' + escHtml(s.url) + '">' + escHtml(s.url) + '</span>' +
+        regionBadge +
+        trustedBadge +
+        '<span class="source-actions">' +
+          '<button class="admin-btn btn-edit" onclick="editSource(' + idx + ')" title="Редагувати">✏️</button>' +
+          '<button class="admin-btn" onclick="toggleSourceActive(' + idx + ')" title="' + toggleTitle + '">' + toggleLabel + '</button>' +
+        '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.filterSources = function() {
+    renderSources();
+  };
+
+  window.toggleSourceAddForm = function() {
+    var form = document.getElementById('source-add-form');
+    var visible = form.style.display !== 'none';
+    if (visible) {
+      cancelSourceForm();
+    } else {
+      editingSourceIdx = -1;
+      document.getElementById('source-form-title').textContent = '➕ Нове джерело';
+      document.getElementById('src-name').value = '';
+      document.getElementById('src-url').value = '';
+      document.getElementById('src-region').value = 'global';
+      document.getElementById('src-trusted').checked = false;
+      form.style.display = 'block';
+    }
+  };
+
+  window.cancelSourceForm = function() {
+    document.getElementById('source-add-form').style.display = 'none';
+    editingSourceIdx = -1;
+  };
+
+  window.editSource = function(idx) {
+    var s = sourcesData[idx];
+    if (!s) return;
+
+    editingSourceIdx = idx;
+    document.getElementById('source-form-title').textContent = '✏️ Редагувати: ' + s.name;
+    document.getElementById('src-name').value = s.name || '';
+    document.getElementById('src-url').value = s.url || '';
+    document.getElementById('src-region').value = s.region || 'global';
+    document.getElementById('src-trusted').checked = !!s.trusted;
+    document.getElementById('source-add-form').style.display = 'block';
+  };
+
+  window.saveSource = async function() {
+    var name = document.getElementById('src-name').value.trim();
+    var url = document.getElementById('src-url').value.trim();
+    var region = document.getElementById('src-region').value;
+    var trusted = document.getElementById('src-trusted').checked;
+
+    if (!name || !url) {
+      showStatus('❌ Назва та URL обов\'язкові', 'error');
+      return;
+    }
+
+    showStatus('⏳ Збереження джерела...', 'info');
+
+    try {
+      // Re-read to get latest SHA
+      var resp = await ghApi('GET', '/contents/data/sources.json');
+      if (!resp.ok) throw new Error('Cannot fetch sources.json: ' + resp.status);
+      var data = await resp.json();
+      sourcesSha = data.sha;
+      var content = JSON.parse(b64DecodeUtf8(data.content));
+
+      var newSource = { name: name, url: url, region: region, active: true };
+      if (trusted) newSource.trusted = true;
+
+      if (editingSourceIdx >= 0 && editingSourceIdx < content.sources.length) {
+        // Preserve active state
+        newSource.active = content.sources[editingSourceIdx].active !== false;
+        content.sources[editingSourceIdx] = newSource;
+      } else {
+        content.sources.push(newSource);
+      }
+
+      var encoded = b64EncodeUtf8(JSON.stringify(content, null, 2));
+
+      var putResp = await ghApi('PUT', '/contents/data/sources.json', {
+        message: (editingSourceIdx >= 0 ? '✏️ Update' : '➕ Add') + ' source: ' + name,
+        content: encoded,
+        sha: sourcesSha
+      });
+
+      if (!putResp.ok) {
+        var err = await putResp.json().catch(function() { return {}; });
+        throw new Error(err.message || 'PUT failed: ' + putResp.status);
+      }
+
+      sourcesData = content.sources;
+      var putData = await putResp.json();
+      sourcesSha = putData.content.sha;
+
+      cancelSourceForm();
+      renderSources();
+      showStatus('✅ Джерело збережено!', 'success');
+
+    } catch (e) {
+      console.error('Save source error:', e);
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.toggleSourceActive = async function(idx) {
+    var s = sourcesData[idx];
+    if (!s) return;
+
+    var newActive = s.active === false;
+    var action = newActive ? 'активувати' : 'деактивувати';
+    if (!confirm(action.charAt(0).toUpperCase() + action.slice(1) + ' "' + s.name + '"?')) return;
+
+    showStatus('⏳ Оновлення...', 'info');
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/sources.json');
+      if (!resp.ok) throw new Error('Cannot fetch sources.json: ' + resp.status);
+      var data = await resp.json();
+      sourcesSha = data.sha;
+      var content = JSON.parse(b64DecodeUtf8(data.content));
+
+      content.sources[idx].active = newActive;
+
+      var encoded = b64EncodeUtf8(JSON.stringify(content, null, 2));
+
+      var putResp = await ghApi('PUT', '/contents/data/sources.json', {
+        message: (newActive ? '🟢 Activate' : '🔴 Deactivate') + ': ' + s.name,
+        content: encoded,
+        sha: sourcesSha
+      });
+
+      if (!putResp.ok) {
+        var err = await putResp.json().catch(function() { return {}; });
+        throw new Error(err.message || 'PUT failed: ' + putResp.status);
+      }
+
+      sourcesData = content.sources;
+      var putData = await putResp.json();
+      sourcesSha = putData.content.sha;
+
+      renderSources();
+      showStatus('✅ Джерело ' + (newActive ? 'активовано' : 'деактивовано') + '!', 'success');
+
+    } catch (e) {
+      console.error('Toggle source error:', e);
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // SOCIAL STATUS + MODAL
+  // =========================================================================
+
+  async function loadSocialStatus() {
+    if (!ghToken) return;
+    try {
+      var resp = await ghApi('GET', '/contents/data/social_status.json');
+      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      SOCIAL_STATUS = data || {};
+    } catch (e) {
+      SOCIAL_STATUS = {};
+    }
+  }
+  window.loadSocialStatus = loadSocialStatus;
+
+  window.openSocialModal = function(filename, platform) {
+    var modal = document.getElementById('social-modal');
+    if (!modal) {
+      // Create modal dynamically
+      modal = document.createElement('div');
+      modal.id = 'social-modal';
+      modal.className = 'social-modal-overlay';
+      modal.innerHTML = '<div class="social-modal-box">' +
+        '<div class="social-modal-header">' +
+          '<h3 id="social-modal-title"></h3>' +
+          '<button onclick="closeSocialModal()" class="social-modal-close">\u2715</button>' +
+        '</div>' +
+        '<div class="social-modal-body">' +
+          '<label>Текст публікації:</label>' +
+          '<textarea id="social-modal-text" rows="5" style="width:100%;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:0.95rem;resize:vertical;"></textarea>' +
+          '<div style="margin-top:12px;display:flex;gap:12px;align-items:center;">' +
+            '<label><input type="radio" name="social-when" value="now" checked onchange="document.getElementById(\'social-modal-time\').disabled=true"> Зараз</label>' +
+            '<label><input type="radio" name="social-when" value="scheduled" onchange="document.getElementById(\'social-modal-time\').disabled=false"> Запланувати</label>' +
+            '<input type="datetime-local" id="social-modal-time" disabled style="background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border);border-radius:6px;padding:6px;">' +
+          '</div>' +
+          '<input type="hidden" id="social-modal-filename">' +
+          '<input type="hidden" id="social-modal-platform">' +
+        '</div>' +
+        '<div class="social-modal-footer">' +
+          '<button class="admin-btn admin-btn-green" onclick="publishSocial()" id="social-modal-submit">Опублікувати</button>' +
+          '<button class="admin-btn" onclick="closeSocialModal()">Скасувати</button>' +
+        '</div>' +
+      '</div>';
+      document.body.appendChild(modal);
+    }
+
+    // Find article data
+    var article = ALL_ARTICLES.find(function(a) { return a.filename === filename; });
+    var title = article ? (article.title || '').replace(/^"+|"+$/g, '') : filename;
+    var platformName = platform === 'telegram' ? String.fromCodePoint(128232) + ' Telegram' : String.fromCodePoint(129525) + ' Threads';
+
+    document.getElementById('social-modal-title').textContent = platformName + ': ' + title.substring(0, 50);
+    document.getElementById('social-modal-filename').value = filename;
+    document.getElementById('social-modal-platform').value = platform;
+
+    // Load hook text from article frontmatter
+    var hookField = platform === 'telegram' ? 'telegram_hook' : 'threads_hook';
+    var defaultText = article ? (article.summary || '') : '';
+
+    // Try to get hook from file
+    ghApi('GET', '/contents/content/news/' + filename).then(function(resp) {
+      var content = b64DecodeUtf8(resp.content);
+      var hookMatch = content.match(new RegExp(hookField + ':\\s*"([^"]*)"'));
+      if (hookMatch) {
+        document.getElementById('social-modal-text').value = hookMatch[1];
+      } else {
+        document.getElementById('social-modal-text').value = defaultText;
+      }
+    }).catch(function() {
+      document.getElementById('social-modal-text').value = defaultText;
+    });
+
+    modal.style.display = 'flex';
+  };
+
+  window.closeSocialModal = function() {
+    var modal = document.getElementById('social-modal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  window.publishSocial = async function() {
+    var filename = document.getElementById('social-modal-filename').value;
+    var platform = document.getElementById('social-modal-platform').value;
+    var text = document.getElementById('social-modal-text').value;
+    var whenRadio = document.querySelector('input[name="social-when"]:checked');
+    var when = whenRadio ? whenRadio.value : 'now';
+
+    if (!filename || !platform) return;
+
+    var submitBtn = document.getElementById('social-modal-submit');
+    submitBtn.textContent = '\u23F3 Публікація...';
+    submitBtn.disabled = true;
+
+    try {
+      if (when === 'scheduled') {
+        var scheduledTime = document.getElementById('social-modal-time').value;
+        if (!scheduledTime) {
+          showStatus('\u274C Вкажіть час публікації', 'error');
+          submitBtn.textContent = 'Опублікувати';
+          submitBtn.disabled = false;
+          return;
+        }
+        // Add to scheduled.json
+        var schedResp = await ghApi('GET', '/contents/data/scheduled.json');
+        var schedSha = schedResp.sha;
+        var schedData = JSON.parse(b64DecodeUtf8(schedResp.content));
+        if (!schedData[platform]) schedData[platform] = [];
+        schedData[platform].push({
+          scheduled_at: new Date(scheduledTime).toISOString(),
+          articles: [{ filename: filename, title: text.substring(0, 60), custom_text: text }]
+        });
+        await ghApi('PUT', '/contents/data/scheduled.json', {
+          message: String.fromCodePoint(128197) + ' Schedule ' + platform + ': ' + filename,
+          content: b64EncodeUtf8(JSON.stringify(schedData, null, 2)),
+          sha: schedSha
+        });
+        showStatus(String.fromCodePoint(9989) + ' Заплановано на ' + scheduledTime, 'success');
+      } else {
+        // Immediate: dispatch workflow
+        var workflowName = platform === 'telegram' ? 'telegram_post.yml' : 'threads_post.yml';
+        await ghApi('POST', '/actions/workflows/' + workflowName + '/dispatches', {
+          ref: 'main',
+          inputs: { article: filename, text: text }
+        });
+        showStatus(String.fromCodePoint(9989) + ' Публікація запущена в ' + (platform === 'telegram' ? 'Telegram' : 'Threads'), 'success');
+      }
+
+      closeSocialModal();
+
+      // Reload social status after a delay
+      setTimeout(function() { loadSocialStatus().then(renderArticles); }, 5000);
+
+    } catch (e) {
+      console.error('Social publish error:', e);
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    }
+
+    submitBtn.textContent = 'Опублікувати';
+    submitBtn.disabled = false;
   };
 
   // Expose for onclick

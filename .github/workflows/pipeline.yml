@@ -2,14 +2,23 @@ name: KONOPLA.UA News Pipeline
 
 on:
   schedule:
-    - cron: '0 5,11,17 * * *'
+    - cron: '0 2,8,14,20 * * *'
   workflow_dispatch:
     inputs:
+      action:
+        description: 'Дія'
+        type: choice
+        options: [discover, process]
+        default: discover
       region:
         description: 'Які джерела сканувати'
         type: choice
         options: [all, global, ua]
         default: all
+      candidate_ids:
+        description: 'ID кандидатів для обробки (через кому)'
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -39,7 +48,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Run news pipeline
+      - name: Run pipeline
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -47,17 +56,37 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           PYTHONIOENCODING: utf-8
           LANG: en_US.UTF-8
           LC_ALL: en_US.UTF-8
-        run: python scripts/main.py --region ${{ github.event.inputs.region || 'all' }}
+        run: |
+          ACTION="${{ github.event.inputs.action || 'discover' }}"
+          REGION="${{ github.event.inputs.region || 'all' }}"
+          IDS="${{ github.event.inputs.candidate_ids || '' }}"
+          if [ "$ACTION" = "process" ] && [ -n "$IDS" ]; then
+            python scripts/main.py --action process --ids "$IDS" --region "$REGION"
+          else
+            python scripts/main.py --action discover --region "$REGION"
+          fi
 
-      - name: Commit new drafts
+      - name: Commit changes
+        id: commit
         run: |
           git config user.name "Konopla Bot"
           git config user.email "bot@konopla.ua"
           git add content/news/ data/ static/images/generated/ || true
-          git diff --staged --quiet || git commit -m "📋 New draft articles $(date -u +'%Y-%m-%d %H:%M UTC')"
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            ACTION="${{ github.event.inputs.action || 'discover' }}"
+            if [ "$ACTION" = "process" ]; then
+              git commit -m "📋 New draft articles $(date -u +'%Y-%m-%d %H:%M UTC')"
+            else
+              git commit -m "📡 Updated candidates $(date -u +'%Y-%m-%d %H:%M UTC')"
+            fi
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
           for i in 1 2 3; do
             git push && break
             echo "Push failed (attempt $i), pulling and retrying..."
@@ -69,6 +98,7 @@ jobs:
           done
 
       - name: Setup Hugo
+        if: github.event.inputs.action == 'process' && steps.commit.outputs.changed == 'true'
         run: |
           HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep '"tag_name"' | sed 's/.*"v\(.*\)".*/\1/')
           wget -q "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb" -O hugo.deb
@@ -76,16 +106,20 @@ jobs:
           rm hugo.deb
 
       - name: Build Hugo site
+        if: github.event.inputs.action == 'process' && steps.commit.outputs.changed == 'true'
         run: hugo --minify
 
       - name: Setup Pages
+        if: github.event.inputs.action == 'process' && steps.commit.outputs.changed == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.event.inputs.action == 'process' && steps.commit.outputs.changed == 'true'
         uses: actions/upload-pages-artifact@v4
         with:
           path: './public'
 
       - name: Deploy to GitHub Pages
+        if: github.event.inputs.action == 'process' && steps.commit.outputs.changed == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
