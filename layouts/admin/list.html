@@ -43,8 +43,8 @@
           <li class="sidebar-item" data-view="settings" onclick="showView('settings')">
             <span class="sidebar-label">⚙️ Налаштування</span>
           </li>
-          <li class="sidebar-item sidebar-item-link" onclick="window.location.href='/admin/catalog/'">
-            <span class="sidebar-label">📋 Каталог</span>
+          <li class="sidebar-item" data-view="catalog" onclick="showView('catalog')">
+            <span class="sidebar-label">📋 Каталог</span> <span class="sidebar-badge" id="badge-catalog"></span>
           </li>
         </ul>
         <div class="sidebar-footer">
@@ -348,7 +348,6 @@
             <h1>⚙️ Налаштування</h1>
             <div class="view-actions">
               <button class="admin-btn admin-btn-green" onclick="toggleSourceAddForm()">➕ Додати джерело</button>
-              <a href="/admin/catalog/" class="admin-btn">📋 Каталог</a>
             </div>
           </div>
           <!-- Sources -->
@@ -413,6 +412,184 @@
             </div>
           </div>
         </div><!-- /view-settings -->
+
+        <!-- ===== VIEW: Catalog ===== -->
+        <div class="admin-view" id="view-catalog">
+          <div class="view-header">
+            <h1>📋 Каталог компаній</h1>
+            <div class="view-actions">
+              <button class="admin-btn admin-btn-green" onclick="showCompanyForm()">+ Додати компанію</button>
+              <button class="admin-btn" onclick="loadCatalog()">🔄 Оновити</button>
+              <button class="admin-btn" onclick="triggerCatalogDeploy()">🚀 Деплой</button>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="cat-filters">
+            <input type="text" id="cat-search" placeholder="🔍 Пошук компанії..." oninput="renderCompanies()" class="cat-search-input">
+            <select id="cat-filter-cat" onchange="renderCompanies()" class="cat-select">
+              <option value="all">Всі категорії</option>
+            </select>
+            <select id="cat-filter-region" onchange="renderCompanies()" class="cat-select">
+              <option value="all">Всі регіони</option>
+            </select>
+            <select id="cat-filter-status" onchange="renderCompanies()" class="cat-select">
+              <option value="all">Всі статуси</option>
+              <option value="active">Активні</option>
+              <option value="inactive">Неактивні</option>
+            </select>
+            <span id="cat-count" class="cat-count">0 компаній</span>
+          </div>
+
+          <!-- Company form (hidden) -->
+          <div id="company-form" class="company-form-wrap" style="display:none">
+            <div class="company-form-card">
+              <div class="company-form-header">
+                <h2 id="cat-form-title">✍️ Нова компанія</h2>
+                <button class="admin-btn admin-btn-dim" onclick="hideCompanyForm()">✕ Закрити</button>
+              </div>
+
+              <!-- Основна інформація -->
+              <div class="cf-row">
+                <div class="cf-section-label">Основна інформація</div>
+                <div class="cf-field cf-field-wide">
+                  <label>Назва *</label>
+                  <input type="text" id="cat-name" placeholder="Назва компанії" oninput="autoSlug()">
+                </div>
+                <div class="cf-field">
+                  <label>Slug (URL)</label>
+                  <input type="text" id="cat-slug" placeholder="nazva-kompaniyi">
+                </div>
+                <div class="cf-field">
+                  <label>Категорія *</label>
+                  <select id="cat-category"></select>
+                </div>
+                <div class="cf-field">
+                  <label>Статус</label>
+                  <select id="cat-status">
+                    <option value="active">Активна</option>
+                    <option value="inactive">Неактивна</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Розташування -->
+              <div class="cf-row">
+                <div class="cf-section-label">Розташування</div>
+                <div class="cf-field">
+                  <label>Регіон *</label>
+                  <select id="cat-region"></select>
+                </div>
+                <div class="cf-field">
+                  <label>Місто / Адреса</label>
+                  <input type="text" id="cat-location" placeholder="Київ, вул. Хрещатик 1">
+                </div>
+                <div class="cf-field">
+                  <label>Рік заснування</label>
+                  <input type="number" id="cat-founded" placeholder="2015" min="1800" max="2030">
+                </div>
+                <div class="cf-field">
+                  <label>Широта</label>
+                  <input type="number" id="cat-lat" placeholder="50.4501" step="0.0001">
+                </div>
+                <div class="cf-field">
+                  <label>Довгота</label>
+                  <input type="number" id="cat-lng" placeholder="30.5234" step="0.0001">
+                </div>
+              </div>
+
+              <!-- Опис -->
+              <div class="cf-row">
+                <div class="cf-section-label">Опис</div>
+                <div class="cf-field cf-field-wide">
+                  <label>Короткий опис *</label>
+                  <textarea id="cat-description" rows="3" placeholder="Короткий опис компанії (до 300 символів)..."></textarea>
+                </div>
+                <div class="cf-field cf-field-wide">
+                  <label>Повний опис</label>
+                  <textarea id="cat-full-desc" rows="5" placeholder="Повний опис для сторінки компанії..."></textarea>
+                </div>
+              </div>
+
+              <!-- Контакти -->
+              <div class="cf-row">
+                <div class="cf-section-label">Контакти</div>
+                <div class="cf-field">
+                  <label>Веб-сайт</label>
+                  <input type="url" id="cat-website" placeholder="https://example.com">
+                </div>
+                <div class="cf-field">
+                  <label>Телефон</label>
+                  <input type="tel" id="cat-phone" placeholder="+380 44 1234567">
+                </div>
+                <div class="cf-field">
+                  <label>Email</label>
+                  <input type="email" id="cat-email" placeholder="info@example.com">
+                </div>
+              </div>
+
+              <!-- Соцмережі -->
+              <div class="cf-row">
+                <div class="cf-section-label">Соцмережі</div>
+                <div class="cf-field">
+                  <label>Telegram</label>
+                  <input type="text" id="cat-telegram" placeholder="@channel або https://t.me/...">
+                </div>
+                <div class="cf-field">
+                  <label>Instagram</label>
+                  <input type="text" id="cat-instagram" placeholder="@handle або URL">
+                </div>
+                <div class="cf-field">
+                  <label>Facebook</label>
+                  <input type="text" id="cat-facebook" placeholder="URL сторінки">
+                </div>
+              </div>
+
+              <!-- Медіа та теги -->
+              <div class="cf-row">
+                <div class="cf-section-label">Медіа, теги та продукти</div>
+                <div class="cf-field">
+                  <label>Логотип (URL або завантажити)</label>
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <input type="text" id="cat-logo" placeholder="/images/catalog/logo.png" style="flex:1">
+                    <label class="cf-upload-btn" title="Завантажити логотип (max 2MB)">
+                      📷
+                      <input type="file" id="cat-logo-upload" accept="image/jpeg,image/png,image/webp,image/svg+xml" style="display:none" onchange="uploadCatalogLogo(this)">
+                    </label>
+                  </div>
+                  <div id="cat-logo-preview" style="display:none;margin-top:8px">
+                    <img id="cat-logo-preview-img" src="" alt="Logo" style="max-height:60px;border-radius:8px;border:1px solid var(--border);padding:4px;background:var(--bg-primary)">
+                  </div>
+                </div>
+                <div class="cf-field">
+                  <label>Теги (через кому)</label>
+                  <input type="text" id="cat-tags" placeholder="DevoHome, текстиль, конопляна тканина">
+                </div>
+                <div class="cf-field">
+                  <label>Продукти/послуги (через кому)</label>
+                  <input type="text" id="cat-products" placeholder="волокно, костра, насіння">
+                </div>
+                <div class="cf-field" style="justify-content:flex-end;padding-bottom:2px">
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-primary)">
+                    <input type="checkbox" id="cat-featured">
+                    ⭐ Виділена компанія
+                  </label>
+                </div>
+              </div>
+
+              <div class="cf-actions">
+                <button class="admin-btn admin-btn-green cf-submit-btn" onclick="saveCompany()">💾 Зберегти</button>
+                <button class="admin-btn admin-btn-dim" onclick="hideCompanyForm()">Скасувати</button>
+                <span id="cat-editing-id" style="display:none"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Companies list -->
+          <div id="companies-list">
+            <div class="loading">Завантаження каталогу...</div>
+          </div>
+        </div><!-- /view-catalog -->
 
       </div><!-- /admin-main -->
     </div><!-- /admin-panel -->
@@ -548,8 +725,6 @@
   flex-shrink: 0;
 }
 .sidebar-badge:empty { display: none; }
-.sidebar-item-link { opacity: 0.7; }
-.sidebar-item-link:hover { opacity: 1; }
 .sidebar-footer {
   padding: 0.75rem 1rem;
   border-top: 1px solid var(--border);
@@ -2501,6 +2676,207 @@
     flex-direction: column;
   }
 }
+
+/* ===== Catalog View ===== */
+.cat-filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0 16px;
+}
+.cat-search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+.cat-select {
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+.cat-count {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.company-form-wrap { margin-bottom: 24px; }
+.company-form-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.company-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.company-form-header h2 { margin: 0; font-size: 1.1rem; }
+.cat-company-group { margin-bottom: 28px; }
+.cat-group-title {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.cat-group-title:hover { border-color: var(--border-hover); border-left-color: var(--green-accent); }
+.cat-group-count {
+  background: var(--green-dim);
+  color: var(--green-accent);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.cat-company-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+}
+.cat-company-table th {
+  background: var(--bg-secondary);
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+.cat-company-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+.cat-company-table tr:last-child td { border-bottom: none; }
+.cat-company-table tr:hover td { background: var(--bg-tertiary); }
+.cat-company-name { font-weight: 600; color: var(--text-primary); }
+.cat-company-location { color: var(--text-tertiary); font-size: 0.82rem; }
+.cat-company-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.cat-tag {
+  padding: 2px 8px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.cat-badge-active {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(52,211,153,0.15);
+  color: var(--green-accent);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.cat-badge-inactive {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  border-radius: 10px;
+  font-size: 0.75rem;
+}
+.cat-actions { display: flex; gap: 6px; }
+.cat-btn-edit {
+  padding: 4px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.cat-btn-edit:hover { border-color: var(--green-accent); color: var(--green-accent); }
+.cat-btn-delete {
+  padding: 4px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.cat-btn-delete:hover { border-color: #ef4444; color: #ef4444; }
+.cf-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  grid-column: 1 / -1;
+}
+.cf-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.cf-upload-btn:hover { border-color: var(--green-accent); background: var(--green-dim); }
+@media (max-width: 640px) {
+  .cat-filters {
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 12px;
+  }
+  .cat-search-input, .cat-select {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+  }
+  .cat-count { text-align: right; }
+  .cat-group-title { font-size: 0.9rem; padding: 9px 12px; }
+  .cat-company-table thead { display: none; }
+  .cat-company-table, .cat-company-table tbody, .cat-company-table tr, .cat-company-table td {
+    display: block; width: 100%; box-sizing: border-box;
+  }
+  .cat-company-table { border: 1px solid var(--border); border-top: none; }
+  .cat-company-table tr { padding: 12px; border-bottom: 1px solid var(--border); position: relative; }
+  .cat-company-table tr:last-child { border-bottom: none; }
+  .cat-company-table tr:hover td { background: transparent; }
+  .cat-company-table td { padding: 0; border: none; font-size: 0.85rem; }
+  .cat-company-table td:nth-child(1) { padding-right: 80px; margin-bottom: 5px; }
+  .cat-company-table td:nth-child(2) { font-size: 0.78rem; color: var(--text-tertiary); margin-bottom: 5px; }
+  .cat-company-table td:nth-child(3) { margin-bottom: 8px; }
+  .cat-company-table td:nth-child(4) { position: absolute; top: 12px; right: 12px; width: auto; }
+  .cat-company-table td:nth-child(5) { border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; }
+}
 </style>
 
 <script>
@@ -2584,9 +2960,13 @@
 
   var currentView = 'candidates';
   var chartsInitialized = false;
+  var catalogLoaded = false;
+  var catalogData = null;
+  var catalogSha = '';
+  var catalogEditingId = null;
 
   function showView(name) {
-    var validViews = ['candidates', 'moderation', 'articles', 'analytics', 'settings'];
+    var validViews = ['candidates', 'moderation', 'articles', 'analytics', 'settings', 'catalog'];
     if (validViews.indexOf(name) === -1) name = 'candidates';
 
     // Hide all views, then show the requested one with fade
@@ -2619,6 +2999,7 @@
     // Lazy load data
     if (name === 'candidates' && candidatesData.length === 0 && ghToken) loadCandidates();
     if (name === 'settings' && sourcesData.length === 0 && ghToken) loadSources();
+    if (name === 'catalog' && !catalogLoaded && ghToken) loadCatalog();
     if (name === 'analytics' && !chartsInitialized) {
       setTimeout(function() {
         renderStats();
@@ -2648,6 +3029,8 @@
     }
     el = document.getElementById('badge-articles');
     if (el) el.textContent = ALL_ARTICLES.length || '';
+    el = document.getElementById('badge-catalog');
+    if (el) el.textContent = (catalogData && catalogData.companies ? catalogData.companies.length : '') || '';
   }
 
   window.toggleMobileSidebar = function() {
@@ -5686,6 +6069,352 @@
 
     submitBtn.textContent = 'Опублікувати';
     submitBtn.disabled = false;
+  };
+
+  // =========================================================================
+  // Catalog Management
+  // =========================================================================
+
+  function catSlugify(text) {
+    var map = {а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ye',ж:'zh',з:'z',и:'y',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ь:'',ю:'yu',я:'ya',"\u02BC":'',"\u0027":''};
+    return text.toLowerCase().split('').map(function(c){ return map[c]||(/[a-z0-9]/.test(c)?c:'-'); }).join('').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  }
+
+  window.loadCatalog = async function() {
+    try {
+      showStatus('⏳ Завантаження каталогу...', 'info');
+      var resp = await ghApi('GET', '/contents/data/catalog.json');
+      if (!resp.ok) throw new Error('Cannot fetch catalog.json: ' + resp.status);
+      var data = await resp.json();
+      catalogSha = data.sha;
+      catalogData = JSON.parse(b64DecodeUtf8(data.content));
+      catalogLoaded = true;
+      populateCatalogSelects();
+      renderCompanies();
+      updateBadges();
+      showStatus('✅ Каталог завантажено', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка завантаження каталогу: ' + e.message, 'error');
+    }
+  };
+
+  async function saveCatalogData(msg) {
+    if (!ghToken) { showStatus('❌ Потрібен GitHub Token', 'error'); return false; }
+    try {
+      showStatus('⏳ Збереження каталогу...', 'info');
+      var resp = await ghApi('PUT', '/contents/data/catalog.json', {
+        message: msg || '📋 Update catalog',
+        content: b64EncodeUtf8(JSON.stringify(catalogData, null, 2)),
+        sha: catalogSha
+      });
+      if (!resp.ok) throw new Error('Save failed: ' + resp.status);
+      var result = await resp.json();
+      catalogSha = result.content.sha;
+      showStatus('✅ Каталог збережено', 'success');
+      return true;
+    } catch(e) {
+      showStatus('❌ Помилка збереження: ' + e.message, 'error');
+      return false;
+    }
+  }
+
+  function populateCatalogSelects() {
+    if (!catalogData) return;
+    var catSel = document.getElementById('cat-filter-cat');
+    var regSel = document.getElementById('cat-filter-region');
+    var cfCat  = document.getElementById('cat-category');
+    var cfReg  = document.getElementById('cat-region');
+
+    catSel.innerHTML = '<option value="all">Всі категорії</option>';
+    cfCat.innerHTML  = '<option value="">— Оберіть категорію —</option>';
+    catalogData.categories.sort(function(a,b){ return a.order - b.order; }).forEach(function(c) {
+      catSel.innerHTML += '<option value="' + c.id + '">' + c.emoji + ' ' + c.name + '</option>';
+      cfCat.innerHTML  += '<option value="' + c.id + '">' + c.emoji + ' ' + c.name + '</option>';
+    });
+
+    regSel.innerHTML = '<option value="all">Всі регіони</option>';
+    cfReg.innerHTML  = '<option value="">— Оберіть регіон —</option>';
+    catalogData.regions.forEach(function(r) {
+      regSel.innerHTML += '<option value="' + r.id + '">' + r.name + '</option>';
+      cfReg.innerHTML  += '<option value="' + r.id + '">' + r.name + '</option>';
+    });
+  }
+
+  window.renderCompanies = function() {
+    if (!catalogData) return;
+
+    var search = (document.getElementById('cat-search').value || '').toLowerCase();
+    var catF   = document.getElementById('cat-filter-cat').value;
+    var regF   = document.getElementById('cat-filter-region').value;
+    var statF  = document.getElementById('cat-filter-status').value;
+
+    var companies = catalogData.companies.filter(function(c) {
+      if (catF !== 'all' && c.category_id !== catF) return false;
+      if (regF !== 'all' && c.region !== regF) return false;
+      if (statF !== 'all' && c.status !== statF) return false;
+      if (search && !(c.name.toLowerCase().includes(search) || (c.description||'').toLowerCase().includes(search) || (c.location||'').toLowerCase().includes(search))) return false;
+      return true;
+    });
+
+    document.getElementById('cat-count').textContent = companies.length + ' компаній';
+
+    var catMap = {};
+    catalogData.categories.forEach(function(c){ catMap[c.id] = c; });
+    var grouped = {};
+    companies.forEach(function(c) {
+      var key = c.category_id;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(c);
+    });
+
+    var html = '';
+    catalogData.categories.forEach(function(cat) {
+      if (!grouped[cat.id] || !grouped[cat.id].length) return;
+      var list = grouped[cat.id];
+      html += '<div class="cat-company-group">';
+      html += '<div class="cat-group-title">' + cat.emoji + ' ' + cat.name + ' <span class="cat-group-count">' + list.length + '</span></div>';
+      html += '<table class="cat-company-table"><thead><tr><th>Назва</th><th>Регіон</th><th>Теги</th><th>Статус</th><th>Дії</th></tr></thead><tbody>';
+      list.forEach(function(c) {
+        var regName = '';
+        if (catalogData.regions) {
+          var r = catalogData.regions.find(function(x){ return x.id === c.region; });
+          regName = r ? r.short : (c.location || '');
+        }
+        var tagsHtml = (c.tags||[]).slice(0,3).map(function(t){ return '<span class="cat-tag">' + t + '</span>'; }).join('');
+        var statusHtml = c.status === 'active'
+          ? '<span class="cat-badge-active">\u25CF Активна</span>'
+          : '<span class="cat-badge-inactive">\u25CB Неактивна</span>';
+        var featured = c.featured ? ' \u2B50' : '';
+        html += '<tr>';
+        html += '<td><div class="cat-company-name">' + c.name + featured + '</div><div class="cat-company-location">\uD83D\uDCCD ' + (c.location||'') + '</div></td>';
+        html += '<td>' + regName + '</td>';
+        html += '<td><div class="cat-company-tags">' + tagsHtml + '</div></td>';
+        html += '<td>' + statusHtml + '</td>';
+        html += '<td><div class="cat-actions"><button class="cat-btn-edit" onclick="editCompany(\'' + c.id + '\')">\u270F\uFE0F Ред.</button><button class="cat-btn-delete" onclick="deleteCompany(\'' + c.id + '\',\'' + c.name.replace(/'/g,"\\'") + '\')">\uD83D\uDDD1\uFE0F</button></div></td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+    });
+
+    if (!html) html = '<div style="padding:40px;text-align:center;color:var(--text-tertiary)">Нічого не знайдено</div>';
+    document.getElementById('companies-list').innerHTML = html;
+    updateBadges();
+  };
+
+  window.showCompanyForm = function(id) {
+    catalogEditingId = id || null;
+    document.getElementById('cat-form-title').textContent = id ? '✏️ Редагування компанії' : '✍️ Нова компанія';
+    document.getElementById('cat-editing-id').textContent = id || '';
+
+    if (id && catalogData) {
+      var c = catalogData.companies.find(function(x){ return x.id===id; });
+      if (!c) return;
+      document.getElementById('cat-name').value       = c.name || '';
+      document.getElementById('cat-slug').value       = c.slug || '';
+      document.getElementById('cat-category').value   = c.category_id || '';
+      document.getElementById('cat-region').value     = c.region || '';
+      document.getElementById('cat-location').value   = c.location || '';
+      document.getElementById('cat-lat').value        = (c.coordinates && c.coordinates[0]) || '';
+      document.getElementById('cat-lng').value        = (c.coordinates && c.coordinates[1]) || '';
+      document.getElementById('cat-founded').value    = c.founded_year || '';
+      document.getElementById('cat-description').value= c.description || '';
+      document.getElementById('cat-full-desc').value  = c.full_description || '';
+      document.getElementById('cat-website').value    = c.website || '';
+      document.getElementById('cat-phone').value      = c.phone || '';
+      document.getElementById('cat-email').value      = c.email || '';
+      document.getElementById('cat-telegram').value   = (c.social && c.social.telegram) || '';
+      document.getElementById('cat-instagram').value  = (c.social && c.social.instagram) || '';
+      document.getElementById('cat-facebook').value   = (c.social && c.social.facebook) || '';
+      document.getElementById('cat-logo').value       = c.logo || '';
+      document.getElementById('cat-tags').value       = (c.tags||[]).join(', ');
+      document.getElementById('cat-products').value   = (c.products||[]).join(', ');
+      document.getElementById('cat-status').value     = c.status || 'active';
+      document.getElementById('cat-featured').checked = !!c.featured;
+      updateCatalogLogoPreview(c.logo);
+    } else {
+      ['cat-name','cat-slug','cat-location','cat-lat','cat-lng','cat-description','cat-full-desc',
+       'cat-website','cat-phone','cat-email','cat-telegram','cat-instagram','cat-facebook','cat-logo','cat-tags','cat-products']
+      .forEach(function(id){ document.getElementById(id).value=''; });
+      document.getElementById('cat-founded').value = '';
+      document.getElementById('cat-category').value = '';
+      document.getElementById('cat-region').value = '';
+      document.getElementById('cat-status').value = 'active';
+      document.getElementById('cat-featured').checked = false;
+      updateCatalogLogoPreview('');
+      var logoUpload = document.getElementById('cat-logo-upload');
+      if (logoUpload) logoUpload.value = '';
+    }
+
+    document.getElementById('company-form').style.display = 'block';
+    document.getElementById('company-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.hideCompanyForm = function() {
+    document.getElementById('company-form').style.display = 'none';
+    catalogEditingId = null;
+  };
+
+  window.editCompany = function(id) { showCompanyForm(id); };
+
+  window.autoSlug = function() {
+    if (catalogEditingId) return;
+    var name = document.getElementById('cat-name').value;
+    document.getElementById('cat-slug').value = catSlugify(name);
+  };
+
+  function updateCatalogLogoPreview(url) {
+    var prev = document.getElementById('cat-logo-preview');
+    var img  = document.getElementById('cat-logo-preview-img');
+    if (!prev || !img) return;
+    if (url) { img.src = url; prev.style.display = 'block'; }
+    else { prev.style.display = 'none'; }
+  }
+
+  // Listen for logo URL changes
+  var catLogoInput = document.getElementById('cat-logo');
+  if (catLogoInput) {
+    catLogoInput.addEventListener('input', function() {
+      updateCatalogLogoPreview(this.value);
+    });
+  }
+
+  window.uploadCatalogLogo = async function(fileInput) {
+    var file = fileInput.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { showStatus('❌ Файл занадто великий (max 2MB)', 'error'); return; }
+    if (!ghToken) { showStatus('❌ Потрібен GitHub Token', 'error'); return; }
+    var ext = file.name.split('.').pop().toLowerCase();
+    if (!['jpg','jpeg','png','webp','svg'].includes(ext)) { showStatus('❌ Тільки JPG, PNG, WebP або SVG', 'error'); return; }
+    showStatus('⏳ Завантаження логотипу...', 'info');
+    var reader = new FileReader();
+    reader.onload = async function(ev) {
+      try {
+        var base64 = ev.target.result.split(',')[1];
+        var filename = 'logo-' + Date.now().toString(36) + '.' + ext;
+        var resp = await ghApi('PUT', '/contents/static/images/catalog/' + filename, {
+          message: '\uD83D\uDCF7 Upload company logo: ' + filename,
+          content: base64
+        });
+        if (!resp.ok) throw new Error('Upload failed: ' + resp.status);
+        var url = '/images/catalog/' + filename;
+        document.getElementById('cat-logo').value = url;
+        updateCatalogLogoPreview(url);
+        showStatus('✅ Логотип завантажено', 'success');
+      } catch(e) {
+        showStatus('❌ Помилка завантаження: ' + e.message, 'error');
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  window.saveCompany = async function() {
+    var name = document.getElementById('cat-name').value.trim();
+    var cat  = document.getElementById('cat-category').value;
+    var reg  = document.getElementById('cat-region').value;
+    var desc = document.getElementById('cat-description').value.trim();
+
+    if (!name) { showStatus('❌ Введіть назву компанії', 'error'); return; }
+    if (!cat)  { showStatus('❌ Оберіть категорію', 'error'); return; }
+    if (!reg)  { showStatus('❌ Оберіть регіон', 'error'); return; }
+    if (!desc) { showStatus('❌ Введіть короткий опис', 'error'); return; }
+
+    var lat = parseFloat(document.getElementById('cat-lat').value) || 0;
+    var lng = parseFloat(document.getElementById('cat-lng').value) || 0;
+
+    var tagsRaw     = document.getElementById('cat-tags').value;
+    var productsRaw = document.getElementById('cat-products').value;
+    var tags     = tagsRaw.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+    var products = productsRaw.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+
+    var now = new Date().toISOString();
+
+    if (catalogEditingId) {
+      var idx = catalogData.companies.findIndex(function(c){ return c.id === catalogEditingId; });
+      if (idx === -1) { showStatus('❌ Компанію не знайдено', 'error'); return; }
+      Object.assign(catalogData.companies[idx], {
+        name:             name,
+        slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
+        category_id:      cat,
+        region:           reg,
+        location:         document.getElementById('cat-location').value.trim(),
+        coordinates:      (lat || lng) ? [lat, lng] : catalogData.companies[idx].coordinates,
+        founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
+        description:      desc,
+        full_description: document.getElementById('cat-full-desc').value.trim(),
+        website:          document.getElementById('cat-website').value.trim(),
+        phone:            document.getElementById('cat-phone').value.trim(),
+        email:            document.getElementById('cat-email').value.trim(),
+        logo:             document.getElementById('cat-logo').value.trim(),
+        social: {
+          telegram:  document.getElementById('cat-telegram').value.trim(),
+          instagram: document.getElementById('cat-instagram').value.trim(),
+          facebook:  document.getElementById('cat-facebook').value.trim()
+        },
+        tags:     tags,
+        products: products,
+        status:   document.getElementById('cat-status').value,
+        featured: document.getElementById('cat-featured').checked,
+        updated_at: now
+      });
+      var ok = await saveCatalogData('📋 Update company: ' + name);
+      if (ok) { hideCompanyForm(); renderCompanies(); }
+    } else {
+      var maxNum = catalogData.companies.reduce(function(m, c) {
+        var n = parseInt((c.id || '').split('-').pop());
+        return isNaN(n) ? m : Math.max(m, n);
+      }, 0);
+      var newId = 'hemp-ua-' + String(maxNum + 1).padStart(3, '0');
+      var newCompany = {
+        id:               newId,
+        slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
+        name:             name,
+        category_id:      cat,
+        region:           reg,
+        location:         document.getElementById('cat-location').value.trim(),
+        coordinates:      (lat || lng) ? [lat, lng] : [],
+        founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
+        description:      desc,
+        full_description: document.getElementById('cat-full-desc').value.trim(),
+        website:          document.getElementById('cat-website').value.trim(),
+        phone:            document.getElementById('cat-phone').value.trim(),
+        email:            document.getElementById('cat-email').value.trim(),
+        logo:             document.getElementById('cat-logo').value.trim(),
+        social: {
+          telegram:  document.getElementById('cat-telegram').value.trim(),
+          instagram: document.getElementById('cat-instagram').value.trim(),
+          facebook:  document.getElementById('cat-facebook').value.trim()
+        },
+        tags:     tags,
+        products: products,
+        status:   document.getElementById('cat-status').value,
+        featured: document.getElementById('cat-featured').checked,
+        added_at:   now,
+        updated_at: now
+      };
+      catalogData.companies.push(newCompany);
+      var ok = await saveCatalogData('📋 Add company: ' + name);
+      if (ok) { hideCompanyForm(); renderCompanies(); }
+    }
+  };
+
+  window.deleteCompany = async function(id, name) {
+    if (!catalogData) { showStatus('❌ Каталог не завантажено', 'error'); return; }
+    if (!confirm('Видалити компанію "' + name + '"?\nЦю дію не можна скасувати.')) return;
+    catalogData.companies = catalogData.companies.filter(function(c){ return c.id !== id; });
+    var ok = await saveCatalogData('🗑️ Delete company: ' + name);
+    if (ok) renderCompanies();
+  };
+
+  window.triggerCatalogDeploy = async function() {
+    if (!ghToken) { showStatus('❌ Потрібен GitHub Token', 'error'); return; }
+    try {
+      showStatus('⏳ Запуск деплою...', 'info');
+      var resp = await ghApi('POST', '/actions/workflows/moderate.yml/dispatches', { ref: 'main' });
+      if (!resp.ok) throw new Error('Deploy failed: ' + resp.status);
+      showStatus('🚀 Деплой запущено!', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка деплою: ' + e.message, 'error');
+    }
   };
 
   // Expose for onclick
