@@ -1,89 +1,501 @@
 {
   "sources": [
-    {"url": "https://www.hemptodaymag.com/feed/", "name": "Hemp Today Magazine", "region": "global", "active": false},
-    {"url": "https://hempbuildermag.com/feed/", "name": "Hemp Builder Magazine", "region": "global", "active": false},
-    {"url": "https://hempgazette.com/feed/", "name": "Hemp Gazette", "region": "global", "active": true, "trusted": true},
-    {"url": "https://hemptoday.net/feed/", "name": "Hemp Today", "region": "global", "active": true, "trusted": true},
-    {"url": "https://www.mjbizdaily.com/hemp/feed/", "name": "MJBizDaily Hemp", "region": "global", "active": false},
-    {"url": "https://indhemp.com/feed", "name": "IND Hemp", "region": "global", "active": true, "trusted": true},
-    {"url": "https://earthmerchant.com/feed", "name": "Earth Merchant", "region": "global", "active": true, "trusted": true},
-    {"url": "https://cannabislaw.report/rss-feed/", "name": "Cannabis Law Report", "region": "global", "active": true, "trusted": true},
-    {"url": "https://www.newcannabisventures.com/feed/", "name": "New Cannabis Ventures", "region": "global", "active": true},
-
-    {"url": "https://news.google.com/rss/search?q=industrial+hemp+technology&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Technology (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+innovation+research&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Innovation (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+patent+invention&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Patents (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+textile+fabric+clothing&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Textile (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+fashion+sustainable&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Fashion (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hempcrete+hemp+construction+building&hl=en&gl=US&ceid=US:en", "name": "Google News — Hempcrete (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+insulation+building+material&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Insulation (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+bioplastic+composite+material&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Bioplastic (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+fiber+biocomposite&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Biocomposite (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+agriculture+farming+crop&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Agriculture (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+cultivation+harvest&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Cultivation (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+seed+food+nutrition&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Food (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+protein+oil+food&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Protein (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+automotive+car+industry&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Automotive (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+battery+supercapacitor+energy&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Energy (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+paper+pulp+packaging&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Paper (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+cosmetics+skincare+beauty&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Cosmetics (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+legislation+regulation+farm+bill&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Legislation (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+industry+market+business&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Business (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+sustainability+eco+carbon&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Sustainability (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+environment+green+planet&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Environment (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+startup+investment+funding&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Startups (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+legislation+law+2025+2026&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Law 2025-2026 (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+bioplastic+automotive+composite&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Auto Composite (US)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Battery Tech (US)", "region": "global", "active": true},
-
-    {"url": "https://news.google.com/rss/search?q=hemp+canada+industry&hl=en&gl=CA&ceid=CA:en", "name": "Google News — Hemp Canada", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+farming+canada&hl=en&gl=CA&ceid=CA:en", "name": "Google News — Hemp Farming Canada", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+uk+industry&hl=en&gl=GB&ceid=GB:en", "name": "Google News — Hemp UK", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+europe+industry&hl=en&gl=GB&ceid=GB:en", "name": "Google News — Hemp Europe", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=industrial+hemp+EU+regulation&hl=en&gl=GB&ceid=GB:en", "name": "Google News — Hemp EU Regulation", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+netherlands+industry&hl=en&gl=NL&ceid=NL:en", "name": "Google News — Hemp Netherlands", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=Hanf+Industrie+Deutschland&hl=de&gl=DE&ceid=DE:de", "name": "Google News — Hanf Deutschland (DE)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+germany+industry&hl=en&gl=DE&ceid=DE:en", "name": "Google News — Hemp Germany (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=chanvre+industriel+france&hl=fr&gl=FR&ceid=FR:fr", "name": "Google News — Chanvre France (FR)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=canapa+industriale+italia&hl=it&gl=IT&ceid=IT:it", "name": "Google News — Canapa Italia (IT)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=konop%C3%AD+pr%C5%AFmyslov%C3%A9&hl=cs&gl=CZ&ceid=CZ:cs", "name": "Google News — Konopi CZ (CS)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+czech+republic&hl=en&gl=CZ&ceid=CZ:en", "name": "Google News — Hemp Czech Republic (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=konopie+przemys%C5%82owe+polska&hl=pl&gl=PL&ceid=PL:pl", "name": "Google News — Konopie Polska (PL)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+china+industry&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp China (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=china+hemp+textile+production&hl=en&gl=US&ceid=US:en", "name": "Google News — China Hemp Textile (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+india+industry&hl=en&gl=IN&ceid=IN:en", "name": "Google News — Hemp India (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+india+textile+agriculture&hl=en&gl=IN&ceid=IN:en", "name": "Google News — Hemp India Textile (EN)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+australia+industry&hl=en&gl=AU&ceid=AU:en", "name": "Google News — Hemp Australia", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+industry+japan&hl=en&gl=JP&ceid=JP:en", "name": "Google News — Hemp Japan", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+industry+korea&hl=en&gl=KR&ceid=KR:en", "name": "Google News — Hemp Korea", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=c%C3%A2nhamo+industrial+brasil&hl=pt&gl=BR&ceid=BR:pt", "name": "Google News — Canhamo Brasil (PT)", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp%20Ukraine%20investment&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Ukraine Investment", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp%20Ukraine%20export&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Ukraine Export", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=EIHA%20hemp%20Europe&hl=en&gl=US&ceid=US:en", "name": "Google News — EIHA Hemp Europe", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp%20Spain%20industry&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Spain Industry", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp%20Romania%20industry&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Romania Industry", "region": "global", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp%20Lithuania%20Latvia%20hemp&hl=en&gl=US&ceid=US:en", "name": "Google News — Hemp Lithuania Latvia", "region": "global", "active": true},
-
-    {"url": "https://news.google.com/rss/search?q=hemp+ukraine+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Hemp Ukraine (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BF%D1%80%D0%BE%D0%BC%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Промислові коноплі Україна (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Коноплі (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляний (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=hemp+ukraine&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Hemp Ukraine EN (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9+%D0%B1%D0%B5%D1%82%D0%BE%D0%BD&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляний бетон (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D1%82%D0%B5%D1%85%D0%BD%D1%96%D1%87%D0%BD%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Технічні коноплі (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B5%20%D0%B2%D0%BE%D0%BB%D0%BE%D0%BA%D0%BD%D0%BE&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляне волокно (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BE%D0%BB%D1%96%D1%8F&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляна олія (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B8%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляний текстиль (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%B2%D0%B8%D1%80%D0%BE%D1%89%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Вирощування конопель (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D0%B1%D1%96%D0%B7%D0%BD%D0%B5%D1%81&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляний бізнес (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D0%B5%D0%BF%D0%B5%D1%80%D0%B5%D1%80%D0%BE%D0%B1%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Коноплепереробка (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BD%D0%B0%D1%81%D1%96%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Насіння конопель (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Закон коноплі Україна (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=CBD%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — CBD Україна (UA)", "region": "ua", "active": true},
-    {"url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BA%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk", "name": "Google News — Конопляна косметика (UA)", "region": "ua", "active": true},
-    {"url": "https://agrotimes.ua/feed/", "name": "Agrotimes UA", "region": "ua", "active": true},
-    {"url": "https://latifundist.com/feed", "name": "Latifundist UA", "region": "ua", "active": false},
-    {"url": "https://agroportal.ua/rss", "name": "Agroportal UA", "region": "ua", "active": true},
-    {"url": "https://superagronom.com/rss", "name": "SuperAgronom UA", "region": "ua", "active": true}
+    {
+      "url": "https://www.hemptodaymag.com/feed/",
+      "name": "Hemp Today Magazine",
+      "region": "global",
+      "active": false
+    },
+    {
+      "url": "https://hempbuildermag.com/feed/",
+      "name": "Hemp Builder Magazine",
+      "region": "global",
+      "active": false
+    },
+    {
+      "url": "https://hempgazette.com/feed/",
+      "name": "Hemp Gazette",
+      "region": "global",
+      "active": true,
+      "trusted": true
+    },
+    {
+      "url": "https://hemptoday.net/feed/",
+      "name": "Hemp Today",
+      "region": "global",
+      "active": true,
+      "trusted": true
+    },
+    {
+      "url": "https://www.mjbizdaily.com/hemp/feed/",
+      "name": "MJBizDaily Hemp",
+      "region": "global",
+      "active": false
+    },
+    {
+      "url": "https://indhemp.com/feed",
+      "name": "IND Hemp",
+      "region": "global",
+      "active": true,
+      "trusted": true
+    },
+    {
+      "url": "https://earthmerchant.com/feed",
+      "name": "Earth Merchant",
+      "region": "global",
+      "active": true,
+      "trusted": true
+    },
+    {
+      "url": "https://cannabislaw.report/rss-feed/",
+      "name": "Cannabis Law Report",
+      "region": "global",
+      "active": true,
+      "trusted": true
+    },
+    {
+      "url": "https://www.newcannabisventures.com/feed/",
+      "name": "New Cannabis Ventures",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=industrial+hemp+technology&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Technology (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+innovation+research&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Innovation (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+patent+invention&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Patents (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+textile+fabric+clothing&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Textile (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+fashion+sustainable&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Fashion (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hempcrete+hemp+construction+building&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hempcrete (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+insulation+building+material&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Insulation (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+bioplastic+composite+material&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Bioplastic (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+fiber+biocomposite&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Biocomposite (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+agriculture+farming+crop&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Agriculture (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+cultivation+harvest&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Cultivation (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+seed+food+nutrition&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Food (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+protein+oil+food&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Protein (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+automotive+car+industry&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Automotive (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+battery+supercapacitor+energy&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Energy (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+paper+pulp+packaging&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Paper (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+cosmetics+skincare+beauty&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Cosmetics (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+legislation+regulation+farm+bill&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Legislation (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+industry+market+business&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Business (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+sustainability+eco+carbon&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Sustainability (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+environment+green+planet&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Environment (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+startup+investment+funding&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Startups (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+legislation+law+2025+2026&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Law 2025-2026 (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+bioplastic+automotive+composite&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Auto Composite (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Battery Tech (US)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+canada+industry&hl=en&gl=CA&ceid=CA:en",
+      "name": "Google News — Hemp Canada",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+farming+canada&hl=en&gl=CA&ceid=CA:en",
+      "name": "Google News — Hemp Farming Canada",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+uk+industry&hl=en&gl=GB&ceid=GB:en",
+      "name": "Google News — Hemp UK",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+europe+industry&hl=en&gl=GB&ceid=GB:en",
+      "name": "Google News — Hemp Europe",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=industrial+hemp+EU+regulation&hl=en&gl=GB&ceid=GB:en",
+      "name": "Google News — Hemp EU Regulation",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+netherlands+industry&hl=en&gl=NL&ceid=NL:en",
+      "name": "Google News — Hemp Netherlands",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=Hanf+Industrie+Deutschland&hl=de&gl=DE&ceid=DE:de",
+      "name": "Google News — Hanf Deutschland (DE)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+germany+industry&hl=en&gl=DE&ceid=DE:en",
+      "name": "Google News — Hemp Germany (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=chanvre+industriel+france&hl=fr&gl=FR&ceid=FR:fr",
+      "name": "Google News — Chanvre France (FR)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=canapa+industriale+italia&hl=it&gl=IT&ceid=IT:it",
+      "name": "Google News — Canapa Italia (IT)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=konop%C3%AD+pr%C5%AFmyslov%C3%A9&hl=cs&gl=CZ&ceid=CZ:cs",
+      "name": "Google News — Konopi CZ (CS)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+czech+republic&hl=en&gl=CZ&ceid=CZ:en",
+      "name": "Google News — Hemp Czech Republic (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=konopie+przemys%C5%82owe+polska&hl=pl&gl=PL&ceid=PL:pl",
+      "name": "Google News — Konopie Polska (PL)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+china+industry&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp China (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=china+hemp+textile+production&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — China Hemp Textile (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+india+industry&hl=en&gl=IN&ceid=IN:en",
+      "name": "Google News — Hemp India (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+india+textile+agriculture&hl=en&gl=IN&ceid=IN:en",
+      "name": "Google News — Hemp India Textile (EN)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+australia+industry&hl=en&gl=AU&ceid=AU:en",
+      "name": "Google News — Hemp Australia",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+industry+japan&hl=en&gl=JP&ceid=JP:en",
+      "name": "Google News — Hemp Japan",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+industry+korea&hl=en&gl=KR&ceid=KR:en",
+      "name": "Google News — Hemp Korea",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=c%C3%A2nhamo+industrial+brasil&hl=pt&gl=BR&ceid=BR:pt",
+      "name": "Google News — Canhamo Brasil (PT)",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp%20Ukraine%20investment&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Ukraine Investment",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp%20Ukraine%20export&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Ukraine Export",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=EIHA%20hemp%20Europe&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — EIHA Hemp Europe",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp%20Spain%20industry&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Spain Industry",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp%20Romania%20industry&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Romania Industry",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp%20Lithuania%20Latvia%20hemp&hl=en&gl=US&ceid=US:en",
+      "name": "Google News — Hemp Lithuania Latvia",
+      "region": "global",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+ukraine+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Hemp Ukraine (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BF%D1%80%D0%BE%D0%BC%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Промислові коноплі Україна (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Коноплі (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляний (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=hemp+ukraine&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Hemp Ukraine EN (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9+%D0%B1%D0%B5%D1%82%D0%BE%D0%BD&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляний бетон (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D1%82%D0%B5%D1%85%D0%BD%D1%96%D1%87%D0%BD%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Технічні коноплі (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B5%20%D0%B2%D0%BE%D0%BB%D0%BE%D0%BA%D0%BD%D0%BE&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляне волокно (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BE%D0%BB%D1%96%D1%8F&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляна олія (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B8%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляний текстиль (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%B2%D0%B8%D1%80%D0%BE%D1%89%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Вирощування конопель (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D0%B1%D1%96%D0%B7%D0%BD%D0%B5%D1%81&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляний бізнес (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D0%B5%D0%BF%D0%B5%D1%80%D0%B5%D1%80%D0%BE%D0%B1%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Коноплепереробка (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BD%D0%B0%D1%81%D1%96%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Насіння конопель (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Закон коноплі Україна (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=CBD%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — CBD Україна (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BA%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk",
+      "name": "Google News — Конопляна косметика (UA)",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://agrotimes.ua/feed/",
+      "name": "Agrotimes UA",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://latifundist.com/feed",
+      "name": "Latifundist UA",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://agroportal.ua/rss",
+      "name": "Agroportal UA",
+      "region": "ua",
+      "active": true
+    },
+    {
+      "url": "https://superagronom.com/rss",
+      "name": "SuperAgronom UA",
+      "region": "ua",
+      "active": true
+    }
   ]
 }
