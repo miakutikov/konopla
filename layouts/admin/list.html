@@ -177,56 +177,6 @@
         <div id="articles-list"></div>
       </div>
 
-      <!-- Statistics -->
-      <div id="stats-section" class="stats-section">
-        <h2>📊 Статистика</h2>
-        <div class="stats-cards">
-          <div class="stat-card">
-            <div class="stat-number" id="stat-total">0</div>
-            <div class="stat-label">Усього статей</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number stat-published" id="stat-published">0</div>
-            <div class="stat-label">Опубліковано</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number stat-drafts" id="stat-drafts">0</div>
-            <div class="stat-label">Чернетки</div>
-          </div>
-        </div>
-        <div class="stats-charts">
-          <div class="chart-container">
-            <h3>Статті за категоріями</h3>
-            <canvas id="chart-categories"></canvas>
-          </div>
-          <div class="chart-container">
-            <h3>Публікації за місяць (останні 12 місяців)</h3>
-            <canvas id="chart-monthly"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Calendar -->
-      <div id="calendar-section" class="calendar-section">
-        <div class="calendar-header-row">
-          <h2>📅 Календар публікацій</h2>
-          <div class="calendar-nav">
-            <button class="admin-btn admin-btn-dim" onclick="calendarPrev()">&larr;</button>
-            <span id="calendar-month-label" class="calendar-month-label"></span>
-            <button class="admin-btn admin-btn-dim" onclick="calendarNext()">&rarr;</button>
-            <button class="admin-btn admin-btn-dim" onclick="calendarToday()">Сьогодні</button>
-          </div>
-        </div>
-        <div class="calendar-weekdays">
-          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span>
-        </div>
-        <div id="calendar-grid" class="calendar-grid"></div>
-        <div id="calendar-detail" class="calendar-detail" style="display:none">
-          <h3 id="calendar-detail-title"></h3>
-          <div id="calendar-detail-list"></div>
-        </div>
-      </div>
-
       <!-- Deploy queue -->
       <div id="deploy-queue" class="deploy-queue" style="display:none">
         <div class="deploy-queue-header">
@@ -286,6 +236,7 @@
           <div class="candidates-toolbar-actions">
             <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити</button>
             <button class="admin-btn admin-btn-green" id="btn-process-candidates" onclick="processCandidates()" disabled>✅ Обробити вибрані (0)</button>
+            <button class="admin-btn btn-delete" id="btn-delete-candidates" onclick="deleteSelectedCandidates()" disabled>🗑️ Видалити вибрані</button>
           </div>
         </div>
         <div id="candidates-list" class="candidates-list">
@@ -347,6 +298,56 @@
         </div>
         <div id="sources-list" class="sources-list">
           <div class="loading">⏳ Завантаження...</div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div id="stats-section" class="stats-section">
+        <h2>📊 Статистика</h2>
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Усього статей</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number stat-published" id="stat-published">0</div>
+            <div class="stat-label">Опубліковано</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number stat-drafts" id="stat-drafts">0</div>
+            <div class="stat-label">Чернетки</div>
+          </div>
+        </div>
+        <div class="stats-charts">
+          <div class="chart-container">
+            <h3>Статті за категоріями</h3>
+            <canvas id="chart-categories"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Публікації за місяць (останні 12 місяців)</h3>
+            <canvas id="chart-monthly"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div id="calendar-section" class="calendar-section">
+        <div class="calendar-header-row">
+          <h2>📅 Календар публікацій</h2>
+          <div class="calendar-nav">
+            <button class="admin-btn admin-btn-dim" onclick="calendarPrev()">&larr;</button>
+            <span id="calendar-month-label" class="calendar-month-label"></span>
+            <button class="admin-btn admin-btn-dim" onclick="calendarNext()">&rarr;</button>
+            <button class="admin-btn admin-btn-dim" onclick="calendarToday()">Сьогодні</button>
+          </div>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+        <div id="calendar-detail" class="calendar-detail" style="display:none">
+          <h3 id="calendar-detail-title"></h3>
+          <div id="calendar-detail-list"></div>
         </div>
       </div>
 
@@ -4826,6 +4827,7 @@
           '<div class="candidate-actions">' +
             '<a href="' + escHtml(c.link || '#') + '" target="_blank" class="admin-btn">↗ Відкрити</a>' +
             (c.content_preview ? '<button class="admin-btn" onclick="toggleCandidatePreview(\'' + escHtml(c.id) + '\')">👁 Прев\'ю</button>' : '') +
+            '<button class="admin-btn btn-delete" onclick="deleteCandidate(\'' + escHtml(c.id) + '\')" title="Видалити">' + String.fromCodePoint(128465, 65039) + '</button>' +
           '</div>' +
           (c.content_preview ? '<div class="candidate-preview" id="preview-' + escHtml(c.id) + '">' + escHtml(c.content_preview) + '</div>' : '') +
         '</div>' +
@@ -4849,6 +4851,8 @@
     var processBtn = document.getElementById('btn-process-candidates');
     processBtn.disabled = selectedCount === 0;
     processBtn.textContent = '✅ Обробити вибрані (' + selectedCount + ')';
+    var deleteBtn = document.getElementById('btn-delete-candidates');
+    if (deleteBtn) deleteBtn.disabled = selectedCount === 0;
   }
 
   window.candidateToggle = function(id, checked) {
@@ -4947,6 +4951,52 @@
       }
     } catch (e) {
       showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.deleteCandidate = async function(id) {
+    if (!confirm('Видалити кандидата?')) return;
+    try {
+      var resp = await ghApi('GET', '/contents/data/candidates.json');
+      var sha = resp.sha;
+      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      data.items = (data.items || []).filter(function(c) { return c.id !== id; });
+      await ghApi('PUT', '/contents/data/candidates.json', {
+        message: String.fromCodePoint(128465) + ' Remove candidate ' + id,
+        content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
+        sha: sha
+      });
+      candidatesData = data.items;
+      delete candidatesSelected[id];
+      renderCandidates();
+      showStatus(String.fromCodePoint(9989) + ' Кандидата видалено', 'success');
+    } catch (e) {
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.deleteSelectedCandidates = async function() {
+    var selectedIds = Object.keys(candidatesSelected);
+    if (!selectedIds.length) return;
+    if (!confirm('Видалити ' + selectedIds.length + ' кандидатів?')) return;
+    try {
+      var resp = await ghApi('GET', '/contents/data/candidates.json');
+      var sha = resp.sha;
+      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      var idSet = {};
+      selectedIds.forEach(function(id) { idSet[id] = true; });
+      data.items = (data.items || []).filter(function(c) { return !idSet[c.id]; });
+      await ghApi('PUT', '/contents/data/candidates.json', {
+        message: String.fromCodePoint(128465) + ' Remove ' + selectedIds.length + ' candidates',
+        content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
+        sha: sha
+      });
+      candidatesData = data.items;
+      candidatesSelected = {};
+      renderCandidates();
+      showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' кандидатів', 'success');
+    } catch (e) {
+      showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
 
