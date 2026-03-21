@@ -43,6 +43,9 @@
           <li class="sidebar-item" data-view="settings" onclick="showView('settings')">
             <span class="sidebar-label">⚙️ Налаштування</span>
           </li>
+          <li class="sidebar-item sidebar-item-link" onclick="window.location.href='/admin/catalog/'">
+            <span class="sidebar-label">📋 Каталог</span>
+          </li>
         </ul>
         <div class="sidebar-footer">
           <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Згорнути/розгорнути">«</button>
@@ -545,6 +548,8 @@
   flex-shrink: 0;
 }
 .sidebar-badge:empty { display: none; }
+.sidebar-item-link { opacity: 0.7; }
+.sidebar-item-link:hover { opacity: 1; }
 .sidebar-footer {
   padding: 0.75rem 1rem;
   border-top: 1px solid var(--border);
