@@ -29,7 +29,7 @@
         <div class="sidebar-brand">🌿 KONOPLA.UA</div>
         <ul class="sidebar-nav">
           <li class="sidebar-item active" data-view="candidates" onclick="showView('candidates')">
-            <span class="sidebar-label">📡 Кандидати</span> <span class="sidebar-badge" id="badge-candidates"></span>
+            <span class="sidebar-label">📡 Знахідки</span> <span class="sidebar-badge" id="badge-candidates"></span>
           </li>
           <li class="sidebar-item" data-view="moderation" onclick="showView('moderation')">
             <span class="sidebar-label">📝 Модерація</span> <span class="sidebar-badge" id="badge-moderation"></span>
@@ -62,7 +62,7 @@
         <!-- ===== VIEW: Candidates ===== -->
         <div class="admin-view active" id="view-candidates">
           <div class="view-header">
-            <h1>📡 Кандидати</h1>
+            <h1>📡 Знахідки</h1>
             <div class="view-actions">
               <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити</button>
               <button class="admin-btn admin-btn-green" id="btn-process-candidates-top" onclick="processCandidates()" disabled>✅ Обробити вибрані</button>
@@ -80,14 +80,14 @@
                 <option value="article">📰 Статті</option>
                 <option value="video">🎬 Відео</option>
               </select>
-              <span id="candidates-counter" class="candidates-counter">0 кандидатів</span>
+              <span id="candidates-counter" class="candidates-counter">0 знахідок</span>
               <span id="candidates-updated" class="candidates-updated"></span>
             </div>
             <div id="candidates-list" class="candidates-list">
               <div class="loading">⏳ Завантаження...</div>
             </div>
             <div id="candidates-empty" class="admin-empty" style="display:none">
-              <h2>📭 Немає кандидатів</h2>
+              <h2>📭 Немає знахідок</h2>
               <p>Натисніть 🔄 Оновити для пошуку новин.</p>
             </div>
           </div>
@@ -284,7 +284,7 @@
           </div>
           <div id="articles-empty" class="admin-empty" style="display:none">
             <h2>📚 Ще немає статей</h2>
-            <p>Статті з'являться тут після обробки кандидатів.</p>
+            <p>Статті з'являться тут після обробки знахідок.</p>
           </div>
         </div><!-- /view-articles -->
 
@@ -5043,7 +5043,7 @@
     }
 
     var listEl = document.getElementById('candidates-list');
-    listEl.innerHTML = '<div class="loading">⏳ Завантаження кандидатів...</div>';
+    listEl.innerHTML = '<div class="loading">⏳ Завантаження знахідок...</div>';
     document.getElementById('candidates-empty').style.display = 'none';
 
     try {
@@ -5098,7 +5098,7 @@
     document.getElementById('candidates-empty').style.display = 'none';
 
     if (filtered.length === 0) {
-      listEl.innerHTML = '<div class="loading">Немає кандидатів для обраного фільтру</div>';
+      listEl.innerHTML = '<div class="loading">Немає знахідок для обраного фільтру</div>';
       updateCandidatesCounter();
       return;
     }
@@ -5151,7 +5151,7 @@
 
     var selectedCount = Object.keys(candidatesSelected).length;
     var counterEl = document.getElementById('candidates-counter');
-    counterEl.textContent = filtered.length + ' кандидатів' + (selectedCount > 0 ? ' · ' + selectedCount + ' вибрано' : '');
+    counterEl.textContent = filtered.length + ' знахідок' + (selectedCount > 0 ? ' · ' + selectedCount + ' вибрано' : '');
 
     var processBtn = document.getElementById('btn-process-candidates-top');
     if (processBtn) {
@@ -5213,7 +5213,7 @@
       return;
     }
 
-    showStatus('⏳ Запуск пошуку кандидатів...', 'info');
+    showStatus('⏳ Запуск пошуку новин...', 'info');
 
     try {
       var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
@@ -5222,7 +5222,7 @@
       });
 
       if (resp.status === 204 || resp.ok) {
-        showStatus('🔄 Пошук кандидатів запущено! Оновіть сторінку через кілька хвилин.', 'success');
+        showStatus('🔄 Пошук новин запущено! Оновіть сторінку через кілька хвилин.', 'success');
       } else {
         throw new Error('Dispatch failed: ' + resp.status);
       }
@@ -5235,9 +5235,9 @@
     var selectedIds = Object.keys(candidatesSelected);
     if (!selectedIds.length) return;
 
-    if (!confirm('Обробити ' + selectedIds.length + ' кандидатів?')) return;
+    if (!confirm('Обробити ' + selectedIds.length + ' знахідок?')) return;
 
-    showStatus('⏳ Запуск обробки ' + selectedIds.length + ' кандидатів...', 'info');
+    showStatus('⏳ Запуск обробки ' + selectedIds.length + ' знахідок...', 'info');
 
     try {
       var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
@@ -5246,7 +5246,7 @@
       });
 
       if (resp.status === 204 || resp.ok) {
-        showStatus('✅ Обробку ' + selectedIds.length + ' кандидатів запущено! Нові статті з\'являться через кілька хвилин.', 'success');
+        showStatus('✅ Обробку ' + selectedIds.length + ' знахідок запущено! Нові статті з\'являться через кілька хвилин.', 'success');
         candidatesSelected = {};
         updateCandidatesCounter();
         // Uncheck all
@@ -5262,11 +5262,13 @@
   };
 
   window.deleteCandidate = async function(id) {
-    if (!confirm('Видалити кандидата?')) return;
+    if (!confirm('Видалити цю новину?')) return;
     try {
       var resp = await ghApi('GET', '/contents/data/candidates.json');
-      var sha = resp.sha;
-      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+      var fileData = await resp.json();
+      var sha = fileData.sha;
+      var data = JSON.parse(b64DecodeUtf8(fileData.content));
       data.items = (data.items || []).filter(function(c) { return c.id !== id; });
       await ghApi('PUT', '/contents/data/candidates.json', {
         message: String.fromCodePoint(128465) + ' Remove candidate ' + id,
@@ -5276,7 +5278,7 @@
       candidatesData = data.items;
       delete candidatesSelected[id];
       renderCandidates();
-      showStatus(String.fromCodePoint(9989) + ' Кандидата видалено', 'success');
+      showStatus(String.fromCodePoint(9989) + ' Новину видалено', 'success');
     } catch (e) {
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
@@ -5285,11 +5287,13 @@
   window.deleteSelectedCandidates = async function() {
     var selectedIds = Object.keys(candidatesSelected);
     if (!selectedIds.length) return;
-    if (!confirm('Видалити ' + selectedIds.length + ' кандидатів?')) return;
+    if (!confirm('Видалити ' + selectedIds.length + ' новин зі списку?')) return;
     try {
       var resp = await ghApi('GET', '/contents/data/candidates.json');
-      var sha = resp.sha;
-      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+      var fileData = await resp.json();
+      var sha = fileData.sha;
+      var data = JSON.parse(b64DecodeUtf8(fileData.content));
       var idSet = {};
       selectedIds.forEach(function(id) { idSet[id] = true; });
       data.items = (data.items || []).filter(function(c) { return !idSet[c.id]; });
@@ -5301,7 +5305,7 @@
       candidatesData = data.items;
       candidatesSelected = {};
       renderCandidates();
-      showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' кандидатів', 'success');
+      showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' знахідок', 'success');
     } catch (e) {
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
