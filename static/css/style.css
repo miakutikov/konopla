@@ -152,23 +152,23 @@ img { max-width: 100%; height: auto; display: block; }
   margin-left: auto;
 }
 
-.header-tg-btn {
+.header-social-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  transition: all var(--transition);
+}
+.header-social-btn:hover {
   background: var(--green-accent);
   color: #000;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: background var(--transition), transform var(--transition);
-}
-.header-tg-btn:hover {
-  background: var(--green-hover);
-  color: #000;
-  transform: scale(1.02);
+  border-color: var(--green-accent);
+  transform: scale(1.08);
 }
 
 /* Burger button */
@@ -1681,7 +1681,7 @@ img { max-width: 100%; height: auto; display: block; }
   }
   .menu-toggle { display: flex; }
   .header-nav { display: none; }
-  .header-tg-btn { display: none; }
+  .header-social-btn { display: none; }
   .news-page-layout,
   .catalog-page-layout {
     grid-template-columns: 1fr;
