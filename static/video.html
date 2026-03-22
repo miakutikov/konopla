@@ -15,9 +15,44 @@
 <body>
 <div class="video-wrap">
   <div class="video-container">
-    <iframe src="https://drive.google.com/file/d/1LCjggYI9wGt6EdU1Ktq_nbGHMG8i6Nlg/preview"
-      allowfullscreen scrolling="no" allow="encrypted-media *;"></iframe>
+    <iframe id="vi" src="https://yewtu.be/embed/viCMobNeaPY"
+      allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>
   </div>
 </div>
+<script>
+(function() {
+  var instances = [
+    'yewtu.be',
+    'inv.nadeko.net',
+    'invidious.privacydev.net',
+    'iv.datura.network'
+  ];
+  var idx = 0;
+  var iframe = document.getElementById('vi');
+  var vid = 'viCMobNeaPY';
+
+  function next() {
+    idx++;
+    if (idx < instances.length) {
+      iframe.src = 'https://' + instances[idx] + '/embed/' + vid;
+    }
+  }
+
+  iframe.addEventListener('error', next);
+
+  // Якщо iframe завантажився, але показав сторінку помилки — пробуємо через 4с
+  iframe.addEventListener('load', function() {
+    var timer = setTimeout(function() {
+      try {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (!doc || doc.title === '' || doc.body.innerHTML === '') next();
+      } catch(e) {
+        // cross-origin — значить сторінка завантажилась нормально
+      }
+    }, 4000);
+    iframe.addEventListener('load', function() { clearTimeout(timer); }, { once: true });
+  }, { once: true });
+})();
+</script>
 </body>
 </html>
