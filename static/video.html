@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Відео</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #000; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px 16px; min-height: 100vh; }
   .video-wrap { width: 100%; max-width: 960px; }
-  .video-container { width: 100%; height: 0; position: relative; padding-bottom: 56.25%; }
+  .video-container { width: 100%; position: relative; padding-bottom: 56.25%; height: 0; }
   .video-container iframe,
-  .video-container video { top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0; background: #111; }
-  .fallback { color: #aaa; text-align: center; padding: 40px 0; font-family: sans-serif; font-size: 14px; }
-  .fallback a { color: #7af; }
+  .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; background: #111; }
+  .status { color: #aaa; text-align: center; padding: 40px 16px; font-family: sans-serif; font-size: 14px; line-height: 1.6; }
+  .status a { color: #7af; }
 </style>
 </head>
 <body>
@@ -25,10 +26,10 @@
   </div>
 </div>
 
-<!-- Відео 2: YouTube через Piped API -->
+<!-- Відео 2: YouTube через Piped HLS-проксі -->
 <div class="video-wrap">
   <div class="video-container" id="yt-container">
-    <div class="fallback" id="yt-loading">Завантаження відео…</div>
+    <div class="status" id="yt-status">Завантаження відео…</div>
   </div>
 </div>
 
@@ -38,39 +39,71 @@
   var APIS = [
     'https://pipedapi.kavin.rocks',
     'https://piped.adminforge.de/api',
-    'https://piped.privacydev.net/api'
+    'https://piped.privacydev.net/api',
+    'https://pipedapi.in.projectsegfau.lt'
   ];
+  var TIMEOUT_MS = 7000;
   var container = document.getElementById('yt-container');
+  var status = document.getElementById('yt-status');
+
+  function setStatus(html) {
+    if (status) status.innerHTML = html;
+  }
 
   function showFallback() {
-    container.innerHTML =
-      '<div class="fallback">Не вдалося завантажити відео.<br>' +
-      '<a href="https://piped.kavin.rocks/watch?v=' + VIDEO_ID + '" target="_blank" rel="noopener">Дивитись на Piped ↗</a></div>';
+    setStatus('Відео тимчасово недоступне.<br>' +
+      '<a href="https://piped.kavin.rocks/watch?v=' + VIDEO_ID + '" target="_blank" rel="noopener">Дивитись на Piped ↗</a>');
+  }
+
+  function playHls(hlsUrl) {
+    var video = document.createElement('video');
+    video.controls = true;
+    video.preload = 'metadata';
+    video.setAttribute('playsinline', '');
+
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Safari / iOS — нативна підтримка HLS
+      video.src = hlsUrl;
+      mountVideo(video);
+    } else if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      var hls = new Hls({ enableWorker: false });
+      hls.loadSource(hlsUrl);
+      hls.attachMedia(video);
+      mountVideo(video);
+    } else {
+      showFallback();
+    }
+  }
+
+  function mountVideo(video) {
+    container.innerHTML = '';
+    container.appendChild(video);
+  }
+
+  function fetchWithTimeout(url) {
+    var ctrl = new AbortController();
+    var id = setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS);
+    return fetch(url, { signal: ctrl.signal }).finally(function () { clearTimeout(id); });
   }
 
   function tryApi(idx) {
     if (idx >= APIS.length) { showFallback(); return; }
-    fetch(APIS[idx] + '/streams/' + VIDEO_ID)
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    setStatus('Завантаження відео… (' + (idx + 1) + '/' + APIS.length + ')');
+    fetchWithTimeout(APIS[idx] + '/streams/' + VIDEO_ID)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
       .then(function (data) {
-        var streams = (data.videoStreams || data.streams || []);
-        // Знаходимо найкращий MP4 зі звуком (не videoOnly)
-        var best = null;
-        streams.forEach(function (s) {
-          if (s.videoOnly) return;
-          if (!s.mimeType || s.mimeType.indexOf('video/mp4') === -1) return;
-          if (!best || (s.height || 0) > (best.height || 0)) best = s;
-        });
-        if (!best) { tryApi(idx + 1); return; }
-        var video = document.createElement('video');
-        video.controls = true;
-        video.preload = 'metadata';
-        video.src = best.url;
-        video.onerror = function () { tryApi(idx + 1); };
-        container.innerHTML = '';
-        container.appendChild(video);
+        // Використовуємо HLS-проксі Piped — трафік іде через їхній сервер, не YouTube CDN
+        var hlsUrl = data.hls;
+        if (hlsUrl) {
+          playHls(hlsUrl);
+        } else {
+          tryApi(idx + 1);
+        }
       })
-      .catch(function () { tryApi(idx + 1); });
+      .catch(function (e) {
+        console.warn('Piped API ' + APIS[idx] + ' failed:', e);
+        tryApi(idx + 1);
+      });
   }
 
   tryApi(0);
