@@ -1,3 +1,14 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "filename": "20260325-0412-favaro-vidznachaye-innovatsiyi-ta-bachyt-mozhlyvosti-v-promyslovykh-konoplyakh.md",
+      "title": "Фаваро відзначає інновації та бачить можливості в промислових коноплях",
+      "category": "бізнес"
+    },
+    {
+      "filename": "20260325-0411-rynok-konoplyanoyi-oliyi-v-yes-prohnoz-zrostannya-do-2442-mln-do-2036-roku.md",
+      "title": "Ринок конопляної олії в ЄС: прогноз зростання до $244,2 млн до 2036 року",
+      "category": "інше"
+    }
+  ]
 }
