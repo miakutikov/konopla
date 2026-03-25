@@ -1,3 +1,49 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "bfc04295",
+      "filename": "20260325-0856-pershyy-den-pakuvannya-konoplebetonu-ne-vse-pishlo-hladko.md",
+      "title": "Перший день пакування коноплебетону: не все пішло гладко",
+      "summary": "Канал Eco Endeavour ділиться своїм першим досвідом роботи з коноплебетоном, розкриваючи неочікувані труднощі та шлях до їх подолання.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/kbQiQf2jBa4/hqdefault.jpg",
+      "created_at": "2026-03-25T08:56:46.154722+00:00"
+    },
+    {
+      "id": "79cd22b7",
+      "filename": "20260325-0857-testuvannya-kupola-z-khempkritu-3dsd-nove-video.md",
+      "title": "Тестування купола з **хемпкріту** 3DSD: нове відео",
+      "summary": "Представляємо відео від Jeff Eichen, що демонструє тестування інноваційного купола, виготовленого з **хемпкріту** (конопляного бетону) за технологією 3DSD.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/dza7XCpBAOc/hqdefault.jpg",
+      "created_at": "2026-03-25T08:57:08.877742+00:00"
+    },
+    {
+      "id": "ec94381d",
+      "filename": "20260325-0857-3dsd-konoplyanyy-kupol-testove-video.md",
+      "title": "3DSD Конопляний Купол: Тестове Відео",
+      "summary": "На YouTube з'явилося коротке відео від Jeff Eichen, що демонструє тестування інноваційного конопляного купола 3DSD. Цей матеріал присвячений промисловим коноплям у будівництві.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/4shVa9Kf9JI/hqdefault.jpg",
+      "created_at": "2026-03-25T08:57:35.472331+00:00"
+    },
+    {
+      "id": "7d214bcf",
+      "filename": "20260325-0857-neymovirnyy-fabrychnyy-protses-yak-syra-konoplya-peretvoryuyetsya-na-rozkishni-s.md",
+      "title": "Неймовірний фабричний процес: як сира конопля перетворюється на розкішні сукні!",
+      "summary": "Відео від SecretBliss показує, як промислові коноплі перетворюються на розкішний одяг, розкриваючи інновації у сталій моді та екологічно чистому виробництві.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/SqniY0Hu_Ik/hqdefault.jpg",
+      "created_at": "2026-03-25T08:57:58.592637+00:00"
+    },
+    {
+      "id": "78e58e3a",
+      "filename": "20260325-0859-diy-kolorovyy-koshyk-z-konoplyanoho-kanatu.md",
+      "title": "DIY: Кольоровий кошик з конопляного канату",
+      "summary": "Відео-урок з виготовлення стильного кошика з кольорового конопляного канату для вашого дому.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/sRaNLD-Ax4E/hqdefault.jpg",
+      "created_at": "2026-03-25T08:59:27.116853+00:00"
+    }
+  ]
 }
