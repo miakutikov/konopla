@@ -14,7 +14,7 @@ image_source_url: "https://www.youtube.com/watch?v=V6qisvg7Ads"
 youtube_id: "V6qisvg7Ads"
 telegram_hook: "Нове відео від Buried Science розкриває, як $4 блок з конопель перевершує бетон. Чому цей екологічний матеріал був заборонений?"
 threads_hook: "$4 блок з конопель міцніший за бетон і вогнетривкий. Чому його заборонили на століття? Дивіться відео Buried Science про приховані можливості hempcrete."
-draft: true
+draft: false
 ---
 
 На YouTube-каналі Buried Science вийшло відео під назвою «Блок за $4 переживає бетон. Чому будівництво з ним було злочином?», що досліджує властивості конопляного бетону (hempcrete).
