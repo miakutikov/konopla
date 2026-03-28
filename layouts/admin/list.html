@@ -1283,6 +1283,28 @@
   border-top: 1px solid var(--border);
   background: rgba(0,0,0,0.15);
   flex-wrap: wrap;
+  align-items: center;
+}
+.wf-url-row {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+.wf-url-input {
+  flex: 1;
+  background: var(--card-bg, #1a1a1a);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary, #aaa);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+.wf-url-input:focus {
+  border-color: var(--accent);
+  color: var(--text);
+  outline: none;
 }
 .wf-status-badge {
   display: inline-flex;
@@ -4198,12 +4220,15 @@
             '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
         }
       } else if (a.stage === 'feed' && a.status === 'queued') {
-        actions = '<button class="admin-btn admin-btn-green" onclick="processWorkflowItem(\'' + escHtml(a.id) + '\')">\u26A1 Обробити</button>' +
+        actions = '<div class="wf-url-row">' +
+          '<input type="text" class="wf-url-input" id="url-' + escHtml(a.id) + '" value="' + escHtml(a.original_url || '') + '" placeholder="URL статті для скрейпінгу...">' +
+          '<button class="admin-btn admin-btn-dim" onclick="saveArticleUrl(\'' + escHtml(a.id) + '\')" title="Зберегти URL">\uD83D\uDCBE</button>' +
+          '</div>' +
+          '<button class="admin-btn admin-btn-green" onclick="processWorkflowItem(\'' + escHtml(a.id) + '\')">\u26A1 Обробити</button>' +
           '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
       } else if (a.status === 'ready_for_edit') {
         actions = '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">\u270F\uFE0F Редагувати</button>' +
           '<button class="admin-btn btn-approve" onclick="approveArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">\u2705 Схвалити</button>' +
-          '<a href="/news/' + escHtml((a.filename || '').replace('.md', '')) + '/" target="_blank" class="admin-btn">\uD83D\uDC41 Preview</a>' +
           '<button class="admin-btn btn-delete" onclick="deleteArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
       } else if (a.status === 'approved') {
         actions = '<a href="/news/' + escHtml((a.filename || '').replace('.md', '')) + '/" target="_blank" class="admin-btn">\uD83D\uDC41 Переглянути</a>';
@@ -4336,6 +4361,21 @@
       await saveWorkflowData('\uD83D\uDDD1\uFE0F Remove from workflow: ' + id);
     }
   }
+
+  window.saveArticleUrl = async function(id) {
+    var input = document.getElementById('url-' + id);
+    if (!input) return;
+    var newUrl = input.value.trim();
+    if (!newUrl) return;
+
+    var item = workflowData.find(function(a) { return a.id === id; });
+    if (!item) return;
+
+    item.original_url = newUrl;
+    item.updated_at = new Date().toISOString();
+    await saveWorkflowData('\uD83D\uDD17 Update URL: ' + item.title.substring(0, 40));
+    showStatus('\u2705 URL збережено', 'success');
+  };
 
   window.retryProcessing = async function(id) {
     var item = workflowData.find(function(a) { return a.id === id; });
