@@ -21,7 +21,7 @@ from config import API_DELAY_SECONDS, load_sources
 from utils import load_json, save_json
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
+WORKFLOW_FILE = os.path.join(PROJECT_ROOT, "data", "workflow.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 CANDIDATES_FILE = os.path.join(PROJECT_ROOT, "data", "candidates.json")
 
@@ -37,6 +37,7 @@ def run_discover(region='all'):
     """Fetch RSS feeds and save raw candidates. No AI calls required."""
     from fetcher import fetch_all_feeds, load_processed
     from monitor import send_pipeline_report, send_crash_alert
+    from relevance import compute_relevance, is_source_trusted, guess_category
 
     start_time = time.time()
 
@@ -83,6 +84,15 @@ def run_discover(region='all'):
 
         content_text = article.get("content", "") or article.get("summary", "")
 
+        # Compute relevance score
+        sources_full = load_sources(full=True)
+        rel_score, rel_reasons = compute_relevance(
+            title=article["title"],
+            content=content_text,
+            source_name=article["source"],
+            sources=sources_full,
+        )
+
         candidate = {
             "id": str(uuid.uuid4())[:8],
             "type": "article",
@@ -95,6 +105,10 @@ def run_discover(region='all'):
             "hash": h,
             "content_preview": content_text[:300],
             "added_at": datetime.now(timezone.utc).isoformat(),
+            "relevance_score": rel_score,
+            "relevance_reasons": rel_reasons,
+            "source_trusted": is_source_trusted(article["source"], sources_full),
+            "category_hint": guess_category(article["title"], content_text),
         }
         candidates.setdefault("items", []).append(candidate)
         existing_hashes.add(h)
@@ -183,7 +197,6 @@ def run_process(ids):
         print("[INFO] No valid candidates to process.")
         return 0
 
-    drafts = load_json(DRAFTS_FILE, {"articles": []})
     processed = load_processed()
     processed_ids = []
 
@@ -293,16 +306,14 @@ def run_process(ids):
 
             filename = os.path.basename(filepath)
 
-            # Track draft for admin panel
-            drafts["articles"].append({
-                "id": article_id,
-                "filename": filename,
-                "title": rewritten.get("title", ""),
-                "summary": rewritten.get("summary", ""),
-                "category": rewritten.get("category", ""),
-                "image": image_data.get("url", "") if image_data else "",
-                "created_at": datetime.now(timezone.utc).isoformat(),
-            })
+            # Track in workflow.json
+            _add_to_workflow(
+                article_id=article_id,
+                filename=filename,
+                rewritten=rewritten,
+                candidate=candidate,
+                image_data=image_data,
+            )
 
             # Notify admin
             try:
@@ -327,7 +338,6 @@ def run_process(ids):
             processed_ids.append(candidate["id"])
 
             # Save after each article
-            save_json(DRAFTS_FILE, drafts)
             save_processed(processed)
 
             if i < len(to_process) - 1:
@@ -370,6 +380,41 @@ def _remove_processed_candidates(processed_ids):
     candidates["items"] = [c for c in candidates.get("items", []) if c["id"] not in id_set]
     save_json(CANDIDATES_FILE, candidates)
     print(f"[INFO] Removed {len(processed_ids)} processed candidates from candidates.json")
+
+
+# ---------------------------------------------------------------------------
+# Workflow state management
+# ---------------------------------------------------------------------------
+
+def _add_to_workflow(article_id, filename, rewritten, candidate, image_data):
+    """Add a processed article to workflow.json for the new editorial pipeline."""
+    workflow = load_json(WORKFLOW_FILE, {"articles": []})
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    entry = {
+        "id": article_id,
+        "filename": filename,
+        "title": rewritten.get("title", ""),
+        "summary": rewritten.get("summary", ""),
+        "category": rewritten.get("category", ""),
+        "image": image_data.get("url", "") if image_data else "",
+        "candidate_id": candidate.get("id", ""),
+        "original_title": candidate.get("title", ""),
+        "original_url": candidate.get("link", ""),
+        "stage": "editorial",
+        "status": "ready_for_edit",
+        "channels": {
+            "website": {"enabled": True, "status": "pending", "scheduled_at": None},
+            "telegram": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("telegram_hook", "")},
+            "threads": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("threads_hook", "")},
+        },
+        "created_at": now_iso,
+        "updated_at": now_iso,
+        "published_at": None,
+    }
+
+    workflow["articles"].append(entry)
+    save_json(WORKFLOW_FILE, workflow)
 
 
 # ---------------------------------------------------------------------------

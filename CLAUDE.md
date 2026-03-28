@@ -1,5 +1,11 @@
 # KONOPLA.UA — Нотатки для Claude
 
+## System Map
+
+**Перед будь-якою роботою з адмін-панеллю** (`layouts/admin/list.html`) — прочитай `SYSTEM_MAP.md`. Це повна карта SPA: всі JS функції з номерами рядків, HTML секції, CSS класи, data files, workflows, global variables.
+
+**Після будь-яких змін в адмінці** — оновлюй `SYSTEM_MAP.md` (номери рядків, нові/видалені функції, нові CSS класи, змінений data flow).
+
 ## Інфраструктура
 
 - **Google Search Console** — підключена ✓ (верифіковано ~8 бер. 2026)
