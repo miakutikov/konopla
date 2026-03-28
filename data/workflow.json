@@ -49,13 +49,12 @@
       "original_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMmdWczdFeTROd3Q2Zi1xck5iYTdqRWNzQk1CMkpPS0lQTzZwb3otT0ExNUZjcWFMeGpPRlhwOG1qVlF0a21iNHB0XzdvN2p3MDJqbk45TWtPbDRnbG9IYXpZOUVpZlBtcUtDVlg0R3g0d19UZ2tXQU1mcU01UGZvTW93TExJdm5aWE1yRlZ6ZmRaNl9ZNDhsbTdNY0VFOWlXYWlzREpBc2NpTk0?oc=5",
       "source_name": "\"hemp australia industry\" - Google News",
       "content_preview": "Paddock to petrol in 100 days: how hemp could solve the current fuel shortage &nbsp;&nbsp; stockandland.com.au",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -72,8 +71,8 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-03-28T21:02:29.617Z",
-      "updated_at": "2026-03-28T21:03:42.409735+00:00",
-      "published_at": null
+      "updated_at": "2026-03-28T21:05:21.579Z",
+      "published_at": "2026-03-28T21:05:21.579Z"
     }
   ]
 }
