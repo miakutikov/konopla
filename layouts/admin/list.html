@@ -38,7 +38,7 @@
             <span class="sidebar-label">🚀 Публікація</span> <span class="sidebar-badge" id="badge-publishing"></span>
           </li>
           <li class="sidebar-item" data-view="archive" onclick="showView('archive')">
-            <span class="sidebar-label">📚 Архів</span> <span class="sidebar-badge" id="badge-archive"></span>
+            <span class="sidebar-label">📚 Статті</span> <span class="sidebar-badge" id="badge-archive"></span>
           </li>
           <li class="sidebar-item" data-view="analytics" onclick="showView('analytics')">
             <span class="sidebar-label">📊 Аналітика</span>
@@ -312,7 +312,7 @@
         <!-- ===== VIEW: Archive (Архів) ===== -->
         <div class="admin-view" id="view-archive">
           <div class="view-header">
-            <h1>📚 Архів</h1>
+            <h1>📚 Статті</h1>
             <div class="view-actions articles-filters">
               <input type="text" id="articles-search" placeholder="Пошук за назвою..." oninput="filterArticles()">
               <select id="articles-filter-status" onchange="filterArticles()">
@@ -982,12 +982,17 @@
 .articles-stats .stat-value { font-weight: 600; color: var(--text); }
 .repost-btn {
   font-size: 0.68rem !important;
-  padding: 1px 5px !important;
+  padding: 2px 6px !important;
   min-height: auto !important;
-  opacity: 0.7;
   cursor: pointer;
+  background: rgba(168, 85, 247, 0.1) !important;
+  border-color: rgba(168, 85, 247, 0.3) !important;
+  color: #a855f7 !important;
 }
-.repost-btn:hover { opacity: 1; }
+.repost-btn:hover {
+  background: rgba(168, 85, 247, 0.25) !important;
+  color: #c084fc !important;
+}
 /* Social modal */
 .social-modal-overlay {
   display: none;
@@ -5850,11 +5855,11 @@
       });
       statsEl.innerHTML =
         '<span>Всього: <span class="stat-value">' + totalAll + '</span></span>' +
-        '<span>' + String.fromCodePoint(127760) + ' Сайт: <span class="stat-value">' + pubCount + '</span></span>' +
-        '<span>' + String.fromCodePoint(128221) + ' Чернетки: <span class="stat-value">' + draftCount + '</span></span>' +
-        '<span>' + String.fromCodePoint(128232) + ' TG: <span class="stat-value">' + tgCount + '/' + pubCount + '</span></span>' +
-        '<span>' + String.fromCodePoint(129525) + ' Threads: <span class="stat-value">' + thCount + '/' + pubCount + '</span></span>' +
-        '<span>| ' + total + ' ' + String.fromCodePoint(128269) + '</span>';
+        '<span>Сайт: <span class="stat-value">' + pubCount + '</span></span>' +
+        '<span>Чернетки: <span class="stat-value">' + draftCount + '</span></span>' +
+        '<span>TG: <span class="stat-value">' + tgCount + '/' + pubCount + '</span></span>' +
+        '<span>Threads: <span class="stat-value">' + thCount + '/' + pubCount + '</span></span>' +
+        (total !== totalAll ? '<span>| знайдено ' + total + '</span>' : '');
     }
 
     var listEl = document.getElementById('articles-list');
@@ -5883,38 +5888,26 @@
 
       var pinnedLabel = isPinned ? ' <span class="pinned-info">' + String.fromCodePoint(128204) + ' Закріплено</span>' : '';
 
-      // 3-channel badges: Website / Telegram / Threads
+      // Channel status badges (text-based, no emoji)
       var channelBadges = '';
       if (!a.draft) {
         var ch = getArticleChannels(a);
-        // Website — always deployed if published
-        channelBadges = '<span class="social-badges">' +
-          '<span class="channel-badge ch-done" title="' + String.fromCodePoint(127760) + ' Опубліковано на сайті">' +
-            String.fromCodePoint(127760) + String.fromCodePoint(9989) +
-          '</span>';
+        channelBadges = '<span class="social-badges">';
         // Telegram
         if (ch.telegram) {
-          channelBadges += '<span class="channel-badge ch-done" title="Telegram: ' + escHtml(ch.tgDate) + '">' +
-            String.fromCodePoint(128232) + String.fromCodePoint(9989) + '</span>';
+          channelBadges += '<span class="channel-badge ch-done" title="Telegram: ' + escHtml(ch.tgDate) + '">TG</span>';
         } else if (ch.telegramScheduled) {
-          channelBadges += '<span class="channel-badge ch-scheduled" title="Telegram: заплановано">' +
-            String.fromCodePoint(128232) + String.fromCodePoint(9203) + '</span>';
+          channelBadges += '<span class="channel-badge ch-scheduled" title="Telegram: заплановано">TG</span>';
         } else {
-          channelBadges += '<span class="channel-badge ch-pending" title="Не опубліковано в Telegram">' +
-            String.fromCodePoint(128232) + '\u2014</span>' +
-            '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'telegram\')" title="Опублікувати в Telegram">TG</button>';
+          channelBadges += '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'telegram\')" title="Постити в Telegram">TG</button>';
         }
         // Threads
         if (ch.threads) {
-          channelBadges += '<span class="channel-badge ch-done" title="Threads: ' + escHtml(ch.thDate) + '">' +
-            String.fromCodePoint(129525) + String.fromCodePoint(9989) + '</span>';
+          channelBadges += '<span class="channel-badge ch-done" title="Threads: ' + escHtml(ch.thDate) + '">Th</span>';
         } else if (ch.threadsScheduled) {
-          channelBadges += '<span class="channel-badge ch-scheduled" title="Threads: заплановано">' +
-            String.fromCodePoint(129525) + String.fromCodePoint(9203) + '</span>';
+          channelBadges += '<span class="channel-badge ch-scheduled" title="Threads: заплановано">Th</span>';
         } else {
-          channelBadges += '<span class="channel-badge ch-pending" title="Не опубліковано в Threads">' +
-            String.fromCodePoint(129525) + '\u2014</span>' +
-            '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'threads\')" title="Опублікувати в Threads">' + String.fromCodePoint(129525) + '</button>';
+          channelBadges += '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'threads\')" title="Постити в Threads">Th</button>';
         }
         channelBadges += '</span>';
       }
@@ -7079,7 +7072,9 @@
     if (!ghToken) return;
     try {
       var resp = await ghApi('GET', '/contents/data/social_status.json');
-      var data = JSON.parse(b64DecodeUtf8(resp.content));
+      if (!resp.ok) { SOCIAL_STATUS = {}; return; }
+      var fileData = await resp.json();
+      var data = JSON.parse(b64DecodeUtf8(fileData.content));
       SOCIAL_STATUS = data || {};
     } catch (e) {
       SOCIAL_STATUS = {};
@@ -7183,8 +7178,10 @@
         }
         // Add to scheduled.json
         var schedResp = await ghApi('GET', '/contents/data/scheduled.json');
-        var schedSha = schedResp.sha;
-        var schedData = JSON.parse(b64DecodeUtf8(schedResp.content));
+        if (!schedResp.ok) throw new Error('Cannot fetch scheduled.json');
+        var schedFile = await schedResp.json();
+        var schedSha = schedFile.sha;
+        var schedData = JSON.parse(b64DecodeUtf8(schedFile.content));
         if (!schedData[platform]) schedData[platform] = [];
         schedData[platform].push({
           scheduled_at: new Date(scheduledTime).toISOString(),
