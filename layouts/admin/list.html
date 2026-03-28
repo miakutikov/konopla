@@ -6619,11 +6619,39 @@
     }
   };
 
+  // Mark hashes as processed so pipeline won't re-discover them
+  async function addToProcessed(hashes) {
+    if (!hashes.length || !ghToken) return;
+    try {
+      var resp = await ghApi('GET', '/contents/data/processed.json');
+      var sha = null;
+      var data = { articles: [], recent_titles: [] };
+      if (resp.ok) {
+        var fileData = await resp.json();
+        sha = fileData.sha;
+        data = JSON.parse(b64DecodeUtf8(fileData.content));
+      }
+      data.articles = (data.articles || []).concat(hashes);
+      if (data.articles.length > 1000) {
+        data.articles = data.articles.slice(-1000);
+      }
+      var body = {
+        message: String.fromCodePoint(128683) + ' Reject ' + hashes.length + ' candidates',
+        content: b64EncodeUtf8(JSON.stringify(data, null, 2))
+      };
+      if (sha) body.sha = sha;
+      await ghApi('PUT', '/contents/data/processed.json', body);
+    } catch (e) {
+      console.warn('Failed to update processed.json:', e);
+    }
+  }
+
   window.deleteCandidate = async function(id) {
     if (!confirm('Видалити цю новину?')) return;
     showStatus(String.fromCodePoint(9203) + ' Видаляємо...', 'info');
     try {
-      // Use cached SHA if available, otherwise fetch fresh
+      // Save hash before filtering
+      var deleted = candidatesData.find(function(c) { return c.id === id; });
       var sha = candidatesSha;
       var data;
       if (!sha) {
@@ -6650,6 +6678,8 @@
       candidatesData = data.items;
       delete candidatesSelected[id];
       renderCandidates();
+      // Mark as processed so pipeline won't re-add
+      if (deleted && deleted.hash) await addToProcessed([deleted.hash]);
       showStatus(String.fromCodePoint(9989) + ' Новину видалено', 'success');
     } catch (e) {
       console.error('Delete candidate error:', e);
@@ -6663,6 +6693,12 @@
     if (!confirm('Видалити ' + selectedIds.length + ' новин зі списку?')) return;
     showStatus(String.fromCodePoint(9203) + ' Видаляємо ' + selectedIds.length + '...', 'info');
     try {
+      // Collect hashes before filtering
+      var hashes = [];
+      selectedIds.forEach(function(sid) {
+        var c = candidatesData.find(function(x) { return x.id === sid; });
+        if (c && c.hash) hashes.push(c.hash);
+      });
       var sha = candidatesSha;
       var data;
       if (!sha) {
@@ -6691,6 +6727,8 @@
       candidatesData = data.items;
       candidatesSelected = {};
       renderCandidates();
+      // Mark as processed so pipeline won't re-add
+      if (hashes.length) await addToProcessed(hashes);
       showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' знахідок', 'success');
     } catch (e) {
       console.error('Delete candidates error:', e);
