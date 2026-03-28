@@ -84,8 +84,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE00RklocWlOckg0OVVUMHVCY0ZFRy1YeDV0eFo1eE1vNmYtX20wc20xdnlXbldmbUFFckJacGthY0hvWHNRbUxpclFTRU9BdUxaYWFIVjAwNlVJdw?oc=5",
       "source_name": "\"коноплі\" - Google Новини",
       "content_preview": "Крем із коноплі і сироп з кленового соку. Молода кондитерка — про те, як сезонні локальні продукти змінюють українську веганську кухню &nbsp;&nbsp; Publika.ua",
-      "stage": "feed",
-      "status": "queued",
+      "stage": "editorial",
+      "status": "processing",
       "channels": {
         "website": {
           "enabled": true,
@@ -107,7 +107,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-03-28T19:56:15.907Z",
-      "updated_at": "2026-03-28T19:56:15.907Z",
+      "updated_at": "2026-03-28T19:56:30.792Z",
       "published_at": null
     }
   ]
