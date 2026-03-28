@@ -122,6 +122,12 @@ A      @     → 185.199.111.153
 
 ---
 
+## 🗺 System Map
+
+Файл `SYSTEM_MAP.md` — повна архітектурна карта адмін-панелі (`layouts/admin/list.html`): всі JS функції з номерами рядків, HTML секції, CSS класи, data files, GitHub workflows, localStorage keys та data flow. Оновлюється при кожній зміні в адмінці.
+
+---
+
 ## 📁 Структура проєкту
 
 ```

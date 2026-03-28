@@ -28,14 +28,17 @@
       <nav id="admin-sidebar" class="admin-sidebar">
         <div class="sidebar-brand">🌿 KONOPLA.UA</div>
         <ul class="sidebar-nav">
-          <li class="sidebar-item active" data-view="candidates" onclick="showView('candidates')">
-            <span class="sidebar-label">📡 Знахідки</span> <span class="sidebar-badge" id="badge-candidates"></span>
+          <li class="sidebar-item active" data-view="feed" onclick="showView('feed')">
+            <span class="sidebar-label">📡 Стрічка</span> <span class="sidebar-badge" id="badge-feed"></span>
           </li>
-          <li class="sidebar-item" data-view="moderation" onclick="showView('moderation')">
-            <span class="sidebar-label">📝 Модерація</span> <span class="sidebar-badge" id="badge-moderation"></span>
+          <li class="sidebar-item" data-view="editorial" onclick="showView('editorial')">
+            <span class="sidebar-label">✍️ Редакція</span> <span class="sidebar-badge" id="badge-editorial"></span>
           </li>
-          <li class="sidebar-item" data-view="articles" onclick="showView('articles')">
-            <span class="sidebar-label">📚 Статті</span> <span class="sidebar-badge" id="badge-articles"></span>
+          <li class="sidebar-item" data-view="publishing" onclick="showView('publishing')">
+            <span class="sidebar-label">🚀 Публікація</span> <span class="sidebar-badge" id="badge-publishing"></span>
+          </li>
+          <li class="sidebar-item" data-view="archive" onclick="showView('archive')">
+            <span class="sidebar-label">📚 Архів</span> <span class="sidebar-badge" id="badge-archive"></span>
           </li>
           <li class="sidebar-item" data-view="analytics" onclick="showView('analytics')">
             <span class="sidebar-label">📊 Аналітика</span>
@@ -59,14 +62,12 @@
       <div id="admin-main">
         <div id="status-bar" class="admin-status" style="display:none"></div>
 
-        <!-- ===== VIEW: Candidates ===== -->
-        <div class="admin-view active" id="view-candidates">
+        <!-- ===== VIEW: Feed (Стрічка) ===== -->
+        <div class="admin-view active" id="view-feed">
           <div class="view-header">
-            <h1>📡 Знахідки</h1>
+            <h1>📡 Стрічка</h1>
             <div class="view-actions">
-              <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити</button>
-              <button class="admin-btn admin-btn-green" id="btn-process-candidates-top" onclick="processCandidates()" disabled>✅ Обробити вибрані</button>
-              <button class="admin-btn btn-delete" id="btn-delete-candidates-top" onclick="deleteSelectedCandidates()" disabled>🗑️ Видалити вибрані</button>
+              <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити стрічку</button>
             </div>
           </div>
           <div id="candidates-tab" class="candidates-tab">
@@ -75,6 +76,11 @@
                 <input type="checkbox" id="candidates-select-all-cb" onchange="candidatesToggleAll(this.checked)">
                 <span id="candidates-select-all-label">Виділити все</span>
               </label>
+              <select id="candidates-sort" onchange="renderCandidates()">
+                <option value="relevance">За релевантністю</option>
+                <option value="date">За датою</option>
+                <option value="source">За джерелом</option>
+              </select>
               <select id="candidates-filter-type" onchange="filterCandidates()">
                 <option value="all">Все</option>
                 <option value="article">📰 Статті</option>
@@ -83,25 +89,39 @@
               <span id="candidates-counter" class="candidates-counter">0 знахідок</span>
               <span id="candidates-updated" class="candidates-updated"></span>
             </div>
+            <div class="candidates-toolbar-actions">
+              <button class="admin-btn admin-btn-green" id="btn-process-candidates-top" onclick="shortlistSelected()" disabled>+ В роботу</button>
+              <button class="admin-btn btn-delete" id="btn-delete-candidates-top" onclick="deleteSelectedCandidates()" disabled>🗑️ Видалити вибрані</button>
+            </div>
             <div id="candidates-list" class="candidates-list">
               <div class="loading">⏳ Завантаження...</div>
             </div>
             <div id="candidates-empty" class="admin-empty" style="display:none">
-              <h2>📭 Немає знахідок</h2>
-              <p>Натисніть 🔄 Оновити для пошуку новин.</p>
+              <h2>📭 Стрічка порожня</h2>
+              <p>Натисніть 🔄 Оновити стрічку для пошуку новин.</p>
             </div>
           </div>
-        </div><!-- /view-candidates -->
+        </div><!-- /view-feed -->
 
-        <!-- ===== VIEW: Moderation ===== -->
-        <div class="admin-view" id="view-moderation">
+        <!-- ===== VIEW: Editorial (Редакція) ===== -->
+        <div class="admin-view" id="view-editorial">
           <div class="view-header">
-            <h1>📝 Модерація <span id="drafts-count" style="display:none;font-size:0.85rem;background:#f59e0b;color:#fff;border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle;"></span></h1>
+            <h1>✍️ Редакція <span id="drafts-count" class="editorial-count-badge"></span></h1>
             <div class="view-actions">
               <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
-              <button class="admin-btn" onclick="loadDrafts()">🔄 Оновити</button>
-              <button class="admin-btn" onclick="triggerManualDeploy()">🚀 Деплой</button>
-              <button class="admin-btn admin-btn-green" onclick="runPipeline()">🚀 Запустити збір</button>
+              <button class="admin-btn" onclick="loadEditorial()">🔄 Оновити</button>
+            </div>
+          </div>
+
+          <!-- Editorial toolbar -->
+          <div class="editorial-toolbar">
+            <div class="editorial-tabs">
+              <button class="editorial-tab active" onclick="switchEditorialTab('queued')" id="etab-queued">📥 В черзі</button>
+              <button class="editorial-tab" onclick="switchEditorialTab('drafts')" id="etab-drafts">📝 Чернетки</button>
+              <button class="editorial-tab" onclick="switchEditorialTab('all')" id="etab-all">📋 Усі</button>
+            </div>
+            <div class="editorial-actions">
+              <button class="admin-btn admin-btn-green" id="btn-process-queued" onclick="processQueuedWorkflow()" disabled>⚡ В обробку</button>
             </div>
           </div>
 
@@ -214,59 +234,85 @@
             </div>
           </div>
 
-          <div id="drafts-list" class="drafts-list">
+          <!-- Workflow articles (from workflow.json) -->
+          <div id="editorial-list" class="editorial-list">
+            <div class="loading">Завантаження...</div>
+          </div>
+
+          <!-- Legacy drafts list (from drafts.json — shown in "Чернетки" tab) -->
+          <div id="drafts-list" class="drafts-list" style="display:none">
             <div class="loading">Завантаження...</div>
           </div>
 
           <div id="empty-state" class="admin-empty" style="display:none">
-            <h2>📭 Немає статей на модерації</h2>
-            <p>Натисніть «Запустити збір» для отримання нових новин</p>
+            <h2>📭 Немає статей в редакції</h2>
+            <p>Додайте новини зі Стрічки кнопкою «В роботу»</p>
           </div>
 
-          <!-- Deploy queue -->
-          <div id="deploy-queue" class="deploy-queue" style="display:none">
-            <div class="deploy-queue-header">
-              <h2>🚀 Черга на деплой</h2>
-              <div class="deploy-queue-actions">
-                <button class="admin-btn admin-btn-green" onclick="deployAll()">🚀 Задеплоїти (<span id="queue-count">0</span>)</button>
-                <button class="admin-btn admin-btn-dim" onclick="clearQueue()">Очистити</button>
-              </div>
-            </div>
-            <div id="queue-items" class="queue-items"></div>
-            <div id="scheduled-deploy" class="scheduled-items"></div>
-          </div>
+        </div><!-- /view-editorial -->
 
-          <!-- Telegram queue -->
-          <div id="tg-queue" class="deploy-queue tg-queue" style="display:none">
-            <div class="deploy-queue-header">
-              <h2>📨 Черга Telegram</h2>
-              <div class="deploy-queue-actions">
-                <button class="admin-btn admin-btn-tg" onclick="postToTelegram()">📨 Постити в Telegram (<span id="tg-queue-count">0</span>)</button>
-                <button class="admin-btn admin-btn-dim" onclick="clearTgQueue()">Очистити</button>
-              </div>
-            </div>
-            <div id="tg-queue-items" class="queue-items"></div>
-            <div id="scheduled-telegram" class="scheduled-items"></div>
-          </div>
-
-          <!-- Threads queue -->
-          <div id="threads-queue" class="deploy-queue threads-queue" style="display:none">
-            <div class="deploy-queue-header">
-              <h2>🧵 Черга Threads</h2>
-              <div class="deploy-queue-actions">
-                <button class="admin-btn admin-btn-threads" onclick="postToThreads()">🧵 Постити в Threads (<span id="threads-queue-count">0</span>)</button>
-                <button class="admin-btn admin-btn-dim" onclick="clearThreadsQueue()">Очистити</button>
-              </div>
-            </div>
-            <div id="threads-queue-items" class="queue-items"></div>
-            <div id="scheduled-threads" class="scheduled-items"></div>
-          </div>
-        </div><!-- /view-moderation -->
-
-        <!-- ===== VIEW: Articles ===== -->
-        <div class="admin-view" id="view-articles">
+        <!-- ===== VIEW: Publishing (Публікація) ===== -->
+        <div class="admin-view" id="view-publishing">
           <div class="view-header">
-            <h1>📚 Статті</h1>
+            <h1>🚀 Публікація</h1>
+            <div class="view-actions">
+              <button class="admin-btn" onclick="triggerManualDeploy()">🚀 Деплой сайту</button>
+              <button class="admin-btn" onclick="runPipeline()">📡 Запустити збір</button>
+            </div>
+          </div>
+
+          <!-- Channel tabs -->
+          <div class="pub-channels">
+            <div class="pub-channel" id="pub-website">
+              <div class="pub-channel-header">
+                <h3>🌐 Сайт</h3>
+                <div class="pub-channel-actions">
+                  <button class="admin-btn admin-btn-green" onclick="deployAll()">🚀 Задеплоїти (<span id="queue-count">0</span>)</button>
+                  <button class="admin-btn admin-btn-dim" onclick="clearQueue()">Очистити</button>
+                </div>
+              </div>
+              <div id="queue-items" class="queue-items"></div>
+              <div id="scheduled-deploy" class="scheduled-items"></div>
+              <div class="pub-channel-empty" id="pub-website-empty" style="display:none">Немає статей в черзі</div>
+            </div>
+
+            <div class="pub-channel" id="pub-telegram">
+              <div class="pub-channel-header">
+                <h3>📨 Telegram</h3>
+                <div class="pub-channel-actions">
+                  <button class="admin-btn admin-btn-tg" onclick="postToTelegram()">📨 Постити (<span id="tg-queue-count">0</span>)</button>
+                  <button class="admin-btn admin-btn-dim" onclick="clearTgQueue()">Очистити</button>
+                </div>
+              </div>
+              <div id="tg-queue-items" class="queue-items"></div>
+              <div id="scheduled-telegram" class="scheduled-items"></div>
+              <div class="pub-channel-empty" id="pub-tg-empty" style="display:none">Немає статей в черзі</div>
+            </div>
+
+            <div class="pub-channel" id="pub-threads">
+              <div class="pub-channel-header">
+                <h3>🧵 Threads</h3>
+                <div class="pub-channel-actions">
+                  <button class="admin-btn admin-btn-threads" onclick="postToThreads()">🧵 Постити (<span id="threads-queue-count">0</span>)</button>
+                  <button class="admin-btn admin-btn-dim" onclick="clearThreadsQueue()">Очистити</button>
+                </div>
+              </div>
+              <div id="threads-queue-items" class="queue-items"></div>
+              <div id="scheduled-threads" class="scheduled-items"></div>
+              <div class="pub-channel-empty" id="pub-threads-empty" style="display:none">Немає статей в черзі</div>
+            </div>
+          </div>
+
+          <div id="publishing-empty" class="admin-empty" style="display:none">
+            <h2>📭 Немає статей для публікації</h2>
+            <p>Схваліть статті в Редакції — вони автоматично потраплять у черги.</p>
+          </div>
+        </div><!-- /view-publishing -->
+
+        <!-- ===== VIEW: Archive (Архів) ===== -->
+        <div class="admin-view" id="view-archive">
+          <div class="view-header">
+            <h1>📚 Архів</h1>
             <div class="view-actions articles-filters">
               <input type="text" id="articles-search" placeholder="Пошук за назвою..." oninput="filterArticles()">
               <select id="articles-filter-status" onchange="filterArticles()">
@@ -277,16 +323,24 @@
               <select id="articles-filter-cat" onchange="filterArticles()">
                 <option value="all">Усі категорії</option>
               </select>
+              <select id="articles-filter-channel" onchange="filterArticles()">
+                <option value="all">Усі канали</option>
+                <option value="website-only">Тільки сайт</option>
+                <option value="no-telegram">Без Telegram</option>
+                <option value="no-threads">Без Threads</option>
+                <option value="all-channels">Всі канали ✅</option>
+              </select>
             </div>
           </div>
           <div id="articles-section" class="articles-section">
+            <div id="articles-stats" class="articles-stats"></div>
             <div id="articles-list"></div>
           </div>
           <div id="articles-empty" class="admin-empty" style="display:none">
             <h2>📚 Ще немає статей</h2>
             <p>Статті з'являться тут після обробки знахідок.</p>
           </div>
-        </div><!-- /view-articles -->
+        </div><!-- /view-archive -->
 
         <!-- ===== VIEW: Analytics ===== -->
         <div class="admin-view" id="view-analytics">
@@ -881,10 +935,32 @@
 /* Social badges in article rows */
 .social-badges {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
   margin-left: auto;
   flex-shrink: 0;
+}
+.channel-badge {
+  font-size: 0.72rem;
+  padding: 2px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  background: var(--bg-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.channel-badge.ch-done {
+  color: var(--green-accent);
+  background: rgba(16, 185, 129, 0.1);
+}
+.channel-badge.ch-pending {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+.channel-badge.ch-scheduled {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
 }
 .social-badge {
   font-size: 0.78rem;
@@ -894,6 +970,24 @@
 }
 .social-done { color: var(--green-accent); }
 .social-pending { color: var(--text-tertiary); opacity: 0.6; }
+.articles-stats {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.articles-stats span { white-space: nowrap; }
+.articles-stats .stat-value { font-weight: 600; color: var(--text); }
+.repost-btn {
+  font-size: 0.68rem !important;
+  padding: 1px 5px !important;
+  min-height: auto !important;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.repost-btn:hover { opacity: 1; }
 /* Social modal */
 .social-modal-overlay {
   display: none;
@@ -1056,6 +1150,182 @@
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+}
+
+/* Editorial workspace */
+.editorial-count-badge {
+  display: none;
+  font-size: 0.85rem;
+  background: #f59e0b;
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.editorial-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.editorial-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+.editorial-tab {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all var(--transition);
+}
+.editorial-tab:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+.editorial-tab.active {
+  background: var(--bg-tertiary);
+  color: var(--green-accent);
+  border-color: var(--border);
+  font-weight: 600;
+}
+.editorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+/* Workflow article card in editorial */
+.wf-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.wf-card:hover {
+  border-color: var(--border-hover);
+}
+.wf-card-inner {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+.wf-card-img {
+  width: 120px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-tertiary);
+}
+.wf-card-img-placeholder {
+  width: 120px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--text-tertiary);
+}
+.wf-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.wf-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+.wf-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.wf-card-title a:hover {
+  color: var(--green-accent);
+}
+.wf-card-meta {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  margin-bottom: 0.35rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.wf-card-summary {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wf-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.15);
+  flex-wrap: wrap;
+}
+.wf-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.wf-status-queued {
+  background: rgba(245,158,11,0.2);
+  color: #f59e0b;
+}
+.wf-status-processing {
+  background: rgba(59,130,246,0.2);
+  color: #3b82f6;
+}
+.wf-status-ready {
+  background: rgba(16,185,129,0.2);
+  color: #10b981;
+}
+.wf-status-approved {
+  background: rgba(34,197,94,0.2);
+  color: #22c55e;
+}
+.wf-status-rejected {
+  background: rgba(239,68,68,0.2);
+  color: #ef4444;
+}
+.wf-card-original {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+.wf-card-original a {
+  color: var(--text-tertiary);
+  text-decoration: underline;
+}
+.wf-card-original a:hover {
+  color: var(--green-accent);
+}
+.wf-card.processing {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 /* Draft card */
@@ -1548,6 +1818,165 @@
 .admin-btn-tg:hover {
   background: #0088cc !important;
   color: #fff !important;
+}
+
+/* Publishing view — channel cards */
+.pub-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pub-channel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  transition: border-color var(--transition);
+}
+.pub-channel:hover {
+  border-color: var(--border-hover);
+}
+.pub-channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.pub-channel-header h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+.pub-channel-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.pub-channel-empty {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+#pub-website .pub-channel-header h3 { color: var(--green-accent); }
+#pub-telegram .pub-channel-header h3 { color: #0088cc; }
+#pub-threads .pub-channel-header h3 { color: #999; }
+
+@media (max-width: 768px) {
+  /* Publishing: compact on mobile */
+  .pub-channel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .pub-channel-actions {
+    width: 100%;
+  }
+  .pub-channel-actions .admin-btn {
+    flex: 1;
+  }
+}
+
+/* =========================================================================
+   MOBILE: New views (Editorial, Publishing, Archive enhancements)
+   ========================================================================= */
+@media (max-width: 768px) {
+  /* Editorial: toolbar + tabs */
+  .editorial-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .editorial-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .editorial-tab {
+    flex: 1;
+    text-align: center;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.5rem;
+    min-height: 40px;
+  }
+  .editorial-actions {
+    width: 100%;
+  }
+  .editorial-actions .admin-btn {
+    width: 100%;
+  }
+
+  /* Editorial: workflow cards — vertical layout */
+  .wf-card-inner {
+    flex-direction: column;
+  }
+  .wf-card-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .wf-card-actions {
+    flex-wrap: wrap;
+  }
+  .wf-card-actions .admin-btn {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    font-size: 0.78rem;
+  }
+
+  /* Archive: stats bar scrollable */
+  .articles-stats {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    font-size: 0.72rem;
+    gap: 0.5rem;
+  }
+
+  /* Archive: channel filter full width */
+  #articles-filter-channel {
+    width: 100% !important;
+  }
+
+  /* Archive: channel badges wrap */
+  .social-badges {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .channel-badge {
+    font-size: 0.65rem;
+    padding: 1px 3px;
+  }
+  .repost-btn {
+    font-size: 0.62rem !important;
+    padding: 1px 3px !important;
+  }
+
+  /* Archive: article row mobile layout — badges below title */
+  .article-row .social-badges {
+    width: 100%;
+    order: 5;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Very small screens: editorial tabs smaller */
+  .editorial-tab {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.35rem;
+  }
+  /* Workflow cards: single-column actions */
+  .wf-card-actions {
+    flex-direction: column;
+  }
+  .wf-card-actions .admin-btn {
+    width: 100%;
+  }
 }
 
 /* YouTube panel button */
@@ -2500,6 +2929,77 @@
 .candidate-preview.open {
   display: block;
 }
+/* Relevance scoring in Feed */
+.candidate-title-row {
+  flex-wrap: wrap;
+}
+.candidate-relevance {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.relevance-stars {
+  color: var(--green-accent);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+.relevance-score {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.candidate-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+.trust-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--green-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.category-hint {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  padding: 1px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.candidate-card.low-relevance {
+  opacity: 0.5;
+  border-color: transparent;
+}
+.candidate-card.low-relevance:hover {
+  opacity: 0.8;
+}
+.candidate-warning {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: #f59e0b;
+  margin-top: 4px;
+}
+.candidate-shortlist-btn {
+  background: rgba(34, 197, 94, 0.12) !important;
+  color: var(--green-accent) !important;
+  border-color: var(--green-accent) !important;
+  font-weight: 600 !important;
+}
+.candidate-shortlist-btn:hover {
+  background: var(--green-accent) !important;
+  color: #000 !important;
+}
 
 /* =========================================================================
    Sources tab
@@ -2947,6 +3447,9 @@
   var threadsQueue = [];
   var editingFile = null;
   var SOCIAL_STATUS = {};
+  var workflowData = [];
+  var workflowSha = null;
+  var editorialTab = 'queued';
 
   var ALL_ARTICLES = [
     {{ range where .Site.RegularPages "Section" "news" }}
@@ -3011,16 +3514,22 @@
   // Sidebar Navigation
   // =========================================================================
 
-  var currentView = 'candidates';
+  var currentView = 'feed';
   var chartsInitialized = false;
   var catalogLoaded = false;
   var catalogData = null;
   var catalogSha = '';
   var catalogEditingId = null;
 
+  // Map old view names to new ones (backwards compat for saved localStorage / bookmarks)
+  var VIEW_ALIASES = {candidates: 'feed', moderation: 'editorial', articles: 'archive'};
+
   function showView(name) {
-    var validViews = ['candidates', 'moderation', 'articles', 'analytics', 'settings', 'catalog'];
-    if (validViews.indexOf(name) === -1) name = 'candidates';
+    // Resolve aliases from old naming
+    if (VIEW_ALIASES[name]) name = VIEW_ALIASES[name];
+
+    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'analytics', 'settings', 'catalog'];
+    if (validViews.indexOf(name) === -1) name = 'feed';
 
     // Hide all views, then show the requested one with fade
     document.querySelectorAll('.admin-view').forEach(function(v) {
@@ -3050,7 +3559,9 @@
     }
 
     // Lazy load data
-    if (name === 'candidates' && candidatesData.length === 0 && ghToken) loadCandidates();
+    if (name === 'feed' && candidatesData.length === 0 && ghToken) loadCandidates();
+    if (name === 'editorial' && workflowData.length === 0 && ghToken) loadEditorial();
+    if (name === 'archive' && workflowData.length === 0 && ghToken) loadWorkflowArticles().then(function() { renderArticles(); });
     if (name === 'settings' && sourcesData.length === 0 && ghToken) loadSources();
     if (name === 'catalog' && !catalogLoaded && ghToken) loadCatalog();
     if (name === 'analytics' && !chartsInitialized) {
@@ -3073,14 +3584,18 @@
 
   function updateBadges() {
     var el;
-    el = document.getElementById('badge-candidates');
+    el = document.getElementById('badge-feed');
     if (el) el.textContent = candidatesData.length || '';
-    el = document.getElementById('badge-moderation');
+    el = document.getElementById('badge-editorial');
     if (el) {
-      var draftCount = document.querySelectorAll('.draft-card').length;
-      el.textContent = draftCount || '';
+      var editorialCount = workflowData.filter(function(a) {
+        return a.stage === 'feed' || a.stage === 'editorial';
+      }).length;
+      el.textContent = editorialCount || '';
     }
-    el = document.getElementById('badge-articles');
+    el = document.getElementById('badge-publishing');
+    if (el) el.textContent = (approvedQueue.length + telegramQueue.length + threadsQueue.length) || '';
+    el = document.getElementById('badge-archive');
     if (el) el.textContent = ALL_ARTICLES.length || '';
     el = document.getElementById('badge-catalog');
     if (el) el.textContent = (catalogData && catalogData.companies ? catalogData.companies.length : '') || '';
@@ -3137,14 +3652,13 @@
     if (!ghToken) {
       showPatSetup();
     } else {
-      loadDrafts();
       loadSocialStatus();
     }
     renderArticles();
 
     // Determine initial view from hash or localStorage
     var hash = location.hash.slice(1);
-    var savedView = localStorage.getItem('konopla_admin_view') || 'candidates';
+    var savedView = localStorage.getItem('konopla_admin_view') || 'feed';
     showView(hash || savedView);
   }
 
@@ -3348,10 +3862,10 @@
         throw new Error('PUT failed: ' + (err.message || putResp.status));
       }
 
-      // 4. Remove from drafts.json
+      // 4. Remove from drafts.json (legacy)
       await removeDraftEntry(articleId);
 
-      // 5. Add to deploy queue AND telegram queue
+      // 5. Add to all queues (deploy + social)
       var queueItem = {
         title: title,
         filename: filename,
@@ -3369,6 +3883,24 @@
       threadsQueue.push(queueItem);
       saveThreadsQueue();
       renderThreadsQueue();
+
+      // Update workflow.json if entry exists
+      var wfUpdated = false;
+      for (var wi = 0; wi < workflowData.length; wi++) {
+        if (workflowData[wi].filename === filename) {
+          workflowData[wi].stage = 'publishing';
+          workflowData[wi].status = 'approved';
+          workflowData[wi].channels = workflowData[wi].channels || {};
+          workflowData[wi].channels.website = { enabled: true, status: 'deployed' };
+          workflowData[wi].channels.telegram = workflowData[wi].channels.telegram || { enabled: true, status: 'queued' };
+          workflowData[wi].channels.threads = workflowData[wi].channels.threads || { enabled: true, status: 'queued' };
+          workflowData[wi].updated_at = new Date().toISOString();
+          workflowData[wi].published_at = new Date().toISOString();
+          wfUpdated = true;
+          break;
+        }
+      }
+      if (wfUpdated) await saveWorkflowData('Approve: ' + filename);
 
       showStatus('✅ Схвалено! Додано в черги деплой + Telegram + Threads.', 'success');
 
@@ -3419,8 +3951,9 @@
         }
       }
 
-      // 3. Remove from drafts.json
+      // 3. Remove from drafts.json (legacy) + workflow.json
       await removeDraftEntry(articleId);
+      await _removeFromWorkflow(articleId);
 
       showStatus('🗑️ Стаття видалена.', 'success');
 
@@ -3464,10 +3997,12 @@
       }
 
       await removeDraftEntry(articleId);
+      await _removeFromWorkflow(articleId);
 
       if (row) row.remove();
       showStatus('\uD83D\uDDD1\uFE0F Стаття видалена.', 'success');
-      loadAllArticles();
+      ALL_ARTICLES = ALL_ARTICLES.filter(function(a) { return a.filename !== filename; });
+      renderArticles();
 
     } catch (e) {
       console.error('Delete error:', e);
@@ -3487,11 +4022,9 @@
     }
 
     showStatus('⏳ Запуск збору новин (світ + UA)...', 'info');
-    document.getElementById('btn-run-pipeline').disabled = true;
 
     var results = [];
     try {
-      // Trigger pipelines sequentially to avoid race on data/drafts.json
       var resp1 = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', { ref: 'main' });
       if (resp1.status === 204 || resp1.ok) results.push('🌍 Світ');
       else results.push('❌ Світ: ' + resp1.status);
@@ -3505,9 +4038,6 @@
       showStatus('❌ Помилка запуску: ' + e.message, 'error');
     }
 
-    setTimeout(function() {
-      document.getElementById('btn-run-pipeline').disabled = false;
-    }, 10000);
   };
 
   // =========================================================================
@@ -3539,6 +4069,285 @@
   }
 
   // =========================================================================
+  // Editorial — Workflow articles
+  // =========================================================================
+
+  window.loadEditorial = async function() {
+    await Promise.all([loadWorkflowArticles(), loadDrafts()]);
+    renderEditorial();
+  };
+
+  async function loadWorkflowArticles() {
+    if (!ghToken) return;
+    try {
+      var resp = await ghApi('GET', '/contents/data/workflow.json');
+      if (resp.status === 404) {
+        workflowData = [];
+        workflowSha = null;
+        return;
+      }
+      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+      var data = await resp.json();
+      workflowSha = data.sha;
+      var content = JSON.parse(b64DecodeUtf8(data.content));
+      workflowData = (content.articles || []).filter(function(a) { return a && a.id; });
+    } catch (e) {
+      console.error('Load workflow error:', e);
+    }
+  }
+
+  window.switchEditorialTab = function(tab) {
+    editorialTab = tab;
+    document.querySelectorAll('.editorial-tab').forEach(function(el) {
+      el.classList.toggle('active', el.id === 'etab-' + tab);
+    });
+    renderEditorial();
+  };
+
+  function renderEditorial() {
+    var listEl = document.getElementById('editorial-list');
+    var draftsEl = document.getElementById('drafts-list');
+    var emptyEl = document.getElementById('empty-state');
+
+    if (editorialTab === 'drafts') {
+      // Show legacy drafts
+      listEl.style.display = 'none';
+      draftsEl.style.display = '';
+      return;
+    }
+
+    draftsEl.style.display = 'none';
+    listEl.style.display = '';
+
+    // Filter workflow articles based on tab
+    var items = workflowData;
+    if (editorialTab === 'queued') {
+      items = workflowData.filter(function(a) {
+        return a.stage === 'feed' || (a.stage === 'editorial' && a.status === 'queued');
+      });
+    }
+
+    if (items.length === 0 && editorialTab !== 'all') {
+      listEl.innerHTML = '';
+      emptyEl.style.display = 'block';
+      updateEditorialCounter();
+      return;
+    }
+
+    emptyEl.style.display = 'none';
+
+    // Sort: queued first, then by date newest first
+    items = items.slice().sort(function(a, b) {
+      var stageOrder = { feed: 0, editorial: 1, publishing: 2 };
+      var statusOrder = { queued: 0, processing: 1, ready_for_edit: 2, approved: 3, rejected: 4 };
+      var sa = stageOrder[a.stage] || 9;
+      var sb = stageOrder[b.stage] || 9;
+      if (sa !== sb) return sa - sb;
+      var oa = statusOrder[a.status] || 9;
+      var ob = statusOrder[b.status] || 9;
+      if (oa !== ob) return oa - ob;
+      return (b.created_at || '').localeCompare(a.created_at || '');
+    });
+
+    listEl.innerHTML = items.map(function(a) {
+      var imgHtml = a.image
+        ? '<img src="' + escHtml(a.image) + '" alt="" class="wf-card-img" onerror="this.style.display=\'none\'">'
+        : '<div class="wf-card-img-placeholder">' + (a.stage === 'feed' ? '\uD83D\uDCE5' : '\uD83D\uDCDD') + '</div>';
+
+      var statusClass = 'wf-status-' + (a.status || 'queued');
+      var statusLabel = {
+        'queued': '\u23F3 В черзі',
+        'processing': '\u2699\uFE0F Обробка',
+        'ready_for_edit': '\u270F\uFE0F Готово до ред.',
+        'approved': '\u2705 Схвалено',
+        'rejected': '\u274C Відхилено'
+      }[a.status] || a.status;
+
+      var stageLabel = {
+        'feed': '\uD83D\uDCE1 Стрічка',
+        'editorial': '\u270D\uFE0F Редакція',
+        'publishing': '\uD83D\uDE80 Публікація'
+      }[a.stage] || a.stage;
+
+      var catBadge = a.category && a.category !== '\u0456\u043D\u0448\u0435'
+        ? '<span class="category-hint">' + escHtml(a.category) + '</span>'
+        : '';
+
+      var originalLink = a.original_url
+        ? '<div class="wf-card-original"><a href="' + escHtml(a.original_url) + '" target="_blank">\u2197 ' + escHtml(a.original_title || 'Оригінал') + '</a></div>'
+        : '';
+
+      var scoreHtml = typeof a.relevance_score === 'number'
+        ? '<span class="relevance-score" style="margin-left:0">' + a.relevance_score.toFixed(2) + '</span>'
+        : '';
+
+      var dateStr = a.created_at ? timeAgo(a.created_at) : '';
+
+      // Actions based on stage/status
+      var actions = '';
+      if (a.stage === 'feed' && a.status === 'queued') {
+        actions = '<button class="admin-btn admin-btn-green" onclick="processWorkflowItem(\'' + escHtml(a.id) + '\')">\u26A1 Обробити</button>' +
+          '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
+      } else if (a.status === 'ready_for_edit') {
+        actions = '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">\u270F\uFE0F Редагувати</button>' +
+          '<button class="admin-btn btn-approve" onclick="approveArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">\u2705 Схвалити</button>' +
+          '<a href="/news/' + escHtml((a.filename || '').replace('.md', '')) + '/" target="_blank" class="admin-btn">\uD83D\uDC41 Preview</a>' +
+          '<button class="admin-btn btn-delete" onclick="deleteArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
+      } else if (a.status === 'approved') {
+        actions = '<a href="/news/' + escHtml((a.filename || '').replace('.md', '')) + '/" target="_blank" class="admin-btn">\uD83D\uDC41 Переглянути</a>';
+      }
+
+      return '<div class="wf-card" data-wf-id="' + escHtml(a.id) + '">' +
+        '<div class="wf-card-inner">' +
+          imgHtml +
+          '<div class="wf-card-info">' +
+            '<div class="wf-card-title">' + escHtml(a.title) + '</div>' +
+            '<div class="wf-card-meta">' +
+              '<span class="wf-status-badge ' + statusClass + '">' + statusLabel + '</span>' +
+              catBadge + scoreHtml +
+              '<span>' + escHtml(dateStr) + '</span>' +
+            '</div>' +
+            '<div class="wf-card-summary">' + escHtml(a.summary || '') + '</div>' +
+            originalLink +
+          '</div>' +
+        '</div>' +
+        (actions ? '<div class="wf-card-actions">' + actions + '</div>' : '') +
+      '</div>';
+    }).join('');
+
+    updateEditorialCounter();
+  }
+
+  function updateEditorialCounter() {
+    var queuedCount = workflowData.filter(function(a) {
+      return a.stage === 'feed' || (a.stage === 'editorial' && a.status === 'queued');
+    }).length;
+    var draftCount = workflowData.filter(function(a) {
+      return a.status === 'ready_for_edit';
+    }).length;
+
+    // Update tab labels
+    var tabQueued = document.getElementById('etab-queued');
+    if (tabQueued) tabQueued.textContent = '\uD83D\uDCE5 В черзі' + (queuedCount > 0 ? ' (' + queuedCount + ')' : '');
+    var tabDrafts = document.getElementById('etab-drafts');
+    if (tabDrafts) tabDrafts.textContent = '\uD83D\uDCDD Чернетки' + (draftCount > 0 ? ' (' + draftCount + ')' : '');
+
+    // Badge
+    var badge = document.getElementById('drafts-count');
+    var total = queuedCount + draftCount;
+    if (badge) {
+      if (total > 0) {
+        badge.textContent = total;
+        badge.style.display = 'inline';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    // Process button
+    var processBtn = document.getElementById('btn-process-queued');
+    if (processBtn) processBtn.disabled = queuedCount === 0;
+  }
+
+  window.processWorkflowItem = async function(id) {
+    var item = workflowData.find(function(a) { return a.id === id; });
+    if (!item) return;
+    if (!confirm('\u26A1 Обробити "' + item.title.substring(0, 50) + '..."? AI перепише на українську.')) return;
+
+    var card = document.querySelector('[data-wf-id="' + id + '"]');
+    if (card) card.classList.add('processing');
+    showStatus('\u23F3 Запуск обробки...', 'info');
+
+    try {
+      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
+        ref: 'main',
+        inputs: { action: 'process', candidate_ids: item.candidate_id || id, region: 'all' }
+      });
+
+      if (resp.status === 204 || resp.ok) {
+        // Update workflow status
+        item.status = 'processing';
+        item.stage = 'editorial';
+        item.updated_at = new Date().toISOString();
+        await saveWorkflowData('\u2699\uFE0F Processing: ' + item.title.substring(0, 40));
+        renderEditorial();
+        showStatus('\u2705 Обробку запущено! Стаття з\'явиться через 2-3 хвилини.', 'success');
+      } else {
+        throw new Error('Dispatch failed: ' + resp.status);
+      }
+    } catch (e) {
+      if (card) card.classList.remove('processing');
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.processQueuedWorkflow = async function() {
+    var queued = workflowData.filter(function(a) {
+      return a.stage === 'feed' && a.status === 'queued';
+    });
+    if (!queued.length) return;
+    if (!confirm('\u26A1 Обробити ' + queued.length + ' статей? AI перепише на українську.')) return;
+
+    showStatus('\u23F3 Запуск масової обробки...', 'info');
+
+    try {
+      var ids = queued.map(function(a) { return a.candidate_id || a.id; }).join(',');
+      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
+        ref: 'main',
+        inputs: { action: 'process', candidate_ids: ids, region: 'all' }
+      });
+
+      if (resp.status === 204 || resp.ok) {
+        queued.forEach(function(a) {
+          a.status = 'processing';
+          a.stage = 'editorial';
+          a.updated_at = new Date().toISOString();
+        });
+        await saveWorkflowData('\u2699\uFE0F Processing ' + queued.length + ' articles');
+        renderEditorial();
+        showStatus('\u2705 Обробку ' + queued.length + ' статей запущено!', 'success');
+      } else {
+        throw new Error('Dispatch failed: ' + resp.status);
+      }
+    } catch (e) {
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // Internal: remove from workflowData without confirm (used by delete functions)
+  async function _removeFromWorkflow(id) {
+    var before = workflowData.length;
+    workflowData = workflowData.filter(function(a) { return a.id !== id; });
+    if (workflowData.length < before) {
+      await saveWorkflowData('\uD83D\uDDD1\uFE0F Remove from workflow: ' + id);
+    }
+  }
+
+  window.removeWorkflowItem = async function(id) {
+    if (!confirm('Видалити цю статтю з редакції?')) return;
+
+    try {
+      await _removeFromWorkflow(id);
+      renderEditorial();
+      showStatus('\u2705 Видалено з редакції', 'success');
+    } catch (e) {
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
+  };
+
+  async function saveWorkflowData(message) {
+    var body = {
+      message: message,
+      content: b64EncodeUtf8(JSON.stringify({ articles: workflowData }, null, 2))
+    };
+    if (workflowSha) body.sha = workflowSha;
+    var resp = await ghApi('PUT', '/contents/data/workflow.json', body);
+    if (!resp.ok) throw new Error('Failed to save workflow.json: ' + resp.status);
+    var result = await resp.json();
+    workflowSha = result.content.sha;
+  }
+
+  // =========================================================================
   // Deploy queue
   // =========================================================================
 
@@ -3556,16 +4365,11 @@
   }
 
   function renderQueue() {
-    var container = document.getElementById('deploy-queue');
     var itemsEl = document.getElementById('queue-items');
     var countEl = document.getElementById('queue-count');
+    var emptyEl = document.getElementById('pub-website-empty');
 
-    if (!approvedQueue.length) {
-      container.style.display = 'none';
-      return;
-    }
-
-    container.style.display = 'block';
+    if (emptyEl) emptyEl.style.display = approvedQueue.length ? 'none' : '';
     countEl.textContent = approvedQueue.length;
 
     itemsEl.innerHTML = approvedQueue.map(function(item, idx) {
@@ -3762,16 +4566,11 @@
   }
 
   function renderTgQueue() {
-    var container = document.getElementById('tg-queue');
     var itemsEl = document.getElementById('tg-queue-items');
     var countEl = document.getElementById('tg-queue-count');
+    var emptyEl = document.getElementById('pub-tg-empty');
 
-    if (!telegramQueue.length) {
-      container.style.display = 'none';
-      return;
-    }
-
-    container.style.display = 'block';
+    if (emptyEl) emptyEl.style.display = telegramQueue.length ? 'none' : '';
     countEl.textContent = telegramQueue.length;
 
     itemsEl.innerHTML = telegramQueue.map(function(item, idx) {
@@ -3875,16 +4674,11 @@
   }
 
   function renderThreadsQueue() {
-    var container = document.getElementById('threads-queue');
     var itemsEl = document.getElementById('threads-queue-items');
     var countEl = document.getElementById('threads-queue-count');
+    var emptyEl = document.getElementById('pub-threads-empty');
 
-    if (!threadsQueue.length) {
-      container.style.display = 'none';
-      return;
-    }
-
-    container.style.display = 'block';
+    if (emptyEl) emptyEl.style.display = threadsQueue.length ? 'none' : '';
     countEl.textContent = threadsQueue.length;
 
     itemsEl.innerHTML = threadsQueue.map(function(item, idx) {
@@ -4975,12 +5769,44 @@
     if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // Helper: get channel statuses for an article
+  function getArticleChannels(a) {
+    var ss = SOCIAL_STATUS[a.filename] || {};
+    // Check workflow.json for richer channel data
+    var wfEntry = null;
+    if (workflowData && workflowData.length) {
+      for (var i = 0; i < workflowData.length; i++) {
+        if (workflowData[i].filename === a.filename) { wfEntry = workflowData[i]; break; }
+      }
+    }
+    var webDone = !a.draft;
+    var tgDone = ss.telegram ? true : false;
+    var thDone = ss.threads ? true : false;
+    var tgScheduled = false, thScheduled = false;
+    // Enrich from workflow channels if available
+    if (wfEntry && wfEntry.channels) {
+      var ch = wfEntry.channels;
+      if (ch.telegram && ch.telegram.status === 'scheduled') tgScheduled = true;
+      if (ch.threads && ch.threads.status === 'scheduled') thScheduled = true;
+      if (ch.telegram && ch.telegram.status === 'posted') tgDone = true;
+      if (ch.threads && ch.threads.status === 'posted') thDone = true;
+    }
+    return {
+      website: webDone,
+      telegram: tgDone, telegramScheduled: tgScheduled,
+      threads: thDone, threadsScheduled: thScheduled,
+      tgDate: ss.telegram ? (ss.telegram.posted_at || '').slice(0, 10) : '',
+      thDate: ss.threads ? (ss.threads.posted_at || '').slice(0, 10) : ''
+    };
+  }
+
   window.filterArticles = function(resetPage) {
     if (resetPage !== false) articlesPage = 1;
 
     var query = (document.getElementById('articles-search').value || '').toLowerCase();
     var status = document.getElementById('articles-filter-status').value;
     var cat = document.getElementById('articles-filter-cat').value;
+    var channelFilter = (document.getElementById('articles-filter-channel') || {}).value || 'all';
 
     var filtered = ALL_ARTICLES.filter(function(a) {
       if (status === 'published' && a.draft) return false;
@@ -4988,6 +5814,14 @@
       if (cat !== 'all' && a.category !== cat) return false;
       if (query && (a.title || '').replace(/^"+|"+$/g, '').toLowerCase().indexOf(query) === -1 &&
           (a.category || '').toLowerCase().indexOf(query) === -1) return false;
+      // Channel filter
+      if (channelFilter !== 'all' && !a.draft) {
+        var ch = getArticleChannels(a);
+        if (channelFilter === 'website-only' && (ch.telegram || ch.threads)) return false;
+        if (channelFilter === 'no-telegram' && ch.telegram) return false;
+        if (channelFilter === 'no-threads' && ch.threads) return false;
+        if (channelFilter === 'all-channels' && (!ch.telegram || !ch.threads)) return false;
+      }
       return true;
     });
 
@@ -4998,8 +5832,30 @@
     var start = (articlesPage - 1) * ARTICLES_PER_PAGE;
     var pageItems = filtered.slice(start, start + ARTICLES_PER_PAGE);
 
-    var countEl = document.getElementById('articles-count');
-    if (countEl) countEl.textContent = total;
+
+
+    // Stats bar
+    var statsEl = document.getElementById('articles-stats');
+    if (statsEl) {
+      var totalAll = ALL_ARTICLES.length;
+      var pubCount = ALL_ARTICLES.filter(function(a) { return !a.draft; }).length;
+      var draftCount = totalAll - pubCount;
+      var tgCount = 0, thCount = 0;
+      ALL_ARTICLES.forEach(function(a) {
+        if (!a.draft) {
+          var ch = getArticleChannels(a);
+          if (ch.telegram) tgCount++;
+          if (ch.threads) thCount++;
+        }
+      });
+      statsEl.innerHTML =
+        '<span>Всього: <span class="stat-value">' + totalAll + '</span></span>' +
+        '<span>' + String.fromCodePoint(127760) + ' Сайт: <span class="stat-value">' + pubCount + '</span></span>' +
+        '<span>' + String.fromCodePoint(128221) + ' Чернетки: <span class="stat-value">' + draftCount + '</span></span>' +
+        '<span>' + String.fromCodePoint(128232) + ' TG: <span class="stat-value">' + tgCount + '/' + pubCount + '</span></span>' +
+        '<span>' + String.fromCodePoint(129525) + ' Threads: <span class="stat-value">' + thCount + '/' + pubCount + '</span></span>' +
+        '<span>| ' + total + ' ' + String.fromCodePoint(128269) + '</span>';
+    }
 
     var listEl = document.getElementById('articles-list');
     if (!listEl) return;
@@ -5027,22 +5883,40 @@
 
       var pinnedLabel = isPinned ? ' <span class="pinned-info">' + String.fromCodePoint(128204) + ' Закріплено</span>' : '';
 
-      // Social status indicators for published articles
-      var socialBadges = '';
+      // 3-channel badges: Website / Telegram / Threads
+      var channelBadges = '';
       if (!a.draft) {
-        var ss = SOCIAL_STATUS[a.filename] || {};
-        var tgDone = ss.telegram ? true : false;
-        var thDone = ss.threads ? true : false;
-        socialBadges = '<span class="social-badges">' +
-          '<span class="social-badge ' + (tgDone ? 'social-done' : 'social-pending') + '" title="' + (tgDone ? 'Telegram: ' + (ss.telegram.posted_at || '').slice(0, 10) : 'Не опубліковано в Telegram') + '">' +
-            String.fromCodePoint(128232) + (tgDone ? String.fromCodePoint(9989) : '\u2014') +
-          '</span>' +
-          '<span class="social-badge ' + (thDone ? 'social-done' : 'social-pending') + '" title="' + (thDone ? 'Threads: ' + (ss.threads.posted_at || '').slice(0, 10) : 'Не опубліковано в Threads') + '">' +
-            String.fromCodePoint(129525) + (thDone ? String.fromCodePoint(9989) : '\u2014') +
-          '</span>' +
-          (!tgDone ? '<button class="admin-btn admin-btn-sm" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'telegram\')" title="Опублікувати в Telegram">TG</button>' : '') +
-          (!thDone ? '<button class="admin-btn admin-btn-sm" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'threads\')" title="Опублікувати в Threads">' + String.fromCodePoint(129525) + '</button>' : '') +
-        '</span>';
+        var ch = getArticleChannels(a);
+        // Website — always deployed if published
+        channelBadges = '<span class="social-badges">' +
+          '<span class="channel-badge ch-done" title="' + String.fromCodePoint(127760) + ' Опубліковано на сайті">' +
+            String.fromCodePoint(127760) + String.fromCodePoint(9989) +
+          '</span>';
+        // Telegram
+        if (ch.telegram) {
+          channelBadges += '<span class="channel-badge ch-done" title="Telegram: ' + escHtml(ch.tgDate) + '">' +
+            String.fromCodePoint(128232) + String.fromCodePoint(9989) + '</span>';
+        } else if (ch.telegramScheduled) {
+          channelBadges += '<span class="channel-badge ch-scheduled" title="Telegram: заплановано">' +
+            String.fromCodePoint(128232) + String.fromCodePoint(9203) + '</span>';
+        } else {
+          channelBadges += '<span class="channel-badge ch-pending" title="Не опубліковано в Telegram">' +
+            String.fromCodePoint(128232) + '\u2014</span>' +
+            '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'telegram\')" title="Опублікувати в Telegram">TG</button>';
+        }
+        // Threads
+        if (ch.threads) {
+          channelBadges += '<span class="channel-badge ch-done" title="Threads: ' + escHtml(ch.thDate) + '">' +
+            String.fromCodePoint(129525) + String.fromCodePoint(9989) + '</span>';
+        } else if (ch.threadsScheduled) {
+          channelBadges += '<span class="channel-badge ch-scheduled" title="Threads: заплановано">' +
+            String.fromCodePoint(129525) + String.fromCodePoint(9203) + '</span>';
+        } else {
+          channelBadges += '<span class="channel-badge ch-pending" title="Не опубліковано в Threads">' +
+            String.fromCodePoint(129525) + '\u2014</span>' +
+            '<button class="admin-btn repost-btn" onclick="openSocialModal(\'' + escHtml(a.filename) + '\', \'threads\')" title="Опублікувати в Threads">' + String.fromCodePoint(129525) + '</button>';
+        }
+        channelBadges += '</span>';
       }
 
       return '<div class="article-row" data-filename="' + escHtml(a.filename) + '" data-id="' + escHtml(a.id) + '">' +
@@ -5050,7 +5924,7 @@
         '<span class="article-status ' + statusClass + '">' + statusText + '</span>' +
         '<span class="article-category">' + escHtml(a.category || '') + '</span>' +
         '<span class="article-title"><a href="/news/' + escHtml(slug) + '/" target="_blank">' + escHtml(cleanTitle) + '</a>' + pinnedLabel + '</span>' +
-        socialBadges +
+        channelBadges +
         '<span class="article-actions">' +
           pinBtn +
           '<button class="admin-btn btn-edit" onclick="editArticle(\'' + escHtml(a.filename) + '\')">' + String.fromCodePoint(9999, 65039) + '</button>' +
@@ -5515,7 +6389,16 @@
     }
   };
 
-  function renderCandidates() {
+  function renderRelevanceStars(score) {
+    if (typeof score !== 'number') return '';
+    var full = Math.round(score * 5);
+    var stars = '';
+    for (var i = 0; i < 5; i++) stars += i < full ? '★' : '☆';
+    return '<span class="relevance-stars">' + stars + '</span>' +
+           '<span class="relevance-score">' + score.toFixed(2) + '</span>';
+  }
+
+  window.renderCandidates = function() {
     var filter = document.getElementById('candidates-filter-type').value;
     var filtered = candidatesData;
     if (filter !== 'all') {
@@ -5539,35 +6422,74 @@
       return;
     }
 
-    // Sort newest first
-    filtered.sort(function(a, b) {
-      return (b.date || '').localeCompare(a.date || '');
-    });
+    // Sort based on selected option
+    var sortBy = document.getElementById('candidates-sort').value;
+    filtered = filtered.slice(); // clone to avoid mutating original
+    if (sortBy === 'relevance') {
+      filtered.sort(function(a, b) {
+        return (b.relevance_score || 0) - (a.relevance_score || 0);
+      });
+    } else if (sortBy === 'date') {
+      filtered.sort(function(a, b) {
+        return (b.date || '').localeCompare(a.date || '');
+      });
+    } else if (sortBy === 'source') {
+      filtered.sort(function(a, b) {
+        return (a.source || '').localeCompare(b.source || '');
+      });
+    }
 
     var now = Date.now();
 
     listEl.innerHTML = filtered.map(function(c) {
       var isOld = c.date && (now - new Date(c.date).getTime()) > 86400000;
+      var score = c.relevance_score;
+      var isLow = typeof score === 'number' && score < 0.3;
       var typeIcon = c.type === 'video' ? '🎬' : '📰';
       var checked = candidatesSelected[c.id] ? ' checked' : '';
       var thumbHtml = c.image_url
         ? '<img src="' + escHtml(c.image_url) + '" alt="" class="candidate-thumb" onerror="this.style.display=\'none\'">'
         : '';
-      var viewsInfo = c.views ? ' · ' + escHtml(c.views) + ' переглядів' : '';
 
-      return '<div class="candidate-card' + (isOld ? ' dimmed' : '') + '" data-id="' + escHtml(c.id) + '">' +
+      // Relevance stars
+      var starsHtml = typeof score === 'number'
+        ? '<span class="candidate-relevance">' + renderRelevanceStars(score) + '</span>'
+        : '';
+
+      // Badges: trust + category hint
+      var badgesHtml = '';
+      var hasBadges = c.source_trusted || c.category_hint;
+      if (hasBadges) {
+        badgesHtml = '<div class="candidate-badges">';
+        if (c.source_trusted) badgesHtml += '<span class="trust-badge">✓ Довірене</span>';
+        if (c.category_hint && c.category_hint !== 'інше') badgesHtml += '<span class="category-hint">' + escHtml(c.category_hint) + '</span>';
+        badgesHtml += '</div>';
+      }
+
+      // Low relevance warning
+      var warningHtml = isLow ? '<div class="candidate-warning">⚠️ Можливо не стосується промислових конопель</div>' : '';
+
+      var cardClass = 'candidate-card';
+      if (isLow) cardClass += ' low-relevance';
+      else if (isOld) cardClass += ' dimmed';
+
+      return '<div class="' + cardClass + '" data-id="' + escHtml(c.id) + '">' +
         '<div class="candidate-cb"><input type="checkbox" onchange="candidateToggle(\'' + escHtml(c.id) + '\', this.checked)"' + checked + '></div>' +
         thumbHtml +
         '<div class="candidate-info">' +
           '<div class="candidate-title-row">' +
             '<span class="candidate-type">' + typeIcon + '</span>' +
             '<span class="candidate-title">' + escHtml(c.title) + '</span>' +
+            starsHtml +
           '</div>' +
-          '<div class="candidate-meta">' + escHtml(c.source || '') + ' · ' + (c.date ? timeAgo(c.date) : '') + viewsInfo + '</div>' +
+          '<div class="candidate-meta">' + escHtml(c.source || '') + ' · ' + (c.date ? timeAgo(c.date) : '') + '</div>' +
+          badgesHtml +
           '<div class="candidate-summary">' + escHtml(c.summary || '') + '</div>' +
+          warningHtml +
           '<div class="candidate-actions">' +
-            '<a href="' + escHtml(c.link || '#') + '" target="_blank" class="admin-btn">↗ Відкрити</a>' +
-            (c.content_preview ? '<button class="admin-btn" onclick="toggleCandidatePreview(\'' + escHtml(c.id) + '\')">👁 Прев\'ю</button>' : '') +
+            '<a href="' + escHtml(c.link || '#') + '" target="_blank" class="admin-btn">↗ Оригінал</a>' +
+            (c.content_preview ? '<button class="admin-btn" onclick="toggleCandidatePreview(\'' + escHtml(c.id) + '\')">👁 Детальніше</button>' : '') +
+            (!isLow ? '<button class="admin-btn candidate-shortlist-btn" onclick="shortlistCandidate(\'' + escHtml(c.id) + '\')">+ В роботу</button>' : '') +
             '<button class="admin-btn btn-delete" onclick="deleteCandidate(\'' + escHtml(c.id) + '\')" title="Видалити">' + String.fromCodePoint(128465, 65039) + '</button>' +
           '</div>' +
           (c.content_preview ? '<div class="candidate-preview" id="preview-' + escHtml(c.id) + '">' + escHtml(c.content_preview) + '</div>' : '') +
@@ -5576,9 +6498,9 @@
     }).join('');
 
     updateCandidatesCounter();
-  }
+  };
 
-  function updateCandidatesCounter() {
+  window.updateCandidatesCounter = function() {
     var filter = document.getElementById('candidates-filter-type').value;
     var filtered = candidatesData;
     if (filter !== 'all') {
@@ -5592,11 +6514,11 @@
     var processBtn = document.getElementById('btn-process-candidates-top');
     if (processBtn) {
       processBtn.disabled = selectedCount === 0;
-      processBtn.textContent = '✅ Обробити вибрані' + (selectedCount > 0 ? ' (' + selectedCount + ')' : '');
+      processBtn.textContent = '+ В роботу' + (selectedCount > 0 ? ' (' + selectedCount + ')' : '');
     }
     var deleteBtn = document.getElementById('btn-delete-candidates-top');
     if (deleteBtn) deleteBtn.disabled = selectedCount === 0;
-  }
+  };
 
   window.candidateToggle = function(id, checked) {
     if (checked) {
@@ -5746,6 +6668,106 @@
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
+
+  // =========================================================================
+  // Shortlist — move candidates to workflow (stage=feed)
+  // =========================================================================
+
+  window.shortlistCandidate = async function(id) {
+    var candidate = candidatesData.find(function(c) { return c.id === id; });
+    if (!candidate) return;
+    if (!confirm('Додати "' + candidate.title.substring(0, 50) + '..." в роботу?')) return;
+    await _shortlistCandidates([candidate]);
+  };
+
+  window.shortlistSelected = async function() {
+    var selectedIds = Object.keys(candidatesSelected);
+    if (!selectedIds.length) return;
+    var selected = candidatesData.filter(function(c) { return candidatesSelected[c.id]; });
+    if (!selected.length) return;
+    if (!confirm('Додати ' + selected.length + ' знахідок в роботу?')) return;
+    await _shortlistCandidates(selected);
+  };
+
+  async function _shortlistCandidates(candidates) {
+    showStatus('\u23F3 Додаю в роботу...', 'info');
+
+    try {
+      // 1. Read workflow.json
+      var wfResp = await ghApi('GET', '/contents/data/workflow.json');
+      var wfData, wfSha;
+      if (wfResp.ok) {
+        var wfFile = await wfResp.json();
+        wfSha = wfFile.sha;
+        wfData = JSON.parse(b64DecodeUtf8(wfFile.content));
+      } else {
+        wfData = { articles: [] };
+        wfSha = null;
+      }
+
+      // 2. Build workflow entries from candidates
+      var nowIso = new Date().toISOString();
+      candidates.forEach(function(c) {
+        wfData.articles.push({
+          id: c.id,
+          filename: '',
+          title: c.title,
+          summary: c.summary || c.content_preview || '',
+          category: c.category_hint || '',
+          image: c.image_url || '',
+          candidate_id: c.id,
+          original_title: c.title,
+          original_url: c.link,
+          stage: 'feed',
+          status: 'queued',
+          channels: {
+            website: { enabled: true, status: 'pending', scheduled_at: null },
+            telegram: { enabled: true, status: 'pending', scheduled_at: null, custom_text: '' },
+            threads: { enabled: true, status: 'pending', scheduled_at: null, custom_text: '' }
+          },
+          relevance_score: c.relevance_score || 0,
+          created_at: nowIso,
+          updated_at: nowIso,
+          published_at: null
+        });
+      });
+
+      // 3. Save workflow.json
+      var wfBody = {
+        message: '\u2795 Add ' + candidates.length + ' candidates to workflow',
+        content: b64EncodeUtf8(JSON.stringify(wfData, null, 2))
+      };
+      if (wfSha) wfBody.sha = wfSha;
+      var saveWf = await ghApi('PUT', '/contents/data/workflow.json', wfBody);
+      if (!saveWf.ok) throw new Error('Failed to save workflow.json: ' + saveWf.status);
+
+      // 4. Remove from candidates.json
+      var candResp = await ghApi('GET', '/contents/data/candidates.json');
+      if (candResp.ok) {
+        var candFile = await candResp.json();
+        var candData = JSON.parse(b64DecodeUtf8(candFile.content));
+        var idSet = {};
+        candidates.forEach(function(c) { idSet[c.id] = true; });
+        candData.items = (candData.items || []).filter(function(c) { return !idSet[c.id]; });
+        await ghApi('PUT', '/contents/data/candidates.json', {
+          message: '\u{1F4CB} Move ' + candidates.length + ' candidates to workflow',
+          content: b64EncodeUtf8(JSON.stringify(candData, null, 2)),
+          sha: candFile.sha
+        });
+        candidatesData = candData.items;
+      }
+
+      // 5. Update UI
+      candidatesSelected = {};
+      renderCandidates();
+      updateCandidatesCounter();
+      showStatus('\u2705 ' + candidates.length + ' знахідок додано в роботу', 'success');
+
+    } catch (e) {
+      console.error('Shortlist error:', e);
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
+  }
 
   // =========================================================================
   // Sources tab
