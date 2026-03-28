@@ -182,6 +182,16 @@ def run_process(ids):
     candidates = load_json(CANDIDATES_FILE, {"items": []})
     items_by_id = {c["id"]: c for c in candidates.get("items", [])}
 
+    # Also load workflow.json as fallback (candidates are removed from
+    # candidates.json when shortlisted, but their data lives in workflow.json)
+    workflow = load_json(WORKFLOW_FILE, {"articles": []})
+    wf_by_id = {}
+    for wf in workflow.get("articles", []):
+        if wf.get("candidate_id"):
+            wf_by_id[wf["candidate_id"]] = wf
+        if wf.get("id"):
+            wf_by_id[wf["id"]] = wf
+
     # Resolve requested candidates
     to_process = []
     for cid in ids:
@@ -190,8 +200,24 @@ def run_process(ids):
             continue
         if cid in items_by_id:
             to_process.append(items_by_id[cid])
+        elif cid in wf_by_id:
+            # Build candidate-like dict from workflow entry
+            wf_item = wf_by_id[cid]
+            print(f"[INFO] Candidate {cid} found in workflow.json (already shortlisted)")
+            to_process.append({
+                "id": cid,
+                "title": wf_item.get("original_title") or wf_item.get("title", ""),
+                "link": wf_item.get("original_url", ""),
+                "source": wf_item.get("source_name", ""),
+                "summary": wf_item.get("summary", ""),
+                "image_url": wf_item.get("image", ""),
+                "date": wf_item.get("created_at", ""),
+                "hash": "",
+                "content_preview": wf_item.get("content_preview") or wf_item.get("summary", ""),
+                "category_hint": wf_item.get("category", ""),
+            })
         else:
-            print(f"[WARN] Candidate ID not found: {cid}")
+            print(f"[WARN] Candidate ID not found in candidates.json or workflow.json: {cid}")
 
     if not to_process:
         print("[INFO] No valid candidates to process.")
@@ -244,7 +270,8 @@ def run_process(ids):
             if not rewritten:
                 print("   Skipping — rewrite failed (API error)")
                 failed_count += 1
-                processed["articles"].append(candidate["hash"])
+                if candidate.get("hash"):
+                    processed["articles"].append(candidate["hash"])
                 save_processed(processed)
                 processed_ids.append(candidate["id"])
                 continue
@@ -252,7 +279,8 @@ def run_process(ids):
             if rewritten.get("rejected"):
                 print("   Skipping — AI rejected as irrelevant")
                 skipped_count += 1
-                processed["articles"].append(candidate["hash"])
+                if candidate.get("hash"):
+                    processed["articles"].append(candidate["hash"])
                 save_processed(processed)
                 processed_ids.append(candidate["id"])
                 continue
@@ -299,7 +327,8 @@ def run_process(ids):
             if not filepath:
                 print("   Failed to create draft file")
                 failed_count += 1
-                processed["articles"].append(candidate["hash"])
+                if candidate.get("hash"):
+                    processed["articles"].append(candidate["hash"])
                 save_processed(processed)
                 processed_ids.append(candidate["id"])
                 continue
@@ -328,7 +357,8 @@ def run_process(ids):
                 print(f"   Admin notification error: {e}")
 
             # Mark as processed
-            processed["articles"].append(candidate["hash"])
+            if candidate.get("hash"):
+                processed["articles"].append(candidate["hash"])
             if "recent_titles" not in processed:
                 processed["recent_titles"] = []
             processed["recent_titles"].append(rewritten["title"])
@@ -387,33 +417,61 @@ def _remove_processed_candidates(processed_ids):
 # ---------------------------------------------------------------------------
 
 def _add_to_workflow(article_id, filename, rewritten, candidate, image_data):
-    """Add a processed article to workflow.json for the new editorial pipeline."""
+    """Add or update a processed article in workflow.json for the editorial pipeline."""
     workflow = load_json(WORKFLOW_FILE, {"articles": []})
 
     now_iso = datetime.now(timezone.utc).isoformat()
-    entry = {
-        "id": article_id,
-        "filename": filename,
-        "title": rewritten.get("title", ""),
-        "summary": rewritten.get("summary", ""),
-        "category": rewritten.get("category", ""),
-        "image": image_data.get("url", "") if image_data else "",
-        "candidate_id": candidate.get("id", ""),
-        "original_title": candidate.get("title", ""),
-        "original_url": candidate.get("link", ""),
-        "stage": "editorial",
-        "status": "ready_for_edit",
-        "channels": {
+    cand_id = candidate.get("id", "")
+
+    # Check if workflow entry already exists (from shortlisting)
+    existing = None
+    for a in workflow.get("articles", []):
+        if a.get("candidate_id") == cand_id or a.get("id") == cand_id:
+            existing = a
+            break
+
+    if existing:
+        # Update existing entry with processed data
+        existing["id"] = article_id
+        existing["filename"] = filename
+        existing["title"] = rewritten.get("title", "")
+        existing["summary"] = rewritten.get("summary", "")
+        existing["category"] = rewritten.get("category", "")
+        existing["image"] = image_data.get("url", "") if image_data else ""
+        existing["stage"] = "editorial"
+        existing["status"] = "ready_for_edit"
+        existing["channels"] = {
             "website": {"enabled": True, "status": "pending", "scheduled_at": None},
             "telegram": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("telegram_hook", "")},
             "threads": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("threads_hook", "")},
-        },
-        "created_at": now_iso,
-        "updated_at": now_iso,
-        "published_at": None,
-    }
+        }
+        existing["updated_at"] = now_iso
+        print(f"   Updated existing workflow entry for candidate {cand_id}")
+    else:
+        # Create new entry
+        entry = {
+            "id": article_id,
+            "filename": filename,
+            "title": rewritten.get("title", ""),
+            "summary": rewritten.get("summary", ""),
+            "category": rewritten.get("category", ""),
+            "image": image_data.get("url", "") if image_data else "",
+            "candidate_id": cand_id,
+            "original_title": candidate.get("title", ""),
+            "original_url": candidate.get("link", ""),
+            "stage": "editorial",
+            "status": "ready_for_edit",
+            "channels": {
+                "website": {"enabled": True, "status": "pending", "scheduled_at": None},
+                "telegram": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("telegram_hook", "")},
+                "threads": {"enabled": True, "status": "pending", "scheduled_at": None, "custom_text": rewritten.get("threads_hook", "")},
+            },
+            "created_at": now_iso,
+            "updated_at": now_iso,
+            "published_at": None,
+        }
+        workflow["articles"].append(entry)
 
-    workflow["articles"].append(entry)
     save_json(WORKFLOW_FILE, workflow)
 
 

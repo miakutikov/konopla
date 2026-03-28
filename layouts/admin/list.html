@@ -121,7 +121,7 @@
               <button class="editorial-tab" onclick="switchEditorialTab('all')" id="etab-all">📋 Усі</button>
             </div>
             <div class="editorial-actions">
-              <button class="admin-btn admin-btn-green" id="btn-process-queued" onclick="processQueuedWorkflow()" disabled>⚡ В обробку</button>
+              <button class="admin-btn admin-btn-green" id="btn-process-queued" onclick="processQueuedWorkflow()" disabled>⚡ Обробити все</button>
             </div>
           </div>
 
@@ -4127,7 +4127,7 @@
     var items = workflowData;
     if (editorialTab === 'queued') {
       items = workflowData.filter(function(a) {
-        return a.stage === 'feed' || (a.stage === 'editorial' && a.status === 'queued');
+        return a.stage === 'feed' || (a.stage === 'editorial' && (a.status === 'queued' || a.status === 'processing'));
       });
     }
 
@@ -4189,7 +4189,10 @@
 
       // Actions based on stage/status
       var actions = '';
-      if (a.stage === 'feed' && a.status === 'queued') {
+      if (a.status === 'processing') {
+        actions = '<span class="admin-btn" style="opacity:0.6;cursor:default">\u2699\uFE0F Обробляється...</span>' +
+          '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
+      } else if (a.stage === 'feed' && a.status === 'queued') {
         actions = '<button class="admin-btn admin-btn-green" onclick="processWorkflowItem(\'' + escHtml(a.id) + '\')">\u26A1 Обробити</button>' +
           '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
       } else if (a.status === 'ready_for_edit') {
@@ -6777,6 +6780,8 @@
           candidate_id: c.id,
           original_title: c.title,
           original_url: c.link,
+          source_name: c.source || '',
+          content_preview: c.content_preview || '',
           stage: 'feed',
           status: 'queued',
           channels: {
