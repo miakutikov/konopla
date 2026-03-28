@@ -4190,8 +4190,16 @@
       // Actions based on stage/status
       var actions = '';
       if (a.status === 'processing') {
-        actions = '<span class="admin-btn" style="opacity:0.6;cursor:default">\u2699\uFE0F Обробляється...</span>' +
-          '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
+        // Check if processing is stuck (>3 minutes)
+        var processingAge = a.updated_at ? (Date.now() - new Date(a.updated_at).getTime()) : 0;
+        var isStuck = processingAge > 3 * 60 * 1000;
+        if (isStuck) {
+          actions = '<button class="admin-btn admin-btn-green" onclick="retryProcessing(\'' + escHtml(a.id) + '\')">\u{1F504} Повторити</button>' +
+            '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
+        } else {
+          actions = '<span class="admin-btn" style="opacity:0.6;cursor:default">\u2699\uFE0F Обробляється...</span>' +
+            '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
+        }
       } else if (a.stage === 'feed' && a.status === 'queued') {
         actions = '<button class="admin-btn admin-btn-green" onclick="processWorkflowItem(\'' + escHtml(a.id) + '\')">\u26A1 Обробити</button>' +
           '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
@@ -4329,6 +4337,19 @@
       await saveWorkflowData('\uD83D\uDDD1\uFE0F Remove from workflow: ' + id);
     }
   }
+
+  window.retryProcessing = async function(id) {
+    var item = workflowData.find(function(a) { return a.id === id; });
+    if (!item) return;
+
+    // Reset to queued so user can try again
+    item.status = 'queued';
+    item.stage = 'feed';
+    item.updated_at = new Date().toISOString();
+    await saveWorkflowData('\u{1F504} Reset stuck processing: ' + item.title.substring(0, 40));
+    renderEditorial();
+    showStatus('\u2705 Статтю повернуто в чергу. Натисніть "Обробити" щоб спробувати знову.', 'success');
+  };
 
   window.removeWorkflowItem = async function(id) {
     if (!confirm('Видалити цю статтю з редакції?')) return;
