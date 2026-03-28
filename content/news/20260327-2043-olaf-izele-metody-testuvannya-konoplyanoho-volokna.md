@@ -14,7 +14,7 @@ image_source_url: "https://www.youtube.com/watch?v=9lSuwBl2FhU"
 youtube_id: "9lSuwBl2FhU"
 telegram_hook: "Дізнайтеся про стандартизацію методів тестування конопляного волокна! Олаф Ізеле з Metáxi SimBioSys LLC розповідає про свою роботу в ASTM International."
 threads_hook: "Чому так важливо мати стандарти для тестування конопляного волокна? Експерт Олаф Ізеле пояснює, як його робота в ASTM International допомагає розвивати індустрію. Дивіться відео!"
-draft: true
+draft: false
 ---
 
 На порталі Konopla.UA ми раді представити відео з серії вебінарів Cornell Hemp Webinar Series, що відбувся 25 березня 2026 року. У цьому випуску Олаф Ізеле, власник компанії Metáxi SimBioSys LLC, ділиться своїми знаннями про методи тестування конопляного волокна.
