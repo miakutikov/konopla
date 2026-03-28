@@ -116,9 +116,9 @@
           <!-- Editorial toolbar -->
           <div class="editorial-toolbar">
             <div class="editorial-tabs">
-              <button class="editorial-tab active" onclick="switchEditorialTab('queued')" id="etab-queued">📥 В черзі</button>
-              <button class="editorial-tab" onclick="switchEditorialTab('drafts')" id="etab-drafts">📝 Чернетки</button>
-              <button class="editorial-tab" onclick="switchEditorialTab('all')" id="etab-all">📋 Усі</button>
+              <button class="editorial-tab active" onclick="switchEditorialTab('all')" id="etab-all">📋 Усі</button>
+              <button class="editorial-tab" onclick="switchEditorialTab('queued')" id="etab-queued">📥 В обробці</button>
+              <button class="editorial-tab" onclick="switchEditorialTab('ready')" id="etab-ready">✅ Готові</button>
             </div>
             <div class="editorial-actions">
               <button class="admin-btn admin-btn-green" id="btn-process-queued" onclick="processQueuedWorkflow()" disabled>⚡ Обробити все</button>
@@ -3453,7 +3453,7 @@
   var SOCIAL_STATUS = {};
   var workflowData = [];
   var workflowSha = null;
-  var editorialTab = 'queued';
+  var editorialTab = 'all';
 
   var ALL_ARTICLES = [
     {{ range where .Site.RegularPages "Section" "news" }}
@@ -4113,25 +4113,22 @@
     var draftsEl = document.getElementById('drafts-list');
     var emptyEl = document.getElementById('empty-state');
 
-    if (editorialTab === 'drafts') {
-      // Show legacy drafts
-      listEl.style.display = 'none';
-      draftsEl.style.display = '';
-      return;
-    }
-
-    draftsEl.style.display = 'none';
+    if (draftsEl) draftsEl.style.display = 'none';
     listEl.style.display = '';
 
     // Filter workflow articles based on tab
     var items = workflowData;
     if (editorialTab === 'queued') {
       items = workflowData.filter(function(a) {
-        return a.stage === 'feed' || (a.stage === 'editorial' && (a.status === 'queued' || a.status === 'processing'));
+        return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
+      });
+    } else if (editorialTab === 'ready') {
+      items = workflowData.filter(function(a) {
+        return a.status === 'ready_for_edit';
       });
     }
 
-    if (items.length === 0 && editorialTab !== 'all') {
+    if (items.length === 0) {
       listEl.innerHTML = '';
       emptyEl.style.display = 'block';
       updateEditorialCounter();
@@ -4235,24 +4232,26 @@
 
   function updateEditorialCounter() {
     var queuedCount = workflowData.filter(function(a) {
-      return a.stage === 'feed' || (a.stage === 'editorial' && a.status === 'queued');
+      return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
     }).length;
-    var draftCount = workflowData.filter(function(a) {
+    var readyCount = workflowData.filter(function(a) {
       return a.status === 'ready_for_edit';
     }).length;
+    var totalCount = workflowData.length;
 
     // Update tab labels
+    var tabAll = document.getElementById('etab-all');
+    if (tabAll) tabAll.textContent = '\uD83D\uDCCB Усі' + (totalCount > 0 ? ' (' + totalCount + ')' : '');
     var tabQueued = document.getElementById('etab-queued');
-    if (tabQueued) tabQueued.textContent = '\uD83D\uDCE5 В черзі' + (queuedCount > 0 ? ' (' + queuedCount + ')' : '');
-    var tabDrafts = document.getElementById('etab-drafts');
-    if (tabDrafts) tabDrafts.textContent = '\uD83D\uDCDD Чернетки' + (draftCount > 0 ? ' (' + draftCount + ')' : '');
+    if (tabQueued) tabQueued.textContent = '\uD83D\uDCE5 В обробці' + (queuedCount > 0 ? ' (' + queuedCount + ')' : '');
+    var tabReady = document.getElementById('etab-ready');
+    if (tabReady) tabReady.textContent = '\u2705 Готові' + (readyCount > 0 ? ' (' + readyCount + ')' : '');
 
     // Badge
     var badge = document.getElementById('drafts-count');
-    var total = queuedCount + draftCount;
     if (badge) {
-      if (total > 0) {
-        badge.textContent = total;
+      if (totalCount > 0) {
+        badge.textContent = totalCount;
         badge.style.display = 'inline';
       } else {
         badge.style.display = 'none';
