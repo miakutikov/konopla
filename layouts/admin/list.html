@@ -108,9 +108,17 @@
           <div class="view-header">
             <h1>✍️ Редакція <span id="drafts-count" class="editorial-count-badge"></span></h1>
             <div class="view-actions">
+              <button class="admin-btn" onclick="toggleQuickAdd()">🔗 Додати URL</button>
               <button class="admin-btn" onclick="toggleCreateForm()">✍️ Нова стаття</button>
               <button class="admin-btn" onclick="loadEditorial()">🔄 Оновити</button>
             </div>
+          </div>
+
+          <!-- Quick add URL -->
+          <div id="quick-add-url" class="quick-add-url" style="display:none">
+            <input type="text" id="qa-url" class="qa-url-input" placeholder="Вставте URL статті або відео...">
+            <button class="admin-btn admin-btn-green" onclick="quickAddUrl()">⚡ Додати й обробити</button>
+            <button class="admin-btn admin-btn-dim" onclick="toggleQuickAdd()">✕</button>
           </div>
 
           <!-- Editorial toolbar -->
@@ -1166,6 +1174,29 @@
   padding: 2px 10px;
   margin-left: 8px;
   vertical-align: middle;
+}
+.quick-add-url {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(76, 175, 80, 0.08);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.qa-url-input {
+  flex: 1;
+  background: var(--card-bg, #1a1a1a);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+.qa-url-input:focus {
+  border-color: var(--accent);
+  outline: none;
 }
 .editorial-toolbar {
   display: flex;
@@ -4361,6 +4392,100 @@
       await saveWorkflowData('\uD83D\uDDD1\uFE0F Remove from workflow: ' + id);
     }
   }
+
+  window.toggleQuickAdd = function() {
+    var el = document.getElementById('quick-add-url');
+    if (!el) return;
+    var showing = el.style.display !== 'none';
+    el.style.display = showing ? 'none' : 'flex';
+    if (!showing) {
+      document.getElementById('qa-url').value = '';
+      document.getElementById('qa-url').focus();
+    }
+  };
+
+  window.quickAddUrl = async function() {
+    var url = document.getElementById('qa-url').value.trim();
+    if (!url) {
+      showStatus('\u274C Вставте URL', 'error');
+      return;
+    }
+    if (!url.startsWith('http')) {
+      showStatus('\u274C URL має починатись з http:// або https://', 'error');
+      return;
+    }
+
+    showStatus('\u23F3 Додаю...', 'info');
+
+    try {
+      // 1. Read workflow.json
+      var wfResp = await ghApi('GET', '/contents/data/workflow.json');
+      var wfData, wfSha;
+      if (wfResp.ok) {
+        var wfFile = await wfResp.json();
+        wfSha = wfFile.sha;
+        wfData = JSON.parse(b64DecodeUtf8(wfFile.content));
+      } else {
+        wfData = { articles: [] };
+        wfSha = null;
+      }
+
+      // 2. Create workflow entry
+      var newId = Math.random().toString(36).substr(2, 8);
+      var nowIso = new Date().toISOString();
+      var domain = '';
+      try { domain = new URL(url).hostname.replace('www.', ''); } catch(e) {}
+
+      wfData.articles.push({
+        id: newId,
+        filename: '',
+        title: domain + ' — ' + url.substring(0, 60),
+        summary: '',
+        category: '',
+        image: '',
+        candidate_id: newId,
+        original_title: '',
+        original_url: url,
+        source_name: domain,
+        content_preview: '',
+        stage: 'feed',
+        status: 'queued',
+        channels: {
+          website: { enabled: true, status: 'pending', scheduled_at: null },
+          telegram: { enabled: true, status: 'pending', scheduled_at: null, custom_text: '' },
+          threads: { enabled: true, status: 'pending', scheduled_at: null, custom_text: '' }
+        },
+        relevance_score: 1.0,
+        created_at: nowIso,
+        updated_at: nowIso,
+        published_at: null
+      });
+
+      // 3. Save
+      var body = {
+        message: '\uD83D\uDD17 Manual URL: ' + url.substring(0, 60),
+        content: b64EncodeUtf8(JSON.stringify(wfData, null, 2))
+      };
+      if (wfSha) body.sha = wfSha;
+      var saveResp = await ghApi('PUT', '/contents/data/workflow.json', body);
+      if (!saveResp.ok) throw new Error('Save failed: ' + saveResp.status);
+
+      // 4. Update local state
+      var savedFile = await saveResp.json();
+      workflowSha = savedFile.content ? savedFile.content.sha : null;
+      workflowData = wfData.articles;
+
+      // 5. Hide form, switch to queue tab, render
+      document.getElementById('quick-add-url').style.display = 'none';
+      switchEditorialTab('queued');
+      renderEditorial();
+      showStatus('\u2705 URL додано! Натисніть "Обробити" для запуску AI.', 'success');
+
+    } catch (e) {
+      console.error('Quick add error:', e);
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
+  };
 
   window.saveArticleUrl = async function(id) {
     var input = document.getElementById('url-' + id);
