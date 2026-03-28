@@ -6621,23 +6621,38 @@
 
   window.deleteCandidate = async function(id) {
     if (!confirm('Видалити цю новину?')) return;
+    showStatus(String.fromCodePoint(9203) + ' Видаляємо...', 'info');
     try {
-      var resp = await ghApi('GET', '/contents/data/candidates.json');
-      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
-      var fileData = await resp.json();
-      var sha = fileData.sha;
-      var data = JSON.parse(b64DecodeUtf8(fileData.content));
+      // Use cached SHA if available, otherwise fetch fresh
+      var sha = candidatesSha;
+      var data;
+      if (!sha) {
+        var resp = await ghApi('GET', '/contents/data/candidates.json');
+        if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+        var fileData = await resp.json();
+        sha = fileData.sha;
+        data = JSON.parse(b64DecodeUtf8(fileData.content));
+      } else {
+        data = { items: candidatesData.slice() };
+      }
       data.items = (data.items || []).filter(function(c) { return c.id !== id; });
-      await ghApi('PUT', '/contents/data/candidates.json', {
+      var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
         message: String.fromCodePoint(128465) + ' Remove candidate ' + id,
         content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
         sha: sha
       });
+      if (!putResp.ok) {
+        var err = await putResp.json().catch(function() { return {}; });
+        throw new Error('PUT failed: ' + (err.message || putResp.status));
+      }
+      var result = await putResp.json();
+      candidatesSha = result.content.sha;
       candidatesData = data.items;
       delete candidatesSelected[id];
       renderCandidates();
       showStatus(String.fromCodePoint(9989) + ' Новину видалено', 'success');
     } catch (e) {
+      console.error('Delete candidate error:', e);
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
@@ -6646,25 +6661,39 @@
     var selectedIds = Object.keys(candidatesSelected);
     if (!selectedIds.length) return;
     if (!confirm('Видалити ' + selectedIds.length + ' новин зі списку?')) return;
+    showStatus(String.fromCodePoint(9203) + ' Видаляємо ' + selectedIds.length + '...', 'info');
     try {
-      var resp = await ghApi('GET', '/contents/data/candidates.json');
-      if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
-      var fileData = await resp.json();
-      var sha = fileData.sha;
-      var data = JSON.parse(b64DecodeUtf8(fileData.content));
+      var sha = candidatesSha;
+      var data;
+      if (!sha) {
+        var resp = await ghApi('GET', '/contents/data/candidates.json');
+        if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
+        var fileData = await resp.json();
+        sha = fileData.sha;
+        data = JSON.parse(b64DecodeUtf8(fileData.content));
+      } else {
+        data = { items: candidatesData.slice() };
+      }
       var idSet = {};
       selectedIds.forEach(function(id) { idSet[id] = true; });
       data.items = (data.items || []).filter(function(c) { return !idSet[c.id]; });
-      await ghApi('PUT', '/contents/data/candidates.json', {
+      var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
         message: String.fromCodePoint(128465) + ' Remove ' + selectedIds.length + ' candidates',
         content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
         sha: sha
       });
+      if (!putResp.ok) {
+        var err = await putResp.json().catch(function() { return {}; });
+        throw new Error('PUT failed: ' + (err.message || putResp.status));
+      }
+      var result = await putResp.json();
+      candidatesSha = result.content.sha;
       candidatesData = data.items;
       candidatesSelected = {};
       renderCandidates();
       showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' знахідок', 'success');
     } catch (e) {
+      console.error('Delete candidates error:', e);
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
