@@ -75,19 +75,19 @@
       "published_at": "2026-03-28T21:05:21.579Z"
     },
     {
-      "id": "rmgvfeoy",
-      "filename": "",
-      "title": "sechat.com.br — https://sechat.com.br/en/noticia/the-new-campaign-for-hemp-r",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "35329aff",
+      "filename": "20260329-0953-nova-kampaniya-za-reformu-konoplyarstva-u-velykiy-brytaniyi.md",
+      "title": "Нова кампанія за реформу коноплярства у Великій Британії",
+      "summary": "Британська організація Volteface запустила кампанію «Приємні землі» для реформи коноплярства у Великій Британії. Звіт «Приємні землі» запропонує уряду рішення для усунення недоліків у чинному законодавстві.",
+      "category": "законодавство",
+      "image": "/images/generated/35329aff.jpg",
       "candidate_id": "rmgvfeoy",
       "original_title": "",
       "original_url": "https://sechat.com.br/en/noticia/the-new-campaign-for-hemp-reform-in-the-united-kingdom",
       "source_name": "sechat.com.br",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -98,18 +98,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Британська організація Volteface запустила кампанію «Приємні землі», закликаючи уряд послабити обмеження для фермерів-коноплярів та стимулювати економіку."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "У Великій Британії запустили нову кампанію за реформу коноплярства! Фермери змушені знищувати найціннішу частину врожаю, а країна втрачає мільйони. Час це змінити!"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-03-29T09:52:45.582Z",
-      "updated_at": "2026-03-29T09:52:53.980Z",
+      "updated_at": "2026-03-29T09:53:43.932440+00:00",
       "published_at": null
     }
   ]
