@@ -4169,14 +4169,18 @@
     if (draftsEl) draftsEl.style.display = 'none';
     listEl.style.display = '';
 
-    // Filter workflow articles based on tab
-    var items = workflowData;
+    // Filter: exclude approved articles (they belong in "Статті" view)
+    var activeItems = workflowData.filter(function(a) {
+      return a.status !== 'approved' && a.status !== 'rejected';
+    });
+
+    var items = activeItems;
     if (editorialTab === 'queued') {
-      items = workflowData.filter(function(a) {
+      items = activeItems.filter(function(a) {
         return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
       });
     } else if (editorialTab === 'ready') {
-      items = workflowData.filter(function(a) {
+      items = activeItems.filter(function(a) {
         return a.status === 'ready_for_edit';
       });
     }
@@ -4287,13 +4291,17 @@
   }
 
   function updateEditorialCounter() {
-    var queuedCount = workflowData.filter(function(a) {
+    // Only count active (non-approved, non-rejected) articles
+    var active = workflowData.filter(function(a) {
+      return a.status !== 'approved' && a.status !== 'rejected';
+    });
+    var queuedCount = active.filter(function(a) {
       return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
     }).length;
-    var readyCount = workflowData.filter(function(a) {
+    var readyCount = active.filter(function(a) {
       return a.status === 'ready_for_edit';
     }).length;
-    var totalCount = workflowData.length;
+    var totalCount = active.length;
 
     // Update tab labels
     var tabAll = document.getElementById('etab-all');
