@@ -73,6 +73,44 @@
       "created_at": "2026-03-28T21:02:29.617Z",
       "updated_at": "2026-03-28T21:05:21.579Z",
       "published_at": "2026-03-28T21:05:21.579Z"
+    },
+    {
+      "id": "2c7965f1",
+      "filename": "",
+      "title": "The new campaign for hemp reform in the United Kingdom - Sechat",
+      "summary": "The new campaign for hemp reform in the United Kingdom &nbsp;&nbsp; Sechat",
+      "category": "інше",
+      "image": "",
+      "candidate_id": "2c7965f1",
+      "original_title": "The new campaign for hemp reform in the United Kingdom - Sechat",
+      "original_url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNWl9zQVJBSWFmZlluRjdoa1F5ZnhGYTNGSXdiUlN1YlR4M0VLelBhYkQ5cHlsYUp3TTRFemNWTllNckp0djFOZmp0NEVQd09XUXZoWlFJZVlzdnZTa29LQzJrTmRVN3lMeVhvRDFoM1Q0Vk9abllzWjdFeUwtMmduQkc2VWd0N3FzU0tTTzlNRHY?oc=5",
+      "source_name": "\"hemp uk industry\" - Google News",
+      "content_preview": "The new campaign for hemp reform in the United Kingdom &nbsp;&nbsp; Sechat",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.5,
+      "created_at": "2026-03-29T04:47:28.837Z",
+      "updated_at": "2026-03-29T04:47:28.837Z",
+      "published_at": null
     }
   ]
 }
