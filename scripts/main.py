@@ -236,9 +236,10 @@ def run_process(ids):
             print(f"Article {i+1}/{len(to_process)}")
             print(f"   Title: {candidate['title'][:70]}...")
 
-            # --- Scrape full text if content_preview is short ---
+            # --- Scrape full text ---
             content = candidate.get("content_preview", "")
-            if len(content) < 500:
+            # Always try scraping if we don't have substantial content
+            if len(content) < 2000:
                 try:
                     print("   Scraping full text...")
                     scraped = scrape_article(candidate["link"])
@@ -246,13 +247,23 @@ def run_process(ids):
                         content = scraped
                         print(f"   Scraped: {len(content)} chars")
                     else:
-                        print(f"   [WARN] Scrape returned no content or too short")
+                        print(f"   [WARN] Scrape returned no usable content from {candidate['link'][:60]}")
                 except Exception as e:
-                    print(f"   Scrape error (non-critical): {e}")
+                    print(f"   Scrape error: {e}")
                 time.sleep(1)
 
+            # If content is too short, mark as failed and skip
             if len(content) < 200:
-                print(f"   [WARN] Very little content ({len(content)} chars) — AI output may be short")
+                print(f"   [ERROR] Insufficient content ({len(content)} chars) — cannot rewrite")
+                print(f"   The source page may require JS, have a paywall, or block bots")
+                failed_count += 1
+                # Update workflow: mark as needing manual URL
+                _update_workflow_status(
+                    candidate.get("id", ""),
+                    status="scrape_failed",
+                    stage="feed",
+                )
+                continue
 
             # --- Rewrite via AI ---
             rewritten = None
@@ -422,6 +433,23 @@ def _remove_processed_candidates(processed_ids):
 # ---------------------------------------------------------------------------
 # Workflow state management
 # ---------------------------------------------------------------------------
+
+def _update_workflow_status(candidate_id, status, stage=None):
+    """Update status of an existing workflow entry (e.g. mark scrape_failed)."""
+    if not candidate_id:
+        return
+    workflow = load_json(WORKFLOW_FILE, {"articles": []})
+    for a in workflow.get("articles", []):
+        if a.get("candidate_id") == candidate_id or a.get("id") == candidate_id:
+            a["status"] = status
+            if stage:
+                a["stage"] = stage
+            a["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(WORKFLOW_FILE, workflow)
+            print(f"   Workflow status → {status}")
+            return
+    print(f"   [WARN] Workflow entry not found for {candidate_id}")
+
 
 def _add_to_workflow(article_id, filename, rewritten, candidate, image_data):
     """Add or update a processed article in workflow.json for the editorial pipeline."""
