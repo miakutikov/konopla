@@ -164,7 +164,7 @@ def run_process(ids):
 
     try:
         from fetcher import load_processed, save_processed
-        from scraper import scrape_article
+        from scraper import scrape_article_full
         from rewriter import rewrite_article
         from images import get_article_image
         from publisher import create_article_file
@@ -239,13 +239,17 @@ def run_process(ids):
             # --- Scrape full text ---
             content = candidate.get("content_preview", "")
             # Always try scraping if we don't have substantial content
+            scraped_images = []
+            scraped_og_image = ""
             if len(content) < 2000:
                 try:
                     print("   Scraping full text...")
-                    scraped = scrape_article(candidate["link"])
-                    if scraped and len(scraped) > len(content):
-                        content = scraped
-                        print(f"   Scraped: {len(content)} chars")
+                    scrape_result = scrape_article_full(candidate["link"])
+                    if scrape_result and scrape_result.get("text") and len(scrape_result["text"]) > len(content):
+                        content = scrape_result["text"]
+                        scraped_images = scrape_result.get("images", [])
+                        scraped_og_image = scrape_result.get("og_image", "")
+                        print(f"   Scraped: {len(content)} chars, {len(scraped_images)} images, og_image: {'yes' if scraped_og_image else 'no'}")
                     else:
                         print(f"   [WARN] Scrape returned no usable content from {candidate['link'][:60]}")
                 except Exception as e:
@@ -272,6 +276,10 @@ def run_process(ids):
                 source_images = []
                 if candidate.get("image_url"):
                     source_images = [{"url": candidate["image_url"], "alt": ""}]
+                elif scraped_og_image:
+                    source_images = [{"url": scraped_og_image, "alt": ""}]
+                elif scraped_images:
+                    source_images = scraped_images[:3]
 
                 is_manual = not candidate.get("hash")
                 rewritten = rewrite_article(
@@ -317,6 +325,25 @@ def run_process(ids):
                     "author_url": "",
                 }
                 print(f"   Using source image: {candidate['image_url'][:60]}...")
+
+            # Fallback: use og:image or first scraped image from the page
+            if not image_data and scraped_og_image:
+                image_data = {
+                    "url": scraped_og_image,
+                    "source": "original",
+                    "author": "",
+                    "author_url": "",
+                }
+                print(f"   Using scraped og:image: {scraped_og_image[:60]}...")
+
+            if not image_data and scraped_images:
+                image_data = {
+                    "url": scraped_images[0]["url"],
+                    "source": "original",
+                    "author": "",
+                    "author_url": "",
+                }
+                print(f"   Using scraped page image: {scraped_images[0]['url'][:60]}...")
 
             if not image_data:
                 try:
