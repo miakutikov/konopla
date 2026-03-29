@@ -123,8 +123,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxOdHN4NFJwcklsdTVZd0xXZXZ5UTRGZ1RBWjROcE5MUTh0QWhveUZ2MkNoZXRfcEVoUUhoVE8ySTNUZ1BEU3BVTVVwMU1uN0U1T0pfRzRkSlFjTE9EdUR0c05scTRXNG5YOU5lV1pXeV9QTURPRldrTWRHcEw1R1hnenVFSmhrVnpnblZBbFJMbjNiV1k5V0RXVXpxanR6TjRXYURQdVFhc0JISVcyUEZSUjNOMnNWSmF4RzlZalBWUUJmZ2JTNjVfazhzbWt5dkF6Qkt2OGRRTEJjQWcwSXZkcV95eEd4emRkVG1wYkw0SDl4SUZ0UjJsOQ?oc=5",
       "source_name": "\"canapa industriale italia\" - Google News",
       "content_preview": "Canapa industriale, segnali incoraggianti dal mercato nonostante le incertezze normative &nbsp;&nbsp; Confederazione Generale dell'Agricoltura Italiana",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "channels": {
         "website": {
           "enabled": true,
@@ -146,7 +146,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-03-29T12:37:30.477Z",
-      "updated_at": "2026-03-29T12:40:27.491Z",
+      "updated_at": "2026-03-29T12:40:43.330757+00:00",
       "published_at": null
     }
   ]
