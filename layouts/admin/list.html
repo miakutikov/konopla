@@ -4187,7 +4187,7 @@
     var items = activeItems;
     if (editorialTab === 'queued') {
       items = activeItems.filter(function(a) {
-        return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
+        return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing' || a.status === 'scrape_failed';
       });
     } else if (editorialTab === 'ready') {
       items = activeItems.filter(function(a) {
@@ -4228,7 +4228,8 @@
         'processing': '\u2699\uFE0F Обробка',
         'ready_for_edit': '\u270F\uFE0F Готово до ред.',
         'approved': '\u2705 Схвалено',
-        'rejected': '\u274C Відхилено'
+        'rejected': '\u274C Відхилено',
+        'scrape_failed': '\u26A0\uFE0F Не вдалось зчитати'
       }[a.status] || a.status;
 
       var stageLabel = {
@@ -4264,6 +4265,15 @@
           actions = '<span class="admin-btn" style="opacity:0.6;cursor:default">\u2699\uFE0F Обробляється...</span>' +
             '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
         }
+      } else if (a.status === 'scrape_failed') {
+        actions = '<div class="wf-url-warning" style="background:rgba(244,67,54,0.12);border-color:rgba(244,67,54,0.4);color:#ef9a9a">' +
+          '\u274C Не вдалось зчитати текст зі сторінки. Вставте прямий URL на статтю і спробуйте знову.</div>' +
+          '<div class="wf-url-row">' +
+          '<input type="text" class="wf-url-input" id="url-' + escHtml(a.id) + '" value="' + escHtml(a.original_url || '') + '" placeholder="Прямий URL на статтю...">' +
+          '<button class="admin-btn admin-btn-dim" onclick="saveArticleUrl(\'' + escHtml(a.id) + '\')" title="Зберегти URL">\uD83D\uDCBE</button>' +
+          '</div>' +
+          '<button class="admin-btn admin-btn-green" onclick="retryProcessing(\'' + escHtml(a.id) + '\')">\u{1F504} Повторити</button>' +
+          '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Видалити</button>';
       } else if (a.stage === 'feed' && a.status === 'queued') {
         var isGoogleNews = (a.original_url || '').indexOf('news.google.com') !== -1;
         var urlWarning = isGoogleNews
@@ -4311,7 +4321,7 @@
       return a.status !== 'approved' && a.status !== 'rejected';
     });
     var queuedCount = active.filter(function(a) {
-      return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing';
+      return a.stage === 'feed' || a.status === 'queued' || a.status === 'processing' || a.status === 'scrape_failed';
     }).length;
     var readyCount = active.filter(function(a) {
       return a.status === 'ready_for_edit';
