@@ -4671,7 +4671,12 @@
       return;
     }
 
-    showStatus('\u23F3 Додаю...', 'info');
+    // Detect YouTube URL
+    var ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+    var isYoutube = !!ytMatch;
+    var ytVideoId = ytMatch ? ytMatch[1] : '';
+
+    showStatus(isYoutube ? '🎬 Додаю YouTube відео...' : '\u23F3 Додаю...', 'info');
 
     try {
       // 1. Read workflow.json
@@ -4692,17 +4697,23 @@
       var domain = '';
       try { domain = new URL(url).hostname.replace('www.', ''); } catch(e) {}
 
+      // For YouTube: normalize URL and set proper title/image
+      var entryUrl = isYoutube ? 'https://www.youtube.com/watch?v=' + ytVideoId : url;
+      var entryTitle = isYoutube ? '🎬 YouTube — ' + ytVideoId : domain + ' — ' + url.substring(0, 60);
+      var entryImage = isYoutube ? 'https://img.youtube.com/vi/' + ytVideoId + '/hqdefault.jpg' : '';
+      var entrySource = isYoutube ? 'YouTube' : domain;
+
       wfData.articles.push({
         id: newId,
         filename: '',
-        title: domain + ' — ' + url.substring(0, 60),
+        title: entryTitle,
         summary: '',
-        category: '',
-        image: '',
+        category: isYoutube ? 'відео' : '',
+        image: entryImage,
         candidate_id: newId,
         original_title: '',
-        original_url: url,
-        source_name: domain,
+        original_url: entryUrl,
+        source_name: entrySource,
         content_preview: '',
         stage: 'feed',
         status: 'queued',
@@ -4718,8 +4729,9 @@
       });
 
       // 3. Save
+      var emoji = isYoutube ? '🎬' : '\uD83D\uDD17';
       var body = {
-        message: '\uD83D\uDD17 Manual URL: ' + url.substring(0, 60),
+        message: emoji + ' Manual URL: ' + entryUrl.substring(0, 60),
         content: b64EncodeUtf8(JSON.stringify(wfData, null, 2))
       };
       if (wfSha) body.sha = wfSha;
@@ -4735,7 +4747,11 @@
       document.getElementById('quick-add-url').style.display = 'none';
       switchEditorialTab('queued');
       renderEditorial();
-      showStatus('\u2705 URL додано! Натисніть "Обробити" для запуску AI.', 'success');
+      if (isYoutube) {
+        showStatus('🎬 YouTube відео додано! Pipeline автоматично витягне назву, опис і оформить як відео-статтю.', 'success');
+      } else {
+        showStatus('\u2705 URL додано! Натисніть "Обробити" для запуску AI.', 'success');
+      }
 
     } catch (e) {
       console.error('Quick add error:', e);

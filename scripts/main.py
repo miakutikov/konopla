@@ -28,6 +28,78 @@ CANDIDATES_FILE = os.path.join(PROJECT_ROOT, "data", "candidates.json")
 CANDIDATES_MAX_AGE_DAYS = 7
 CANDIDATES_MAX_ITEMS = 200
 
+# YouTube URL patterns
+_YT_PATTERNS = [
+    # youtu.be/VIDEO_ID
+    r"(?:https?://)?youtu\.be/([a-zA-Z0-9_-]{11})",
+    # youtube.com/watch?v=VIDEO_ID
+    r"(?:https?://)?(?:www\.)?youtube\.com/watch\?.*v=([a-zA-Z0-9_-]{11})",
+    # youtube.com/embed/VIDEO_ID
+    r"(?:https?://)?(?:www\.)?youtube\.com/embed/([a-zA-Z0-9_-]{11})",
+    # youtube.com/shorts/VIDEO_ID
+    r"(?:https?://)?(?:www\.)?youtube\.com/shorts/([a-zA-Z0-9_-]{11})",
+]
+
+
+def _extract_youtube_id(url: str):
+    """Extract YouTube video ID from various URL formats."""
+    import re
+    for pattern in _YT_PATTERNS:
+        m = re.search(pattern, url)
+        if m:
+            return m.group(1)
+    return None
+
+
+def _fetch_youtube_metadata(video_id: str):
+    """Fetch video metadata from YouTube Data API v3."""
+    api_key = os.environ.get("YOUTUBE_API_KEY", "")
+    if not api_key:
+        print("   [WARN] YOUTUBE_API_KEY not set, cannot fetch video metadata")
+        return None
+
+    import json
+    from urllib.request import Request, urlopen
+    from urllib.error import HTTPError, URLError
+
+    url = (
+        f"https://www.googleapis.com/youtube/v3/videos"
+        f"?part=snippet,statistics&id={video_id}&key={api_key}"
+    )
+
+    try:
+        req = Request(url, headers={"Accept": "application/json"})
+        with urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except (HTTPError, URLError, TimeoutError, OSError) as e:
+        print(f"   [WARN] YouTube API error: {e}")
+        return None
+
+    items = data.get("items", [])
+    if not items:
+        print(f"   [WARN] YouTube video {video_id} not found")
+        return None
+
+    snippet = items[0].get("snippet", {})
+    stats = items[0].get("statistics", {})
+
+    # Get best thumbnail
+    thumbs = snippet.get("thumbnails", {})
+    thumbnail = ""
+    for key in ("maxres", "standard", "high", "medium", "default"):
+        if key in thumbs:
+            thumbnail = thumbs[key].get("url", "")
+            break
+
+    return {
+        "title": snippet.get("title", ""),
+        "description": snippet.get("description", ""),
+        "channel": snippet.get("channelTitle", ""),
+        "published_at": snippet.get("publishedAt", ""),
+        "thumbnail": thumbnail,
+        "views": stats.get("viewCount", "0"),
+    }
+
 
 # ---------------------------------------------------------------------------
 # Mode 1: discover
@@ -236,12 +308,38 @@ def run_process(ids):
             print(f"Article {i+1}/{len(to_process)}")
             print(f"   Title: {candidate['title'][:70]}...")
 
+            # --- Check if this is a YouTube URL ---
+            yt_video_id = _extract_youtube_id(candidate["link"])
+            yt_metadata = None
+            if yt_video_id:
+                print(f"   🎬 YouTube video detected: {yt_video_id}")
+                yt_metadata = _fetch_youtube_metadata(yt_video_id)
+                if yt_metadata:
+                    print(f"   Channel: {yt_metadata['channel']}, Views: {yt_metadata['views']}")
+
             # --- Scrape full text ---
             content = candidate.get("content_preview", "")
-            # Always try scraping if we don't have substantial content
             scraped_images = []
             scraped_og_image = ""
-            if len(content) < 2000:
+
+            if yt_metadata:
+                # For YouTube: compose content from API metadata (don't scrape)
+                video_url = f"https://www.youtube.com/watch?v={yt_video_id}"
+                content = (
+                    f"Це YouTube відео про промислові коноплі.\n\n"
+                    f"Назва: {yt_metadata['title']}\n"
+                    f"Канал: {yt_metadata['channel']}\n"
+                    f"Опис: {yt_metadata['description'][:2000]}\n"
+                    f"Переглядів: {yt_metadata['views']}\n"
+                    f"Посилання: {video_url}\n\n"
+                    f"ВАЖЛИВО: Це відео, а не текстова стаття. "
+                    f"Напиши анонс/огляд цього відео для сайту Konopla.UA. "
+                    f"Зазнач що це відео і хто його автор. Заохоть читача переглянути відео на сайті."
+                )
+                scraped_og_image = yt_metadata["thumbnail"]
+                print(f"   Video content composed: {len(content)} chars")
+            elif len(content) < 2000:
+                # Regular article: try scraping
                 try:
                     print("   Scraping full text...")
                     scrape_result = scrape_article_full(candidate["link"])
@@ -256,8 +354,8 @@ def run_process(ids):
                     print(f"   Scrape error: {e}")
                 time.sleep(1)
 
-            # If content is too short, mark as failed and skip
-            if len(content) < 200:
+            # If content is too short, mark as failed and skip (not for YouTube)
+            if len(content) < 200 and not yt_video_id:
                 print(f"   [ERROR] Insufficient content ({len(content)} chars) — cannot rewrite")
                 print(f"   The source page may require JS, have a paywall, or block bots")
                 failed_count += 1
@@ -313,11 +411,29 @@ def run_process(ids):
 
             print(f"   OK: {rewritten['title'][:60]}...")
 
+            # --- YouTube: set video-specific fields ---
+            if yt_video_id:
+                rewritten["youtube_id"] = yt_video_id
+                rewritten["category"] = "відео"
+                candidate["link"] = f"https://www.youtube.com/watch?v={yt_video_id}"
+                if yt_metadata:
+                    candidate["source"] = f"YouTube: {yt_metadata['channel']}"
+                print(f"   🎬 youtube_id={yt_video_id}, category=відео")
+
             # --- Get image: prefer original source, fallback to Unsplash/Gemini ---
             article_id = str(uuid.uuid4())[:8]
             image_data = None
 
-            if candidate.get("image_url"):
+            # YouTube: use thumbnail
+            if yt_video_id and yt_metadata and yt_metadata.get("thumbnail"):
+                image_data = {
+                    "url": yt_metadata["thumbnail"],
+                    "source": "youtube",
+                    "author": yt_metadata.get("channel", ""),
+                    "author_url": "",
+                }
+                print(f"   Using YouTube thumbnail")
+            elif candidate.get("image_url"):
                 image_data = {
                     "url": candidate["image_url"],
                     "source": "original",
