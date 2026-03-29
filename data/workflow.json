@@ -124,7 +124,7 @@
       "source_name": "\"canapa industriale italia\" - Google News",
       "content_preview": "Canapa industriale, segnali incoraggianti dal mercato nonostante le incertezze normative &nbsp;&nbsp; Confederazione Generale dell'Agricoltura Italiana",
       "stage": "feed",
-      "status": "scrape_failed",
+      "status": "queued",
       "channels": {
         "website": {
           "enabled": true,
@@ -146,7 +146,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-03-29T12:37:30.477Z",
-      "updated_at": "2026-03-29T12:41:29.580Z",
+      "updated_at": "2026-03-29T12:41:37.422Z",
       "published_at": null
     }
   ]
