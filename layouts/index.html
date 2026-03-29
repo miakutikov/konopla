@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="container">
 
-  {{/* --- БЕКЕНД ЛОГІКА ЗАЛИШЕНА БЕЗ ЗМІН --- */}}
+  {{/* --- БЕКЕНД ЛОГІКА --- */}}
   {{ $allNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
   {{ $news := $allNews.ByDate.Reverse }}
 
@@ -19,70 +19,20 @@
     {{ end }}
   {{ end }}
 
-  {{ $featuredArticle := false }}
+  {{ $heroArticle := false }}
   {{ $rest := $news }}
   {{ $isPinned := false }}
 
   {{ if $pinnedArticle }}
-    {{ $featuredArticle = $pinnedArticle }}
+    {{ $heroArticle = $pinnedArticle }}
     {{ $rest = where $news ".File.LogicalName" "ne" $pinnedFilename }}
     {{ $isPinned = true }}
   {{ else }}
-    {{ $featuredArticle = index $news 0 }}
+    {{ $heroArticle = index $news 0 }}
     {{ $rest = after 1 $news }}
   {{ end }}
-  {{/* --- КІНЕЦЬ БЕКЕНД ЛОГІКИ --- */}}
 
-
-  {{/* --- Featured section --- */}}
-  {{ with $featuredArticle }}
-  <section class="featured-section" aria-label="Головна новина">
-    <article class="featured-card {{ if $isPinned }}is-pinned{{ end }}">
-      
-      <a href="{{ .Permalink }}" class="featured-image-link" aria-hidden="true" tabindex="-1">
-        {{ if .Params.image }}
-        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="featured-img" fetchpriority="high" decoding="async" onerror="this.outerHTML='<div class=featured-img-placeholder><img src=/images/logo.png alt=KONOPLA.UA class=placeholder-logo></div>'">
-        {{ else }}
-        <div class="featured-img-placeholder">
-          <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
-        </div>
-        {{ end }}
-      </a>
-
-      <div class="featured-body">
-        <header class="card-header">
-          <div class="card-badges">
-            {{/* Виводимо плашку, якщо новина закріплена (змінна $isPinned вже була у вашому коді) */}}
-            {{ if $isPinned }}
-              <span class="badge badge-pinned" aria-label="Закріплена новина">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
-                Закріплено
-              </span>
-            {{ end }}
-            
-            {{ if .Params.categories }}
-            <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="badge badge-category">{{ index .Params.categories 0 | title }}</a>
-            {{ end }}
-          </div>
-          <h1 class="featured-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-        </header>
-
-        <p class="featured-summary">{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
-        
-        <footer class="card-meta">
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="meta-date">
-            {{ .Date.Format "02.01.2006" }}
-          </time>
-          <a href="{{ .Permalink }}" class="read-more-link" aria-label="Читати новину: {{ .Title }}">
-            Читати <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </footer>
-      </div>
-    </article>
-  </section>
-  {{ end }}
-
-  {{/* --- Split: videos vs text articles --- */}}
+  {{/* Split: videos vs text articles */}}
   {{ $videos := slice }}
   {{ $textNews := slice }}
   {{ range $rest }}
@@ -93,16 +43,96 @@
     {{ end }}
   {{ end }}
 
-  <!-- Video section -->
-  {{ if $videos }}
-  <section class="video-section">
-    <h2 class="section-title">Відео</h2>
-    <div class="video-grid">
-      {{ range first 6 $videos }}
-        {{ partial "article-card.html" . }}
+  {{/* Top 3 articles + remaining for compact list */}}
+  {{ $topArticles := first 3 $textNews }}
+  {{ $compactNews := after 3 $textNews }}
+  {{/* --- КІНЕЦЬ ЛОГІКИ --- */}}
+
+
+  {{/* ===== HERO SECTION ===== */}}
+  {{ with $heroArticle }}
+  <section class="hero-section" aria-label="Головна новина">
+    <a href="{{ .Permalink }}" class="hero-link">
+      <article class="hero-card {{ if $isPinned }}is-pinned{{ end }}">
+        {{ if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ .Title }}" class="hero-img" fetchpriority="high" decoding="async" onerror="this.style.display='none';this.closest('.hero-card').classList.add('hero-no-img')">
+        {{ else }}
+        <div class="hero-placeholder">
+          <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="hero-placeholder-logo">
+        </div>
+        {{ end }}
+        <div class="hero-overlay">
+          <div class="hero-meta-top">
+            {{ if $isPinned }}
+            <span class="hero-badge hero-badge-pinned">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+              Закріплено
+            </span>
+            {{ end }}
+            {{ if .Params.categories }}
+            <span class="hero-badge hero-badge-cat">{{ index .Params.categories 0 | title }}</span>
+            {{ end }}
+          </div>
+          <h1 class="hero-title">{{ .Title }}</h1>
+          <p class="hero-summary">{{ if .Params.summary }}{{ .Params.summary }}{{ else }}{{ .Summary }}{{ end }}</p>
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="hero-date">
+            {{ .Date.Format "02.01.2006" }}
+          </time>
+        </div>
+      </article>
+    </a>
+  </section>
+  {{ end }}
+
+
+  {{/* ===== TOP 3 SECTION ===== */}}
+  {{ if $topArticles }}
+  <section class="top-section" aria-label="Топ новини">
+    <div class="top-grid">
+      {{ range $topArticles }}
+      <article class="top-card">
+        <a href="{{ .Permalink }}" class="top-card-image-link">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="top-card-img" onerror="this.outerHTML='<div class=top-card-img-placeholder><img src=/images/logo.png alt=KONOPLA.UA class=placeholder-logo></div>'">
+          {{ else }}
+          <div class="top-card-img-placeholder">
+            <img src="{{ "images/logo.png" | relURL }}" alt="KONOPLA.UA" class="placeholder-logo">
+          </div>
+          {{ end }}
+        </a>
+        <div class="top-card-body">
+          {{ if .Params.categories }}
+          <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="card-category">{{ index .Params.categories 0 | title }}</a>
+          {{ end }}
+          <h2 class="top-card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <time datetime="{{ .Date.Format "2006-01-02" }}" class="card-date">{{ .Date.Format "02.01.2006" }}</time>
+        </div>
+      </article>
       {{ end }}
     </div>
-    {{ if gt (len $videos) 6 }}
+  </section>
+  {{ end }}
+
+
+  {{/* ===== VIDEO SECTION ===== */}}
+  {{ if $videos }}
+  <section class="video-section" aria-label="Відео">
+    <h2 class="section-title">Відео</h2>
+    <div class="video-grid-new">
+      {{ range first 3 $videos }}
+      <article class="top-card video-card-item">
+        <a href="{{ .Permalink }}" class="top-card-image-link">
+          <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg" alt="{{ .Title }}" loading="lazy" class="top-card-img" onerror="this.style.display='none';this.parentElement.classList.add('top-card-img-placeholder')">
+          <div class="video-play-icon">&#9654;</div>
+        </a>
+        <div class="top-card-body">
+          <h2 class="top-card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <time datetime="{{ .Date.Format "2006-01-02" }}" class="card-date">{{ .Date.Format "02.01.2006" }}</time>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ if gt (len $videos) 3 }}
     <div class="more-news">
       <a href="{{ "/news/" | relURL }}" class="more-news-btn">Усі відео &rarr;</a>
     </div>
@@ -110,21 +140,35 @@
   </section>
   {{ end }}
 
-  <!-- News grid -->
-  {{ if $textNews }}
-  <section class="news-section" aria-labelledby="latest-news-title">
-    <header class="section-header">
-      <h2 id="latest-news-title" class="section-title">Останні новини</h2>
-    </header>
-    <div class="news-grid">
-      {{ range first 11 $textNews }}
-        {{ partial "article-card.html" . }}
+
+  {{/* ===== COMPACT NEWS LIST ===== */}}
+  {{ if $compactNews }}
+  <section class="compact-section" aria-labelledby="more-news-title">
+    <h2 id="more-news-title" class="section-title">Інші новини</h2>
+    <div class="compact-list">
+      {{ range first 8 $compactNews }}
+      <a href="{{ .Permalink }}" class="compact-item">
+        {{ if .Params.image }}
+        <div class="compact-thumb">
+          <img src="{{ .Params.image }}" alt="" loading="lazy" class="compact-thumb-img" onerror="this.parentElement.style.display='none'">
+        </div>
+        {{ end }}
+        <div class="compact-body">
+          <h3 class="compact-title">{{ .Title }}</h3>
+          <div class="compact-meta">
+            {{ if .Params.categories }}
+            <span class="compact-cat">{{ index .Params.categories 0 | title }}</span>
+            {{ end }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+          </div>
+        </div>
+      </a>
       {{ end }}
     </div>
-    {{ if gt (len $textNews) 11 }}
+    {{ if gt (len $compactNews) 8 }}
     <div class="more-news">
       <a href="{{ "/news/" | relURL }}" class="more-news-btn btn-primary">
-        Усі новини 
+        Усі новини
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -132,7 +176,8 @@
   </section>
   {{ end }}
 
-  <!-- Knowledge base -->
+
+  {{/* ===== KNOWLEDGE BASE ===== */}}
   {{ $knowledge := where .Site.RegularPages "Section" "knowledge" }}
   {{ if $knowledge }}
   <section class="knowledge-section">
