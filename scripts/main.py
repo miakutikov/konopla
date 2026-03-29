@@ -257,12 +257,14 @@ def run_process(ids):
                 if candidate.get("image_url"):
                     source_images = [{"url": candidate["image_url"], "alt": ""}]
 
+                is_manual = not candidate.get("hash")
                 rewritten = rewrite_article(
                     title=candidate["title"],
                     summary=candidate.get("summary", ""),
                     source_url=candidate["link"],
                     content=content,
                     source_images=source_images,
+                    force_relevant=is_manual,
                 )
             except Exception as e:
                 print(f"   Rewrite error: {e}")

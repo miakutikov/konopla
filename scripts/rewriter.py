@@ -26,10 +26,11 @@ OPENROUTER_MODELS = [
 ]
 
 
-def rewrite_article(title, summary, source_url, content="", source_images=None):
+def rewrite_article(title, summary, source_url, content="", source_images=None, force_relevant=False):
     """
     Рерайтить статтю українською. Спочатку Gemini, потім OpenRouter.
     Повертає dict або None.
+    force_relevant=True — для вручну доданих URL, не перевіряти релевантність.
     """
     # Use full content if available, otherwise summary
     article_body = content if content and len(content) > len(summary) else summary
@@ -41,6 +42,9 @@ def rewrite_article(title, summary, source_url, content="", source_images=None):
 Повний текст: {article_body}
 
 Джерело: {source_url}"""
+
+    if force_relevant:
+        user_prompt += "\n\nВАЖЛИВО: Цю статтю додано вручну редактором. НЕ відхиляй її як нерелевантну — обов'язково переклади та оформи. Не повертай {\"rejected\": true}."
 
     # Try Gemini first
     gemini_key = os.environ.get("GEMINI_API_KEY", GEMINI_API_KEY)
