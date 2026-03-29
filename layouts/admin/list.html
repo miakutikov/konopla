@@ -40,6 +40,9 @@
           <li class="sidebar-item" data-view="archive" onclick="showView('archive')">
             <span class="sidebar-label">📚 Статті</span> <span class="sidebar-badge" id="badge-archive"></span>
           </li>
+          <li class="sidebar-item" data-view="scheduled" onclick="showView('scheduled')">
+            <span class="sidebar-label">⏰ Заплановані</span> <span class="sidebar-badge" id="badge-scheduled"></span>
+          </li>
           <li class="sidebar-item" data-view="analytics" onclick="showView('analytics')">
             <span class="sidebar-label">📊 Аналітика</span>
           </li>
@@ -68,6 +71,7 @@
             <h1>📡 Стрічка</h1>
             <div class="view-actions">
               <button class="admin-btn" onclick="refreshCandidates()">🔄 Оновити стрічку</button>
+              <button class="admin-btn" onclick="runYoutubeMonitor()">🎬 YouTube моніторинг</button>
             </div>
           </div>
           <div id="candidates-tab" class="candidates-tab">
@@ -315,6 +319,23 @@
             <p>Схваліть статті в Редакції — вони автоматично потраплять у черги.</p>
           </div>
         </div><!-- /view-publishing -->
+
+        <!-- ===== VIEW: Scheduled (Заплановані) ===== -->
+        <div class="admin-view" id="view-scheduled">
+          <div class="view-header">
+            <h1>⏰ Заплановані публікації</h1>
+            <div class="view-actions">
+              <button class="admin-btn" onclick="loadScheduledView()">🔄 Оновити</button>
+            </div>
+          </div>
+          <div id="scheduled-view-content">
+            <div class="loading">⏳ Завантаження...</div>
+          </div>
+          <div id="scheduled-view-empty" class="admin-empty" style="display:none">
+            <h2>📭 Немає запланованих публікацій</h2>
+            <p>Плануйте публікації через вкладку Публікація — вони з'являться тут.</p>
+          </div>
+        </div><!-- /view-scheduled -->
 
         <!-- ===== VIEW: Archive (Архів) ===== -->
         <div class="admin-view" id="view-archive">
@@ -2280,6 +2301,90 @@
   background: rgba(239, 68, 68, 0.1);
 }
 
+/* Scheduled full view */
+.scheduled-group {
+  margin-bottom: 1.5rem;
+}
+.scheduled-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.scheduled-group-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+.scheduled-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sched-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.sched-card:hover {
+  background: rgba(245, 158, 11, 0.12);
+}
+.sched-card.sched-overdue {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+.sched-card-time {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+.sched-card-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f59e0b;
+}
+.sched-overdue .sched-card-date {
+  color: #ef4444;
+}
+.sched-card-relative {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+.sched-card-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sched-card-cancel {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.sched-card-cancel:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
 /* Threads queue styling */
 .threads-queue {
   border-top-color: #833AB4 !important;
@@ -3595,7 +3700,7 @@
     // Resolve aliases from old naming
     if (VIEW_ALIASES[name]) name = VIEW_ALIASES[name];
 
-    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'analytics', 'settings', 'catalog'];
+    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog'];
     if (validViews.indexOf(name) === -1) name = 'feed';
 
     // Hide all views, then show the requested one with fade
@@ -3631,6 +3736,7 @@
     if (name === 'archive' && workflowData.length === 0 && ghToken) loadWorkflowArticles().then(function() { renderArticles(); });
     if (name === 'settings' && sourcesData.length === 0 && ghToken) loadSources();
     if (name === 'catalog' && !catalogLoaded && ghToken) loadCatalog();
+    if (name === 'scheduled' && ghToken) loadScheduledView();
     if (name === 'analytics' && !chartsInitialized) {
       setTimeout(function() {
         renderStats();
@@ -4088,24 +4194,141 @@
       return;
     }
 
-    showStatus('⏳ Запуск збору новин (світ + UA)...', 'info');
+    showStatus('⏳ Запуск збору новин (всі регіони)...', 'info');
 
-    var results = [];
     try {
-      var resp1 = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', { ref: 'main' });
-      if (resp1.status === 204 || resp1.ok) results.push('🌍 Світ');
-      else results.push('❌ Світ: ' + resp1.status);
-
-      var resp2 = await ghApi('POST', '/actions/workflows/ua_pipeline.yml/dispatches', { ref: 'main' });
-      if (resp2.status === 204 || resp2.ok) results.push('🇺🇦 UA');
-      else results.push('❌ UA: ' + resp2.status);
-
-      showStatus('🚀 Збір запущено: ' + results.join(', ') + '. Нові статті з\'являться через кілька хвилин.', 'success');
+      var resp = await ghApi('POST', '/actions/workflows/pipeline.yml/dispatches', {
+        ref: 'main',
+        inputs: { action: 'discover', region: 'all' }
+      });
+      if (resp.status === 204 || resp.ok) {
+        showStatus('🚀 Збір запущено (всі регіони). Нові статті з\'являться через кілька хвилин.', 'success');
+      } else {
+        showStatus('❌ Помилка запуску: HTTP ' + resp.status, 'error');
+      }
     } catch (e) {
       showStatus('❌ Помилка запуску: ' + e.message, 'error');
     }
 
   };
+
+  // =========================================================================
+  // YouTube Monitor
+  // =========================================================================
+
+  window.runYoutubeMonitor = async function() {
+    if (!ghToken) {
+      showStatus('❌ Потрібен GitHub Token', 'error');
+      return;
+    }
+
+    showStatus('⏳ Запуск YouTube моніторингу...', 'info');
+
+    try {
+      var resp = await ghApi('POST', '/actions/workflows/youtube_monitor.yml/dispatches', { ref: 'main' });
+      if (resp.status === 204 || resp.ok) {
+        showStatus('🎬 YouTube моніторинг запущено. Нові відео з\'являться через кілька хвилин.', 'success');
+      } else {
+        showStatus('❌ Помилка запуску YouTube моніторингу: HTTP ' + resp.status, 'error');
+      }
+    } catch (e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // =========================================================================
+  // Scheduled View
+  // =========================================================================
+
+  window.loadScheduledView = async function() {
+    var content = document.getElementById('scheduled-view-content');
+    var empty = document.getElementById('scheduled-view-empty');
+    if (!content) return;
+
+    content.innerHTML = '<div class="loading">⏳ Завантаження...</div>';
+    if (empty) empty.style.display = 'none';
+
+    try {
+      var resp = await ghApi('GET', '/contents/data/scheduled.json');
+      if (!resp.ok) {
+        content.innerHTML = '';
+        if (empty) empty.style.display = '';
+        return;
+      }
+
+      var fileData = await resp.json();
+      var scheduled = JSON.parse(b64DecodeUtf8(fileData.content));
+
+      var deployItems = scheduled.deploy || [];
+      var tgItems = scheduled.telegram || [];
+      var threadsItems = scheduled.threads || [];
+      var totalCount = deployItems.length + tgItems.length + threadsItems.length;
+
+      // Update badge
+      var badge = document.getElementById('badge-scheduled');
+      if (badge) badge.textContent = totalCount > 0 ? totalCount : '';
+
+      if (totalCount === 0) {
+        content.innerHTML = '';
+        if (empty) empty.style.display = '';
+        return;
+      }
+
+      var html = '';
+
+      if (deployItems.length) {
+        html += renderScheduledGroup('🌐 Сайт', 'deploy', deployItems);
+      }
+      if (tgItems.length) {
+        html += renderScheduledGroup('📨 Telegram', 'telegram', tgItems);
+      }
+      if (threadsItems.length) {
+        html += renderScheduledGroup('🧵 Threads', 'threads', threadsItems);
+      }
+
+      content.innerHTML = html;
+    } catch (e) {
+      console.error('Failed to load scheduled view:', e);
+      content.innerHTML = '<div class="admin-error">❌ Помилка завантаження: ' + escHtml(e.message) + '</div>';
+    }
+  };
+
+  function renderScheduledGroup(label, type, items) {
+    var sorted = items.slice().sort(function(a, b) {
+      return new Date(a.scheduled_at) - new Date(b.scheduled_at);
+    });
+
+    var html = '<div class="scheduled-group">' +
+      '<h3 class="scheduled-group-title">' + label + ' <span class="scheduled-group-count">' + items.length + '</span></h3>' +
+      '<div class="scheduled-group-items">';
+
+    sorted.forEach(function(item) {
+      var dt = new Date(item.scheduled_at);
+      var now = new Date();
+      var diffMin = Math.round((dt - now) / 60000);
+      var timeLabel = diffMin > 0
+        ? 'через ' + (diffMin > 60 ? Math.round(diffMin / 60) + ' год' : diffMin + ' хв')
+        : 'прострочено';
+      var isOverdue = diffMin <= 0;
+
+      var title = item.title || item.filename || '';
+      if (!title && item.articles) {
+        title = item.articles.map(function(a) { return a.title; }).join(', ');
+      }
+
+      html += '<div class="sched-card' + (isOverdue ? ' sched-overdue' : '') + '">' +
+        '<div class="sched-card-time">' +
+          '<span class="sched-card-date">' + dt.toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) + '</span>' +
+          '<span class="sched-card-relative">' + timeLabel + '</span>' +
+        '</div>' +
+        '<div class="sched-card-title">' + escHtml(title).slice(0, 80) + '</div>' +
+        '<button class="sched-card-cancel" onclick="cancelScheduled(\'' + type + '\', \'' + escHtml(item.id || '') + '\')" title="Скасувати">✕</button>' +
+      '</div>';
+    });
+
+    html += '</div></div>';
+    return html;
+  }
 
   // =========================================================================
   // Helpers
