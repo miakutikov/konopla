@@ -1316,6 +1316,16 @@
   flex-wrap: wrap;
   align-items: center;
 }
+.wf-url-warning {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  margin-bottom: 0.25rem;
+  background: rgba(255, 152, 0, 0.12);
+  border: 1px solid rgba(255, 152, 0, 0.4);
+  border-radius: 6px;
+  color: #ffb74d;
+  font-size: 0.78rem;
+}
 .wf-url-row {
   display: flex;
   gap: 0.25rem;
@@ -4255,7 +4265,12 @@
             '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
         }
       } else if (a.stage === 'feed' && a.status === 'queued') {
-        actions = '<div class="wf-url-row">' +
+        var isGoogleNews = (a.original_url || '').indexOf('news.google.com') !== -1;
+        var urlWarning = isGoogleNews
+          ? '<div class="wf-url-warning">\u26A0\uFE0F Google News URL \u2014 скрейпінг може не працювати. Вставте прямий URL на статтю.</div>'
+          : '';
+        actions = urlWarning +
+          '<div class="wf-url-row">' +
           '<input type="text" class="wf-url-input" id="url-' + escHtml(a.id) + '" value="' + escHtml(a.original_url || '') + '" placeholder="URL статті для скрейпінгу...">' +
           '<button class="admin-btn admin-btn-dim" onclick="saveArticleUrl(\'' + escHtml(a.id) + '\')" title="Зберегти URL">\uD83D\uDCBE</button>' +
           '</div>' +

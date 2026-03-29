@@ -245,9 +245,14 @@ def run_process(ids):
                     if scraped and len(scraped) > len(content):
                         content = scraped
                         print(f"   Scraped: {len(content)} chars")
+                    else:
+                        print(f"   [WARN] Scrape returned no content or too short")
                 except Exception as e:
                     print(f"   Scrape error (non-critical): {e}")
                 time.sleep(1)
+
+            if len(content) < 200:
+                print(f"   [WARN] Very little content ({len(content)} chars) — AI output may be short")
 
             # --- Rewrite via AI ---
             rewritten = None
