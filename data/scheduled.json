@@ -1,40 +1,5 @@
 {
-  "deploy": [
-    {
-      "id": "mnc382nrtei8",
-      "filename": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "title": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "category": "",
-      "scheduled_at": "2026-03-30T05:00:00.000Z",
-      "created_at": "2026-03-29T18:23:33.495Z"
-    }
-  ],
-  "telegram": [
-    {
-      "id": "mnc387irymkb",
-      "filename": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "title": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "category": "",
-      "scheduled_at": "2026-03-30T05:00:00.000Z",
-      "created_at": "2026-03-29T18:23:39.795Z"
-    }
-  ],
-  "threads": [
-    {
-      "id": "mnc2ggdhebik",
-      "filename": "20260329-1246-konopli-v-italiyi-rynok-zrostaye-popry-normatyvnu-nevyznachenist.md",
-      "title": "Коноплі в Італії: ринок зростає попри нормативну невизначеність",
-      "category": "агро",
-      "scheduled_at": "2026-03-30T05:00:00.000Z",
-      "created_at": "2026-03-29T18:02:04.902Z"
-    },
-    {
-      "id": "mnc38e31e3yb",
-      "filename": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "title": "20260329-1809-konoplyanyy-plastyk-pol-benkhaym-pro-maybutnye-materialiv.md",
-      "category": "",
-      "scheduled_at": "2026-03-30T05:00:00.000Z",
-      "created_at": "2026-03-29T18:23:48.301Z"
-    }
-  ]
+  "deploy": [],
+  "telegram": [],
+  "threads": []
 }
