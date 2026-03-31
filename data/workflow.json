@@ -186,19 +186,19 @@
       "published_at": "2026-03-31T16:10:59.448Z"
     },
     {
-      "id": "43c692c5",
-      "filename": "",
-      "title": "‘Hempcrete’s performance resonates more strongly than abstract sustainability claims’",
-      "summary": "INTERVIEW: Dr. Ernesto Valenzuela is a Senior Lecturer in Agricultural Economics at La Trobe University. His work supports regional development, agriculture and sustainable industries, translating research into practical insights for [&#8230;]",
+      "id": "45f20aec",
+      "filename": "20260331-1622-produktyvnist-hempkrytu-perekonuye-bilshe-nizh-abstraktni-zayavy-pro-stiykist.md",
+      "title": "Продуктивність гемпкриту переконує більше, ніж абстрактні заяви про стійкість",
+      "summary": "Інтерв'ю з доктором Ернесто Валенсуелою про перспективи промислових конопель та гемпкриту в будівництві Австралії.",
       "category": "будівництво",
-      "image": "",
+      "image": "https://hemptoday.net/wp-content/uploads/2026/03/Ernesto-VALENZUELA_picture.jpg",
       "candidate_id": "43c692c5",
       "original_title": "‘Hempcrete’s performance resonates more strongly than abstract sustainability claims’",
       "original_url": "https://hemptoday.net/hempcretes-performance-resonates-more-strongly-than-abstract-sustainability-claims/",
       "source_name": "HempToday®",
       "content_preview": "INTERVIEW: Dr. Ernesto Valenzuela is a Senior Lecturer in Agricultural Economics at La Trobe University. His work supports regional development, agriculture and sustainable industries, translating research into practical insights for industry and policy, with a strong focus on building resilient sup",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -209,18 +209,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Доктор Валенсуела про переваги гемпкриту: низьковуглецевий, стійкий до пожежі та регіональне виробництво будівельних матеріалів."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Чому гемпкрит стає популярним в Австралії? Інтерв'ю з експертом про перспективи конопляних будматеріалів."
         }
       },
       "relevance_score": 0.7,
       "created_at": "2026-03-31T16:11:53.764Z",
-      "updated_at": "2026-03-31T16:12:13.455Z",
+      "updated_at": "2026-03-31T16:22:25.866814+00:00",
       "published_at": null
     }
   ]
