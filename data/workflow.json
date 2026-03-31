@@ -160,8 +160,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxNUnYzUmZaVzlLSmZFWU5BeFl2Rm9hVzhhWjFWZ3pnU2dxQld1NVJkUXpfZDBlV3FaajZ5RVJsUTJiTy1MdVJreEJ0SFhINFY4SjRrdnZodjctd1ZBdXdQczdicGVINEE3VGpyMGY0bG83ZHBZQWFDdFVpa0JGdWU3Sm5mclhYZ2cycDB1NnhLZ1RqaHpRbTE4c0p2SWNCWTlzV2lIbGRPWHBnWFcyLXBiamRWc1FSS1dTcmtIS2tPRkZUZl9kUmJlSld3TFlRdVlnVldKeDZCOUdQcWhQVHRqY0dVdTh4UTBURFRZSUUtUTdWZkRCRHdCTXVwWWVYZnVUR040Sw?oc=5",
       "source_name": "\"hemp industry market business\" - Google News",
       "content_preview": "Letter to the Editor: Proposed hemp regulations threaten businesses &nbsp;&nbsp; mainstreetmediatn.com",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "channels": {
         "website": {
           "enabled": true,
@@ -183,7 +183,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-03-31T06:45:03.413Z",
-      "updated_at": "2026-03-31T06:45:18.565Z",
+      "updated_at": "2026-03-31T06:45:45.098756+00:00",
       "published_at": null
     }
   ]
