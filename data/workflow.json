@@ -149,19 +149,57 @@
       "published_at": "2026-03-29T18:23:16.474Z"
     },
     {
-      "id": "a6gj5itl",
+      "id": "b708fe7f",
+      "filename": "",
+      "title": "Letter to the Editor: Proposed hemp regulations threaten businesses - mainstreetmediatn.com",
+      "summary": "Letter to the Editor: Proposed hemp regulations threaten businesses &nbsp;&nbsp; mainstreetmediatn.com",
+      "category": "законодавство",
+      "image": "",
+      "candidate_id": "b708fe7f",
+      "original_title": "Letter to the Editor: Proposed hemp regulations threaten businesses - mainstreetmediatn.com",
+      "original_url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxNUnYzUmZaVzlLSmZFWU5BeFl2Rm9hVzhhWjFWZ3pnU2dxQld1NVJkUXpfZDBlV3FaajZ5RVJsUTJiTy1MdVJreEJ0SFhINFY4SjRrdnZodjctd1ZBdXdQczdicGVINEE3VGpyMGY0bG83ZHBZQWFDdFVpa0JGdWU3Sm5mclhYZ2cycDB1NnhLZ1RqaHpRbTE4c0p2SWNCWTlzV2lIbGRPWHBnWFcyLXBiamRWc1FSS1dTcmtIS2tPRkZUZl9kUmJlSld3TFlRdVlnVldKeDZCOUdQcWhQVHRqY0dVdTh4UTBURFRZSUUtUTdWZkRCRHdCTXVwWWVYZnVUR040Sw?oc=5",
+      "source_name": "\"hemp industry market business\" - Google News",
+      "content_preview": "Letter to the Editor: Proposed hemp regulations threaten businesses &nbsp;&nbsp; mainstreetmediatn.com",
+      "stage": "feed",
+      "status": "scrape_failed",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.5,
+      "created_at": "2026-03-31T06:45:03.413Z",
+      "updated_at": "2026-03-31T06:45:45.098756+00:00",
+      "published_at": null
+    },
+    {
+      "id": "9d8sk6g7",
       "filename": "",
       "title": "mainstreetmediatn.com — https://mainstreetmediatn.com/articles/letters-to-editor-opi",
       "summary": "",
       "category": "",
       "image": "",
-      "candidate_id": "a6gj5itl",
+      "candidate_id": "9d8sk6g7",
       "original_title": "",
       "original_url": "https://mainstreetmediatn.com/articles/letters-to-editor-opinion-gallatinnews/letter-to-the-editor-proposed-hemp-regulations-threaten-businesses/?pubid=cheathamcountyexchange",
       "source_name": "mainstreetmediatn.com",
       "content_preview": "",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "queued",
       "channels": {
         "website": {
           "enabled": true,
@@ -182,8 +220,46 @@
         }
       },
       "relevance_score": 1,
+      "created_at": "2026-03-31T06:47:28.689Z",
+      "updated_at": "2026-03-31T06:47:28.689Z",
+      "published_at": null
+    },
+    {
+      "id": "1a3d9c1a",
+      "filename": "20260331-0649-zaproponovani-normy-shchodo-konopel-zahrozhuyut-biznesu.md",
+      "title": "Запропоновані норми щодо конопель загрожують бізнесу",
+      "summary": "Власник малого конопляного бізнесу в Теннессі висловлює глибоке занепокоєння щодо запропонованого законодавства. Воно передасть регулювання конопляної індустрії Комісії з алкогольних напоїв, що загрожує місцевим підприємствам та конкуренції.",
+      "category": "законодавство",
+      "image": "https://mainstreetmediatn.com/wp-content/uploads/2024/01/Letter-1200x628.jpg",
+      "candidate_id": "a6gj5itl",
+      "original_title": "",
+      "original_url": "https://mainstreetmediatn.com/articles/letters-to-editor-opinion-gallatinnews/letter-to-the-editor-proposed-hemp-regulations-threaten-businesses/?pubid=cheathamcountyexchange",
+      "source_name": "mainstreetmediatn.com",
+      "content_preview": "",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": "У Теннессі пропонують змінити регулювання конопляної індустрії. Це може знищити малий бізнес та призвести до монополізації ринку."
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": "У Теннессі насуваються зміни, що можуть розчавити малий конопляний бізнес. Регулювання хочуть передати Комісії з алкогольних напоїв, а це загрожує тисячам робочих місць. Чи захистять місцевих виробників?"
+        }
+      },
+      "relevance_score": 1,
       "created_at": "2026-03-31T06:48:42.980Z",
-      "updated_at": "2026-03-31T06:48:50.289Z",
+      "updated_at": "2026-03-31T06:49:32.541835+00:00",
       "published_at": null
     }
   ]
