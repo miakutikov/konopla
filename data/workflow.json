@@ -223,19 +223,19 @@
       "published_at": "2026-04-01T04:40:49.817Z"
     },
     {
-      "id": "6115d879",
-      "filename": "",
-      "title": "‘Hempcrete’s performance resonates more strongly than abstract sustainability claims’",
-      "summary": "INTERVIEW: Dr. Ernesto Valenzuela is a Senior Lecturer in Agricultural Economics at La Trobe University. His work supports regional development, agriculture and sustainable industries, translating research into practical insights for [&#8230;]",
+      "id": "4090ed9c",
+      "filename": "20260402-0614-efektyvnist-konoplyanoho-betonu-vahomisha-za-abstraktni-zayavy-pro-stalist.md",
+      "title": "Ефективність конопляного бетону вагоміша за абстрактні заяви про сталість",
+      "summary": "Доктор Ернесто Валенсуела з Університету Ла Троб обговорює потенціал конопляного бетону для будівельного сектору Австралії, виклики та шляхи масштабування цього інноваційного матеріалу.",
       "category": "будівництво",
-      "image": "",
+      "image": "https://hemptoday.net/wp-content/uploads/2026/03/Ernesto-VALENZUELA_picture.jpg",
       "candidate_id": "6115d879",
       "original_title": "‘Hempcrete’s performance resonates more strongly than abstract sustainability claims’",
       "original_url": "https://hemptoday.net/hempcretes-performance-resonates-more-strongly-than-abstract-sustainability-claims/",
       "source_name": "HempToday®",
       "content_preview": "INTERVIEW: Dr. Ernesto Valenzuela is a Senior Lecturer in Agricultural Economics at La Trobe University. His work supports regional development, agriculture and sustainable industries, translating research into practical insights for industry and policy, with a strong focus on building resilient sup",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -246,18 +246,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Ернесто Валенсуела з La Trobe University про потенціал конопляного бетону в Австралії: від низьковуглецевих будівель до соціального житла."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Конопляний бетон: майбутнє будівництва в Австралії? Експерт пояснює, чому ефективність важливіша за абстрактні обіцянки. Дізнайтеся про виклики та перспективи!"
         }
       },
       "relevance_score": 0.7,
       "created_at": "2026-04-02T06:12:06.404Z",
-      "updated_at": "2026-04-02T06:13:09.920Z",
+      "updated_at": "2026-04-02T06:14:01.318375+00:00",
       "published_at": null
     },
     {
@@ -272,8 +272,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPNHUwNlJyS0lPZ3lLejR1NDdHQ2FtbzN2V09jcVY5eVhBSC03bW5OMG9UYUNQZFRZekxpVVI5VFozOFBjTFZwOHlzblhmeEw5MXJtaW1tTFUwWnZ3NGUzYXpwazRhaUV3UHlwT0VDTEhqR0pwTm1TZmR3TlI0S25ILVNJTGtnM0p2a3Z5Tld2cUJZSHcxY2NMUl9HQmhWektYNTJXblZRa290TVI0aVZqN0NMMW1tTGJUSVE1MU1LbEptVnZKMzRGU3NsdHF2N25GZDNRN2Q1SmdUbm1mNEItOC1wd3JoUk1RSUJxOWh3c280NkU4Y3dXbGE0bzVBVVpT?oc=5",
       "source_name": "\"hemp seed food nutrition\" - Google News",
       "content_preview": "Nutritionist shares 8 vegetarian sources of protein to add to your diet besides paneer: Edamame, hemp seeds, and more &nbsp;&nbsp; msn.com",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "channels": {
         "website": {
           "enabled": true,
@@ -295,7 +295,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-02T06:12:22.390Z",
-      "updated_at": "2026-04-02T06:13:09.920Z",
+      "updated_at": "2026-04-02T06:14:07.997446+00:00",
       "published_at": null
     }
   ]
