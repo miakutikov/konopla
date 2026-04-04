@@ -77,9 +77,11 @@ def build_threads_post(fm, filename):
     # Build post text (Threads max 500 chars)
     hashtags = f"#коноплі #{category}" if category else "#коноплі"
 
-    text = f"{hook}\n\nДеталі: {article_url}\n\n{hashtags}"
+    suffix = f"\n\nДеталі: {article_url}\n\n{hashtags}"
+    max_hook = 500 - len(suffix)
+    hook_trimmed = hook[:max_hook] if len(hook) > max_hook else hook
 
-    return text[:500]
+    return f"{hook_trimmed}{suffix}"
 
 
 def create_threads_container(text):
@@ -155,8 +157,9 @@ def _post_single(filename, custom_text=None):
     if custom_text:
         slug = filename.replace('.md', '')
         article_url = f"{SITE_URL}/news/{slug}/"
-        text = f"{custom_text}\n\nДеталі: {article_url}\n\n#коноплі"
-        text = text[:500]
+        suffix = f"\n\nДеталі: {article_url}\n\n#коноплі"
+        max_text = 500 - len(suffix)
+        text = (custom_text[:max_text] if len(custom_text) > max_text else custom_text) + suffix
     else:
         text = build_threads_post(fm, filename)
 

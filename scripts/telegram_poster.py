@@ -44,11 +44,18 @@ def parse_frontmatter(filepath):
         if not key:
             continue
         if val.startswith('['):
-            # Array like categories: ["value"] — extract first element
-            m = re.search(r'"([^"]+)"', val)
-            if m:
-                fm['category'] = m.group(1)
-            fm[key] = val
+            # Array like categories: ["value1", "value2"] — extract all elements
+            items = re.findall(r'"([^"]+)"', val)
+            if not items:
+                # Try unquoted items: [value1, value2]
+                items = [v.strip().strip("'") for v in val.strip('[]').split(',') if v.strip()]
+            if items:
+                fm[key] = items
+                # Set 'category' from first element of 'categories' list
+                if key == 'categories':
+                    fm['category'] = items[0]
+            else:
+                fm[key] = val
         else:
             # Strip surrounding quotes if present
             fm[key] = val.strip('"\'')
