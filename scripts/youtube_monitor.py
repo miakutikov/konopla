@@ -153,7 +153,6 @@ def search_videos(query, published_after, max_results=5):
         "type": "video",
         "order": "date",
         "publishedAfter": published_after,
-        "relevanceLanguage": "uk",
         "maxResults": max_results,
     }
 
@@ -365,7 +364,7 @@ def run_youtube_monitor():
 
         if filepath:
             import uuid
-            article_id = str(uuid.uuid4())[:8]
+            article_id = uuid.uuid4().hex[:12]
             filename = os.path.basename(filepath)
 
             drafts["articles"].append({

@@ -4,6 +4,7 @@ publisher.py — Створює Hugo markdown файли з переписани
 
 import os
 import re
+import tempfile
 from datetime import datetime, timezone
 
 
@@ -87,7 +88,7 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
 
         now = datetime.now(timezone.utc)
         date_str = now.strftime("%Y-%m-%dT%H:%M:%S+00:00")
-        date_prefix = now.strftime("%Y%m%d-%H%M")
+        date_prefix = now.strftime("%Y%m%d-%H%M%S")
 
         title = article_data["title"]
         summary = article_data["summary"]
@@ -172,10 +173,19 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
                 front_matter += f"\n\n---\n{credit}\n"
         
         os.makedirs(content_dir, exist_ok=True)
-        
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(front_matter)
-        
+
+        tmp_fd, tmp_path = tempfile.mkstemp(dir=content_dir, suffix=".tmp")
+        try:
+            with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
+                f.write(front_matter)
+            os.replace(tmp_path, filepath)
+        except Exception:
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+            raise
+
         print(f"[OK] Created: {filepath}")
         return filepath
         

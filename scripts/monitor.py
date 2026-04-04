@@ -24,7 +24,7 @@ ADMIN_CHAT_ID = os.environ.get("ADMIN_CHAT_ID", "")
 
 def _get_alert_chat_id():
     """Повертає chat ID для алертів (адмін або канал)."""
-    return ADMIN_CHAT_ID or TELEGRAM_CHAT_ID
+    return ADMIN_CHAT_ID if ADMIN_CHAT_ID else TELEGRAM_CHAT_ID
 
 
 def send_alert(message, level="WARN"):

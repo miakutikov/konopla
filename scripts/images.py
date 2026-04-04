@@ -136,7 +136,8 @@ def generate_gemini_image(query, article_id="img"):
                     img = img.crop((0, top, img.width, top + new_height))
 
             # Resize to standard 1280x720
-            img = img.resize((1280, 720), Image.LANCZOS)
+            _resample = getattr(Image, "LANCZOS", getattr(Image, "ANTIALIAS", Image.BICUBIC))
+            img = img.resize((1280, 720), _resample)
 
             # Save as optimized JPEG for smaller file size
             ext = "jpg"

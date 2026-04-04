@@ -76,7 +76,11 @@ def _split_by_time(items, now):
     """Розбиває items на due (час настав) та remaining (ще не час)."""
     due, remaining = [], []
     for item in items:
-        t = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
+        try:
+            t = datetime.fromisoformat(item["scheduled_at"].replace("Z", "+00:00"))
+        except (KeyError, ValueError, TypeError) as e:
+            print(f"[WARN] Skipping scheduled item with invalid date: {e} — {item}")
+            continue
         (due if t <= now else remaining).append(item)
     return due, remaining
 

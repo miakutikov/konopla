@@ -3927,7 +3927,8 @@
       if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
 
       var data = await resp.json();
-      var content = JSON.parse(b64DecodeUtf8(data.content));
+      var content;
+      try { content = JSON.parse(b64DecodeUtf8(data.content)); } catch (e) { content = { articles: [] }; }
       var articles = (content.articles || []).filter(function(a) { return a && a.filename; });
 
       if (articles.length === 0) {
@@ -4685,7 +4686,7 @@
       if (wfResp.ok) {
         var wfFile = await wfResp.json();
         wfSha = wfFile.sha;
-        wfData = JSON.parse(b64DecodeUtf8(wfFile.content));
+        try { wfData = JSON.parse(b64DecodeUtf8(wfFile.content)); } catch (e) { wfData = { articles: [] }; }
       } else {
         wfData = { articles: [] };
         wfSha = null;
@@ -5106,9 +5107,10 @@
       await new Promise(function(r) { setTimeout(r, 5000); });
 
       // 3. Trigger telegram_post.yml workflow
-      await ghApi('POST', '/actions/workflows/telegram_post.yml/dispatches', {
+      var dispatchResp = await ghApi('POST', '/actions/workflows/telegram_post.yml/dispatches', {
         ref: 'main'
       });
+      if (!dispatchResp.ok) throw new Error('Failed to trigger workflow: ' + dispatchResp.status);
 
       var count = telegramQueue.length;
       telegramQueue = [];
@@ -5214,9 +5216,10 @@
       await new Promise(function(r) { setTimeout(r, 5000); });
 
       // 3. Trigger threads_post.yml workflow
-      await ghApi('POST', '/actions/workflows/threads_post.yml/dispatches', {
+      var dispatchResp = await ghApi('POST', '/actions/workflows/threads_post.yml/dispatches', {
         ref: 'main'
       });
+      if (!dispatchResp.ok) throw new Error('Failed to trigger workflow: ' + dispatchResp.status);
 
       var count = threadsQueue.length;
       threadsQueue = [];
@@ -7218,7 +7221,7 @@
       if (wfResp.ok) {
         var wfFile = await wfResp.json();
         wfSha = wfFile.sha;
-        wfData = JSON.parse(b64DecodeUtf8(wfFile.content));
+        try { wfData = JSON.parse(b64DecodeUtf8(wfFile.content)); } catch (e) { wfData = { articles: [] }; }
       } else {
         wfData = { articles: [] };
         wfSha = null;
@@ -7266,7 +7269,8 @@
       var candResp = await ghApi('GET', '/contents/data/candidates.json');
       if (candResp.ok) {
         var candFile = await candResp.json();
-        var candData = JSON.parse(b64DecodeUtf8(candFile.content));
+        var candData;
+        try { candData = JSON.parse(b64DecodeUtf8(candFile.content)); } catch (e) { candData = { items: [] }; }
         var idSet = {};
         candidates.forEach(function(c) { idSet[c.id] = true; });
         candData.items = (candData.items || []).filter(function(c) { return !idSet[c.id]; });

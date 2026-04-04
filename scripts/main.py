@@ -166,7 +166,7 @@ def run_discover(region='all'):
         )
 
         candidate = {
-            "id": str(uuid.uuid4())[:8],
+            "id": uuid.uuid4().hex[:12],
             "type": "article",
             "title": article["title"],
             "link": article["link"],
