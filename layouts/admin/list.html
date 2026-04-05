@@ -4490,8 +4490,12 @@
             '<button class="admin-btn btn-delete" onclick="removeWorkflowItem(\'' + escHtml(a.id) + '\')">\u274C Скасувати</button>';
         }
       } else if (a.status === 'scrape_failed') {
-        actions = '<div class="wf-url-warning" style="background:rgba(244,67,54,0.12);border-color:rgba(244,67,54,0.4);color:#ef9a9a">' +
-          '\u274C Не вдалось зчитати текст зі сторінки. Вставте прямий URL на статтю і спробуйте знову.</div>' +
+        var isGoogleNewsFailed = (a.original_url || '').indexOf('news.google.com') !== -1;
+        var failedWarning = isGoogleNewsFailed
+          ? '<button class="admin-btn admin-btn-dim" onclick="resolveGoogleNewsInCard(\'' + escHtml(a.id) + '\')">\uD83D\uDD17 Розпізнати URL</button>'
+          : '<div class="wf-url-warning" style="background:rgba(244,67,54,0.12);border-color:rgba(244,67,54,0.4);color:#ef9a9a">' +
+            '\u274C Не вдалось зчитати текст зі сторінки. Вставте прямий URL на статтю і спробуйте знову.</div>';
+        actions = failedWarning +
           '<div class="wf-url-row">' +
           '<input type="text" class="wf-url-input" id="url-' + escHtml(a.id) + '" value="' + escHtml(a.original_url || '') + '" placeholder="Прямий URL на статтю...">' +
           '<button class="admin-btn admin-btn-dim" onclick="saveArticleUrl(\'' + escHtml(a.id) + '\')" title="Зберегти URL">\uD83D\uDCBE</button>' +
@@ -4501,7 +4505,7 @@
       } else if (a.stage === 'feed' && a.status === 'queued') {
         var isGoogleNews = (a.original_url || '').indexOf('news.google.com') !== -1;
         var urlWarning = isGoogleNews
-          ? '<div class="wf-url-warning">\u26A0\uFE0F Google News URL \u2014 скрейпінг може не працювати. Вставте прямий URL на статтю.</div>'
+          ? '<button class="admin-btn admin-btn-dim" onclick="resolveGoogleNewsInCard(\'' + escHtml(a.id) + '\')">\uD83D\uDD17 Розпізнати URL</button>'
           : '';
         actions = urlWarning +
           '<div class="wf-url-row">' +
@@ -4661,6 +4665,34 @@
     }
   };
 
+  // Decode Google News redirect URLs (CBMi... base64 payload)
+  function _tryResolveGoogleNewsUrl(url) {
+    try {
+      var match = url.match(/\/(?:rss\/)?articles\/(CBMi[A-Za-z0-9_-]+)/);
+      if (!match) return null;
+      var b64 = match[1];
+      while (b64.length % 4) b64 += '=';
+      var bytes = atob(b64.replace(/-/g, '+').replace(/_/g, '/'));
+      var urlMatch = bytes.match(/https?:\/\/[^\s\x00-\x1f"'<>]+/);
+      return urlMatch ? urlMatch[0] : null;
+    } catch(e) { return null; }
+  }
+
+  window.resolveGoogleNewsInCard = function(id) {
+    var item = workflowData.find(function(a) { return a.id === id; });
+    if (!item) return;
+    var resolved = _tryResolveGoogleNewsUrl(item.original_url || '');
+    if (resolved) {
+      var input = document.getElementById('url-' + id);
+      if (input) {
+        input.value = resolved;
+        showStatus('\uD83D\uDD17 URL розпізнано! Натисни \uD83D\uDCBE щоб зберегти.', 'success');
+      }
+    } else {
+      showStatus('\u26A0\uFE0F Не вдалось розпізнати. Вставте прямий URL вручну.', 'error');
+    }
+  };
+
   window.quickAddUrl = async function() {
     var url = document.getElementById('qa-url').value.trim();
     if (!url) {
@@ -4670,6 +4702,19 @@
     if (!url.startsWith('http')) {
       showStatus('\u274C URL має починатись з http:// або https://', 'error');
       return;
+    }
+
+    // Auto-resolve Google News redirect URLs
+    if (url.indexOf('news.google.com') !== -1) {
+      var resolved = _tryResolveGoogleNewsUrl(url);
+      if (resolved) {
+        url = resolved;
+        showStatus('\uD83D\uDD17 Google News URL розпізнано: ' + resolved.substring(0, 60) + '...', 'info');
+        document.getElementById('qa-url').value = resolved;
+      } else {
+        showStatus('\u26A0\uFE0F Не вдалось розпізнати Google News URL. Вставте прямий URL статті.', 'error');
+        return;
+      }
     }
 
     // Detect YouTube URL
