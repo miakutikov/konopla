@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: '0 2,8,14,20 * * *'
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
     inputs:
       action:
         description: 'Дія'
@@ -22,6 +19,9 @@ env:
         description: 'ID кандидатів для обробки (через кому)'
         type: string
         default: ''
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
   contents: write
