@@ -1,10 +1,7 @@
 {{- /*
-  news-kb-related.html
-  Динамічний блок «З Бази знань» для новинних статей.
-  Алгоритм: сканує data/kb_links.json, знаходить KB статті, чиї фрази
-  зустрічаються в title + plain text новини. Той самий source of truth що
-  і для inline auto-links (autolink-content.html partial).
-  Ліміт: max 5. Не відображається якщо жодного збігу.
+  news-kb-related.html — sidebar block for news articles.
+  Outputs a sidebar card styled like Telegram CTA but with related-item list.
+  Returns empty string if no KB matches → caller falls back to Telegram CTA.
 */ -}}
 {{- if .Site.Data.kb_links -}}
 {{- $searchText := printf "%s %s" .Title .Plain | strings.ToLower -}}
@@ -23,19 +20,16 @@
 {{- end -}}
 {{- $related = $related | first 5 -}}
 {{- if $related -}}
-<div class="kb-related-block">
-  <h2 class="kb-related-title">📖 З Бази знань</h2>
-  <ul class="kb-related-list">
-    {{- range $related -}}
-    {{- $page := $.Site.GetPage (printf "/knowledge/%s/" .slug) -}}
-    <li>
-      <a href="{{ .url }}">
-        {{- if and $page $page.Params.icon -}}<span class="kb-related-icon">{{ $page.Params.icon }}</span>{{- end -}}
-        <span>{{ .title }}</span>
-      </a>
-    </li>
-    {{- end -}}
-  </ul>
+<div class="sidebar-section sidebar-kb-cta">
+  <h3>📖 З Бази знань</h3>
+  {{- range $related -}}
+  {{- $page := $.Site.GetPage (printf "/knowledge/%s/" .slug) -}}
+  <a href="{{ .url }}" class="related-item">
+    <span class="related-title">
+      {{- if and $page $page.Params.icon -}}<span class="kb-sidebar-icon">{{ $page.Params.icon }}</span> {{- end -}}{{ .title }}
+    </span>
+  </a>
+  {{- end -}}
 </div>
 {{- end -}}
 {{- end -}}

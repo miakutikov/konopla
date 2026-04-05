@@ -2194,6 +2194,25 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* === TELEGRAM CTA SIDEBAR === */
+/* KB sidebar card — same gradient as Telegram CTA, list structure of «Схожі новини» */
+.sidebar-kb-cta {
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), rgba(52, 211, 153, 0.04));
+  border-color: rgba(52, 211, 153, 0.2) !important;
+}
+.sidebar-kb-cta h3 {
+  color: var(--green-accent);
+}
+.sidebar-kb-cta .related-item {
+  border-color: rgba(52, 211, 153, 0.12);
+}
+.sidebar-kb-cta .related-item:hover .related-title {
+  color: var(--green-accent);
+  opacity: 0.8;
+}
+.kb-sidebar-icon {
+  font-size: 0.95rem;
+}
+
 .sidebar-tg-cta {
   background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), rgba(52, 211, 153, 0.04));
   border: 1px solid rgba(52, 211, 153, 0.2);

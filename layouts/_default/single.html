@@ -73,10 +73,6 @@
     </div>
     {{ end }}
 
-    {{ if eq .Section "news" }}
-    {{ partial "news-kb-related.html" . }}
-    {{ end }}
-
     <a href="{{ "/news/" | relURL }}" class="back-link">&larr; Всі новини</a>
   </article>
 
@@ -96,6 +92,10 @@
     </div>
     {{ end }}
 
+    {{- $kbSidebar := partial "news-kb-related.html" . -}}
+    {{- if $kbSidebar -}}
+    {{ $kbSidebar }}
+    {{- else -}}
     <!-- Telegram CTA -->
     <div class="sidebar-section sidebar-tg-cta">
       <div class="tg-cta-inner">
@@ -107,6 +107,7 @@
         </a>
       </div>
     </div>
+    {{- end -}}
   </aside>
 
 </div>
