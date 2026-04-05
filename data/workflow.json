@@ -259,6 +259,44 @@
       "created_at": "2026-04-02T06:16:38.781Z",
       "updated_at": "2026-04-02T06:17:33.098999+00:00",
       "published_at": null
+    },
+    {
+      "id": "769bbb00",
+      "filename": "",
+      "title": "Polish hemp textile maker draws heavy demand in public offering on Warsaw exchange",
+      "summary": "Polish hemp company Kombinat Konopny’s debut on NewConnect, the junior market of the Warsaw Stock Exchange, was one of the strongest openings ever seen on the platform and marks another [&#8230;]",
+      "category": "текстиль",
+      "image": "",
+      "candidate_id": "769bbb00",
+      "original_title": "Polish hemp textile maker draws heavy demand in public offering on Warsaw exchange",
+      "original_url": "https://hemptoday.net/polish-hemp-textile-maker-draws-heavy-demand-in-public-offering-on-warsaw-exchange/",
+      "source_name": "HempToday®",
+      "content_preview": "Polish hemp company Kombinat Konopny’s debut on NewConnect, the junior market of the Warsaw Stock Exchange, was one of the strongest openings ever seen on the platform and marks another step in the company’s steady progress. Kombinat’s debut on NewConnect drew unusually brisk demand, with buy orders",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.7,
+      "created_at": "2026-04-05T04:16:19.235Z",
+      "updated_at": "2026-04-05T04:16:19.235Z",
+      "published_at": null
     }
   ]
 }
