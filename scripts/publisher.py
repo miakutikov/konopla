@@ -206,8 +206,8 @@ def create_telegram_message(article_data, site_url="https://konopla.ua"):
     slug = slugify(title)
     
     now = datetime.now(timezone.utc)
-    date_prefix = now.strftime("%Y%m%d-%H%M")
-    
+    date_prefix = now.strftime("%Y%m%d-%H%M%S")
+
     article_url = f"{site_url}/news/{date_prefix}-{slug}/"
     
     # Emoji per category
