@@ -1,7 +1,7 @@
 # SYSTEM_MAP.md — Admin Panel Architecture Reference
 
-> **Last updated:** 2026-04-05 (Knowledge Base editor)
-> **Main file:** `layouts/admin/list.html` (~9000 lines)
+> **Last updated:** 2026-04-05 (Auto-linking + KB Links Registry)
+> **Main file:** `layouts/admin/list.html` (~9600 lines)
 > **Structure:** Single-file SPA — HTML (1-599) | CSS (600-2933) | JS (2935-7394)
 
 ---
@@ -9,28 +9,30 @@
 ## File Structure
 
 ```
-layouts/admin/list.html     — 7395 lines, main admin SPA
-layouts/admin/catalog/      — redirect to /admin/#catalog
-scripts/main.py             — pipeline entry (discover/process)
-scripts/fetcher.py          — RSS fetching + filtering
-scripts/rewriter.py         — Gemini AI rewriting
-scripts/config.py           — keywords, prompts, constants
-scripts/relevance.py        — relevance scoring (compute_relevance, guess_category)
-scripts/publisher.py        — Hugo .md file creation
-scripts/migrate_drafts.py   — one-time drafts.json → workflow.json migration
-scripts/scheduler.py        — scheduled post executor
-scripts/telegram_bot.py     — Telegram notifications
-scripts/images.py           — image sourcing (original/Gemini/Unsplash)
-data/candidates.json        — raw RSS candidates
-data/drafts.json            — LEGACY (no longer written by pipeline, kept for admin read-only)
-data/workflow.json           — unified workflow state {"articles": [...]}
-data/sources.json           — RSS sources (90+)
-data/catalog.json           — company directory
-data/scheduled.json         — scheduled posts
-data/social_status.json     — social posting history
-data/pinned.json            — pinned homepage article
-data/feed_health.json       — feed success/failure stats
-data/processed.json         — MD5 hashes of processed articles
+layouts/admin/list.html          — ~9600 lines, main admin SPA
+layouts/admin/catalog/           — redirect to /admin/#catalog
+layouts/partials/autolink-content.html — Hugo build-time KB auto-linker
+scripts/main.py                  — pipeline entry (discover/process)
+scripts/fetcher.py               — RSS fetching + filtering
+scripts/rewriter.py              — Gemini AI rewriting
+scripts/config.py                — keywords, prompts, constants
+scripts/relevance.py             — relevance scoring (compute_relevance, guess_category)
+scripts/publisher.py             — Hugo .md file creation
+scripts/migrate_drafts.py        — one-time drafts.json → workflow.json migration
+scripts/scheduler.py             — scheduled post executor
+scripts/telegram_bot.py          — Telegram notifications
+scripts/images.py                — image sourcing (original/Gemini/Unsplash)
+data/candidates.json             — raw RSS candidates
+data/drafts.json                 — LEGACY (no longer written by pipeline, kept for admin read-only)
+data/workflow.json               — unified workflow state {"articles": [...]}
+data/sources.json                — RSS sources (90+)
+data/catalog.json                — company directory
+data/scheduled.json              — scheduled posts
+data/social_status.json          — social posting history
+data/pinned.json                 — pinned homepage article
+data/feed_health.json            — feed success/failure stats
+data/processed.json              — MD5 hashes of processed articles
+data/kb_links.json               — KB auto-link registry {"links": [{slug, url, title, phrases}]}
 ```
 
 ---
@@ -47,6 +49,7 @@ data/processed.json         — MD5 hashes of processed articles
 | ⚙️ Налаштування | settings | view-settings | `.sources-*`, `.source-*`, `.yt-*` |
 | 📋 Каталог | catalog | view-catalog | `.cat-*`, `.company-form-*` |
 | 📖 База знань | knowledge | view-knowledge | `.kb-*`, `.kb-card`, `.kb-editor-*`, `.kb-link-modal`, `.kb-link-item` |
+| 🔗 Автопосилання | kblinks | view-kblinks | `.kbl-*`, `.kbl-form-card`, `.kbl-entry`, `.kbl-phrase-chip` |
 
 **Aliases (backwards compat):** `candidates→feed`, `moderation→editorial`, `articles→archive`
 
@@ -289,6 +292,22 @@ data/processed.json         — MD5 hashes of processed articles
 | ~8612 | `confirmInsertKbLink()` | Insert Quill link `/knowledge/slug/` |
 | ~8625 | `kbAutoFormat()` | AI (Gemini) format KB article content |
 | ~8665 | `triggerKbDeploy()` | Trigger moderate.yml deploy |
+
+### KB Links Registry (Автопосилання)
+Global vars: `kbLinksData = []`, `kbLinksSha = null`, `editingKbLinkIdx = null`
+Data file: `data/kb_links.json` — `{links: [{slug, url, title, phrases[]}]}`
+
+| Line | Function | Description |
+|------|----------|-------------|
+| ~8700 | `loadKbLinks()` | GET data/kb_links.json, decode, set kbLinksSha |
+| ~8720 | `renderKbLinks()` | Render entries list with phrase chips + search filter |
+| ~8760 | `saveKbLinks(msg)` | PUT data/kb_links.json via ghApi (SHA-aware) |
+| ~8780 | `showKbLinkForm(idx)` | Open form (null=new, number=edit); populates kbArticles dropdown |
+| ~8820 | `closeKbLinkForm()` | Hide form, reset editingKbLinkIdx |
+| ~8830 | `onKbLinkArticleSelect()` | Autofill URL and title from kbArticles on dropdown change |
+| ~8840 | `saveKbLinkEntry()` | Validate + push/update entry + saveKbLinks |
+| ~8875 | `deleteKbLinkEntry(idx)` | Splice entry + saveKbLinks with rollback on error |
+| ~8900 | `triggerKbLinksDeploy()` | Dispatch moderate.yml workflow |
 
 ### Catalog
 | Line | Function | Description |
