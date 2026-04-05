@@ -1,0 +1,61 @@
+{{- /*
+  kb-related.html
+  Динамічний блок «Пов'язані матеріали» для статей Бази знань.
+  Основний алгоритм: phrase-matching — шукає фрази з data/kb_links.json в
+  plain-тексті статті (той самий source of truth що news-kb-related.html).
+  Fallback: якщо збігів немає — показує pillar-статті БЗ (sorted by weight).
+  Виключає поточну статтю. Ліміт: max 5. Автоматично оновлюється при rebuild.
+*/ -}}
+{{- if .Site.Data.kb_links -}}
+{{- $current := . -}}
+{{- $searchText := printf "%s %s" .Title .Plain | strings.ToLower -}}
+{{- $related := slice -}}
+
+{{- /* Primary: phrase-matching against kb_links.json */ -}}
+{{- range .Site.Data.kb_links.links -}}
+  {{- $entry := . -}}
+  {{- if ne $entry.url $current.RelPermalink -}}
+    {{- $matched := false -}}
+    {{- range $entry.phrases -}}
+      {{- if and (ge (len .) 5) (strings.Contains $searchText (strings.ToLower .)) -}}
+        {{- $matched = true -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $matched -}}
+      {{- $page := $.Site.GetPage (printf "/knowledge/%s/" $entry.slug) -}}
+      {{- if $page -}}
+        {{- $related = $related | append $page -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $related = $related | first 5 -}}
+
+{{- /* Fallback: якщо немає збігів — pillar статті sorted by weight */ -}}
+{{- if not $related -}}
+  {{- $allKb := where .Site.RegularPages "Section" "knowledge" -}}
+  {{- $pillar := where $allKb "Params.pillar" true -}}
+  {{- range $pillar.ByWeight -}}
+    {{- if and (not .IsSection) (ne .RelPermalink $current.RelPermalink) -}}
+      {{- $related = $related | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $related = $related | first 4 -}}
+{{- end -}}
+
+{{- if $related -}}
+<div class="kb-related-block">
+  <h2 class="kb-related-title">Пов'язані матеріали</h2>
+  <ul class="kb-related-list">
+    {{- range $related -}}
+    <li>
+      <a href="{{ .RelPermalink }}">
+        {{- if .Params.icon -}}<span class="kb-related-icon">{{ .Params.icon }}</span>{{- end -}}
+        <span>{{ .Title }}</span>
+      </a>
+    </li>
+    {{- end -}}
+  </ul>
+</div>
+{{- end -}}
+{{- end -}}

@@ -59,3 +59,7 @@ buildDrafts = false
   [[related.indices]]
     name = "date"
     weight = 10
+  [[related.indices]]
+    name = "keywords"
+    weight = 90
+    type = "basic"

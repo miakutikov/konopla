@@ -2678,6 +2678,62 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 16px;
 }
 
+/* KB article: full-width без news sidebar */
+.article-layout-kb {
+  display: block;
+}
+.article-layout-kb .article {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.kb-article-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* «Пов'язані матеріали» / «З Бази знань» — shared block styles */
+.kb-related-block {
+  margin: 2.5rem 0 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.kb-related-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.85rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.kb-related-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.kb-related-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--green-accent);
+  text-decoration: none;
+  font-size: 0.93rem;
+  transition: opacity var(--transition);
+}
+.kb-related-list a:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.kb-related-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
 /* KB auto-links (generated at build time via autolink-content.html partial) */
 .kb-autolink {
   color: var(--green-accent);

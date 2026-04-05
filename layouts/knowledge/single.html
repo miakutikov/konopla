@@ -1,23 +1,19 @@
 {{ define "main" }}
-<div class="container article-layout">
+<div class="container article-layout article-layout-kb">
 
   {{ partial "breadcrumbs.html" . }}
 
-  <article class="article">
+  <article class="article article-kb">
     <header class="article-header">
-      {{ if .Params.categories }}
-      <a href="{{ "/categories/" | relURL }}{{ index .Params.categories 0 | urlize }}/" class="card-category">{{ index .Params.categories 0 | title }}</a>
+      {{ if .Params.icon }}
+      <div class="kb-article-icon">{{ .Params.icon }}</div>
       {{ end }}
       <h1>{{ .Title }}</h1>
       <div class="article-meta">
         {{ $months := dict "January" "січня" "February" "лютого" "March" "березня" "April" "квітня" "May" "травня" "June" "червня" "July" "липня" "August" "серпня" "September" "вересня" "October" "жовтня" "November" "листопада" "December" "грудня" }}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02" }} {{ index $months (.Date.Format "January") }} {{ .Date.Format "2006" }}</time>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">Оновлено: {{ .Date.Format "02" }} {{ index $months (.Date.Format "January") }} {{ .Date.Format "2006" }}</time>
         <span class="meta-sep">&middot;</span>
         <span class="reading-time">{{ .ReadingTime }} хв читання</span>
-        {{ if .Params.source }}
-        <span class="meta-sep">&middot;</span>
-        <span class="source">Джерело: {{ .Params.source }}</span>
-        {{ end }}
       </div>
     </header>
 
@@ -30,22 +26,15 @@
     {{ else if .Params.image }}
     <figure class="article-figure">
       <img src="{{ .Params.image }}" alt="{{ .Title }}" class="article-image" onerror="this.onerror=null;this.src='/images/logo.png';this.classList.add('article-image-fallback')">
-      {{ if .Params.image_author }}
-      <figcaption class="image-credit">
-        Фото: <a href="{{ .Params.image_author_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">{{ .Params.image_author }}</a> /
-        <a href="{{ .Params.image_source_url }}?utm_source=konopla_ua&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>
-      </figcaption>
-      {{ end }}
     </figure>
     {{ end }}
 
     <div class="article-content">
-      {{ if eq .Section "news" }}
-        {{ partial "autolink-content.html" (dict "content" .Content "page" . "site" .Site) }}
-      {{ else }}
-        {{ .Content }}
-      {{ end }}
+      {{ .Content }}
     </div>
+
+    <!-- Dynamic related KB articles (keyword-intersection at build time) -->
+    {{ partial "kb-related.html" . }}
 
     <!-- Share buttons -->
     <div class="share-buttons">
@@ -59,55 +48,8 @@
     </div>
     <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Скопійовано!</div>
 
-    {{ if .Params.tags }}
-    <div class="tags">
-      {{ range .Params.tags }}
-      <span class="tag">#{{ . }}</span>
-      {{ end }}
-    </div>
-    {{ end }}
-
-    {{ if .Params.source_url }}
-    <div class="original-source">
-      <a href="{{ .Params.source_url }}" target="_blank" rel="noopener nofollow">Читати оригінал &rarr;</a>
-    </div>
-    {{ end }}
-
-    {{ if eq .Section "news" }}
-    {{ partial "news-kb-related.html" . }}
-    {{ end }}
-
-    <a href="{{ "/news/" | relURL }}" class="back-link">&larr; Всі новини</a>
+    <a href="{{ "/knowledge/" | relURL }}" class="back-link">&larr; База знань</a>
   </article>
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <!-- Related articles -->
-    {{ $related := .Site.RegularPages.Related . | first 4 }}
-    {{ if $related }}
-    <div class="sidebar-section">
-      <h3>Схожі новини</h3>
-      {{ range $related }}
-      <a href="{{ .Permalink }}" class="related-item">
-        <span class="related-title">{{ .Title }}</span>
-        <time>{{ .Date.Format "02.01.2006" }}</time>
-      </a>
-      {{ end }}
-    </div>
-    {{ end }}
-
-    <!-- Telegram CTA -->
-    <div class="sidebar-section sidebar-tg-cta">
-      <div class="tg-cta-inner">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="tg-cta-icon" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.357.14-.488.072l.21-2.958 5.37-4.853c.235-.21-.054-.326-.362-.117l-6.633 4.174-2.856-.892c-.621-.194-.633-.621.13-.92l11.16-4.3c.517-.187.97.126.8.822z"/></svg>
-        <h3 class="tg-cta-title">Слідкуйте за нами</h3>
-        <p class="tg-cta-text">Новини про промислові коноплі — першими у Telegram</p>
-        <a href="{{ .Site.Params.telegram }}" class="tg-cta-btn" target="_blank" rel="noopener">
-          Підписатись →
-        </a>
-      </div>
-    </div>
-  </aside>
 
 </div>
 
