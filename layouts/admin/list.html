@@ -52,6 +52,9 @@
           <li class="sidebar-item" data-view="catalog" onclick="showView('catalog')">
             <span class="sidebar-label">📋 Каталог</span> <span class="sidebar-badge" id="badge-catalog"></span>
           </li>
+          <li class="sidebar-item" data-view="knowledge" onclick="showView('knowledge')">
+            <span class="sidebar-label">📖 База знань</span> <span class="sidebar-badge" id="badge-knowledge"></span>
+          </li>
         </ul>
         <div class="sidebar-footer">
           <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Згорнути/розгорнути">«</button>
@@ -672,6 +675,161 @@
             <div class="loading">Завантаження каталогу...</div>
           </div>
         </div><!-- /view-catalog -->
+
+        <!-- ===== VIEW: Knowledge Base (База знань) ===== -->
+        <div class="admin-view" id="view-knowledge">
+          <div class="view-header">
+            <h1>📖 База знань</h1>
+            <div class="view-actions">
+              <button class="admin-btn admin-btn-green" onclick="showKbEditor(null)">✍️ Нова стаття</button>
+              <button class="admin-btn" onclick="loadKnowledge()">🔄 Оновити</button>
+              <button class="admin-btn" onclick="triggerKbDeploy()">🚀 Деплой</button>
+            </div>
+          </div>
+
+          <!-- KB Editor (hidden by default) -->
+          <div id="kb-editor-wrap" class="kb-editor-wrap" style="display:none">
+            <div class="kb-editor-card">
+              <div class="kb-editor-header">
+                <h2 id="kb-editor-title">✍️ Нова стаття</h2>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <button class="admin-btn admin-btn-ai" id="btn-kb-autoformat" onclick="kbAutoFormat()">✨ AI оформлення</button>
+                  <button class="admin-btn admin-btn-green" onclick="saveKbArticle()">💾 Зберегти</button>
+                  <button class="admin-btn admin-btn-dim" onclick="closeKbEditor()">✕ Закрити</button>
+                </div>
+              </div>
+
+              <!-- Row 1: title + slug -->
+              <div class="cf-row">
+                <div class="cf-field cf-field-wide">
+                  <label>Заголовок *</label>
+                  <input type="text" id="kb-title" placeholder="Заголовок статті бази знань" oninput="kbAutoSlug()">
+                </div>
+                <div class="cf-field">
+                  <label>Slug (URL)</label>
+                  <div style="display:flex;gap:6px;align-items:center">
+                    <span style="color:var(--text-tertiary);font-size:0.8rem;white-space:nowrap">/knowledge/</span>
+                    <input type="text" id="kb-slug" placeholder="hemp-guide-ukraine" style="flex:1">
+                    <span style="color:var(--text-tertiary);font-size:0.8rem;white-space:nowrap">/</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2: icon + weight + pillar -->
+              <div class="cf-row">
+                <div class="cf-field" style="flex:0 0 110px">
+                  <label>Іконка (emoji)</label>
+                  <input type="text" id="kb-icon" placeholder="🌿" maxlength="8" style="font-size:1.4rem;text-align:center">
+                </div>
+                <div class="cf-field" style="flex:0 0 110px">
+                  <label>Вага (weight)</label>
+                  <input type="number" id="kb-weight" placeholder="20" min="1" max="99" value="20">
+                </div>
+                <div class="cf-field" style="flex:0 0 140px;justify-content:flex-end">
+                  <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-primary)">
+                    <input type="checkbox" id="kb-pillar"> ⭐ Pillar-стаття
+                  </label>
+                </div>
+                <div class="cf-field cf-field-wide">
+                  <label>Summary (для карток і Google)</label>
+                  <textarea id="kb-summary" rows="2" maxlength="300" placeholder="1-2 речення опису статті"></textarea>
+                </div>
+              </div>
+
+              <!-- Row 3: keywords -->
+              <div class="cf-row">
+                <div class="cf-field cf-field-wide">
+                  <label>Keywords (через кому) — для SEO</label>
+                  <input type="text" id="kb-keywords" placeholder="промислові коноплі Україна, hemp Ukraine, конопляне волокно">
+                </div>
+              </div>
+
+              <!-- Row 4: WYSIWYG editor + toolbar extension -->
+              <div class="cf-row cf-row-editor">
+                <div class="cf-field cf-field-wide">
+                  <div class="kb-editor-toolbar-extra">
+                    <button class="kb-tool-btn" onclick="insertKbTable()" title="Вставити таблицю">⊞ Таблиця</button>
+                    <button class="kb-tool-btn" onclick="insertKbDivider()" title="Горизонтальна лінія">― Розділювач</button>
+                    <button class="kb-tool-btn kb-tool-link" onclick="openKbLinkModal()" title="Посилання на статтю бази знань">🔗 Посилання на БЗ</button>
+                  </div>
+                  <label>Текст статті *</label>
+                  <div id="kb-editor"></div>
+                </div>
+              </div>
+
+              <!-- Row 5: image -->
+              <div class="cf-row">
+                <div class="cf-field cf-field-wide">
+                  <label>Зображення (обкладинка)</label>
+                  <div class="cf-image-area">
+                    <label class="cf-image-dropzone" id="kb-image-dropzone">
+                      <input type="file" id="kb-image-upload" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadKbImage(this)">
+                      <span class="cf-dropzone-icon">📷</span>
+                      <span class="cf-dropzone-text">Обрати фото</span>
+                      <span class="cf-dropzone-hint">JPEG, PNG, WebP · max 2 МБ</span>
+                    </label>
+                    <div id="kb-image-preview" class="cf-image-preview" style="display:none">
+                      <img id="kb-image-preview-img" src="" alt="Preview">
+                      <div class="cf-image-preview-actions">
+                        <label class="cf-img-action-btn" title="Замінити фото">
+                          📷
+                          <input type="file" id="kb-image-upload-replace" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadKbImage(this)">
+                        </label>
+                        <button class="cf-img-action-btn" onclick="clearKbImage()" title="Видалити фото">✕</button>
+                      </div>
+                    </div>
+                    <input type="text" id="kb-image" placeholder="або вставте URL зображення" oninput="updateKbImagePreview()" class="cf-image-url-input">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 6: YouTube -->
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label>YouTube ID (опціонально)</label>
+                  <input type="text" id="kb-youtube" placeholder="dQw4w9WgXcQ">
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="cf-actions">
+                <button class="admin-btn admin-btn-green" onclick="saveKbArticle()">💾 Зберегти статтю</button>
+                <button class="admin-btn admin-btn-dim" onclick="closeKbEditor()">Скасувати</button>
+                <span id="kb-editing-file" style="display:none"></span>
+                <span id="kb-editing-sha" style="display:none"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- KB articles list -->
+          <div id="kb-list" class="kb-list">
+            <div class="loading">⏳ Завантаження...</div>
+          </div>
+          <div id="kb-empty" class="admin-empty" style="display:none">
+            <h2>📖 База знань порожня</h2>
+            <p>Натисніть «Нова стаття» щоб створити першу статтю.</p>
+          </div>
+        </div><!-- /view-knowledge -->
+
+        <!-- KB internal link modal -->
+        <div id="kb-link-modal" class="kb-link-modal" style="display:none" onclick="if(event.target===this)closeKbLinkModal()">
+          <div class="kb-link-modal-inner">
+            <div class="kb-link-modal-header">
+              <h3>🔗 Вставити посилання на статтю бази знань</h3>
+              <button class="admin-btn admin-btn-dim" onclick="closeKbLinkModal()">✕</button>
+            </div>
+            <input type="text" id="kb-link-search" class="kb-link-search" placeholder="Пошук статті..." oninput="filterKbLinkList()">
+            <div id="kb-link-display-row" style="display:none;margin-bottom:12px">
+              <label style="font-size:0.8rem;color:var(--text-secondary);display:block;margin-bottom:4px">Текст посилання (можна змінити)</label>
+              <input type="text" id="kb-link-display-text" class="cf-image-url-input" placeholder="Текст посилання...">
+            </div>
+            <div id="kb-link-list" class="kb-link-list"></div>
+            <div class="cf-actions" style="padding:12px 0 0">
+              <button class="admin-btn admin-btn-green" id="btn-insert-kb-link" onclick="confirmInsertKbLink()" disabled>🔗 Вставити</button>
+              <button class="admin-btn admin-btn-dim" onclick="closeKbLinkModal()">Скасувати</button>
+            </div>
+          </div>
+        </div>
 
       </div><!-- /admin-main -->
     </div><!-- /admin-panel -->
@@ -2943,6 +3101,230 @@
 }
 
 /* =========================================================================
+   Knowledge Base
+   ========================================================================= */
+.kb-editor-wrap {
+  margin-bottom: 24px;
+}
+.kb-editor-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.kb-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.kb-editor-header h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+.kb-editor-toolbar-extra {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.kb-tool-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.kb-tool-btn:hover {
+  background: var(--bg-hover, rgba(255,255,255,0.08));
+}
+.kb-tool-link {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+.kb-tool-link:hover {
+  background: rgba(59, 130, 246, 0.25);
+}
+/* Knowledge list */
+.kb-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.kb-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color var(--transition);
+}
+.kb-card:hover {
+  border-color: var(--green-accent);
+}
+.kb-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.kb-card-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.kb-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.kb-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+.kb-card-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.kb-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  flex-wrap: wrap;
+}
+.kb-card-slug {
+  font-family: monospace;
+  background: var(--bg-tertiary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+}
+.kb-card-pillar {
+  background: rgba(250, 204, 21, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+}
+.kb-card-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+/* Link modal */
+.kb-link-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.kb-link-modal-inner {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.kb-link-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.kb-link-modal-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+.kb-link-search {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+}
+.kb-link-search:focus {
+  border-color: var(--green-accent);
+}
+.kb-link-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px;
+  max-height: 340px;
+}
+.kb-link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.kb-link-item:hover {
+  border-color: var(--green-accent);
+  background: rgba(74, 222, 128, 0.05);
+}
+.kb-link-item.selected {
+  border-color: var(--green-accent);
+  background: rgba(74, 222, 128, 0.1);
+}
+.kb-link-item-icon { font-size: 1.2rem; }
+.kb-link-item-info { flex: 1; min-width: 0; }
+.kb-link-item-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kb-link-item-url {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+}
+/* Knowledge badge (sidebar) */
+#badge-knowledge { background: rgba(74,222,128,0.2); color: var(--green-accent); }
+
+/* =========================================================================
    Candidates tab
    ========================================================================= */
 .admin-btn-candidates {
@@ -3700,7 +4082,7 @@
     // Resolve aliases from old naming
     if (VIEW_ALIASES[name]) name = VIEW_ALIASES[name];
 
-    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog'];
+    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog', 'knowledge'];
     if (validViews.indexOf(name) === -1) name = 'feed';
 
     // Hide all views, then show the requested one with fade
@@ -3736,6 +4118,7 @@
     if (name === 'archive' && workflowData.length === 0 && ghToken) loadWorkflowArticles().then(function() { renderArticles(); });
     if (name === 'settings' && sourcesData.length === 0 && ghToken) loadSources();
     if (name === 'catalog' && !catalogLoaded && ghToken) loadCatalog();
+    if (name === 'knowledge' && kbArticles.length === 0 && ghToken) loadKnowledge();
     if (name === 'scheduled' && ghToken) loadScheduledView();
     if (name === 'analytics' && !chartsInitialized) {
       setTimeout(function() {
@@ -8069,6 +8452,549 @@
       showStatus('❌ Помилка деплою: ' + e.message, 'error');
     }
   };
+
+  // =========================================================================
+  // Knowledge Base Editor
+  // =========================================================================
+
+  var kbArticles = [];       // [{filename, sha, title, summary, icon, weight, slug, pillar}]
+  var kbQuillEditor = null;
+  var kbTurndown = null;
+  var kbSelectedLink = null; // {slug, title} for link modal
+
+  // --- Init KB Quill ---
+  function initKbQuill() {
+    if (kbQuillEditor) return;
+    kbQuillEditor = new Quill('#kb-editor', {
+      theme: 'snow',
+      placeholder: 'Пишіть текст статті. Підтримуються заголовки, жирний, цитати, списки, таблиці, посилання...',
+      modules: {
+        toolbar: [
+          [{ 'header': [2, 3, 4, false] }],
+          ['bold', 'italic'],
+          ['blockquote', 'code-block'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          ['link'],
+          ['clean']
+        ]
+      }
+    });
+    kbTurndown = new TurndownService({ headingStyle: 'atx', bulletListMarker: '-', codeBlockStyle: 'fenced' });
+    kbTurndown.addRule('blockquote', {
+      filter: 'blockquote',
+      replacement: function(content) {
+        return '\n' + content.trim().split('\n').map(function(l) { return '> ' + l; }).join('\n') + '\n\n';
+      }
+    });
+    // Intercept Quill link to keep internal links clean
+    kbQuillEditor.on('text-change', function() { window._kbDirty = true; });
+  }
+  window._kbDirty = false;
+
+  // --- Slug from title ---
+  window.kbAutoSlug = function() {
+    var title = document.getElementById('kb-title').value;
+    var slug = slugifyUA(title);
+    var slugEl = document.getElementById('kb-slug');
+    // Only auto-fill if slug is empty or was auto-generated (not manually edited)
+    if (!slugEl.dataset.manualEdit) {
+      slugEl.value = slug;
+    }
+  };
+
+  // Mark slug as manually edited
+  (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      var slugEl = document.getElementById('kb-slug');
+      if (slugEl) slugEl.addEventListener('input', function() { slugEl.dataset.manualEdit = '1'; });
+    });
+  })();
+
+  // --- Load KB articles list from GitHub ---
+  window.loadKnowledge = async function() {
+    var listEl = document.getElementById('kb-list');
+    var emptyEl = document.getElementById('kb-empty');
+    listEl.innerHTML = '<div class="loading">⏳ Завантаження...</div>';
+    emptyEl.style.display = 'none';
+
+    if (!ghToken) {
+      listEl.innerHTML = '<div class="loading">❌ Потрібен GitHub Token</div>';
+      return;
+    }
+
+    try {
+      var resp = await ghApi('GET', '/contents/content/knowledge');
+      if (!resp.ok) throw new Error('API error: ' + resp.status);
+      var files = await resp.json();
+
+      var mdFiles = files.filter(function(f) { return f.name.endsWith('.md') && f.name !== '_index.md'; });
+      if (!mdFiles.length) {
+        kbArticles = [];
+        listEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      // Fetch each file's content (in parallel, max 6 at a time)
+      var chunks = [];
+      for (var i = 0; i < mdFiles.length; i += 6) chunks.push(mdFiles.slice(i, i + 6));
+      kbArticles = [];
+      for (var ci = 0; ci < chunks.length; ci++) {
+        var results = await Promise.all(chunks[ci].map(function(f) {
+          return ghApi('GET', '/contents/content/knowledge/' + f.name).then(function(r) {
+            return r.ok ? r.json() : null;
+          }).catch(function() { return null; });
+        }));
+        results.forEach(function(data) {
+          if (!data) return;
+          try {
+            var raw = b64DecodeUtf8(data.content);
+            var parsed = parseFrontmatter(raw);
+            if (!parsed) return;
+            var fm = parsed.frontmatter;
+            var slug = data.name.replace('.md', '');
+            kbArticles.push({
+              filename: data.name,
+              sha: data.sha,
+              title: fm.title || data.name,
+              summary: fm.summary || '',
+              icon: fm.icon || '📄',
+              weight: parseInt(fm.weight) || 99,
+              slug: slug,
+              pillar: fm.pillar === 'true' || fm.pillar === true,
+              keywords: Array.isArray(fm.keywords) ? fm.keywords.join(', ') : (fm.keywords || ''),
+              image: fm.image || '',
+              youtube_id: fm.youtube_id || '',
+              date: fm.date || '',
+              body: parsed.body
+            });
+          } catch(e) { console.warn('KB parse error:', data.name, e); }
+        });
+      }
+
+      // Sort by weight
+      kbArticles.sort(function(a, b) { return a.weight - b.weight; });
+
+      renderKbList();
+    } catch(e) {
+      console.error('KB load error:', e);
+      listEl.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
+    }
+  };
+
+  function renderKbList() {
+    var listEl = document.getElementById('kb-list');
+    var emptyEl = document.getElementById('kb-empty');
+    if (!kbArticles.length) {
+      listEl.innerHTML = '';
+      emptyEl.style.display = 'block';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    listEl.innerHTML = kbArticles.map(function(a) {
+      var pillarBadge = a.pillar ? '<span class="kb-card-pillar">⭐ Pillar</span>' : '';
+      return '<div class="kb-card">' +
+        '<div class="kb-card-top">' +
+          '<div class="kb-card-icon">' + escHtml(a.icon) + '</div>' +
+          '<div class="kb-card-info">' +
+            '<div class="kb-card-title">' + escHtml(a.title) + '</div>' +
+            '<div class="kb-card-summary">' + escHtml(a.summary) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="kb-card-meta">' +
+          '<span class="kb-card-slug">/knowledge/' + escHtml(a.slug) + '/</span>' +
+          '<span>w:' + a.weight + '</span>' +
+          pillarBadge +
+        '</div>' +
+        '<div class="kb-card-actions">' +
+          '<a class="admin-btn" href="/knowledge/' + escHtml(a.slug) + '/" target="_blank" style="text-decoration:none">👁 Переглянути</a>' +
+          '<button class="admin-btn btn-edit" onclick="showKbEditor(\'' + escHtml(a.filename) + '\')">✏️ Редагувати</button>' +
+          '<button class="admin-btn btn-delete" onclick="deleteKbArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.sha) + '\', \'' + escHtml(a.title) + '\')">🗑️</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // Badge
+    var badge = document.getElementById('badge-knowledge');
+    if (badge) badge.textContent = kbArticles.length || '';
+  }
+
+  // --- Open editor ---
+  window.showKbEditor = function(filename) {
+    var wrapEl = document.getElementById('kb-editor-wrap');
+    wrapEl.style.display = 'block';
+    initKbQuill();
+    window._kbDirty = false;
+
+    var titleEl = document.getElementById('kb-editor-title');
+    var slugEl = document.getElementById('kb-slug');
+    slugEl.dataset.manualEdit = '';
+
+    if (!filename) {
+      // New article
+      titleEl.textContent = '✍️ Нова стаття бази знань';
+      document.getElementById('kb-title').value = '';
+      document.getElementById('kb-slug').value = '';
+      document.getElementById('kb-icon').value = '📄';
+      document.getElementById('kb-weight').value = '20';
+      document.getElementById('kb-pillar').checked = false;
+      document.getElementById('kb-summary').value = '';
+      document.getElementById('kb-keywords').value = '';
+      document.getElementById('kb-image').value = '';
+      document.getElementById('kb-youtube').value = '';
+      document.getElementById('kb-editing-file').textContent = '';
+      document.getElementById('kb-editing-sha').textContent = '';
+      updateKbImagePreview();
+      kbQuillEditor.setText('');
+    } else {
+      // Edit existing
+      var article = kbArticles.find(function(a) { return a.filename === filename; });
+      if (!article) { showStatus('❌ Стаття не знайдена', 'error'); return; }
+      titleEl.textContent = '✏️ Редагування: ' + article.title;
+      document.getElementById('kb-title').value = article.title;
+      document.getElementById('kb-slug').value = article.slug;
+      slugEl.dataset.manualEdit = '1'; // don't auto-rewrite
+      document.getElementById('kb-icon').value = article.icon;
+      document.getElementById('kb-weight').value = article.weight;
+      document.getElementById('kb-pillar').checked = !!article.pillar;
+      document.getElementById('kb-summary').value = article.summary;
+      document.getElementById('kb-keywords').value = article.keywords;
+      document.getElementById('kb-image').value = article.image || '';
+      document.getElementById('kb-youtube').value = article.youtube_id || '';
+      document.getElementById('kb-editing-file').textContent = filename;
+      document.getElementById('kb-editing-sha').textContent = article.sha;
+      updateKbImagePreview();
+      var bodyHtml = markdownToHtml(article.body || '');
+      kbQuillEditor.clipboard.dangerouslyPasteHTML(bodyHtml);
+    }
+
+    wrapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showStatus(filename ? '✏️ Завантажено для редагування' : '✍️ Нова стаття', 'info');
+  };
+
+  // --- Close editor ---
+  window.closeKbEditor = function() {
+    if (window._kbDirty && !confirm('Є незбережені зміни. Закрити?')) return;
+    document.getElementById('kb-editor-wrap').style.display = 'none';
+    window._kbDirty = false;
+  };
+
+  // --- Save KB article ---
+  window.saveKbArticle = async function() {
+    var title = document.getElementById('kb-title').value.trim();
+    var slug = document.getElementById('kb-slug').value.trim() || slugifyUA(title);
+    var icon = document.getElementById('kb-icon').value.trim() || '📄';
+    var weight = parseInt(document.getElementById('kb-weight').value) || 20;
+    var pillar = document.getElementById('kb-pillar').checked;
+    var summary = document.getElementById('kb-summary').value.trim();
+    var keywordsRaw = document.getElementById('kb-keywords').value.trim();
+    var imageUrl = document.getElementById('kb-image').value.trim();
+    var youtubeId = document.getElementById('kb-youtube').value.trim();
+    var editingFilename = document.getElementById('kb-editing-file').textContent.trim();
+    var editingSha = document.getElementById('kb-editing-sha').textContent.trim();
+
+    if (!title) { showStatus('❌ Введіть заголовок', 'error'); return; }
+    if (!kbQuillEditor || kbQuillEditor.getText().trim().length < 10) {
+      showStatus('❌ Текст статті занадто короткий', 'error'); return;
+    }
+
+    var bodyHtml = kbQuillEditor.root.innerHTML;
+    var bodyMd = kbTurndown.turndown(bodyHtml);
+
+    // Build keywords array
+    var keywords = keywordsRaw ? keywordsRaw.split(',').map(function(k) { return '"' + k.trim().replace(/"/g, "'") + '"'; }).filter(Boolean) : [];
+    var keywordsStr = '[' + keywords.join(', ') + ']';
+
+    var now = new Date();
+    var dateStr = editingFilename
+      ? (kbArticles.find(function(a) { return a.filename === editingFilename; }) || {}).date || now.toISOString().replace(/\.\d{3}Z$/, '+00:00')
+      : now.toISOString().replace(/\.\d{3}Z$/, '+00:00');
+
+    var filename = editingFilename || (slug + '.md');
+    var filePath = 'content/knowledge/' + filename;
+
+    var fm = '---\n';
+    fm += 'title: "' + title.replace(/"/g, "'") + '"\n';
+    fm += 'date: ' + dateStr + '\n';
+    fm += 'summary: "' + summary.replace(/"/g, "'") + '"\n';
+    fm += 'icon: "' + icon + '"\n';
+    fm += 'weight: ' + weight + '\n';
+    if (keywords.length) fm += 'keywords: ' + keywordsStr + '\n';
+    fm += 'pillar: ' + pillar + '\n';
+    if (imageUrl) fm += 'image: "' + imageUrl + '"\n';
+    if (youtubeId) fm += 'youtube_id: "' + youtubeId + '"\n';
+    fm += '---\n\n';
+    fm += bodyMd + '\n';
+
+    showStatus('⏳ Зберігаємо...', 'info');
+
+    try {
+      var putBody = {
+        message: (editingFilename ? '✏️ KB Edit: ' : '📖 KB New: ') + title.substring(0, 60),
+        content: b64EncodeUtf8(fm)
+      };
+      if (editingSha) putBody.sha = editingSha;
+
+      var resp = await ghApi('PUT', '/contents/' + filePath, putBody);
+      if (!resp.ok) {
+        var err = await resp.json().catch(function() { return {}; });
+        throw new Error(err.message || 'PUT failed: ' + resp.status);
+      }
+
+      showStatus('✅ Стаття бази знань збережена!', 'success');
+      window._kbDirty = false;
+      document.getElementById('kb-editor-wrap').style.display = 'none';
+      await loadKnowledge();
+
+    } catch(e) {
+      console.error('KB save error:', e);
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  // --- Delete KB article ---
+  window.deleteKbArticle = async function(filename, sha, title) {
+    if (!confirm('Видалити "' + title + '"?\nЦю дію не можна скасувати.')) return;
+    try {
+      var resp = await ghApi('DELETE', '/contents/content/knowledge/' + filename, {
+        message: '🗑️ KB Delete: ' + title.substring(0, 50),
+        sha: sha
+      });
+      if (!resp.ok) throw new Error('Delete failed: ' + resp.status);
+      showStatus('✅ Статтю видалено', 'success');
+      await loadKnowledge();
+    } catch(e) {
+      showStatus('❌ Помилка видалення: ' + e.message, 'error');
+    }
+  };
+
+  // --- Image upload for KB ---
+  window.uploadKbImage = async function(fileInput) {
+    var file = fileInput.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { showStatus('❌ Файл занадто великий (max 2MB)', 'error'); fileInput.value = ''; return; }
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) { showStatus('❌ Тільки JPG, PNG або WebP', 'error'); fileInput.value = ''; return; }
+    if (!ghToken) { showStatus('❌ GitHub PAT не налаштовано', 'error'); fileInput.value = ''; return; }
+    showStatus('⏳ Завантаження фото...', 'info');
+    try {
+      var reader = new FileReader();
+      var b64 = await new Promise(function(resolve, reject) {
+        reader.onload = function() { resolve(reader.result.split(',')[1]); };
+        reader.onerror = function() { reject(new Error('File read error')); };
+        reader.readAsDataURL(file);
+      });
+      var ext = file.name.split('.').pop().toLowerCase();
+      if (ext === 'jpeg') ext = 'jpg';
+      var imgFilename = 'kb-' + Date.now().toString(36) + '.' + ext;
+      var imgPath = 'static/images/uploads/' + imgFilename;
+      var putResp = await ghApi('PUT', '/contents/' + imgPath, {
+        message: '📷 KB Upload: ' + imgFilename,
+        content: b64
+      });
+      if (!putResp.ok) {
+        var errData = await putResp.json().catch(function() { return {}; });
+        throw new Error(errData.message || 'Upload failed: ' + putResp.status);
+      }
+      document.getElementById('kb-image').value = '/images/uploads/' + imgFilename;
+      updateKbImagePreview();
+      showStatus('✅ Фото завантажено!', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    } finally {
+      fileInput.value = '';
+    }
+  };
+
+  window.updateKbImagePreview = function() {
+    var url = document.getElementById('kb-image').value.trim();
+    var preview = document.getElementById('kb-image-preview');
+    var previewImg = document.getElementById('kb-image-preview-img');
+    var dropzone = document.getElementById('kb-image-dropzone');
+    if (!preview || !previewImg || !dropzone) return;
+    if (url) {
+      previewImg.onload = function() { preview.style.display = 'inline-flex'; dropzone.style.display = 'none'; };
+      previewImg.onerror = function() { preview.style.display = 'none'; dropzone.style.display = 'flex'; };
+      previewImg.src = url;
+    } else {
+      preview.style.display = 'none';
+      dropzone.style.display = 'flex';
+      previewImg.src = '';
+    }
+  };
+
+  window.clearKbImage = function() {
+    document.getElementById('kb-image').value = '';
+    updateKbImagePreview();
+  };
+
+  // --- Insert table ---
+  window.insertKbTable = function() {
+    if (!kbQuillEditor) return;
+    var tableHtml = '<p>| Стовпець 1 | Стовпець 2 | Стовпець 3 |</p>' +
+      '<p>|------------|------------|------------|</p>' +
+      '<p>| Дані       | Дані       | Дані       |</p>';
+    var range = kbQuillEditor.getSelection(true);
+    kbQuillEditor.clipboard.dangerouslyPasteHTML(range ? range.index : kbQuillEditor.getLength(), tableHtml);
+    showStatus('⊞ Таблицю вставлено. Відредагуйте вміст.', 'info');
+  };
+
+  // --- Insert divider ---
+  window.insertKbDivider = function() {
+    if (!kbQuillEditor) return;
+    var range = kbQuillEditor.getSelection(true);
+    var idx = range ? range.index : kbQuillEditor.getLength();
+    kbQuillEditor.insertText(idx, '\n---\n\n', 'user');
+    showStatus('― Розділювач вставлено.', 'info');
+  };
+
+  // --- Internal link modal ---
+  var _kbLinkSelected = null;
+
+  window.openKbLinkModal = function() {
+    _kbLinkSelected = null;
+    document.getElementById('kb-link-search').value = '';
+    document.getElementById('kb-link-display-row').style.display = 'none';
+    document.getElementById('kb-link-display-text').value = '';
+    document.getElementById('btn-insert-kb-link').disabled = true;
+    renderKbLinkList('');
+    document.getElementById('kb-link-modal').style.display = 'flex';
+    setTimeout(function() { document.getElementById('kb-link-search').focus(); }, 100);
+  };
+
+  window.closeKbLinkModal = function() {
+    document.getElementById('kb-link-modal').style.display = 'none';
+    _kbLinkSelected = null;
+  };
+
+  window.filterKbLinkList = function() {
+    var q = document.getElementById('kb-link-search').value.toLowerCase();
+    renderKbLinkList(q);
+  };
+
+  function renderKbLinkList(query) {
+    var listEl = document.getElementById('kb-link-list');
+    var filtered = kbArticles.filter(function(a) {
+      return !query || a.title.toLowerCase().includes(query) || a.slug.includes(query) || a.summary.toLowerCase().includes(query);
+    });
+    if (!filtered.length) {
+      listEl.innerHTML = '<div style="padding:12px;color:var(--text-tertiary);text-align:center">Нічого не знайдено</div>';
+      return;
+    }
+    listEl.innerHTML = filtered.map(function(a) {
+      var sel = _kbLinkSelected && _kbLinkSelected.slug === a.slug ? ' selected' : '';
+      return '<div class="kb-link-item' + sel + '" onclick="selectKbLinkItem(\'' + escHtml(a.slug) + '\', \'' + escHtml(a.title) + '\')">' +
+        '<span class="kb-link-item-icon">' + escHtml(a.icon) + '</span>' +
+        '<div class="kb-link-item-info">' +
+          '<div class="kb-link-item-title">' + escHtml(a.title) + '</div>' +
+          '<div class="kb-link-item-url">/knowledge/' + escHtml(a.slug) + '/</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  window.selectKbLinkItem = function(slug, title) {
+    _kbLinkSelected = { slug: slug, title: title };
+    // Update selection highlight
+    document.querySelectorAll('.kb-link-item').forEach(function(el) { el.classList.remove('selected'); });
+    event.currentTarget.classList.add('selected');
+    // Show display text row
+    var dispRow = document.getElementById('kb-link-display-row');
+    dispRow.style.display = 'block';
+    document.getElementById('kb-link-display-text').value = title;
+    document.getElementById('btn-insert-kb-link').disabled = false;
+  };
+
+  window.confirmInsertKbLink = function() {
+    if (!_kbLinkSelected || !kbQuillEditor) return;
+    var displayText = document.getElementById('kb-link-display-text').value.trim() || _kbLinkSelected.title;
+    var url = '/knowledge/' + _kbLinkSelected.slug + '/';
+    // Insert as Quill link
+    var range = kbQuillEditor.getSelection(true);
+    var idx = range ? range.index : kbQuillEditor.getLength();
+    kbQuillEditor.insertText(idx, displayText, 'link', url, 'user');
+    kbQuillEditor.setSelection(idx + displayText.length, 0);
+    closeKbLinkModal();
+    showStatus('🔗 Посилання вставлено: ' + displayText + ' → ' + url, 'success');
+  };
+
+  // --- AI Auto-format for KB ---
+  window.kbAutoFormat = async function() {
+    var geminiKey = localStorage.getItem('konopla_gemini_key');
+    if (!geminiKey) {
+      geminiKey = prompt('Введіть Gemini API Key:');
+      if (!geminiKey) return;
+      localStorage.setItem('konopla_gemini_key', geminiKey);
+    }
+    if (!kbQuillEditor) { showStatus('❌ Редактор не ініціалізований', 'error'); return; }
+    var rawText = kbQuillEditor.getText().trim();
+    if (rawText.length < 20) { showStatus('❌ Введіть текст (мінімум 20 символів)', 'error'); return; }
+
+    var btn = document.getElementById('btn-kb-autoformat');
+    btn.textContent = '⏳ AI...';
+    btn.disabled = true;
+    showStatus('⏳ AI форматує текст бази знань...', 'info');
+
+    var title = document.getElementById('kb-title').value.trim();
+    var prompt_text = 'Відформатуй цей текст як статтю бази знань:\n';
+    if (title) prompt_text += 'Тема: ' + title + '\n\n';
+    prompt_text += rawText;
+
+    var kbPrompt = 'Ти — редактор бази знань про промислові коноплі. Відформатуй текст у структурований HTML:\n' +
+      '- Заголовки (h2, h3) для секцій\n- <strong> для ключових фактів і цифр\n' +
+      '- <blockquote> для цитат\n- <ul>/<li> для переліків\n- Абзаци через <p>\n' +
+      'Відповідь лише у форматі JSON: {"title":"...", "summary":"...", "html":"..."}\n\n';
+
+    try {
+      var resp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(geminiKey),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: kbPrompt + prompt_text }] }],
+            generationConfig: { temperature: 0.5, maxOutputTokens: 8192, responseMimeType: 'application/json' }
+          })
+        }
+      );
+      if (!resp.ok) throw new Error('Gemini API error: ' + resp.status);
+      var data = await resp.json();
+      var aiText = data.candidates[0].content.parts[0].text.replace(/^```json\s*/, '').replace(/\s*```$/, '').trim();
+      var result = JSON.parse(aiText);
+      if (result.title && !document.getElementById('kb-title').value.trim()) {
+        document.getElementById('kb-title').value = result.title;
+        kbAutoSlug();
+      }
+      if (result.summary && !document.getElementById('kb-summary').value.trim()) {
+        document.getElementById('kb-summary').value = result.summary;
+      }
+      if (result.html) {
+        kbQuillEditor.clipboard.dangerouslyPasteHTML(result.html);
+      }
+      showStatus('✅ AI оформлення готове!', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка AI: ' + e.message, 'error');
+    } finally {
+      btn.textContent = '✨ AI оформлення';
+      btn.disabled = false;
+    }
+  };
+
+  // --- KB Deploy ---
+  window.triggerKbDeploy = async function() {
+    if (!confirm('Задеплоїти зміни бази знань?')) return;
+    try {
+      showStatus('⏳ Запуск деплою...', 'info');
+      var resp = await ghApi('POST', '/actions/workflows/moderate.yml/dispatches', { ref: 'main' });
+      if (!resp.ok) throw new Error('Deploy failed: ' + resp.status);
+      showStatus('🚀 Деплой запущено! Зміни з\'являться за 1-2 хв.', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка деплою: ' + e.message, 'error');
+    }
+  };
+
+  // Hook: load knowledge when switching to this view
+  var _origShowView = typeof showView === 'function' ? showView : null;
+  // (We patch showView at the end after it's defined — see below in showPanel augmentation)
 
   // Expose for onclick
   window.logout = logout;
