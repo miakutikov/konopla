@@ -40,7 +40,11 @@
     {{ end }}
 
     <div class="article-content">
-      {{ .Content }}
+      {{ if eq .Section "news" }}
+        {{ partial "autolink-content.html" (dict "content" .Content "page" . "site" .Site) }}
+      {{ else }}
+        {{ .Content }}
+      {{ end }}
     </div>
 
     <!-- Share buttons -->

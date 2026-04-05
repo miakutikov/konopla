@@ -2677,3 +2677,15 @@ img { max-width: 100%; height: auto; display: block; }
 .knowledge-cards {
   gap: 16px;
 }
+
+/* KB auto-links (generated at build time via autolink-content.html partial) */
+.kb-autolink {
+  color: var(--green-accent);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: color var(--transition), text-decoration-style var(--transition);
+}
+.kb-autolink:hover {
+  text-decoration-style: solid;
+}

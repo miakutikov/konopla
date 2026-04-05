@@ -1,0 +1,23 @@
+{{- /*
+  autolink-content.html
+  Injects KB article links into news article HTML at Hugo build time.
+  Reads phrases from data/kb_links.json — never modifies .md files.
+  Only applied to Section == "news".
+  Uses count=1 so only the first occurrence per phrase gets linked.
+*/ -}}
+{{- $content := .content -}}
+{{- if .site.Data.kb_links -}}
+  {{- range .site.Data.kb_links.links -}}
+    {{- $kbURL := .url -}}
+    {{- $kbTitle := .title | htmlEscape -}}
+    {{- range .phrases -}}
+      {{- $ph := . | strings.TrimSpace -}}
+      {{- if ge (len $ph) 5 -}}
+        {{- $pat := printf `(?i)>([^<]*)(%s)([^<]*)<` $ph -}}
+        {{- $rep := printf `>$1<a href="%s" class="kb-autolink" title="%s">$2</a>$3<` $kbURL $kbTitle -}}
+        {{- $content = replaceRE $pat $rep $content 1 -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $content | safeHTML -}}

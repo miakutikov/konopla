@@ -55,6 +55,9 @@
           <li class="sidebar-item" data-view="knowledge" onclick="showView('knowledge')">
             <span class="sidebar-label">📖 База знань</span> <span class="sidebar-badge" id="badge-knowledge"></span>
           </li>
+          <li class="sidebar-item" data-view="kblinks" onclick="showView('kblinks')">
+            <span class="sidebar-label">🔗 Автопосилання</span>
+          </li>
         </ul>
         <div class="sidebar-footer">
           <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Згорнути/розгорнути">«</button>
@@ -830,6 +833,70 @@
             </div>
           </div>
         </div>
+
+        <!-- ===== VIEW: Автопосилання ===== -->
+        <div class="admin-view" id="view-kblinks">
+          <div class="view-header">
+            <h1>🔗 Автопосилання</h1>
+            <div class="view-actions">
+              <button class="admin-btn admin-btn-green" onclick="showKbLinkForm(null)">+ Додати</button>
+              <button class="admin-btn" onclick="loadKbLinks()">🔄 Оновити</button>
+              <button class="admin-btn" onclick="triggerKbLinksDeploy()">🚀 Деплой</button>
+            </div>
+          </div>
+
+          <!-- Form (collapsible) -->
+          <div id="kbl-form-wrap" class="kbl-form-wrap" style="display:none">
+            <div class="kbl-form-card">
+              <div class="kbl-form-header">
+                <h3 id="kbl-form-title">➕ Новий запис</h3>
+                <button class="admin-btn admin-btn-dim" onclick="closeKbLinkForm()">✕</button>
+              </div>
+              <div style="padding:16px 20px">
+                <div class="cf-row">
+                  <div class="cf-field">
+                    <label>KB стаття</label>
+                    <select id="kbl-article-select" onchange="onKbLinkArticleSelect()">
+                      <option value="">— оберіть статтю —</option>
+                    </select>
+                  </div>
+                  <div class="cf-field">
+                    <label>URL</label>
+                    <input type="text" id="kbl-url" placeholder="/knowledge/slug/">
+                  </div>
+                </div>
+                <div class="cf-row">
+                  <div class="cf-field cf-field-wide">
+                    <label>Назва (tooltip для посилань)</label>
+                    <input type="text" id="kbl-title-input" placeholder="Назва статті бази знань">
+                  </div>
+                </div>
+                <div class="cf-row">
+                  <div class="cf-field cf-field-wide">
+                    <label>Фрази — одна на рядок (мін. 5 символів, без спецсимволів regex)</label>
+                    <textarea id="kbl-phrases" rows="5" placeholder="конопляний бетон&#10;hempcrete&#10;конопляно-вапняний"></textarea>
+                  </div>
+                </div>
+                <div class="cf-actions">
+                  <button class="admin-btn admin-btn-green" onclick="saveKbLinkEntry()">💾 Зберегти запис</button>
+                  <button class="admin-btn admin-btn-dim" onclick="closeKbLinkForm()">Скасувати</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div style="margin-bottom:16px">
+            <input type="text" id="kbl-search" class="catalog-search-input" placeholder="🔍 Пошук по назві або фразі..." oninput="renderKbLinks()">
+          </div>
+
+          <!-- List -->
+          <div id="kbl-list" class="kbl-list"></div>
+          <div id="kbl-empty" class="admin-empty" style="display:none">
+            <h2>🔗 Реєстр автопосилань порожній</h2>
+            <p>Натисніть «+ Додати» щоб додати перший запис.</p>
+          </div>
+        </div><!-- /view-kblinks -->
 
       </div><!-- /admin-main -->
     </div><!-- /admin-panel -->
@@ -3325,6 +3392,68 @@
 #badge-knowledge { background: rgba(74,222,128,0.2); color: var(--green-accent); }
 
 /* =========================================================================
+   KB Links Registry (Автопосилання)
+   ========================================================================= */
+.kbl-form-wrap { margin-bottom: 20px; }
+.kbl-form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.kbl-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.kbl-form-header h3 { margin: 0; font-size: 1rem; }
+.kbl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.kbl-entry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: border-color var(--transition);
+}
+.kbl-entry:hover { border-color: var(--green-accent); }
+.kbl-entry-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.kbl-entry-info { flex: 1; min-width: 0; }
+.kbl-entry-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.kbl-entry-url {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+.kbl-entry-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.kbl-entry-phrases { display: flex; flex-wrap: wrap; gap: 6px; }
+.kbl-phrase-chip {
+  display: inline-block;
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--green-accent);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+}
+
+/* =========================================================================
    Candidates tab
    ========================================================================= */
 .admin-btn-candidates {
@@ -4082,7 +4211,7 @@
     // Resolve aliases from old naming
     if (VIEW_ALIASES[name]) name = VIEW_ALIASES[name];
 
-    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog', 'knowledge'];
+    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog', 'knowledge', 'kblinks'];
     if (validViews.indexOf(name) === -1) name = 'feed';
 
     // Hide all views, then show the requested one with fade
@@ -4119,6 +4248,7 @@
     if (name === 'settings' && sourcesData.length === 0 && ghToken) loadSources();
     if (name === 'catalog' && !catalogLoaded && ghToken) loadCatalog();
     if (name === 'knowledge' && kbArticles.length === 0 && ghToken) loadKnowledge();
+    if (name === 'kblinks' && kbLinksData.length === 0 && ghToken) loadKbLinks();
     if (name === 'scheduled' && ghToken) loadScheduledView();
     if (name === 'analytics' && !chartsInitialized) {
       setTimeout(function() {
@@ -8980,6 +9110,193 @@
   };
 
   // --- KB Deploy ---
+  // =========================================================================
+  // KB Links Registry (Автопосилання)
+  // =========================================================================
+
+  var kbLinksData = [];
+  var kbLinksSha = null;
+  var editingKbLinkIdx = null;
+
+  window.loadKbLinks = async function() {
+    try {
+      showStatus('⏳ Завантаження реєстру...', 'info');
+      var resp = await ghApi('GET', '/contents/data/kb_links.json');
+      if (!resp.ok) { showStatus('❌ Помилка завантаження реєстру (' + resp.status + ')', 'error'); return; }
+      var file = await resp.json();
+      kbLinksSha = file.sha;
+      var decoded = JSON.parse(atob(file.content.replace(/\n/g, '')));
+      kbLinksData = decoded.links || [];
+      renderKbLinks();
+      showStatus('✅ Реєстр завантажено (' + kbLinksData.length + ' записів)', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+    }
+  };
+
+  window.renderKbLinks = function() {
+    var q = ((document.getElementById('kbl-search') || {}).value || '').trim().toLowerCase();
+    var filtered = kbLinksData.map(function(item, idx) { return { item: item, idx: idx }; });
+    if (q) {
+      filtered = filtered.filter(function(d) {
+        return d.item.title.toLowerCase().includes(q) ||
+               (d.item.phrases || []).some(function(p) { return p.toLowerCase().includes(q); });
+      });
+    }
+    var list = document.getElementById('kbl-list');
+    var empty = document.getElementById('kbl-empty');
+    if (!list) return;
+    if (kbLinksData.length === 0) {
+      list.innerHTML = '';
+      if (empty) empty.style.display = '';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    if (filtered.length === 0) {
+      list.innerHTML = '<p style="color:var(--text-secondary);text-align:center;padding:20px">Нічого не знайдено</p>';
+      return;
+    }
+    list.innerHTML = filtered.map(function(d) {
+      var chips = (d.item.phrases || []).map(function(p) {
+        return '<span class="kbl-phrase-chip">' + escHtml(p) + '</span>';
+      }).join('');
+      return '<div class="kbl-entry">' +
+        '<div class="kbl-entry-top">' +
+          '<div class="kbl-entry-info">' +
+            '<strong class="kbl-entry-title">' + escHtml(d.item.title) + '</strong>' +
+            '<span class="kbl-entry-url">' + escHtml(d.item.url) + '</span>' +
+          '</div>' +
+          '<div class="kbl-entry-actions">' +
+            '<button class="admin-btn admin-btn-sm" onclick="showKbLinkForm(' + d.idx + ')" title="Редагувати">✏️</button>' +
+            '<button class="admin-btn admin-btn-sm btn-delete" onclick="deleteKbLinkEntry(' + d.idx + ')" title="Видалити">🗑️</button>' +
+          '</div>' +
+        '</div>' +
+        (chips ? '<div class="kbl-entry-phrases">' + chips + '</div>' : '') +
+      '</div>';
+    }).join('');
+  };
+
+  window.saveKbLinks = async function(commitMsg) {
+    var content = JSON.stringify({ links: kbLinksData }, null, 2);
+    var b64 = btoa(unescape(encodeURIComponent(content)));
+    var body = { message: commitMsg, content: b64, branch: 'main' };
+    if (kbLinksSha) body.sha = kbLinksSha;
+    var resp = await ghApi('PUT', '/contents/data/kb_links.json', body);
+    if (!resp.ok) {
+      var errData = await resp.json().catch(function() { return {}; });
+      throw new Error(errData.message || ('HTTP ' + resp.status));
+    }
+    var result = await resp.json();
+    kbLinksSha = result.content.sha;
+  };
+
+  window.showKbLinkForm = function(idx) {
+    editingKbLinkIdx = (typeof idx === 'number') ? idx : null;
+    var wrap = document.getElementById('kbl-form-wrap');
+    var formTitle = document.getElementById('kbl-form-title');
+    var select = document.getElementById('kbl-article-select');
+    // Populate KB articles dropdown
+    if (select) {
+      var opts = '<option value="">— оберіть статтю —</option>';
+      kbArticles.forEach(function(a) {
+        opts += '<option value="' + escHtml(a.slug) + '">' + escHtml(a.title) + '</option>';
+      });
+      select.innerHTML = opts;
+    }
+    if (editingKbLinkIdx === null) {
+      if (formTitle) formTitle.textContent = '➕ Новий запис';
+      if (select) select.value = '';
+      document.getElementById('kbl-url').value = '';
+      document.getElementById('kbl-title-input').value = '';
+      document.getElementById('kbl-phrases').value = '';
+    } else {
+      var entry = kbLinksData[editingKbLinkIdx];
+      if (!entry) return;
+      if (formTitle) formTitle.textContent = '✏️ Редагувати: ' + entry.title;
+      if (select) select.value = entry.slug || '';
+      document.getElementById('kbl-url').value = entry.url || '';
+      document.getElementById('kbl-title-input').value = entry.title || '';
+      document.getElementById('kbl-phrases').value = (entry.phrases || []).join('\n');
+    }
+    if (wrap) {
+      wrap.style.display = '';
+      wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  window.closeKbLinkForm = function() {
+    var wrap = document.getElementById('kbl-form-wrap');
+    if (wrap) wrap.style.display = 'none';
+    editingKbLinkIdx = null;
+  };
+
+  window.onKbLinkArticleSelect = function() {
+    var select = document.getElementById('kbl-article-select');
+    if (!select || !select.value) return;
+    var article = kbArticles.find(function(a) { return a.slug === select.value; });
+    if (article) {
+      document.getElementById('kbl-url').value = '/knowledge/' + article.slug + '/';
+      document.getElementById('kbl-title-input').value = article.title || '';
+    }
+  };
+
+  window.saveKbLinkEntry = async function() {
+    var url = (document.getElementById('kbl-url').value || '').trim();
+    var title = (document.getElementById('kbl-title-input').value || '').trim();
+    var phrasesRaw = document.getElementById('kbl-phrases').value || '';
+    var phrases = phrasesRaw.split('\n')
+      .map(function(p) { return p.trim(); })
+      .filter(function(p) { return p.length >= 5; });
+    var select = document.getElementById('kbl-article-select');
+    var slug = select ? (select.value || '') : '';
+    if (!url) { showStatus('⚠️ Вкажіть URL', 'error'); return; }
+    if (!title) { showStatus('⚠️ Вкажіть назву', 'error'); return; }
+    if (phrases.length === 0) { showStatus('⚠️ Додайте хоча б одну фразу (мін. 5 символів)', 'error'); return; }
+    var entry = { slug: slug, url: url, title: title, phrases: phrases };
+    var isNew = editingKbLinkIdx === null;
+    var prevEntry = isNew ? null : kbLinksData[editingKbLinkIdx];
+    if (isNew) { kbLinksData.push(entry); } else { kbLinksData[editingKbLinkIdx] = entry; }
+    try {
+      showStatus('⏳ Збереження...', 'info');
+      await saveKbLinks(isNew ? '🔗 Add kb link: ' + title : '🔗 Update kb link: ' + title);
+      closeKbLinkForm();
+      renderKbLinks();
+      showStatus('✅ Збережено!', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+      if (isNew) { kbLinksData.pop(); } else { kbLinksData[editingKbLinkIdx] = prevEntry; }
+    }
+  };
+
+  window.deleteKbLinkEntry = async function(idx) {
+    var entry = kbLinksData[idx];
+    if (!entry) return;
+    if (!confirm('Видалити "' + entry.title + '" з реєстру автопосилань?')) return;
+    var removed = kbLinksData.splice(idx, 1)[0];
+    try {
+      showStatus('⏳ Видалення...', 'info');
+      await saveKbLinks('🔗 Remove kb link: ' + removed.title);
+      renderKbLinks();
+      showStatus('✅ Видалено!', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка: ' + e.message, 'error');
+      kbLinksData.splice(idx, 0, removed);
+      renderKbLinks();
+    }
+  };
+
+  window.triggerKbLinksDeploy = async function() {
+    if (!confirm('Задеплоїти зміни реєстру автопосилань?')) return;
+    try {
+      showStatus('⏳ Запуск деплою...', 'info');
+      var resp = await ghApi('POST', '/actions/workflows/moderate.yml/dispatches', { ref: 'main' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      showStatus('🚀 Деплой запущено! Нові посилання з\'являться за 1-2 хв.', 'success');
+    } catch(e) {
+      showStatus('❌ Помилка деплою: ' + e.message, 'error');
+    }
+  };
+
   window.triggerKbDeploy = async function() {
     if (!confirm('Задеплоїти зміни бази знань?')) return;
     try {
