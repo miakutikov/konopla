@@ -1,7 +1,7 @@
 # SYSTEM_MAP.md — Admin Panel Architecture Reference
 
-> **Last updated:** 2026-03-28 (Задача 7 — migration + cleanup)
-> **Main file:** `layouts/admin/list.html` (7395 lines)
+> **Last updated:** 2026-04-05 (Knowledge Base editor)
+> **Main file:** `layouts/admin/list.html` (~9000 lines)
 > **Structure:** Single-file SPA — HTML (1-599) | CSS (600-2933) | JS (2935-7394)
 
 ---
@@ -46,6 +46,7 @@ data/processed.json         — MD5 hashes of processed articles
 | 📊 Аналітика | analytics | view-analytics | `.stats-*`, `.chart-*`, `.calendar-*`, `.cal-*` |
 | ⚙️ Налаштування | settings | view-settings | `.sources-*`, `.source-*`, `.yt-*` |
 | 📋 Каталог | catalog | view-catalog | `.cat-*`, `.company-form-*` |
+| 📖 База знань | knowledge | view-knowledge | `.kb-*`, `.kb-card`, `.kb-editor-*`, `.kb-link-modal`, `.kb-link-item` |
 
 **Aliases (backwards compat):** `candidates→feed`, `moderation→editorial`, `articles→archive`
 
@@ -263,6 +264,31 @@ data/processed.json         — MD5 hashes of processed articles
 | 6001 | `openSocialModal(filename, platform)` | Open publish modal |
 | 6068 | `closeSocialModal()` | Close modal |
 | 6073 | `publishSocial()` | Dispatch social workflow |
+
+### Knowledge Base Editor
+| Line | Function | Description |
+|------|----------|-------------|
+| ~8300 | `initKbQuill()` | Init separate Quill instance for KB editor |
+| ~8320 | `kbAutoSlug()` | Auto-generate slug from KB title |
+| ~8330 | `loadKnowledge()` | Fetch all .md files from content/knowledge/ via GitHub API |
+| ~8380 | `renderKbList()` | Render KB articles as cards grid |
+| ~8405 | `showKbEditor(filename)` | Open editor (null=new, filename=edit existing) |
+| ~8440 | `closeKbEditor()` | Close editor with dirty check |
+| ~8445 | `saveKbArticle()` | Build frontmatter + save .md to GitHub |
+| ~8500 | `deleteKbArticle(filename, sha, title)` | Delete KB article via GitHub API |
+| ~8510 | `uploadKbImage(fileInput)` | Upload image to static/images/uploads/ |
+| ~8540 | `updateKbImagePreview()` | Preview KB image from URL |
+| ~8550 | `clearKbImage()` | Clear KB image |
+| ~8555 | `insertKbTable()` | Insert markdown table template in Quill |
+| ~8562 | `insertKbDivider()` | Insert `---` divider in Quill |
+| ~8568 | `openKbLinkModal()` | Open Wikipedia-style internal link modal |
+| ~8575 | `closeKbLinkModal()` | Close link modal |
+| ~8580 | `filterKbLinkList()` | Filter KB articles in link modal |
+| ~8583 | `renderKbLinkList(query)` | Render filtered list in modal |
+| ~8600 | `selectKbLinkItem(slug, title)` | Select article to link |
+| ~8612 | `confirmInsertKbLink()` | Insert Quill link `/knowledge/slug/` |
+| ~8625 | `kbAutoFormat()` | AI (Gemini) format KB article content |
+| ~8665 | `triggerKbDeploy()` | Trigger moderate.yml deploy |
 
 ### Catalog
 | Line | Function | Description |
