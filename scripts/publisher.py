@@ -2,10 +2,89 @@
 publisher.py — Створює Hugo markdown файли з переписаних новин
 """
 
+import glob
 import os
 import re
 import tempfile
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
+
+# === Tag normalization & canonicalization ===
+
+_existing_tags_cache = None
+
+
+def _normalize_tag(tag):
+    """Нормалізує один тег: lowercase, пробіли, фільтр сміття."""
+    if not isinstance(tag, str):
+        return None
+    tag = tag.strip().lower()
+    tag = tag.replace('_', ' ')
+    tag = re.sub(r'\s+', ' ', tag).strip()
+    if not tag or len(tag) < 2:
+        return None
+    # Відкидаємо слова з мікс-скриптом (кирилиця + латиниця в одному слові)
+    for word in tag.split():
+        has_cyr = bool(re.search(r'[а-яіїєґ]', word))
+        has_lat = bool(re.search(r'[a-z]', word))
+        if has_cyr and has_lat:
+            return None
+    return tag
+
+
+def _load_existing_tags(content_dir):
+    """Читає всі наявні теги з .md файлів у content_dir."""
+    tags = set()
+    for filepath in glob.glob(os.path.join(content_dir, '*.md')):
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                head = f.read(2000)
+            m = re.search(r'^tags:\s*\[([^\]]*)\]', head, re.MULTILINE)
+            if m:
+                for t in re.findall(r'"([^"]+)"', m.group(1)):
+                    norm = _normalize_tag(t)
+                    if norm:
+                        tags.add(norm)
+        except Exception:
+            continue
+    return tags
+
+
+def _canonicalize_tag(norm_tag, existing_tags):
+    """Повертає найближчий існуючий тег або norm_tag як новий."""
+    if norm_tag in existing_tags:
+        return norm_tag
+    best, best_score = None, 0.0
+    for existing in existing_tags:
+        score = SequenceMatcher(None, norm_tag, existing).ratio()
+        if score > best_score:
+            best_score = score
+            best = existing
+    if best_score >= 0.85:
+        print(f"[TAGS] '{norm_tag}' → '{best}' ({best_score:.2f})")
+        return best
+    return norm_tag
+
+
+def process_tags(raw_tags, content_dir):
+    """Нормалізує та каталогізує теги: використовує існуючі, нові — тільки якщо потрібно."""
+    global _existing_tags_cache
+    if _existing_tags_cache is None:
+        _existing_tags_cache = _load_existing_tags(content_dir)
+
+    result, seen = [], set()
+    for tag in raw_tags:
+        norm = _normalize_tag(tag)
+        if not norm:
+            continue
+        canonical = _canonicalize_tag(norm, _existing_tags_cache)
+        if canonical not in seen:
+            seen.add(canonical)
+            result.append(canonical)
+
+    # Поповнюємо кеш новими тегами для наступних статей у тому ж запуску
+    _existing_tags_cache.update(result)
+    return result[:5]
 
 
 def fix_double_utf8(text):
@@ -94,7 +173,7 @@ def create_article_file(article_data, source_url, source_name, image_data=None, 
         summary = article_data["summary"]
         content = article_data["content"]
         category = article_data.get("category", "інше")
-        tags = article_data.get("tags", [])
+        tags = process_tags(article_data.get("tags", []), content_dir)
         
         slug = slugify(title)
         filename = f"{date_prefix}-{slug}.md"
