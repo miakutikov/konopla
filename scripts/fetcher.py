@@ -201,6 +201,20 @@ def _fetch_single_feed(feed_url, processed_hashes, cutoff, trusted=False):
         for entry in feed.entries:
             title = clean_html(entry.get("title", ""))
             link = entry.get("link", "")
+
+            # Resolve Google News redirect URLs immediately before any processing
+            if link and "news.google.com" in link:
+                try:
+                    from scraper import _resolve_google_news_url
+                    resolved = _resolve_google_news_url(link)
+                    if resolved:
+                        link = resolved
+                    else:
+                        print(f"[SKIP] Could not resolve Google News URL: {link[:80]}")
+                        continue
+                except Exception as e:
+                    print(f"[SKIP] Google News resolve error: {e}")
+                    continue
             content_parts = entry.get("content", [])
             full_content = ""
             if content_parts and isinstance(content_parts, list):
