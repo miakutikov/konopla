@@ -577,7 +577,7 @@ img { max-width: 100%; height: auto; display: block; }
   border: 1px solid rgba(52, 211, 153, 0.12);
 }
 .section-subtitle {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.95rem;
   margin-top: -12px;
   margin-bottom: 24px;
@@ -613,7 +613,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .knowledge-card p {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 .knowledge-read {
@@ -662,7 +662,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .knowledge-page { margin: 20px 0; }
 .knowledge-page-title { font-size: 1.6rem; margin-bottom: 8px; }
-.knowledge-page-desc { color: var(--text-muted); margin-bottom: 24px; }
+.knowledge-page-desc { color: var(--text-secondary); margin-bottom: 24px; }
 .knowledge-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

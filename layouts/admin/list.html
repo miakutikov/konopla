@@ -4889,13 +4889,10 @@
   };
 
   async function triggerDeploy() {
-    try {
-      await ghApi('POST', '/actions/workflows/moderate.yml/dispatches', {
-        ref: 'main'
-      });
-    } catch (e) {
-      console.warn('Failed to trigger deploy:', e);
-    }
+    var resp = await ghApi('POST', '/actions/workflows/moderate.yml/dispatches', {
+      ref: 'main'
+    });
+    if (!resp.ok) throw new Error('Dispatch failed: ' + resp.status);
   }
 
   window.triggerManualDeploy = async function() {

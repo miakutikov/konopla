@@ -421,7 +421,7 @@ def run_process(ids):
                 print(f"   🎬 youtube_id={yt_video_id}, category=відео")
 
             # --- Get image: prefer original source, fallback to Unsplash/Gemini ---
-            article_id = str(uuid.uuid4())[:8]
+            article_id = uuid.uuid4().hex[:12]
             image_data = None
 
             # YouTube: use thumbnail
