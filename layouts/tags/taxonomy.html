@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="container">
+
+  {{ partial "breadcrumbs.html" . }}
+
+  <div class="news-content-header">
+    <h1>{{ .Title }}</h1>
+    <p class="list-count">{{ len .Data.Terms }} тегів</p>
+  </div>
+
+  <div class="tags" style="margin: 24px 0 48px;">
+    {{ range .Data.Terms.Alphabetical }}
+    <a href="{{ .Page.Permalink }}" class="tag">
+      #{{ .Page.Title }} <span style="opacity:0.6;font-size:0.75em">({{ .Count }})</span>
+    </a>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}
