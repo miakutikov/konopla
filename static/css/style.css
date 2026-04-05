@@ -567,6 +567,23 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.3px;
   font-size: 0.72rem;
 }
+@media (min-width: 768px) {
+  .compact-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+  }
+  .compact-item:nth-child(2) {
+    border-top: 1px solid var(--border);
+  }
+  .compact-thumb {
+    width: 110px;
+    height: 74px;
+  }
+  .compact-title {
+    font-size: 1rem;
+  }
+}
 
 /* === KNOWLEDGE SECTION === */
 .knowledge-section {
