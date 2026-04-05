@@ -37,7 +37,7 @@ buildDrafts = false
 
 [taxonomies]
   category = "categories"
-  # tag = "tags" — вимкнено: 186 унікальних тегів генерували ~186 порожніх сторінок у sitemap
+  tag = "tags"
 
 # Sitemap
 [sitemap]

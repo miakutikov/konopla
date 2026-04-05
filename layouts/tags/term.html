@@ -1,0 +1,114 @@
+{{- define "head-extra" -}}
+  {{- $pages := where .Pages ".Params.draft" "ne" true -}}
+  {{- $pag := .Paginate $pages -}}
+  {{- if $pag.HasPrev }}<link rel="prev" href="{{ $pag.Prev.URL | absURL }}">{{ end -}}
+  {{- if $pag.HasNext }}<link rel="next" href="{{ $pag.Next.URL | absURL }}">{{ end -}}
+{{- end -}}
+
+{{ define "main" }}
+<div class="container">
+
+  {{ partial "breadcrumbs.html" . }}
+
+  {{ $publishedNews := where (where .Site.RegularPages "Section" "news") ".Params.draft" "ne" true }}
+  {{ $publishedPages := where .Pages ".Params.draft" "ne" true }}
+
+  <section class="news-page-layout">
+    <!-- Category sidebar -->
+    <aside class="categories-sidebar">
+      <h3 class="sidebar-heading">Категорії</h3>
+      <ul class="categories-list">
+        <li>
+          <a href="{{ "/news/" | relURL }}" class="category-item">
+            <span class="category-name">Усі новини</span>
+            <span class="category-count">{{ len $publishedNews }}</span>
+          </a>
+        </li>
+        {{ $categories := slice
+          (dict "name" "текстиль" "emoji" "🧵")
+          (dict "name" "будівництво" "emoji" "🏗️")
+          (dict "name" "агро" "emoji" "🌱")
+          (dict "name" "біопластик" "emoji" "♻️")
+          (dict "name" "харчова" "emoji" "🥗")
+          (dict "name" "автопром" "emoji" "🚗")
+          (dict "name" "енергетика" "emoji" "⚡")
+          (dict "name" "косметика" "emoji" "✨")
+          (dict "name" "наука" "emoji" "🔬")
+          (dict "name" "екологія" "emoji" "🌍")
+          (dict "name" "бізнес" "emoji" "💼")
+          (dict "name" "законодавство" "emoji" "📋")
+        }}
+        {{ range $categories }}
+        {{ $count := 0 }}
+        {{ with index $.Site.Taxonomies.categories (lower .name) }}
+          {{ $count = .Count }}
+        {{ end }}
+        {{ if gt $count 0 }}
+        <li>
+          <a href="{{ "/categories/" | relURL }}{{ .name | urlize }}/" class="category-item">
+            <span class="category-emoji">{{ .emoji }}</span>
+            <span class="category-name">{{ .name | title }}</span>
+            <span class="category-count">{{ $count }}</span>
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+      {{ if $.Site.Taxonomies.tags }}
+      <div class="sidebar-tags">
+        <h3 class="sidebar-heading">Теги</h3>
+        <div class="tags">
+          {{ range $.Site.Taxonomies.tags.ByCount }}
+          <a href="{{ "/tags/" | relURL }}{{ .Name | urlize }}/" class="tag{{ if eq (.Name | urlize) ($.Title | urlize) }} active{{ end }}">#{{ .Name }}</a>
+          {{ end }}
+        </div>
+        <button class="tags-toggle" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? 'Згорнути ▲' : 'Показати всі ▼'">Показати всі ▼</button>
+      </div>
+      {{ end }}
+    </aside>
+
+    <!-- Tag content -->
+    <div class="news-content">
+      <div class="news-content-header">
+        <h1>#{{ .Title }}</h1>
+        <p class="list-count">{{ len $publishedPages }} {{ if eq (len $publishedPages) 1 }}новина{{ else }}новин{{ end }}</p>
+      </div>
+
+      {{ $paginator := .Paginate $publishedPages }}
+      <div class="news-grid">
+        {{ range $paginator.Pages }}
+          {{ partial "article-card.html" . }}
+        {{ end }}
+      </div>
+
+      <!-- Pagination -->
+      {{ if gt $paginator.TotalPages 1 }}
+      <nav class="pagination">
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" class="page-btn">&larr; Новіші</a>
+        {{ else }}
+        <span class="page-btn disabled">&larr; Новіші</span>
+        {{ end }}
+
+        <div class="page-numbers">
+          {{ range $paginator.Pagers }}
+          {{ if eq . $paginator }}
+          <span class="page-num current">{{ .PageNumber }}</span>
+          {{ else }}
+          <a href="{{ .URL }}" class="page-num">{{ .PageNumber }}</a>
+          {{ end }}
+          {{ end }}
+        </div>
+
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}" class="page-btn">Старіші &rarr;</a>
+        {{ else }}
+        <span class="page-btn disabled">Старіші &rarr;</span>
+        {{ end }}
+      </nav>
+      {{ end }}
+    </div>
+  </section>
+
+</div>
+{{ end }}
