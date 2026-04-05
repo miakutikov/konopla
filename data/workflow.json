@@ -451,19 +451,19 @@
       "published_at": null
     },
     {
-      "id": "q9y22lxc",
-      "filename": "",
-      "title": "🎬 YouTube — oS12XbN42nk",
-      "summary": "",
+      "id": "cd23de60",
+      "filename": "20260405-0736-vsya-pravda-pro-cbd-mahazyny-v-ukrayini-rozsliduvannya-kyiv-city-news.md",
+      "title": "Вся правда про CBD-магазини в Україні: розслідування Kyiv City News",
+      "summary": "Канал Kyiv City News випустив відеорозслідування, що детально аналізує ринок CBD в Україні, його законність, відмінності від ТГК та перспективи легалізації медичного канабісу.",
       "category": "відео",
-      "image": "https://img.youtube.com/vi/oS12XbN42nk/hqdefault.jpg",
+      "image": "https://i.ytimg.com/vi/oS12XbN42nk/maxresdefault.jpg",
       "candidate_id": "q9y22lxc",
       "original_title": "",
       "original_url": "https://www.youtube.com/watch?v=oS12XbN42nk",
       "source_name": "YouTube",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -474,18 +474,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Kyiv City News розслідує ринок CBD в Україні: законність магазинів, різниця між CBD та ТГК, перспективи легалізації медичного канабісу."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "CBD-магазини в Україні: легально чи ні? Kyiv City News розібралися, що приховують від нас, як працює ринок CBD та чи чекає на нас легалізація медичного канабісу. Дивіться відео!"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-05T07:35:54.632Z",
-      "updated_at": "2026-04-05T07:36:01.704Z",
+      "updated_at": "2026-04-05T07:36:42.476661+00:00",
       "published_at": null
     }
   ]
