@@ -410,6 +410,45 @@
       "created_at": "2026-04-09T18:16:09.374Z",
       "updated_at": "2026-04-09T18:16:09.374Z",
       "published_at": null
+    },
+    {
+      "id": "f7ca6cb9",
+      "filename": "20260402-0905-kartuvannya-ekosystemy-promyslovykh-konopel-predstavlyayemo-hempcortex.md",
+      "title": "Картування екосистеми промислових конопель: представляємо HempCortex",
+      "summary": "Дізнайтеся про нову платформу HempCortex від HempQuarterz Inc., що має на меті об'єднати та візуалізувати дані промислових конопель від сировини до готової продукції, вирішуючи проблему фрагментації галузі.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/eyfhz9eXKik/hqdefault.jpg",
+      "candidate_id": "f7ca6cb9",
+      "original_title": "Картування екосистеми промислових конопель: представляємо HempCortex",
+      "original_url": "",
+      "source_name": "YouTube",
+      "content_preview": "Дізнайтеся про нову платформу HempCortex від HempQuarterz Inc., що має на меті об'єднати та візуалізувати дані промислових конопель від сировини до готової продукції, вирішуючи проблему фрагментації галузі.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-09T18:16:29.004Z",
+      "updated_at": "2026-04-09T18:16:29.004Z",
+      "published_at": null
     }
   ]
 }
