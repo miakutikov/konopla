@@ -7388,6 +7388,9 @@
         document.getElementById('candidates-updated').textContent = 'оновлено ' + timeAgo(content.updated_at);
       }
 
+      // Fallback: pull YouTube videos from drafts.json that aren't in workflow yet
+      await appendYouTubeDraftsToCandidates();
+
       candidatesSelected = {};
       document.getElementById('candidates-select-all-cb').checked = false;
       renderCandidates();
@@ -7398,6 +7401,67 @@
       listEl.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
     }
   };
+
+  // Fallback: read YouTube videos from drafts.json and show them in Feed view
+  // as synthetic candidates if they are not already represented in candidates.json
+  // or already moved into workflow.json. Ensures YouTube videos are visible even
+  // when the RSS fetcher has not produced any candidates.
+  async function appendYouTubeDraftsToCandidates() {
+    try {
+      var dResp = await ghApi('GET', '/contents/data/drafts.json');
+      if (!dResp || !dResp.ok) return;
+      var dFile = await dResp.json();
+      var dContent;
+      try { dContent = JSON.parse(b64DecodeUtf8(dFile.content)); } catch (e) { return; }
+      var articles = (dContent.articles || []).filter(function(a) { return a && a.category === 'відео'; });
+      if (articles.length === 0) return;
+
+      // Make sure workflow data is loaded so we can filter already-shortlisted videos
+      if (!workflowData || workflowData.length === 0) {
+        try { await loadWorkflowArticles(); } catch (e) {}
+      }
+      var workflowFilenames = new Set();
+      (workflowData || []).forEach(function(w) {
+        if (w && w.filename) workflowFilenames.add(w.filename);
+      });
+      var existingCandIds = new Set((candidatesData || []).map(function(c) { return c.id; }));
+
+      var synthetic = articles
+        .filter(function(a) {
+          if (a.filename && workflowFilenames.has(a.filename)) return false;
+          if (a.id && existingCandIds.has(a.id)) return false;
+          return true;
+        })
+        .map(function(a) {
+          var ytUrl = a.source_url || (a.youtube_id ? 'https://www.youtube.com/watch?v=' + a.youtube_id : '');
+          return {
+            id: a.id,
+            type: 'video',
+            title: a.title,
+            link: ytUrl,
+            source: 'YouTube',
+            summary: a.summary || '',
+            image_url: a.image || '',
+            date: a.created_at || '',
+            content_preview: (a.summary || '').slice(0, 300),
+            added_at: a.created_at || '',
+            relevance_score: 0.9,
+            source_trusted: true,
+            category_hint: 'відео',
+            youtube_id: a.youtube_id || '',
+            draft_filename: a.filename,
+            _synthetic: true
+          };
+        });
+
+      if (synthetic.length > 0) {
+        // Prepend synthetic (newest first)
+        candidatesData = synthetic.concat(candidatesData || []);
+      }
+    } catch (e) {
+      console.warn('YouTube drafts fallback failed:', e);
+    }
+  }
 
   function renderRelevanceStars(score) {
     if (typeof score !== 'number') return '';
@@ -7660,8 +7724,19 @@
     if (!confirm('Видалити цю новину?')) return;
     showStatus(String.fromCodePoint(9203) + ' Видаляємо...', 'info');
     try {
-      // Save hash before filtering
       var deleted = candidatesData.find(function(c) { return c.id === id; });
+
+      // Synthetic YouTube draft — delete only from drafts.json (+ content file)
+      if (deleted && deleted._synthetic && deleted.draft_filename) {
+        await deleteDraftArticleByFilename(deleted.draft_filename);
+        candidatesData = candidatesData.filter(function(c) { return c.id !== id; });
+        delete candidatesSelected[id];
+        renderCandidates();
+        updateBadges();
+        showStatus(String.fromCodePoint(9989) + ' Відео видалено', 'success');
+        return;
+      }
+
       var sha = candidatesSha;
       var data;
       if (!sha) {
@@ -7671,7 +7746,7 @@
         sha = fileData.sha;
         data = JSON.parse(b64DecodeUtf8(fileData.content));
       } else {
-        data = { items: candidatesData.slice() };
+        data = { items: candidatesData.filter(function(c) { return !c._synthetic; }) };
       }
       data.items = (data.items || []).filter(function(c) { return c.id !== id; });
       var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
@@ -7685,7 +7760,7 @@
       }
       var result = await putResp.json();
       candidatesSha = result.content.sha;
-      candidatesData = data.items;
+      candidatesData = candidatesData.filter(function(c) { return c.id !== id; });
       delete candidatesSelected[id];
       renderCandidates();
       // Mark as processed so pipeline won't re-add
@@ -7696,6 +7771,37 @@
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
+
+  // Helper: delete a draft article by filename (removes from drafts.json + content file)
+  async function deleteDraftArticleByFilename(filename) {
+    // 1. Remove from drafts.json
+    try {
+      var dResp = await ghApi('GET', '/contents/data/drafts.json');
+      if (dResp.ok) {
+        var dFile = await dResp.json();
+        var dData = JSON.parse(b64DecodeUtf8(dFile.content));
+        dData.articles = (dData.articles || []).filter(function(a) { return a.filename !== filename; });
+        await ghApi('PUT', '/contents/data/drafts.json', {
+          message: String.fromCodePoint(128465) + ' Remove video draft ' + filename,
+          content: b64EncodeUtf8(JSON.stringify(dData, null, 2)),
+          sha: dFile.sha
+        });
+      }
+    } catch (e) { console.warn('drafts.json cleanup failed:', e); }
+
+    // 2. Delete content file
+    try {
+      var path = 'content/news/' + filename;
+      var fResp = await ghApi('GET', '/contents/' + path);
+      if (fResp.ok) {
+        var fFile = await fResp.json();
+        await ghApi('DELETE', '/contents/' + path, {
+          message: String.fromCodePoint(128465) + ' Delete video draft ' + filename,
+          sha: fFile.sha
+        });
+      }
+    } catch (e) { console.warn('content file delete failed:', e); }
+  }
 
   window.deleteSelectedCandidates = async function() {
     var selectedIds = Object.keys(candidatesSelected);
@@ -7785,20 +7891,24 @@
       // 2. Build workflow entries from candidates
       var nowIso = new Date().toISOString();
       candidates.forEach(function(c) {
+        // Video candidates come from youtube_monitor already AI-rewritten with a draft file.
+        // Skip the 'feed/queued' processing stage — jump straight to editorial/ready_for_edit.
+        var isVideo = c.type === 'video' && c.draft_filename;
         wfData.articles.push({
           id: c.id,
-          filename: '',
+          filename: c.draft_filename || '',
           title: c.title,
           summary: c.summary || c.content_preview || '',
-          category: c.category_hint || '',
+          category: c.category_hint || (isVideo ? 'відео' : ''),
           image: c.image_url || '',
           candidate_id: c.id,
           original_title: c.title,
           original_url: c.link,
           source_name: c.source || '',
           content_preview: c.content_preview || '',
-          stage: 'feed',
-          status: 'queued',
+          stage: isVideo ? 'editorial' : 'feed',
+          status: isVideo ? 'ready_for_edit' : 'queued',
+          youtube_id: c.youtube_id || null,
           channels: {
             website: { enabled: true, status: 'pending', scheduled_at: null },
             telegram: { enabled: true, status: 'pending', scheduled_at: null, custom_text: '' },
@@ -7820,22 +7930,29 @@
       var saveWf = await ghApi('PUT', '/contents/data/workflow.json', wfBody);
       if (!saveWf.ok) throw new Error('Failed to save workflow.json: ' + saveWf.status);
 
-      // 4. Remove from candidates.json
-      var candResp = await ghApi('GET', '/contents/data/candidates.json');
-      if (candResp.ok) {
-        var candFile = await candResp.json();
-        var candData;
-        try { candData = JSON.parse(b64DecodeUtf8(candFile.content)); } catch (e) { candData = { items: [] }; }
-        var idSet = {};
-        candidates.forEach(function(c) { idSet[c.id] = true; });
-        candData.items = (candData.items || []).filter(function(c) { return !idSet[c.id]; });
-        await ghApi('PUT', '/contents/data/candidates.json', {
-          message: '\u{1F4CB} Move ' + candidates.length + ' candidates to workflow',
-          content: b64EncodeUtf8(JSON.stringify(candData, null, 2)),
-          sha: candFile.sha
-        });
-        candidatesData = candData.items;
+      // 4. Remove from candidates.json (skip synthetic drafts-fallback entries)
+      var realCandidates = candidates.filter(function(c) { return !c._synthetic; });
+      if (realCandidates.length > 0) {
+        var candResp = await ghApi('GET', '/contents/data/candidates.json');
+        if (candResp.ok) {
+          var candFile = await candResp.json();
+          var candData;
+          try { candData = JSON.parse(b64DecodeUtf8(candFile.content)); } catch (e) { candData = { items: [] }; }
+          var idSet = {};
+          realCandidates.forEach(function(c) { idSet[c.id] = true; });
+          candData.items = (candData.items || []).filter(function(c) { return !idSet[c.id]; });
+          await ghApi('PUT', '/contents/data/candidates.json', {
+            message: '\u{1F4CB} Move ' + realCandidates.length + ' candidates to workflow',
+            content: b64EncodeUtf8(JSON.stringify(candData, null, 2)),
+            sha: candFile.sha
+          });
+          candidatesData = candData.items;
+        }
       }
+      // Remove shortlisted synthetic entries from local candidatesData
+      var removedIds = {};
+      candidates.forEach(function(c) { removedIds[c.id] = true; });
+      candidatesData = (candidatesData || []).filter(function(c) { return !removedIds[c.id]; });
 
       // 5. Update UI
       candidatesSelected = {};

@@ -26,6 +26,7 @@ from utils import load_json, save_json
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_FILE = os.path.join(PROJECT_ROOT, "data", "processed_videos.json")
 DRAFTS_FILE = os.path.join(PROJECT_ROOT, "data", "drafts.json")
+CANDIDATES_FILE = os.path.join(PROJECT_ROOT, "data", "candidates.json")
 CONTENT_DIR = os.path.join(PROJECT_ROOT, "content", "news")
 
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
@@ -273,7 +274,9 @@ def run_youtube_monitor():
 
     # Process top N candidates
     drafts = load_json(DRAFTS_FILE, {"articles": []})
+    cands = load_json(CANDIDATES_FILE, {"items": [], "updated_at": ""})
     count = 0
+    new_candidate_entries = []
 
     for video_id, snippet in list(candidates.items())[:MAX_VIDEOS_PER_RUN]:
         print(f"\n{'=' * 40}")
@@ -374,8 +377,32 @@ def run_youtube_monitor():
                 "summary": rewritten.get("summary", ""),
                 "category": "відео",
                 "image": thumbnail,
+                "youtube_id": video_id,
+                "source_url": video_url,
                 "created_at": datetime.now(timezone.utc).isoformat(),
             })
+
+            # Also register in candidates.json so admin Feed view shows the video
+            cand_entry = {
+                "id": uuid.uuid4().hex[:12],
+                "type": "video",
+                "title": rewritten.get("title", title),
+                "link": video_url,
+                "source": f"YouTube: {channel}",
+                "summary": rewritten.get("summary", "")[:500],
+                "image_url": thumbnail,
+                "date": published_at or datetime.now(timezone.utc).isoformat(),
+                "hash": f"yt_{video_id}",
+                "content_preview": (rewritten.get("summary", "") or description)[:300],
+                "added_at": datetime.now(timezone.utc).isoformat(),
+                "relevance_score": 0.9,
+                "relevance_reasons": ["YouTube video (AI-vetted)"],
+                "source_trusted": True,
+                "category_hint": "відео",
+                "youtube_id": video_id,
+                "draft_filename": filename,
+            }
+            new_candidate_entries.append(cand_entry)
 
             count += 1
             print(f"  📝 Draft created: {filename}")
@@ -389,22 +416,47 @@ def run_youtube_monitor():
     save_processed(processed)
     save_json(DRAFTS_FILE, drafts)
 
+    # Prepend new video candidates to candidates.json so Feed view shows them
+    if new_candidate_entries:
+        try:
+            existing = cands.setdefault("items", [])
+            cands["items"] = new_candidate_entries + existing
+            cands["updated_at"] = datetime.now(timezone.utc).isoformat()
+            save_json(CANDIDATES_FILE, cands)
+            print(f"[INFO] Added {len(new_candidate_entries)} video(s) to candidates.json")
+        except Exception as e:
+            print(f"[WARN] Failed to update candidates.json: {e}")
+
     print(f"\n{'=' * 60}")
     print(f"📊 YouTube Monitor complete!")
     print(f"   🎬 Candidates found: {len(candidates)}")
     print(f"   ✍️ Drafts created: {count}")
     print("=" * 60)
 
-    # Notify admin via Telegram
+    # Notify admin via Telegram — photo previews with deep-link to admin
     try:
-        from telegram_bot import send_message, ADMIN_CHAT_ID
+        from telegram_bot import send_message, send_photo, ADMIN_CHAT_ID
         if count > 0:
-            send_message(
-                f"🎬 <b>YouTube Monitor</b>\n\n"
-                f"Знайдено {count} нових відео.\n"
-                f"👉 <a href=\"https://konopla.ua/admin/\">Модерувати</a>",
-                chat_id=ADMIN_CHAT_ID
-            )
+            # Send individual previews for up to 3 most recent videos
+            recent = drafts["articles"][-count:][:3]
+            for art in recent:
+                caption = (
+                    f"🎬 <b>Нове відео</b>\n\n"
+                    f"<b>{art['title']}</b>\n\n"
+                    f"{art.get('summary', '')[:200]}\n\n"
+                    f'👉 <a href="https://konopla.ua/admin/#feed">Відкрити в адмінці</a>'
+                )
+                if art.get('image'):
+                    send_photo(photo_url=art['image'], caption=caption, chat_id=ADMIN_CHAT_ID)
+                else:
+                    send_message(caption, chat_id=ADMIN_CHAT_ID)
+
+            if count > 3:
+                send_message(
+                    f"🎬 Всього {count} нових відео.\n"
+                    f'👉 <a href="https://konopla.ua/admin/#feed">Переглянути всі</a>',
+                    chat_id=ADMIN_CHAT_ID,
+                )
     except Exception as e:
         print(f"[WARN] Admin notification failed: {e}")
 
