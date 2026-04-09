@@ -371,6 +371,45 @@
       "created_at": "2026-04-09T18:15:47.879Z",
       "updated_at": "2026-04-09T18:15:47.879Z",
       "published_at": null
+    },
+    {
+      "id": "97837c95",
+      "filename": "20260401-2055-konoplyana-zmova-chy-znyshchyla-velyka-industriya-super-kulturu.md",
+      "title": "Конопляна змова: Чи знищила велика індустрія супер-культуру?",
+      "summary": "Канал Index Unknown випустив відео, що досліджує 400-річну історію промислових конопель, від колоніальної культури до забороненої рослини, ставлячи питання про справжні причини її заборони.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/328mnP-0sbM/hqdefault.jpg",
+      "candidate_id": "97837c95",
+      "original_title": "Конопляна змова: Чи знищила велика індустрія супер-культуру?",
+      "original_url": "",
+      "source_name": "YouTube",
+      "content_preview": "Канал Index Unknown випустив відео, що досліджує 400-річну історію промислових конопель, від колоніальної культури до забороненої рослини, ставлячи питання про справжні причини її заборони.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-09T18:16:09.374Z",
+      "updated_at": "2026-04-09T18:16:09.374Z",
+      "published_at": null
     }
   ]
 }
