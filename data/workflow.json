@@ -384,14 +384,13 @@
       "original_url": "",
       "source_name": "YouTube",
       "content_preview": "Канал Index Unknown випустив відео, що досліджує 400-річну історію промислових конопель, від колоніальної культури до забороненої рослини, ставлячи питання про справжні причини її заборони.",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "youtube_id": null,
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -408,8 +407,8 @@
       },
       "relevance_score": 0.9,
       "created_at": "2026-04-09T18:16:09.374Z",
-      "updated_at": "2026-04-09T18:16:09.374Z",
-      "published_at": null
+      "updated_at": "2026-04-09T18:18:32.016Z",
+      "published_at": "2026-04-09T18:18:32.016Z"
     },
     {
       "id": "f7ca6cb9",
