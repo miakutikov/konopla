@@ -345,14 +345,13 @@
       "original_url": "",
       "source_name": "YouTube",
       "content_preview": "Відео від каналу Renew демонструє інноваційне розширення будинку з коноплебетону в Австралії, як приклад сталого будівництва та екологічного житла.",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "youtube_id": null,
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -369,8 +368,8 @@
       },
       "relevance_score": 0.9,
       "created_at": "2026-04-09T18:15:47.879Z",
-      "updated_at": "2026-04-09T18:15:47.879Z",
-      "published_at": null
+      "updated_at": "2026-04-09T18:18:35.887Z",
+      "published_at": "2026-04-09T18:18:35.887Z"
     },
     {
       "id": "97837c95",
