@@ -295,6 +295,44 @@
       "created_at": "2026-04-05T07:35:54.632Z",
       "updated_at": "2026-04-05T07:37:51.916Z",
       "published_at": "2026-04-05T07:37:51.917Z"
+    },
+    {
+      "id": "6311b6a277ca",
+      "filename": "",
+      "title": "IND HEMP, Summit International Trading and Thien Phuoc announce strategic partnership for importing US grown hemp fiber into Vietnam’s fiber and textile supply chains.",
+      "summary": "A new Memorandum of Understanding&#160;establishes&#160;a transparent pipeline for IND HEMP fiber into Vietnam’s textile sector, delivering sustainable, traceable textiles produced in Vietnam for U.S. brands; first-look yarns and fabrics debut this week at the Functional Fabric Fair.&#160; IND HEMP, a leader in American industrial hemp processing, Summit International Trading, a leading textile import/export supply chain partner,...",
+      "category": "текстиль",
+      "image": "",
+      "candidate_id": "6311b6a277ca",
+      "original_title": "IND HEMP, Summit International Trading and Thien Phuoc announce strategic partnership for importing US grown hemp fiber into Vietnam’s fiber and textile supply chains.",
+      "original_url": "https://indhemp.com/ind-hemp-summit-international-trading-and-thien-phuoc-announce-strategic-partnership-for-importing-us-grown-hemp-fiber-into-vietnams-fiber-and-textile-supply-chains/",
+      "source_name": "IND HEMP",
+      "content_preview": "IND HEMP, Summit International Trading and Thien Phuoc announce strategic partnership for importing US grown hemp fiber into Vietnam’s fiber and textile supply chains. A new Memorandum of Understanding establishes a transparent pipeline for IND HEMP fiber into Vietnam’s textile sector, delivering su",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.6,
+      "created_at": "2026-04-09T11:03:22.950Z",
+      "updated_at": "2026-04-09T11:03:22.950Z",
+      "published_at": null
     }
   ]
 }
