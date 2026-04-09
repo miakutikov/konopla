@@ -9242,7 +9242,7 @@
       if (!resp.ok) { showStatus('❌ Помилка завантаження реєстру (' + resp.status + ')', 'error'); return; }
       var file = await resp.json();
       kbLinksSha = file.sha;
-      var decoded = JSON.parse(atob(file.content.replace(/\n/g, '')));
+      var decoded = JSON.parse(b64DecodeUtf8(file.content));
       kbLinksData = decoded.links || [];
       renderKbLinks();
       showStatus('✅ Реєстр завантажено (' + kbLinksData.length + ' записів)', 'success');
@@ -9295,7 +9295,7 @@
 
   window.saveKbLinks = async function(commitMsg) {
     var content = JSON.stringify({ links: kbLinksData }, null, 2);
-    var b64 = btoa(unescape(encodeURIComponent(content)));
+    var b64 = b64EncodeUtf8(content);
     var body = { message: commitMsg, content: b64, branch: 'main' };
     if (kbLinksSha) body.sha = kbLinksSha;
     var resp = await ghApi('PUT', '/contents/data/kb_links.json', body);
