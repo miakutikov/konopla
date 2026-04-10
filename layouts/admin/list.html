@@ -4527,9 +4527,12 @@
       if (!fileResp.ok) throw new Error('Cannot fetch file: ' + fileResp.status);
       var fileData = await fileResp.json();
 
-      // 2. Decode content, replace draft: true → draft: false
+      // 2. Decode content, replace draft: true → draft: false, update date to now
       var decoded = b64DecodeUtf8(fileData.content);
       var updated = decoded.replace(/^draft:\s*true$/m, 'draft: false');
+      // Update the article date to publication time (draft date may be days old)
+      var nowIso = new Date().toISOString().replace(/\.\d+Z$/, '+00:00');
+      updated = updated.replace(/^date:\s*.+$/m, 'date: ' + nowIso);
 
       if (updated === decoded) {
         showStatus('⚠️ Файл вже не draft або не знайдено draft: true', 'error');
