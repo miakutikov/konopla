@@ -446,6 +446,45 @@
       "created_at": "2026-04-09T18:16:29.004Z",
       "updated_at": "2026-04-09T18:18:26.286Z",
       "published_at": "2026-04-09T18:18:26.286Z"
+    },
+    {
+      "id": "a9b22955",
+      "filename": "20260401-0911-konoplyanyy-prytulok-den-staloho-zhytla-2026.md",
+      "title": "Конопляний притулок: День сталого житла 2026",
+      "summary": "Відкрийте для себе один з найцікавіших екологічних будинків Австралії, збудований з конопляного бетону (hempcrete), у новому відео від каналу Renew.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/0hD4Z52Pe2U/hqdefault.jpg",
+      "candidate_id": "a9b22955",
+      "original_title": "Конопляний притулок: День сталого житла 2026",
+      "original_url": "",
+      "source_name": "YouTube",
+      "content_preview": "Відкрийте для себе один з найцікавіших екологічних будинків Австралії, збудований з конопляного бетону (hempcrete), у новому відео від каналу Renew.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-10T05:11:53.228Z",
+      "updated_at": "2026-04-10T05:11:53.228Z",
+      "published_at": null
     }
   ]
 }
