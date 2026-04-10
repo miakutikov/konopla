@@ -7694,8 +7694,12 @@
   };
 
   // Mark hashes as processed so pipeline won't re-discover them
-  async function addToProcessed(hashes) {
-    if (!hashes.length || !ghToken) return;
+  async function addToProcessed(candidates) {
+    // candidates: array of {hash, title} objects
+    if (!candidates.length || !ghToken) return;
+    var newHashes = candidates.map(function(c) { return c.hash; }).filter(Boolean);
+    var newTitles = candidates.map(function(c) { return c.title; }).filter(Boolean);
+    if (!newHashes.length && !newTitles.length) return;
     try {
       var resp = await ghApi('GET', '/contents/data/processed.json');
       var sha = null;
@@ -7705,12 +7709,15 @@
         sha = fileData.sha;
         data = JSON.parse(b64DecodeUtf8(fileData.content));
       }
-      data.articles = (data.articles || []).concat(hashes);
-      if (data.articles.length > 1000) {
-        data.articles = data.articles.slice(-1000);
-      }
+      // Append hashes
+      data.articles = (data.articles || []).concat(newHashes);
+      if (data.articles.length > 1000) data.articles = data.articles.slice(-1000);
+      // Append titles for semantic dedup — pipeline uses recent_titles
+      // to catch articles with changed URLs (Google News rotates redirect URLs)
+      data.recent_titles = (data.recent_titles || []).concat(newTitles);
+      if (data.recent_titles.length > 200) data.recent_titles = data.recent_titles.slice(-200);
       var body = {
-        message: String.fromCodePoint(128683) + ' Reject ' + hashes.length + ' candidates',
+        message: String.fromCodePoint(128683) + ' Reject ' + candidates.length + ' candidates',
         content: b64EncodeUtf8(JSON.stringify(data, null, 2))
       };
       if (sha) body.sha = sha;
@@ -7764,7 +7771,7 @@
       delete candidatesSelected[id];
       renderCandidates();
       // Mark as processed so pipeline won't re-add
-      if (deleted && deleted.hash) await addToProcessed([deleted.hash]);
+      if (deleted) await addToProcessed([{ hash: deleted.hash, title: deleted.title }]);
       showStatus(String.fromCodePoint(9989) + ' Новину видалено', 'success');
     } catch (e) {
       console.error('Delete candidate error:', e);
@@ -7809,11 +7816,11 @@
     if (!confirm('Видалити ' + selectedIds.length + ' новин зі списку?')) return;
     showStatus(String.fromCodePoint(9203) + ' Видаляємо ' + selectedIds.length + '...', 'info');
     try {
-      // Collect hashes before filtering
-      var hashes = [];
+      // Collect hashes + titles before filtering (titles needed for semantic dedup)
+      var toProcess = [];
       selectedIds.forEach(function(sid) {
         var c = candidatesData.find(function(x) { return x.id === sid; });
-        if (c && c.hash) hashes.push(c.hash);
+        if (c) toProcess.push({ hash: c.hash, title: c.title });
       });
       var sha = candidatesSha;
       var data;
@@ -7844,7 +7851,7 @@
       candidatesSelected = {};
       renderCandidates();
       // Mark as processed so pipeline won't re-add
-      if (hashes.length) await addToProcessed(hashes);
+      if (toProcess.length) await addToProcessed(toProcess);
       showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' знахідок', 'success');
     } catch (e) {
       console.error('Delete candidates error:', e);
