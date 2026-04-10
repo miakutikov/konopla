@@ -7747,17 +7747,13 @@
         return;
       }
 
-      var sha = candidatesSha;
-      var data;
-      if (!sha) {
-        var resp = await ghApi('GET', '/contents/data/candidates.json');
-        if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
-        var fileData = await resp.json();
-        sha = fileData.sha;
-        data = JSON.parse(b64DecodeUtf8(fileData.content));
-      } else {
-        data = { items: candidatesData.filter(function(c) { return !c._synthetic; }) };
-      }
+      // Always fetch fresh candidates.json to avoid stale SHA (409 Conflict).
+      // SHA becomes stale if pipeline, shortlist, or another delete modified the file.
+      var freshResp = await ghApi('GET', '/contents/data/candidates.json');
+      if (!freshResp.ok) throw new Error('GitHub API error: ' + freshResp.status);
+      var freshFile = await freshResp.json();
+      var sha = freshFile.sha;
+      var data = JSON.parse(b64DecodeUtf8(freshFile.content));
       data.items = (data.items || []).filter(function(c) { return c.id !== id; });
       var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
         message: String.fromCodePoint(128465) + ' Remove candidate ' + id,
@@ -7825,17 +7821,12 @@
         var c = candidatesData.find(function(x) { return x.id === sid; });
         if (c) toProcess.push({ hash: c.hash, title: c.title });
       });
-      var sha = candidatesSha;
-      var data;
-      if (!sha) {
-        var resp = await ghApi('GET', '/contents/data/candidates.json');
-        if (!resp.ok) throw new Error('GitHub API error: ' + resp.status);
-        var fileData = await resp.json();
-        sha = fileData.sha;
-        data = JSON.parse(b64DecodeUtf8(fileData.content));
-      } else {
-        data = { items: candidatesData.slice() };
-      }
+      // Always fetch fresh candidates.json to avoid stale SHA (409 Conflict)
+      var freshResp = await ghApi('GET', '/contents/data/candidates.json');
+      if (!freshResp.ok) throw new Error('GitHub API error: ' + freshResp.status);
+      var freshFile = await freshResp.json();
+      var sha = freshFile.sha;
+      var data = JSON.parse(b64DecodeUtf8(freshFile.content));
       var idSet = {};
       selectedIds.forEach(function(id) { idSet[id] = true; });
       data.items = (data.items || []).filter(function(c) { return !idSet[c.id]; });
@@ -7850,7 +7841,8 @@
       }
       var result = await putResp.json();
       candidatesSha = result.content.sha;
-      candidatesData = data.items;
+      // Update local state: remove deleted items (keep synthetics that weren't in candidates.json)
+      candidatesData = candidatesData.filter(function(c) { return !idSet[c.id]; });
       candidatesSelected = {};
       renderCandidates();
       // Mark as processed so pipeline won't re-add
@@ -7951,11 +7943,15 @@
           var idSet = {};
           realCandidates.forEach(function(c) { idSet[c.id] = true; });
           candData.items = (candData.items || []).filter(function(c) { return !idSet[c.id]; });
-          await ghApi('PUT', '/contents/data/candidates.json', {
+          var candPutResp = await ghApi('PUT', '/contents/data/candidates.json', {
             message: '\u{1F4CB} Move ' + realCandidates.length + ' candidates to workflow',
             content: b64EncodeUtf8(JSON.stringify(candData, null, 2)),
             sha: candFile.sha
           });
+          if (candPutResp.ok) {
+            var candPutResult = await candPutResp.json();
+            candidatesSha = candPutResult.content.sha;
+          }
           candidatesData = candData.items;
         }
       }
