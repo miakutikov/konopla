@@ -1,24 +1,110 @@
 {
   "items": [
     {
-      "id": "2c43c7d306a6",
-      "type": "article",
-      "title": "Житель Кіровоградщини вирощував у себе вдома коноплі - zlatopil.com",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNNEZpd1dYZnpicXl3YU9vVjZoWEl1TWRLQzdDY2ltRzk4bDgtLVg5NkQzSmNodm9YT20yY0FSSWg5Y1kzc1hqaVhSY21jU1ZUZEdCamJ6SUtWcTJrX3ZYWVZxUXkxc0ZLMEtDMXM4UVltWEJEWExMckNRTVBiOU1zLWtBNVd1WnQ2bDl0LThucw?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "Житель Кіровоградщини вирощував у себе вдома коноплі &nbsp;&nbsp; zlatopil.com",
-      "image_url": "",
-      "date": "2026-04-09T12:05:08+00:00",
-      "hash": "c21d8c9b2cf7dd6aaecaabf8b8595a15",
-      "content_preview": "Житель Кіровоградщини вирощував у себе вдома коноплі &nbsp;&nbsp; zlatopil.com",
-      "added_at": "2026-04-10T09:17:04.514329+00:00",
-      "relevance_score": 0.5,
+      "id": "7119b1d9f9a8",
+      "type": "video",
+      "title": "Незаконний будівельний матеріал, прирівняний до героїну: коноплебетон проходить всі протипожежні тести",
+      "link": "https://www.youtube.com/watch?v=6VkeydklzBQ",
+      "source": "YouTube: RETURN TO SIMPLE",
+      "summary": "YouTube-канал RETURN TO SIMPLE випустив відео, що досліджує властивості коноплебетону (hempcrete) — будівельного матеріалу, який не горить, не гниє та міцнішає з роками, але був класифікований у США нарівні з героїном.",
+      "image_url": "https://i.ytimg.com/vi/6VkeydklzBQ/hqdefault.jpg",
+      "date": "2026-04-10T02:15:00Z",
+      "hash": "yt_6VkeydklzBQ",
+      "content_preview": "YouTube-канал RETURN TO SIMPLE випустив відео, що досліджує властивості коноплебетону (hempcrete) — будівельного матеріалу, який не горить, не гниє та міцнішає з роками, але був класифікований у США нарівні з героїном.",
+      "added_at": "2026-04-10T09:17:51.764761+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "агро"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6VkeydklzBQ",
+      "draft_filename": "20260410-091751-nezakonnyy-budivelnyy-material-pryrivnyanyy-do-heroyinu-konoplebeton-prokhodyt-v.md"
+    },
+    {
+      "id": "34c8ee78a9fe",
+      "type": "video",
+      "title": "Ramon Granados: Чому я залишив нафту та газ заради промислових конопель",
+      "link": "https://www.youtube.com/watch?v=E2GOIV-Srzw",
+      "source": "YouTube: Mr Hemp Engineering Pty Ltd",
+      "summary": "Відео, де колишній нафтовик з 25-річним досвідом розповідає про свій перехід у галузь промислових конопель та створення академії знань про цю унікальну культуру.",
+      "image_url": "https://i.ytimg.com/vi/E2GOIV-Srzw/hqdefault.jpg",
+      "date": "2026-04-10T04:52:34Z",
+      "hash": "yt_E2GOIV-Srzw",
+      "content_preview": "Відео, де колишній нафтовик з 25-річним досвідом розповідає про свій перехід у галузь промислових конопель та створення академії знань про цю унікальну культуру.",
+      "added_at": "2026-04-10T09:21:04.874520+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "E2GOIV-Srzw",
+      "draft_filename": "20260410-092104-ramon-granados-chomu-ya-zalyshyv-naftu-ta-haz-zarady-promyslovykh-konopel.md"
+    },
+    {
+      "id": "e674053f8d65",
+      "type": "video",
+      "title": "Академія Наук про Промислові Коноплі: Найповніша освіта у сфері конопляної індустрії",
+      "link": "https://www.youtube.com/watch?v=xJDczwP2X5M",
+      "source": "YouTube: Mr Hemp Engineering Pty Ltd",
+      "summary": "Новий освітній курс від засновника Mr Hemp Engineering пропонує 26 відеосесій, що охоплюють весь ланцюг вартості промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/xJDczwP2X5M/hqdefault.jpg",
+      "date": "2026-04-10T04:37:11Z",
+      "hash": "yt_xJDczwP2X5M",
+      "content_preview": "Новий освітній курс від засновника Mr Hemp Engineering пропонує 26 відеосесій, що охоплюють весь ланцюг вартості промислових конопель.",
+      "added_at": "2026-04-10T09:23:08.930014+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "xJDczwP2X5M",
+      "draft_filename": "20260410-092308-akademiya-nauk-pro-promyslovi-konopli-naypovnisha-osvita-u-sferi-konoplyanoyi-in.md"
+    },
+    {
+      "id": "f92c2acf41ff",
+      "type": "video",
+      "title": "FURALAND Конопляні жуйки для собак: огляд",
+      "link": "https://www.youtube.com/watch?v=UOUK9QID7VQ",
+      "source": "YouTube: Cole Schwartz",
+      "summary": "Відеоогляд конопляних заспокійливих жуйок для собак від Cole Schwartz. Чи варто купувати FURALAND Hemp Calming Chews для вашого улюбленця?",
+      "image_url": "https://i.ytimg.com/vi/UOUK9QID7VQ/hqdefault.jpg",
+      "date": "2026-04-10T02:12:30Z",
+      "hash": "yt_UOUK9QID7VQ",
+      "content_preview": "Відеоогляд конопляних заспокійливих жуйок для собак від Cole Schwartz. Чи варто купувати FURALAND Hemp Calming Chews для вашого улюбленця?",
+      "added_at": "2026-04-10T09:24:20.822136+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "UOUK9QID7VQ",
+      "draft_filename": "20260410-092420-furaland-konoplyani-zhuyky-dlya-sobak-ohlyad.md"
+    },
+    {
+      "id": "5e425aeb101f",
+      "type": "video",
+      "title": "Конопляне вовно: інноваційний матеріал майбутнього",
+      "link": "https://www.youtube.com/watch?v=9aQlipZPeyo",
+      "source": "YouTube: Anthony Falciglia",
+      "summary": "Відео від Anthony Falciglia розкриває технологію виробництва та переваги конопляного волокна як екологічної альтернативи традиційним текстильним матеріалам.",
+      "image_url": "https://i.ytimg.com/vi/9aQlipZPeyo/hqdefault.jpg",
+      "date": "2026-04-09T21:57:15Z",
+      "hash": "yt_9aQlipZPeyo",
+      "content_preview": "Відео від Anthony Falciglia розкриває технологію виробництва та переваги конопляного волокна як екологічної альтернативи традиційним текстильним матеріалам.",
+      "added_at": "2026-04-10T09:25:46.691101+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "9aQlipZPeyo",
+      "draft_filename": "20260410-092546-konoplyane-vovno-innovatsiynyy-material-maybutnoho.md"
     }
-  ]
+  ],
+  "updated_at": "2026-04-10T09:25:46.693135+00:00"
 }
