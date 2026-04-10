@@ -14,7 +14,7 @@ image_source_url: "https://www.youtube.com/watch?v=eYUKA-WClQU"
 youtube_id: "eYUKA-WClQU"
 telegram_hook: "Дізнайтеся, як правильно проектувати фундамент для будинків з конопляного бетону. Відео від Next Genesis Design вже на Konopla.UA!"
 threads_hook: "Цікаво, як будують фундаменти для конопляних будинків? Наше нове відео розкриває всі секрети!"
-draft: true
+draft: false
 ---
 
 На каналі Next Genesis Design вийшло нове відео, яке детально розповідає про проектування фундаменту для будинків з гempcrete (конопляно-вапняного композиту).
