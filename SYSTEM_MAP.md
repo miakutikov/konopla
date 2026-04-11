@@ -229,23 +229,26 @@ data/kb_links.json               — KB auto-link registry {"links": [{slug, url
 ### Feed (Candidates)
 | Line | Function | Description |
 |------|----------|-------------|
-| 5568 | `timeAgo(dateStr)` | Relative time formatting |
-| 5576 | `toggleCandidatesTab()` | Switch to feed view |
-| 5580 | `loadCandidates()` | Fetch candidates.json |
-| 5623 | `renderRelevanceStars(score)` | ★★★☆☆ stars + score badge |
-| 5632 | `renderCandidates()` | Render cards with relevance, sorting, badges |
-| 5734 | `updateCandidatesCounter()` | Update "В роботу (N)" button text |
-| 5754 | `candidateToggle(id, checked)` | Toggle checkbox |
-| 5763 | `candidatesToggleAll(checked)` | Select/deselect all |
-| 5787 | `filterCandidates()` | Filter by type |
-| 5794 | `toggleCandidatePreview(id)` | Expand content_preview |
-| 5799 | `refreshCandidates()` | Trigger discover pipeline |
-| 5823 | `processCandidates()` | Process selected → pipeline.yml |
-| 5853 | `deleteCandidate(id)` | Delete single candidate |
-| 5876 | `deleteSelectedCandidates()` | Delete selected candidates |
-| 5907 | `shortlistCandidate(id)` | Move single candidate → workflow.json |
-| 5914 | `shortlistSelected()` | Move selected → workflow.json (bulk) |
-| 5923 | `_shortlistCandidates(arr)` | Internal: write workflow + remove candidates |
+| 7350 | `timeAgo(dateStr)` | Relative time formatting |
+| 7358 | `toggleCandidatesTab()` | Switch to feed view |
+| 7362 | `loadCandidates()` | Fetch candidates.json + append YouTube drafts |
+| 7412 | `appendYouTubeDraftsToCandidates()` | Create synthetic candidates from drafts.json YouTube videos |
+| 7470 | `renderRelevanceStars(score)` | ★★★☆☆ stars + score badge |
+| 7479 | `renderCandidates()` | Render cards with relevance, sorting, badges |
+| 7581 | `updateCandidatesCounter()` | Update "В роботу (N)" button text |
+| 7601 | `candidateToggle(id, checked)` | Toggle checkbox |
+| 7610 | `candidatesToggleAll(checked)` | Select/deselect all |
+| 7634 | `filterCandidates()` | Filter by type |
+| 7641 | `toggleCandidatePreview(id)` | Expand content_preview |
+| 7646 | `refreshCandidates()` | Trigger discover pipeline |
+| 7670 | `processCandidates()` | Process selected → pipeline.yml |
+| 7701 | `addToProcessed(candidates)` | Mark hashes+titles as processed in processed.json |
+| 7735 | `deleteCandidate(id)` | Delete single candidate (handles synthetic + real) |
+| 7787 | `deleteDraftArticleByFilename(fn)` | Remove draft from drafts.json + delete content file |
+| 7822 | `deleteSelectedCandidates()` | Delete selected (separates synthetic vs real) |
+| 7893 | `shortlistCandidate(id)` | Move single candidate → workflow.json |
+| 7900 | `shortlistSelected()` | Move selected → workflow.json (bulk) |
+| 7909 | `_shortlistCandidates(arr)` | Internal: write workflow + remove candidates |
 
 ### Sources (Settings)
 | Line | Function | Description |

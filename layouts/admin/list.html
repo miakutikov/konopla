@@ -7453,6 +7453,7 @@
             category_hint: 'відео',
             youtube_id: a.youtube_id || '',
             draft_filename: a.filename,
+            hash: a.youtube_id ? 'yt_' + a.youtube_id : undefined,
             _synthetic: true
           };
         });
@@ -7726,7 +7727,8 @@
       if (sha) body.sha = sha;
       await ghApi('PUT', '/contents/data/processed.json', body);
     } catch (e) {
-      console.warn('Failed to update processed.json:', e);
+      console.error('Failed to update processed.json:', e);
+      showStatus('\u26A0\uFE0F processed.json not updated: ' + e.message, 'error');
     }
   }
 
@@ -7739,6 +7741,9 @@
       // Synthetic YouTube draft — delete only from drafts.json (+ content file)
       if (deleted && deleted._synthetic && deleted.draft_filename) {
         await deleteDraftArticleByFilename(deleted.draft_filename);
+        // Mark as processed so pipeline won't re-add
+        var synHash = deleted.hash || (deleted.youtube_id ? 'yt_' + deleted.youtube_id : '');
+        await addToProcessed([{ hash: synHash, title: deleted.title }]);
         candidatesData = candidatesData.filter(function(c) { return c.id !== id; });
         delete candidatesSelected[id];
         renderCandidates();
@@ -7780,22 +7785,27 @@
 
   // Helper: delete a draft article by filename (removes from drafts.json + content file)
   async function deleteDraftArticleByFilename(filename) {
-    // 1. Remove from drafts.json
-    try {
-      var dResp = await ghApi('GET', '/contents/data/drafts.json');
-      if (dResp.ok) {
-        var dFile = await dResp.json();
-        var dData = JSON.parse(b64DecodeUtf8(dFile.content));
-        dData.articles = (dData.articles || []).filter(function(a) { return a.filename !== filename; });
-        await ghApi('PUT', '/contents/data/drafts.json', {
-          message: String.fromCodePoint(128465) + ' Remove video draft ' + filename,
-          content: b64EncodeUtf8(JSON.stringify(dData, null, 2)),
-          sha: dFile.sha
-        });
+    // 1. Remove from drafts.json — must succeed, otherwise caller sees false success
+    var dResp = await ghApi('GET', '/contents/data/drafts.json');
+    if (!dResp.ok) throw new Error('Failed to read drafts.json: ' + dResp.status);
+    var dFile = await dResp.json();
+    var dData = JSON.parse(b64DecodeUtf8(dFile.content));
+    var beforeLen = (dData.articles || []).length;
+    dData.articles = (dData.articles || []).filter(function(a) { return a.filename !== filename; });
+    // Only PUT if something was actually removed
+    if ((dData.articles || []).length < beforeLen) {
+      var putResp = await ghApi('PUT', '/contents/data/drafts.json', {
+        message: String.fromCodePoint(128465) + ' Remove video draft ' + filename,
+        content: b64EncodeUtf8(JSON.stringify(dData, null, 2)),
+        sha: dFile.sha
+      });
+      if (!putResp.ok) {
+        var putErr = await putResp.json().catch(function() { return {}; });
+        throw new Error('drafts.json PUT failed: ' + (putErr.message || putResp.status));
       }
-    } catch (e) { console.warn('drafts.json cleanup failed:', e); }
+    }
 
-    // 2. Delete content file
+    // 2. Delete content file (best-effort — not critical if it fails)
     try {
       var path = 'content/news/' + filename;
       var fResp = await ghApi('GET', '/contents/' + path);
@@ -7806,7 +7816,7 @@
           sha: fFile.sha
         });
       }
-    } catch (e) { console.warn('content file delete failed:', e); }
+    } catch (e) { console.warn('Content file delete failed (non-critical):', e); }
   }
 
   window.deleteSelectedCandidates = async function() {
@@ -7815,37 +7825,59 @@
     if (!confirm('Видалити ' + selectedIds.length + ' новин зі списку?')) return;
     showStatus(String.fromCodePoint(9203) + ' Видаляємо ' + selectedIds.length + '...', 'info');
     try {
-      // Collect hashes + titles before filtering (titles needed for semantic dedup)
+      // Separate synthetic (YouTube from drafts.json) from real (RSS from candidates.json)
+      var syntheticToDelete = [];
+      var realToDelete = [];
       var toProcess = [];
       selectedIds.forEach(function(sid) {
         var c = candidatesData.find(function(x) { return x.id === sid; });
-        if (c) toProcess.push({ hash: c.hash, title: c.title });
+        if (!c) return;
+        // Collect hash+title for processed.json (prevent pipeline re-add)
+        var h = c.hash || (c.youtube_id ? 'yt_' + c.youtube_id : '');
+        toProcess.push({ hash: h, title: c.title });
+        if (c._synthetic && c.draft_filename) {
+          syntheticToDelete.push(c);
+        } else {
+          realToDelete.push(c);
+        }
       });
-      // Always fetch fresh candidates.json to avoid stale SHA (409 Conflict)
-      var freshResp = await ghApi('GET', '/contents/data/candidates.json');
-      if (!freshResp.ok) throw new Error('GitHub API error: ' + freshResp.status);
-      var freshFile = await freshResp.json();
-      var sha = freshFile.sha;
-      var data = JSON.parse(b64DecodeUtf8(freshFile.content));
+
+      // 1. Delete synthetic candidates from drafts.json (sequentially — each PUT changes SHA)
+      for (var i = 0; i < syntheticToDelete.length; i++) {
+        await deleteDraftArticleByFilename(syntheticToDelete[i].draft_filename);
+      }
+
+      // 2. Delete real candidates from candidates.json (only if there are any)
+      if (realToDelete.length > 0) {
+        var freshResp = await ghApi('GET', '/contents/data/candidates.json');
+        if (!freshResp.ok) throw new Error('GitHub API error: ' + freshResp.status);
+        var freshFile = await freshResp.json();
+        var sha = freshFile.sha;
+        var data = JSON.parse(b64DecodeUtf8(freshFile.content));
+        var realIdSet = {};
+        realToDelete.forEach(function(c) { realIdSet[c.id] = true; });
+        data.items = (data.items || []).filter(function(c) { return !realIdSet[c.id]; });
+        var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
+          message: String.fromCodePoint(128465) + ' Remove ' + realToDelete.length + ' candidates',
+          content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
+          sha: sha
+        });
+        if (!putResp.ok) {
+          var err = await putResp.json().catch(function() { return {}; });
+          throw new Error('PUT failed: ' + (err.message || putResp.status));
+        }
+        var result = await putResp.json();
+        candidatesSha = result.content.sha;
+      }
+
+      // 3. Update local state
       var idSet = {};
       selectedIds.forEach(function(id) { idSet[id] = true; });
-      data.items = (data.items || []).filter(function(c) { return !idSet[c.id]; });
-      var putResp = await ghApi('PUT', '/contents/data/candidates.json', {
-        message: String.fromCodePoint(128465) + ' Remove ' + selectedIds.length + ' candidates',
-        content: b64EncodeUtf8(JSON.stringify(data, null, 2)),
-        sha: sha
-      });
-      if (!putResp.ok) {
-        var err = await putResp.json().catch(function() { return {}; });
-        throw new Error('PUT failed: ' + (err.message || putResp.status));
-      }
-      var result = await putResp.json();
-      candidatesSha = result.content.sha;
-      // Update local state: remove deleted items (keep synthetics that weren't in candidates.json)
       candidatesData = candidatesData.filter(function(c) { return !idSet[c.id]; });
       candidatesSelected = {};
       renderCandidates();
-      // Mark as processed so pipeline won't re-add
+
+      // 4. Mark as processed so pipeline won't re-add
       if (toProcess.length) await addToProcessed(toProcess);
       showStatus(String.fromCodePoint(9989) + ' Видалено ' + selectedIds.length + ' знахідок', 'success');
     } catch (e) {
