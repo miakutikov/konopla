@@ -649,8 +649,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPeWZOOTVWd092aDM5RFh0WGVnSjlNM1lSTDdmcXQ1QlJ6dmFERGRyWldNTXh2RDctSEVrd0pYQUFJcEVKbF9LU2hwQWpteFdxRWRzM3RmYjA4WGpETmlYRF9HX0dQTHZmdTVDVzREMS03OXhuSFRMWjdIQ1VmSS1wOE5mMGhWSFowOThCd2wxaU5SR3NpYjVCQS03TjlZTlpwZ2dqMHQ0TEZGVW9zeVhQYmU5NVBFbzNIM1QyZzlGdlh0TEhiaTVhVDBucw?oc=5",
       "source_name": "\"cânhamo industrial brasil\" - Google Notícias",
       "content_preview": "Projeto pioneiro de cânhamo industrial será apresentado nesta tarde durante o Festival da Linguiça &nbsp;&nbsp; Portal Alegrete Tudo",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -673,7 +673,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-11T19:48:41.426Z",
-      "updated_at": "2026-04-11T19:49:26.870Z",
+      "updated_at": "2026-04-11T19:49:45.009050+00:00",
       "published_at": null
     }
   ]
