@@ -1,6 +1,90 @@
 {
   "items": [
     {
+      "id": "e6bbe33c4222",
+      "type": "video",
+      "title": "Конопляна стіна зростає: перший поверх майже готовий",
+      "link": "https://www.youtube.com/watch?v=lRMe5luWuIw",
+      "source": "YouTube: Livable Box",
+      "summary": "Дізнайтеся, як конопляні костриці використовуються для будівництва міцних та екологічних стін, що захищають від вологи.",
+      "image_url": "https://i.ytimg.com/vi/lRMe5luWuIw/hqdefault.jpg",
+      "date": "2026-04-11T07:10:50Z",
+      "hash": "yt_lRMe5luWuIw",
+      "content_preview": "Дізнайтеся, як конопляні костриці використовуються для будівництва міцних та екологічних стін, що захищають від вологи.",
+      "added_at": "2026-04-11T08:51:13.590054+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "lRMe5luWuIw",
+      "draft_filename": "20260411-085113-konoplyana-stina-zrostaye-pershyy-poverkh-mayzhe-hotovyy.md"
+    },
+    {
+      "id": "11132cb3d708",
+      "type": "video",
+      "title": "Time 4 Hemp: Грег Флавелл з Hemp Tech Global про коноплебетон",
+      "link": "https://www.youtube.com/watch?v=NdQDUFY-6T4",
+      "source": "YouTube: PACE Radio Network",
+      "summary": "Konopla.UA пропонує переглянути відеоінтерв'ю з Грегом Флавелом, де обговорюється конопля як екологічний будівельний матеріал та потенціал коноплебетону.",
+      "image_url": "https://i.ytimg.com/vi/NdQDUFY-6T4/hqdefault.jpg",
+      "date": "2026-04-11T03:06:47Z",
+      "hash": "yt_NdQDUFY-6T4",
+      "content_preview": "Konopla.UA пропонує переглянути відеоінтерв'ю з Грегом Флавелом, де обговорюється конопля як екологічний будівельний матеріал та потенціал коноплебетону.",
+      "added_at": "2026-04-11T08:51:38.750253+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "NdQDUFY-6T4",
+      "draft_filename": "20260411-085138-time-4-hemp-hreh-flavell-z-hemp-tech-global-pro-konoplebeton.md"
+    },
+    {
+      "id": "17a1336ffb5b",
+      "type": "video",
+      "title": "Hempire в Данії: відео про конопляні будівельні матеріали",
+      "link": "https://www.youtube.com/watch?v=yBDyrxNV5M4",
+      "source": "YouTube: Hempire UA",
+      "summary": "Канал Hempire UA представив відеоогляд використання промислових конопель у будівництві в Данії, демонструючи переваги конопляних будматеріалів.",
+      "image_url": "https://i.ytimg.com/vi/yBDyrxNV5M4/hqdefault.jpg",
+      "date": "2026-04-10T07:59:25Z",
+      "hash": "yt_yBDyrxNV5M4",
+      "content_preview": "Канал Hempire UA представив відеоогляд використання промислових конопель у будівництві в Данії, демонструючи переваги конопляних будматеріалів.",
+      "added_at": "2026-04-11T08:52:01.254629+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "yBDyrxNV5M4",
+      "draft_filename": "20260411-085201-hempire-v-daniyi-video-pro-konoplyani-budivelni-materialy.md"
+    },
+    {
+      "id": "60e793acb0fb",
+      "type": "video",
+      "title": "Продаж курибельних конопель у Техасі знову дозволено... Поки що",
+      "link": "https://www.youtube.com/watch?v=oheGg6uifm8",
+      "source": "YouTube: KHOU 11",
+      "summary": "Суддя округу Тревіс видав тимчасову заборону, яка призупинила дію нових правил штату щодо промислових конопель, дозволивши тимчасово відновити продаж курибельної продукції.",
+      "image_url": "https://i.ytimg.com/vi/oheGg6uifm8/hqdefault.jpg",
+      "date": "2026-04-11T03:47:30Z",
+      "hash": "yt_oheGg6uifm8",
+      "content_preview": "Суддя округу Тревіс видав тимчасову заборону, яка призупинила дію нових правил штату щодо промислових конопель, дозволивши тимчасово відновити продаж курибельної продукції.",
+      "added_at": "2026-04-11T08:52:16.053814+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "oheGg6uifm8",
+      "draft_filename": "20260411-085216-prodazh-kurybelnykh-konopel-u-tekhasi-znovu-dozvoleno-poky-shcho.md"
+    },
+    {
       "id": "1798b3ccc687",
       "type": "article",
       "title": "Житель Кіровоградщини вирощував у себе вдома коноплі - UKR.NET",
@@ -21,5 +105,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-04-10T20:50:00.435882+00:00"
+  "updated_at": "2026-04-11T08:52:55.777443+00:00"
 }
