@@ -6205,23 +6205,26 @@
     }
   };
 
-  // UTF-8 safe base64 decode/encode
+  // UTF-8 safe base64 decode — handles GitHub API line-wrapped content.
+  // Returns '' for null/undefined/empty input to guard callers from DOMException.
   function b64DecodeUtf8(b64) {
+    if (!b64) return '';
     var binStr = atob(b64.replace(/\s/g, ''));
-    var bytes = new Uint8Array(binStr.length);
-    for (var i = 0; i < binStr.length; i++) {
-      bytes[i] = binStr.charCodeAt(i);
-    }
-    return new TextDecoder('utf-8').decode(bytes);
+    return new TextDecoder().decode(
+      Uint8Array.from({ length: binStr.length }, function(_, i) { return binStr.charCodeAt(i); })
+    );
   }
 
+  // UTF-8 safe base64 encode — chunked to avoid O(n²) string concat and stack overflow
+  // on large files (workflow.json, catalog.json can reach 200–500 KB).
   function b64EncodeUtf8(str) {
     var bytes = new TextEncoder().encode(str);
-    var binStr = '';
-    for (var i = 0; i < bytes.length; i++) {
-      binStr += String.fromCharCode(bytes[i]);
+    var CHUNK = 0x8000; // 32 768 bytes — safe apply() stack limit in all browsers
+    var parts = [];
+    for (var i = 0; i < bytes.length; i += CHUNK) {
+      parts.push(String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK)));
     }
-    return btoa(binStr);
+    return btoa(parts.join(''));
   }
 
   // Duck-typed failed Response — keeps all 83 callers' resp.ok / resp.json() patterns intact
