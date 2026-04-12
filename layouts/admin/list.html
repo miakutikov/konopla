@@ -5418,10 +5418,18 @@
     var item = workflowData.find(function(a) { return a.id === id; });
     if (!item) return;
 
-    item.original_url = newUrl;
-    item.updated_at = new Date().toISOString();
-    await saveWorkflowData('\uD83D\uDD17 Update URL: ' + item.title.substring(0, 40));
-    showStatus('\u2705 URL збережено', 'success');
+    var btn = input.parentElement && input.parentElement.querySelector('button');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3'; }
+
+    try {
+      item.original_url = newUrl;
+      item.updated_at = new Date().toISOString();
+      await saveWorkflowData('\uD83D\uDD17 Update URL: ' + item.title.substring(0, 40));
+      showStatus('\u2705 URL збережено', 'success');
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = '\uD83D\uDCBE'; }
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
   };
 
   window.retryProcessing = async function(id) {
