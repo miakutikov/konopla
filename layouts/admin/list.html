@@ -7498,22 +7498,22 @@
   async function appendYouTubeDraftsToCandidates() {
     try {
       var dResp = await ghApi('GET', '/contents/data/drafts.json');
-      if (!dResp || !dResp.ok) return;
+      if (!dResp.ok) return;
       var dFile = await dResp.json();
       var dContent;
       try { dContent = JSON.parse(b64DecodeUtf8(dFile.content)); } catch (e) { return; }
-      var articles = (dContent.articles || []).filter(function(a) { return a && a.category === 'відео'; });
+      var articles = (dContent.articles || []).filter(function(a) { return a && a.id && a.category === 'відео'; });
       if (articles.length === 0) return;
 
       // Make sure workflow data is loaded so we can filter already-shortlisted videos
-      if (!workflowData || workflowData.length === 0) {
+      if (workflowData.length === 0) {
         try { await loadWorkflowArticles(); } catch (e) {}
       }
       var workflowFilenames = new Set();
-      (workflowData || []).forEach(function(w) {
+      workflowData.forEach(function(w) {
         if (w && w.filename) workflowFilenames.add(w.filename);
       });
-      var existingCandIds = new Set((candidatesData || []).map(function(c) { return c.id; }));
+      var existingCandIds = new Set(candidatesData.map(function(c) { return c.id; }));
 
       var synthetic = articles
         .filter(function(a) {
