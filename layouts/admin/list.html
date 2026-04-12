@@ -4988,6 +4988,7 @@
       workflowData = (content.articles || []).filter(function(a) { return a && a.id; });
     } catch (e) {
       console.error('Load workflow error:', e);
+      showStatus('❌ Помилка завантаження workflow: ' + e.message, 'error');
     }
   }
 
