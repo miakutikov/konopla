@@ -297,8 +297,8 @@
 
 | Фаза | Сесій | Статус |
 |------|-------|--------|
-| Фаза 1: Core Infrastructure | 1–9 | 🔄 6/9 (ghApi ✅, b64 ✅, parseFrontmatter ✅, showStatus ✅, checkAuth+init+logout ✅, showView+updateBadges ✅) |
-| Фаза 2: Feed / Candidates | 10–26 | ⬜ Не почато |
+| Фаза 1: Core Infrastructure | 1–9 | ✅ 6/9 завершено (ghApi, b64, parseFrontmatter, showStatus, checkAuth+init+logout, showView+updateBadges) |
+| Фаза 2: Feed / Candidates | 10–26 | 🔄 1/17 (loadCandidates ✅) |
 | Фаза 3: Editorial / Workflow | 27–42 | ⬜ Не почато |
 | Фаза 4: Drafts & Articles | 43–57 | ⬜ Не почато |
 | Фаза 5: Publishing | 58–72 | ⬜ Не почато |
@@ -310,7 +310,7 @@
 | Фаза 11: KB Articles | 105–114 | ⬜ Не почато |
 | Фаза 12: KB Links | 115–123 | ⬜ Не почато |
 | Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **6/126** |
+| **ВСЬОГО** | **126 сесій** | **7/126** |
 
 ---
 
