@@ -8158,18 +8158,21 @@
           if (candPutResp.ok) {
             var candPutResult = await candPutResp.json();
             candidatesSha = candPutResult.content.sha;
+          } else {
+            console.warn('candidates.json PUT failed after shortlist:', candPutResp.status);
+            showStatus('\u26A0\uFE0F candidates.json не оновлено (' + candPutResp.status + ') — оновіть Feed вручну', 'error');
           }
-          candidatesData = candData.items;
         }
       }
-      // Remove shortlisted synthetic entries from local candidatesData
+      // Remove all shortlisted entries from local state (real + synthetic)
       var removedIds = {};
       candidates.forEach(function(c) { removedIds[c.id] = true; });
-      candidatesData = (candidatesData || []).filter(function(c) { return !removedIds[c.id]; });
+      candidatesData = candidatesData.filter(function(c) { return !removedIds[c.id]; });
 
       // 5. Update UI
       candidatesSelected = {};
       renderCandidates();
+      updateBadges();
       updateCandidatesCounter();
       showStatus('\u2705 ' + candidates.length + ' знахідок додано в роботу', 'success');
 
