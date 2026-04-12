@@ -5334,9 +5334,11 @@
         var wfFile = await wfResp.json();
         wfSha = wfFile.sha;
         try { wfData = JSON.parse(b64DecodeUtf8(wfFile.content)); } catch (e) { wfData = { articles: [] }; }
-      } else {
+      } else if (wfResp.status === 404) {
         wfData = { articles: [] };
         wfSha = null;
+      } else {
+        throw new Error('Failed to read workflow.json: ' + wfResp.status);
       }
 
       // 2. Create workflow entry
