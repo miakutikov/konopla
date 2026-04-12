@@ -7811,7 +7811,11 @@
         content: b64EncodeUtf8(JSON.stringify(data, null, 2))
       };
       if (sha) body.sha = sha;
-      await ghApi('PUT', '/contents/data/processed.json', body);
+      var putResp = await ghApi('PUT', '/contents/data/processed.json', body);
+      if (!putResp.ok) {
+        var putErr = await putResp.json().catch(function() { return {}; });
+        throw new Error('PUT processed.json failed: ' + (putErr.message || putResp.status));
+      }
     } catch (e) {
       console.error('Failed to update processed.json:', e);
       showStatus('\u26A0\uFE0F processed.json not updated: ' + e.message, 'error');
