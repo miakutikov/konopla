@@ -4199,6 +4199,7 @@
 
   var currentView = 'feed';
   var chartsInitialized = false;
+  var _statusTimer = null; // tracks active success auto-dismiss timeout
   var catalogLoaded = false;
   var catalogData = null;
   var catalogSha = '';
@@ -6309,6 +6310,8 @@
   }
 
   function showStatus(msg, type) {
+    // Cancel any pending success auto-dismiss to prevent it hiding the new message
+    if (_statusTimer) { clearTimeout(_statusTimer); _statusTimer = null; }
     var el = document.getElementById('status-bar');
     el.innerHTML = '';
     el.appendChild(document.createTextNode(msg));
@@ -6321,8 +6324,9 @@
     el.style.display = 'block';
 
     if (type === 'success') {
-      setTimeout(function() {
+      _statusTimer = setTimeout(function() {
         el.style.display = 'none';
+        _statusTimer = null;
       }, 5000);
     }
   }
