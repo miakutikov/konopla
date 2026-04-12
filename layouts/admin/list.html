@@ -7750,7 +7750,7 @@
 
     var selectedCount = Object.keys(candidatesSelected).length;
     var counterEl = document.getElementById('candidates-counter');
-    counterEl.textContent = filtered.length + ' знахідок' + (selectedCount > 0 ? ' · ' + selectedCount + ' вибрано' : '');
+    if (counterEl) counterEl.textContent = filtered.length + ' знахідок' + (selectedCount > 0 ? ' · ' + selectedCount + ' вибрано' : '');
 
     var processBtn = document.getElementById('btn-process-candidates-top');
     if (processBtn) {
