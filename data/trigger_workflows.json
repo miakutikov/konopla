@@ -1,3 +1,5 @@
 {
-  "workflows": []
+  "workflows": [
+    "threads_post.yml"
+  ]
 }
