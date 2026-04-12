@@ -6794,6 +6794,9 @@
   // =========================================================================
 
   window.editArticle = async function(filename) {
+    if (window._editLoading) return;
+    window._editLoading = true;
+
     showStatus('⏳ Завантажуємо статтю...', 'info');
     try {
       var fileResp = await ghApi('GET', '/contents/content/news/' + filename);
@@ -6837,10 +6840,12 @@
       var bodyHtml = markdownToHtml(body);
       quillEditor.clipboard.dangerouslyPasteHTML(bodyHtml);
 
+      window._editLoading = false;
       showStatus('✏️ Статтю завантажено для редагування', 'success');
       document.getElementById('create-form').scrollIntoView({ behavior: 'smooth' });
 
     } catch (e) {
+      window._editLoading = false;
       console.error('Edit error:', e);
       showStatus('❌ Помилка завантаження: ' + e.message, 'error');
       editingFile = null;

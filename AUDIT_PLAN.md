@@ -300,7 +300,7 @@
 | Фаза 1: Core Infrastructure | 1–9 | ✅ 6/9 завершено (ghApi, b64, parseFrontmatter, showStatus, checkAuth+init+logout, showView+updateBadges) |
 | Фаза 2: Feed / Candidates | 10–26 | ✅ 17/17 ЗАВЕРШЕНО (loadCandidates, appendYouTubeDraftsToCandidates, addToProcessed, deleteCandidate, deleteSelectedCandidates, deleteDraftArticleByFilename, _shortlistCandidates, renderCandidates, shortlistCandidate+shortlistSelected, processCandidates, refreshCandidates 🟢, updateCandidatesCounter, candidateToggle 🟢, candidatesToggleAll 🟢, filterCandidates 🟢, toggleCandidatePreview 🟢) |
 | Фаза 3: Editorial / Workflow | 27–42 | ✅ 16/16 ЗАВЕРШЕНО (saveWorkflowData 🟢, loadWorkflowArticles ✅, loadEditorial 🟢, renderEditorial ✅, processWorkflowItem 🟢, processQueuedWorkflow ✅, removeWorkflowItem 🟢, _removeFromWorkflow 🟢, quickAddUrl ✅, _tryResolveGoogleNewsUrl 🟢, retryProcessing ✅, switchEditorialTab 🟢, updateEditorialCounter 🟢, toggleQuickAdd 🟢, resolveGoogleNewsInCard 🟢, saveArticleUrl ✅) |
-| Фаза 4: Drafts & Articles | 43–57 | 🔄 4/15 (approveArticle ✅, deleteArticle 🟢, removeDraftEntry 🟢, createArticle ✅) |
+| Фаза 4: Drafts & Articles | 43–57 | 🔄 5/15 (approveArticle ✅, deleteArticle 🟢, removeDraftEntry 🟢, createArticle ✅, editArticle ✅) |
 | Фаза 5: Publishing | 58–72 | ⬜ Не почато |
 | Фаза 6: Social Status | 73–76 | ⬜ Не почато |
 | Фаза 7: Analytics | 77–84 | ⬜ Не почато |
@@ -310,7 +310,7 @@
 | Фаза 11: KB Articles | 105–114 | ⬜ Не почато |
 | Фаза 12: KB Links | 115–123 | ⬜ Не почато |
 | Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **36/126** |
+| **ВСЬОГО** | **126 сесій** | **37/126** |
 
 ---
 
