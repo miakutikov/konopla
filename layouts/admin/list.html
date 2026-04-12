@@ -7835,6 +7835,7 @@
     if (!selectedIds.length) return;
 
     if (!confirm('Обробити ' + selectedIds.length + ' знахідок?')) return;
+    candidatesSelected = {};  // guard: clear before async — prevents duplicate dispatch
 
     showStatus('⏳ Запуск обробки ' + selectedIds.length + ' знахідок...', 'info');
 
@@ -7846,7 +7847,6 @@
 
       if (resp.status === 204 || resp.ok) {
         showStatus('✅ Обробку ' + selectedIds.length + ' знахідок запущено! Нові статті з\'являться через кілька хвилин.', 'success');
-        candidatesSelected = {};
         updateCandidatesCounter();
         // Uncheck all
         var cbs = document.querySelectorAll('.candidate-card input[type="checkbox"]');
