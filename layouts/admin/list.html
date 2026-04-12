@@ -4124,7 +4124,6 @@
   var SITE_URL = '{{ .Site.BaseURL }}';
 
   var ghToken = '';
-  var adminKey = '';
   var approvedQueue = [];
   var telegramQueue = [];
   var threadsQueue = [];
@@ -4172,18 +4171,16 @@
   function init() {
     // Check URL param
     var params = new URLSearchParams(window.location.search);
-    var key = params.get('key');
-    if (key) {
-      checkAuth(key);
-      return;
-    }
+    var urlKey = params.get('key');
+    if (urlKey) { checkAuth(urlKey); return; }
 
-    // Check localStorage
-    var saved = localStorage.getItem('konopla_admin_key');
-    if (saved) {
-      checkAuth(saved);
-      return;
-    }
+    // Prefer stored hash (avoids re-hash round-trip)
+    var savedHash = localStorage.getItem('konopla_admin_key_hash');
+    if (savedHash === ADMIN_KEY_HASH) { showPanel(); return; }
+
+    // Legacy: plaintext key stored before this fix — migrate on load
+    var savedKey = localStorage.getItem('konopla_admin_key');
+    if (savedKey) { checkAuth(savedKey); return; }
 
     showAuth();
   }
@@ -4350,26 +4347,32 @@
   }
 
   async function checkAuth(key) {
-    var hash = await sha256(key);
-    if (hash === ADMIN_KEY_HASH) {
-      adminKey = key;
-      localStorage.setItem('konopla_admin_key', key);
-      // Clean URL
-      if (window.location.search) {
-        window.history.replaceState({}, '', window.location.pathname);
+    document.getElementById('auth-error').style.display = 'none';
+    try {
+      var hash = await sha256(key);
+      if (hash === ADMIN_KEY_HASH) {
+        localStorage.setItem('konopla_admin_key_hash', hash);
+        localStorage.removeItem('konopla_admin_key'); // remove legacy plaintext
+        if (window.location.search) {
+          window.history.replaceState({}, '', window.location.pathname);
+        }
+        showPanel();
+      } else {
+        localStorage.removeItem('konopla_admin_key');
+        localStorage.removeItem('konopla_admin_key_hash');
+        showAuth();
+        document.getElementById('auth-error').style.display = 'block';
       }
-      showPanel();
-    } else {
-      localStorage.removeItem('konopla_admin_key');
+    } catch (e) {
       showAuth();
-      document.getElementById('auth-error').style.display = 'block';
+      showStatus('\u274C Помилка перевірки пароля: ' + e.message, 'error');
     }
   }
 
   function logout() {
-    localStorage.removeItem('konopla_admin_key');
+    localStorage.removeItem('konopla_admin_key_hash');
+    localStorage.removeItem('konopla_admin_key'); // legacy cleanup
     localStorage.removeItem('konopla_gh_token');
-    adminKey = '';
     ghToken = '';
     showAuth();
   }
@@ -4384,7 +4387,12 @@
   document.getElementById('auth-form').addEventListener('submit', function(e) {
     e.preventDefault();
     var key = document.getElementById('auth-key').value.trim();
-    if (key) checkAuth(key);
+    if (!key) return;
+    var btn = e.target.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3'; }
+    checkAuth(key).finally(function() {
+      if (btn) { btn.disabled = false; btn.textContent = '\u0423\u0432\u0456\u0439\u0442\u0438'; }
+    });
   });
 
   // =========================================================================
