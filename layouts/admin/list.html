@@ -7425,6 +7425,7 @@
   var candidatesData = [];
   var candidatesSelected = {};
   var candidatesSha = null;
+  var _candidatesLoading = false;
 
   function timeAgo(dateStr) {
     var diff = (Date.now() - new Date(dateStr).getTime()) / 1000;
@@ -7443,6 +7444,8 @@
       showStatus('❌ Потрібен GitHub Token', 'error');
       return;
     }
+    if (_candidatesLoading) return;
+    _candidatesLoading = true;
 
     var listEl = document.getElementById('candidates-list');
     listEl.innerHTML = '<div class="loading">⏳ Завантаження знахідок...</div>';
@@ -7452,10 +7455,12 @@
       var resp = await ghApi('GET', '/contents/data/candidates.json');
 
       if (resp.status === 404) {
+        candidatesData = [];
+        candidatesSha = null;
         listEl.innerHTML = '';
         document.getElementById('candidates-empty').style.display = 'block';
         document.getElementById('candidates-updated').textContent = '';
-        updateCandidatesCounter();
+        updateBadges();
         return;
       }
 
@@ -7480,7 +7485,9 @@
 
     } catch (e) {
       console.error('Load candidates error:', e);
-      listEl.innerHTML = '<div class="loading">❌ Помилка: ' + escHtml(e.message) + '</div>';
+      listEl.innerHTML = '<div class="admin-error">❌ Помилка: ' + escHtml(e.message) + '</div>';
+    } finally {
+      _candidatesLoading = false;
     }
   };
 
