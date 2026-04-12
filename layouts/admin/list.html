@@ -4249,10 +4249,10 @@
     if (name === 'kblinks' && kbLinksData.length === 0 && ghToken) loadKbLinks();
     if (name === 'scheduled' && ghToken) loadScheduledView();
     if (name === 'analytics' && !chartsInitialized) {
+      chartsInitialized = true;
       setTimeout(function() {
         renderStats();
         initCalendar();
-        chartsInitialized = true;
       }, 50);
     }
 
@@ -4283,6 +4283,8 @@
     if (el) el.textContent = ALL_ARTICLES.length || '';
     el = document.getElementById('badge-catalog');
     if (el) el.textContent = (catalogData && catalogData.companies ? catalogData.companies.length : '') || '';
+    el = document.getElementById('badge-knowledge');
+    if (el) el.textContent = kbArticles.length || '';
   }
 
   window.toggleMobileSidebar = function() {
