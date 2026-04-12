@@ -8074,6 +8074,12 @@
     var candidate = candidatesData.find(function(c) { return c.id === id; });
     if (!candidate) return;
     if (!confirm('Додати "' + candidate.title.substring(0, 50) + '..." в роботу?')) return;
+    // Disable button immediately to prevent double-shortlist (would add duplicate to workflow)
+    var card = Array.from(document.querySelectorAll('.candidate-card')).find(function(el) {
+      return el.dataset.id === id;
+    });
+    var btn = card && card.querySelector('.candidate-shortlist-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3'; }
     await _shortlistCandidates([candidate]);
   };
 
@@ -8083,6 +8089,7 @@
     var selected = candidatesData.filter(function(c) { return candidatesSelected[c.id]; });
     if (!selected.length) return;
     if (!confirm('Додати ' + selected.length + ' знахідок в роботу?')) return;
+    candidatesSelected = {};  // guard: clear before async — prevents duplicate batch shortlist
     await _shortlistCandidates(selected);
   };
 
