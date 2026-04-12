@@ -5218,6 +5218,8 @@
     if (!queued.length) return;
     if (!confirm('\u26A1 Обробити ' + queued.length + ' статей? AI перепише на українську.')) return;
 
+    var btn = document.getElementById('btn-process-queued');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3'; }
     showStatus('\u23F3 Запуск масової обробки...', 'info');
 
     try {
@@ -5240,6 +5242,7 @@
         throw new Error('Dispatch failed: ' + resp.status);
       }
     } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = '\u26A1 Обробити все'; }
       showStatus('\u274C Помилка: ' + e.message, 'error');
     }
   };
