@@ -7824,6 +7824,11 @@
 
   window.deleteCandidate = async function(id) {
     if (!confirm('Видалити цю новину?')) return;
+    // Disable card immediately to prevent double-click during async
+    var card = Array.from(document.querySelectorAll('.candidate-card')).find(function(el) {
+      return el.dataset.id === id;
+    });
+    if (card) { card.style.opacity = '0.4'; card.style.pointerEvents = 'none'; }
     showStatus(String.fromCodePoint(9203) + ' Видаляємо...', 'info');
     try {
       var deleted = candidatesData.find(function(c) { return c.id === id; });
@@ -7869,6 +7874,7 @@
       showStatus(String.fromCodePoint(9989) + ' Новину видалено', 'success');
     } catch (e) {
       console.error('Delete candidate error:', e);
+      if (card) { card.style.opacity = ''; card.style.pointerEvents = ''; }
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     }
   };
