@@ -58,6 +58,9 @@
           <li class="sidebar-item" data-view="kblinks" onclick="showView('kblinks')">
             <span class="sidebar-label">🔗 Автопосилання</span>
           </li>
+          <li class="sidebar-item" data-view="instructions" onclick="showView('instructions')">
+            <span class="sidebar-label">📘 Інструкція</span>
+          </li>
         </ul>
         <div class="sidebar-footer">
           <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" title="Згорнути/розгорнути">«</button>
@@ -897,6 +900,75 @@
             <p>Натисніть «+ Додати» щоб додати перший запис.</p>
           </div>
         </div><!-- /view-kblinks -->
+
+        <!-- ===== VIEW: Інструкція ===== -->
+        <div class="admin-view" id="view-instructions">
+          <div class="view-header">
+            <h2>📘 Інструкція</h2>
+            <p class="view-subtitle">Загальний потік даних порталу</p>
+          </div>
+          <div style="padding: 0 8px 32px; max-width: 720px;">
+            <svg width="100%" viewBox="0 0 680 490" role="img">
+<title>Konopla.ua admin portal — загальний потік даних</title>
+<desc>Флоучарт: від джерел через кандидатів і редакцію до публікації на сайті, в Telegram і Threads.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+<text font-size="12" font-family="sans-serif" x="40" y="38" fill="#888">1 · джерела</text>
+<text font-size="12" font-family="sans-serif" x="40" y="143" fill="#888">2 · відбір</text>
+<text font-size="12" font-family="sans-serif" x="40" y="255" fill="#888">3 · редакція</text>
+<text font-size="12" font-family="sans-serif" x="40" y="372" fill="#888">4 · публікація</text>
+<g style="cursor:pointer">
+<rect x="100" y="48" width="140" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="170" y="70" text-anchor="middle" dominant-baseline="central" fill="#085041">RSS-стрічки</text>
+</g>
+<g style="cursor:pointer">
+<rect x="270" y="48" width="140" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="340" y="60" text-anchor="middle" dominant-baseline="central" fill="#085041">YouTube</text>
+<text font-size="12" font-family="sans-serif" x="340" y="80" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">youtube_monitor.yml</text>
+</g>
+<g style="cursor:pointer">
+<rect x="440" y="48" width="140" height="44" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="510" y="70" text-anchor="middle" dominant-baseline="central" fill="#085041">Ручний URL</text>
+</g>
+<path d="M170 92 L170 128 L280 128 L280 153" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M340 92 L340 153" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M510 92 L510 128 L400 128 L400 153" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g style="cursor:pointer">
+<rect x="200" y="153" width="280" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="340" y="174" text-anchor="middle" dominant-baseline="central" fill="#26215C">Кандидати / Feed</text>
+<text font-size="12" font-family="sans-serif" x="340" y="195" text-anchor="middle" dominant-baseline="central" fill="#534AB7">вибір · відхилення · shortlist</text>
+</g>
+<path d="M340 209 L340 265" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text font-size="12" font-family="sans-serif" x="352" y="240" fill="#aaa">pipeline.yml</text>
+<g style="cursor:pointer">
+<rect x="200" y="265" width="280" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="340" y="286" text-anchor="middle" dominant-baseline="central" fill="#412402">Editorial / Workflow</text>
+<text font-size="12" font-family="sans-serif" x="340" y="307" text-anchor="middle" dominant-baseline="central" fill="#854F0B">редагування · розклад · деплой</text>
+</g>
+<path d="M300 321 L300 355 L165 355 L165 382" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M340 321 L340 382" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M380 321 L380 355 L515 355 L515 382" fill="none" stroke="#aaa" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g style="cursor:pointer">
+<rect x="90" y="382" width="150" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="165" y="403" text-anchor="middle" dominant-baseline="central" fill="#4A1B0C">Сайт</text>
+<text font-size="12" font-family="sans-serif" x="165" y="424" text-anchor="middle" dominant-baseline="central" fill="#993C1D">moderate.yml</text>
+</g>
+<g style="cursor:pointer">
+<rect x="265" y="382" width="150" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="340" y="403" text-anchor="middle" dominant-baseline="central" fill="#4A1B0C">Telegram</text>
+<text font-size="12" font-family="sans-serif" x="340" y="424" text-anchor="middle" dominant-baseline="central" fill="#993C1D">telegram_post.yml</text>
+</g>
+<g style="cursor:pointer">
+<rect x="440" y="382" width="150" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text font-size="14" font-weight="500" font-family="sans-serif" x="515" y="403" text-anchor="middle" dominant-baseline="central" fill="#4A1B0C">Threads</text>
+<text font-size="12" font-family="sans-serif" x="515" y="424" text-anchor="middle" dominant-baseline="central" fill="#993C1D">threads_post.yml</text>
+</g>
+            </svg>
+          </div>
+        </div><!-- /view-instructions -->
 
       </div><!-- /admin-main -->
     </div><!-- /admin-panel -->
@@ -4209,7 +4281,7 @@
     // Resolve aliases from old naming
     if (VIEW_ALIASES[name]) name = VIEW_ALIASES[name];
 
-    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog', 'knowledge', 'kblinks'];
+    var validViews = ['feed', 'editorial', 'publishing', 'archive', 'scheduled', 'analytics', 'settings', 'catalog', 'knowledge', 'kblinks', 'instructions'];
     if (validViews.indexOf(name) === -1) name = 'feed';
 
     // Hide all views, then show the requested one with fade
