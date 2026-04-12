@@ -673,6 +673,45 @@
       "created_at": "2026-04-12T03:30:34.769Z",
       "updated_at": "2026-04-12T03:32:44.634Z",
       "published_at": "2026-04-12T03:32:44.634Z"
+    },
+    {
+      "id": "56f7b4a55360",
+      "filename": "20260412-090210-yakist-zhytla-zabezpechennya-bezpeky-ta-dovhovichnosti.md",
+      "title": "Якість житла: забезпечення безпеки та довговічності",
+      "summary": "Мелісса Нельсон із South Bend Industrial Hemp обговорює важливість якості та довговічності в конопляному будівництві.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/8bt5B3SEeYA/hqdefault.jpg",
+      "candidate_id": "56f7b4a55360",
+      "original_title": "Якість житла: забезпечення безпеки та довговічності",
+      "original_url": "https://www.youtube.com/watch?v=8bt5B3SEeYA",
+      "source_name": "YouTube: Hemp Build School Mastermind",
+      "content_preview": "Мелісса Нельсон із South Bend Industrial Hemp обговорює важливість якості та довговічності в конопляному будівництві.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "8bt5B3SEeYA",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-12T12:15:32.374Z",
+      "updated_at": "2026-04-12T12:15:32.374Z",
+      "published_at": null
     }
   ]
 }
