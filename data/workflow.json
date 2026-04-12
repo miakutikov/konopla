@@ -649,8 +649,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQaENOU3BheFRodGFwTlZ6MVNVdGhsTzM3c20zblU5QzJSOFBoS0NKb1hvcVpOTW9RdnAxTUN2TGVOR1lIcGtRMXBobGt4MEFCTVRZRkFUUS1SeGFIX2kyT0pPa1lLVllyM3hFZ2FDOUl4SnBBWVlOWkZkU0NBdXREWm00R25PNnc?oc=5",
       "source_name": "\"hemp innovation research\" - Google News",
       "content_preview": "Raleigh professor accused of false expenses for hemp research. How much he owes &nbsp;&nbsp; AOL.com",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -673,7 +673,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-12T03:26:32.163Z",
-      "updated_at": "2026-04-12T03:27:01.994Z",
+      "updated_at": "2026-04-12T03:27:18.392445+00:00",
       "published_at": null
     }
   ]
