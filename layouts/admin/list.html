@@ -4622,8 +4622,8 @@
       var nowIso = new Date().toISOString().replace(/\.\d+Z$/, '+00:00');
       updated = updated.replace(/^date:\s*.+$/m, 'date: ' + nowIso);
 
-      if (updated === decoded) {
-        showStatus('⚠️ Файл вже не draft або не знайдено draft: true', 'error');
+      if (decoded.search(/^draft:\s*true$/m) === -1) {
+        showStatus('\u26A0\uFE0F Файл вже не draft або не знайдено draft: true', 'error');
         enableCard(card);
         return;
       }
