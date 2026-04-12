@@ -5061,18 +5061,12 @@
         'scrape_failed': '\u26A0\uFE0F Не вдалось зчитати'
       }[a.status] || a.status;
 
-      var stageLabel = {
-        'feed': '\uD83D\uDCE1 Стрічка',
-        'editorial': '\u270D\uFE0F Редакція',
-        'publishing': '\uD83D\uDE80 Публікація'
-      }[a.stage] || a.stage;
-
       var catBadge = a.category && a.category !== '\u0456\u043D\u0448\u0435'
         ? '<span class="category-hint">' + escHtml(a.category) + '</span>'
         : '';
 
       var originalLink = a.original_url
-        ? '<div class="wf-card-original"><a href="' + escHtml(a.original_url) + '" target="_blank">\u2197 ' + escHtml(a.original_title || 'Оригінал') + '</a></div>'
+        ? '<div class="wf-card-original"><a href="' + escHtml(/^https?:\/\//i.test(a.original_url) ? a.original_url : '#') + '" target="_blank">\u2197 ' + escHtml(a.original_title || 'Оригінал') + '</a></div>'
         : '';
 
       var scoreHtml = typeof a.relevance_score === 'number'
