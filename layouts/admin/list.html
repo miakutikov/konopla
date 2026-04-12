@@ -5428,13 +5428,22 @@
     var item = workflowData.find(function(a) { return a.id === id; });
     if (!item) return;
 
-    // Reset to queued so user can try again
-    item.status = 'queued';
-    item.stage = 'feed';
-    item.updated_at = new Date().toISOString();
-    await saveWorkflowData('\u{1F504} Reset stuck processing: ' + item.title.substring(0, 40));
-    renderEditorial();
-    showStatus('\u2705 Статтю повернуто в чергу. Натисніть "Обробити" щоб спробувати знову.', 'success');
+    var card = document.querySelector('[data-wf-id="' + id + '"]');
+    var btn = card && card.querySelector('.admin-btn-green');
+    if (btn) { btn.disabled = true; btn.textContent = '\u23F3'; }
+
+    try {
+      // Reset to queued so user can try again
+      item.status = 'queued';
+      item.stage = 'feed';
+      item.updated_at = new Date().toISOString();
+      await saveWorkflowData('\u{1F504} Reset stuck processing: ' + item.title.substring(0, 40));
+      renderEditorial();
+      showStatus('\u2705 Статтю повернуто в чергу. Натисніть "Обробити" щоб спробувати знову.', 'success');
+    } catch (e) {
+      if (btn) { btn.disabled = false; btn.textContent = '\uD83D\uDD04 Повторити'; }
+      showStatus('\u274C Помилка: ' + e.message, 'error');
+    }
   };
 
   window.removeWorkflowItem = async function(id) {
