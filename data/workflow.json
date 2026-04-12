@@ -650,7 +650,7 @@
       "source_name": "\"hemp innovation research\" - Google News",
       "content_preview": "Raleigh professor accused of false expenses for hemp research. How much he owes &nbsp;&nbsp; AOL.com",
       "stage": "feed",
-      "status": "scrape_failed",
+      "status": "queued",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -673,7 +673,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-12T03:26:32.163Z",
-      "updated_at": "2026-04-12T03:27:18.392445+00:00",
+      "updated_at": "2026-04-12T03:30:26.237Z",
       "published_at": null
     }
   ]
