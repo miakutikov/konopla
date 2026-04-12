@@ -7886,11 +7886,15 @@
     var dResp = await ghApi('GET', '/contents/data/drafts.json');
     if (!dResp.ok) throw new Error('Failed to read drafts.json: ' + dResp.status);
     var dFile = await dResp.json();
-    var dData = JSON.parse(b64DecodeUtf8(dFile.content));
-    var beforeLen = (dData.articles || []).length;
-    dData.articles = (dData.articles || []).filter(function(a) { return a.filename !== filename; });
+    var dData;
+    try { dData = JSON.parse(b64DecodeUtf8(dFile.content)); } catch (e) {
+      throw new Error('Failed to parse drafts.json: ' + e.message);
+    }
+    var articles = dData.articles || [];
+    var beforeLen = articles.length;
+    dData.articles = articles.filter(function(a) { return a.filename !== filename; });
     // Only PUT if something was actually removed
-    if ((dData.articles || []).length < beforeLen) {
+    if (dData.articles.length < beforeLen) {
       var putResp = await ghApi('PUT', '/contents/data/drafts.json', {
         message: String.fromCodePoint(128465) + ' Remove video draft ' + filename,
         content: b64EncodeUtf8(JSON.stringify(dData, null, 2)),
