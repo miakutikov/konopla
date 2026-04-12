@@ -1,6 +1,27 @@
 {
   "items": [
     {
+      "id": "1dc830410651",
+      "type": "video",
+      "title": "Chocolato | 250 GSM: Невибілена 100% натуральна конопляна тканина",
+      "link": "https://www.youtube.com/watch?v=wtBuuommLpE",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Konopla.UA представляє огляд відео від Weaving Vibes про тканину Chocolato – невибілений матеріал зі 100% натуральних конопель, ідеальний для довговічного одягу.",
+      "image_url": "https://i.ytimg.com/vi/wtBuuommLpE/hqdefault.jpg",
+      "date": "2026-04-11T07:39:14Z",
+      "hash": "yt_wtBuuommLpE",
+      "content_preview": "Konopla.UA представляє огляд відео від Weaving Vibes про тканину Chocolato – невибілений матеріал зі 100% натуральних конопель, ідеальний для довговічного одягу.",
+      "added_at": "2026-04-12T20:46:35.690931+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "wtBuuommLpE",
+      "draft_filename": "20260412-204635-chocolato-250-gsm-nevybilena-100-naturalna-konoplyana-tkanyna.md"
+    },
+    {
       "id": "a6e13ba5ddfa",
       "type": "article",
       "title": "Raleigh professor accused of false expenses for hemp research. How much he owes - AOL.com",
@@ -41,5 +62,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-04-12T09:02:15.655202+00:00"
+  "updated_at": "2026-04-12T20:46:40.692001+00:00"
 }
