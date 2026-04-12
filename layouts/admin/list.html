@@ -4520,8 +4520,8 @@
       if (resp.status === 404) {
         el.innerHTML = '';
         document.getElementById('empty-state').style.display = 'block';
-        var cb = document.getElementById('drafts-count');
-        if (cb) cb.style.display = 'none';
+        var countBadge = document.getElementById('drafts-count');
+        if (countBadge) countBadge.style.display = 'none';
         return;
       }
 
@@ -4541,7 +4541,7 @@
       }
 
       // Update drafts count badge
-      var countBadge = document.getElementById('drafts-count');
+      countBadge = document.getElementById('drafts-count');
       if (countBadge) {
         countBadge.textContent = articles.length + ' на модерації';
         countBadge.style.display = 'inline';
