@@ -6708,6 +6708,9 @@
     fm += '---\n\n';
     fm += content + '\n';
 
+    var submitBtn = document.querySelector('.cf-submit-btn');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '\u23F3'; }
+
     showStatus(isEdit ? '⏳ Зберігаємо зміни...' : '⏳ Створюємо статтю...', 'info');
 
     try {
@@ -6777,6 +6780,10 @@
       }
 
     } catch (e) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = isEdit ? '\uD83D\uDCBE Зберегти' : '\uD83D\uDCDD Створити статтю';
+      }
       console.error('Save error:', e);
       showStatus('❌ Помилка: ' + e.message, 'error');
     }
