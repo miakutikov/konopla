@@ -6,10 +6,7 @@ categories: ["агро"]
 tags: ["коноплі", "заборона", "конгрес", "фермери"]
 source: "washingtonexaminer.com"
 source_url: "https://www.washingtonexaminer.com/news/business/4523663/hemp-farmer-planting-season-ban-gamble/"
-image: "https://www.washingtonexaminer.com/wp-content/uploads/2023/12/55e6591cd2eefc8911988b9719b141e4-scaled-e1775848185673.jpg?resize=1200,683"
-image_source: "Original"
-telegram_hook: "Фермери конопель беруть ризик, готуючись до сезону 2026 року"
-threads_hook: "Фермери конопель готуються до сезону 2026 року, незважаючи на загрозу заборони конопель"
+image: "/images/generated/gen-mnx13ook2t86.jpg"
 draft: false
 ---
 
