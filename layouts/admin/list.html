@@ -8449,6 +8449,8 @@
       var data = await resp.json();
       sourcesSha = data.sha;
       var content = JSON.parse(b64DecodeUtf8(data.content));
+      content.sources = content.sources || [];
+      if (idx >= content.sources.length) throw new Error('Джерело не знайдено після оновлення файлу');
 
       content.sources[idx].active = newActive;
 
