@@ -307,10 +307,10 @@
 | Фаза 8: Sources | 85–91 | ✅ 7/7 (loadSources 🟢, saveSource 🟡, toggleSourceActive 🟡, renderSources 🟢, editSource 🟢, filterSources 🟢, toggleSourceAddForm 🟢) |
 | Фаза 9: YouTube Panel | 92–95 | ✅ 4/4 (ytPanelSearch 🟢, addYtVideo 🟡, runYoutubeMonitor 🟢, toggleYtPanel 🟢) |
 | Фаза 10: Catalog | 96–104 | ✅ 9/9 (loadCatalog 🟡, saveCatalogData 🟢, renderCompanies 🟡, editCompany 🟢, showCompanyForm 🟢, uploadCatalogLogo 🟡, saveCompany 🟡, deleteCompany 🟢, triggerCatalogDeploy 🟢) |
-| Фаза 11: KB Articles | 105–114 | 🔄 4/10 (loadKnowledge 🟢, saveKbArticle 🟡, deleteKbArticle 🟢, kbAutoFormat 🟡) |
+| Фаза 11: KB Articles | 105–114 | 🔄 6/10 (loadKnowledge 🟢, saveKbArticle 🟡, deleteKbArticle 🟢, kbAutoFormat 🟡, renderKbList 🟡, showKbEditor 🟢) |
 | Фаза 12: KB Links | 115–123 | ⬜ Не почато |
 | Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **97/126** |
+| **ВСЬОГО** | **126 сесій** | **99/126** |
 
 ---
 

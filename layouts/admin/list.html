@@ -9155,7 +9155,7 @@
         '<div class="kb-card-actions">' +
           '<a class="admin-btn" href="/knowledge/' + escHtml(a.slug) + '/" target="_blank" style="text-decoration:none">👁 Переглянути</a>' +
           '<button class="admin-btn btn-edit" onclick="showKbEditor(\'' + escHtml(a.filename) + '\')">✏️ Редагувати</button>' +
-          '<button class="admin-btn btn-delete" onclick="deleteKbArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.sha) + '\', \'' + escHtml(a.title) + '\')">🗑️</button>' +
+          '<button class="admin-btn btn-delete" onclick="deleteKbArticle(\'' + escHtml(a.filename) + '\', \'' + escHtml(a.sha) + '\', \'' + escHtml(a.title).replace(/\'/g, "&#39;") + '\')">🗑️</button>' +
         '</div>' +
       '</div>';
     }).join('');
