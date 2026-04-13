@@ -303,14 +303,14 @@
 | Фаза 4: Drafts & Articles | 43–57 | ✅ 15/15 ЗАВЕРШЕНО (approveArticle ✅, deleteArticle 🟢, removeDraftEntry 🟢, createArticle ✅, editArticle ✅, loadDrafts 🟡, renderArticles 🟡, filterArticles 🟢, autoFormat ✅, toggleCreateForm 🟢, resetCreateForm 🟢, initQuill 🟢, generateImage ✅, uploadImage 🟡, pinArticle 🟢, unpinArticle 🟢) |
 | Фаза 5: Publishing | 58–72 | ✅ 15/15 ЗАВЕРШЕНО (triggerManualDeploy 🟢, deployAll 🟢, postToTelegram 🟢, postToThreads 🟢, scheduleArticle 🟢, loadScheduledView 🟡, cancelScheduled 🟡, renderQueue 🟢, renderTgQueue 🟢, renderThreadsQueue 🟢, loadQueue 🟢, loadTgQueue 🟢, loadThreadsQueue 🟢, renderScheduledGroup 🟢, setSchedulePreset 🟡) |
 | Фаза 6: Social Status | 73–76 | ✅ 4/4 ЗАВЕРШЕНО (openSocialModal 🟡, publishSocial 🟡, loadSocialStatus 🟢, closeSocialModal 🟢) |
-| Фаза 7: Analytics | 77–84 | 🔄 7/8 (renderStats 🟡, initCalendar 🟢, renderCalendar 🟢, showCalendarDay 🟢, calendarPrev 🟢, calendarNext 🟢, calendarToday 🟢) |
+| Фаза 7: Analytics | 77–84 | ✅ 8/8 (renderStats 🟡, initCalendar 🟢, renderCalendar 🟢, showCalendarDay 🟢, calendarPrev 🟢, calendarNext 🟢, calendarToday 🟢, timeAgo 🟡) |
 | Фаза 8: Sources | 85–91 | ⬜ Не почато |
 | Фаза 9: YouTube Panel | 92–95 | ⬜ Не почато |
 | Фаза 10: Catalog | 96–104 | ⬜ Не почато |
 | Фаза 11: KB Articles | 105–114 | ⬜ Не почато |
 | Фаза 12: KB Links | 115–123 | ⬜ Не почато |
 | Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **72/126** |
+| **ВСЬОГО** | **126 сесій** | **73/126** |
 
 ---
 
