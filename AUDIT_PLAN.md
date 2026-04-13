@@ -309,8 +309,8 @@
 | Фаза 10: Catalog | 96–104 | ✅ 9/9 (loadCatalog 🟡, saveCatalogData 🟢, renderCompanies 🟡, editCompany 🟢, showCompanyForm 🟢, uploadCatalogLogo 🟡, saveCompany 🟡, deleteCompany 🟢, triggerCatalogDeploy 🟢) |
 | Фаза 11: KB Articles | 105–114 | ✅ 10/10 (loadKnowledge 🟢, saveKbArticle 🟡, deleteKbArticle 🟢, kbAutoFormat 🟡, renderKbList 🟡, showKbEditor 🟢, uploadKbImage 🟡, insertKbTable 🟢, insertKbDivider 🟢, closeKbEditor 🟢) |
 | Фаза 12: KB Links | 115–123 | ✅ 9/9 (loadKbLinks 🟢, saveKbLinks 🟢, saveKbLinkEntry 🟡, deleteKbLinkEntry 🟢, renderKbLinks 🟡, showKbLinkForm 🟢, confirmInsertKbLink 🟢, openKbLinkModal 🟢, filterKbLinkList 🟢) |
-| Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **112/126** |
+| Фаза 13: Utilities | 124–126 | ✅ 3/3 (slugifyUA 🟡, markdownToHtml 🟡, renderRelevanceStars 🟢) |
+| **ВСЬОГО** | **126 сесій** | **115/126 — всі фази завершено ✅** |
 
 ---
 

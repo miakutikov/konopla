@@ -6514,7 +6514,10 @@
     var html = md
       .replace(/^---$/gm, '<hr>')
       .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, linkText, url) {
+        var safeUrl = /^javascript:/i.test(url.trim()) ? '#' : url;
+        return '<a href="' + safeUrl + '" target="_blank">' + linkText + '</a>';
+      })
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     var blocks = html.split(/\n\n+/);
     var result = [];
@@ -6643,6 +6646,7 @@
   };
 
   function slugifyUA(text) {
+    if (!text) return '';
     var translit = {
       'а':'a','б':'b','в':'v','г':'h','ґ':'g','д':'d','е':'e',
       'є':'ye','ж':'zh','з':'z','и':'y','і':'i','ї':'yi','й':'y',
