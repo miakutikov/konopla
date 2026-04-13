@@ -8713,7 +8713,7 @@
     var regF   = document.getElementById('cat-filter-region').value;
     var statF  = document.getElementById('cat-filter-status').value;
 
-    var companies = catalogData.companies.filter(function(c) {
+    var companies = (catalogData.companies || []).filter(function(c) {
       if (catF !== 'all' && c.category_id !== catF) return false;
       if (regF !== 'all' && c.region !== regF) return false;
       if (statF !== 'all' && c.status !== statF) return false;
@@ -8737,25 +8737,25 @@
       if (!grouped[cat.id] || !grouped[cat.id].length) return;
       var list = grouped[cat.id];
       html += '<div class="cat-company-group">';
-      html += '<div class="cat-group-title">' + cat.emoji + ' ' + cat.name + ' <span class="cat-group-count">' + list.length + '</span></div>';
+      html += '<div class="cat-group-title">' + escHtml(cat.emoji) + ' ' + escHtml(cat.name) + ' <span class="cat-group-count">' + list.length + '</span></div>';
       html += '<table class="cat-company-table"><thead><tr><th>Назва</th><th>Регіон</th><th>Теги</th><th>Статус</th><th>Дії</th></tr></thead><tbody>';
       list.forEach(function(c) {
         var regName = '';
         if (catalogData.regions) {
           var r = catalogData.regions.find(function(x){ return x.id === c.region; });
-          regName = r ? r.short : (c.location || '');
+          regName = r ? escHtml(r.short) : escHtml(c.location || '');
         }
-        var tagsHtml = (c.tags||[]).slice(0,3).map(function(t){ return '<span class="cat-tag">' + t + '</span>'; }).join('');
+        var tagsHtml = (c.tags||[]).slice(0,3).map(function(t){ return '<span class="cat-tag">' + escHtml(t) + '</span>'; }).join('');
         var statusHtml = c.status === 'active'
           ? '<span class="cat-badge-active">\u25CF Активна</span>'
           : '<span class="cat-badge-inactive">\u25CB Неактивна</span>';
         var featured = c.featured ? ' \u2B50' : '';
         html += '<tr>';
-        html += '<td><div class="cat-company-name">' + c.name + featured + '</div><div class="cat-company-location">\uD83D\uDCCD ' + (c.location||'') + '</div></td>';
+        html += '<td><div class="cat-company-name">' + escHtml(c.name) + featured + '</div><div class="cat-company-location">\uD83D\uDCCD ' + escHtml(c.location||'') + '</div></td>';
         html += '<td>' + regName + '</td>';
         html += '<td><div class="cat-company-tags">' + tagsHtml + '</div></td>';
         html += '<td>' + statusHtml + '</td>';
-        html += '<td><div class="cat-actions"><button class="cat-btn-edit" onclick="editCompany(\'' + c.id + '\')">\u270F\uFE0F Ред.</button><button class="cat-btn-delete" onclick="deleteCompany(\'' + c.id + '\',\'' + c.name.replace(/'/g,"\\'") + '\')">\uD83D\uDDD1\uFE0F</button></div></td>';
+        html += '<td><div class="cat-actions"><button class="cat-btn-edit" onclick="editCompany(\'' + escHtml(c.id) + '\')">\u270F\uFE0F Ред.</button><button class="cat-btn-delete" onclick="deleteCompany(\'' + escHtml(c.id) + '\',\'' + escHtml(c.name).replace(/'/g,"&#39;") + '\')">\uD83D\uDDD1\uFE0F</button></div></td>';
         html += '</tr>';
       });
       html += '</tbody></table></div>';
