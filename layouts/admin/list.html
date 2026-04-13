@@ -7368,7 +7368,9 @@
     var catData = catLabels.map(function(c) { return catCounts[c]; });
 
     if (typeof Chart !== 'undefined') {
-      new Chart(document.getElementById('chart-categories'), {
+      var catCanvas = document.getElementById('chart-categories');
+      if (catCanvas._chartInstance) catCanvas._chartInstance.destroy();
+      catCanvas._chartInstance = new Chart(catCanvas, {
         type: 'bar',
         data: {
           labels: catLabels,
@@ -7404,7 +7406,9 @@
       });
       var monthData = months.map(function(m) { return monthCounts[m]; });
 
-      new Chart(document.getElementById('chart-monthly'), {
+      var monthCanvas = document.getElementById('chart-monthly');
+      if (monthCanvas._chartInstance) monthCanvas._chartInstance.destroy();
+      monthCanvas._chartInstance = new Chart(monthCanvas, {
         type: 'bar',
         data: {
           labels: monthLabels,
