@@ -8582,7 +8582,9 @@
         if (!schedResp.ok) throw new Error('Cannot fetch scheduled.json');
         var schedFile = await schedResp.json();
         var schedSha = schedFile.sha;
-        var schedData = JSON.parse(b64DecodeUtf8(schedFile.content));
+        var schedData;
+        try { schedData = JSON.parse(b64DecodeUtf8(schedFile.content)); }
+        catch (e) { schedData = { deploy: [], telegram: [], threads: [] }; }
         if (!schedData[platform]) schedData[platform] = [];
         schedData[platform].push({
           scheduled_at: new Date(scheduledTime).toISOString(),
