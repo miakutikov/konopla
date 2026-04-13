@@ -8883,6 +8883,7 @@
   };
 
   window.saveCompany = async function() {
+    if (window._saveCompanyInProgress) return;
     var name = document.getElementById('cat-name').value.trim();
     var cat  = document.getElementById('cat-category').value;
     var reg  = document.getElementById('cat-region').value;
@@ -8892,6 +8893,8 @@
     if (!cat)  { showStatus('❌ Оберіть категорію', 'error'); return; }
     if (!reg)  { showStatus('❌ Оберіть регіон', 'error'); return; }
     if (!desc) { showStatus('❌ Введіть короткий опис', 'error'); return; }
+
+    window._saveCompanyInProgress = true;
 
     var lat = parseFloat(document.getElementById('cat-lat').value) || 0;
     var lng = parseFloat(document.getElementById('cat-lng').value) || 0;
@@ -8903,72 +8906,76 @@
 
     var now = new Date().toISOString();
 
-    if (catalogEditingId) {
-      var idx = catalogData.companies.findIndex(function(c){ return c.id === catalogEditingId; });
-      if (idx === -1) { showStatus('❌ Компанію не знайдено', 'error'); return; }
-      Object.assign(catalogData.companies[idx], {
-        name:             name,
-        slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
-        category_id:      cat,
-        region:           reg,
-        location:         document.getElementById('cat-location').value.trim(),
-        coordinates:      (lat || lng) ? [lat, lng] : catalogData.companies[idx].coordinates,
-        founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
-        description:      desc,
-        full_description: document.getElementById('cat-full-desc').value.trim(),
-        website:          document.getElementById('cat-website').value.trim(),
-        phone:            document.getElementById('cat-phone').value.trim(),
-        email:            document.getElementById('cat-email').value.trim(),
-        logo:             document.getElementById('cat-logo').value.trim(),
-        social: {
-          telegram:  document.getElementById('cat-telegram').value.trim(),
-          instagram: document.getElementById('cat-instagram').value.trim(),
-          facebook:  document.getElementById('cat-facebook').value.trim()
-        },
-        tags:     tags,
-        products: products,
-        status:   document.getElementById('cat-status').value,
-        featured: document.getElementById('cat-featured').checked,
-        updated_at: now
-      });
-      var ok = await saveCatalogData('📋 Update company: ' + name);
-      if (ok) { hideCompanyForm(); renderCompanies(); }
-    } else {
-      var maxNum = catalogData.companies.reduce(function(m, c) {
-        var n = parseInt((c.id || '').split('-').pop());
-        return isNaN(n) ? m : Math.max(m, n);
-      }, 0);
-      var newId = 'hemp-ua-' + String(maxNum + 1).padStart(3, '0');
-      var newCompany = {
-        id:               newId,
-        slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
-        name:             name,
-        category_id:      cat,
-        region:           reg,
-        location:         document.getElementById('cat-location').value.trim(),
-        coordinates:      (lat || lng) ? [lat, lng] : [],
-        founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
-        description:      desc,
-        full_description: document.getElementById('cat-full-desc').value.trim(),
-        website:          document.getElementById('cat-website').value.trim(),
-        phone:            document.getElementById('cat-phone').value.trim(),
-        email:            document.getElementById('cat-email').value.trim(),
-        logo:             document.getElementById('cat-logo').value.trim(),
-        social: {
-          telegram:  document.getElementById('cat-telegram').value.trim(),
-          instagram: document.getElementById('cat-instagram').value.trim(),
-          facebook:  document.getElementById('cat-facebook').value.trim()
-        },
-        tags:     tags,
-        products: products,
-        status:   document.getElementById('cat-status').value,
-        featured: document.getElementById('cat-featured').checked,
-        added_at:   now,
-        updated_at: now
-      };
-      catalogData.companies.push(newCompany);
-      var ok = await saveCatalogData('📋 Add company: ' + name);
-      if (ok) { hideCompanyForm(); renderCompanies(); }
+    try {
+      if (catalogEditingId) {
+        var idx = catalogData.companies.findIndex(function(c){ return c.id === catalogEditingId; });
+        if (idx === -1) { showStatus('❌ Компанію не знайдено', 'error'); return; }
+        Object.assign(catalogData.companies[idx], {
+          name:             name,
+          slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
+          category_id:      cat,
+          region:           reg,
+          location:         document.getElementById('cat-location').value.trim(),
+          coordinates:      (lat || lng) ? [lat, lng] : catalogData.companies[idx].coordinates,
+          founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
+          description:      desc,
+          full_description: document.getElementById('cat-full-desc').value.trim(),
+          website:          document.getElementById('cat-website').value.trim(),
+          phone:            document.getElementById('cat-phone').value.trim(),
+          email:            document.getElementById('cat-email').value.trim(),
+          logo:             document.getElementById('cat-logo').value.trim(),
+          social: {
+            telegram:  document.getElementById('cat-telegram').value.trim(),
+            instagram: document.getElementById('cat-instagram').value.trim(),
+            facebook:  document.getElementById('cat-facebook').value.trim()
+          },
+          tags:     tags,
+          products: products,
+          status:   document.getElementById('cat-status').value,
+          featured: document.getElementById('cat-featured').checked,
+          updated_at: now
+        });
+        var ok = await saveCatalogData('📋 Update company: ' + name);
+        if (ok) { hideCompanyForm(); renderCompanies(); }
+      } else {
+        var maxNum = catalogData.companies.reduce(function(m, c) {
+          var n = parseInt((c.id || '').split('-').pop());
+          return isNaN(n) ? m : Math.max(m, n);
+        }, 0);
+        var newId = 'hemp-ua-' + String(maxNum + 1).padStart(3, '0');
+        var newCompany = {
+          id:               newId,
+          slug:             document.getElementById('cat-slug').value.trim() || catSlugify(name),
+          name:             name,
+          category_id:      cat,
+          region:           reg,
+          location:         document.getElementById('cat-location').value.trim(),
+          coordinates:      (lat || lng) ? [lat, lng] : [],
+          founded_year:     parseInt(document.getElementById('cat-founded').value) || 0,
+          description:      desc,
+          full_description: document.getElementById('cat-full-desc').value.trim(),
+          website:          document.getElementById('cat-website').value.trim(),
+          phone:            document.getElementById('cat-phone').value.trim(),
+          email:            document.getElementById('cat-email').value.trim(),
+          logo:             document.getElementById('cat-logo').value.trim(),
+          social: {
+            telegram:  document.getElementById('cat-telegram').value.trim(),
+            instagram: document.getElementById('cat-instagram').value.trim(),
+            facebook:  document.getElementById('cat-facebook').value.trim()
+          },
+          tags:     tags,
+          products: products,
+          status:   document.getElementById('cat-status').value,
+          featured: document.getElementById('cat-featured').checked,
+          added_at:   now,
+          updated_at: now
+        };
+        catalogData.companies.push(newCompany);
+        var ok = await saveCatalogData('📋 Add company: ' + name);
+        if (ok) { hideCompanyForm(); renderCompanies(); }
+      }
+    } finally {
+      window._saveCompanyInProgress = false;
     }
   };
 
