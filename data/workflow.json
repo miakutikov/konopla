@@ -713,19 +713,19 @@
       "published_at": "2026-04-12T12:20:32.265Z"
     },
     {
-      "id": "y1drnl1d",
-      "filename": "",
-      "title": "washingtonexaminer.com — https://www.washingtonexaminer.com/news/business/4523663/hem",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "ab9fb0ff08ba",
+      "filename": "20260413-032734-fermery-konopel-berut-ryzyk-hotuyuchys-do-sezonu-2026-roku.md",
+      "title": "Фермери конопель беруть ризик, готуючись до сезону 2026 року",
+      "summary": "Фермери конопель у США готуються до сезону 2026 року, незважаючи на загрозу заборони конопель, яка може залишити їх без ринку для продажу своєї продукції. Конгрес повинен вирішити питання щодо заборони до листопада 2026 року.",
+      "category": "агро",
+      "image": "https://www.washingtonexaminer.com/wp-content/uploads/2023/12/55e6591cd2eefc8911988b9719b141e4-scaled-e1775848185673.jpg?resize=1200,683",
       "candidate_id": "y1drnl1d",
       "original_title": "",
       "original_url": "https://www.washingtonexaminer.com/news/business/4523663/hemp-farmer-planting-season-ban-gamble/",
       "source_name": "washingtonexaminer.com",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -736,34 +736,34 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Фермери конопель беруть ризик, готуючись до сезону 2026 року"
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Фермери конопель готуються до сезону 2026 року, незважаючи на загрозу заборони конопель"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-13T03:11:27.457Z",
-      "updated_at": "2026-04-13T03:25:04.484Z",
+      "updated_at": "2026-04-13T03:27:34.235452+00:00",
       "published_at": null
     },
     {
-      "id": "xdszr8qw",
-      "filename": "",
-      "title": "diesachsen.de — https://www.diesachsen.de/otsialni-pytann/25-klubiv-z-vyrosh",
-      "summary": "",
-      "category": "",
-      "image": "",
-      "candidate_id": "xdszr8qw",
+      "id": "8ab7f6825ae5",
+      "filename": "20260413-034106-u-saksoniyi-stvoreno-25-klubiv-vyroshchuvannya-konopel.md",
+      "title": "У Саксонії створено 25 клубів вирощування конопель",
+      "summary": "Приблизно через два роки після часткової легалізації канабісу в Саксонії було створено 25 клубів коноплярів.",
+      "category": "інше",
+      "image": "https://cdn.pblzr.de/e08acf9f-4dbb-4687-ab91-95afdc6aa0ce/2026/04/25-cannabis-anbauvereine-in-sachsen-genehmigt-260409-935-1268114_L.jpeg",
+      "candidate_id": "sf439rgi",
       "original_title": "",
       "original_url": "https://www.diesachsen.de/otsialni-pytann/25-klubiv-z-vyroshchuvannya-konopel-otrymaly-dozvil-u-aks-3122708?language=uk",
       "source_name": "diesachsen.de",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -774,18 +774,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "У Саксонії створено 25 клубів вирощування коноплі після часткової легалізації"
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Часткова легалізація канабісу в Німеччині призвела до створення сотень клубів по всій країні"
         }
       },
       "relevance_score": 1,
-      "created_at": "2026-04-13T03:36:10.346Z",
-      "updated_at": "2026-04-13T03:36:22.832Z",
+      "created_at": "2026-04-13T03:12:33.953Z",
+      "updated_at": "2026-04-13T03:41:06.742508+00:00",
       "published_at": null
     }
   ]
