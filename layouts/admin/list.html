@@ -4862,7 +4862,9 @@
       }
 
       var fileData = await resp.json();
-      var scheduled = JSON.parse(b64DecodeUtf8(fileData.content));
+      var scheduled;
+      try { scheduled = JSON.parse(b64DecodeUtf8(fileData.content)); }
+      catch (e) { scheduled = { deploy: [], telegram: [], threads: [] }; }
 
       var deployItems = scheduled.deploy || [];
       var tgItems = scheduled.telegram || [];
