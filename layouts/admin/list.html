@@ -5905,8 +5905,10 @@
 
   // Preset schedule buttons: set datetime-local to next 08:00/14:00/20:00 Kyiv time
   window.setSchedulePreset = function(type, idx, hourKyiv) {
-    var KYIV_OFFSET = 3; // UTC+3 (EEST)
     var now = new Date();
+    // Dynamic Kyiv offset (UTC+2 winter / UTC+3 summer)
+    var kyivNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Kiev' }));
+    var KYIV_OFFSET = Math.round((kyivNow - now) / 3600000);
     // Target date in UTC
     var target = new Date(now);
     target.setUTCHours(hourKyiv - KYIV_OFFSET, 0, 0, 0);
