@@ -6027,7 +6027,9 @@
       if (!getResp.ok) throw new Error('Cannot read scheduled.json');
 
       var fileData = await getResp.json();
-      var scheduled = JSON.parse(b64DecodeUtf8(fileData.content));
+      var scheduled;
+      try { scheduled = JSON.parse(b64DecodeUtf8(fileData.content)); }
+      catch (e) { scheduled = { deploy: [], telegram: [], threads: [] }; }
 
       if (scheduled[type]) {
         scheduled[type] = scheduled[type].filter(function(item) { return item.id !== itemId; });
