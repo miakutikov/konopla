@@ -8844,12 +8844,14 @@
   }
 
   window.uploadCatalogLogo = async function(fileInput) {
+    if (window._uploadCatalogLogoInProgress) return;
     var file = fileInput.files[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) { showStatus('❌ Файл занадто великий (max 2MB)', 'error'); return; }
     if (!ghToken) { showStatus('❌ Потрібен GitHub Token', 'error'); return; }
     var ext = file.name.split('.').pop().toLowerCase();
     if (!['jpg','jpeg','png','webp','svg'].includes(ext)) { showStatus('❌ Тільки JPG, PNG, WebP або SVG', 'error'); return; }
+    window._uploadCatalogLogoInProgress = true;
     showStatus('⏳ Завантаження логотипу...', 'info');
     var reader = new FileReader();
     reader.onload = async function(ev) {
@@ -8867,7 +8869,15 @@
         showStatus('✅ Логотип завантажено', 'success');
       } catch(e) {
         showStatus('❌ Помилка завантаження: ' + e.message, 'error');
+      } finally {
+        fileInput.value = '';
+        window._uploadCatalogLogoInProgress = false;
       }
+    };
+    reader.onerror = function() {
+      showStatus('❌ Помилка читання файлу', 'error');
+      fileInput.value = '';
+      window._uploadCatalogLogoInProgress = false;
     };
     reader.readAsDataURL(file);
   };
