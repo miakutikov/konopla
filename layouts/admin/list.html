@@ -8646,6 +8646,7 @@
   }
 
   window.loadCatalog = async function() {
+    if (!ghToken) { showStatus('❌ Потрібен GitHub Token', 'error'); return; }
     try {
       showStatus('⏳ Завантаження каталогу...', 'info');
       var resp = await ghApi('GET', '/contents/data/catalog.json');
@@ -8690,19 +8691,18 @@
     var cfCat  = document.getElementById('cat-category');
     var cfReg  = document.getElementById('cat-region');
 
-    catSel.innerHTML = '<option value="all">Всі категорії</option>';
-    cfCat.innerHTML  = '<option value="">— Оберіть категорію —</option>';
-    catalogData.categories.sort(function(a,b){ return a.order - b.order; }).forEach(function(c) {
-      catSel.innerHTML += '<option value="' + c.id + '">' + c.emoji + ' ' + c.name + '</option>';
-      cfCat.innerHTML  += '<option value="' + c.id + '">' + c.emoji + ' ' + c.name + '</option>';
-    });
+    var cats = catalogData.categories.sort(function(a,b){ return a.order - b.order; });
+    var catOpts = cats.map(function(c) {
+      return '<option value="' + c.id + '">' + c.emoji + ' ' + c.name + '</option>';
+    }).join('');
+    catSel.innerHTML = '<option value="all">Всі категорії</option>' + catOpts;
+    cfCat.innerHTML  = '<option value="">— Оберіть категорію —</option>' + catOpts;
 
-    regSel.innerHTML = '<option value="all">Всі регіони</option>';
-    cfReg.innerHTML  = '<option value="">— Оберіть регіон —</option>';
-    catalogData.regions.forEach(function(r) {
-      regSel.innerHTML += '<option value="' + r.id + '">' + r.name + '</option>';
-      cfReg.innerHTML  += '<option value="' + r.id + '">' + r.name + '</option>';
-    });
+    var regOpts = catalogData.regions.map(function(r) {
+      return '<option value="' + r.id + '">' + r.name + '</option>';
+    }).join('');
+    regSel.innerHTML = '<option value="all">Всі регіони</option>' + regOpts;
+    cfReg.innerHTML  = '<option value="">— Оберіть регіон —</option>' + regOpts;
   }
 
   window.renderCompanies = function() {
