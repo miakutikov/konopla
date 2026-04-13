@@ -724,8 +724,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPeHVaU2FlM0Nnd1lGYy1iUmpPU2NZVjlTVnBLdmM4TFRrdUxoQzBhQ2Y5UGR6dWs0NXZZWmVzdDlEVWVISkRrdVFwNVYwejBWMFAzNGNpNF94Si1MVS1adnpKMlB0OWVNMlY5M2hNWUh3TGg2dU9TaWd0TFdFWExiRGtpTUJIV3BJUUljYjFZdzBXb2dpMThVRmxVd3lsVVdIQ3l1RXhncC1SSnhILTVkS0QxNkpUMXk4Tm40?oc=5",
       "source_name": "\"вирощування конопель\" - Google Новини",
       "content_preview": "25 клубів з вирощування конопель отримали дозвіл у Саксонії &nbsp;&nbsp; Die Sachsen News",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -748,7 +748,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-13T03:06:35.837Z",
-      "updated_at": "2026-04-13T03:07:31.395Z",
+      "updated_at": "2026-04-13T03:07:50.778399+00:00",
       "published_at": null
     },
     {
@@ -763,8 +763,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQOGJ6X05qOFoyTU56WWlvODktbklKNnk1b25PVDhLWVlIdDhVNVE5SVRyY3E5blJhSThzV3hjVkJ1T0JqUEs5QnpCUkdMUUtkZl9DbDlWTl9HeGw5dmNrYkFNMkRrMXhDX3d1WnczOXNUcnpETFFpTlppWVVSNmZ6dUVrNFdQV1pERVY1RGRRYVM2RXlzYkVBWnk1d0o?oc=5",
       "source_name": "\"hemp cultivation harvest\" - Google News",
       "content_preview": "Hemp farmers prepare for planting season ahead of impending ban: ‘We are 100% taking a gamble’ &nbsp;&nbsp; Washington Examiner",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -787,7 +787,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-13T03:07:05.292Z",
-      "updated_at": "2026-04-13T03:07:31.395Z",
+      "updated_at": "2026-04-13T03:07:52.701095+00:00",
       "published_at": null
     }
   ]
