@@ -6961,10 +6961,10 @@
     var catSelect = document.getElementById('articles-filter-cat');
     if (catSelect) {
       var catKeys = Object.keys(cats).sort();
-      catSelect.innerHTML = '<option value="all">Усі категорії</option>';
-      catKeys.forEach(function(c) {
-        catSelect.innerHTML += '<option value="' + escHtml(c) + '">' + escHtml(c) + '</option>';
-      });
+      catSelect.innerHTML = '<option value="all">Усі категорії</option>' +
+        catKeys.map(function(c) {
+          return '<option value="' + escHtml(c) + '">' + escHtml(c) + '</option>';
+        }).join('');
     }
 
     articlesPage = 1;
