@@ -8370,6 +8370,7 @@
   };
 
   window.saveSource = async function() {
+    if (window._saveSourceInProgress) return;
     var name = document.getElementById('src-name').value.trim();
     var url = document.getElementById('src-url').value.trim();
     var region = document.getElementById('src-region').value;
@@ -8380,6 +8381,7 @@
       return;
     }
 
+    window._saveSourceInProgress = true;
     showStatus('⏳ Збереження джерела...', 'info');
 
     try {
@@ -8389,6 +8391,7 @@
       var data = await resp.json();
       sourcesSha = data.sha;
       var content = JSON.parse(b64DecodeUtf8(data.content));
+      content.sources = content.sources || [];
 
       var newSource = { name: name, url: url, region: region, active: true };
       if (trusted) newSource.trusted = true;
@@ -8425,6 +8428,8 @@
     } catch (e) {
       console.error('Save source error:', e);
       showStatus('❌ Помилка: ' + e.message, 'error');
+    } finally {
+      window._saveSourceInProgress = false;
     }
   };
 
