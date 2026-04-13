@@ -9320,11 +9320,13 @@
 
   // --- Image upload for KB ---
   window.uploadKbImage = async function(fileInput) {
+    if (window._uploadKbImageInProgress) return;
     var file = fileInput.files[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) { showStatus('❌ Файл занадто великий (max 2MB)', 'error'); fileInput.value = ''; return; }
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) { showStatus('❌ Тільки JPG, PNG або WebP', 'error'); fileInput.value = ''; return; }
     if (!ghToken) { showStatus('❌ GitHub PAT не налаштовано', 'error'); fileInput.value = ''; return; }
+    window._uploadKbImageInProgress = true;
     showStatus('⏳ Завантаження фото...', 'info');
     try {
       var reader = new FileReader();
@@ -9352,6 +9354,7 @@
       showStatus('❌ Помилка: ' + e.message, 'error');
     } finally {
       fileInput.value = '';
+      window._uploadKbImageInProgress = false;
     }
   };
 
