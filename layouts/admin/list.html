@@ -5618,6 +5618,7 @@
   };
 
   window.uploadImage = async function(fileInput) {
+    if (window._uploadInProgress) return;
     var file = fileInput.files[0];
     if (!file) return;
 
@@ -5639,6 +5640,7 @@
       return;
     }
 
+    window._uploadInProgress = true;
     showStatus(String.fromCodePoint(9203) + ' Завантаження фото...', 'info');
 
     try {
@@ -5673,6 +5675,7 @@
       showStatus(String.fromCodePoint(10060) + ' Помилка: ' + e.message, 'error');
     } finally {
       fileInput.value = '';
+      window._uploadInProgress = false;
     }
   };
 
