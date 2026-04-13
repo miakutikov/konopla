@@ -302,7 +302,7 @@
 | Фаза 3: Editorial / Workflow | 27–42 | ✅ 16/16 ЗАВЕРШЕНО (saveWorkflowData 🟢, loadWorkflowArticles ✅, loadEditorial 🟢, renderEditorial ✅, processWorkflowItem 🟢, processQueuedWorkflow ✅, removeWorkflowItem 🟢, _removeFromWorkflow 🟢, quickAddUrl ✅, _tryResolveGoogleNewsUrl 🟢, retryProcessing ✅, switchEditorialTab 🟢, updateEditorialCounter 🟢, toggleQuickAdd 🟢, resolveGoogleNewsInCard 🟢, saveArticleUrl ✅) |
 | Фаза 4: Drafts & Articles | 43–57 | ✅ 15/15 ЗАВЕРШЕНО (approveArticle ✅, deleteArticle 🟢, removeDraftEntry 🟢, createArticle ✅, editArticle ✅, loadDrafts 🟡, renderArticles 🟡, filterArticles 🟢, autoFormat ✅, toggleCreateForm 🟢, resetCreateForm 🟢, initQuill 🟢, generateImage ✅, uploadImage 🟡, pinArticle 🟢, unpinArticle 🟢) |
 | Фаза 5: Publishing | 58–72 | ✅ 15/15 ЗАВЕРШЕНО (triggerManualDeploy 🟢, deployAll 🟢, postToTelegram 🟢, postToThreads 🟢, scheduleArticle 🟢, loadScheduledView 🟡, cancelScheduled 🟡, renderQueue 🟢, renderTgQueue 🟢, renderThreadsQueue 🟢, loadQueue 🟢, loadTgQueue 🟢, loadThreadsQueue 🟢, renderScheduledGroup 🟢, setSchedulePreset 🟡) |
-| Фаза 6: Social Status | 73–76 | 🔄 2/4 (openSocialModal 🟡, publishSocial 🟡) |
+| Фаза 6: Social Status | 73–76 | 🔄 3/4 (openSocialModal 🟡, publishSocial 🟡, loadSocialStatus 🟢) |
 | Фаза 7: Analytics | 77–84 | ⬜ Не почато |
 | Фаза 8: Sources | 85–91 | ⬜ Не почато |
 | Фаза 9: YouTube Panel | 92–95 | ⬜ Не почато |
@@ -310,7 +310,7 @@
 | Фаза 11: KB Articles | 105–114 | ⬜ Не почато |
 | Фаза 12: KB Links | 115–123 | ⬜ Не почато |
 | Фаза 13: Utilities | 124–126 | ⬜ Не почато |
-| **ВСЬОГО** | **126 сесій** | **63/126** |
+| **ВСЬОГО** | **126 сесій** | **64/126** |
 
 ---
 
