@@ -9227,6 +9227,7 @@
 
   // --- Save KB article ---
   window.saveKbArticle = async function() {
+    if (window._saveKbInProgress) return;
     var title = document.getElementById('kb-title').value.trim();
     var slug = document.getElementById('kb-slug').value.trim() || slugifyUA(title);
     var icon = document.getElementById('kb-icon').value.trim() || '📄';
@@ -9272,6 +9273,7 @@
     fm += '---\n\n';
     fm += bodyMd + '\n';
 
+    window._saveKbInProgress = true;
     showStatus('⏳ Зберігаємо...', 'info');
 
     try {
@@ -9295,6 +9297,8 @@
     } catch(e) {
       console.error('KB save error:', e);
       showStatus('❌ Помилка: ' + e.message, 'error');
+    } finally {
+      window._saveKbInProgress = false;
     }
   };
 
