@@ -7274,10 +7274,10 @@
 
     try {
       var geminiResp = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=' + encodeURIComponent(geminiKey),
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent',
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey },
           body: JSON.stringify({
             contents: [{ parts: [{ text: imagePrompt }] }],
             generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
