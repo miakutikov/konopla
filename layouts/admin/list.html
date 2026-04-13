@@ -8538,14 +8538,12 @@
       if (!resp.ok) throw new Error('fetch failed');
       return resp.json();
     }).then(function(data) {
+      if (document.getElementById('social-modal-filename').value !== filename) return;
       var content = b64DecodeUtf8(data.content);
       var hookMatch = content.match(new RegExp(hookField + ':\\s*"([^"]*)"'));
-      if (hookMatch) {
-        document.getElementById('social-modal-text').value = hookMatch[1];
-      } else {
-        document.getElementById('social-modal-text').value = defaultText;
-      }
+      document.getElementById('social-modal-text').value = hookMatch ? hookMatch[1] : defaultText;
     }).catch(function() {
+      if (document.getElementById('social-modal-filename').value !== filename) return;
       document.getElementById('social-modal-text').value = defaultText;
     });
 
