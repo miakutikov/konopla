@@ -762,8 +762,8 @@
       "original_url": "https://www.diesachsen.de/otsialni-pytann/25-klubiv-z-vyroshchuvannya-konopel-otrymaly-dozvil-u-aks-3122708?language=uk",
       "source_name": "diesachsen.de",
       "content_preview": "",
-      "stage": "feed",
-      "status": "queued",
+      "stage": "editorial",
+      "status": "processing",
       "channels": {
         "website": {
           "enabled": true,
@@ -785,7 +785,7 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-13T03:36:10.346Z",
-      "updated_at": "2026-04-13T03:36:10.346Z",
+      "updated_at": "2026-04-13T03:36:22.832Z",
       "published_at": null
     }
   ]
