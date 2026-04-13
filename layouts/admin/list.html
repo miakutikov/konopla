@@ -9563,7 +9563,7 @@
     var filtered = kbLinksData.map(function(item, idx) { return { item: item, idx: idx }; });
     if (q) {
       filtered = filtered.filter(function(d) {
-        return d.item.title.toLowerCase().includes(q) ||
+        return (d.item.title || '').toLowerCase().includes(q) ||
                (d.item.phrases || []).some(function(p) { return p.toLowerCase().includes(q); });
       });
     }
@@ -9665,6 +9665,7 @@
   };
 
   window.saveKbLinkEntry = async function() {
+    if (window._saveKbLinkEntryInProgress) return;
     var url = (document.getElementById('kbl-url').value || '').trim();
     var title = (document.getElementById('kbl-title-input').value || '').trim();
     var phrasesRaw = document.getElementById('kbl-phrases').value || '';
@@ -9680,6 +9681,7 @@
     var isNew = editingKbLinkIdx === null;
     var prevEntry = isNew ? null : kbLinksData[editingKbLinkIdx];
     if (isNew) { kbLinksData.push(entry); } else { kbLinksData[editingKbLinkIdx] = entry; }
+    window._saveKbLinkEntryInProgress = true;
     try {
       showStatus('⏳ Збереження...', 'info');
       await saveKbLinks(isNew ? '🔗 Add kb link: ' + title : '🔗 Update kb link: ' + title);
@@ -9689,6 +9691,8 @@
     } catch(e) {
       showStatus('❌ Помилка: ' + e.message, 'error');
       if (isNew) { kbLinksData.pop(); } else { kbLinksData[editingKbLinkIdx] = prevEntry; }
+    } finally {
+      window._saveKbLinkEntryInProgress = false;
     }
   };
 
