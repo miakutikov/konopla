@@ -6248,6 +6248,7 @@
       try {
         // 1. Fetch video details
         var ytKey = localStorage.getItem('konopla_yt_key');
+        if (!ytKey) throw new Error('YouTube API Key відсутній');
         var detResp = await fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + videoId + '&key=' + encodeURIComponent(ytKey));
         if (!detResp.ok) throw new Error('Cannot fetch video details');
 
@@ -6268,9 +6269,9 @@
           '{\n  "title": "заголовок українською",\n  "summary": "1-2 речення анонс",\n  "body": "текст статті в markdown (3-5 абзаців)",\n  "tags": ["тег1", "тег2"],\n  "category": "одна з: текстиль, будівництво, агро, біопластик, харчова, автопром, енергетика, косметика, наука, екологія, бізнес, законодавство, відео, інше"\n}\n\n' +
           'ВАЖЛИВО: Якщо відео НЕ стосується коноплів — поверни {"rejected": true, "reason": "причина"}';
 
-        var geminiResp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(geminiKey), {
+        var geminiResp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey },
           body: JSON.stringify({
             contents: [{ parts: [{ text: geminiPrompt }] }],
             generationConfig: { temperature: 0.4, responseMimeType: 'application/json' }
@@ -6285,6 +6286,8 @@
         }
 
         var geminiData = await geminiResp.json();
+        if (!geminiData.candidates || !geminiData.candidates[0])
+          throw new Error('Gemini: порожня відповідь');
         var aiText = geminiData.candidates[0].content.parts[0].text;
         var aiArticle = JSON.parse(aiText);
 
