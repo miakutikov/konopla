@@ -837,8 +837,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQOGJ6X05qOFoyTU56WWlvODktbklKNnk1b25PVDhLWVlIdDhVNVE5SVRyY3E5blJhSThzV3hjVkJ1T0JqUEs5QnpCUkdMUUtkZl9DbDlWTl9HeGw5dmNrYkFNMkRrMXhDX3d1WnczOXNUcnpETFFpTlppWVVSNmZ6dUVrNFdQV1pERVY1RGRRYVM2RXlzYkVBWnk1d0o?oc=5",
       "source_name": "\"hemp cultivation harvest\" - Google News",
       "content_preview": "Hemp farmers prepare for planting season ahead of impending ban: ‘We are 100% taking a gamble’ &nbsp;&nbsp; Washington Examiner",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -861,7 +861,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-14T16:23:13.373Z",
-      "updated_at": "2026-04-14T16:24:04.454Z",
+      "updated_at": "2026-04-14T16:24:29.991892+00:00",
       "published_at": null
     },
     {
@@ -876,8 +876,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE15a1p3a1M5UDVGT2F4YjJpQTU3dEgyRlJCczhfZlg1bnFsTzN0QXoxazJqQm53Sm9pbWxtNE5HbzNNTlZLNGc?oc=5",
       "source_name": "\"hemp seed food nutrition\" - Google News",
       "content_preview": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -900,7 +900,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-14T16:23:20.592Z",
-      "updated_at": "2026-04-14T16:24:04.454Z",
+      "updated_at": "2026-04-14T16:24:31.330045+00:00",
       "published_at": null
     }
   ]
