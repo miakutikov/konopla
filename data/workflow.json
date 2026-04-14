@@ -785,6 +785,45 @@
       "created_at": "2026-04-13T03:36:10.346Z",
       "updated_at": "2026-04-13T09:18:01.353Z",
       "published_at": "2026-04-13T09:18:01.353Z"
+    },
+    {
+      "id": "cae4d4fef2f6",
+      "filename": "20260413-210412-eko-bloky-z-konopel-innovatsiyna-systema-budivnytstva-typu-lego.md",
+      "title": "Еко-блоки з конопель: інноваційна система будівництва типу Lego",
+      "summary": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/-JjwjGNSz0Q/hqdefault.jpg",
+      "candidate_id": "cae4d4fef2f6",
+      "original_title": "Еко-блоки з конопель: інноваційна система будівництва типу Lego",
+      "original_url": "https://www.youtube.com/watch?v=-JjwjGNSz0Q",
+      "source_name": "YouTube",
+      "content_preview": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "-JjwjGNSz0Q",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-14T16:22:43.131Z",
+      "updated_at": "2026-04-14T16:22:43.131Z",
+      "published_at": null
     }
   ]
 }
