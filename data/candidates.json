@@ -1,25 +1,65 @@
 {
   "items": [
     {
-      "id": "25c4979a23bb",
+      "id": "d4d4fbd0a517",
+      "type": "article",
+      "title": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі - UA.NEWS",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaEd1THVhbzlQaVFnV1pXdXA2aDRZWTh2Z1Y2Mjd2S2dOelNDRTJiQUowb2VNTDRqdmF5czlTd05CenBoWk9lTzdRZXFZMXZGSHNqYU1TYkt4SWgzNUt1OE9ac2cwNWRtVXl6cVlCZklmczI4S2FDVnFxUjVQeUZ3WlpvQmFDRlZDbnJlQXVTdkw5UWZy?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі &nbsp;&nbsp; UA.NEWS",
+      "image_url": "",
+      "date": "2026-04-13T17:22:00+00:00",
+      "hash": "b115353dad65be71ec13c0ba943ce2f2",
+      "content_preview": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі &nbsp;&nbsp; UA.NEWS",
+      "added_at": "2026-04-14T04:50:59.111822+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "текстиль"
+    },
+    {
+      "id": "adf9cf1783b1",
+      "type": "article",
+      "title": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study - Radio Moldova",
+      "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE15a1p3a1M5UDVGT2F4YjJpQTU3dEgyRlJCczhfZlg1bnFsTzN0QXoxazJqQm53Sm9pbWxtNE5HbzNNTlZLNGc?oc=5",
+      "source": "\"hemp seed food nutrition\" - Google News",
+      "summary": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
+      "image_url": "",
+      "date": "2026-04-13T21:00:00+00:00",
+      "hash": "1c2e2dd8257a297cd90b1d37bc844033",
+      "content_preview": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
+      "added_at": "2026-04-14T04:50:59.111577+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "харчова"
+    },
+    {
+      "id": "36486b318b5f",
       "type": "video",
-      "title": "Еко-блоки з конопель: інноваційна система будівництва типу Lego",
-      "link": "https://www.youtube.com/watch?v=-JjwjGNSz0Q",
-      "source": "YouTube: Wealth Pouch Studio ",
-      "summary": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
-      "image_url": "https://i.ytimg.com/vi/-JjwjGNSz0Q/hqdefault.jpg",
-      "date": "2026-04-13T11:00:00Z",
-      "hash": "yt_-JjwjGNSz0Q",
-      "content_preview": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
-      "added_at": "2026-04-13T21:04:12.897061+00:00",
+      "title": "Kompolti: Угорська конопляна різноманітність",
+      "link": "https://www.youtube.com/watch?v=C1hz4i2Ety0",
+      "source": "YouTube: polikromator",
+      "summary": "Відео про одну з найдавніших європейських конопляних різноманітностей, яка має високу продуктивність волокна та багато застосувань.",
+      "image_url": "https://i.ytimg.com/vi/C1hz4i2Ety0/hqdefault.jpg",
+      "date": "2026-04-13T17:47:33Z",
+      "hash": "yt_C1hz4i2Ety0",
+      "content_preview": "Відео про одну з найдавніших європейських конопляних різноманітностей, яка має високу продуктивність волокна та багато застосувань.",
+      "added_at": "2026-04-13T21:07:04.018583+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "-JjwjGNSz0Q",
-      "draft_filename": "20260413-210412-eko-bloky-z-konopel-innovatsiyna-systema-budivnytstva-typu-lego.md"
+      "youtube_id": "C1hz4i2Ety0",
+      "draft_filename": "20260413-210704-kompolti-uhorska-konoplyana-riznomanitnist.md"
     },
     {
       "id": "9257068e1ce3",
@@ -43,25 +83,25 @@
       "draft_filename": "20260413-210522-ohlyad-vital-hemp-gummies-2026-videoanaliz-produktsiyi.md"
     },
     {
-      "id": "36486b318b5f",
+      "id": "25c4979a23bb",
       "type": "video",
-      "title": "Kompolti: Угорська конопляна різноманітність",
-      "link": "https://www.youtube.com/watch?v=C1hz4i2Ety0",
-      "source": "YouTube: polikromator",
-      "summary": "Відео про одну з найдавніших європейських конопляних різноманітностей, яка має високу продуктивність волокна та багато застосувань.",
-      "image_url": "https://i.ytimg.com/vi/C1hz4i2Ety0/hqdefault.jpg",
-      "date": "2026-04-13T17:47:33Z",
-      "hash": "yt_C1hz4i2Ety0",
-      "content_preview": "Відео про одну з найдавніших європейських конопляних різноманітностей, яка має високу продуктивність волокна та багато застосувань.",
-      "added_at": "2026-04-13T21:07:04.018583+00:00",
+      "title": "Еко-блоки з конопель: інноваційна система будівництва типу Lego",
+      "link": "https://www.youtube.com/watch?v=-JjwjGNSz0Q",
+      "source": "YouTube: Wealth Pouch Studio ",
+      "summary": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
+      "image_url": "https://i.ytimg.com/vi/-JjwjGNSz0Q/hqdefault.jpg",
+      "date": "2026-04-13T11:00:00Z",
+      "hash": "yt_-JjwjGNSz0Q",
+      "content_preview": "Відео Wealth Pouch Studio демонструє інноваційні конопляні блоки для будівництва, що нагадують Lego за принципом збірки.",
+      "added_at": "2026-04-13T21:04:12.897061+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "C1hz4i2Ety0",
-      "draft_filename": "20260413-210704-kompolti-uhorska-konoplyana-riznomanitnist.md"
+      "youtube_id": "-JjwjGNSz0Q",
+      "draft_filename": "20260413-210412-eko-bloky-z-konopel-innovatsiyna-systema-budivnytstva-typu-lego.md"
     },
     {
       "id": "a69d5a8e3c37",
