@@ -1,24 +1,109 @@
 {
   "items": [
     {
-      "id": "377fe7ed066e",
-      "type": "article",
-      "title": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study - Radio Moldova",
-      "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE15a1p3a1M5UDVGT2F4YjJpQTU3dEgyRlJCczhfZlg1bnFsTzN0QXoxazJqQm53Sm9pbWxtNE5HbzNNTlZLNGc?oc=5",
-      "source": "\"hemp seed food nutrition\" - Google News",
-      "summary": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
-      "image_url": "",
-      "date": "2026-04-13T21:00:00+00:00",
-      "hash": "1c2e2dd8257a297cd90b1d37bc844033",
-      "content_preview": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
-      "added_at": "2026-04-15T20:56:44.164775+00:00",
-      "relevance_score": 0.5,
+      "id": "2557c38d5633",
+      "type": "video",
+      "title": "Бетон, що поглинає CO₂",
+      "link": "https://www.youtube.com/watch?v=w1q_DVo4W0M",
+      "source": "YouTube: Planeta Nomada",
+      "summary": "Представляємо відео від каналу Planeta Nomada про хемпкрит — конопляний бетон, що здатен поглинати вуглець та змінювати сучасне будівництво.",
+      "image_url": "https://i.ytimg.com/vi/w1q_DVo4W0M/hqdefault.jpg",
+      "date": "2026-04-15T18:01:03Z",
+      "hash": "yt_w1q_DVo4W0M",
+      "content_preview": "Представляємо відео від каналу Planeta Nomada про хемпкрит — конопляний бетон, що здатен поглинати вуглець та змінювати сучасне будівництво.",
+      "added_at": "2026-04-15T20:57:23.361500+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "харчова"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "w1q_DVo4W0M",
+      "draft_filename": "20260415-205723-beton-shcho-pohlynaye-co.md"
+    },
+    {
+      "id": "c2e5e615c95b",
+      "type": "video",
+      "title": "Hempcrete: 1500-річний матеріал, міцніший за цемент і 100% вогнетривкий",
+      "link": "https://www.youtube.com/watch?v=YGj5gBmbNQI",
+      "source": "YouTube: Final Point",
+      "summary": "Дізнайтеся про конопляний бетон (hempcrete) — будівельний матеріал, що існує понад 1500 років, міцніший за цемент та повністю вогнетривкий, у новому відео від каналу Final Point.",
+      "image_url": "https://i.ytimg.com/vi/YGj5gBmbNQI/hqdefault.jpg",
+      "date": "2026-04-15T14:07:44Z",
+      "hash": "yt_YGj5gBmbNQI",
+      "content_preview": "Дізнайтеся про конопляний бетон (hempcrete) — будівельний матеріал, що існує понад 1500 років, міцніший за цемент та повністю вогнетривкий, у новому відео від каналу Final Point.",
+      "added_at": "2026-04-15T20:57:46.638964+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "YGj5gBmbNQI",
+      "draft_filename": "20260415-205746-hempcrete-1500-richnyy-material-mitsnishyy-za-tsement-i-100-vohnetryvkyy.md"
+    },
+    {
+      "id": "a59a8ab6e81f",
+      "type": "video",
+      "title": "Відкрийте колекційний випуск про коноплі від La Maison écologique",
+      "link": "https://www.youtube.com/watch?v=FqZnqeZ9nOk",
+      "source": "YouTube: magazine La Maison écologique",
+      "summary": "Журнал La Maison écologique випустив колекційний відеоогляд, присвячений промисловим коноплям. У відео розкриваються унікальні властивості конопель як екологічного та сталого будівельного матеріалу.",
+      "image_url": "https://i.ytimg.com/vi/FqZnqeZ9nOk/hqdefault.jpg",
+      "date": "2026-04-15T08:33:20Z",
+      "hash": "yt_FqZnqeZ9nOk",
+      "content_preview": "Журнал La Maison écologique випустив колекційний відеоогляд, присвячений промисловим коноплям. У відео розкриваються унікальні властивості конопель як екологічного та сталого будівельного матеріалу.",
+      "added_at": "2026-04-15T20:58:07.991496+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "FqZnqeZ9nOk",
+      "draft_filename": "20260415-205807-vidkryyte-kolektsiynyy-vypusk-pro-konopli-vid-la-maison-cologique.md"
+    },
+    {
+      "id": "f192031c1290",
+      "type": "video",
+      "title": "HB 30: Легка м'якість та природна ефективність конопляно-бамбукової тканини",
+      "link": "https://www.youtube.com/watch?v=UQossl2N_4g",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Відео від Weaving Vibes представляє тканину HB 30 — унікальне поєднання конопель та бамбука, що пропонує легкість, міцність та комфорт для повсякденного одягу.",
+      "image_url": "https://i.ytimg.com/vi/UQossl2N_4g/hqdefault.jpg",
+      "date": "2026-04-15T10:46:20Z",
+      "hash": "yt_UQossl2N_4g",
+      "content_preview": "Відео від Weaving Vibes представляє тканину HB 30 — унікальне поєднання конопель та бамбука, що пропонує легкість, міцність та комфорт для повсякденного одягу.",
+      "added_at": "2026-04-15T20:58:43.637214+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "UQossl2N_4g",
+      "draft_filename": "20260415-205843-hb-30-lehka-myakist-ta-pryrodna-efektyvnist-konoplyano-bambukovoyi-tkanyny.md"
+    },
+    {
+      "id": "fbff5fa097e8",
+      "type": "video",
+      "title": "Zittles: Важка конопляно-бавовняна тканина для міцної структури",
+      "link": "https://www.youtube.com/watch?v=BxcWtMMlVBU",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "На YouTube-каналі Weaving Vibes вийшло відео, присвячене новій конопляно-бавовняній тканині Zittles, що поєднує міцність конопель з м'якістю бавовни.",
+      "image_url": "https://i.ytimg.com/vi/BxcWtMMlVBU/hqdefault.jpg",
+      "date": "2026-04-15T09:46:22Z",
+      "hash": "yt_BxcWtMMlVBU",
+      "content_preview": "На YouTube-каналі Weaving Vibes вийшло відео, присвячене новій конопляно-бавовняній тканині Zittles, що поєднує міцність конопель з м'якістю бавовни.",
+      "added_at": "2026-04-15T20:59:07.484574+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "BxcWtMMlVBU",
+      "draft_filename": "20260415-205907-zittles-vazhka-konoplyano-bavovnyana-tkanyna-dlya-mitsnoyi-struktury.md"
     },
     {
       "id": "193d65113bb6",
@@ -245,5 +330,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-04-15T09:44:32.531817+00:00"
+  "updated_at": "2026-04-15T20:59:07.485532+00:00"
 }
