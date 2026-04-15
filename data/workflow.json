@@ -863,19 +863,19 @@
       "published_at": "2026-04-15T03:58:33.966Z"
     },
     {
-      "id": "mb2x1snj",
-      "filename": "",
-      "title": "🎬 YouTube — JCrJk6qZLRw",
-      "summary": "",
+      "id": "9f7fe700cb67",
+      "filename": "20260415-040418-video-hrem-derrant-pro-konoplyano-vapnyanyy-sprey.md",
+      "title": "Відео: Грем Деррант про конопляно-вапняний спрей",
+      "summary": "Експерт з природного будівництва Грем Деррант демонструє техніку нанесення конопляно-вапняного спрею для створення екологічних будівель.",
       "category": "відео",
-      "image": "https://img.youtube.com/vi/JCrJk6qZLRw/hqdefault.jpg",
+      "image": "https://i.ytimg.com/vi/JCrJk6qZLRw/maxresdefault.jpg",
       "candidate_id": "mb2x1snj",
       "original_title": "",
       "original_url": "https://www.youtube.com/watch?v=JCrJk6qZLRw",
       "source_name": "YouTube",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -886,18 +886,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Дивіться відео, де Грем Деррант демонструє техніку нанесення конопляно-вапняного спрею для екологічних будівель."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Експерт з природного будівництва Грем Деррант розкриває секрети успішного використання конопель у будівництві."
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-15T04:02:15.587Z",
-      "updated_at": "2026-04-15T04:02:22.833Z",
+      "updated_at": "2026-04-15T04:04:18.063914+00:00",
       "published_at": null
     }
   ]
