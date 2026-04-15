@@ -898,6 +898,45 @@
       "created_at": "2026-04-15T04:02:15.587Z",
       "updated_at": "2026-04-15T04:06:50.909Z",
       "published_at": "2026-04-15T04:06:50.909Z"
+    },
+    {
+      "id": "52f031c0b263",
+      "filename": "20260415-092933-zapovnennya-stin-konoplyano-vapnyanoyu-sumishshyu-budivnytstvo-budynku-z-konoply.md",
+      "title": "Заповнення стін конопляно-вапняною сумішшю: будівництво будинку з конопляного бетону",
+      "summary": "Канал Eco Endeavour презентував відео про будівництво з конопляного бетону, демонструючи легкість та особливості роботи з цим екологічним матеріалом.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/IE4lxlrvHro/hqdefault.jpg",
+      "candidate_id": "52f031c0b263",
+      "original_title": "Заповнення стін конопляно-вапняною сумішшю: будівництво будинку з конопляного бетону",
+      "original_url": "https://www.youtube.com/watch?v=IE4lxlrvHro",
+      "source_name": "YouTube",
+      "content_preview": "Канал Eco Endeavour презентував відео про будівництво з конопляного бетону, демонструючи легкість та особливості роботи з цим екологічним матеріалом.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "IE4lxlrvHro",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-15T18:04:21.575Z",
+      "updated_at": "2026-04-15T18:04:21.575Z",
+      "published_at": null
     }
   ]
 }
