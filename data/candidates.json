@@ -1,44 +1,88 @@
 {
   "items": [
     {
-      "id": "9406c51731eb",
-      "type": "article",
-      "title": "Щаслива родина. Дружина Коноплі поділилася зворушливим особистим фото з чоловіком і донькою - UKR.NET",
-      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE55dThsdGlJVEdMbmhhUkd5SDFPLTllOEZlQVJUaDZud3hTaTY0QkxJY0RkWWFfd0Q5U1B6ck1HTl9lcTZ1OFNNUURfZWxna1AtVGVydXdIQWV5WENpQV94dU1WUQ?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "Щаслива родина. Дружина Коноплі поділилася зворушливим особистим фото з чоловіком і донькою &nbsp;&nbsp; UKR.NET",
-      "image_url": "",
-      "date": "2026-04-11T08:40:22+00:00",
-      "hash": "e1e35a31b4cca2a9f4125fa2aa37d105",
-      "content_preview": "Щаслива родина. Дружина Коноплі поділилася зворушливим особистим фото з чоловіком і донькою &nbsp;&nbsp; UKR.NET",
-      "added_at": "2026-04-15T09:28:48.850673+00:00",
-      "relevance_score": 0.5,
+      "id": "3b3c314e86ba",
+      "type": "video",
+      "title": "Заповнення стін конопляно-вапняною сумішшю: будівництво будинку з конопляного бетону",
+      "link": "https://www.youtube.com/watch?v=IE4lxlrvHro",
+      "source": "YouTube: Eco Endeavour",
+      "summary": "Канал Eco Endeavour презентував відео про будівництво з конопляного бетону, демонструючи легкість та особливості роботи з цим екологічним матеріалом.",
+      "image_url": "https://i.ytimg.com/vi/IE4lxlrvHro/hqdefault.jpg",
+      "date": "2026-04-15T04:47:30Z",
+      "hash": "yt_IE4lxlrvHro",
+      "content_preview": "Канал Eco Endeavour презентував відео про будівництво з конопляного бетону, демонструючи легкість та особливості роботи з цим екологічним матеріалом.",
+      "added_at": "2026-04-15T09:29:33.037423+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "IE4lxlrvHro",
+      "draft_filename": "20260415-092933-zapovnennya-stin-konoplyano-vapnyanoyu-sumishshyu-budivnytstvo-budynku-z-konoply.md"
     },
     {
-      "id": "31920e3369b6",
-      "type": "article",
-      "title": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі - UA.NEWS",
-      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaEd1THVhbzlQaVFnV1pXdXA2aDRZWTh2Z1Y2Mjd2S2dOelNDRTJiQUowb2VNTDRqdmF5czlTd05CenBoWk9lTzdRZXFZMXZGSHNqYU1TYkt4SWgzNUt1OE9ac2cwNWRtVXl6cVlCZklmczI4S2FDVnFxUjVQeUZ3WlpvQmFDRlZDbnJlQXVTdkw5UWZy?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі &nbsp;&nbsp; UA.NEWS",
-      "image_url": "",
-      "date": "2026-04-13T17:22:00+00:00",
-      "hash": "b115353dad65be71ec13c0ba943ce2f2",
-      "content_preview": "У РФ викрили шахрайство з проєктом тканини-невидимки з коноплі &nbsp;&nbsp; UA.NEWS",
-      "added_at": "2026-04-15T09:28:48.850418+00:00",
-      "relevance_score": 0.5,
+      "id": "78dc22331346",
+      "type": "video",
+      "title": "Конопляні блоки, що збираються як LEGO",
+      "link": "https://www.youtube.com/watch?v=876FF0_jcyM",
+      "source": "YouTube: Good News Good Planet",
+      "summary": "Канадська компанія Just BioFiber розробила конопляні будівельні блоки, які можна складати як LEGO-кубики.",
+      "image_url": "https://i.ytimg.com/vi/876FF0_jcyM/hqdefault.jpg",
+      "date": "2026-04-15T00:01:23Z",
+      "hash": "yt_876FF0_jcyM",
+      "content_preview": "Канадська компанія Just BioFiber розробила конопляні будівельні блоки, які можна складати як LEGO-кубики.",
+      "added_at": "2026-04-15T09:32:24.774522+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "876FF0_jcyM",
+      "draft_filename": "20260415-093224-konoplyani-bloky-shcho-zbyrayutsya-yak-lego.md"
+    },
+    {
+      "id": "80e6d260d103",
+      "type": "video",
+      "title": "«Амстердам»: М'яка, дихаюча тканина з конопель та бавовни для елегантного літнього одягу",
+      "link": "https://www.youtube.com/watch?v=BlLBYboGVdU",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Відео від Weaving Vibes представляє нову тканину «Амстердам», що поєднує **30% конопель** та **70% бавовни Kasturi**, ідеально підходячи для створення легкого та якісного літнього одягу.",
+      "image_url": "https://i.ytimg.com/vi/BlLBYboGVdU/hqdefault.jpg",
+      "date": "2026-04-13T09:05:13Z",
+      "hash": "yt_BlLBYboGVdU",
+      "content_preview": "Відео від Weaving Vibes представляє нову тканину «Амстердам», що поєднує **30% конопель** та **70% бавовни Kasturi**, ідеально підходячи для створення легкого та якісного літнього одягу.",
+      "added_at": "2026-04-15T09:32:47.342051+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "BlLBYboGVdU",
+      "draft_filename": "20260415-093247-amsterdam-myaka-dykhayucha-tkanyna-z-konopel-ta-bavovny-dlya-elehantnoho-litnoho.md"
+    },
+    {
+      "id": "de7fe9efb6b6",
+      "type": "video",
+      "title": "ОГЛЯД VITAL HEMP GUMMIES (🛑ЧИ ПРАЦЮЄ ВІН НАСПРАВДУ?🛑)",
+      "link": "https://www.youtube.com/watch?v=IrtYSqiGtHs",
+      "source": "YouTube: BrunoTraductor Official 2",
+      "summary": "Відеоогляд популярних конопляних гелевих цукерок Vital Hemp, які позиціонуються як натуральний засіб для підтримки здоров'я. Автор каналу BrunoTraductor Official 2 аналізує ефективність продукту та ділиться думками користувачів.",
+      "image_url": "https://i.ytimg.com/vi/IrtYSqiGtHs/hqdefault.jpg",
+      "date": "2026-04-15T00:58:58Z",
+      "hash": "yt_IrtYSqiGtHs",
+      "content_preview": "Відеоогляд популярних конопляних гелевих цукерок Vital Hemp, які позиціонуються як натуральний засіб для підтримки здоров'я. Автор каналу BrunoTraductor Official 2 аналізує ефективність продукту та ділиться думками користувачів.",
+      "added_at": "2026-04-15T09:44:27.530344+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "IrtYSqiGtHs",
+      "draft_filename": "20260415-094427-ohlyad-vital-hemp-gummies-chy-pratsyuye-vin-naspravdu.md"
     },
     {
       "id": "79f025cff73c",
@@ -101,5 +145,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-04-14T21:06:56.340572+00:00"
+  "updated_at": "2026-04-15T09:44:32.531817+00:00"
 }
