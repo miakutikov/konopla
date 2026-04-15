@@ -915,14 +915,13 @@
       "original_url": "https://www.youtube.com/watch?v=JCrJk6qZLRw",
       "source_name": "YouTube",
       "content_preview": "Експерт з конопляного будівництва Грем Деррант демонструє технологію нанесення конопляно-вапняного розчину для енергоефективних будівель.",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "youtube_id": "JCrJk6qZLRw",
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -939,8 +938,8 @@
       },
       "relevance_score": 0.9,
       "created_at": "2026-04-15T03:57:17.581Z",
-      "updated_at": "2026-04-15T03:57:17.581Z",
-      "published_at": null
+      "updated_at": "2026-04-15T03:58:33.966Z",
+      "published_at": "2026-04-15T03:58:33.966Z"
     }
   ]
 }
