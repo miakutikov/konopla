@@ -1,6 +1,6 @@
 ---
 title: "Будівництво будинку з конопляного бетону – досвід Eco Endeavour"
-date: 2026-04-15T09:29:33+00:00
+date: 2026-04-15T18:05:53+00:00
 summary: "На YouTube-каналі Eco Endeavour опубліковано нове відео, що демонструє процес заповнення стін конопляно-вапняною сумішшю та будівництва будинку з конопляного бетону."
 categories: ["відео"]
 tags: ["конопляний бетон", "hempcrete", "будівництво", "екологічне житло", "відео"]
@@ -8,7 +8,7 @@ source: "YouTube: Eco Endeavour"
 source_url: "https://www.youtube.com/watch?v=IE4lxlrvHro"
 image: "https://i.ytimg.com/vi/IE4lxlrvHro/hqdefault.jpg"
 youtube_id: "IE4lxlrvHro"
-draft: true
+draft: false
 ---
 
 На YouTube-каналі **Eco Endeavour** з'явилося нове відео під назвою «**Packing walls with hemp-lime - Hempcrete house build**» (Заповнення стін конопляно-вапняною сумішшю: будівництво будинку з конопляного бетону), яке вже набрало **44 перегляди**.
