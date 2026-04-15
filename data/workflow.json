@@ -939,45 +939,6 @@
       "created_at": "2026-04-15T03:57:17.581Z",
       "updated_at": "2026-04-15T03:58:33.966Z",
       "published_at": "2026-04-15T03:58:33.966Z"
-    },
-    {
-      "id": "2b815520e0b5",
-      "filename": "20260414-210547-hrem-derrant-tekhnolohiya-konoplyano-vapnyanoho-rozpylyuvannya-ta-budivelni-pora.md",
-      "title": "Грем Деррант: Технологія конопляно-вапняного розпилювання та будівельні поради",
-      "summary": "Експерт з конопляного будівництва Грем Деррант демонструє технологію нанесення конопляно-вапняного розчину для енергоефективних будівель.",
-      "category": "відео",
-      "image": "https://i.ytimg.com/vi/JCrJk6qZLRw/hqdefault.jpg",
-      "candidate_id": "2b815520e0b5",
-      "original_title": "Грем Деррант: Технологія конопляно-вапняного розпилювання та будівельні поради",
-      "original_url": "https://www.youtube.com/watch?v=JCrJk6qZLRw",
-      "source_name": "YouTube: EarthWise",
-      "content_preview": "Експерт з конопляного будівництва Грем Деррант демонструє технологію нанесення конопляно-вапняного розчину для енергоефективних будівель.",
-      "stage": "editorial",
-      "status": "ready_for_edit",
-      "youtube_id": "JCrJk6qZLRw",
-      "channels": {
-        "website": {
-          "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
-        },
-        "telegram": {
-          "enabled": true,
-          "status": "pending",
-          "scheduled_at": null,
-          "custom_text": ""
-        },
-        "threads": {
-          "enabled": true,
-          "status": "pending",
-          "scheduled_at": null,
-          "custom_text": ""
-        }
-      },
-      "relevance_score": 0.9,
-      "created_at": "2026-04-15T03:59:47.525Z",
-      "updated_at": "2026-04-15T03:59:47.525Z",
-      "published_at": null
     }
   ]
 }
