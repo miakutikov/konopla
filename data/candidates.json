@@ -1,6 +1,90 @@
 {
   "items": [
     {
+      "id": "5e69de65698f",
+      "type": "video",
+      "title": "Dakota Hemp: Створення індустрії в Південній Дакоті",
+      "link": "https://www.youtube.com/watch?v=PcG5l2x-9Y8",
+      "source": "YouTube: Lancaster Farming",
+      "summary": "Огляд відео про компанію Dakota Hemp, яка розвиває промислові коноплі в Південній Дакоті та перетворює їх на волокно і hurd.",
+      "image_url": "https://i.ytimg.com/vi/PcG5l2x-9Y8/hqdefault.jpg",
+      "date": "2026-04-16T17:53:46Z",
+      "hash": "yt_PcG5l2x-9Y8",
+      "content_preview": "Огляд відео про компанію Dakota Hemp, яка розвиває промислові коноплі в Південній Дакоті та перетворює їх на волокно і hurd.",
+      "added_at": "2026-04-16T21:00:13.044508+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "PcG5l2x-9Y8",
+      "draft_filename": "20260416-210013-dakota-hemp-stvorennya-industriyi-v-pivdenniy-dakoti.md"
+    },
+    {
+      "id": "05e30c388a72",
+      "type": "video",
+      "title": "AI-презентація конопляного текстилю Омі з Японії",
+      "link": "https://www.youtube.com/watch?v=vYpmSkGwbMQ",
+      "source": "YouTube: Spica-music",
+      "summary": "Нове AI-генероване відео представляє традиційний конопляний текстиль Омі з префектури Сіга в Японії.",
+      "image_url": "https://i.ytimg.com/vi/vYpmSkGwbMQ/hqdefault.jpg",
+      "date": "2026-04-16T15:06:00Z",
+      "hash": "yt_vYpmSkGwbMQ",
+      "content_preview": "Нове AI-генероване відео представляє традиційний конопляний текстиль Омі з префектури Сіга в Японії.",
+      "added_at": "2026-04-16T21:00:59.585847+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "vYpmSkGwbMQ",
+      "draft_filename": "20260416-210059-ai-prezentatsiya-konoplyanoho-tekstylyu-omi-z-yaponiyi.md"
+    },
+    {
+      "id": "908af026f276",
+      "type": "video",
+      "title": "Японський конопляний текстиль Омі в AI-відео",
+      "link": "https://www.youtube.com/watch?v=t6E5PeZWykg",
+      "source": "YouTube: Spica-music",
+      "summary": "AI-генероване відео демонструє традиційний конопляний текстиль Омі з елегантною подачею в японському стилі.",
+      "image_url": "https://i.ytimg.com/vi/t6E5PeZWykg/hqdefault.jpg",
+      "date": "2026-04-16T15:06:00Z",
+      "hash": "yt_t6E5PeZWykg",
+      "content_preview": "AI-генероване відео демонструє традиційний конопляний текстиль Омі з елегантною подачею в японському стилі.",
+      "added_at": "2026-04-16T21:02:37.014529+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "t6E5PeZWykg",
+      "draft_filename": "20260416-210236-yaponskyy-konoplyanyy-tekstyl-omi-v-ai-video.md"
+    },
+    {
+      "id": "85568aacf5cc",
+      "type": "video",
+      "title": "Чому фермери бояться сіяти коноплі",
+      "link": "https://www.youtube.com/watch?v=gwikADHaT8w",
+      "source": "YouTube: Pat Talks Law",
+      "summary": "Новий відеоаналіз від Pat Talks Law про правові ризики та невизначеність у галузі промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/gwikADHaT8w/hqdefault.jpg",
+      "date": "2026-04-16T17:00:53Z",
+      "hash": "yt_gwikADHaT8w",
+      "content_preview": "Новий відеоаналіз від Pat Talks Law про правові ризики та невизначеність у галузі промислових конопель.",
+      "added_at": "2026-04-16T21:04:40.330416+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "gwikADHaT8w",
+      "draft_filename": "20260416-210440-chomu-fermery-boyatsya-siyaty-konopli.md"
+    },
+    {
       "id": "19f44ffd0447",
       "type": "article",
       "title": "Len i konopie wrócą na polskie pola? Wnioski z konferencji w Oleszycach - Wieści Rolnicze",
@@ -414,5 +498,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-04-16T09:34:31.449020+00:00"
+  "updated_at": "2026-04-16T21:10:28.025584+00:00"
 }
