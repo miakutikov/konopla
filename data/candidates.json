@@ -1,6 +1,69 @@
 {
   "items": [
     {
+      "id": "a9e3af809985",
+      "type": "video",
+      "title": "Відео: Конопляне волокно в композитних матеріалах",
+      "link": "https://www.youtube.com/watch?v=MF8h7mEHk10",
+      "source": "YouTube: Mohammed Aarif S.I",
+      "summary": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
+      "image_url": "https://i.ytimg.com/vi/MF8h7mEHk10/hqdefault.jpg",
+      "date": "2026-04-15T10:17:14Z",
+      "hash": "yt_MF8h7mEHk10",
+      "content_preview": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
+      "added_at": "2026-04-16T09:29:20.663414+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "MF8h7mEHk10",
+      "draft_filename": "20260416-092920-video-konoplyane-volokno-v-kompozytnykh-materialakh.md"
+    },
+    {
+      "id": "d1cd6e59d329",
+      "type": "video",
+      "title": "Нова тканина з конопель: дихаючий вафельний візерунок",
+      "link": "https://www.youtube.com/watch?v=oZHmalesbnA",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Відео від каналу Weaving Vibes представляє тканину з 30% конопель та 70% бавовни для комфортного повсякденного носіння.",
+      "image_url": "https://i.ytimg.com/vi/oZHmalesbnA/hqdefault.jpg",
+      "date": "2026-04-15T09:41:08Z",
+      "hash": "yt_oZHmalesbnA",
+      "content_preview": "Відео від каналу Weaving Vibes представляє тканину з 30% конопель та 70% бавовни для комфортного повсякденного носіння.",
+      "added_at": "2026-04-16T09:31:46.206569+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "oZHmalesbnA",
+      "draft_filename": "20260416-093146-nova-tkanyna-z-konopel-dykhayuchyy-vafelnyy-vizerunok.md"
+    },
+    {
+      "id": "6d98b0ea30d6",
+      "type": "video",
+      "title": "Прем'єра 29 сезону шоу 'High Noon Hemp Show with Beach'",
+      "link": "https://www.youtube.com/watch?v=0ea9obGp_QE",
+      "source": "YouTube: Jedi Hemp",
+      "summary": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
+      "image_url": "https://i.ytimg.com/vi/0ea9obGp_QE/hqdefault.jpg",
+      "date": "2026-04-16T05:17:42Z",
+      "hash": "yt_0ea9obGp_QE",
+      "content_preview": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
+      "added_at": "2026-04-16T09:34:26.447534+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "0ea9obGp_QE",
+      "draft_filename": "20260416-093426-premyera-29-sezonu-shou-high-noon-hemp-show-with-beach.md"
+    },
+    {
       "id": "fbff5fa097e8",
       "type": "video",
       "title": "Zittles: Важка конопляно-бавовняна тканина для міцної структури",
@@ -330,5 +393,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-04-15T20:59:07.485532+00:00"
+  "updated_at": "2026-04-16T09:34:31.449020+00:00"
 }
