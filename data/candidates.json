@@ -1,25 +1,46 @@
 {
   "items": [
     {
-      "id": "a9e3af809985",
+      "id": "19f44ffd0447",
+      "type": "article",
+      "title": "Len i konopie wrócą na polskie pola? Wnioski z konferencji w Oleszycach - Wieści Rolnicze",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPV1otai1JVzFBb2x4ZldJczMtS0poTEpGazhyd2xiWW84cTNVVWxJbS1GTUJPVkZub1RsWEdrVGxQZGlzMFg1MU5QS1VLbzVNeW40SlpaeFN1WXVkbEs5aDBnUHhPN0RIbFlCTHc2NHgyYmpJMFFaeDRaVGNwMXE1ZDUzZUxEN3RRUFlJems2VlBvZmY2VUhmMUhHX3E1MmRiWkQtaE9PLWJ4VDZtMWhqOEZFMTM?oc=5",
+      "source": "\"konopie przemysłowe polska\" - Google News",
+      "summary": "Len i konopie wrócą na polskie pola? Wnioski z konferencji w Oleszycach &nbsp;&nbsp; Wieści Rolnicze",
+      "image_url": "",
+      "date": "2026-04-16T09:50:22+00:00",
+      "hash": "730fda1b987bbfbc56b816ba0d6a4e43",
+      "content_preview": "Len i konopie wrócą na polskie pola? Wnioski z konferencji w Oleszycach &nbsp;&nbsp; Wieści Rolnicze",
+      "added_at": "2026-04-16T15:31:23.053739+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "6d98b0ea30d6",
       "type": "video",
-      "title": "Відео: Конопляне волокно в композитних матеріалах",
-      "link": "https://www.youtube.com/watch?v=MF8h7mEHk10",
-      "source": "YouTube: Mohammed Aarif S.I",
-      "summary": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
-      "image_url": "https://i.ytimg.com/vi/MF8h7mEHk10/hqdefault.jpg",
-      "date": "2026-04-15T10:17:14Z",
-      "hash": "yt_MF8h7mEHk10",
-      "content_preview": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
-      "added_at": "2026-04-16T09:29:20.663414+00:00",
+      "title": "Прем'єра 29 сезону шоу 'High Noon Hemp Show with Beach'",
+      "link": "https://www.youtube.com/watch?v=0ea9obGp_QE",
+      "source": "YouTube: Jedi Hemp",
+      "summary": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
+      "image_url": "https://i.ytimg.com/vi/0ea9obGp_QE/hqdefault.jpg",
+      "date": "2026-04-16T05:17:42Z",
+      "hash": "yt_0ea9obGp_QE",
+      "content_preview": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
+      "added_at": "2026-04-16T09:34:26.447534+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "MF8h7mEHk10",
-      "draft_filename": "20260416-092920-video-konoplyane-volokno-v-kompozytnykh-materialakh.md"
+      "youtube_id": "0ea9obGp_QE",
+      "draft_filename": "20260416-093426-premyera-29-sezonu-shou-high-noon-hemp-show-with-beach.md"
     },
     {
       "id": "d1cd6e59d329",
@@ -43,25 +64,25 @@
       "draft_filename": "20260416-093146-nova-tkanyna-z-konopel-dykhayuchyy-vafelnyy-vizerunok.md"
     },
     {
-      "id": "6d98b0ea30d6",
+      "id": "a9e3af809985",
       "type": "video",
-      "title": "Прем'єра 29 сезону шоу 'High Noon Hemp Show with Beach'",
-      "link": "https://www.youtube.com/watch?v=0ea9obGp_QE",
-      "source": "YouTube: Jedi Hemp",
-      "summary": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
-      "image_url": "https://i.ytimg.com/vi/0ea9obGp_QE/hqdefault.jpg",
-      "date": "2026-04-16T05:17:42Z",
-      "hash": "yt_0ea9obGp_QE",
-      "content_preview": "Новий випуск популярного шоу про промислові коноплі на каналі Jedi Hemp.",
-      "added_at": "2026-04-16T09:34:26.447534+00:00",
+      "title": "Відео: Конопляне волокно в композитних матеріалах",
+      "link": "https://www.youtube.com/watch?v=MF8h7mEHk10",
+      "source": "YouTube: Mohammed Aarif S.I",
+      "summary": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
+      "image_url": "https://i.ytimg.com/vi/MF8h7mEHk10/hqdefault.jpg",
+      "date": "2026-04-15T10:17:14Z",
+      "hash": "yt_MF8h7mEHk10",
+      "content_preview": "Дослідження використання конопляного та бамбукового волокна для зміцнення епоксидної смоли.",
+      "added_at": "2026-04-16T09:29:20.663414+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "0ea9obGp_QE",
-      "draft_filename": "20260416-093426-premyera-29-sezonu-shou-high-noon-hemp-show-with-beach.md"
+      "youtube_id": "MF8h7mEHk10",
+      "draft_filename": "20260416-092920-video-konoplyane-volokno-v-kompozytnykh-materialakh.md"
     },
     {
       "id": "fbff5fa097e8",
