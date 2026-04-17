@@ -1,25 +1,45 @@
 {
   "items": [
     {
-      "id": "e5d9594cff44",
-      "type": "video",
-      "title": "Ямайка | Універсальний конопляно-бавовняний тканини для сорочок",
-      "link": "https://www.youtube.com/watch?v=YFyxPWV9uOQ",
-      "source": "YouTube: Weaving Vibes",
-      "summary": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
-      "image_url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/hqdefault.jpg",
-      "date": "2026-04-17T04:37:55Z",
-      "hash": "yt_YFyxPWV9uOQ",
-      "content_preview": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
-      "added_at": "2026-04-17T09:30:34.430913+00:00",
-      "relevance_score": 0.9,
+      "id": "b1201f923aa9",
+      "type": "article",
+      "title": "Німецькі дослідники працюють над створенням біорозкладного добрива з конопляної костри - Superagronom.com",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNOUZqWGxzdUNsRG9FU3dndndiTTV0TTUtZ3pSUUtWQUhhNVprRVhIZTNsN1kzUFRJTjRwczBETkdHN3JIQ1phb1dJbkNZeFJWeTB3cE1rMk1OLWRQTldhOC1kNjQ1NGhzeW15eVVBSGRoREMweUE4ZEtoUUFkcERVcUg4S2RXQ3pPOVNlM09IbXM2ZXo2Zlp3aWhabzlfUktKSTctVFplb2RDRDByV2RRT1RHdDJXdG12RGU1VzNBaWdTMWxUaFHSAc4BQVVfeXFMTUJpNVh3cWk5d3N2S0tKX0JjdklBRThDc1ctbERkZ2lOMGdydG9lT0d3WWNQeWR6RFM1ZDVEUEw3TlFEUVNKSl85T2padlRlVkZXUXh4UHdHZ3ZNNUpzbno2UFRodDZjeDFyU184VVFUbkNJSjhTb1JDMjFMWVRXeHJtX056Vk1KTlk0blhZMVBLV1htUDZUS21zemlJV3Z0c3JvTzlOY0F0VElaLXdyZUFZNXFFODdHNkhUOTZLWFBNTzhMRko0Y1hGT1Fkc1E?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Німецькі дослідники працюють над створенням біорозкладного добрива з конопляної костри &nbsp;&nbsp; Superagronom.com",
+      "image_url": "",
+      "date": "2026-04-16T11:01:59+00:00",
+      "hash": "ca89aa3df64eb42ae6f1ef3ad415ba51",
+      "content_preview": "Німецькі дослідники працюють над створенням біорозкладного добрива з конопляної костри &nbsp;&nbsp; Superagronom.com",
+      "added_at": "2026-04-17T15:00:56.473872+00:00",
+      "relevance_score": 0.6,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "YFyxPWV9uOQ",
-      "draft_filename": "20260417-093034-yamayka-universalnyy-konoplyano-bavovnyanyy-tkanyny-dlya-sorochok.md"
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "1c5b17f146d5",
+      "type": "article",
+      "title": "Волинянин висушував коноплі та виготовляв канабіс: його судитимуть - UKR.NET",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBzaWRhOEZiTHdFcl9BUWdxbnpUbDU2WlRPUk1GTFZCc2hTMEs4WFNmZ0I0cU11c3hFWDVWQjBkUXk2QXFuRjkwaWRKR2NpcG00NnJuZUlabTVaaC14dHRQTGR2RzdXRjQ?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Волинянин висушував коноплі та виготовляв канабіс: його судитимуть &nbsp;&nbsp; UKR.NET",
+      "image_url": "",
+      "date": "2026-04-17T05:56:28+00:00",
+      "hash": "bc9e41dfd0aaa41c1d9d75c94a88267d",
+      "content_preview": "Волинянин висушував коноплі та виготовляв канабіс: його судитимуть &nbsp;&nbsp; UKR.NET",
+      "added_at": "2026-04-17T15:00:56.473589+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
     },
     {
       "id": "fd2721d8abc3",
@@ -41,6 +61,27 @@
       "category_hint": "відео",
       "youtube_id": "_9ufRKMdr04",
       "draft_filename": "20260417-093153-yak-vyroblyayut-konoplyani-bloky-ekolohichni-tsehlyny-shcho-pohlynayut-co2.md"
+    },
+    {
+      "id": "e5d9594cff44",
+      "type": "video",
+      "title": "Ямайка | Універсальний конопляно-бавовняний тканини для сорочок",
+      "link": "https://www.youtube.com/watch?v=YFyxPWV9uOQ",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
+      "image_url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/hqdefault.jpg",
+      "date": "2026-04-17T04:37:55Z",
+      "hash": "yt_YFyxPWV9uOQ",
+      "content_preview": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
+      "added_at": "2026-04-17T09:30:34.430913+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "YFyxPWV9uOQ",
+      "draft_filename": "20260417-093034-yamayka-universalnyy-konoplyano-bavovnyanyy-tkanyny-dlya-sorochok.md"
     },
     {
       "id": "85568aacf5cc",
