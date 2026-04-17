@@ -1,24 +1,46 @@
 {
   "items": [
     {
-      "id": "03d455c2ea03",
-      "type": "article",
-      "title": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study - Radio Moldova",
-      "link": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE15a1p3a1M5UDVGT2F4YjJpQTU3dEgyRlJCczhfZlg1bnFsTzN0QXoxazJqQm53Sm9pbWxtNE5HbzNNTlZLNGc?oc=5",
-      "source": "\"hemp seed food nutrition\" - Google News",
-      "summary": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
-      "image_url": "",
-      "date": "2026-04-13T21:00:00+00:00",
-      "hash": "1c2e2dd8257a297cd90b1d37bc844033",
-      "content_preview": "From byproduct to superfood: Technical University of Moldova validates high-protein hemp bread in peer-reviewed study &nbsp;&nbsp; Radio Moldova",
-      "added_at": "2026-04-17T09:23:37.680695+00:00",
-      "relevance_score": 0.5,
+      "id": "e5d9594cff44",
+      "type": "video",
+      "title": "Ямайка | Універсальний конопляно-бавовняний тканини для сорочок",
+      "link": "https://www.youtube.com/watch?v=YFyxPWV9uOQ",
+      "source": "YouTube: Weaving Vibes",
+      "summary": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
+      "image_url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/hqdefault.jpg",
+      "date": "2026-04-17T04:37:55Z",
+      "hash": "yt_YFyxPWV9uOQ",
+      "content_preview": "Новий матеріал на основі промислових конопель від каналу Weaving Vibes поєднує міцність коноплі та м'якість бавовни.",
+      "added_at": "2026-04-17T09:30:34.430913+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "харчова"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "YFyxPWV9uOQ",
+      "draft_filename": "20260417-093034-yamayka-universalnyy-konoplyano-bavovnyanyy-tkanyny-dlya-sorochok.md"
+    },
+    {
+      "id": "fd2721d8abc3",
+      "type": "video",
+      "title": "Як виробляють конопляні блоки: екологічні цеглини, що поглинають CO2",
+      "link": "https://www.youtube.com/watch?v=_9ufRKMdr04",
+      "source": "YouTube: Real Process Hub",
+      "summary": "Відео від Real Process Hub про процес створення конопляних блоків (хемпкріту) - інноваційного будівельного матеріалу з промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/_9ufRKMdr04/hqdefault.jpg",
+      "date": "2026-04-17T08:37:09Z",
+      "hash": "yt__9ufRKMdr04",
+      "content_preview": "Відео від Real Process Hub про процес створення конопляних блоків (хемпкріту) - інноваційного будівельного матеріалу з промислових конопель.",
+      "added_at": "2026-04-17T09:31:53.534514+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "_9ufRKMdr04",
+      "draft_filename": "20260417-093153-yak-vyroblyayut-konoplyani-bloky-ekolohichni-tsehlyny-shcho-pohlynayut-co2.md"
     },
     {
       "id": "85568aacf5cc",
@@ -518,5 +540,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-04-16T21:10:28.025584+00:00"
+  "updated_at": "2026-04-17T09:32:48.289740+00:00"
 }
