@@ -1128,6 +1128,44 @@
       "created_at": "2026-04-18T18:58:48.832Z",
       "updated_at": "2026-04-18T18:59:48.193293+00:00",
       "published_at": null
+    },
+    {
+      "id": "ldvnklz5",
+      "filename": "",
+      "title": "agrarheute.com — https://www.agrarheute.com/pflanze/neuer-duenger-cannabis-la",
+      "summary": "",
+      "category": "",
+      "image": "",
+      "candidate_id": "ldvnklz5",
+      "original_title": "",
+      "original_url": "https://www.agrarheute.com/pflanze/neuer-duenger-cannabis-landwirten-trockenheit-hilft-640132",
+      "source_name": "agrarheute.com",
+      "content_preview": "",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 1,
+      "created_at": "2026-04-18T19:02:18.338Z",
+      "updated_at": "2026-04-18T19:02:18.338Z",
+      "published_at": null
     }
   ]
 }
