@@ -1168,19 +1168,19 @@
       "published_at": null
     },
     {
-      "id": "xnkkp0y2",
-      "filename": "",
-      "title": "topagrar.pl — https://www.topagrar.pl/articles/aktualnosci/kto-jest-lidere",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "c7a5e67e6434",
+      "filename": "20260418-190519-khto-ye-liderom-u-vyroshchuvanni-konopel-v-yevropi.md",
+      "title": "Хто є лідером у вирощуванні конопель в Європі?",
+      "summary": "Франція є провідним виробником промислових конопель у Європі та третім у світі. Країна послабила законодавство, що сприяло розвитку галузі та легалізації CBD-продуктів.",
+      "category": "агро",
+      "image": "https://static.topagrar.pl/images/2021/08/20/h_443663_1280.png",
       "candidate_id": "xnkkp0y2",
       "original_title": "",
       "original_url": "https://www.topagrar.pl/articles/aktualnosci/kto-jest-liderem-w-uprawie-konopi-w-europie-2458811",
       "source_name": "topagrar.pl",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -1191,18 +1191,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Франція лідирує у вирощуванні промислових конопель в Європі. Дізнайтеся, скільки гектарів засіяно та як змінилося законодавство щодо CBD."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Франція — європейський лідер з вирощування промислових конопель! Більше половини всіх посівів ЄС зосереджено там. Плюс, CBD-продукти отримали зелене світло. Цікаво, як це впливає на ринок?"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-18T19:04:20.390Z",
-      "updated_at": "2026-04-18T19:04:29.537Z",
+      "updated_at": "2026-04-18T19:05:19.765896+00:00",
       "published_at": null
     }
   ]
