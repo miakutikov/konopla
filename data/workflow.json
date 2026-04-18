@@ -1130,19 +1130,19 @@
       "published_at": null
     },
     {
-      "id": "ldvnklz5",
-      "filename": "",
-      "title": "agrarheute.com — https://www.agrarheute.com/pflanze/neuer-duenger-cannabis-la",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "391ea3fdb073",
+      "filename": "20260418-190320-nove-dobryvo-z-konopel-chomu-vono-dopomahaye-ahrariyam-navit-u-posukhu.md",
+      "title": "Нове добриво з конопель: Чому воно допомагає аграріям навіть у посуху",
+      "summary": "Німецькі дослідники розробили інноваційне добриво з конопляної костриці, яке не лише забезпечує рослини поживними речовинами, а й слугує накопичувачем води в ґрунті, що є критично важливим в умовах посухи.",
+      "category": "агро",
+      "image": "https://www.agrarheute.com/sites/agrarheute.com/files/styles/ah_bildergalerie_standalone_5x4/public/2026-04/hanfblatt-48726392.jpg?itok=EtzCFPvj",
       "candidate_id": "ldvnklz5",
       "original_title": "",
       "original_url": "https://www.agrarheute.com/pflanze/neuer-duenger-cannabis-landwirten-trockenheit-hilft-640132",
       "source_name": "agrarheute.com",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -1153,18 +1153,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Відкриття, що змінює агро! Дослідники розробили нове добриво з конопляної костриці, яке не лише живить рослини, а й утримує воду в ґрунті. Ідеально для посушливих регіонів."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Уявіть: добриво з конопель, яке ще й воду в ґрунті тримає! Німецькі вчені створили інноваційний продукт з конопляної костриці. Це справжній прорив для аграріїв, особливо в умовах посухи. Деталі на Konopla.UA!"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-18T19:02:18.338Z",
-      "updated_at": "2026-04-18T19:02:25.857Z",
+      "updated_at": "2026-04-18T19:03:20.116108+00:00",
       "published_at": null
     }
   ]
