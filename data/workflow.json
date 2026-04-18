@@ -1102,13 +1102,12 @@
       "original_url": "https://www.agrarheute.com/pflanze/neuer-duenger-cannabis-landwirten-trockenheit-hilft-640132",
       "source_name": "agrarheute.com",
       "content_preview": "",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -1125,8 +1124,8 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-18T19:02:18.338Z",
-      "updated_at": "2026-04-18T19:03:20.116108+00:00",
-      "published_at": null
+      "updated_at": "2026-04-18T19:07:08.622Z",
+      "published_at": "2026-04-18T19:07:08.623Z"
     },
     {
       "id": "c7a5e67e6434",
