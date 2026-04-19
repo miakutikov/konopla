@@ -5,4 +5,7 @@ type: "admin"
 draft: false
 sitemap:
   disable: true
+cascade:
+  sitemap:
+    disable: true
 ---
