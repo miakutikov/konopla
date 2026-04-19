@@ -6,8 +6,8 @@
     </div>
     <h1 class="error-code">404</h1>
     <h2 class="error-title">Сторінку не знайдено</h2>
-    <p class="error-text">Можливо, вона ще не опублікована або була видалена. Спробуйте знайти потрібний розділ нижче.</p>
-    <div class="error-links">
+    <p class="error-text" id="error-text">Можливо, вона ще не опублікована або була видалена. Спробуйте знайти потрібний розділ нижче.</p>
+    <div class="error-links" id="error-links">
       <a href="/" class="error-btn">На головну</a>
       <a href="/news/" class="error-btn error-btn-secondary">Новини</a>
       <a href="/search/" class="error-btn error-btn-secondary">Пошук</a>
@@ -15,6 +15,24 @@
     </div>
   </div>
 </div>
+<script>
+(function() {
+  var path = window.location.pathname;
+  var links = document.getElementById('error-links');
+  var text = document.getElementById('error-text');
+  if (/^\/catalog\/[^/]+\/?$/.test(path)) {
+    text.textContent = 'Цю компанію було видалено з каталогу або вона ще не додана.';
+    var a = document.createElement('a');
+    a.href = '/catalog/'; a.className = 'error-btn'; a.textContent = 'Перейти до каталогу';
+    links.insertBefore(a, links.firstChild);
+  } else if (/^\/tags\/[^/]+\/?$/.test(path)) {
+    text.textContent = 'Статті з цим тегом ще не опубліковані або тег змінився.';
+    var a = document.createElement('a');
+    a.href = '/tags/'; a.className = 'error-btn'; a.textContent = 'Всі теги';
+    links.insertBefore(a, links.firstChild);
+  }
+})();
+</script>
 
 <style>
 .error-page {
