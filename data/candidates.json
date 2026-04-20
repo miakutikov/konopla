@@ -1,25 +1,44 @@
 {
   "items": [
     {
-      "id": "59036cafcbd6",
-      "type": "video",
-      "title": "Візуалізація технології гемпкриту: нове відео від EndGameMeditation",
-      "link": "https://www.youtube.com/watch?v=9rkurKSYkF8",
-      "source": "YouTube: EndGameMeditation",
-      "summary": "Нове відео демонструє візуальне уявлення гемпкриту — будівельного матеріалу на основі конопельного волокна та вапна.",
-      "image_url": "https://i.ytimg.com/vi/9rkurKSYkF8/hqdefault.jpg",
-      "date": "2026-04-20T07:02:06Z",
-      "hash": "yt_9rkurKSYkF8",
-      "content_preview": "Нове відео демонструє візуальне уявлення гемпкриту — будівельного матеріалу на основі конопельного волокна та вапна.",
-      "added_at": "2026-04-20T10:08:10.920760+00:00",
-      "relevance_score": 0.9,
+      "id": "d51dbda15aca",
+      "type": "article",
+      "title": "První konopné masti míchal bývalý strojař v garáži, teď s kosmetikou míří na 120 milionů - CzechCrunch",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTVBGRks2aGktVk5OZFR3elp2VkFtWGx5amxJcjRyaVpGU2stNlIwNEZiRjVxclJmZnUxRmtCdkRLTXMyNEVUd1FrMzBiR0Y2Z1ozNFc5aWREQ1FxRk1oRHNGZVowYVkwbC04YXVoU3pVVXdZZElGYTZibmxTekJWYXN1NkhUekxHMGhQNlJSclFSbWRYY1dCa0NGcG5QaVV2c1gxa0JCU3dYOVE?oc=5",
+      "source": "\"konopí průmyslové\" - Zprávy Google",
+      "summary": "První konopné masti míchal bývalý strojař v garáži, teď s kosmetikou míří na 120 milionů &nbsp;&nbsp; CzechCrunch",
+      "image_url": "",
+      "date": "2026-04-20T04:41:45+00:00",
+      "hash": "0f9f2484ac129c05d9f98cf9c7957cd7",
+      "content_preview": "První konopné masti míchal bývalý strojař v garáži, teď s kosmetikou míří na 120 milionů &nbsp;&nbsp; CzechCrunch",
+      "added_at": "2026-04-20T15:21:50.295348+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "9rkurKSYkF8",
-      "draft_filename": "20260420-100810-vizualizatsiya-tekhnolohiyi-hempkrytu-nove-video-vid-endgamemeditation.md"
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "4d5caa2e5408",
+      "type": "article",
+      "title": "Bipartisan Bill Filed to Let States Set Own Rules for Hemp Cannabinoids - thestreet.com",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOXzhUOE83LW5pS1pqakhuaG9Vd1RBSFdObXFrdDhlRkdRZVVaeEQxdGFKVkU0ZWdQcTNiYktaNTJZOUZjOUwyR0txUzBZSjRKVXd2NWJ0d0pueGExRlBzWGJfa2VvUHB0Z1gyS2tWTVdZU0JNM3JOdG9FN1lWWmU5R1JsOC1mNU8yenJwaWg1ZDR4WTZSb0ZjM0pkc2dtZk9IQWZTdzhuckpjWlk3d3kzd2RZLTI?oc=5",
+      "source": "\"hemp legislation regulation farm bill\" - Google N",
+      "summary": "Bipartisan Bill Filed to Let States Set Own Rules for Hemp Cannabinoids &nbsp;&nbsp; thestreet.com",
+      "image_url": "",
+      "date": "2026-04-20T13:52:52+00:00",
+      "hash": "b29db9e697eae8069f48724bdedc7e9f",
+      "content_preview": "Bipartisan Bill Filed to Let States Set Own Rules for Hemp Cannabinoids &nbsp;&nbsp; thestreet.com",
+      "added_at": "2026-04-20T15:21:50.295113+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "законодавство"
     },
     {
       "id": "8b3c99945561",
@@ -41,6 +60,27 @@
       "category_hint": "відео",
       "youtube_id": "H8llAGmhTFA",
       "draft_filename": "20260420-101036-hemp-ah-de-future-muzychnyy-klip-pro-promyslovi-konopli.md"
+    },
+    {
+      "id": "59036cafcbd6",
+      "type": "video",
+      "title": "Візуалізація технології гемпкриту: нове відео від EndGameMeditation",
+      "link": "https://www.youtube.com/watch?v=9rkurKSYkF8",
+      "source": "YouTube: EndGameMeditation",
+      "summary": "Нове відео демонструє візуальне уявлення гемпкриту — будівельного матеріалу на основі конопельного волокна та вапна.",
+      "image_url": "https://i.ytimg.com/vi/9rkurKSYkF8/hqdefault.jpg",
+      "date": "2026-04-20T07:02:06Z",
+      "hash": "yt_9rkurKSYkF8",
+      "content_preview": "Нове відео демонструє візуальне уявлення гемпкриту — будівельного матеріалу на основі конопельного волокна та вапна.",
+      "added_at": "2026-04-20T10:08:10.920760+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "9rkurKSYkF8",
+      "draft_filename": "20260420-100810-vizualizatsiya-tekhnolohiyi-hempkrytu-nove-video-vid-endgamemeditation.md"
     },
     {
       "id": "e0fa1135e2e4",
