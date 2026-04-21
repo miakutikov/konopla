@@ -1237,6 +1237,45 @@
       "created_at": "2026-04-20T16:48:50.428Z",
       "updated_at": "2026-04-21T00:22:56.161682+00:00",
       "published_at": null
+    },
+    {
+      "id": "6044dfade413",
+      "filename": "20260419-205046-konoplyana-pidstylka-dlya-kurchat-ohlyad-vid-moon-and-sky-homestead.md",
+      "title": "Конопляна підстилка для курчат: огляд від Moon and Sky Homestead",
+      "summary": "Дізнайтеся, як конопляна підстилка від Eaton Pet and Pasture використовується для догляду за курчатами у новому відео від Moon and Sky Homestead.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/PytoiIq1x-8/hqdefault.jpg",
+      "candidate_id": "6044dfade413",
+      "original_title": "Конопляна підстилка для курчат: огляд від Moon and Sky Homestead",
+      "original_url": "https://www.youtube.com/watch?v=PytoiIq1x-8",
+      "source_name": "YouTube",
+      "content_preview": "Дізнайтеся, як конопляна підстилка від Eaton Pet and Pasture використовується для догляду за курчатами у новому відео від Moon and Sky Homestead.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "PytoiIq1x-8",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-21T08:45:32.844Z",
+      "updated_at": "2026-04-21T08:45:32.844Z",
+      "published_at": null
     }
   ]
 }
