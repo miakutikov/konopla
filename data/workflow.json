@@ -1351,6 +1351,44 @@
       "created_at": "2026-04-21T17:50:50.532Z",
       "updated_at": "2026-04-21T17:50:59.524Z",
       "published_at": null
+    },
+    {
+      "id": "nyrwb2bp",
+      "filename": "",
+      "title": "greenpost.ua — https://greenpost.ua/news/ekologichnyj-ta-promyslovyj-potent",
+      "summary": "",
+      "category": "",
+      "image": "",
+      "candidate_id": "nyrwb2bp",
+      "original_title": "",
+      "original_url": "https://greenpost.ua/news/ekologichnyj-ta-promyslovyj-potentsial-chomu-tehnichni-konopli-stayut-trendom-stalogo-rozvytku-i105786",
+      "source_name": "greenpost.ua",
+      "content_preview": "",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 1,
+      "created_at": "2026-04-21T17:55:39.485Z",
+      "updated_at": "2026-04-21T17:55:39.485Z",
+      "published_at": null
     }
   ]
 }
