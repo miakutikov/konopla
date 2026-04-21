@@ -1250,14 +1250,13 @@
       "original_url": "https://www.youtube.com/watch?v=PytoiIq1x-8",
       "source_name": "YouTube",
       "content_preview": "Дізнайтеся, як конопляна підстилка від Eaton Pet and Pasture використовується для догляду за курчатами у новому відео від Moon and Sky Homestead.",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "youtube_id": "PytoiIq1x-8",
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -1274,8 +1273,8 @@
       },
       "relevance_score": 0.9,
       "created_at": "2026-04-21T08:45:32.844Z",
-      "updated_at": "2026-04-21T08:45:32.844Z",
-      "published_at": null
+      "updated_at": "2026-04-21T17:18:38.427Z",
+      "published_at": "2026-04-21T17:18:38.427Z"
     },
     {
       "id": "2f1b54a5dbe4",
