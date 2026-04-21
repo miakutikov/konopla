@@ -1326,8 +1326,8 @@
       "original_url": "https://landlord.ua/dosvid/30-mln-investyczij-ta-industrialnyj-park-na-zhytomyrshhyni-andrij-mykytiv-pro-realiyi-biznesu-na-promyslovyh-konoplyah-pid-chas-vijny/",
       "source_name": "landlord.ua",
       "content_preview": "",
-      "stage": "feed",
-      "status": "queued",
+      "stage": "editorial",
+      "status": "processing",
       "channels": {
         "website": {
           "enabled": true,
@@ -1349,7 +1349,7 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-21T17:50:50.532Z",
-      "updated_at": "2026-04-21T17:50:50.532Z",
+      "updated_at": "2026-04-21T17:50:59.524Z",
       "published_at": null
     }
   ]
