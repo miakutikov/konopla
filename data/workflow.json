@@ -1136,13 +1136,12 @@
       "original_url": "https://capetimes.co.za/business-report/opinion/2014-11-17-legalising-hemp-plants-fights-poverty/",
       "source_name": "capetimes.co.za",
       "content_preview": "",
-      "stage": "editorial",
-      "status": "ready_for_edit",
+      "stage": "publishing",
+      "status": "approved",
       "channels": {
         "website": {
           "enabled": true,
-          "status": "pending",
-          "scheduled_at": null
+          "status": "deployed"
         },
         "telegram": {
           "enabled": true,
@@ -1159,8 +1158,8 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-20T16:47:40.293Z",
-      "updated_at": "2026-04-21T00:22:48.429584+00:00",
-      "published_at": null
+      "updated_at": "2026-04-21T17:40:46.824Z",
+      "published_at": "2026-04-21T17:40:46.824Z"
     },
     {
       "id": "737dv8ug",
