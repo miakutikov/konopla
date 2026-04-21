@@ -1087,19 +1087,19 @@
       "published_at": "2026-04-18T19:07:17.961Z"
     },
     {
-      "id": "qzsy5ey2",
-      "filename": "",
-      "title": "cc.cz — https://cc.cz/prvni-masti-michal-byvaly-strojar-v-garazi-ted",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "3f0ca086881f",
+      "filename": "20260421-001942-vid-harazhnykh-mazey-do-120-milyoniv-istoriya-konoplyanoyi-kosmetyky-konopn-tta.md",
+      "title": "Від гаражних мазей до 120 мільйонів: історія конопляної косметики Konopný táta",
+      "summary": "Історія чеського підприємця Їржі Нутіла, який перетворив домашнє виробництво конопляних мазей у гаражі на успішний бізнес Konopný táta з річним оборотом у десятки мільйонів чеських крон, що планує експансію на європейські ринки.",
+      "category": "бізнес",
+      "image": "https://cc.cz/wp-content/uploads/2026/04/konopny-tata-1.jpg",
       "candidate_id": "qzsy5ey2",
       "original_title": "",
       "original_url": "https://cc.cz/prvni-masti-michal-byvaly-strojar-v-garazi-ted-s-kosmetikou-konopny-tata-miri-na-120-milionu/",
       "source_name": "cc.cz",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -1110,34 +1110,34 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Від гаража до мільйонних прибутків: як чеський інженер Їржі Нутіл побудував успішний бізнес на конопляній косметиці Konopný táta."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Неймовірна історія чеського підприємця Їржі Нутіла, який почав з конопляних мазей у гаражі, а тепер його компанія Konopný táta прагне до 120 мільйонів крон. Це справжній приклад інновацій та наполегливості!"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-20T16:47:17.105Z",
-      "updated_at": "2026-04-21T00:18:45.832Z",
+      "updated_at": "2026-04-21T00:19:42.723882+00:00",
       "published_at": null
     },
     {
-      "id": "t61uinyw",
-      "filename": "",
-      "title": "capetimes.co.za — https://capetimes.co.za/business-report/opinion/2014-11-17-l",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "7eb6e874df5b",
+      "filename": "20260421-002248-lehalizatsiya-konopel-boretsya-z-bidnistyu.md",
+      "title": "Легалізація конопель бореться з бідністю",
+      "summary": "Легалізація конопель може допомогти боротися з бідністю в Південно-Африканській Республіці. Коноплі мають багато користних властивостей і можуть бути використані для виробництва різних продуктів.",
+      "category": "агро",
+      "image": "https://iol-prod.appspot.com/image/74bfa59a693261db289f2286a1648fd501ec9105/1000/jpeg",
       "candidate_id": "t61uinyw",
       "original_title": "",
       "original_url": "https://capetimes.co.za/business-report/opinion/2014-11-17-legalising-hemp-plants-fights-poverty/",
       "source_name": "capetimes.co.za",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -1148,18 +1148,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Легалізація конопель може допомогти боротися з бідністю в Південно-Африканській Республіці"
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Коноплі - це не тільки наркотик, а й цінна культура, яка може принести користь економіці та суспільству"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-20T16:47:40.293Z",
-      "updated_at": "2026-04-21T00:18:45.832Z",
+      "updated_at": "2026-04-21T00:22:48.429584+00:00",
       "published_at": null
     },
     {
@@ -1174,8 +1174,8 @@
       "original_url": "https://impactalpha.com/fibers-fund-and-invest-appalachia-provide-loans-and-grants-for-hemp-production-in-north-carolina/",
       "source_name": "impactalpha.com",
       "content_preview": "",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "channels": {
         "website": {
           "enabled": true,
@@ -1197,7 +1197,7 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-20T16:48:03.954Z",
-      "updated_at": "2026-04-21T00:18:45.832Z",
+      "updated_at": "2026-04-21T00:22:55.112666+00:00",
       "published_at": null
     },
     {
@@ -1212,8 +1212,8 @@
       "original_url": "https://www.thestreet.com/crypto/investing/bipartisan-bill-filed-to-let-states-set-own-rules-for-hemp-cannabinoids",
       "source_name": "thestreet.com",
       "content_preview": "",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "channels": {
         "website": {
           "enabled": true,
@@ -1235,7 +1235,7 @@
       },
       "relevance_score": 1,
       "created_at": "2026-04-20T16:48:50.428Z",
-      "updated_at": "2026-04-21T00:18:45.832Z",
+      "updated_at": "2026-04-21T00:22:56.161682+00:00",
       "published_at": null
     }
   ]
