@@ -1276,6 +1276,45 @@
       "created_at": "2026-04-21T08:45:32.844Z",
       "updated_at": "2026-04-21T08:45:32.844Z",
       "published_at": null
+    },
+    {
+      "id": "2f1b54a5dbe4",
+      "filename": "20260420-205718-hempcrete-dlya-smertelnykh-khvyl-speky-v-indiyi.md",
+      "title": "Hempcrete для смертельних хвиль спеки в Індії",
+      "summary": "Відео від NITSE досліджує, як конопляний біокомпозит може допомогти боротися з екстремальними температурами в Індії.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/YIP939fGv4o/hqdefault.jpg",
+      "candidate_id": "2f1b54a5dbe4",
+      "original_title": "Hempcrete для смертельних хвиль спеки в Індії",
+      "original_url": "https://www.youtube.com/watch?v=YIP939fGv4o",
+      "source_name": "YouTube",
+      "content_preview": "Відео від NITSE досліджує, як конопляний біокомпозит може допомогти боротися з екстремальними температурами в Індії.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "YIP939fGv4o",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-21T08:45:50.314Z",
+      "updated_at": "2026-04-21T08:45:50.314Z",
+      "published_at": null
     }
   ]
 }
