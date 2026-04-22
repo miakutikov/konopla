@@ -1,25 +1,45 @@
 {
   "items": [
     {
-      "id": "db9277127d7f",
+      "id": "f71408587c96",
+      "type": "article",
+      "title": "Міжнародний день коноплі - AgroPortal.ua",
+      "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5WcFFmZHdZdlZqbVRPZEZac3NGYmtJMnMzMVVsNHBQeWFRYWxGVHNLb05jeWEwVEY2dER6aXNUdGxZRW92MG40c1IxRXNSV3R0LXZqSFRBZmlka0tsaXp5RUM0ZlhLdWNnVHFJ?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Міжнародний день коноплі &nbsp;&nbsp; AgroPortal.ua",
+      "image_url": "",
+      "date": "2026-04-19T03:28:00+00:00",
+      "hash": "afa47cc9feedcae6df3b890287f6b7a8",
+      "content_preview": "Міжнародний день коноплі &nbsp;&nbsp; AgroPortal.ua",
+      "added_at": "2026-04-22T15:19:29.629762+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "d788b404f159",
       "type": "video",
-      "title": "Сонячні панелі проти конопляного бетону: фермери обирають найкраще",
-      "link": "https://www.youtube.com/watch?v=EOUIIxUMBHs",
-      "source": "YouTube: Larry Sharpe",
-      "summary": "Відеоаналіз вартості конопляного бетону та аргументи на користь дозволу фермерам інноваційно підходити до вирощування конопель.",
-      "image_url": "https://i.ytimg.com/vi/EOUIIxUMBHs/hqdefault.jpg",
-      "date": "2026-04-22T00:57:28Z",
-      "hash": "yt_EOUIIxUMBHs",
-      "content_preview": "Відеоаналіз вартості конопляного бетону та аргументи на користь дозволу фермерам інноваційно підходити до вирощування конопель.",
-      "added_at": "2026-04-22T09:31:33.457209+00:00",
+      "title": "VITAL HEMP GUMMIES REVIEW — Чи варто інвестувати?",
+      "link": "https://www.youtube.com/watch?v=bj1Dp97hynY",
+      "source": "YouTube: simrixcarson",
+      "summary": "Детальний огляд конопляних гумок Vital Hemp, які позиціонуються як натуральний засіб для релаксації та зняття стресу.",
+      "image_url": "https://i.ytimg.com/vi/bj1Dp97hynY/hqdefault.jpg",
+      "date": "2026-04-22T02:29:13Z",
+      "hash": "yt_bj1Dp97hynY",
+      "content_preview": "Детальний огляд конопляних гумок Vital Hemp, які позиціонуються як натуральний засіб для релаксації та зняття стресу.",
+      "added_at": "2026-04-22T09:36:50.009856+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "EOUIIxUMBHs",
-      "draft_filename": "20260422-093133-sonyachni-paneli-proty-konoplyanoho-betonu-fermery-obyrayut-naykrashche.md"
+      "youtube_id": "bj1Dp97hynY",
+      "draft_filename": "20260422-093649-vital-hemp-gummies-review-chy-varto-investuvaty.md"
     },
     {
       "id": "f47d225a071d",
@@ -43,25 +63,25 @@
       "draft_filename": "20260422-093331-maybutnye-sadivnytstva-ta-budivnytstva-mozhe-buty-v-tsiy-roslyni.md"
     },
     {
-      "id": "d788b404f159",
+      "id": "db9277127d7f",
       "type": "video",
-      "title": "VITAL HEMP GUMMIES REVIEW — Чи варто інвестувати?",
-      "link": "https://www.youtube.com/watch?v=bj1Dp97hynY",
-      "source": "YouTube: simrixcarson",
-      "summary": "Детальний огляд конопляних гумок Vital Hemp, які позиціонуються як натуральний засіб для релаксації та зняття стресу.",
-      "image_url": "https://i.ytimg.com/vi/bj1Dp97hynY/hqdefault.jpg",
-      "date": "2026-04-22T02:29:13Z",
-      "hash": "yt_bj1Dp97hynY",
-      "content_preview": "Детальний огляд конопляних гумок Vital Hemp, які позиціонуються як натуральний засіб для релаксації та зняття стресу.",
-      "added_at": "2026-04-22T09:36:50.009856+00:00",
+      "title": "Сонячні панелі проти конопляного бетону: фермери обирають найкраще",
+      "link": "https://www.youtube.com/watch?v=EOUIIxUMBHs",
+      "source": "YouTube: Larry Sharpe",
+      "summary": "Відеоаналіз вартості конопляного бетону та аргументи на користь дозволу фермерам інноваційно підходити до вирощування конопель.",
+      "image_url": "https://i.ytimg.com/vi/EOUIIxUMBHs/hqdefault.jpg",
+      "date": "2026-04-22T00:57:28Z",
+      "hash": "yt_EOUIIxUMBHs",
+      "content_preview": "Відеоаналіз вартості конопляного бетону та аргументи на користь дозволу фермерам інноваційно підходити до вирощування конопель.",
+      "added_at": "2026-04-22T09:31:33.457209+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "bj1Dp97hynY",
-      "draft_filename": "20260422-093649-vital-hemp-gummies-review-chy-varto-investuvaty.md"
+      "youtube_id": "EOUIIxUMBHs",
+      "draft_filename": "20260422-093133-sonyachni-paneli-proty-konoplyanoho-betonu-fermery-obyrayut-naykrashche.md"
     },
     {
       "id": "ef9caa225985",
