@@ -1,24 +1,109 @@
 {
   "items": [
     {
-      "id": "86468e17dd9d",
-      "type": "article",
-      "title": "Relancer la filière chanvre : dans le bassin de la Boutonne, un projet industriel et quelques doutes - ici.fr",
-      "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNekVRNWhUYUlTeTBaWS1GazVvenhXbC1pQXNPVU8tOUVVdDkyYWlCY0RZb3ZzbFVmcXh1SFktTldfSXpHNENuOHhkamtETUN2UjhydEFNVUtMMGFaRzRZNjc4WlNzMEw0SkUwNTZ3R2gzLVdaanFZNkVtc2dneUpMdTQxSVZVdkNnV0g1QWtWQlFPU0E1bGtQRnBSaHdwQnA0bmllUGFFNGozdU5oclhqeWtnR21EaU5DUmlVU1Z6VmJGRjR1cjNBOHp4bXdKSW5ONEswUjhDTEdKNm5pUTN3em1jRlZULWdCbHdnSUsyQUY4VXBISXRMaWp5MFVtcGc?oc=5",
-      "source": "\"chanvre industriel france\" - Google Actualités",
-      "summary": "Relancer la filière chanvre : dans le bassin de la Boutonne, un projet industriel et quelques doutes &nbsp;&nbsp; ici.fr",
-      "image_url": "",
-      "date": "2026-04-23T04:31:30+00:00",
-      "hash": "9e951dcd42657fc8d2c6b328197660c4",
-      "content_preview": "Relancer la filière chanvre : dans le bassin de la Boutonne, un projet industriel et quelques doutes &nbsp;&nbsp; ici.fr",
-      "added_at": "2026-04-23T09:50:33.345133+00:00",
-      "relevance_score": 0.5,
+      "id": "3527ec673200",
+      "type": "video",
+      "title": "Промислові коноплі: ринок вартістю $7 млрд і швидке зростання",
+      "link": "https://www.youtube.com/watch?v=ukM8kg58Mas",
+      "source": "YouTube: WholeHemp",
+      "summary": "Аналіз глобального ринку промислових конопель, який досяг $7 млрд і має перспективи зростання до $26 млрд до 2030 року.",
+      "image_url": "https://i.ytimg.com/vi/ukM8kg58Mas/hqdefault.jpg",
+      "date": "2026-04-22T16:01:34Z",
+      "hash": "yt_ukM8kg58Mas",
+      "content_preview": "Аналіз глобального ринку промислових конопель, який досяг $7 млрд і має перспективи зростання до $26 млрд до 2030 року.",
+      "added_at": "2026-04-23T09:52:12.462394+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "ukM8kg58Mas",
+      "draft_filename": "20260423-095212-promyslovi-konopli-rynok-vartistyu-7-mlrd-i-shvydke-zrostannya.md"
+    },
+    {
+      "id": "18226babd674",
+      "type": "video",
+      "title": "Відео про іворовий конопляно-бавовняний тканиний матеріал",
+      "link": "https://www.youtube.com/watch?v=Wgd4KciqW5U",
+      "source": "YouTube: Haptic designer fabric",
+      "summary": "Нове відео від каналу Haptic designer fabric представляє унікальний конопляно-бавовняний матеріал з текстурою зморщеної сітки.",
+      "image_url": "https://i.ytimg.com/vi/Wgd4KciqW5U/hqdefault.jpg",
+      "date": "2026-04-22T08:33:29Z",
+      "hash": "yt_Wgd4KciqW5U",
+      "content_preview": "Нове відео від каналу Haptic designer fabric представляє унікальний конопляно-бавовняний матеріал з текстурою зморщеної сітки.",
+      "added_at": "2026-04-23T09:53:20.688802+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "Wgd4KciqW5U",
+      "draft_filename": "20260423-095320-video-pro-ivorovyy-konoplyano-bavovnyanyy-tkanynyy-material.md"
+    },
+    {
+      "id": "105f9523a1bd",
+      "type": "video",
+      "title": "Фарбування конопляного текстилю: нове відео від Ganesh Hemp",
+      "link": "https://www.youtube.com/watch?v=pP3Ee-v4zCA",
+      "source": "YouTube: Ganesh Hemp",
+      "summary": "Нове відео від каналу Ganesh Hemp демонструє процес фарбування конопляного текстилю, привертаючи увагу понад 3,5 тисяч переглядів.",
+      "image_url": "https://i.ytimg.com/vi/pP3Ee-v4zCA/hqdefault.jpg",
+      "date": "2026-04-22T00:05:16Z",
+      "hash": "yt_pP3Ee-v4zCA",
+      "content_preview": "Нове відео від каналу Ganesh Hemp демонструє процес фарбування конопляного текстилю, привертаючи увагу понад 3,5 тисяч переглядів.",
+      "added_at": "2026-04-23T09:55:30.255886+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "pP3Ee-v4zCA",
+      "draft_filename": "20260423-095530-farbuvannya-konoplyanoho-tekstylyu-nove-video-vid-ganesh-hemp.md"
+    },
+    {
+      "id": "f1a648ca9a18",
+      "type": "video",
+      "title": "Вид промислових конопель з висоти пташиного польоту",
+      "link": "https://www.youtube.com/watch?v=TjQugP7TFZg",
+      "source": "YouTube: HN MISO BIOSCIENCES",
+      "summary": "На YouTube-каналі HN MISO BIOSCIENCES опубліковано відео, що демонструє масштаби вирощування промислових конопель з висоти пташиного польоту.",
+      "image_url": "https://i.ytimg.com/vi/TjQugP7TFZg/hqdefault.jpg",
+      "date": "2026-04-23T08:00:25Z",
+      "hash": "yt_TjQugP7TFZg",
+      "content_preview": "На YouTube-каналі HN MISO BIOSCIENCES опубліковано відео, що демонструє масштаби вирощування промислових конопель з висоти пташиного польоту.",
+      "added_at": "2026-04-23T09:55:49.436941+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "TjQugP7TFZg",
+      "draft_filename": "20260423-095549-vyd-promyslovykh-konopel-z-vysoty-ptashynoho-polotu.md"
+    },
+    {
+      "id": "4feb6f9599e3",
+      "type": "video",
+      "title": "Vital Hemp Gummies: огляд 2026 року",
+      "link": "https://www.youtube.com/watch?v=x_nhQ5YBbzs",
+      "source": "YouTube: Christian Sonic ♪",
+      "summary": "Відеоогляд конопляних драже Vital Hemp від Christian Sonic ♪ - чи безпечні та варти вони вашої уваги?",
+      "image_url": "https://i.ytimg.com/vi/x_nhQ5YBbzs/hqdefault.jpg",
+      "date": "2026-04-23T06:00:43Z",
+      "hash": "yt_x_nhQ5YBbzs",
+      "content_preview": "Відеоогляд конопляних драже Vital Hemp від Christian Sonic ♪ - чи безпечні та варти вони вашої уваги?",
+      "added_at": "2026-04-23T09:57:52.871691+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "x_nhQ5YBbzs",
+      "draft_filename": "20260423-095752-vital-hemp-gummies-ohlyad-2026-roku.md"
     },
     {
       "id": "d9d2b0948fba",
@@ -829,5 +914,5 @@
       "draft_filename": "20260419-204948-podribnennya-konoplyanoho-volokna-demonstratsiya-tekhniky.md"
     }
   ],
-  "updated_at": "2026-04-22T21:08:19.470742+00:00"
+  "updated_at": "2026-04-23T09:57:52.873024+00:00"
 }
