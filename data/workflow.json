@@ -1272,6 +1272,45 @@
       "created_at": "2026-04-21T17:55:39.485Z",
       "updated_at": "2026-04-21T19:48:32.155Z",
       "published_at": "2026-04-21T19:48:32.155Z"
+    },
+    {
+      "id": "e76f03773568",
+      "filename": "20260423-095549-vyd-promyslovykh-konopel-z-vysoty-ptashynoho-polotu.md",
+      "title": "Вид промислових конопель з висоти пташиного польоту",
+      "summary": "На YouTube-каналі HN MISO BIOSCIENCES опубліковано відео, що демонструє масштаби вирощування промислових конопель з висоти пташиного польоту.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/TjQugP7TFZg/hqdefault.jpg",
+      "candidate_id": "e76f03773568",
+      "original_title": "Вид промислових конопель з висоти пташиного польоту",
+      "original_url": "https://www.youtube.com/watch?v=TjQugP7TFZg",
+      "source_name": "YouTube",
+      "content_preview": "На YouTube-каналі HN MISO BIOSCIENCES опубліковано відео, що демонструє масштаби вирощування промислових конопель з висоти пташиного польоту.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "TjQugP7TFZg",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-24T03:39:19.260Z",
+      "updated_at": "2026-04-24T03:39:19.260Z",
+      "published_at": null
     }
   ]
 }
