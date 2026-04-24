@@ -1,24 +1,109 @@
 {
   "items": [
     {
-      "id": "ad3a940252a4",
-      "type": "article",
-      "title": "Рома виявляє інтерес до Юхима Коноплі – ЗМІ - Sportarena.ua",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNbG1xNlRPcm9FbXhlM1NUdUpEcHJycDNTQVl4UWN4b3F4QXd5OU9uc3VmSWtsRzhrQ2hNcU5Ec1g3VnlZOGZNaThWeXNIREJGRWNGeEhLb2hFWXRQU1JCdlJPeUdUekZqd0dPSzZPdks1eFBpMWplSTFVQ1k3VlNqM0dkaGYzcjRUZi1watIBkgFBVV95cUxNZnJvYllZYzJXQUlYWDN4T3ZWZGdfS3N2eXhrak8tQ3ZENnVJTnQ2U1drb1piRzVpb2VoVmtXVmxfYjZtaTQ1QlZ5cW5DT2hKTkRQVVdkdElwV0RQQjYxa01pVDZKT2tWWHhqQXViWnhsRERfakxUeEFDZGhLU1FoSHhqTW1Ia2x3NDlFOEdXNXN4Zw?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "Рома виявляє інтерес до Юхима Коноплі – ЗМІ &nbsp;&nbsp; Sportarena.ua",
-      "image_url": "",
-      "date": "2026-04-24T12:00:00+00:00",
-      "hash": "ace787ab3eb100c0b831a369fbb9f726",
-      "content_preview": "Рома виявляє інтерес до Юхима Коноплі – ЗМІ &nbsp;&nbsp; Sportarena.ua",
-      "added_at": "2026-04-24T20:55:17.993115+00:00",
-      "relevance_score": 0.5,
+      "id": "1f6c25d99545",
+      "type": "video",
+      "title": "Hempcrete: Революція від ферми до будівельної оболонки",
+      "link": "https://www.youtube.com/watch?v=C9ROEsAIGqc",
+      "source": "YouTube: Hemp Build School Mastermind",
+      "summary": "Annie Ball з Hempitecture досліджує потенціал конопель як біобазового матеріалу для будівельних оболонок у новому відео.",
+      "image_url": "https://i.ytimg.com/vi/C9ROEsAIGqc/hqdefault.jpg",
+      "date": "2026-04-24T14:00:18Z",
+      "hash": "yt_C9ROEsAIGqc",
+      "content_preview": "Annie Ball з Hempitecture досліджує потенціал конопель як біобазового матеріалу для будівельних оболонок у новому відео.",
+      "added_at": "2026-04-24T20:58:27.067702+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "C9ROEsAIGqc",
+      "draft_filename": "20260424-205827-hempcrete-revolyutsiya-vid-fermy-do-budivelnoyi-obolonky.md"
+    },
+    {
+      "id": "ec17bed43c8d",
+      "type": "video",
+      "title": "Коноплі проти бавовни в індійське літо: яка тканина краще охолоджує?",
+      "link": "https://www.youtube.com/watch?v=LRzX_5TV_9c",
+      "source": "YouTube: Ecentric",
+      "summary": "Нове відео від каналу Ecentric порівнює конопляну та бавовняну тканини в умовах спекотного індійського літа, розкриваючи, яка з них забезпечує більший комфорт.",
+      "image_url": "https://i.ytimg.com/vi/LRzX_5TV_9c/hqdefault.jpg",
+      "date": "2026-04-24T03:55:29Z",
+      "hash": "yt_LRzX_5TV_9c",
+      "content_preview": "Нове відео від каналу Ecentric порівнює конопляну та бавовняну тканини в умовах спекотного індійського літа, розкриваючи, яка з них забезпечує більший комфорт.",
+      "added_at": "2026-04-24T20:58:53.058061+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "LRzX_5TV_9c",
+      "draft_filename": "20260424-205853-konopli-proty-bavovny-v-indiyske-lito-yaka-tkanyna-krashche-okholodzhuye.md"
+    },
+    {
+      "id": "92a772b5368d",
+      "type": "video",
+      "title": "Непальський ткацький верстат для конопель у Ganesh Hemp",
+      "link": "https://www.youtube.com/watch?v=673FrNNNO4w",
+      "source": "YouTube: Ganesh Hemp",
+      "summary": "Відео від Ganesh Hemp демонструє процес переробки конопляного волокна на тканину за допомогою потужного ткацького верстата в Непалі.",
+      "image_url": "https://i.ytimg.com/vi/673FrNNNO4w/hqdefault.jpg",
+      "date": "2026-04-23T23:51:37Z",
+      "hash": "yt_673FrNNNO4w",
+      "content_preview": "Відео від Ganesh Hemp демонструє процес переробки конопляного волокна на тканину за допомогою потужного ткацького верстата в Непалі.",
+      "added_at": "2026-04-24T21:01:16.896071+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "673FrNNNO4w",
+      "draft_filename": "20260424-210116-nepalskyy-tkatskyy-verstat-dlya-konopel-u-ganesh-hemp.md"
+    },
+    {
+      "id": "072bc8f39d03",
+      "type": "video",
+      "title": "Коноплі висадили в Чорнобилі для очищення ґрунту. Це спрацювало.",
+      "link": "https://www.youtube.com/watch?v=RejlHjkClYs",
+      "source": "YouTube: WholeHemp",
+      "summary": "Канал WholeHemp опублікував коротке відео, що демонструє, як промислові коноплі використовувалися для фіторемедіації забруднених земель Чорнобиля та покращення сільськогосподарських ґрунтів.",
+      "image_url": "https://i.ytimg.com/vi/RejlHjkClYs/hqdefault.jpg",
+      "date": "2026-04-24T16:00:54Z",
+      "hash": "yt_RejlHjkClYs",
+      "content_preview": "Канал WholeHemp опублікував коротке відео, що демонструє, як промислові коноплі використовувалися для фіторемедіації забруднених земель Чорнобиля та покращення сільськогосподарських ґрунтів.",
+      "added_at": "2026-04-24T21:01:42.346865+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "RejlHjkClYs",
+      "draft_filename": "20260424-210142-konopli-vysadyly-v-chornobyli-dlya-ochyshchennya-gruntu-tse-spratsyuvalo.md"
+    },
+    {
+      "id": "4606324a063b",
+      "type": "video",
+      "title": "Політичні питання для американської конопляної індустрії",
+      "link": "https://www.youtube.com/watch?v=eW48QEk9Hp8",
+      "source": "YouTube: Market Talk",
+      "summary": "Анонс відео про ключові політичні виклики та перспективи розвитку промислових конопель у США.",
+      "image_url": "https://i.ytimg.com/vi/eW48QEk9Hp8/hqdefault.jpg",
+      "date": "2026-04-24T12:39:46Z",
+      "hash": "yt_eW48QEk9Hp8",
+      "content_preview": "Анонс відео про ключові політичні виклики та перспективи розвитку промислових конопель у США.",
+      "added_at": "2026-04-24T21:03:17.382339+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "eW48QEk9Hp8",
+      "draft_filename": "20260424-210317-politychni-pytannya-dlya-amerykanskoyi-konoplyanoyi-industriyi.md"
     },
     {
       "id": "90b135b0f4bf",
@@ -187,5 +272,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-04-24T10:06:32.736242+00:00"
+  "updated_at": "2026-04-24T21:03:17.383515+00:00"
 }
