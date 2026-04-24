@@ -1,25 +1,109 @@
 {
   "items": [
     {
-      "id": "b7106767e973",
-      "type": "article",
-      "title": "China cuts hemp-fiber imports by half, signaling volatility in key global market",
-      "link": "https://hemptoday.net/china-cuts-hemp-fiber-imports-by-half-signaling-volatility-in-key-global-market/",
-      "source": "HempToday®",
-      "summary": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market [&#8230;]",
-      "image_url": "",
-      "date": "2026-04-24T09:35:17+00:00",
-      "hash": "806d17ee6901951f205771d34df7ac99",
-      "content_preview": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market for hemp textile raw materials. According to Chinese customs figures, the country imported 44,370 metric tons of hemp fiber in 20",
-      "added_at": "2026-04-24T09:50:25.172489+00:00",
-      "relevance_score": 0.6,
+      "id": "914bfa169816",
+      "type": "video",
+      "title": "Відео: Hempcrete Hurd — інноваційний будівельний матеріал з конопель",
+      "link": "https://www.youtube.com/watch?v=dW8qR_h4sKQ",
+      "source": "YouTube: EndGameMeditation",
+      "summary": "Нове відео від EndGameMeditation демонструє процес створення конопляного бетону (хемпкріту) з використанням візуальних ефектів, що відображають його унікальну структуру.",
+      "image_url": "https://i.ytimg.com/vi/dW8qR_h4sKQ/hqdefault.jpg",
+      "date": "2026-04-24T07:02:32Z",
+      "hash": "yt_dW8qR_h4sKQ",
+      "content_preview": "Нове відео від EndGameMeditation демонструє процес створення конопляного бетону (хемпкріту) з використанням візуальних ефектів, що відображають його унікальну структуру.",
+      "added_at": "2026-04-24T09:54:44.612021+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title",
-        "substantive content"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "dW8qR_h4sKQ",
+      "draft_filename": "20260424-095444-video-hempcrete-hurd-innovatsiynyy-budivelnyy-material-z-konopel.md"
+    },
+    {
+      "id": "4b3877d25230",
+      "type": "video",
+      "title": "Інноваційне виробництво конопляних блоків: автоматизація та технології",
+      "link": "https://www.youtube.com/watch?v=omw3Svqais4",
+      "source": "YouTube: Gloria Wang",
+      "summary": "Нове відео демонструє автоматизоване виробництво конопляних будівельних блоків з використанням спеціального диспенсера клею та алюмінієвих інтегрованих плат.",
+      "image_url": "https://i.ytimg.com/vi/omw3Svqais4/hqdefault.jpg",
+      "date": "2026-04-24T00:34:21Z",
+      "hash": "yt_omw3Svqais4",
+      "content_preview": "Нове відео демонструє автоматизоване виробництво конопляних будівельних блоків з використанням спеціального диспенсера клею та алюмінієвих інтегрованих плат.",
+      "added_at": "2026-04-24T09:58:14.673447+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "omw3Svqais4",
+      "draft_filename": "20260424-095814-innovatsiyne-vyrobnytstvo-konoplyanykh-blokiv-avtomatyzatsiya-ta-tekhnolohiyi.md"
+    },
+    {
+      "id": "f3a3da81ae0a",
+      "type": "video",
+      "title": "Хемпкрит: дивовижний матеріал для будівництва",
+      "link": "https://www.youtube.com/watch?v=yJcWDTmHrRM",
+      "source": "YouTube: Solar Coaster",
+      "summary": "Нове відео від каналу Solar Cooster розповідає про унікальні властивості хемпкриту — екологічного будівельного матеріалу на основі конопель.",
+      "image_url": "https://i.ytimg.com/vi/yJcWDTmHrRM/hqdefault.jpg",
+      "date": "2026-04-23T22:31:26Z",
+      "hash": "yt_yJcWDTmHrRM",
+      "content_preview": "Нове відео від каналу Solar Cooster розповідає про унікальні властивості хемпкриту — екологічного будівельного матеріалу на основі конопель.",
+      "added_at": "2026-04-24T10:02:15.434746+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "yJcWDTmHrRM",
+      "draft_filename": "20260424-100215-khempkryt-dyvovyzhnyy-material-dlya-budivnytstva.md"
+    },
+    {
+      "id": "877107018a29",
+      "type": "video",
+      "title": "Підйом конопляних панелей (3-хв прев'ю) — Найшвидший спосіб будівництва?",
+      "link": "https://www.youtube.com/watch?v=yF22r3OWpLA",
+      "source": "YouTube: Solar Coaster",
+      "summary": "Відео від каналу Solar Coaster демонструє процес швидкого зведення будинків з конопляних панелей (hempcrete) — екологічного та довговічного матеріалу.",
+      "image_url": "https://i.ytimg.com/vi/yF22r3OWpLA/hqdefault.jpg",
+      "date": "2026-04-23T22:26:36Z",
+      "hash": "yt_yF22r3OWpLA",
+      "content_preview": "Відео від каналу Solar Coaster демонструє процес швидкого зведення будинків з конопляних панелей (hempcrete) — екологічного та довговічного матеріалу.",
+      "added_at": "2026-04-24T10:04:57.778782+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "yF22r3OWpLA",
+      "draft_filename": "20260424-100457-pidyom-konoplyanykh-paneley-3-khv-prevyu-nayshvydshyy-sposib-budivnytstva.md"
+    },
+    {
+      "id": "045058b6fe41",
+      "type": "video",
+      "title": "Hempcrete проти традиційного будівництва: Чому цей 'старий' матеріал може заощадити мільйони та ваше здоров'я",
+      "link": "https://www.youtube.com/watch?v=YaZ9NS2dGFQ",
+      "source": "YouTube: Solar Coaster",
+      "summary": "Анонс відео від каналу Solar Coaster про переваги конопляного бетону (hempcrete) як екологічного та економічно вигідного будівельного матеріалу.",
+      "image_url": "https://i.ytimg.com/vi/YaZ9NS2dGFQ/hqdefault.jpg",
+      "date": "2026-04-23T21:49:07Z",
+      "hash": "yt_YaZ9NS2dGFQ",
+      "content_preview": "Анонс відео від каналу Solar Coaster про переваги конопляного бетону (hempcrete) як екологічного та економічно вигідного будівельного матеріалу.",
+      "added_at": "2026-04-24T10:06:32.735439+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "YaZ9NS2dGFQ",
+      "draft_filename": "20260424-100632-hempcrete-proty-tradytsiynoho-budivnytstva-chomu-tsey-staryy-material-mozhe-zaos.md"
     },
     {
       "id": "6d0a4d1e59da",
@@ -42,5 +126,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-04-23T21:03:30.551137+00:00"
+  "updated_at": "2026-04-24T10:06:32.736242+00:00"
 }
