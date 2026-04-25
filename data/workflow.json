@@ -1310,6 +1310,45 @@
       "created_at": "2026-04-24T03:39:19.260Z",
       "updated_at": "2026-04-24T03:45:17.691Z",
       "published_at": "2026-04-24T03:45:17.691Z"
+    },
+    {
+      "id": "90b135b0f4bf",
+      "filename": "",
+      "title": "China cuts hemp-fiber imports by half, signaling volatility in key global market",
+      "summary": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market [&#8230;]",
+      "category": "текстиль",
+      "image": "",
+      "candidate_id": "90b135b0f4bf",
+      "original_title": "China cuts hemp-fiber imports by half, signaling volatility in key global market",
+      "original_url": "https://hemptoday.net/china-cuts-hemp-fiber-imports-by-half-signaling-volatility-in-key-global-market/",
+      "source_name": "HempToday®",
+      "content_preview": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market for hemp textile raw materials. According to Chinese customs figures, the country imported 44,370 metric tons of hemp fiber in 20",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.6,
+      "created_at": "2026-04-25T05:14:23.853Z",
+      "updated_at": "2026-04-25T05:14:23.853Z",
+      "published_at": null
     }
   ]
 }
