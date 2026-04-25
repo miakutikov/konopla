@@ -1312,19 +1312,19 @@
       "published_at": "2026-04-24T03:45:17.691Z"
     },
     {
-      "id": "90b135b0f4bf",
-      "filename": "",
-      "title": "China cuts hemp-fiber imports by half, signaling volatility in key global market",
-      "summary": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market [&#8230;]",
+      "id": "cf877d6d40a7",
+      "filename": "20260425-051602-kytay-skorotyv-import-konoplyanoho-volokna-vdvichi-vkazuyuchy-na-minlyvist-rynku.md",
+      "title": "Китай скоротив імпорт конопляного волокна вдвічі, вказуючи на мінливість ринку",
+      "summary": "Китай, ключовий гравець на світовому ринку конопляного текстилю, у 2025 році скоротив імпорт луб'яного волокна конопель на понад 50% через зростання внутрішнього виробництва. Це свідчить про значну мінливість ринку, де Франція зміцнює свої позиції як головний постачальник.",
       "category": "текстиль",
-      "image": "",
+      "image": "https://hemptoday.net/wp-content/uploads/2026/04/CHINA-SHIPPING-IMPORTS.jpg",
       "candidate_id": "90b135b0f4bf",
       "original_title": "China cuts hemp-fiber imports by half, signaling volatility in key global market",
       "original_url": "https://hemptoday.net/china-cuts-hemp-fiber-imports-by-half-signaling-volatility-in-key-global-market/",
       "source_name": "HempToday®",
       "content_preview": "China’s imports of hemp bast fiber were cut in half in 2025 after a steep rise over the previous few years, signaling some volatility in the world’s most important market for hemp textile raw materials. According to Chinese customs figures, the country imported 44,370 metric tons of hemp fiber in 20",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1336,18 +1336,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Китай скоротив імпорт конопляного волокна вдвічі, що свідчить про мінливість світового ринку. Дізнайтеся, як це впливає на головних постачальників."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Китай, гігант конопляного ринку, раптово вдвічі скоротив імпорт волокна! Що це означає для глобальних постачальників та майбутнього конопляного текстилю? Деталі всередині."
         }
       },
       "relevance_score": 0.6,
       "created_at": "2026-04-25T05:14:23.853Z",
-      "updated_at": "2026-04-25T05:15:04.736Z",
+      "updated_at": "2026-04-25T05:16:02.602861+00:00",
       "published_at": null
     },
     {
@@ -1362,8 +1362,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNWDNtUWdtbVdrN1h3MmsySUxleGVLWHpSNXY1bXhWb3VJM04wWWtOX0NOck11TVYzYThOX296bTYwY01Rd3pwbHN2ZFZfRThhYXMxQWF5YjBBQnBDQjNLMVJYeGc1b3ZSQmtxYkNlZkpYdjNucnRxNlRnX1RESENPbzhCeXFPV0tyTmx0V19rcV9pZG5LRHIxRTI3VmJ6Z9IBsgFBVV95cUxQVUZBaGY5Q29GVjZkR1hiT2RZMTgxbFlUZnpQZXVJaU1qODE0U3RiRjN0cU1aaVlIZDI3SERSWGhHd1JPZU5NOHFGV2RYQTdBS3k5TDY1cHAwaFl3N2tBT1dlZDdNMEpCdUFFSEp0Z3ctOGJjWDh1NkoxcVJBWFdBOEFyLUdOcWVFamNBRUZBWGdnQ0lYQzVHVnhTbHBYV0xHR0pzemFoUnc1dVVsWVFtM2ZB?oc=5",
       "source_name": "\"hemp legislation regulation farm bill\" - Google N",
       "content_preview": "Wisconsin hemp farmers face uncertainty as federal law change looms &nbsp;&nbsp; WBAY",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1386,7 +1386,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-25T05:14:35.705Z",
-      "updated_at": "2026-04-25T05:15:04.736Z",
+      "updated_at": "2026-04-25T05:16:09.971522+00:00",
       "published_at": null
     }
   ]
