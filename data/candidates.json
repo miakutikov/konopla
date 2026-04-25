@@ -1,24 +1,46 @@
 {
   "items": [
     {
-      "id": "9f4e5ac72cec",
-      "type": "article",
-      "title": "Український переробник конопель розширює асортимент продукції - AgroPortal.ua",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbk9rMXJ6cmUyaUhfTENoc0djUU94Nm15OU8xNUlOWEVIOG1RcVYtSGtZSS1tdnpWZ09wVHpnb3JsUDN3emNwX2VTNFBjSDlXaklnWkFORXBZdzRUVThmNl96VHpheXU0SzVVdkRBbHI4ekVwenl5ZnNGZDNyaklVMWVjRmR4NVBUQ2hGWHluQVlQVUd6ZXhmekVCVXVqV25jbThnR2MzU3o0MnZuSlhxT2VtYlIzUkk?oc=5",
-      "source": "\"промислові коноплі Україна\" - Google Новини",
-      "summary": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
-      "image_url": "",
-      "date": "2026-04-25T19:51:59+00:00",
-      "hash": "d7faa0ad93e4eb6941b466a8b979aafd",
-      "content_preview": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
-      "added_at": "2026-04-25T20:45:22.577999+00:00",
-      "relevance_score": 0.5,
+      "id": "b19e7e4a1715",
+      "type": "video",
+      "title": "Автомобіль, що міг покласти край нафтовій ері: конопляний секрет Генрі Форда",
+      "link": "https://www.youtube.com/watch?v=rrMMj9ZXqz0",
+      "source": "YouTube: IronRoot Survival",
+      "summary": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "image_url": "https://i.ytimg.com/vi/rrMMj9ZXqz0/hqdefault.jpg",
+      "date": "2026-04-25T19:00:42Z",
+      "hash": "yt_rrMMj9ZXqz0",
+      "content_preview": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "added_at": "2026-04-25T20:46:10.373607+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "rrMMj9ZXqz0",
+      "draft_filename": "20260425-204610-avtomobil-shcho-mih-poklasty-kray-naftoviy-eri-konoplyanyy-sekret-henri-forda.md"
+    },
+    {
+      "id": "2e4eefc7b148",
+      "type": "video",
+      "title": "Зелені угоди та вуглецева нейтральність: нові можливості",
+      "link": "https://www.youtube.com/watch?v=OMqNsbdJk8Q",
+      "source": "YouTube: Hemp Build School Mastermind",
+      "summary": "Відео про перспективи промислових конопель у програмах зеленого фінансування та вуглецевої нейтральності.",
+      "image_url": "https://i.ytimg.com/vi/OMqNsbdJk8Q/hqdefault.jpg",
+      "date": "2026-04-25T14:00:39Z",
+      "hash": "yt_OMqNsbdJk8Q",
+      "content_preview": "Відео про перспективи промислових конопель у програмах зеленого фінансування та вуглецевої нейтральності.",
+      "added_at": "2026-04-25T20:49:10.392952+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "OMqNsbdJk8Q",
+      "draft_filename": "20260425-204910-zeleni-uhody-ta-vuhletseva-neytralnist-novi-mozhlyvosti.md"
     },
     {
       "id": "b149d14947cd",
@@ -164,5 +186,5 @@
       "draft_filename": "20260425-090006-zovnishniy-vyhlyad-budynku-z-khempkrytu-prohres-budivnytstva-v-parkdeyli.md"
     }
   ],
-  "updated_at": "2026-04-25T09:00:44.385283+00:00"
+  "updated_at": "2026-04-25T20:49:15.394166+00:00"
 }
