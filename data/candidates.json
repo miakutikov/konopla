@@ -1,25 +1,24 @@
 {
   "items": [
     {
-      "id": "b19e7e4a1715",
-      "type": "video",
-      "title": "Автомобіль, що міг покласти край нафтовій ері: конопляний секрет Генрі Форда",
-      "link": "https://www.youtube.com/watch?v=rrMMj9ZXqz0",
-      "source": "YouTube: IronRoot Survival",
-      "summary": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
-      "image_url": "https://i.ytimg.com/vi/rrMMj9ZXqz0/hqdefault.jpg",
-      "date": "2026-04-25T19:00:42Z",
-      "hash": "yt_rrMMj9ZXqz0",
-      "content_preview": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
-      "added_at": "2026-04-25T20:46:10.373607+00:00",
-      "relevance_score": 0.9,
+      "id": "74e5b0ca3327",
+      "type": "article",
+      "title": "Український переробник конопель розширює асортимент продукції - AgroPortal.ua",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbk9rMXJ6cmUyaUhfTENoc0djUU94Nm15OU8xNUlOWEVIOG1RcVYtSGtZSS1tdnpWZ09wVHpnb3JsUDN3emNwX2VTNFBjSDlXaklnWkFORXBZdzRUVThmNl96VHpheXU0SzVVdkRBbHI4ekVwenl5ZnNGZDNyaklVMWVjRmR4NVBUQ2hGWHluQVlQVUd6ZXhmekVCVXVqV25jbThnR2MzU3o0MnZuSlhxT2VtYlIzUkk?oc=5",
+      "source": "\"промислові коноплі Україна\" - Google Новини",
+      "summary": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
+      "image_url": "",
+      "date": "2026-04-25T23:26:39+00:00",
+      "hash": "d7faa0ad93e4eb6941b466a8b979aafd",
+      "content_preview": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
+      "added_at": "2026-04-26T05:16:27.878857+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "rrMMj9ZXqz0",
-      "draft_filename": "20260425-204610-avtomobil-shcho-mih-poklasty-kray-naftoviy-eri-konoplyanyy-sekret-henri-forda.md"
+      "source_trusted": false,
+      "category_hint": "інше"
     },
     {
       "id": "2e4eefc7b148",
@@ -41,6 +40,27 @@
       "category_hint": "відео",
       "youtube_id": "OMqNsbdJk8Q",
       "draft_filename": "20260425-204910-zeleni-uhody-ta-vuhletseva-neytralnist-novi-mozhlyvosti.md"
+    },
+    {
+      "id": "b19e7e4a1715",
+      "type": "video",
+      "title": "Автомобіль, що міг покласти край нафтовій ері: конопляний секрет Генрі Форда",
+      "link": "https://www.youtube.com/watch?v=rrMMj9ZXqz0",
+      "source": "YouTube: IronRoot Survival",
+      "summary": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "image_url": "https://i.ytimg.com/vi/rrMMj9ZXqz0/hqdefault.jpg",
+      "date": "2026-04-25T19:00:42Z",
+      "hash": "yt_rrMMj9ZXqz0",
+      "content_preview": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "added_at": "2026-04-25T20:46:10.373607+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "rrMMj9ZXqz0",
+      "draft_filename": "20260425-204610-avtomobil-shcho-mih-poklasty-kray-naftoviy-eri-konoplyanyy-sekret-henri-forda.md"
     },
     {
       "id": "b149d14947cd",
