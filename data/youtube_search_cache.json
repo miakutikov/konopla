@@ -1,607 +1,5 @@
 {
   "queries": {
-    "2f0bb4673a9a476d11207d901494af9b": {
-      "query": "hemp textile",
-      "results": [
-        {
-          "kind": "youtube#searchResult",
-          "etag": "y9tELKHgR9uWQcji4zYXjWBensU",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "Orq821MGfiE"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-18T16:04:42Z",
-            "channelId": "UCQI_SDD4FXf5hlXIiYuubvw",
-            "title": "Smart materials, smarter choices",
-            "description": "Materials matter. We pick fabrics and bottles that last, recycle cleanly, and actually help the planet — not just look good.",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/Orq821MGfiE/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/Orq821MGfiE/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/Orq821MGfiE/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Crazy Buffalo Design",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-18T16:04:42Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "eAIN9l4ZwjufbtEzWfuio_-9bcI",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "0MjyVQknjno"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T16:19:26Z",
-            "channelId": "UCqZ6Go5XMWRLPbYx3wEdUJQ",
-            "title": "FARM HEMP NOW | Better Fabric and Plastic Alternative",
-            "description": "Hemp is the solution to most of our problems.",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/0MjyVQknjno/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/0MjyVQknjno/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/0MjyVQknjno/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Two Spores Farm",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T16:19:26Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "1ISTtNOr9_O-yPRwUrfZ6M9ilX4",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "kKNe4d24nIc"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T06:07:08Z",
-            "channelId": "UCnyGg6Kvsc-WFPGVZa6_uyQ",
-            "title": "Case Study | Hemp &amp; Bamboo Fiber | Industry Project | SNS Institutions",
-            "description": "snsinstitutions #snsdesignthinkers #designthinking This video presents a Case Study on Hemp & Bamboo Fiber – Industry Project ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/kKNe4d24nIc/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/kKNe4d24nIc/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/kKNe4d24nIc/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "MOHAMMED AARIF S I",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T06:07:08Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "EtTL_U6hBwvNWY3u79CXW2csPxU",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "8cLHSigk9zA"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T06:03:30Z",
-            "channelId": "UCnyGg6Kvsc-WFPGVZa6_uyQ",
-            "title": "DT Activity | Hemp &amp; Bamboo Fiber | Industry Project | SNS Institutions",
-            "description": "snsinstitutions #snsdesignthinkers #designthinking This video showcases a Design Thinking (DT) Activity on Hemp & Bamboo ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/8cLHSigk9zA/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/8cLHSigk9zA/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/8cLHSigk9zA/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "MOHAMMED AARIF S I",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T06:03:30Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "uKxLsPS6qA2NOVELW30ljVAZFio",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "YFyxPWV9uOQ"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T04:37:55Z",
-            "channelId": "UC24Vmy1yyRWT4Oy2U2PJlmQ",
-            "title": "Jamaica | Versatile Hemp Cotton fabric for Shirts, Sets &amp; More",
-            "description": "Made with 36% hemp and 64% cotton, this fabric combines hemp's durability and natural character with cotton's softness and ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/YFyxPWV9uOQ/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Weaving Vibes",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T04:37:55Z"
-          }
-        }
-      ],
-      "cached_at": "2026-04-20T10:06:55.492297+00:00"
-    },
-    "a94af732334b346218272711762adab3": {
-      "query": "industrial hemp",
-      "results": [
-        {
-          "kind": "youtube#searchResult",
-          "etag": "5-siBAuKJOALSg9oHdlMfem1nqM",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "H8llAGmhTFA"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T10:00:32Z",
-            "channelId": "UCflOBvpj9oUpV28JHVm2UxA",
-            "title": "Hemp Ah De Future (Reggae Dancehall)(Male) SS | Verman Bedessee &amp;BDC AIM Band (Official Music Video)",
-            "description": "COPYRIGHT NOTICE & DISCLAIMER “Hemp Ah De Future” (Reggae Dancehall) – Official Music – The knowledge of Hemp ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/H8llAGmhTFA/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/H8llAGmhTFA/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/H8llAGmhTFA/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "BDC A.I.M. Band (formerly BDCAIBand)",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-20T10:00:32Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "IEHtJLRWlAsNN67nlyyN0XtPP-w",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "7p4sZx2JIeM"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T08:30:06Z",
-            "channelId": "UCrELsOCd3y-nWnk0LIIWIeA",
-            "title": "CBD Hemp: : Education &amp; Awareness",
-            "description": "CBD Hemp: The Fast-Growing Crop Powering Novel Food & Global Food Security In a world facing climate challenges and ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/7p4sZx2JIeM/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/7p4sZx2JIeM/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/7p4sZx2JIeM/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Hemp Malaysia",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-20T08:30:06Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "6vW55H6YE0xoo5G5Zs6gvLvwvak",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "G2YDecGz1Is"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T08:15:06Z",
-            "channelId": "UCrELsOCd3y-nWnk0LIIWIeA",
-            "title": "Road To KannaHemp Summit 3.0 RE:WIND 420Day",
-            "description": "The Road to KannaHemp Summit 3.0 begins here. Rewind to our journey of Asia collaboration: KannaHemp Summit first began in ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/G2YDecGz1Is/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/G2YDecGz1Is/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/G2YDecGz1Is/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Hemp Malaysia",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-20T08:15:06Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "ASZS77JoJ_5wnQ2iEba0Lbsdhyc",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "Ee8rk7zI5gA"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T03:49:41Z",
-            "channelId": "UCY-Ngg1KZnnZPfTuqA0RpcQ",
-            "title": "420 Special Report: Texas Hemp Raid, Federal Legislation &amp; Dispensary Closures Nationwide",
-            "description": "Cannabis Coast to Coast News with Alaina Pinto delivers comprehensive coverage of the most critical cannabis policy, legislation ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/Ee8rk7zI5gA/default_live.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/Ee8rk7zI5gA/mqdefault_live.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/Ee8rk7zI5gA/hqdefault_live.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "WPCMTV: Cannabis Policy News",
-            "liveBroadcastContent": "upcoming",
-            "publishTime": "2026-04-20T03:49:41Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "I-zFWsBMat9Exgak32BFd4sbgdw",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "lVPB31PCRt4"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-19T21:18:44Z",
-            "channelId": "UC2KlIfGPAXN7BrZJX8Jcf4A",
-            "title": "Kids buy hemp online",
-            "description": "",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/lVPB31PCRt4/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/lVPB31PCRt4/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/lVPB31PCRt4/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Chris 420 Blaze It",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-19T21:18:44Z"
-          }
-        }
-      ],
-      "cached_at": "2026-04-20T10:06:56.864964+00:00"
-    },
-    "72a95e7f9b16ab25488c762a20b0bebb": {
-      "query": "hempcrete",
-      "results": [
-        {
-          "kind": "youtube#searchResult",
-          "etag": "vPQLm4hSsZCkppdlt5D3CYZ4TjM",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "YIP939fGv4o"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T20:19:15Z",
-            "channelId": "UCQeYmaWiWGGYYLTIYvEy18g",
-            "title": "Hempcrete for India&#39;s Deadly Heat Waves",
-            "description": "Hempcrete, a biocomposite of hemp hurds and lime, is being investigated as a solution to India's deadly heatwaves, where ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/YIP939fGv4o/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/YIP939fGv4o/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/YIP939fGv4o/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "NITSE",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-20T20:19:15Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "Q1nQTXK41qD67cdMB7Fnod_Xh1E",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "botYT95Ymvo"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-20T17:50:52Z",
-            "channelId": "UC0qTXdga3PRm3_UbM8ROZLw",
-            "title": "New hempcrete jars temp test, reached 700+degree and no cracking. #hempcrete #barnowlcandles",
-            "description": "",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/botYT95Ymvo/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/botYT95Ymvo/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/botYT95Ymvo/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Barn Owl Candles",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-20T17:50:52Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "6U2LepShM7P8JyS0N0fFRpQM2Oo",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "iPvZmAyv3q4"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-18T13:04:24Z",
-            "channelId": "UCl6ypO1N0waY0eszwVLERXQ",
-            "title": "Hempcrete to Internal Surface WUFI Test",
-            "description": "This video was made with Clipchamp.",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/iPvZmAyv3q4/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/iPvZmAyv3q4/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/iPvZmAyv3q4/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Aaron Stewart",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-18T13:04:24Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "bVl71fD_KvxDMJJ4_lbYcJaqMDI",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "asqgQxmQxpk"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-18T11:58:29Z",
-            "channelId": "UCl6ypO1N0waY0eszwVLERXQ",
-            "title": "150 Hempcrete WUFI Test Results",
-            "description": "This video was made with Clipchamp.",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/asqgQxmQxpk/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/asqgQxmQxpk/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/asqgQxmQxpk/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Aaron Stewart",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-18T11:58:29Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "tLJTm6eCwkVmEHJ0jOmPriGusdc",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "BNoED4wkSt8"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T15:44:44Z",
-            "channelId": "UCtUOeJJKJssHWCSzNWJ9B5w",
-            "title": "Installing Hemp Wool in a Hempcrete Build",
-            "description": "Just a Hempcrete guy living in a Hempcrete World Installing Hempwool into the ceiling of this Hempcrete Home… #hempcrete ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/BNoED4wkSt8/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/BNoED4wkSt8/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/BNoED4wkSt8/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Next Genesis Design",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T15:44:44Z"
-          }
-        }
-      ],
-      "cached_at": "2026-04-20T20:55:26.345189+00:00"
-    },
-    "8e8872edcc561f0aea8692064d7f346a": {
-      "query": "конопляний бетон",
-      "results": [
-        {
-          "kind": "youtube#searchResult",
-          "etag": "Ef3-kZeokH5SL4EPU7a8dib7GrU",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "_9ufRKMdr04"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-17T08:37:09Z",
-            "channelId": "UCkMhbXpYZJO70bem7RxmKOQ",
-            "title": "How Hemp Blocks Are Made 🏭 | Eco-Friendly Bricks That Absorb CO2",
-            "description": "Hemp blocks, also known as hempcrete, are revolutionizing the construction industry. In this video, we explore how hemp stalks ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/_9ufRKMdr04/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/_9ufRKMdr04/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/_9ufRKMdr04/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Real Process Hub",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-17T08:37:09Z"
-          }
-        },
-        {
-          "kind": "youtube#searchResult",
-          "etag": "KId8KqjzJLf8jFSaEMYzlLxiIuY",
-          "id": {
-            "kind": "youtube#video",
-            "videoId": "IE4lxlrvHro"
-          },
-          "snippet": {
-            "publishedAt": "2026-04-15T04:47:30Z",
-            "channelId": "UCv3g3sLwid-Anr6ZMPOcp1A",
-            "title": "Packing walls with hemp-lime - Hempcrete house build",
-            "description": "We are getting faster at mixing up batches of hempcrete and packing it into the walls! Hemp-lime construction is so easy that even ...",
-            "thumbnails": {
-              "default": {
-                "url": "https://i.ytimg.com/vi/IE4lxlrvHro/default.jpg",
-                "width": 120,
-                "height": 90
-              },
-              "medium": {
-                "url": "https://i.ytimg.com/vi/IE4lxlrvHro/mqdefault.jpg",
-                "width": 320,
-                "height": 180
-              },
-              "high": {
-                "url": "https://i.ytimg.com/vi/IE4lxlrvHro/hqdefault.jpg",
-                "width": 480,
-                "height": 360
-              }
-            },
-            "channelTitle": "Eco Endeavour",
-            "liveBroadcastContent": "none",
-            "publishTime": "2026-04-15T04:47:30Z"
-          }
-        }
-      ],
-      "cached_at": "2026-04-20T20:55:27.700639+00:00"
-    },
     "643f782d9ca3cd4e7b4b40a1806a7762": {
       "query": "hemp textile",
       "results": [
@@ -7745,6 +7143,642 @@
         }
       ],
       "cached_at": "2026-04-26T09:08:27.402436+00:00"
+    },
+    "ac3841aa3cff049e5d52e0fc4325cce1": {
+      "query": "hempcrete",
+      "results": [
+        {
+          "kind": "youtube#searchResult",
+          "etag": "urJJBaXl_hivl5lPGAmftEvZnDg",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "snDqxjFRISE"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-26T14:01:17Z",
+            "channelId": "UCJeHwsW57gRLeWR-lw67bBw",
+            "title": "Hempcrete Firewall  Extreme Heat &amp; Fire Test Success!",
+            "description": "Remarkable fire resistance demonstrated by Hempcrete by Ray Kaderli with Hemp Build Network LLC at David Russels facility: ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/snDqxjFRISE/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/snDqxjFRISE/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/snDqxjFRISE/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Hemp Build School Mastermind",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-26T14:01:17Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "2beZsaZAogvF0Quhe4ymV7DE8So",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "VjRy7iSAcoo"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-25T02:22:20Z",
+            "channelId": "UCtUOeJJKJssHWCSzNWJ9B5w",
+            "title": "Hempcrete Home Exterior | Parkdale Build Progress",
+            "description": "A brief look at the exterior of a hempcrete home currently under construction in Parkdale, Oregon. Base coat plaster is complete, ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/VjRy7iSAcoo/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/VjRy7iSAcoo/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/VjRy7iSAcoo/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Next Genesis Design",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-25T02:22:20Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "POzVRfGQwKYQYBDx_CiMb7KpRSg",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "C9ROEsAIGqc"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-24T14:00:18Z",
+            "channelId": "UCJeHwsW57gRLeWR-lw67bBw",
+            "title": "Hempcrete  Farm to Building Envelope Revolution",
+            "description": "Annie Ball with Hempitecture is grateful to be exploring the potential of bio-based materials in the building envelope, particularly ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/C9ROEsAIGqc/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/C9ROEsAIGqc/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/C9ROEsAIGqc/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Hemp Build School Mastermind",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-24T14:00:18Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "Jox621Bl94VDV1CWJd1PaK3__zA",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "dW8qR_h4sKQ"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-24T07:02:32Z",
+            "channelId": "UCsuH95urBBVg6imZMFF0elw",
+            "title": "Hempcrete Hurd — Bazaar Fusion · Act II",
+            "description": "Video Effect: Fibre composite — five-octave fBM with 30-cell Voronoi distance field. Warm gradient (hue 0.10–0.16). Bloom + ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/dW8qR_h4sKQ/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/dW8qR_h4sKQ/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/dW8qR_h4sKQ/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "EndGameMeditation",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-24T07:02:32Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "ZYSNOh8Rq_URMB8cPw9VqBXoVFY",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "omw3Svqais4"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-24T00:34:21Z",
+            "channelId": "UCJz_fg6ckzEhdvEajUv2SjA",
+            "title": "AB #Glue Dispenser #Aluminum Integrated Plate #Panel Manufacturing #Automation Hempcrete #Block",
+            "description": "",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/omw3Svqais4/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/omw3Svqais4/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/omw3Svqais4/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Gloria Wang",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-24T00:34:21Z"
+          }
+        }
+      ],
+      "cached_at": "2026-04-26T20:54:23.676304+00:00"
+    },
+    "ef9ef73d86143a8428b57ac0437bc85e": {
+      "query": "конопляний бетон",
+      "results": [
+        {
+          "kind": "youtube#searchResult",
+          "etag": "NuAL1z7ij-4_QV3ZHKnx0SqEtbY",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "CRmq72VnGEs"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-23T18:05:16Z",
+            "channelId": "UC_Cd3FJuxGKoiMqbtzYN-wA",
+            "title": "Why I stopped using Hempcrete #hempcrete #dustcrete #diyhouse #homesteading #offgridlife",
+            "description": "Why I stopped using Hempcrete #hempcrete #dustcrete #diyhouse #homesteading #offgridlife Why did Bob switch from ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/CRmq72VnGEs/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/CRmq72VnGEs/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/CRmq72VnGEs/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Stefano Creatini",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-23T18:05:16Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "0oZHlhcvcjupc6ihmSbgFhpijIE",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "xtuufRF4P08"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-23T14:01:36Z",
+            "channelId": "UCJeHwsW57gRLeWR-lw67bBw",
+            "title": "Hempcrete&#39;s Secret  Mold Proof, Breathable Walls Explained!",
+            "description": "Building with lime-based materials offers significant health and longevity benefits. Tim Callahan addresses this point and the ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/xtuufRF4P08/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/xtuufRF4P08/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/xtuufRF4P08/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Hemp Build School Mastermind",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-23T14:01:36Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "tMRZxp-oG5PNRwBysYb-3ZzO1-I",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "VliKvpwucTA"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-22T03:25:55Z",
+            "channelId": "UCv3g3sLwid-Anr6ZMPOcp1A",
+            "title": "The Future of Gardening and Building Might Be This Plant!",
+            "description": "In this video, I share how hemp shiv (hemp hurd), a carbon negative plant material that I'm building a hempcrete home with, ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/VliKvpwucTA/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/VliKvpwucTA/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/VliKvpwucTA/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Eco Endeavour",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-22T03:25:55Z"
+          }
+        }
+      ],
+      "cached_at": "2026-04-26T20:54:24.903698+00:00"
+    },
+    "0503e57d814ac2f6f1c18e67a64a618d": {
+      "query": "hemp textile",
+      "results": [
+        {
+          "kind": "youtube#searchResult",
+          "etag": "DUn1LgiBxrB-erSNv5CtukvLRXE",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "y25IsOuZqBs"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-25T19:36:48Z",
+            "channelId": "UC1o57gH_qjVVG-G9RZwds2Q",
+            "title": "Making cord from plumber&#39;s hemp ",
+            "description": "Lately, I have spent a lot of time making cordage from hemp & flax • & I have discovered that I really love it • It is a very meditative ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/y25IsOuZqBs/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/y25IsOuZqBs/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/y25IsOuZqBs/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "TeresaLaLana",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-25T19:36:48Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "t4bDelzlk4uu2RSvQRSUkzJ_6Ss",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "UVrcFTGbNr4"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-25T12:58:47Z",
+            "channelId": "UCU9f46EPN6B0QWmrdPOKjQw",
+            "title": "Episode 2 - What is Cannabis Hemp? Its use for Textiles, Cordage and Food",
+            "description": "This episode will take a look at Cannabis Hemp (the uses beyond a medicine or drug) this will include some of the oldest uses of ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/UVrcFTGbNr4/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/UVrcFTGbNr4/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/UVrcFTGbNr4/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "HemPanacea",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-25T12:58:47Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "O3mlFW6mctUbivtuJ7DDCngjLBM",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "sXzLNRuDX5I"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-25T01:50:39Z",
+            "channelId": "UCekC0o-EL9TY98NXZpoaWaw",
+            "title": "รหัส JA7 ครามใยกัญชง💙 #ร้านญาณิศาผ้าไทย",
+            "description": "ผ้าไทย #ผ้าทอมือ #ผ้าฝ้ายทอมือ #ฝ้าย #อุดรธานี #แฟชั่น #ฟีด.",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/sXzLNRuDX5I/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/sXzLNRuDX5I/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/sXzLNRuDX5I/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "ญาณิศาผ้าไทย",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-25T01:50:39Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "_Eg_THofQ22YwubzG8ffQpBG0ps",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "hepGM0vCTYU"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-24T17:06:11Z",
+            "channelId": "UCDJmW_KIOGGiyIDVwxxJ6PA",
+            "title": "Arkeolojik seriye devam ediyoruz😍❤️ #tığişi",
+            "description": "Bu video tamamen arkeolojik ve tekstil tarihi üzerine bilgilendirme amaçlıdır. Bunu daha önce duymuş muydunuz? Kenevir ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/hepGM0vCTYU/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/hepGM0vCTYU/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/hepGM0vCTYU/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Simal Ertek",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-24T17:06:11Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "OS--VxmVAUhv3fwdyp3N5AtbdWc",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "LRzX_5TV_9c"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-24T03:55:29Z",
+            "channelId": "UC1nSuHmZPtX6HaCSduRp3gw",
+            "title": "Hemp vs Cotton in Indian Summer | Which Fabric Actually Keeps You Cool?",
+            "description": "Indian summers aren't just about heat — they're about what you choose to wear. Most people reach for cotton because it feels soft ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/LRzX_5TV_9c/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/LRzX_5TV_9c/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/LRzX_5TV_9c/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Ecentric",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-24T03:55:29Z"
+          }
+        }
+      ],
+      "cached_at": "2026-04-26T20:54:26.121557+00:00"
+    },
+    "9bdc66b727dfc6c42e08e7a3051de8a8": {
+      "query": "industrial hemp",
+      "results": [
+        {
+          "kind": "youtube#searchResult",
+          "etag": "5O9hL74GoDqQwnz10L3jGkCIVj4",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "4aQb5nLwH-4"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-26T20:53:30Z",
+            "channelId": "UCMIsOdwCmTbgCDkzdqec6rQ",
+            "title": "Why is Gas Station or Hemp CBD never going to work?",
+            "description": "Not all CBD is created equal—and understanding the source matters. In this video, we break down the key differences between ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/4aQb5nLwH-4/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/4aQb5nLwH-4/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/4aQb5nLwH-4/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "King Harvest Official",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-26T20:53:30Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "Jfp4o9rvohfM0UEZdQq5Qh7BZIg",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "cboo67sbDE4"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-26T05:00:37Z",
+            "channelId": "UCxm4UwriiF_GYrWXmhe7J_g",
+            "title": "Kehoe signs hemp regulation bill reshaping Missouri cannabis market, sparking industry backlash",
+            "description": "Read more: https://abc17news.com.",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/cboo67sbDE4/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/cboo67sbDE4/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/cboo67sbDE4/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "KMIZ ABC 17 News",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-26T05:00:37Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "BU1bCrohlaI2wPQ0qioI1_fwT9k",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "Zm-O16AXahE"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-26T03:36:47Z",
+            "channelId": "UCDQtPB59d01G6NaPRcVq9og",
+            "title": "Harder Than Oak? Testing the &quot;Illegal&quot; Wood Alternative",
+            "description": "Hemp is back, and it's tougher than ever. For centuries, hemp was a staple of American industry—used by everyone from George ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/Zm-O16AXahE/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/Zm-O16AXahE/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/Zm-O16AXahE/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Dukta Feelgood",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-26T03:36:47Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "6Py45ibV-HyfdXLjB5C0L-kMAAc",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "lgQr5I8MjYk"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-26T03:20:45Z",
+            "channelId": "UC4F1-I8xec6u7ot6RUwijiA",
+            "title": "Hemp Rights",
+            "description": "Casper Leitch discusses the many different changing laws around hemp that are being put forward in different states across ...",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/lgQr5I8MjYk/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/lgQr5I8MjYk/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/lgQr5I8MjYk/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Time 4 Hemp",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-26T03:20:45Z"
+          }
+        },
+        {
+          "kind": "youtube#searchResult",
+          "etag": "BtyoDriuaTMeelgO4fU2gYs6AZM",
+          "id": {
+            "kind": "youtube#video",
+            "videoId": "2VQejGHsAk4"
+          },
+          "snippet": {
+            "publishedAt": "2026-04-25T23:40:47Z",
+            "channelId": "UCphG5vsdlL4s2kBRezekmgw",
+            "title": "Ganesh Hemp company shop Kathmandu Nepal. #ganeshhemp #drganesh #ganeshaidi  #hempshop",
+            "description": "",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/2VQejGHsAk4/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/2VQejGHsAk4/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/2VQejGHsAk4/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              }
+            },
+            "channelTitle": "Ganesh Hemp",
+            "liveBroadcastContent": "none",
+            "publishTime": "2026-04-25T23:40:47Z"
+          }
+        }
+      ],
+      "cached_at": "2026-04-26T20:54:27.585986+00:00"
     }
   }
 }
