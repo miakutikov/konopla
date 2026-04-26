@@ -1348,6 +1348,45 @@
       "created_at": "2026-04-25T05:14:23.853Z",
       "updated_at": "2026-04-25T05:16:51.770Z",
       "published_at": "2026-04-25T05:16:51.770Z"
+    },
+    {
+      "id": "44ff9b0b1446",
+      "filename": "20260425-204610-avtomobil-shcho-mih-poklasty-kray-naftoviy-eri-konoplyanyy-sekret-henri-forda.md",
+      "title": "Автомобіль, що міг покласти край нафтовій ері: конопляний секрет Генрі Форда",
+      "summary": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/rrMMj9ZXqz0/hqdefault.jpg",
+      "candidate_id": "44ff9b0b1446",
+      "original_title": "Автомобіль, що міг покласти край нафтовій ері: конопляний секрет Генрі Форда",
+      "original_url": "https://www.youtube.com/watch?v=rrMMj9ZXqz0",
+      "source_name": "YouTube",
+      "content_preview": "На YouTube-каналі IronRoot Survival вийшло відео, що розкриває маловідомі факти про Генрі Форда та його інноваційний підхід до використання промислових конопель в автомобілебудуванні.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "rrMMj9ZXqz0",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-26T04:31:16.459Z",
+      "updated_at": "2026-04-26T04:31:16.459Z",
+      "published_at": null
     }
   ]
 }
