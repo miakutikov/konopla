@@ -1,24 +1,25 @@
 {
   "items": [
     {
-      "id": "24cadda1e3b7",
-      "type": "article",
-      "title": "Захисника збірної України Коноплю хоче підписати топклуб італійської Серії А — ЗМІ - UKR.NET",
-      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9GOXZqTTc3emN5YnFNTnVmRXZrdzVEaDRqdjhFMHhQOTBCY0MzdGtEazlVNzh1UGp4MFRrNF9lQlNmdU90V0g4MmZQeHprVHhPRlZ1RWVvNFVDMXdkblo4bFBxYw?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "Захисника збірної України Коноплю хоче підписати топклуб італійської Серії А — ЗМІ &nbsp;&nbsp; UKR.NET",
-      "image_url": "",
-      "date": "2026-04-23T19:41:58+00:00",
-      "hash": "b6338f4faa150945ab2c588cf996533c",
-      "content_preview": "Захисника збірної України Коноплю хоче підписати топклуб італійської Серії А — ЗМІ &nbsp;&nbsp; UKR.NET",
-      "added_at": "2026-04-26T09:08:03.207913+00:00",
-      "relevance_score": 0.5,
+      "id": "958d5c4885a3",
+      "type": "video",
+      "title": "Відеоогляд: магазин Ganesh Hemp у Катманду, Непал",
+      "link": "https://www.youtube.com/watch?v=2VQejGHsAk4",
+      "source": "YouTube: Ganesh Hemp",
+      "summary": "Перегляньте відеоогляд магазину Ganesh Hemp у Катманду, Непал, що демонструє продукцію з промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/2VQejGHsAk4/hqdefault.jpg",
+      "date": "2026-04-25T23:40:47Z",
+      "hash": "yt_2VQejGHsAk4",
+      "content_preview": "Перегляньте відеоогляд магазину Ganesh Hemp у Катманду, Непал, що демонструє продукцію з промислових конопель.",
+      "added_at": "2026-04-26T09:08:44.933864+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "2VQejGHsAk4",
+      "draft_filename": "20260426-090844-videoohlyad-mahazyn-ganesh-hemp-u-katmandu-nepal.md"
     },
     {
       "id": "74e5b0ca3327",
@@ -226,5 +227,5 @@
       "draft_filename": "20260425-090006-zovnishniy-vyhlyad-budynku-z-khempkrytu-prohres-budivnytstva-v-parkdeyli.md"
     }
   ],
-  "updated_at": "2026-04-25T20:49:15.394166+00:00"
+  "updated_at": "2026-04-26T09:08:49.937161+00:00"
 }
