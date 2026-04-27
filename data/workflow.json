@@ -1464,6 +1464,45 @@
       "created_at": "2026-04-27T23:47:08.020Z",
       "updated_at": "2026-04-27T23:47:08.020Z",
       "published_at": null
+    },
+    {
+      "id": "74e5b0ca3327",
+      "filename": "",
+      "title": "Український переробник конопель розширює асортимент продукції - AgroPortal.ua",
+      "summary": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
+      "category": "інше",
+      "image": "",
+      "candidate_id": "74e5b0ca3327",
+      "original_title": "Український переробник конопель розширює асортимент продукції - AgroPortal.ua",
+      "original_url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbk9rMXJ6cmUyaUhfTENoc0djUU94Nm15OU8xNUlOWEVIOG1RcVYtSGtZSS1tdnpWZ09wVHpnb3JsUDN3emNwX2VTNFBjSDlXaklnWkFORXBZdzRUVThmNl96VHpheXU0SzVVdkRBbHI4ekVwenl5ZnNGZDNyaklVMWVjRmR4NVBUQ2hGWHluQVlQVUd6ZXhmekVCVXVqV25jbThnR2MzU3o0MnZuSlhxT2VtYlIzUkk?oc=5",
+      "source_name": "\"промислові коноплі Україна\" - Google Новини",
+      "content_preview": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.5,
+      "created_at": "2026-04-27T23:47:28.149Z",
+      "updated_at": "2026-04-27T23:47:28.149Z",
+      "published_at": null
     }
   ]
 }
