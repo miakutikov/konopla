@@ -1503,6 +1503,45 @@
       "created_at": "2026-04-27T23:47:28.149Z",
       "updated_at": "2026-04-27T23:47:28.149Z",
       "published_at": null
+    },
+    {
+      "id": "49079ec0d964",
+      "filename": "",
+      "title": "Fiber projects should be ‘designed from the start around multi-stream valorization’",
+      "summary": "Alex Teodorescu leads the commercial development of natural fiber processing systems at Cretes (CREative&#160;TEchnical&#160;Solutions). Drawing on more than 15 years of experience in machine building, he brings together expertise in [&#8230;]",
+      "category": "бізнес",
+      "image": "",
+      "candidate_id": "49079ec0d964",
+      "original_title": "Fiber projects should be ‘designed from the start around multi-stream valorization’",
+      "original_url": "https://hemptoday.net/fiber-projects-should-be-designed-from-the-start-around-multi-stream-valorization/",
+      "source_name": "HempToday®",
+      "content_preview": "Alex Teodorescu leads the commercial development of natural fiber processing systems at Cretes (CREative TEchnical Solutions). Drawing on more than 15 years of experience in machine building, he brings together expertise in industrial engineering and bast fiber processing. Since joining the Belgium-",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.4,
+      "created_at": "2026-04-27T23:47:44.737Z",
+      "updated_at": "2026-04-27T23:47:44.737Z",
+      "published_at": null
     }
   ]
 }
