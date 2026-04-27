@@ -1386,6 +1386,45 @@
       "created_at": "2026-04-26T04:31:16.459Z",
       "updated_at": "2026-04-26T04:32:03.923Z",
       "published_at": "2026-04-26T04:32:03.923Z"
+    },
+    {
+      "id": "8c0da6642189",
+      "filename": "20260426-205508-vyhotovlennya-motuzky-iz-santekhnichnykh-konopel-videoohlyad.md",
+      "title": "Виготовлення мотузки із сантехнічних конопель: відеоогляд",
+      "summary": "Відкрийте для себе давнє мистецтво виготовлення мотузок із конопляного волокна у новому відео від TeresaLaLana, що розкриває медитативні та історичні аспекти цього ремесла.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/y25IsOuZqBs/hqdefault.jpg",
+      "candidate_id": "8c0da6642189",
+      "original_title": "Виготовлення мотузки із сантехнічних конопель: відеоогляд",
+      "original_url": "https://www.youtube.com/watch?v=y25IsOuZqBs",
+      "source_name": "YouTube",
+      "content_preview": "Відкрийте для себе давнє мистецтво виготовлення мотузок із конопляного волокна у новому відео від TeresaLaLana, що розкриває медитативні та історичні аспекти цього ремесла.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "y25IsOuZqBs",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-04-27T23:46:13.521Z",
+      "updated_at": "2026-04-27T23:46:13.521Z",
+      "published_at": null
     }
   ]
 }
