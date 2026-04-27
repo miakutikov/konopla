@@ -1437,8 +1437,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiggNBVV95cUxQcHZwd04yUmI4ekJ5cmN3ZW5INXFpTTl3NXlJcWNGUHU0Q1VfenF5QUMxZ1FTeDF5VjBpcXNTVE1JT3BNZ3FvLURPMmI4S3VkbEVCRW9NS3F1eF9ZLVowbHJrTHN4RlJsTDYyVjdGbW13SGg3clF2Y3lPMUMxTDEwLWtBeDR5c24xZ1QzRjU2aVJYT0tISUluZ3lRSjNyZkhvXzRXMFBIMFQzQzJyd2FVVDdVRDc4VG5nUS1ZdXpSWWJZNi1uclFNNlhOWW9kZ1FuRmFxcWkzdFpBZk9JaDRKbEdjUG5vemVuaDJaQjYyWW8xd0pLcV8xUEFsWDZzZEYzY1p5LWJ5ZFNhQ1YwanprV3dsSHRzaWdvS3A1QUJSTnAtXzRtd2VUaWNGWGJSUlVnMUM1bEZya3ExTC1kRnZVQXE4Yko1WHBMd09FSWNYRnIwRFRaR3lEel9leWFqUjJiSVM2QkROdE8wMHV2ak9tZnp2NU5nY2tGbkp3QjJ6cDU4dw?oc=5",
       "source_name": "\"chanvre industriel france\" - Google Actualités",
       "content_preview": "Le chanvre, de culture oubliée à filière d’avenir : comment une poignée d’agriculteurs français a sauvé in extremis une filière aujourd’hui redevenue un pilier agricole et industriel en Europe &nbsp;&nbsp; L'Usine Nouvelle",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "queued",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1461,7 +1461,7 @@
       },
       "relevance_score": 0.6,
       "created_at": "2026-04-27T23:47:08.020Z",
-      "updated_at": "2026-04-27T23:48:40.136Z",
+      "updated_at": "2026-04-27T23:53:31.800Z",
       "published_at": null
     },
     {
@@ -1476,8 +1476,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbk9rMXJ6cmUyaUhfTENoc0djUU94Nm15OU8xNUlOWEVIOG1RcVYtSGtZSS1tdnpWZ09wVHpnb3JsUDN3emNwX2VTNFBjSDlXaklnWkFORXBZdzRUVThmNl96VHpheXU0SzVVdkRBbHI4ekVwenl5ZnNGZDNyaklVMWVjRmR4NVBUQ2hGWHluQVlQVUd6ZXhmekVCVXVqV25jbThnR2MzU3o0MnZuSlhxT2VtYlIzUkk?oc=5",
       "source_name": "\"промислові коноплі Україна\" - Google Новини",
       "content_preview": "Український переробник конопель розширює асортимент продукції &nbsp;&nbsp; AgroPortal.ua",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "queued",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1500,7 +1500,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-27T23:47:28.149Z",
-      "updated_at": "2026-04-27T23:48:40.136Z",
+      "updated_at": "2026-04-27T23:53:25.332Z",
       "published_at": null
     },
     {
