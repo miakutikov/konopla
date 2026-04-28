@@ -1542,19 +1542,19 @@
       "published_at": null
     },
     {
-      "id": "a6u9qygt",
-      "filename": "",
-      "title": "hemptoday.net — https://hemptoday.net/fiber-projects-should-be-designed-from",
-      "summary": "",
-      "category": "",
-      "image": "",
+      "id": "6a1a2fdc9c73",
+      "filename": "20260428-001330-intervyu-aleks-teodoresku-pro-pererobku-konoplyanoho-volokna.md",
+      "title": "ІНТЕРВ'Ю: Алекс Теодореску про переробку конопляного волокна",
+      "summary": "Експерт з переробки натуральних волокон Алекс Теодореску обговорює технології переробки коноплі, виклики досягнення текстільної якості та важливість багатопотокової реалізації продукції.",
+      "category": "агро",
+      "image": "https://hemptoday.net/wp-content/uploads/2026/04/Cretes-Alexandru-Teodorescu-1000.jpg",
       "candidate_id": "a6u9qygt",
       "original_title": "",
       "original_url": "https://hemptoday.net/fiber-projects-should-be-designed-from-the-start-around-multi-stream-valorization/",
       "source_name": "hemptoday.net",
       "content_preview": "",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "channels": {
         "website": {
           "enabled": true,
@@ -1565,18 +1565,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Експерт про переробку конопляного волокна: текстильна якість, промисловий масштаб та важливість багатопотокової реалізації продукції"
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Чому успішні проекти з конопляного волокна балансують між текстилем та іншими ринками, а не покладаються лише на один?"
         }
       },
       "relevance_score": 1,
       "created_at": "2026-04-28T00:03:22.900Z",
-      "updated_at": "2026-04-28T00:03:39.808Z",
+      "updated_at": "2026-04-28T00:13:31.048076+00:00",
       "published_at": null
     }
   ]
