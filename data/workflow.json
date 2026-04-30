@@ -1617,6 +1617,45 @@
       "created_at": "2026-04-30T16:02:19.970Z",
       "updated_at": "2026-04-30T16:02:19.970Z",
       "published_at": null
+    },
+    {
+      "id": "c23f4a14879f",
+      "filename": "",
+      "title": "Moldova Expands Industrial Hemp Uses, Boosting Sector Value",
+      "summary": "Moldova's government has approved new regulations for industrial hemp, expanding its use to include biomass, food supplements, and cosmetics. This move ai… The post Moldova Expands Industrial Hemp Uses, Boosting Sector Value appeared first on Hemp Gazette .",
+      "category": "агро",
+      "image": "",
+      "candidate_id": "c23f4a14879f",
+      "original_title": "Moldova Expands Industrial Hemp Uses, Boosting Sector Value",
+      "original_url": "https://hempgazette.com/news/moldova-expands-industrial-hemp-uses-sector-value/",
+      "source_name": "Hemp Gazette",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.8,
+      "created_at": "2026-04-30T16:03:03.580Z",
+      "updated_at": "2026-04-30T16:03:03.580Z",
+      "published_at": null
     }
   ]
 }
