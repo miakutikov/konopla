@@ -1619,19 +1619,19 @@
       "published_at": null
     },
     {
-      "id": "c23f4a14879f",
-      "filename": "",
-      "title": "Moldova Expands Industrial Hemp Uses, Boosting Sector Value",
-      "summary": "Moldova's government has approved new regulations for industrial hemp, expanding its use to include biomass, food supplements, and cosmetics. This move ai… The post Moldova Expands Industrial Hemp Uses, Boosting Sector Value appeared first on Hemp Gazette .",
-      "category": "агро",
-      "image": "",
+      "id": "7ea5ee2c58c1",
+      "filename": "20260430-160801-moldova-rozshyryuye-vykorystannya-promyslovoyi-konopli.md",
+      "title": "Молдова розширює використання промислової коноплі",
+      "summary": "Уряд Молдови схвалив нові правила, що значно розширюють використання промислової коноплі, включаючи біомасу, харчові добавки та косметику, що має збільшити вартість сектора на 40%.",
+      "category": "законодавство",
+      "image": "https://hempgazette.com/wp-content/uploads/2026/04/moldova-expands-industrial-hemp-uses-sector-value.png",
       "candidate_id": "c23f4a14879f",
       "original_title": "Moldova Expands Industrial Hemp Uses, Boosting Sector Value",
       "original_url": "https://hempgazette.com/news/moldova-expands-industrial-hemp-uses-sector-value/",
       "source_name": "Hemp Gazette",
       "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
       "stage": "editorial",
-      "status": "processing",
+      "status": "ready_for_edit",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1643,18 +1643,18 @@
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Молдова розширила використання промислової коноплі, дозволивши біомасу, харчові добавки та косметику. Це збільшить вартість сектора на 40%."
         },
         "threads": {
           "enabled": true,
           "status": "pending",
           "scheduled_at": null,
-          "custom_text": ""
+          "custom_text": "Нові правила в Молдові дозволили використовувати промислову коноплю для біомаси, харчових добавок та косметики. Це має збільшити вартість сектора на 40%."
         }
       },
       "relevance_score": 0.8,
       "created_at": "2026-04-30T16:03:03.580Z",
-      "updated_at": "2026-04-30T16:03:58.501Z",
+      "updated_at": "2026-04-30T16:08:01.225523+00:00",
       "published_at": null
     },
     {
@@ -1708,8 +1708,8 @@
       "original_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE4zTHFsNWZZQV9CQW5ERy1DQmFOZDRzUlBCRms0U0ZIOUlMUWZtZ2JUUk9MS29icjg3U0hQY2IyN0NjZ2xrMzhWVjN3VEo3RVdJUjcwVnNldjFkRkozZlc3VXVITnJESmRv?oc=5",
       "source_name": "\"технічні коноплі\" - Google Новини",
       "content_preview": "Житомирщина нарощує площі технічних конопель до 2,5 тис. га &nbsp;&nbsp; UKR.NET",
-      "stage": "editorial",
-      "status": "processing",
+      "stage": "feed",
+      "status": "scrape_failed",
       "youtube_id": null,
       "channels": {
         "website": {
@@ -1732,7 +1732,7 @@
       },
       "relevance_score": 0.5,
       "created_at": "2026-04-30T16:03:27.248Z",
-      "updated_at": "2026-04-30T16:03:58.501Z",
+      "updated_at": "2026-04-30T16:12:59.359521+00:00",
       "published_at": null
     }
   ]
