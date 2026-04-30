@@ -1,46 +1,110 @@
 {
   "items": [
     {
-      "id": "e31195dfe9df",
-      "type": "video",
-      "title": "Як знищили коноплі, щоб продати пластик: огляд відео",
-      "link": "https://www.youtube.com/watch?v=nliQnApcqDg",
-      "source": "YouTube: UndrDogHemp",
-      "summary": "Представляємо відео від каналу UndrDogHemp, яке розкриває історичну змову 1937 року, що призвела до заборони промислових конопель заради просування синтетичних матеріалів.",
-      "image_url": "https://i.ytimg.com/vi/nliQnApcqDg/hqdefault.jpg",
-      "date": "2026-04-28T16:22:10Z",
-      "hash": "yt_nliQnApcqDg",
-      "content_preview": "Представляємо відео від каналу UndrDogHemp, яке розкриває історичну змову 1937 року, що призвела до заборони промислових конопель заради просування синтетичних матеріалів.",
-      "added_at": "2026-04-29T21:15:31.023878+00:00",
-      "relevance_score": 0.9,
+      "id": "5bd4a347fd1f",
+      "type": "article",
+      "title": "Draft bill in U.S. would wipe out intoxicants, rescue CBD, but what about ‘true hemp’?",
+      "link": "https://hemptoday.net/draft-bill-in-u-s-would-wipe-out-intoxicants-rescue-cbd-but-what-about-true-hemp/",
+      "source": "HempToday®",
+      "summary": "The original draft of Kentucky Rep. Andy Barr’s Lawful Hemp Protection Act (LHPA) amending the 2018 Farm Bill, which surfaced earlier this month, offers at least a little hope that [&#8230;]",
+      "image_url": "",
+      "date": "2026-04-29T21:05:56+00:00",
+      "hash": "577b9cec6d8bae94434653f5ac287360",
+      "content_preview": "The original draft of Kentucky Rep. Andy Barr’s Lawful Hemp Protection Act (LHPA) amending the 2018 Farm Bill, which surfaced earlier this month, offers at least a little hope that hemp can move on down the line. As with several recent hemp bills , the LHPA is mostly focused on the cannabis industry",
+      "added_at": "2026-04-30T05:38:41.013657+00:00",
+      "relevance_score": 0.6,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title",
+        "substantive content"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "nliQnApcqDg",
-      "draft_filename": "20260429-211531-yak-znyshchyly-konopli-shchob-prodaty-plastyk-ohlyad-video.md"
+      "source_trusted": false,
+      "category_hint": "законодавство"
     },
     {
-      "id": "4cee6105010d",
+      "id": "202e0b1fdfb4",
+      "type": "article",
+      "title": "Industrial Hemp Policy: US Bill Targets Intoxicants, Overlo…",
+      "link": "https://hempgazette.com/news/industrial-hemp-policy-us-bill-intoxicants/",
+      "source": "Hemp Gazette",
+      "summary": "US industrial hemp policy faces changes with the Lawful Hemp Protection Act. It targets synthetic intoxicants and clarifies CBD, but critics say it overlo… The post Industrial Hemp Policy: US Bill Targets Intoxicants, Overlo… appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-04-30T02:39:32+00:00",
+      "hash": "f7f5eead9b0a075200759449b3394b9e",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
+      "added_at": "2026-04-30T05:38:41.013067+00:00",
+      "relevance_score": 0.8,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "hemp keyword in title",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "законодавство"
+    },
+    {
+      "id": "c23f4a14879f",
+      "type": "article",
+      "title": "Moldova Expands Industrial Hemp Uses, Boosting Sector Value",
+      "link": "https://hempgazette.com/news/moldova-expands-industrial-hemp-uses-sector-value/",
+      "source": "Hemp Gazette",
+      "summary": "Moldova's government has approved new regulations for industrial hemp, expanding its use to include biomass, food supplements, and cosmetics. This move ai… The post Moldova Expands Industrial Hemp Uses, Boosting Sector Value appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-04-30T03:04:08+00:00",
+      "hash": "36cdbb3fe1585accb0e22972e626c648",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
+      "added_at": "2026-04-30T05:38:41.012496+00:00",
+      "relevance_score": 0.8,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "hemp keyword in title",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "агро"
+    },
+    {
+      "id": "1f7553b3af8a",
+      "type": "article",
+      "title": "Смілянин викрав човен, а коли до нього прийшли з обшуком, то знайшли ще й коноплі - 18000.com.ua",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNNXpSREMwWU5kZmFaMEFLMkNUTW9qd2pnVzdvWFJNcWpvTE5ZMzdtYnJveGZpSEU3aDBXZ3NzSS1wcmx1YW5RbWt0T2pjN1dWZi1yRjNnZFluWVR5djg3RlJZMUlmd3h3NXp4Z0NvVGgteGtXRW1PTVU0UWg1R0lOZUFUSHgwOGE5eWJTdllNZGdSYUlWbnhTcWdMMDEwQVZCbmUxczB3SDlLVEpQSjlyMW1DVWdnMGptTm0yUHJGbw?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Смілянин викрав човен, а коли до нього прийшли з обшуком, то знайшли ще й коноплі &nbsp;&nbsp; 18000.com.ua",
+      "image_url": "",
+      "date": "2026-04-30T04:49:03+00:00",
+      "hash": "9a17d7f11c19d22b4f79fa7feba291ae",
+      "content_preview": "Смілянин викрав човен, а коли до нього прийшли з обшуком, то знайшли ще й коноплі &nbsp;&nbsp; 18000.com.ua",
+      "added_at": "2026-04-30T05:38:41.012137+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "1f92a8e3ee2b",
       "type": "video",
-      "title": "Запущено новий YouTube канал G-HeMp про промислові коноплі",
-      "link": "https://www.youtube.com/watch?v=3hdpN1nTr1E",
-      "source": "YouTube: G-HeMp",
-      "summary": "На платформі YouTube з'явився новий канал, присвячений промисловим коноплям, з першим відео 'G-HeMp is live'",
-      "image_url": "https://i.ytimg.com/vi/3hdpN1nTr1E/hqdefault.jpg",
-      "date": "2026-04-29T18:34:28Z",
-      "hash": "yt_3hdpN1nTr1E",
-      "content_preview": "На платформі YouTube з'явився новий канал, присвячений промисловим коноплям, з першим відео 'G-HeMp is live'",
-      "added_at": "2026-04-29T21:17:09.531905+00:00",
+      "title": "Коноплі: Створені для довговічності",
+      "link": "https://www.youtube.com/watch?v=SLsfGQP5wZ8",
+      "source": "YouTube: Margaret River Hemp Co",
+      "summary": "Нове відео від Margaret River Hemp Co демонструє неперевершену міцність та довговічність конопляного волокна в одязі, підкреслюючи його м'якість та здатність зберігати форму.",
+      "image_url": "https://i.ytimg.com/vi/SLsfGQP5wZ8/hqdefault.jpg",
+      "date": "2026-04-29T10:22:41Z",
+      "hash": "yt_SLsfGQP5wZ8",
+      "content_preview": "Нове відео від Margaret River Hemp Co демонструє неперевершену міцність та довговічність конопляного волокна в одязі, підкреслюючи його м'якість та здатність зберігати форму.",
+      "added_at": "2026-04-29T21:18:05.890094+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "3hdpN1nTr1E",
-      "draft_filename": "20260429-211709-zapushcheno-novyy-youtube-kanal-g-hemp-pro-promyslovi-konopli.md"
+      "youtube_id": "SLsfGQP5wZ8",
+      "draft_filename": "20260429-211805-konopli-stvoreni-dlya-dovhovichnosti.md"
     },
     {
       "id": "2aeb01b83b5b",
@@ -64,25 +128,46 @@
       "draft_filename": "20260429-211744-zbir-konopel-dlya-doslidzhennya-vymochuvannya.md"
     },
     {
-      "id": "1f92a8e3ee2b",
+      "id": "4cee6105010d",
       "type": "video",
-      "title": "Коноплі: Створені для довговічності",
-      "link": "https://www.youtube.com/watch?v=SLsfGQP5wZ8",
-      "source": "YouTube: Margaret River Hemp Co",
-      "summary": "Нове відео від Margaret River Hemp Co демонструє неперевершену міцність та довговічність конопляного волокна в одязі, підкреслюючи його м'якість та здатність зберігати форму.",
-      "image_url": "https://i.ytimg.com/vi/SLsfGQP5wZ8/hqdefault.jpg",
-      "date": "2026-04-29T10:22:41Z",
-      "hash": "yt_SLsfGQP5wZ8",
-      "content_preview": "Нове відео від Margaret River Hemp Co демонструє неперевершену міцність та довговічність конопляного волокна в одязі, підкреслюючи його м'якість та здатність зберігати форму.",
-      "added_at": "2026-04-29T21:18:05.890094+00:00",
+      "title": "Запущено новий YouTube канал G-HeMp про промислові коноплі",
+      "link": "https://www.youtube.com/watch?v=3hdpN1nTr1E",
+      "source": "YouTube: G-HeMp",
+      "summary": "На платформі YouTube з'явився новий канал, присвячений промисловим коноплям, з першим відео 'G-HeMp is live'",
+      "image_url": "https://i.ytimg.com/vi/3hdpN1nTr1E/hqdefault.jpg",
+      "date": "2026-04-29T18:34:28Z",
+      "hash": "yt_3hdpN1nTr1E",
+      "content_preview": "На платформі YouTube з'явився новий канал, присвячений промисловим коноплям, з першим відео 'G-HeMp is live'",
+      "added_at": "2026-04-29T21:17:09.531905+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "SLsfGQP5wZ8",
-      "draft_filename": "20260429-211805-konopli-stvoreni-dlya-dovhovichnosti.md"
+      "youtube_id": "3hdpN1nTr1E",
+      "draft_filename": "20260429-211709-zapushcheno-novyy-youtube-kanal-g-hemp-pro-promyslovi-konopli.md"
+    },
+    {
+      "id": "e31195dfe9df",
+      "type": "video",
+      "title": "Як знищили коноплі, щоб продати пластик: огляд відео",
+      "link": "https://www.youtube.com/watch?v=nliQnApcqDg",
+      "source": "YouTube: UndrDogHemp",
+      "summary": "Представляємо відео від каналу UndrDogHemp, яке розкриває історичну змову 1937 року, що призвела до заборони промислових конопель заради просування синтетичних матеріалів.",
+      "image_url": "https://i.ytimg.com/vi/nliQnApcqDg/hqdefault.jpg",
+      "date": "2026-04-28T16:22:10Z",
+      "hash": "yt_nliQnApcqDg",
+      "content_preview": "Представляємо відео від каналу UndrDogHemp, яке розкриває історичну змову 1937 року, що призвела до заборони промислових конопель заради просування синтетичних матеріалів.",
+      "added_at": "2026-04-29T21:15:31.023878+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "nliQnApcqDg",
+      "draft_filename": "20260429-211531-yak-znyshchyly-konopli-shchob-prodaty-plastyk-ohlyad-video.md"
     },
     {
       "id": "3a9f95c92c01",
