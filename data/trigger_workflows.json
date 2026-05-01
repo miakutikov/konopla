@@ -1,7 +1,3 @@
 {
-  "workflows": [
-    "moderate.yml",
-    "telegram_post.yml",
-    "threads_post.yml"
-  ]
+  "workflows": []
 }
