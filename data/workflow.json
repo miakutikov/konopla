@@ -1614,6 +1614,45 @@
       "created_at": "2026-05-03T08:14:57.023Z",
       "updated_at": "2026-05-03T08:14:57.023Z",
       "published_at": null
+    },
+    {
+      "id": "78e4028203f4",
+      "filename": "",
+      "title": "Industrial Hemp in Germany: Cultivation & Licensing - Hanf Magazin",
+      "summary": "Industrial Hemp in Germany: Cultivation & Licensing &nbsp;&nbsp; Hanf Magazin",
+      "category": "агро",
+      "image": "",
+      "candidate_id": "78e4028203f4",
+      "original_title": "Industrial Hemp in Germany: Cultivation & Licensing - Hanf Magazin",
+      "original_url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZkxsb1lIX0F1X01jVTI4NU5vSVRWXzRBSkRkeUNJUnJsampXRzlsRjJqeXVHX0ttaDV1bVFQY3pJeFBZQ1JzYW5DM0p5V3ZqcGoxbGFucXhhUW9aamhyeXVqQmZPQXlINlVERWdGRVZLRHZJMWw4QUpLdi1RMXBZTHJaRnNXbnZhQlE5Ym1NX0NRSEk?oc=5",
+      "source_name": "\"industrial hemp EU regulation\" - Google News",
+      "content_preview": "Industrial Hemp in Germany: Cultivation & Licensing &nbsp;&nbsp; Hanf Magazin",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.6,
+      "created_at": "2026-05-03T08:15:07.066Z",
+      "updated_at": "2026-05-03T08:15:07.066Z",
+      "published_at": null
     }
   ]
 }
