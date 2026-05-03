@@ -1575,6 +1575,45 @@
       "created_at": "2026-04-30T16:03:03.580Z",
       "updated_at": "2026-04-30T20:17:19.146Z",
       "published_at": "2026-04-30T20:17:19.146Z"
+    },
+    {
+      "id": "aefff2dab59e",
+      "filename": "",
+      "title": "Найбільший конопляний завод України відновив сезон виробництва - Комерсант Український",
+      "summary": "Найбільший конопляний завод України відновив сезон виробництва &nbsp;&nbsp; Комерсант Український",
+      "category": "інше",
+      "image": "",
+      "candidate_id": "aefff2dab59e",
+      "original_title": "Найбільший конопляний завод України відновив сезон виробництва - Комерсант Український",
+      "original_url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOZjYyRUdiZUNTV2VmRk9TRDVPM25ucURjdHEza2c5VThwYTU3Y3JDa1RvQUhxYXF5SjVUbkR5bWtzcDdQVnpNZndnbXBWUHdEWlJIZGdvYkhZUVBGWVRLTkctM3MxZnAwQ0kzTHY4LXZBUHZxUXRzS1dfbHFLemtDWk5sNGVfbXZSbUFtZm50NlJZaVhqbHZXWA?oc=5",
+      "source_name": "\"промислові коноплі Україна\" - Google Новини",
+      "content_preview": "Найбільший конопляний завод України відновив сезон виробництва &nbsp;&nbsp; Комерсант Український",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.6,
+      "created_at": "2026-05-03T08:14:57.023Z",
+      "updated_at": "2026-05-03T08:14:57.023Z",
+      "published_at": null
     }
   ]
 }
