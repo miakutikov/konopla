@@ -1653,6 +1653,45 @@
       "created_at": "2026-05-03T08:15:07.066Z",
       "updated_at": "2026-05-03T08:15:07.066Z",
       "published_at": null
+    },
+    {
+      "id": "5befc95007de",
+      "filename": "",
+      "title": "Cannabinoid Clinical Trials Gain Momentum: 50+ Companies Le…",
+      "summary": "Discover the significant growth in cannabinoid clinical trials, with over 50 companies advancing new therapies for conditions like Alzheimer's and chronic… The post Cannabinoid Clinical Trials Gain Momentum: 50+ Companies Le… appeared first on Hemp Gazette .",
+      "category": "бізнес",
+      "image": "",
+      "candidate_id": "5befc95007de",
+      "original_title": "Cannabinoid Clinical Trials Gain Momentum: 50+ Companies Le…",
+      "original_url": "https://hempgazette.com/news/cannabinoid-clinical-trials-momentum-new-therapies/",
+      "source_name": "Hemp Gazette",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.6,
+      "created_at": "2026-05-03T08:15:18.728Z",
+      "updated_at": "2026-05-03T08:15:18.728Z",
+      "published_at": null
     }
   ]
 }
