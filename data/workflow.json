@@ -1692,6 +1692,45 @@
       "created_at": "2026-05-03T08:15:18.728Z",
       "updated_at": "2026-05-03T08:15:18.728Z",
       "published_at": null
+    },
+    {
+      "id": "e9a97cb5cb60",
+      "filename": "",
+      "title": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ - UKR.NET",
+      "summary": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ &nbsp;&nbsp; UKR.NET",
+      "category": "біопластик",
+      "image": "",
+      "candidate_id": "e9a97cb5cb60",
+      "original_title": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ - UKR.NET",
+      "original_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1xZTZVaXZyX0dtMnlHSWI2ZEFwV19IcGEzM0dSdFBfU1UzUHZDeG9YaGNIVFFfNzBaNVJYbGRaeU1relFhQVUtTE9TczZ6YnZRREZWeGp4TFZlNHc3Zzl0X3lQVG8wYlVRS0E?oc=5",
+      "source_name": "\"коноплі\" - Google Новини",
+      "content_preview": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ &nbsp;&nbsp; UKR.NET",
+      "stage": "feed",
+      "status": "queued",
+      "youtube_id": null,
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.5,
+      "created_at": "2026-05-03T08:15:28.524Z",
+      "updated_at": "2026-05-03T08:15:28.524Z",
+      "published_at": null
     }
   ]
 }
