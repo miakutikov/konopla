@@ -1,67 +1,86 @@
 {
   "items": [
     {
-      "id": "123a38f4f713",
-      "type": "video",
-      "title": "Конопляний бетон (хемпкрит): Забутий старий-новий будівельний матеріал знову в тренді",
-      "link": "https://www.youtube.com/watch?v=6VTXiDg32BQ",
-      "source": "YouTube: StayBlessedbon",
-      "summary": "Дізнайтеся про хемпкрит – стародавній біоматеріал, що повертається як вуглецево-негативна будівельна революція. Перегляньте 12-хвилинне відео від Nature Lost Vault.",
-      "image_url": "https://i.ytimg.com/vi/6VTXiDg32BQ/hqdefault.jpg",
-      "date": "2026-05-03T06:04:22Z",
-      "hash": "yt_6VTXiDg32BQ",
-      "content_preview": "Дізнайтеся про хемпкрит – стародавній біоматеріал, що повертається як вуглецево-негативна будівельна революція. Перегляньте 12-хвилинне відео від Nature Lost Vault.",
-      "added_at": "2026-05-03T09:28:31.230625+00:00",
-      "relevance_score": 0.9,
+      "id": "ab32d3916441",
+      "type": "article",
+      "title": "Industrial Hemp in Germany: Cultivation & Licensing - Hanf Magazin",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPZkxsb1lIX0F1X01jVTI4NU5vSVRWXzRBSkRkeUNJUnJsampXRzlsRjJqeXVHX0ttaDV1bVFQY3pJeFBZQ1JzYW5DM0p5V3ZqcGoxbGFucXhhUW9aamhyeXVqQmZPQXlINlVERWdGRVZLRHZJMWw4QUpLdi1RMXBZTHJaRnNXbnZhQlE5Ym1NX0NRSEk?oc=5",
+      "source": "\"industrial hemp EU regulation\" - Google News",
+      "summary": "Industrial Hemp in Germany: Cultivation & Licensing &nbsp;&nbsp; Hanf Magazin",
+      "image_url": "",
+      "date": "2026-04-29T07:00:00+00:00",
+      "hash": "f2c9058cef31bf3dd0cad26689eb6d78",
+      "content_preview": "Industrial Hemp in Germany: Cultivation & Licensing &nbsp;&nbsp; Hanf Magazin",
+      "added_at": "2026-05-03T14:57:35.212192+00:00",
+      "relevance_score": 0.6,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "6VTXiDg32BQ",
-      "draft_filename": "20260503-092831-konoplyanyy-beton-khempkryt-zabutyy-staryy-novyy-budivelnyy-material-znovu-v-tre.md"
+      "source_trusted": false,
+      "category_hint": "агро"
     },
     {
-      "id": "1add730624a2",
-      "type": "video",
-      "title": "Коноплі: зелене золото текстильної промисловості",
-      "link": "https://www.youtube.com/watch?v=FUZ9CsSvoeM",
-      "source": "YouTube: Pritesh Ghevariya",
-      "summary": "Нове відео від Pritesh Ghevariya досліджує потенціал промислових конопель як сталого та натурального волокна для текстильної індустрії.",
-      "image_url": "https://i.ytimg.com/vi/FUZ9CsSvoeM/hqdefault.jpg",
-      "date": "2026-05-03T07:42:27Z",
-      "hash": "yt_FUZ9CsSvoeM",
-      "content_preview": "Нове відео від Pritesh Ghevariya досліджує потенціал промислових конопель як сталого та натурального волокна для текстильної індустрії.",
-      "added_at": "2026-05-03T09:28:47.020354+00:00",
-      "relevance_score": 0.9,
+      "id": "05d68850d376",
+      "type": "article",
+      "title": "Moldovan government approves new rules for growing, processing, marketing industrial hemp - Moldpres",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOVkhyZWJ5bkJ6aWJxenJJWHl2OF9JT2pnczU3RDFBUElaWTZoam9Sckt6MWJ5UE9BY2F3RWp2TmNPWFdxY0dMNFBmRXFVODhlNkxha1ZqV0NSTWQwbHp5bG83ZXFLQ1Zyb1ZMamgzM0NnbUxUV3FvbTluQy0yNEVyZHFQWmxIQWZaNWlaaFE2dmx6RnRqY1RkZGFtM1llbmlJR3J2NUwtZHVzLXY4YXJwRGRYeFVBVjNVWTFEb19SNlE4RDcwcGJ6Qkc2dE4tY0hqanNnNA?oc=5",
+      "source": "\"hemp Romania industry\" - Google News",
+      "summary": "Moldovan government approves new rules for growing, processing, marketing industrial hemp &nbsp;&nbsp; Moldpres",
+      "image_url": "",
+      "date": "2026-04-29T14:24:23+00:00",
+      "hash": "39ca58a519716f8a792f2847bd986035",
+      "content_preview": "Moldovan government approves new rules for growing, processing, marketing industrial hemp &nbsp;&nbsp; Moldpres",
+      "added_at": "2026-05-03T14:57:35.212001+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "FUZ9CsSvoeM",
-      "draft_filename": "20260503-092847-konopli-zelene-zoloto-tekstylnoyi-promyslovosti.md"
+      "source_trusted": false,
+      "category_hint": "бізнес"
     },
     {
-      "id": "35d4b5eff3b1",
+      "id": "e0aa375ebe81",
+      "type": "article",
+      "title": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ - UKR.NET",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1xZTZVaXZyX0dtMnlHSWI2ZEFwV19IcGEzM0dSdFBfU1UzUHZDeG9YaGNIVFFfNzBaNVJYbGRaeU1relFhQVUtTE9TczZ6YnZRREZWeGp4TFZlNHc3Zzl0X3lQVG8wYlVRS0E?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ &nbsp;&nbsp; UKR.NET",
+      "image_url": "",
+      "date": "2026-05-01T16:44:42+00:00",
+      "hash": "868ce7b9ef462ed3bb053256f744ecd6",
+      "content_preview": "Вчені створили міцний пластик із коноплі, який не поступається ПЕТ &nbsp;&nbsp; UKR.NET",
+      "added_at": "2026-05-03T14:57:35.211786+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "біопластик"
+    },
+    {
+      "id": "c94f09b05f0e",
       "type": "video",
-      "title": "Встановлення лінії попередньої обробки конопляного волокна: розпушування, чесання та подрібнення",
-      "link": "https://www.youtube.com/watch?v=ISARLGdUyBg",
-      "source": "YouTube: Bakar Makina A.Ş.",
-      "summary": "Дізнайтеся про процес встановлення та монтажу лінії попередньої обробки конопляного волокна, що включає розпушування, попереднє чесання та подрібнення, від компанії Bakar Makina A.Ş.",
-      "image_url": "https://i.ytimg.com/vi/ISARLGdUyBg/hqdefault.jpg",
-      "date": "2026-05-02T19:33:53Z",
-      "hash": "yt_ISARLGdUyBg",
-      "content_preview": "Дізнайтеся про процес встановлення та монтажу лінії попередньої обробки конопляного волокна, що включає розпушування, попереднє чесання та подрібнення, від компанії Bakar Makina A.Ş.",
-      "added_at": "2026-05-03T09:29:12.223253+00:00",
+      "title": "Більше ніяких літій-іонних: конопляні суперзарядки для Tesla",
+      "link": "https://www.youtube.com/watch?v=yqRXpO-Bge8",
+      "source": "YouTube: Raoni",
+      "summary": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
+      "image_url": "https://i.ytimg.com/vi/yqRXpO-Bge8/hqdefault.jpg",
+      "date": "2026-05-02T23:19:07Z",
+      "hash": "yt_yqRXpO-Bge8",
+      "content_preview": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
+      "added_at": "2026-05-03T09:30:13.733907+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "ISARLGdUyBg",
-      "draft_filename": "20260503-092912-vstanovlennya-liniyi-poperednoyi-obrobky-konoplyanoho-volokna-rozpushuvannya-che.md"
+      "youtube_id": "yqRXpO-Bge8",
+      "draft_filename": "20260503-093013-bilshe-niyakykh-litiy-ionnykh-konoplyani-superzaryadky-dlya-tesla.md"
     },
     {
       "id": "2bc05bf9c1a5",
@@ -85,25 +104,67 @@
       "draft_filename": "20260503-092935-audio-slukhannya-shchodo-tymchasovoyi-sudovoyi-zaborony-shchodo-konopel-u-tekhas.md"
     },
     {
-      "id": "c94f09b05f0e",
+      "id": "35d4b5eff3b1",
       "type": "video",
-      "title": "Більше ніяких літій-іонних: конопляні суперзарядки для Tesla",
-      "link": "https://www.youtube.com/watch?v=yqRXpO-Bge8",
-      "source": "YouTube: Raoni",
-      "summary": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
-      "image_url": "https://i.ytimg.com/vi/yqRXpO-Bge8/hqdefault.jpg",
-      "date": "2026-05-02T23:19:07Z",
-      "hash": "yt_yqRXpO-Bge8",
-      "content_preview": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
-      "added_at": "2026-05-03T09:30:13.733907+00:00",
+      "title": "Встановлення лінії попередньої обробки конопляного волокна: розпушування, чесання та подрібнення",
+      "link": "https://www.youtube.com/watch?v=ISARLGdUyBg",
+      "source": "YouTube: Bakar Makina A.Ş.",
+      "summary": "Дізнайтеся про процес встановлення та монтажу лінії попередньої обробки конопляного волокна, що включає розпушування, попереднє чесання та подрібнення, від компанії Bakar Makina A.Ş.",
+      "image_url": "https://i.ytimg.com/vi/ISARLGdUyBg/hqdefault.jpg",
+      "date": "2026-05-02T19:33:53Z",
+      "hash": "yt_ISARLGdUyBg",
+      "content_preview": "Дізнайтеся про процес встановлення та монтажу лінії попередньої обробки конопляного волокна, що включає розпушування, попереднє чесання та подрібнення, від компанії Bakar Makina A.Ş.",
+      "added_at": "2026-05-03T09:29:12.223253+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "yqRXpO-Bge8",
-      "draft_filename": "20260503-093013-bilshe-niyakykh-litiy-ionnykh-konoplyani-superzaryadky-dlya-tesla.md"
+      "youtube_id": "ISARLGdUyBg",
+      "draft_filename": "20260503-092912-vstanovlennya-liniyi-poperednoyi-obrobky-konoplyanoho-volokna-rozpushuvannya-che.md"
+    },
+    {
+      "id": "1add730624a2",
+      "type": "video",
+      "title": "Коноплі: зелене золото текстильної промисловості",
+      "link": "https://www.youtube.com/watch?v=FUZ9CsSvoeM",
+      "source": "YouTube: Pritesh Ghevariya",
+      "summary": "Нове відео від Pritesh Ghevariya досліджує потенціал промислових конопель як сталого та натурального волокна для текстильної індустрії.",
+      "image_url": "https://i.ytimg.com/vi/FUZ9CsSvoeM/hqdefault.jpg",
+      "date": "2026-05-03T07:42:27Z",
+      "hash": "yt_FUZ9CsSvoeM",
+      "content_preview": "Нове відео від Pritesh Ghevariya досліджує потенціал промислових конопель як сталого та натурального волокна для текстильної індустрії.",
+      "added_at": "2026-05-03T09:28:47.020354+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "FUZ9CsSvoeM",
+      "draft_filename": "20260503-092847-konopli-zelene-zoloto-tekstylnoyi-promyslovosti.md"
+    },
+    {
+      "id": "123a38f4f713",
+      "type": "video",
+      "title": "Конопляний бетон (хемпкрит): Забутий старий-новий будівельний матеріал знову в тренді",
+      "link": "https://www.youtube.com/watch?v=6VTXiDg32BQ",
+      "source": "YouTube: StayBlessedbon",
+      "summary": "Дізнайтеся про хемпкрит – стародавній біоматеріал, що повертається як вуглецево-негативна будівельна революція. Перегляньте 12-хвилинне відео від Nature Lost Vault.",
+      "image_url": "https://i.ytimg.com/vi/6VTXiDg32BQ/hqdefault.jpg",
+      "date": "2026-05-03T06:04:22Z",
+      "hash": "yt_6VTXiDg32BQ",
+      "content_preview": "Дізнайтеся про хемпкрит – стародавній біоматеріал, що повертається як вуглецево-негативна будівельна революція. Перегляньте 12-хвилинне відео від Nature Lost Vault.",
+      "added_at": "2026-05-03T09:28:31.230625+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6VTXiDg32BQ",
+      "draft_filename": "20260503-092831-konoplyanyy-beton-khempkryt-zabutyy-staryy-novyy-budivelnyy-material-znovu-v-tre.md"
     }
   ],
   "updated_at": "2026-05-03T09:30:13.734643+00:00"
