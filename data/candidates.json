@@ -1,27 +1,6 @@
 {
   "items": [
     {
-      "id": "1fd99cb05e45",
-      "type": "video",
-      "title": "Гемпкрит: Пояснення сталого будівельного матеріалу",
-      "link": "https://www.youtube.com/watch?v=i7UUqY0eNQs",
-      "source": "YouTube: Hemp Build School Mastermind",
-      "summary": "Дізнайтеся про **гемпкрит** — інноваційний будівельний матеріал, що змінює уявлення про стале будівництво, та виклики його популяризації.",
-      "image_url": "https://i.ytimg.com/vi/i7UUqY0eNQs/hqdefault.jpg",
-      "date": "2026-05-04T14:01:14Z",
-      "hash": "yt_i7UUqY0eNQs",
-      "content_preview": "Дізнайтеся про **гемпкрит** — інноваційний будівельний матеріал, що змінює уявлення про стале будівництво, та виклики його популяризації.",
-      "added_at": "2026-05-04T21:16:12.147643+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "i7UUqY0eNQs",
-      "draft_filename": "20260504-211612-hempkryt-poyasnennya-staloho-budivelnoho-materialu.md"
-    },
-    {
       "id": "d0dca1007c12",
       "type": "video",
       "title": "За межами кави: секрети вирощування конопель та кави в Індії",
@@ -41,6 +20,27 @@
       "category_hint": "відео",
       "youtube_id": "SumcXbXKW9M",
       "draft_filename": "20260504-211636-za-mezhamy-kavy-sekrety-vyroshchuvannya-konopel-ta-kavy-v-indiyi.md"
+    },
+    {
+      "id": "1fd99cb05e45",
+      "type": "video",
+      "title": "Гемпкрит: Пояснення сталого будівельного матеріалу",
+      "link": "https://www.youtube.com/watch?v=i7UUqY0eNQs",
+      "source": "YouTube: Hemp Build School Mastermind",
+      "summary": "Дізнайтеся про **гемпкрит** — інноваційний будівельний матеріал, що змінює уявлення про стале будівництво, та виклики його популяризації.",
+      "image_url": "https://i.ytimg.com/vi/i7UUqY0eNQs/hqdefault.jpg",
+      "date": "2026-05-04T14:01:14Z",
+      "hash": "yt_i7UUqY0eNQs",
+      "content_preview": "Дізнайтеся про **гемпкрит** — інноваційний будівельний матеріал, що змінює уявлення про стале будівництво, та виклики його популяризації.",
+      "added_at": "2026-05-04T21:16:12.147643+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "i7UUqY0eNQs",
+      "draft_filename": "20260504-211612-hempkryt-poyasnennya-staloho-budivelnoho-materialu.md"
     },
     {
       "id": "a8db8383eed3",
