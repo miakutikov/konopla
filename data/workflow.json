@@ -1768,6 +1768,45 @@
       "created_at": "2026-05-03T12:37:20.570Z",
       "updated_at": "2026-05-03T12:37:49.677076+00:00",
       "published_at": null
+    },
+    {
+      "id": "43ebd70a2872",
+      "filename": "20260503-093013-bilshe-niyakykh-litiy-ionnykh-konoplyani-superzaryadky-dlya-tesla.md",
+      "title": "Більше ніяких літій-іонних: конопляні суперзарядки для Tesla",
+      "summary": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/yqRXpO-Bge8/hqdefault.jpg",
+      "candidate_id": "43ebd70a2872",
+      "original_title": "Більше ніяких літій-іонних: конопляні суперзарядки для Tesla",
+      "original_url": "https://www.youtube.com/watch?v=yqRXpO-Bge8",
+      "source_name": "YouTube",
+      "content_preview": "Представляємо відео від Raoni, що досліджує потенціал промислових конопель у створенні інноваційних зарядних пристроїв для електромобілів, які можуть замінити літій-іонні технології.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "yqRXpO-Bge8",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-05-05T18:58:05.542Z",
+      "updated_at": "2026-05-05T18:58:05.542Z",
+      "published_at": null
     }
   ]
 }
