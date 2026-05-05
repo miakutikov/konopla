@@ -1846,6 +1846,44 @@
       "created_at": "2026-05-05T18:59:41.424Z",
       "updated_at": "2026-05-05T19:00:21.424331+00:00",
       "published_at": null
+    },
+    {
+      "id": "w2vebg6x",
+      "filename": "",
+      "title": "europeanpharmaceuticalreview.com — https://www.europeanpharmaceuticalreview.com/bioplastic-prod",
+      "summary": "",
+      "category": "",
+      "image": "",
+      "candidate_id": "w2vebg6x",
+      "original_title": "",
+      "original_url": "https://www.europeanpharmaceuticalreview.com/bioplastic-produced-from-hemp-waste-potential-eco-alternative-for-packaging-films/2135366.article",
+      "source_name": "europeanpharmaceuticalreview.com",
+      "content_preview": "",
+      "stage": "feed",
+      "status": "queued",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 1,
+      "created_at": "2026-05-05T19:12:44.752Z",
+      "updated_at": "2026-05-05T19:12:44.752Z",
+      "published_at": null
     }
   ]
 }
