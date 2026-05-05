@@ -1807,6 +1807,45 @@
       "created_at": "2026-05-05T18:58:05.542Z",
       "updated_at": "2026-05-05T18:58:05.542Z",
       "published_at": null
+    },
+    {
+      "id": "f124f8cae21d",
+      "filename": "20260503-205107-videoohlyad-konoplyanyy-beton-hempcrete-u-tsyvilnomu-budivnytstvi.md",
+      "title": "Відеоогляд: Конопляний бетон (hempcrete) у цивільному будівництві",
+      "summary": "Нове відео від Archana Kumawat досліджує застосування конопляного бетону (hempcrete) у сучасному будівництві та плануванні.",
+      "category": "відео",
+      "image": "https://i.ytimg.com/vi/Gf0aYaGBwfA/hqdefault.jpg",
+      "candidate_id": "f124f8cae21d",
+      "original_title": "Відеоогляд: Конопляний бетон (hempcrete) у цивільному будівництві",
+      "original_url": "https://www.youtube.com/watch?v=Gf0aYaGBwfA",
+      "source_name": "YouTube",
+      "content_preview": "Нове відео від Archana Kumawat досліджує застосування конопляного бетону (hempcrete) у сучасному будівництві та плануванні.",
+      "stage": "editorial",
+      "status": "ready_for_edit",
+      "youtube_id": "Gf0aYaGBwfA",
+      "channels": {
+        "website": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null
+        },
+        "telegram": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        },
+        "threads": {
+          "enabled": true,
+          "status": "pending",
+          "scheduled_at": null,
+          "custom_text": ""
+        }
+      },
+      "relevance_score": 0.9,
+      "created_at": "2026-05-05T18:58:13.633Z",
+      "updated_at": "2026-05-05T18:58:13.633Z",
+      "published_at": null
     }
   ]
 }
