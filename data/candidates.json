@@ -1,44 +1,46 @@
 {
   "items": [
     {
-      "id": "c1b253b6a2bf",
-      "type": "article",
-      "title": "«Агротрейд» завершує сівбу кукурудзи й активно сіє соняшник",
-      "link": "https://agrotimes.ua/agronomiya/agrotrejd-zavershuye-sivbu-kukurudzy-j-aktyvno-siye-sonyashnyk/",
-      "source": "AgroTimes",
-      "summary": "Група «Агротрейд» завершує сівбу кукурудзи по кластерах – наразі виконано 84% від запланованого обсягу. За винятком посівних площ на прикордонні Сумщини, де через перезволожений ґрунт і низькі температури тимчасово не було можливості зайти в поле. Про це повідомили в компанії. Сівба соняшнику перебуває в активній фазі – вже посіяно 41% від усіх площ. Найбільше – [&#8230;]",
-      "image_url": "",
-      "date": "2026-05-05T07:20:00+00:00",
-      "hash": "f9e8ce45822d2df3cc7fb505e539e49b",
-      "content_preview": "Група «Агротрейд» завершує сівбу кукурудзи по кластерах – наразі виконано 84% від запланованого обсягу. За винятком посівних площ на прикордонні Сумщини, де через перезволожений ґрунт і низькі температури тимчасово не було можливості зайти в поле. Про це повідомили в компанії. Сівба соняшнику перебу",
-      "added_at": "2026-05-05T10:09:58.367007+00:00",
-      "relevance_score": 0.4,
+      "id": "ca3b2977ce8d",
+      "type": "video",
+      "title": "Виробництво конопляних сандалів LUNA Chancla",
+      "link": "https://www.youtube.com/watch?v=vSVuhyTBdc0",
+      "source": "YouTube: LUNA Sandals",
+      "summary": "Третя частина серії відео від LUNA Sandals демонструє процес ручного виготовлення конопляних сандалів Chancla.",
+      "image_url": "https://i.ytimg.com/vi/vSVuhyTBdc0/hqdefault.jpg",
+      "date": "2026-05-04T22:37:11Z",
+      "hash": "yt_vSVuhyTBdc0",
+      "content_preview": "Третя частина серії відео від LUNA Sandals демонструє процес ручного виготовлення конопляних сандалів Chancla.",
+      "added_at": "2026-05-05T10:12:13.908663+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "substantive content"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "агро"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "vSVuhyTBdc0",
+      "draft_filename": "20260505-101213-vyrobnytstvo-konoplyanykh-sandaliv-luna-chancla.md"
     },
     {
-      "id": "f2df7eb50c5e",
-      "type": "article",
-      "title": "Moldova sets hemp framework to rebuild fiber and seed value chains, boost innovation - HempToday",
-      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPS0h5a0t1RVE4dkt6ZDdiSnNNZWZBN2JBT01iMlNUdHY0X2d2Zjd4a1BWM3cxVjFtMENhaDMwWlpkQkhISngwZ05uZGdMRGVwQTlUQlEtRmxGc1RxUG1pYVdtZzZ1bEFRZkJ2Mmk5UXBlcjJObXg0UkF0eFltZWdweXNyMERMU2xYdTJ3b21ocFlOeWNiV05qcTlMMHE5TjlMRUFKYmdyemQtZw?oc=5",
-      "source": "\"hemp Romania industry\" - Google News",
-      "summary": "Moldova sets hemp framework to rebuild fiber and seed value chains, boost innovation &nbsp;&nbsp; HempToday",
-      "image_url": "",
-      "date": "2026-05-05T09:16:46+00:00",
-      "hash": "abab6abe932c9adb8cc5ff0fd3e39112",
-      "content_preview": "Moldova sets hemp framework to rebuild fiber and seed value chains, boost innovation &nbsp;&nbsp; HempToday",
-      "added_at": "2026-05-05T10:09:58.366718+00:00",
-      "relevance_score": 0.5,
+      "id": "d339c3fade29",
+      "type": "video",
+      "title": "Ручне виготовлення конопляних сандалів LUNA Chancla",
+      "link": "https://www.youtube.com/watch?v=6aZuUymM-r8",
+      "source": "YouTube: LUNA Sandals",
+      "summary": "Відео від LUNA Sandals демонструє процес створення екологічних сандалів з конопляних матеріалів.",
+      "image_url": "https://i.ytimg.com/vi/6aZuUymM-r8/hqdefault.jpg",
+      "date": "2026-05-04T22:34:16Z",
+      "hash": "yt_6aZuUymM-r8",
+      "content_preview": "Відео від LUNA Sandals демонструє процес створення екологічних сандалів з конопляних матеріалів.",
+      "added_at": "2026-05-05T10:13:18.446391+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6aZuUymM-r8",
+      "draft_filename": "20260505-101318-ruchne-vyhotovlennya-konoplyanykh-sandaliv-luna-chancla.md"
     },
     {
       "id": "d0dca1007c12",
@@ -606,5 +608,5 @@
       "draft_filename": "20260503-092831-konoplyanyy-beton-khempkryt-zabutyy-staryy-novyy-budivelnyy-material-znovu-v-tre.md"
     }
   ],
-  "updated_at": "2026-05-04T21:16:41.394597+00:00"
+  "updated_at": "2026-05-05T10:13:23.448227+00:00"
 }
