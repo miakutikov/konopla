@@ -1,24 +1,67 @@
 {
   "items": [
     {
-      "id": "e6d0100094b5",
-      "type": "article",
-      "title": "CAP funding for hemp: final text approved - Eunews",
-      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNTlpwQzdWYjhyampLVEpOamhuNVVkWDM2QUtFUDRNQTJNX0JJakloMmFkOUg1ZV9nWWlKbFI3aVA0Z0hkVWZhVGZUbDhFN0RjcGhmYl9iUm91S29GZDRrLVRSTGh0aTlEdEFTUVhqV1cyMnNwY2RaN0ZzS3JPUjliZkV1bkFhRURGUkVUam1iUHUwazhONWp5Y0VFb1g2R0hmMjdXYng4MmhzUQ?oc=5",
-      "source": "\"industrial hemp EU regulation\" - Google News",
-      "summary": "CAP funding for hemp: final text approved &nbsp;&nbsp; Eunews",
-      "image_url": "",
-      "date": "2026-05-06T17:13:20+00:00",
-      "hash": "1c7da0e4cda195a409531a8a3b10b718",
-      "content_preview": "CAP funding for hemp: final text approved &nbsp;&nbsp; Eunews",
-      "added_at": "2026-05-06T21:17:20.707556+00:00",
-      "relevance_score": 0.5,
+      "id": "60255034076c",
+      "type": "video",
+      "title": "Відеоогляд: DT Activity | Hemp & Bamboo Fiber | Industry Project",
+      "link": "https://www.youtube.com/watch?v=0kEHfDyDmUk",
+      "source": "YouTube: DINESH. R SNS-MECH",
+      "summary": "Відео від каналу DINESH. R SNS-MECH про промислові коноплі та бамбукове волокно в рамках проекту DT Activity.",
+      "image_url": "https://i.ytimg.com/vi/0kEHfDyDmUk/hqdefault.jpg",
+      "date": "2026-05-05T10:24:06Z",
+      "hash": "yt_0kEHfDyDmUk",
+      "content_preview": "Відео від каналу DINESH. R SNS-MECH про промислові коноплі та бамбукове волокно в рамках проекту DT Activity.",
+      "added_at": "2026-05-06T21:19:24.045725+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "інше"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "0kEHfDyDmUk",
+      "draft_filename": "20260506-211924-videoohlyad-dt-activity-hemp-bamboo-fiber-industry-project.md"
+    },
+    {
+      "id": "3dce9166f31a",
+      "type": "video",
+      "title": "Стала мода в Індії: Історія Hemploom",
+      "link": "https://www.youtube.com/watch?v=MAC61TPpznw",
+      "source": "YouTube: ClimateConnect",
+      "summary": "Відео про індійський бренд конопляного одягу Hemploom та засновника Вішала Сінга.",
+      "image_url": "https://i.ytimg.com/vi/MAC61TPpznw/hqdefault.jpg",
+      "date": "2026-05-05T03:34:54Z",
+      "hash": "yt_MAC61TPpznw",
+      "content_preview": "Відео про індійський бренд конопляного одягу Hemploom та засновника Вішала Сінга.",
+      "added_at": "2026-05-06T21:20:03.556224+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "MAC61TPpznw",
+      "draft_filename": "20260506-212003-stala-moda-v-indiyi-istoriya-hemploom.md"
+    },
+    {
+      "id": "bcfc5b15b4fe",
+      "type": "video",
+      "title": "ЦЕ БЕЗКОШТОВНИЙ МАТЕРІАЛ МІЦНІШИЙ ЗА СТАЛЬ. РОКФЕЛЛЕР ЗАБОРОНИВ ЙОГО. ЧОМУ ЦЕ ЗАРАЗИ НЕЗАКОННО?",
+      "link": "https://www.youtube.com/watch?v=AHRbGBv_efw",
+      "source": "YouTube: Builds With Eli Yoder",
+      "summary": "Відео розкриває таємницю заборони промислових конопель у США у 1937 році та їхній потенціал.",
+      "image_url": "https://i.ytimg.com/vi/AHRbGBv_efw/hqdefault.jpg",
+      "date": "2026-05-06T18:00:06Z",
+      "hash": "yt_AHRbGBv_efw",
+      "content_preview": "Відео розкриває таємницю заборони промислових конопель у США у 1937 році та їхній потенціал.",
+      "added_at": "2026-05-06T21:22:51.480411+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "AHRbGBv_efw",
+      "draft_filename": "20260506-212251-tse-bezkoshtovnyy-material-mitsnishyy-za-stal-rokfeller-zaboronyv-yoho-chomu-tse.md"
     },
     {
       "id": "299e8a7351e0",
@@ -975,5 +1018,5 @@
       "draft_filename": "20260503-092831-konoplyanyy-beton-khempkryt-zabutyy-staryy-novyy-budivelnyy-material-znovu-v-tre.md"
     }
   ],
-  "updated_at": "2026-05-06T10:34:44.865650+00:00"
+  "updated_at": "2026-05-06T21:24:11.582373+00:00"
 }
