@@ -1,46 +1,85 @@
 {
   "items": [
     {
-      "id": "7bc537f44b97",
-      "type": "video",
-      "title": "Hempcrete: пожежна безпека як критичний захист будинку",
-      "link": "https://www.youtube.com/watch?v=sFYbtM-7mh0",
-      "source": "YouTube: Hemp Build School Mastermind",
-      "summary": "Відео від Hemp Build School Mastermind про важливість конопляного бетону для пожежної безпеки будівель.",
-      "image_url": "https://i.ytimg.com/vi/sFYbtM-7mh0/hqdefault.jpg",
-      "date": "2026-05-05T14:01:30Z",
-      "hash": "yt_sFYbtM-7mh0",
-      "content_preview": "Відео від Hemp Build School Mastermind про важливість конопляного бетону для пожежної безпеки будівель.",
-      "added_at": "2026-05-05T21:13:02.281205+00:00",
-      "relevance_score": 0.9,
+      "id": "c22e2e80f56a",
+      "type": "article",
+      "title": "Hemp Fiber Enters an Industrial Scale-Up Phase: How - openPR.com",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPb2dBZGRqMUI1eUhpdW5pYXFOQVQwLTRKRTdkSWlsUkpxVTUzUTlUa19NV05OVGRUWjZndGRmX1BpSjdhZ2JEYmtJNTItOXA5QURjOGhsdEtLbmZxT001bEUyU3JJdnFuSEIxU21EZmR1YThRLU5KaU9OLXpQYmJmSF9uN0lpdHZ1TU9sN3psVQ?oc=5",
+      "source": "\"hemp automotive car industry\" - Google News",
+      "summary": "Hemp Fiber Enters an Industrial Scale-Up Phase: How &nbsp;&nbsp; openPR.com",
+      "image_url": "",
+      "date": "2026-05-04T08:26:46+00:00",
+      "hash": "a40c90b2e8c21bc8022b4f2021a5c0df",
+      "content_preview": "Hemp Fiber Enters an Industrial Scale-Up Phase: How &nbsp;&nbsp; openPR.com",
+      "added_at": "2026-05-06T05:35:54.282459+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "sFYbtM-7mh0",
-      "draft_filename": "20260505-211302-hempcrete-pozhezhna-bezpeka-yak-krytychnyy-zakhyst-budynku.md"
+      "source_trusted": false,
+      "category_hint": "текстиль"
     },
     {
-      "id": "0a4b5e8adafe",
+      "id": "7d7215f8c1ff",
+      "type": "article",
+      "title": "Шахтар визначився з заміною Коноплі, і планує ще мінімум два дорогі трансфери влітку – Вацко - Sportarena.ua",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQM29nUDhMTHhYcEVzMkNWVXpVcTdxZDE5X2NBcFptUk1zMUVrbmJGSHBEM2ROanRoTVVmOVJ2cFlSSFhNYTVTdktjRG5DNGZYQVg3bU9YUDlsdDg0NWdJSDBjRVZBSkVQM2tCRDJKY29qdkdoaVlVZTVzNnM4aVBZajFVYWV1NFdCX2YtZDFEd2J5eDlMWm9iWtIBngFBVV95cUxPTVp2VW4yM1F2TnJWYkJSaC1BYUNZVHBxbFIyUERxYVQyQnVLdDBjTmNfbVBPbEM5Y0duX3ZGREtCd3NNdnJ6X1RzSlk4Sjd5Rzk3d1Jfd2dtSmFjeFktQVoxdU5JUmxGMG1jcWVTMzA1ZThqeTVFMVlDZnlyZXNXb3UtWnN4NFJNYnJIZklQWTlPLVQyVkdpdFdwSmk5Zw?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "Шахтар визначився з заміною Коноплі, і планує ще мінімум два дорогі трансфери влітку – Вацко &nbsp;&nbsp; Sportarena.ua",
+      "image_url": "",
+      "date": "2026-05-05T13:45:00+00:00",
+      "hash": "1acd5843310f0ed25abbfda493a96a58",
+      "content_preview": "Шахтар визначився з заміною Коноплі, і планує ще мінімум два дорогі трансфери влітку – Вацко &nbsp;&nbsp; Sportarena.ua",
+      "added_at": "2026-05-06T05:35:54.282260+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "1482c595c3c9",
+      "type": "article",
+      "title": "Wine & Spirits Wholesalers of America criticizes Congress over hemp THC ban in Farm Bill - CSP Daily News",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNkhVOEtpaGZhMGk5YkhKOXhsazUzLVR0T3JWdEU1NV9XVFhETGhwQWE2ZFZyazUwcUlBUmhxRUpEOFU4RHB2a001YUFiWFZoV1Z6d2tOc29SalJFaWR3VU1rQUNWQTc5UkdCd3BKU0lHX2MxRzhyMmstZDdJMk1vbGFBNG1XMF8xaFpPS1J2cVIxSm1sX01yZUt3eHViRmV3WlZzb3hyN1NwekJOcTFaWFllSFpwaHZY?oc=5",
+      "source": "\"hemp legislation regulation farm bill\" - Google N",
+      "summary": "Wine & Spirits Wholesalers of America criticizes Congress over hemp THC ban in Farm Bill &nbsp;&nbsp; CSP Daily News",
+      "image_url": "",
+      "date": "2026-05-05T19:19:48+00:00",
+      "hash": "82fc02ff64ac07c3f19ef10eea457d88",
+      "content_preview": "Wine & Spirits Wholesalers of America criticizes Congress over hemp THC ban in Farm Bill &nbsp;&nbsp; CSP Daily News",
+      "added_at": "2026-05-06T05:35:54.282004+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "агро"
+    },
+    {
+      "id": "22f33e45e3c8",
       "type": "video",
-      "title": "Відео: Майбутнє повільного розкошу — конопляний деним ручної роботи",
-      "link": "https://www.youtube.com/watch?v=pCvcol1rsIk",
-      "source": "YouTube: Vritti Designs",
-      "summary": "Компанія Vritti Designs презентує інноваційний конопляний деним ручного ткацтва, поєднання традиційних технік та екологічної свідомості.",
-      "image_url": "https://i.ytimg.com/vi/pCvcol1rsIk/hqdefault.jpg",
-      "date": "2026-05-05T13:25:38Z",
-      "hash": "yt_pCvcol1rsIk",
-      "content_preview": "Компанія Vritti Designs презентує інноваційний конопляний деним ручного ткацтва, поєднання традиційних технік та екологічної свідомості.",
-      "added_at": "2026-05-05T21:14:36.254463+00:00",
+      "title": "Топ-4 супернасіння для щоденного вживання! (Переваги чії, льону, конопель та кунжуту)",
+      "link": "https://www.youtube.com/watch?v=1gac63vrus0",
+      "source": "YouTube: HealthNest",
+      "summary": "Відео від HealthNest про харчову цінність конопель та інших супернасіння.",
+      "image_url": "https://i.ytimg.com/vi/1gac63vrus0/hqdefault.jpg",
+      "date": "2026-05-05T03:32:45Z",
+      "hash": "yt_1gac63vrus0",
+      "content_preview": "Відео від HealthNest про харчову цінність конопель та інших супернасіння.",
+      "added_at": "2026-05-05T21:17:57.465861+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "pCvcol1rsIk",
-      "draft_filename": "20260505-211436-video-maybutnye-povilnoho-rozkoshu-konoplyanyy-denym-ruchnoyi-roboty.md"
+      "youtube_id": "1gac63vrus0",
+      "draft_filename": "20260505-211757-top-4-supernasinnya-dlya-shchodennoho-vzhyvannya-perevahy-chiyi-lonu-konopel-ta-.md"
     },
     {
       "id": "9c1e050dfe2d",
@@ -64,25 +103,46 @@
       "draft_filename": "20260505-211607-joes-bones-konoplyani-proteyinovi-pechyva-dlya-sobak.md"
     },
     {
-      "id": "22f33e45e3c8",
+      "id": "0a4b5e8adafe",
       "type": "video",
-      "title": "Топ-4 супернасіння для щоденного вживання! (Переваги чії, льону, конопель та кунжуту)",
-      "link": "https://www.youtube.com/watch?v=1gac63vrus0",
-      "source": "YouTube: HealthNest",
-      "summary": "Відео від HealthNest про харчову цінність конопель та інших супернасіння.",
-      "image_url": "https://i.ytimg.com/vi/1gac63vrus0/hqdefault.jpg",
-      "date": "2026-05-05T03:32:45Z",
-      "hash": "yt_1gac63vrus0",
-      "content_preview": "Відео від HealthNest про харчову цінність конопель та інших супернасіння.",
-      "added_at": "2026-05-05T21:17:57.465861+00:00",
+      "title": "Відео: Майбутнє повільного розкошу — конопляний деним ручної роботи",
+      "link": "https://www.youtube.com/watch?v=pCvcol1rsIk",
+      "source": "YouTube: Vritti Designs",
+      "summary": "Компанія Vritti Designs презентує інноваційний конопляний деним ручного ткацтва, поєднання традиційних технік та екологічної свідомості.",
+      "image_url": "https://i.ytimg.com/vi/pCvcol1rsIk/hqdefault.jpg",
+      "date": "2026-05-05T13:25:38Z",
+      "hash": "yt_pCvcol1rsIk",
+      "content_preview": "Компанія Vritti Designs презентує інноваційний конопляний деним ручного ткацтва, поєднання традиційних технік та екологічної свідомості.",
+      "added_at": "2026-05-05T21:14:36.254463+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "1gac63vrus0",
-      "draft_filename": "20260505-211757-top-4-supernasinnya-dlya-shchodennoho-vzhyvannya-perevahy-chiyi-lonu-konopel-ta-.md"
+      "youtube_id": "pCvcol1rsIk",
+      "draft_filename": "20260505-211436-video-maybutnye-povilnoho-rozkoshu-konoplyanyy-denym-ruchnoyi-roboty.md"
+    },
+    {
+      "id": "7bc537f44b97",
+      "type": "video",
+      "title": "Hempcrete: пожежна безпека як критичний захист будинку",
+      "link": "https://www.youtube.com/watch?v=sFYbtM-7mh0",
+      "source": "YouTube: Hemp Build School Mastermind",
+      "summary": "Відео від Hemp Build School Mastermind про важливість конопляного бетону для пожежної безпеки будівель.",
+      "image_url": "https://i.ytimg.com/vi/sFYbtM-7mh0/hqdefault.jpg",
+      "date": "2026-05-05T14:01:30Z",
+      "hash": "yt_sFYbtM-7mh0",
+      "content_preview": "Відео від Hemp Build School Mastermind про важливість конопляного бетону для пожежної безпеки будівель.",
+      "added_at": "2026-05-05T21:13:02.281205+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "sFYbtM-7mh0",
+      "draft_filename": "20260505-211302-hempcrete-pozhezhna-bezpeka-yak-krytychnyy-zakhyst-budynku.md"
     },
     {
       "id": "3808359d7b2e",
