@@ -1,46 +1,47 @@
 {
   "items": [
     {
-      "id": "e931d55eeca8",
-      "type": "video",
-      "title": "Анонс подкасту FarmED: Конопляний бетон та стале будівництво",
-      "link": "https://www.youtube.com/watch?v=0Uq26enANlk",
-      "source": "YouTube: Timothy Tasker Architects Ltd",
-      "summary": "Дізнайтеся більше про використання конопляного бетону (hempcrete) у сталому будівництві в новому відео від Timothy Tasker Architects Ltd.",
-      "image_url": "https://i.ytimg.com/vi/0Uq26enANlk/hqdefault.jpg",
-      "date": "2026-05-08T13:50:37Z",
-      "hash": "yt_0Uq26enANlk",
-      "content_preview": "Дізнайтеся більше про використання конопляного бетону (hempcrete) у сталому будівництві в новому відео від Timothy Tasker Architects Ltd.",
-      "added_at": "2026-05-08T21:06:44.166153+00:00",
-      "relevance_score": 0.9,
+      "id": "a99d9e71e2c6",
+      "type": "article",
+      "title": "Hemp in the Built Environment – A Symposium of Use and Applications",
+      "link": "https://indhemp.com/hemp-in-the-built-environment-a-symposium-of-use-and-applications/",
+      "source": "IND HEMP",
+      "summary": "The Montana Hemp in the Built Environment Symposium brings together leaders across agriculture, materials, infrastructure, and design to explore how industrial hemp is shaping the future of the built environment. Hosted by IND HEMP, this one-day, on-site symposium showcases the full value chain—from Montana-grown fiber to a diverse portfolio of bio-based solutions supporting buildings, infrastructure,...",
+      "image_url": "",
+      "date": "2026-05-07T22:39:34+00:00",
+      "hash": "dabf07568dc53855cd237a4e658be1d0",
+      "content_preview": "Hemp in the Built Environment – A Symposium of Use and Applications The Montana Hemp in the Built Environment Symposium brings together leaders across agriculture, materials, infrastructure, and design to explore how industrial hemp is shaping the future of the built environment. Hosted by IND HEMP,",
+      "added_at": "2026-05-09T05:29:37.076581+00:00",
+      "relevance_score": 0.7,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords",
+        "substantive content"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "0Uq26enANlk",
-      "draft_filename": "20260508-210644-anons-podkastu-farmed-konoplyanyy-beton-ta-stale-budivnytstvo.md"
+      "source_trusted": false,
+      "category_hint": "будівництво"
     },
     {
-      "id": "50bd6221ec9c",
+      "id": "6087c81b7c1a",
       "type": "video",
-      "title": "Конопляний трикотаж: м'які відтінки та унікальна текстура",
-      "link": "https://www.youtube.com/watch?v=8BMxfEErr-c",
-      "source": "YouTube: HEMP FORTEX",
-      "summary": "Компанія HEMP FORTEX представила відео про свій конопляний стрейч-трикотаж з органічної бавовни, що поєднує унікальну текстуру з витонченими приглушеними відтінками.",
-      "image_url": "https://i.ytimg.com/vi/8BMxfEErr-c/hqdefault.jpg",
-      "date": "2026-05-08T18:00:07Z",
-      "hash": "yt_8BMxfEErr-c",
-      "content_preview": "Компанія HEMP FORTEX представила відео про свій конопляний стрейч-трикотаж з органічної бавовни, що поєднує унікальну текстуру з витонченими приглушеними відтінками.",
-      "added_at": "2026-05-08T21:07:02.853372+00:00",
+      "title": "Відеоогляд: hemp 삼껍질 빈",
+      "link": "https://www.youtube.com/watch?v=zMku0FOljnE",
+      "source": "YouTube: 성경해자TV",
+      "summary": "Konopla.UA анонсує YouTube-відео від 성경해자TV про промислові коноплі, яке вже набрало 495 переглядів.",
+      "image_url": "https://i.ytimg.com/vi/zMku0FOljnE/hqdefault.jpg",
+      "date": "2026-05-08T19:22:00Z",
+      "hash": "yt_zMku0FOljnE",
+      "content_preview": "Konopla.UA анонсує YouTube-відео від 성경해자TV про промислові коноплі, яке вже набрало 495 переглядів.",
+      "added_at": "2026-05-08T21:07:44.533941+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "8BMxfEErr-c",
-      "draft_filename": "20260508-210702-konoplyanyy-trykotazh-myaki-vidtinky-ta-unikalna-tekstura.md"
+      "youtube_id": "zMku0FOljnE",
+      "draft_filename": "20260508-210744-videoohlyad-hemp.md"
     },
     {
       "id": "461339ccfd40",
@@ -64,25 +65,46 @@
       "draft_filename": "20260508-210720-vy-tak-polyubyly-nashi-konoplyani-zeltsery-shcho-my-ledve-vstyhaly-yikh-popovnyu.md"
     },
     {
-      "id": "6087c81b7c1a",
+      "id": "50bd6221ec9c",
       "type": "video",
-      "title": "Відеоогляд: hemp 삼껍질 빈",
-      "link": "https://www.youtube.com/watch?v=zMku0FOljnE",
-      "source": "YouTube: 성경해자TV",
-      "summary": "Konopla.UA анонсує YouTube-відео від 성경해자TV про промислові коноплі, яке вже набрало 495 переглядів.",
-      "image_url": "https://i.ytimg.com/vi/zMku0FOljnE/hqdefault.jpg",
-      "date": "2026-05-08T19:22:00Z",
-      "hash": "yt_zMku0FOljnE",
-      "content_preview": "Konopla.UA анонсує YouTube-відео від 성경해자TV про промислові коноплі, яке вже набрало 495 переглядів.",
-      "added_at": "2026-05-08T21:07:44.533941+00:00",
+      "title": "Конопляний трикотаж: м'які відтінки та унікальна текстура",
+      "link": "https://www.youtube.com/watch?v=8BMxfEErr-c",
+      "source": "YouTube: HEMP FORTEX",
+      "summary": "Компанія HEMP FORTEX представила відео про свій конопляний стрейч-трикотаж з органічної бавовни, що поєднує унікальну текстуру з витонченими приглушеними відтінками.",
+      "image_url": "https://i.ytimg.com/vi/8BMxfEErr-c/hqdefault.jpg",
+      "date": "2026-05-08T18:00:07Z",
+      "hash": "yt_8BMxfEErr-c",
+      "content_preview": "Компанія HEMP FORTEX представила відео про свій конопляний стрейч-трикотаж з органічної бавовни, що поєднує унікальну текстуру з витонченими приглушеними відтінками.",
+      "added_at": "2026-05-08T21:07:02.853372+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "zMku0FOljnE",
-      "draft_filename": "20260508-210744-videoohlyad-hemp.md"
+      "youtube_id": "8BMxfEErr-c",
+      "draft_filename": "20260508-210702-konoplyanyy-trykotazh-myaki-vidtinky-ta-unikalna-tekstura.md"
+    },
+    {
+      "id": "e931d55eeca8",
+      "type": "video",
+      "title": "Анонс подкасту FarmED: Конопляний бетон та стале будівництво",
+      "link": "https://www.youtube.com/watch?v=0Uq26enANlk",
+      "source": "YouTube: Timothy Tasker Architects Ltd",
+      "summary": "Дізнайтеся більше про використання конопляного бетону (hempcrete) у сталому будівництві в новому відео від Timothy Tasker Architects Ltd.",
+      "image_url": "https://i.ytimg.com/vi/0Uq26enANlk/hqdefault.jpg",
+      "date": "2026-05-08T13:50:37Z",
+      "hash": "yt_0Uq26enANlk",
+      "content_preview": "Дізнайтеся більше про використання конопляного бетону (hempcrete) у сталому будівництві в новому відео від Timothy Tasker Architects Ltd.",
+      "added_at": "2026-05-08T21:06:44.166153+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "0Uq26enANlk",
+      "draft_filename": "20260508-210644-anons-podkastu-farmed-konoplyanyy-beton-ta-stale-budivnytstvo.md"
     },
     {
       "id": "7f88f367af04",
