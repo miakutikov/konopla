@@ -1,47 +1,109 @@
 {
   "items": [
     {
-      "id": "c4b9447098c5",
-      "type": "article",
-      "title": "Ohio Hemp Court Fight Mirrors Growing Pressure On Michigan Hemp Market - MITechNews",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNeEJNUlBXV3hKbEs0ZXNfTnlsREh1ejllUlN6ejdjbk1ORUpVQ3JPdnVhTmpmWTRSTDg0d1RMdC1JYmd2NzB5enRkemhDeWFkWUxVdG5FeXRfbHRvWmx2Mi1XOHJjSzNhbndJRy1mVWhBNjRHWGhfZ2VLamZTQUFGcEY2cEN0QjZQb2ZCZTZqOFhmM1Zoc0R5YnZZQnU3RnFz?oc=5",
-      "source": "\"hemp industry market business\" - Google News",
-      "summary": "Ohio Hemp Court Fight Mirrors Growing Pressure On Michigan Hemp Market &nbsp;&nbsp; MITechNews",
-      "image_url": "",
-      "date": "2026-05-09T23:31:13+00:00",
-      "hash": "f0b7457ee8b2c013ddf701c4b4cfa2e0",
-      "content_preview": "Ohio Hemp Court Fight Mirrors Growing Pressure On Michigan Hemp Market &nbsp;&nbsp; MITechNews",
-      "added_at": "2026-05-10T09:43:45.420173+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "бізнес"
-    },
-    {
-      "id": "85defbb736dc",
-      "type": "article",
-      "title": "Fiji’s Industrial Hemp Sector: Ambition Meets Implementation Challenges Four Years Post-Legalization",
-      "link": "https://hempgazette.com/news/fiji-industrial-hemp-progress-challenges-post-legalization/",
-      "source": "Hemp Gazette",
-      "summary": "Explore Fiji's industrial hemp sector four years after legalization, examining its economic ambitions, environmental potential, and the regulatory hurdles… The post Fiji&#8217;s Industrial Hemp Sector: Ambition Meets Implementation Challenges Four Years Post-Legalization appeared first on Hemp Gazette .",
-      "image_url": "",
-      "date": "2026-05-10T08:34:49+00:00",
-      "hash": "facef7e7b3de2202b1f828f532cd6e32",
-      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmetics And Skin Care Building With Hemp Other Agricultural Us",
-      "added_at": "2026-05-10T09:43:45.419568+00:00",
+      "id": "fcd6789aca98",
+      "type": "video",
+      "title": "Індійський стартап: коноплі для пластику та текстилю",
+      "link": "https://www.youtube.com/watch?v=KzbataHsU8c",
+      "source": "YouTube: Draper clips",
+      "summary": "Індійський стартап розробляє інноваційні конопляні пластикові гранули та екологічно чистий текстиль, комерціалізуючи цю технологію у великих масштабах.",
+      "image_url": "https://i.ytimg.com/vi/KzbataHsU8c/hqdefault.jpg",
+      "date": "2026-05-10T08:23:31Z",
+      "hash": "yt_KzbataHsU8c",
+      "content_preview": "Індійський стартап розробляє інноваційні конопляні пластикові гранули та екологічно чистий текстиль, комерціалізуючи цю технологію у великих масштабах.",
+      "added_at": "2026-05-10T09:44:35.492487+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "trusted source",
-        "hemp keyword in title",
-        "2 hemp keywords",
-        "substantive content"
+        "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
-      "category_hint": "законодавство"
+      "category_hint": "відео",
+      "youtube_id": "KzbataHsU8c",
+      "draft_filename": "20260510-094435-indiyskyy-startap-konopli-dlya-plastyku-ta-tekstylyu.md"
+    },
+    {
+      "id": "35d9d97e1345",
+      "type": "video",
+      "title": "Відеоогляд: Путівник натуральними тканинами – бавовна, льон, тенсел та коноплі",
+      "link": "https://www.youtube.com/watch?v=1P9AhEwgomY",
+      "source": "YouTube: Ranee Atelier 🪡🧵",
+      "summary": "Дізнайтеся про переваги, текстуру та екологічність різних натуральних тканин, включаючи конопляні, у новому відео від Ranee Atelier.",
+      "image_url": "https://i.ytimg.com/vi/1P9AhEwgomY/hqdefault.jpg",
+      "date": "2026-05-10T05:51:24Z",
+      "hash": "yt_1P9AhEwgomY",
+      "content_preview": "Дізнайтеся про переваги, текстуру та екологічність різних натуральних тканин, включаючи конопляні, у новому відео від Ranee Atelier.",
+      "added_at": "2026-05-10T09:44:54.192586+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "1P9AhEwgomY",
+      "draft_filename": "20260510-094454-videoohlyad-putivnyk-naturalnymy-tkanynamy-bavovna-lon-tensel-ta-konopli.md"
+    },
+    {
+      "id": "d387983e7d4b",
+      "type": "video",
+      "title": "Наука про промислові коноплі: Агрономія та рослинництво (Глава 1)",
+      "link": "https://www.youtube.com/watch?v=WJZBIViyrKA",
+      "source": "YouTube: Mr Hemp Engineering Pty Ltd",
+      "summary": "Портал Konopla.UA представляє анонс нового освітнього відео від Mr Hemp Engineering Pty Ltd, присвяченого глибокому вивченню промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/WJZBIViyrKA/hqdefault.jpg",
+      "date": "2026-05-10T02:10:33Z",
+      "hash": "yt_WJZBIViyrKA",
+      "content_preview": "Портал Konopla.UA представляє анонс нового освітнього відео від Mr Hemp Engineering Pty Ltd, присвяченого глибокому вивченню промислових конопель.",
+      "added_at": "2026-05-10T09:45:16.684184+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "WJZBIViyrKA",
+      "draft_filename": "20260510-094516-nauka-pro-promyslovi-konopli-ahronomiya-ta-roslynnytstvo-hlava-1.md"
+    },
+    {
+      "id": "70c231319e24",
+      "type": "video",
+      "title": "Забивання конопель у човнові дошки: ключовий етап у будівництві дерев'яних човнів",
+      "link": "https://www.youtube.com/watch?v=gIZWqQ0p_1k",
+      "source": "YouTube: aman maurya",
+      "summary": "Дізнайтеся про використання промислових конопель у будівництві дерев'яних човнів у новому відео від aman maurya.",
+      "image_url": "https://i.ytimg.com/vi/gIZWqQ0p_1k/hqdefault.jpg",
+      "date": "2026-05-10T00:39:21Z",
+      "hash": "yt_gIZWqQ0p_1k",
+      "content_preview": "Дізнайтеся про використання промислових конопель у будівництві дерев'яних човнів у новому відео від aman maurya.",
+      "added_at": "2026-05-10T09:45:44.679101+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "gIZWqQ0p_1k",
+      "draft_filename": "20260510-094544-zabyvannya-konopel-u-chovnovi-doshky-klyuchovyy-etap-u-budivnytstvi-derevyanykh-.md"
+    },
+    {
+      "id": "dc7c2b026e68",
+      "type": "video",
+      "title": "Rostock – підвісний світильник ручної роботи з конопляної мотузки (0.5-6.0 м)",
+      "link": "https://www.youtube.com/watch?v=69btKch7RmI",
+      "source": "YouTube: LampVenture",
+      "summary": "На YouTube-каналі LampVenture опубліковано відеоогляд підвісного світильника Rostock, виготовленого вручну з конопляної мотузки, що додає інтер'єру морського шарму та теплого освітлення.",
+      "image_url": "https://i.ytimg.com/vi/69btKch7RmI/hqdefault.jpg",
+      "date": "2026-05-10T00:27:41Z",
+      "hash": "yt_69btKch7RmI",
+      "content_preview": "На YouTube-каналі LampVenture опубліковано відеоогляд підвісного світильника Rostock, виготовленого вручну з конопляної мотузки, що додає інтер'єру морського шарму та теплого освітлення.",
+      "added_at": "2026-05-10T09:46:13.628221+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "69btKch7RmI",
+      "draft_filename": "20260510-094613-rostock-pidvisnyy-svitylnyk-ruchnoyi-roboty-z-konoplyanoyi-motuzky-0-5-6-0-m.md"
     },
     {
       "id": "4330a13616df",
@@ -1847,5 +1909,5 @@
       "category_hint": "біопластик"
     }
   ],
-  "updated_at": "2026-05-09T20:53:00.593100+00:00"
+  "updated_at": "2026-05-10T09:46:13.630039+00:00"
 }
