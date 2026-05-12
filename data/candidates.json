@@ -1,6 +1,90 @@
 {
   "items": [
     {
+      "id": "48d000a7a85e",
+      "type": "video",
+      "title": "HEMP FORTEX презентує колекцію червоного конопляного трикотажу",
+      "link": "https://www.youtube.com/watch?v=P7yXBSZJcmI",
+      "source": "YouTube: HEMP FORTEX",
+      "summary": "На YouTube-каналі HEMP FORTEX опубліковано відео, що демонструє нову колекцію екологічного червоного конопляного трикотажу з унікальними текстурами та кольорами.",
+      "image_url": "https://i.ytimg.com/vi/P7yXBSZJcmI/hqdefault.jpg",
+      "date": "2026-05-12T18:00:18Z",
+      "hash": "yt_P7yXBSZJcmI",
+      "content_preview": "На YouTube-каналі HEMP FORTEX опубліковано відео, що демонструє нову колекцію екологічного червоного конопляного трикотажу з унікальними текстурами та кольорами.",
+      "added_at": "2026-05-12T21:26:22.949871+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "P7yXBSZJcmI",
+      "draft_filename": "20260512-212622-hemp-fortex-prezentuye-kolektsiyu-chervonoho-konoplyanoho-trykotazhu.md"
+    },
+    {
+      "id": "0b16fa1604b9",
+      "type": "video",
+      "title": "Новий продукт \"Sansaara\" з органічної конопляної тканини",
+      "link": "https://www.youtube.com/watch?v=csYCkLasY5Q",
+      "source": "YouTube: T A R A H A",
+      "summary": "Konopla.UA представляє відеоогляд нового продукту \"Sansaara\", виготовленого з органічної конопляної тканини, від каналу T A R A H A.",
+      "image_url": "https://i.ytimg.com/vi/csYCkLasY5Q/hqdefault.jpg",
+      "date": "2026-05-11T10:54:10Z",
+      "hash": "yt_csYCkLasY5Q",
+      "content_preview": "Konopla.UA представляє відеоогляд нового продукту \"Sansaara\", виготовленого з органічної конопляної тканини, від каналу T A R A H A.",
+      "added_at": "2026-05-12T21:26:40.169735+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "csYCkLasY5Q",
+      "draft_filename": "20260512-212640-novyy-produkt-sansaara-z-orhanichnoyi-konoplyanoyi-tkanyny.md"
+    },
+    {
+      "id": "cdfd07b157d9",
+      "type": "video",
+      "title": "Федеральна заборона на коноплі насувається: що потрібно знати?",
+      "link": "https://www.youtube.com/watch?v=jHFK2cAavyQ",
+      "source": "YouTube: Hometown Hero",
+      "summary": "Дізнайтеся про майбутню федеральну заборону на коноплі в США та її наслідки з відеоогляду від Hometown Hero.",
+      "image_url": "https://i.ytimg.com/vi/jHFK2cAavyQ/hqdefault.jpg",
+      "date": "2026-05-12T18:57:39Z",
+      "hash": "yt_jHFK2cAavyQ",
+      "content_preview": "Дізнайтеся про майбутню федеральну заборону на коноплі в США та її наслідки з відеоогляду від Hometown Hero.",
+      "added_at": "2026-05-12T21:27:01.009628+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "jHFK2cAavyQ",
+      "draft_filename": "20260512-212700-federalna-zaborona-na-konopli-nasuvayetsya-shcho-potribno-znaty.md"
+    },
+    {
+      "id": "1ec87dcc5230",
+      "type": "video",
+      "title": "Коноплі очищають ґрунт Техасу: суперрослина вирішує проблеми з PFAS та металами!",
+      "link": "https://www.youtube.com/watch?v=WzuS36CheFk",
+      "source": "YouTube: Clayton Tucker",
+      "summary": "Дізнайтеся, як промислові коноплі можуть врятувати ґрунти Техасу від токсинів, таких як PFAS та важкі метали, у новому відео від Клейтона Такера.",
+      "image_url": "https://i.ytimg.com/vi/WzuS36CheFk/hqdefault.jpg",
+      "date": "2026-05-12T13:41:42Z",
+      "hash": "yt_WzuS36CheFk",
+      "content_preview": "Дізнайтеся, як промислові коноплі можуть врятувати ґрунти Техасу від токсинів, таких як PFAS та важкі метали, у новому відео від Клейтона Такера.",
+      "added_at": "2026-05-12T21:27:23.527754+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "WzuS36CheFk",
+      "draft_filename": "20260512-212723-konopli-ochyshchayut-grunt-tekhasu-superroslyna-vyrishuye-problemy-z-pfas-ta-met.md"
+    },
+    {
       "id": "6d2457ff32e9",
       "type": "article",
       "title": "Canapa light, l'Ue conferma i fondi per gli agricoltori (dalla Pac), ma l'Italia perde il treno: «Da noi regna ancora il caos normativo» - Corriere della Sera",
@@ -1953,5 +2037,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-05-12T10:39:46.230684+00:00"
+  "updated_at": "2026-05-12T21:27:28.529810+00:00"
 }
