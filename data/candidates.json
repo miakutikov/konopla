@@ -1,24 +1,67 @@
 {
   "items": [
     {
-      "id": "828a965a24f5",
-      "type": "article",
-      "title": "Урожайність технічних конопель в «ТАС Агро» на першому етапі збирання становила 1 т/га - UKR.NET",
-      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9oeHA5eGlQeXRFNlhWY3pmZVViRndueDFJbnVVNUJpOGZabENNWTQ0WGZwOVRjRnlNZWE2cVpBVE9sTXJWZmFaSnZCUmVrQmVQRHd5c1B0ekVmOWZEdWRzdEJHR2RfUFRVcUlsTw?oc=5",
-      "source": "\"технічні коноплі\" - Google Новини",
-      "summary": "Урожайність технічних конопель в «ТАС Агро» на першому етапі збирання становила 1 т/га &nbsp;&nbsp; UKR.NET",
-      "image_url": "",
-      "date": "2026-05-14T22:57:11+00:00",
-      "hash": "22b38124477cba2080fe110f50af13c3",
-      "content_preview": "Урожайність технічних конопель в «ТАС Агро» на першому етапі збирання становила 1 т/га &nbsp;&nbsp; UKR.NET",
-      "added_at": "2026-05-16T20:57:27.978196+00:00",
-      "relevance_score": 0.5,
+      "id": "186aa48f3baa",
+      "type": "video",
+      "title": "Конопляний одяг стає м'якшим з кожним пранням. Бавовна — навпаки",
+      "link": "https://www.youtube.com/watch?v=6eCn4kFLCMQ",
+      "source": "YouTube: WholeHemp",
+      "summary": "YouTube-канал WholeHemp розкриває унікальні переваги конопляного одягу над бавовняним, підкреслюючи його довговічність та екологічність.",
+      "image_url": "https://i.ytimg.com/vi/6eCn4kFLCMQ/hqdefault.jpg",
+      "date": "2026-05-16T16:00:09Z",
+      "hash": "yt_6eCn4kFLCMQ",
+      "content_preview": "YouTube-канал WholeHemp розкриває унікальні переваги конопляного одягу над бавовняним, підкреслюючи його довговічність та екологічність.",
+      "added_at": "2026-05-16T20:58:14.122581+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "агро"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6eCn4kFLCMQ",
+      "draft_filename": "20260516-205814-konoplyanyy-odyah-staye-myakshym-z-kozhnym-prannyam-bavovna-navpaky.md"
+    },
+    {
+      "id": "b20c5f50799d",
+      "type": "video",
+      "title": "Визначення конопель для канабіноїдів та промислового використання",
+      "link": "https://www.youtube.com/watch?v=6dvxDAyZPa4",
+      "source": "YouTube: Chris 420 Blaze It",
+      "summary": "На Konopla.UA доступне нове відео від Chris 420 Blaze It, що розкриває ключові аспекти визначення промислових конопель для виробництва канабіноїдів та широкого спектру промислового застосування.",
+      "image_url": "https://i.ytimg.com/vi/6dvxDAyZPa4/hqdefault.jpg",
+      "date": "2026-05-16T20:00:03Z",
+      "hash": "yt_6dvxDAyZPa4",
+      "content_preview": "На Konopla.UA доступне нове відео від Chris 420 Blaze It, що розкриває ключові аспекти визначення промислових конопель для виробництва канабіноїдів та широкого спектру промислового застосування.",
+      "added_at": "2026-05-16T20:58:36.597082+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6dvxDAyZPa4",
+      "draft_filename": "20260516-205836-vyznachennya-konopel-dlya-kanabinoyidiv-ta-promyslovoho-vykorystannya.md"
+    },
+    {
+      "id": "bdef52c08968",
+      "type": "video",
+      "title": "Перший у світі конопляний літак від Hempearth: скоро в небі!",
+      "link": "https://www.youtube.com/watch?v=V2J6TkGf16Y",
+      "source": "YouTube: Hempearth",
+      "summary": "Компанія Hempearth анонсувала створення першого у світі літака з промислових конопель. Перегляньте відео, щоб дізнатися деталі цього інноваційного проєкту.",
+      "image_url": "https://i.ytimg.com/vi/V2J6TkGf16Y/hqdefault.jpg",
+      "date": "2026-05-16T17:33:09Z",
+      "hash": "yt_V2J6TkGf16Y",
+      "content_preview": "Компанія Hempearth анонсувала створення першого у світі літака з промислових конопель. Перегляньте відео, щоб дізнатися деталі цього інноваційного проєкту.",
+      "added_at": "2026-05-16T20:58:56.122876+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "V2J6TkGf16Y",
+      "draft_filename": "20260516-205856-pershyy-u-sviti-konoplyanyy-litak-vid-hempearth-skoro-v-nebi.md"
     },
     {
       "id": "92b1ab6e372c",
@@ -2240,5 +2283,5 @@
       "category_hint": "інше"
     }
   ],
-  "updated_at": "2026-05-16T09:48:30.978775+00:00"
+  "updated_at": "2026-05-16T20:59:01.126186+00:00"
 }
