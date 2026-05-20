@@ -1,46 +1,173 @@
 {
   "items": [
     {
-      "id": "299a47cecc80",
-      "type": "video",
-      "title": "Alisara Meepaa: Відеоогляд конопляного одягу ручної роботи",
-      "link": "https://www.youtube.com/watch?v=lHh7vNONU2k",
-      "source": "YouTube: อลิสผ้าชนเผ่า Hilltribe 𝑻𝒓𝒊𝒃𝒂𝒍  vintagestyle ",
-      "summary": "Konopla.UA пропонує переглянути відео від Alisara Meepaa, присвячене стильному конопляному одягу ручної роботи.",
-      "image_url": "https://i.ytimg.com/vi/lHh7vNONU2k/hqdefault.jpg",
-      "date": "2026-05-20T10:28:55Z",
-      "hash": "yt_lHh7vNONU2k",
-      "content_preview": "Konopla.UA пропонує переглянути відео від Alisara Meepaa, присвячене стильному конопляному одягу ручної роботи.",
-      "added_at": "2026-05-20T10:57:26.592721+00:00",
-      "relevance_score": 0.9,
+      "id": "cedfeb854c15",
+      "type": "article",
+      "title": "Alaska Legislature Passes Bill to Modernize Industrial Hemp Regulation, Awaiting Governor's Signature - Hemp Gazette",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQQXZSMDBqU0sxbDNiSmZGWkh3cmlRWWVqSW5nMGwwaXlZamZzbjBKbmxMR2RUWms1OV9QbnhFc3VaMTV6Y2NNT2Q3WmF4QzVOdlJhdnJjWHpEcmJQbWQxVkdiRTZKZmZRd0RGbmV2WjdnUWVGeUVMb3BfYV9xQm44c1ljLUx1UkczdEE0?oc=5",
+      "source": "\"hemp australia industry\" - Google News",
+      "summary": "Alaska Legislature Passes Bill to Modernize Industrial Hemp Regulation, Awaiting Governor's Signature &nbsp;&nbsp; Hemp Gazette",
+      "image_url": "",
+      "date": "2026-05-19T23:37:59+00:00",
+      "hash": "815d38112fec6f9b6d9804e01196e5aa",
+      "content_preview": "Alaska Legislature Passes Bill to Modernize Industrial Hemp Regulation, Awaiting Governor's Signature &nbsp;&nbsp; Hemp Gazette",
+      "added_at": "2026-05-20T16:58:48.080852+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "lHh7vNONU2k",
-      "draft_filename": "20260520-105726-alisara-meepaa-videoohlyad-konoplyanoho-odyahu-ruchnoyi-roboty.md"
+      "source_trusted": false,
+      "category_hint": "законодавство"
     },
     {
-      "id": "71a3c1625fdf",
+      "id": "f59a9a1537f7",
+      "type": "article",
+      "title": "US Industrial Hemp Fibre Enters India’s Textile Supply Chain Through New Partnership",
+      "link": "https://hempgazette.com/news/us-industrial-hemp-fibre-india-textile-supply-chain/",
+      "source": "Hemp Gazette",
+      "summary": "Explore how US-grown industrial hemp fibre is entering India's textile supply chain, addressing global demand for sustainable and traceable materials. Thi… The post US Industrial Hemp Fibre Enters India&#8217;s Textile Supply Chain Through New Partnership appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-05-19T23:44:54+00:00",
+      "hash": "b46adfe9cd7caa76c9792553ba5f3fb8",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Publicly listed cannabis and hemp companies by country Flying With Medical Cannabis Industrial Hemp Industrial Hemp Beginner’s Guide Hemp ",
+      "added_at": "2026-05-20T16:58:48.080303+00:00",
+      "relevance_score": 0.8,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "hemp keyword in title",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "текстиль"
+    },
+    {
+      "id": "10b6716ab525",
+      "type": "article",
+      "title": "Thromboembolism Risk in Lung Cancer Patients Receiving Immune Checkpoint Inhibitors: A Retrospective Study",
+      "link": "https://hempgazette.com/news/thromboembolism-lung-cancer-immune-checkpoint-inhibitors/",
+      "source": "Hemp Gazette",
+      "summary": "New research explores the incidence and risk factors of thromboembolism in lung cancer patients treated with immune checkpoint inhibitors. Understand the… The post Thromboembolism Risk in Lung Cancer Patients Receiving Immune Checkpoint Inhibitors: A Retrospective Study appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-05-20T06:18:36+00:00",
+      "hash": "4ee1357b6d067b66fe5243919abe6024",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Publicly listed cannabis and hemp companies by country Flying With Medical Cannabis Industrial Hemp Industrial Hemp Beginner’s Guide Hemp ",
+      "added_at": "2026-05-20T16:58:48.079636+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "законодавство"
+    },
+    {
+      "id": "a09a1503a1e5",
+      "type": "article",
+      "title": "Beyond Dopamine: New Research Uncovers Multisystem Brain Networks in Addiction Mechanisms",
+      "link": "https://hempgazette.com/news/addiction-mechanisms-multisystem-brain-networks/",
+      "source": "Hemp Gazette",
+      "summary": "A recent review in Frontiers in Pharmacology explores the complex multisystem brain networks underlying addiction mechanisms, moving beyond dopamine-centr… The post Beyond Dopamine: New Research Uncovers Multisystem Brain Networks in Addiction Mechanisms appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-05-20T06:18:36+00:00",
+      "hash": "e2e9ea154c1678a21f79b09a8a2e7a17",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Publicly listed cannabis and hemp companies by country Flying With Medical Cannabis Industrial Hemp Industrial Hemp Beginner’s Guide Hemp ",
+      "added_at": "2026-05-20T16:58:48.078925+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "наука"
+    },
+    {
+      "id": "064ec5c64242",
+      "type": "article",
+      "title": "Cost-Utility Analysis Suggests Ezetimibe Addition to Statin Therapy May Be Cost-Effective for Acute Coronary Syndrome Management",
+      "link": "https://hempgazette.com/news/acute-coronary-syndrome-ezetimibe-cost-effectiveness/",
+      "source": "Hemp Gazette",
+      "summary": "A recent cost-utility analysis published in Frontiers in Pharmacology explores whether adding ezetimibe to statin therapy is cost-effective for Acute Coro… The post Cost-Utility Analysis Suggests Ezetimibe Addition to Statin Therapy May Be Cost-Effective for Acute Coronary Syndrome Management appeared first on Hemp Gazette .",
+      "image_url": "",
+      "date": "2026-05-20T06:18:36+00:00",
+      "hash": "1d51301a6996c8a7f379a45883b11581",
+      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Publicly listed cannabis and hemp companies by country Flying With Medical Cannabis Industrial Hemp Industrial Hemp Beginner’s Guide Hemp ",
+      "added_at": "2026-05-20T16:58:48.078252+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "trusted source",
+        "substantive content"
+      ],
+      "source_trusted": true,
+      "category_hint": "наука"
+    },
+    {
+      "id": "9de0ac4cbe8a",
+      "type": "article",
+      "title": "Italian hemp sector shifts toward food and fiber as industrial markets regain focus",
+      "link": "https://hemptoday.net/italian-hemp-sector-shifts-toward-food-and-fiber-as-industrial-markets-regain-focus/",
+      "source": "HempToday®",
+      "summary": "Italy’s industrial hemp sector is showing signs of life after years of contraction, with momentum emerging in food seed and green-building materials, according to a recent analysis. The shift suggests [&#8230;]",
+      "image_url": "",
+      "date": "2026-05-20T07:40:31+00:00",
+      "hash": "9c40620b05b7ca1911eda1a0e7a1dc57",
+      "content_preview": "Italy’s industrial hemp sector is showing signs of life after years of contraction, with momentum emerging in food seed and green-building materials, according to a recent analysis . The shift suggests Italy’s hemp economy may be returning to more traditional industrial markets built around grain an",
+      "added_at": "2026-05-20T16:58:48.077659+00:00",
+      "relevance_score": 0.7,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords",
+        "substantive content"
+      ],
+      "source_trusted": false,
+      "category_hint": "текстиль"
+    },
+    {
+      "id": "95ee592f6ab8",
+      "type": "article",
+      "title": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти - ВІККА",
+      "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxQUzhMZElHUktVcERKanYxSjlPVlprVzlxT0dJQ0lEdk5aUHVHdlRkVGtGVFVLLUltbUo0UElqOWttVUt1X2lGZEd0VFMwcjFxUklISENQTjZTV0lzVHRuRjhrVkpPdUNIb3Fsd1pON2lmaEQyZjhIVHZ5NkZ1RFllRjBxRFQxUm5acEpOdUR0MXFOMlIwODdEV3F3VWpyRS1mbzFucTBWdm9KYmNfdWJfTzNrRVBuZ1ZOamN4a0tvd2lDZjJSN2ZRemR5azZiQWM2UGxWVm5jYkVBX0ZUU0d1RVR1TUM3OWJqRVNtdHJkX1pmSmpZT2J0R3dQTHA?oc=5",
+      "source": "\"конопляний\" - Google Новини",
+      "summary": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти &nbsp;&nbsp; ВІККА",
+      "image_url": "",
+      "date": "2026-05-20T10:00:44+00:00",
+      "hash": "f370d35872013d25fe916af067fac177",
+      "content_preview": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти &nbsp;&nbsp; ВІККА",
+      "added_at": "2026-05-20T16:58:48.077352+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
+      ],
+      "source_trusted": false,
+      "category_hint": "агро"
+    },
+    {
+      "id": "f4757f474883",
       "type": "video",
-      "title": "Mahasale презентує: сорочки з бамбука та конопель для стильного гардеробу",
-      "link": "https://www.youtube.com/watch?v=wXM83z7eoFE",
-      "source": "YouTube: Mahasale",
-      "summary": "Індійський модний бренд Mahasale випустив відеоогляд своєї нової колекції чоловічого одягу, що включає стильні сорочки з бамбука та конопель, а також з конопляної бавовни.",
-      "image_url": "https://i.ytimg.com/vi/wXM83z7eoFE/hqdefault.jpg",
-      "date": "2026-05-19T07:01:06Z",
-      "hash": "yt_wXM83z7eoFE",
-      "content_preview": "Індійський модний бренд Mahasale випустив відеоогляд своєї нової колекції чоловічого одягу, що включає стильні сорочки з бамбука та конопель, а також з конопляної бавовни.",
-      "added_at": "2026-05-20T10:57:54.434089+00:00",
+      "title": "Яйця + авокадо + конопляні серця Tiny Sprouts: ідеальна страва для малюка",
+      "link": "https://www.youtube.com/watch?v=CgeTHzEJPOI",
+      "source": "YouTube: Tiny Sprouts | Real Food Nutrition for Kids",
+      "summary": "На каналі Tiny Sprouts вийшло відео, що демонструє, як конопляні серця збагачують раціон немовлят залізом та корисними жирами, критично важливими для їхнього розвитку.",
+      "image_url": "https://i.ytimg.com/vi/CgeTHzEJPOI/hqdefault.jpg",
+      "date": "2026-05-20T04:21:36Z",
+      "hash": "yt_CgeTHzEJPOI",
+      "content_preview": "На каналі Tiny Sprouts вийшло відео, що демонструє, як конопляні серця збагачують раціон немовлят залізом та корисними жирами, критично важливими для їхнього розвитку.",
+      "added_at": "2026-05-20T10:58:40.625043+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "wXM83z7eoFE",
-      "draft_filename": "20260520-105754-mahasale-prezentuye-sorochky-z-bambuka-ta-konopel-dlya-stylnoho-harderobu.md"
+      "youtube_id": "CgeTHzEJPOI",
+      "draft_filename": "20260520-105840-yaytsya-avokado-konoplyani-sertsya-tiny-sprouts-idealna-strava-dlya-malyuka.md"
     },
     {
       "id": "653765155a57",
@@ -64,25 +191,46 @@
       "draft_filename": "20260520-105821-konoplyani-bombochky-dlya-vanny-koly-tilo-vtomlene-a-rozum-shche-pratsyuye.md"
     },
     {
-      "id": "f4757f474883",
+      "id": "71a3c1625fdf",
       "type": "video",
-      "title": "Яйця + авокадо + конопляні серця Tiny Sprouts: ідеальна страва для малюка",
-      "link": "https://www.youtube.com/watch?v=CgeTHzEJPOI",
-      "source": "YouTube: Tiny Sprouts | Real Food Nutrition for Kids",
-      "summary": "На каналі Tiny Sprouts вийшло відео, що демонструє, як конопляні серця збагачують раціон немовлят залізом та корисними жирами, критично важливими для їхнього розвитку.",
-      "image_url": "https://i.ytimg.com/vi/CgeTHzEJPOI/hqdefault.jpg",
-      "date": "2026-05-20T04:21:36Z",
-      "hash": "yt_CgeTHzEJPOI",
-      "content_preview": "На каналі Tiny Sprouts вийшло відео, що демонструє, як конопляні серця збагачують раціон немовлят залізом та корисними жирами, критично важливими для їхнього розвитку.",
-      "added_at": "2026-05-20T10:58:40.625043+00:00",
+      "title": "Mahasale презентує: сорочки з бамбука та конопель для стильного гардеробу",
+      "link": "https://www.youtube.com/watch?v=wXM83z7eoFE",
+      "source": "YouTube: Mahasale",
+      "summary": "Індійський модний бренд Mahasale випустив відеоогляд своєї нової колекції чоловічого одягу, що включає стильні сорочки з бамбука та конопель, а також з конопляної бавовни.",
+      "image_url": "https://i.ytimg.com/vi/wXM83z7eoFE/hqdefault.jpg",
+      "date": "2026-05-19T07:01:06Z",
+      "hash": "yt_wXM83z7eoFE",
+      "content_preview": "Індійський модний бренд Mahasale випустив відеоогляд своєї нової колекції чоловічого одягу, що включає стильні сорочки з бамбука та конопель, а також з конопляної бавовни.",
+      "added_at": "2026-05-20T10:57:54.434089+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "CgeTHzEJPOI",
-      "draft_filename": "20260520-105840-yaytsya-avokado-konoplyani-sertsya-tiny-sprouts-idealna-strava-dlya-malyuka.md"
+      "youtube_id": "wXM83z7eoFE",
+      "draft_filename": "20260520-105754-mahasale-prezentuye-sorochky-z-bambuka-ta-konopel-dlya-stylnoho-harderobu.md"
+    },
+    {
+      "id": "299a47cecc80",
+      "type": "video",
+      "title": "Alisara Meepaa: Відеоогляд конопляного одягу ручної роботи",
+      "link": "https://www.youtube.com/watch?v=lHh7vNONU2k",
+      "source": "YouTube: อลิสผ้าชนเผ่า Hilltribe 𝑻𝒓𝒊𝒃𝒂𝒍  vintagestyle ",
+      "summary": "Konopla.UA пропонує переглянути відео від Alisara Meepaa, присвячене стильному конопляному одягу ручної роботи.",
+      "image_url": "https://i.ytimg.com/vi/lHh7vNONU2k/hqdefault.jpg",
+      "date": "2026-05-20T10:28:55Z",
+      "hash": "yt_lHh7vNONU2k",
+      "content_preview": "Konopla.UA пропонує переглянути відео від Alisara Meepaa, присвячене стильному конопляному одягу ручної роботи.",
+      "added_at": "2026-05-20T10:57:26.592721+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "lHh7vNONU2k",
+      "draft_filename": "20260520-105726-alisara-meepaa-videoohlyad-konoplyanoho-odyahu-ruchnoyi-roboty.md"
     },
     {
       "id": "4165feff8603",
@@ -2363,228 +2511,6 @@
       "category_hint": "відео",
       "youtube_id": "VzVJo87zW2I",
       "draft_filename": "20260513-213352-chleny-plemeni-rouzbad-siu-osvoyuyut-novu-spravu-budivnytstvo-z-konoplebetonu.md"
-    },
-    {
-      "id": "2c687cea9e48",
-      "type": "article",
-      "title": "Canapa light, l'Ue conferma i fondi per gli agricoltori (dalla Pac), ma l'Italia perde il treno: «Da noi regna ancora il caos normativo» - Corriere della Sera",
-      "link": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxNaXVNc211WTRmaTlSUGh4bzBVS3ZIYzkxVEpiU0FXenF0UjJ4SFBqaVNmXzRHaFNyZmZ2RWt6QnZ4OV9jZWNUeTMtdTgzdVhUMlpwY2VCekF4ckFHWHFJS3AtVW1NQVJrZDFGNDFKVHlGak9kVkhwTmtIUGI3S08yOHdMZkxrM0h3TFlIME1VSWVHQmVqaDhaV01kWHYxUTEtaGNIU0EwbmdKel94YWxoVUxYcU9hLWZyZ1dlSnVnRFQ0d21fVUZCeUdXSGxqQUxmV2F4Y3lhZi1YeExvMUpWNXhIYWRFS3l6V0hZSmZWWHZQZ01FU1d6Y3IwbUcyLTA5ODh5bFBmazJzYWN5eUdBdWNHVlNtdGUwNGJuM1JiNVY2RTNqWG9iTGg5d0ZwcGdUbVl2ZjlSR0NLMHlDVE4tUWNNY1JhYmdQZXAzS0JqTUNqX3U2N3kw0gHcAkFVX3lxTE9tU25CejNhRG44eEtURTZSZEs4Y3A5aEc1NGhNanBraEZFM0xDa2M0X1FxUFRteHlpckRxUU9vdU9McUlDOU9heTVxeXJyakZETVFBbGpJNGxaQzFjUXZPTXZhdmpjZTMtaHpKOG03SU9iYW9wcmJxTWhINmt1bU9QajNhbHBJUlludzUyX3hzQkhqbk5FS3cxVzA5ZEdDajlZbU8xeGpjaGN2TmluQ1dQM19uR0E3b2tubHZFR1B5ajhwYXNkZ0ZXOFZycW92Q0I5X0tJNlhhZ0RodHBMV1NuTlpZeFlvV3BjR0o3WnZuclE0Qk4wXy1nYlBJal96WmtMQUxFS1pyeWxIclM0MFZaejdWOGpuUVgyeDVyc2tXSy16TmRVdDJFNEl2cW45UkRob3otX0FJUkVOUmNPRzlGdGY3VEY0RGhBaVdtZElySEU3WEs5UkszaG1xUQ?oc=5",
-      "source": "\"canapa industriale italia\" - Google News",
-      "summary": "Canapa light, l'Ue conferma i fondi per gli agricoltori (dalla Pac), ma l'Italia perde il treno: «Da noi regna ancora il caos normativo» &nbsp;&nbsp; Corriere della Sera",
-      "image_url": "",
-      "date": "2026-05-11T07:32:00+00:00",
-      "hash": "3db9fa94c1a53b947003e3c069719767",
-      "content_preview": "Canapa light, l'Ue conferma i fondi per gli agricoltori (dalla Pac), ma l'Italia perde il treno: «Da noi regna ancora il caos normativo» &nbsp;&nbsp; Corriere della Sera",
-      "added_at": "2026-05-13T16:25:01.724934+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "інше"
-    },
-    {
-      "id": "5786b2d39658",
-      "type": "article",
-      "title": "The 2018 Farm Bill explained: What it changed for hemp, CBD and THC - AZ Big Media",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPS2lIYTVjSVc5c2dyT1RLQzBtZFh5enprQ2RhMTRGMDhjcW11V2htNnRpYVZkT09kTzBXR3Jmcy1oSXlXcjA4d1RzM2FUdnNzUmt1OGhRcEEzWnRzLS01dzZfaDBzRE9UdXRITUtSUkRHMGpDS2dyMnJ6Z1FMYjFnSGVUS2ktNWJCdldKVGlzdm1OSkJhOV9sQVNwbw?oc=5",
-      "source": "\"hemp legislation regulation farm bill\" - Google N",
-      "summary": "The 2018 Farm Bill explained: What it changed for hemp, CBD and THC &nbsp;&nbsp; AZ Big Media",
-      "image_url": "",
-      "date": "2026-05-11T10:57:22+00:00",
-      "hash": "ba83d7c8c3daa91f7589a1564ab7b0cd",
-      "content_preview": "The 2018 Farm Bill explained: What it changed for hemp, CBD and THC &nbsp;&nbsp; AZ Big Media",
-      "added_at": "2026-05-13T16:25:01.724743+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "агро"
-    },
-    {
-      "id": "6899ab1fed78",
-      "type": "article",
-      "title": "Hemp Fiber Market Projected to Reach US$46.80 Billion by 2033, Driven by Diverse Applications - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFA2QS1FaENPOEJBdTBKWmFVS3prRkc4M1VTZmZYb21wNVh3UFBHeFVEU0plNWZSVDBYSHJiU1ltUlEtRDg4eFYyZUx1ZkVXSFB3Y0N4cnkxOXVWUnk1SV8xVGJmaDhybWVmLWg1NmpPanNSN2w2dFFQZA?oc=5",
-      "source": "\"hemp bioplastic composite material\" - Google News",
-      "summary": "Hemp Fiber Market Projected to Reach US$46.80 Billion by 2033, Driven by Diverse Applications &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-12T06:46:39+00:00",
-      "hash": "364282826b00816a529a8d220d9640f3",
-      "content_preview": "Hemp Fiber Market Projected to Reach US$46.80 Billion by 2033, Driven by Diverse Applications &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.724528+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
-    },
-    {
-      "id": "9caa33d03c40",
-      "type": "article",
-      "title": "Ghana Seeks Vermont Expertise to Develop Industrial Hemp and Medicinal Cannabis Marketplace - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPaU1oNk1BUnVXWXV2VW9FYTNKaHhFMHo2MEVwbEg0M0F6OE1SRnc0NmM0YU4zbDhlbmd6cG9tdVZEM0tqRl84ZjdkOE43eS1aTjhubkQ0b0R6Um15SnoyZEVYWDFrNDFUYXVjbDd4UEpLSUg1S2xtM045U0xFaS1NX3V1dkd2c1dRNkNj?oc=5",
-      "source": "\"hemp australia industry\" - Google News",
-      "summary": "Ghana Seeks Vermont Expertise to Develop Industrial Hemp and Medicinal Cannabis Marketplace &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T09:59:19+00:00",
-      "hash": "8ae14e0cf7fccf8aba144916995131da",
-      "content_preview": "Ghana Seeks Vermont Expertise to Develop Industrial Hemp and Medicinal Cannabis Marketplace &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.724366+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "бізнес"
-    },
-    {
-      "id": "2eb44ede36b9",
-      "type": "article",
-      "title": "Hybrid Seed Technology Advances Cannabis Cultivation Yield, Offers Industrial Hemp Potential - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPYmt0clZYMkVjTmhYTXI3MjNLLWxDX255SFBZMzZ5TEVra2RKaEMzOHRsbkhseVZ3VV92N1RCdkNIOG4wRGREUlJCNjFjYlJDaVZVU0htMkhVd2dtckVkSmNFZU1tUk9XcFM5TnVUeUVyN3I4amVWMktoaURLRVBibEVRbkZhWFlZYi1lbnBxTXhPZw?oc=5",
-      "source": "\"industrial hemp technology\" - Google News",
-      "summary": "Hybrid Seed Technology Advances Cannabis Cultivation Yield, Offers Industrial Hemp Potential &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T11:52:35+00:00",
-      "hash": "17bd97ea36406f84df60d6242e50e39e",
-      "content_preview": "Hybrid Seed Technology Advances Cannabis Cultivation Yield, Offers Industrial Hemp Potential &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.724202+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "агро"
-    },
-    {
-      "id": "c349b6a33488",
-      "type": "article",
-      "title": "Reliable Industrial Hemp Genetics: The Foundation for Industry Scale - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPZG5kZ1hPVFN2YldIYnROam1kVHZXTVAwbGpNOFZuZmtEUEJUX3VxQTdlOG40ZW45UF94OWthVFRBSmU4UEFtS21VWEdpUTI2WTF4TVU1MFZfdGcycHQyVEtQQWtpc0FtTndqbFc2OEFaS3V3NHNNd002bFJrMnVZSTBBbXE?oc=5",
-      "source": "\"hemp australia industry\" - Google News",
-      "summary": "Reliable Industrial Hemp Genetics: The Foundation for Industry Scale &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:01:09+00:00",
-      "hash": "1693ab440f1b73e54f2ae365b6b5a238",
-      "content_preview": "Reliable Industrial Hemp Genetics: The Foundation for Industry Scale &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.724039+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "інше"
-    },
-    {
-      "id": "33be320d802b",
-      "type": "article",
-      "title": "Virginia Hemp Industry Faces Uncertainty Amid Federal Restrictions and State Regulatory Delays - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5hcWgwcXJhVm5QamlPZmJVZGdKbXhNLVJfYmJwUkpVNGo1QTF1NGFFZHhNdzZ3RFpycGREY3F3RVNoYWdvVjJ5TFFBdi1zNFd4dzdmYnIzS2tQX3JRZXZCVm9kQU4tUkpVZy1NbzdTOU9ZQk1HUERodE43Y0gwUQ?oc=5",
-      "source": "\"hemp industry market business\" - Google News",
-      "summary": "Virginia Hemp Industry Faces Uncertainty Amid Federal Restrictions and State Regulatory Delays &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:01:09+00:00",
-      "hash": "6d7dbb2971f884abc234e29f81b27749",
-      "content_preview": "Virginia Hemp Industry Faces Uncertainty Amid Federal Restrictions and State Regulatory Delays &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.723871+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "інше"
-    },
-    {
-      "id": "0110b8b93964",
-      "type": "article",
-      "title": "New Industrial Hemp Fibre Processing Plant to Boost Sustainable Building Materials in Germany - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNaml6dDVRX2NDTDlSRjZTWUtlMmxqNm0yMkdleVg2cWRlbi1UY3NlTmh0ZktrNEhSa01CdFZpTWpJelVnWnpTVHZEZENUa2wzUTdmNGpQYVNXZXhXZzhGOXpPTjZiS2Yyc1o4QWp5dU40ZkhwaFAtUDcyM1paemxoRHFBdmJjbXdBZjBWQw?oc=5",
-      "source": "\"hemp germany industry\" - Google News",
-      "summary": "New Industrial Hemp Fibre Processing Plant to Boost Sustainable Building Materials in Germany &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:04:10+00:00",
-      "hash": "4e1e7cafd89a8cd8e62d512dbfaa9ddd",
-      "content_preview": "New Industrial Hemp Fibre Processing Plant to Boost Sustainable Building Materials in Germany &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.723678+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
-    },
-    {
-      "id": "dcf83e04239a",
-      "type": "article",
-      "title": "Australian Industrial Hemp Alliance Challenges ODC on Restrictive Regulation - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQU2EtOWZJT01TSXF6WVNNZi1IM2VoczNlUVFMdXcxaXoyVXUyTUM1T3g2RndrMXJRVTZXejhtM2pXaXlUNVM0WkFnNTJmQ19BN0ExSjBybS1sc3dTWGRxcXlrLUlPb0tJVDZic0FwSDNTWkNQX09SNElnMVdRSGFqTDMzUkw2LVZiMWJRaUxzV0RQZw?oc=5",
-      "source": "\"hemp australia industry\" - Google News",
-      "summary": "Australian Industrial Hemp Alliance Challenges ODC on Restrictive Regulation &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:10:47+00:00",
-      "hash": "e879c252671086c152381e18a5a7f618",
-      "content_preview": "Australian Industrial Hemp Alliance Challenges ODC on Restrictive Regulation &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.723483+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "законодавство"
-    },
-    {
-      "id": "6577705ccee4",
-      "type": "article",
-      "title": "Panda Biotech and Culturewell Partner to Bring US Hemp Fibre to India’s Textile Industry - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUnFQWGR6RjVwNnVZbEZMSFhUZUItakxJcWJZNkxNU1RNRC1WbnZMbXRpckFZbEpVNko1Q2gwbEwxanZDbTgzQ0l0SzhJUGNEWGdOV3B0QVpVQ0VMT1VvQVZLV3FjWTlfTms0bEZVaWV3eVYzTkNKUDFDbEdRTlE0T2tjT2ZMNUxoTVJUTA?oc=5",
-      "source": "\"hemp india textile agriculture\" - Google News",
-      "summary": "Panda Biotech and Culturewell Partner to Bring US Hemp Fibre to India’s Textile Industry &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:15:39+00:00",
-      "hash": "39c8710d3721cc16b2f369d75d49b93c",
-      "content_preview": "Panda Biotech and Culturewell Partner to Bring US Hemp Fibre to India’s Textile Industry &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-13T16:25:01.723291+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
-    },
-    {
-      "id": "b64d1b946edf",
-      "type": "article",
-      "title": "KwaZulu-Natal Farmers’ Hesitation Signals Challenges for Industrial Hemp Adoption",
-      "link": "https://hempgazette.com/news/kwazulu-natal-farmers-industrial-hemp-adoption/",
-      "source": "Hemp Gazette",
-      "summary": "Explore the potential reasons behind KwaZulu-Natal farmers' reported hesitation to adopt industrial hemp, highlighting the challenges and support needed f… The post KwaZulu-Natal Farmers&#8217; Hesitation Signals Challenges for Industrial Hemp Adoption appeared first on Hemp Gazette .",
-      "image_url": "",
-      "date": "2026-05-13T12:30:03+00:00",
-      "hash": "c0323f02c3dd3db4d772d6746e418eed",
-      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmet",
-      "added_at": "2026-05-13T16:25:01.722660+00:00",
-      "relevance_score": 0.8,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "trusted source",
-        "hemp keyword in title",
-        "substantive content"
-      ],
-      "source_trusted": true,
-      "category_hint": "агро"
     }
   ],
   "updated_at": "2026-05-20T10:58:45.628949+00:00"
