@@ -1,46 +1,87 @@
 {
   "items": [
     {
-      "id": "1856d0bf680e",
-      "type": "video",
-      "title": "Промислові сорти конопель: українська Harmoniia та угорський Cannakomp",
-      "link": "https://www.youtube.com/watch?v=VF613_rVS2M",
-      "source": "YouTube: Радіо Технічних Конопель",
-      "summary": "Нове відео від «Радіо Технічних Конопель» порівнює український сорт Harmoniia та угорський Cannakomp, висвітлюючи їхні унікальні властивості для текстильної промисловості та промислових товарів.",
-      "image_url": "https://i.ytimg.com/vi/VF613_rVS2M/hqdefault.jpg",
-      "date": "2026-05-19T21:34:00Z",
-      "hash": "yt_VF613_rVS2M",
-      "content_preview": "Нове відео від «Радіо Технічних Конопель» порівнює український сорт Harmoniia та угорський Cannakomp, висвітлюючи їхні унікальні властивості для текстильної промисловості та промислових товарів.",
-      "added_at": "2026-05-20T22:00:23.457482+00:00",
-      "relevance_score": 0.9,
+      "id": "206b0a42cc50",
+      "type": "article",
+      "title": "New partnership brings US grown hemp fiber to Vietnam textile supply chain - MSN",
+      "link": "https://news.google.com/rss/articles/CBMi2wJBVV95cUxQQzhzVlp4VTZWejdPMGlXNFB2dTlPYlQ5aVFsYXl6Y0pCdExRS2VYRUhSV19aTmF2dXNJbUVyOF9WQTVBeG04TmR4VEJvSjczdGVQVTltM0l5a3oya09paHFadnk3MEZwUEtyWkNnVHdfNmVQVk1URnJub0o3WHhLYU00clJtNGV4WUwyWU00aUxGSWNwTUFRNTZmbm5UTnkyQnlKYkI4TnFmUmJ0OERwdjVNd3hJUXlfQjB5QXlWWDloOXFiVjBkUDhyTlNLNm9CLVMzM1g3OUtsTlVXWXcweXBTdFh1ZkQ3VWFWd2xZbUNSa0Y4LURYU3BOMURtV1dwVGx1bU5XLWE4MUgxbWd1XzRRSGhuODYyUmROU3BNRGx2LTlJN3RsWjdSbFd6WTZZOHV0b3NUbmlMQ0c3SnlGSnIyU3dNalB2aWdpdzhjTm9ZMkhwdWtMbEd1aw?oc=5",
+      "source": "\"china hemp textile production\" - Google News",
+      "summary": "New partnership brings US grown hemp fiber to Vietnam textile supply chain &nbsp;&nbsp; MSN",
+      "image_url": "",
+      "date": "2026-05-17T23:04:21+00:00",
+      "hash": "e7375a5283d453588b36d6f68ce899bc",
+      "content_preview": "New partnership brings US grown hemp fiber to Vietnam textile supply chain &nbsp;&nbsp; MSN",
+      "added_at": "2026-05-21T06:16:48.326058+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "VF613_rVS2M",
-      "draft_filename": "20260520-220023-promyslovi-sorty-konopel-ukrayinska-harmoniia-ta-uhorskyy-cannakomp.md"
+      "source_trusted": false,
+      "category_hint": "текстиль"
     },
     {
-      "id": "5f0f9b90eb02",
+      "id": "b8392dfbab83",
+      "type": "article",
+      "title": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти - UKR.NET",
+      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1GMkNUOUZKY1ExbGVFV05jaHdKbXl5YzFBVjlOS0dpQWFjQVRJU3BYNUc2R2FoVTN5Vkh2S0xoa2VIY1VSTHdENzIzb1FqaEpUYWVKU1M4QnZ6RkM0RHM0dnRUUHRLb2Rt?oc=5",
+      "source": "\"конопляний\" - Google Новини",
+      "summary": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти &nbsp;&nbsp; UKR.NET",
+      "image_url": "",
+      "date": "2026-05-21T02:33:46+00:00",
+      "hash": "39544c24f602c4ebf21bb9fb8d13191c",
+      "content_preview": "Корпорація, яка відкрила конопляний завод під Черкасами, під загрозою закриття: чиновники вимагають повернути кошти &nbsp;&nbsp; UKR.NET",
+      "added_at": "2026-05-21T06:16:48.325852+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
+      ],
+      "source_trusted": false,
+      "category_hint": "агро"
+    },
+    {
+      "id": "925e3fc1c065",
+      "type": "article",
+      "title": "New Zealand hemp gains momentum as natural-fiber maker Rubisco lands Māori investment",
+      "link": "https://hemptoday.net/new-zealand-hemp-gains-momentum-as-natural-fiber-maker-rubisco-lands-maori-investment/",
+      "source": "HempToday®",
+      "summary": "New Zealand natural-fiber producer Rubisco said it has secured a strategic investment that will support expansion of the company’s hemp- and wool-based materials business. The partnership is with Te Rūnanga [&#8230;]",
+      "image_url": "",
+      "date": "2026-05-21T05:21:32+00:00",
+      "hash": "40cdcf4f73da3ad7626317edb46199b4",
+      "content_preview": "New Zealand natural-fiber producer Rubisco said it has secured a strategic investment that will support expansion of the company’s hemp- and wool-based materials business. The partnership is with Te Rūnanga o Arowhenua Ltd., an investment group tied to a Māori tribal organization in New Zealand’s So",
+      "added_at": "2026-05-21T06:16:48.325389+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "substantive content"
+      ],
+      "source_trusted": false,
+      "category_hint": "бізнес"
+    },
+    {
+      "id": "dd759eea621c",
       "type": "video",
-      "title": "Відео: MUTAIYOUPIN – преміум-постачальник конопляних та лляних тканин",
-      "link": "https://www.youtube.com/watch?v=0GWVY3pQaVY",
-      "source": "YouTube: mutaiyoupin2026",
-      "summary": "На каналі mutaiyoupin2026 опубліковано відео, що детально описує діяльність компанії MUTAIYOUPIN – провідного постачальника тканин з промислових конопель та інших натуральних волокон у Китаї.",
-      "image_url": "https://i.ytimg.com/vi/0GWVY3pQaVY/hqdefault.jpg",
-      "date": "2026-05-20T11:55:42Z",
-      "hash": "yt_0GWVY3pQaVY",
-      "content_preview": "На каналі mutaiyoupin2026 опубліковано відео, що детально описує діяльність компанії MUTAIYOUPIN – провідного постачальника тканин з промислових конопель та інших натуральних волокон у Китаї.",
-      "added_at": "2026-05-20T22:00:50.037092+00:00",
+      "title": "Конопляна ефірна олія: Замовляйте онлайн вже сьогодні",
+      "link": "https://www.youtube.com/watch?v=Er6mmyVJTfs",
+      "source": "YouTube: Bulk Hemp Warehouse",
+      "summary": "Компанія Bulk Hemp Warehouse представила відео, присвячене оптовим поставкам високоякісної конопляної ефірної олії. Дізнайтеся більше про їхню продукцію та глобальну доставку.",
+      "image_url": "https://i.ytimg.com/vi/Er6mmyVJTfs/hqdefault.jpg",
+      "date": "2026-05-20T16:12:39Z",
+      "hash": "yt_Er6mmyVJTfs",
+      "content_preview": "Компанія Bulk Hemp Warehouse представила відео, присвячене оптовим поставкам високоякісної конопляної ефірної олії. Дізнайтеся більше про їхню продукцію та глобальну доставку.",
+      "added_at": "2026-05-20T22:01:39.636547+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "0GWVY3pQaVY",
-      "draft_filename": "20260520-220050-video-mutaiyoupin-premium-postachalnyk-konoplyanykh-ta-llyanykh-tkanyn.md"
+      "youtube_id": "Er6mmyVJTfs",
+      "draft_filename": "20260520-220139-konoplyana-efirna-oliya-zamovlyayte-onlayn-vzhe-sohodni.md"
     },
     {
       "id": "29606d1cf366",
@@ -64,25 +105,46 @@
       "draft_filename": "20260520-220116-potuzhnyy-kombayn-dlya-zboru-promyslovykh-konopel-u-diyi.md"
     },
     {
-      "id": "dd759eea621c",
+      "id": "5f0f9b90eb02",
       "type": "video",
-      "title": "Конопляна ефірна олія: Замовляйте онлайн вже сьогодні",
-      "link": "https://www.youtube.com/watch?v=Er6mmyVJTfs",
-      "source": "YouTube: Bulk Hemp Warehouse",
-      "summary": "Компанія Bulk Hemp Warehouse представила відео, присвячене оптовим поставкам високоякісної конопляної ефірної олії. Дізнайтеся більше про їхню продукцію та глобальну доставку.",
-      "image_url": "https://i.ytimg.com/vi/Er6mmyVJTfs/hqdefault.jpg",
-      "date": "2026-05-20T16:12:39Z",
-      "hash": "yt_Er6mmyVJTfs",
-      "content_preview": "Компанія Bulk Hemp Warehouse представила відео, присвячене оптовим поставкам високоякісної конопляної ефірної олії. Дізнайтеся більше про їхню продукцію та глобальну доставку.",
-      "added_at": "2026-05-20T22:01:39.636547+00:00",
+      "title": "Відео: MUTAIYOUPIN – преміум-постачальник конопляних та лляних тканин",
+      "link": "https://www.youtube.com/watch?v=0GWVY3pQaVY",
+      "source": "YouTube: mutaiyoupin2026",
+      "summary": "На каналі mutaiyoupin2026 опубліковано відео, що детально описує діяльність компанії MUTAIYOUPIN – провідного постачальника тканин з промислових конопель та інших натуральних волокон у Китаї.",
+      "image_url": "https://i.ytimg.com/vi/0GWVY3pQaVY/hqdefault.jpg",
+      "date": "2026-05-20T11:55:42Z",
+      "hash": "yt_0GWVY3pQaVY",
+      "content_preview": "На каналі mutaiyoupin2026 опубліковано відео, що детально описує діяльність компанії MUTAIYOUPIN – провідного постачальника тканин з промислових конопель та інших натуральних волокон у Китаї.",
+      "added_at": "2026-05-20T22:00:50.037092+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "Er6mmyVJTfs",
-      "draft_filename": "20260520-220139-konoplyana-efirna-oliya-zamovlyayte-onlayn-vzhe-sohodni.md"
+      "youtube_id": "0GWVY3pQaVY",
+      "draft_filename": "20260520-220050-video-mutaiyoupin-premium-postachalnyk-konoplyanykh-ta-llyanykh-tkanyn.md"
+    },
+    {
+      "id": "1856d0bf680e",
+      "type": "video",
+      "title": "Промислові сорти конопель: українська Harmoniia та угорський Cannakomp",
+      "link": "https://www.youtube.com/watch?v=VF613_rVS2M",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Нове відео від «Радіо Технічних Конопель» порівнює український сорт Harmoniia та угорський Cannakomp, висвітлюючи їхні унікальні властивості для текстильної промисловості та промислових товарів.",
+      "image_url": "https://i.ytimg.com/vi/VF613_rVS2M/hqdefault.jpg",
+      "date": "2026-05-19T21:34:00Z",
+      "hash": "yt_VF613_rVS2M",
+      "content_preview": "Нове відео від «Радіо Технічних Конопель» порівнює український сорт Harmoniia та угорський Cannakomp, висвітлюючи їхні унікальні властивості для текстильної промисловості та промислових товарів.",
+      "added_at": "2026-05-20T22:00:23.457482+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "VF613_rVS2M",
+      "draft_filename": "20260520-220023-promyslovi-sorty-konopel-ukrayinska-harmoniia-ta-uhorskyy-cannakomp.md"
     },
     {
       "id": "cedfeb854c15",
@@ -2429,67 +2491,6 @@
       "category_hint": "відео",
       "youtube_id": "tGhwi_KLXFU",
       "draft_filename": "20260514-102405-veil-verdant-pod-zhyva-shkira-z-konopel-ta-vodorostey.md"
-    },
-    {
-      "id": "6ce1769afdfc",
-      "type": "article",
-      "title": "KwaZulu-Natal Farmers’ Hesitation Signals Challenges for Industrial Hemp Adoption - Hemp Gazette",
-      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPQVBSd0tjbm5QSy1FTWFzZVNEaUNib3JSaFA5ZWdVSmJTR3Rrd2FWVXl4S1Y4cFJROW9ZUkNkWVBveGpZUzlJVVlYeXp1Yl9xY1ZYWnZ4WE50ZG9KRm81elVvaUhmTXdsVlM1NV9qaG81RmwtZ2x3WHlrRmNSNUVXWUpn?oc=5",
-      "source": "\"hemp australia industry\" - Google News",
-      "summary": "KwaZulu-Natal Farmers’ Hesitation Signals Challenges for Industrial Hemp Adoption &nbsp;&nbsp; Hemp Gazette",
-      "image_url": "",
-      "date": "2026-05-13T12:30:03+00:00",
-      "hash": "634eb9a694501c7dda9f9d75ee489934",
-      "content_preview": "KwaZulu-Natal Farmers’ Hesitation Signals Challenges for Industrial Hemp Adoption &nbsp;&nbsp; Hemp Gazette",
-      "added_at": "2026-05-14T05:55:40.111659+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "агро"
-    },
-    {
-      "id": "987fcb75a55a",
-      "type": "article",
-      "title": "US Hemp Fibre To Enter India Textiles Via Panda Biotech, Culturewell - Siliconindia",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQQjgweUN1eWhFWmlhc3UzVEFNdHZrZDhJekl3Z3daWTRUV3lrd2ItejNqVFMxVWU1blRWMkxsdzVkQ052RVdHZ0MzMFpQUXlzZEdkWkNtVGlRckNSNWliU0hqWGhaNTc5Y1g3Tmthd3FjWFp4SGw1ZWNKYmVLTG4yZUF6ZUsyU2ZIZ00yd2ZieUpISWFNdFVqejMwTDJyNUpsUFpiZFA1NHRaX0J0WnpWMWNBZmd5ZFhV?oc=5",
-      "source": "\"hemp india industry\" - Google News",
-      "summary": "US Hemp Fibre To Enter India Textiles Via Panda Biotech, Culturewell &nbsp;&nbsp; Siliconindia",
-      "image_url": "",
-      "date": "2026-05-13T18:58:58+00:00",
-      "hash": "b8083983dc3fa88a686b26326dd59971",
-      "content_preview": "US Hemp Fibre To Enter India Textiles Via Panda Biotech, Culturewell &nbsp;&nbsp; Siliconindia",
-      "added_at": "2026-05-14T05:55:40.111455+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "текстиль"
-    },
-    {
-      "id": "a06003fc95b5",
-      "type": "article",
-      "title": "Bipartisan Congressional Push Advocates for Expedited Psychedelic Therapies for Veterans’ Mental Health",
-      "link": "https://hempgazette.com/news/psychedelic-therapies-veterans-congressional-push/",
-      "source": "Hemp Gazette",
-      "summary": "Explore the bipartisan congressional efforts to expedite access to psychedelic therapies for veterans struggling with mental health conditions, highlighti… The post Bipartisan Congressional Push Advocates for Expedited Psychedelic Therapies for Veterans&#8217; Mental Health appeared first on Hemp Gazette .",
-      "image_url": "",
-      "date": "2026-05-14T01:39:35+00:00",
-      "hash": "d2f3dc8c8bfd4dd2ac95668b82f69da3",
-      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Industrial Hemp Industrial Hemp Beginner’s Guide Hemp Seed Facts Hemp’s Biofuel Potential Hemp Seed Oil Guide Hemp Fiber Production Cosmet",
-      "added_at": "2026-05-14T05:55:40.110820+00:00",
-      "relevance_score": 0.6,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "trusted source",
-        "substantive content"
-      ],
-      "source_trusted": true,
-      "category_hint": "законодавство"
     }
   ],
   "updated_at": "2026-05-20T22:01:44.640397+00:00"
