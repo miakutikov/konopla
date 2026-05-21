@@ -1,46 +1,109 @@
 {
   "items": [
     {
-      "id": "07a5dbda10c9",
-      "type": "article",
-      "title": "US Researchers Develop Hemp-Derived Plastic: Sustainable Alternative to PET and BPA - Noticias Ambientales",
-      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQNkhrSGJaWi1WQTZaTXF6eTNqQlAyMGFiMTFTRHFYU0gwWmYzWmxqNExwNi1KRWVseFVGWk9uVmJRbEx2ckFfblI4V1psLUNkYklzTjVZVDRMVG54eENqSm1QUkF1UmxJMlFhc3BDTTFtY0lDTXZESm1lTWJiY25qak5uS25iaERCdFQ0cmktbUZoRy1mdGphS0pHVmZZdWM5OWxCcnJYaXYwd0pZcVEtdjQwTGNIUC03YkhJaEI1NmE5eldP0gHKAUFVX3lxTE9nSWlEREw4Z3psVkh4NzA0QlZkSmxabkxVTTBmMERaZEN4c0M0aHl5VVd3Ty1aY3VOVUZoSkxpbzdKWm53NFVGNHJzWTRYbXN3aV85MGNHaldPdUk3MDBIdWJEbFU4VzlsRTRQdUliWVNqWjFjNE9XVEZLQlVheXRxcDd6QmdWX0c2LVo4TGlTb0tVX2x0d0UxVWh6a3k0dU5rRF9HSUo3MS1Qc1VMWGxtQlRTdTB5bnpHOXZqRWlYakJBU05LbnBPSEE?oc=5",
-      "source": "\"hemp innovation research\" - Google News",
-      "summary": "US Researchers Develop Hemp-Derived Plastic: Sustainable Alternative to PET and BPA &nbsp;&nbsp; Noticias Ambientales",
-      "image_url": "",
-      "date": "2026-05-18T20:05:58+00:00",
-      "hash": "956a3773ae7aa588ab2146fba128183e",
-      "content_preview": "US Researchers Develop Hemp-Derived Plastic: Sustainable Alternative to PET and BPA &nbsp;&nbsp; Noticias Ambientales",
-      "added_at": "2026-05-21T11:32:20.932429+00:00",
-      "relevance_score": 0.5,
+      "id": "99efee5a95a6",
+      "type": "video",
+      "title": "Як коноплі рятують важку промисловість",
+      "link": "https://www.youtube.com/watch?v=1l9K1tf9ALk",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Дізнайтеся, як промислові коноплі з Чернігівщини можуть вплинути на важку промисловість у Європі, перетворюючись з агрокультури на ключовий ресурс. Перегляньте відео від «Радіо Технічних Конопель».",
+      "image_url": "https://i.ytimg.com/vi/1l9K1tf9ALk/hqdefault.jpg",
+      "date": "2026-05-21T09:06:14Z",
+      "hash": "yt_1l9K1tf9ALk",
+      "content_preview": "Дізнайтеся, як промислові коноплі з Чернігівщини можуть вплинути на важку промисловість у Європі, перетворюючись з агрокультури на ключовий ресурс. Перегляньте відео від «Радіо Технічних Конопель».",
+      "added_at": "2026-05-21T11:33:10.909424+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "біопластик"
-    },
-    {
-      "id": "aabd8ab9434a",
-      "type": "article",
-      "title": "Trace Femcare Navigates FDA Scrutiny and Asset Acquisition for Hemp Fiber Tampons",
-      "link": "https://hempgazette.com/news/hemp-fiber-tampons-trace-femcare-fda-acquisition/",
-      "source": "Hemp Gazette",
-      "summary": "Explore Trace Femcare's journey developing hemp fiber tampons, including FDA regulatory challenges, a US$400,000 study requirement, and its eventual asset… The post Trace Femcare Navigates FDA Scrutiny and Asset Acquisition for Hemp Fiber Tampons appeared first on Hemp Gazette .",
-      "image_url": "",
-      "date": "2026-05-21T04:26:29+00:00",
-      "hash": "eb4b7f5455d75c231153336cc9c6e65d",
-      "content_preview": "Home Medical Cannabis Medicinal Cannabis Guide THC As Medicine Cannabinoids List Medical Cannabis Myths Rescheduling Medical Cannabis Cannabinoid Clinical Trials Publicly listed cannabis and hemp companies by country Flying With Medical Cannabis Industrial Hemp Industrial Hemp Beginner’s Guide Hemp ",
-      "added_at": "2026-05-21T11:32:20.931755+00:00",
-      "relevance_score": 0.8,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "trusted source",
-        "hemp keyword in title",
-        "substantive content"
+        "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
-      "category_hint": "законодавство"
+      "category_hint": "відео",
+      "youtube_id": "1l9K1tf9ALk",
+      "draft_filename": "20260521-113310-yak-konopli-ryatuyut-vazhku-promyslovist.md"
+    },
+    {
+      "id": "6dcde6b0fde5",
+      "type": "video",
+      "title": "Від ферми до потоку: Trace Femcare та майбутнє тампонів з конопляного волокна",
+      "link": "https://www.youtube.com/watch?v=Di1rZnCJxxQ",
+      "source": "YouTube: Lancaster Farming",
+      "summary": "Дізнайтеся про шлях Trace Femcare, першої компанії, що розробила тампони з конопляного волокна, та її боротьбу з регуляторними перешкодами від FDA.",
+      "image_url": "https://i.ytimg.com/vi/Di1rZnCJxxQ/hqdefault.jpg",
+      "date": "2026-05-21T01:08:38Z",
+      "hash": "yt_Di1rZnCJxxQ",
+      "content_preview": "Дізнайтеся про шлях Trace Femcare, першої компанії, що розробила тампони з конопляного волокна, та її боротьбу з регуляторними перешкодами від FDA.",
+      "added_at": "2026-05-21T11:33:42.451200+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "Di1rZnCJxxQ",
+      "draft_filename": "20260521-113342-vid-fermy-do-potoku-trace-femcare-ta-maybutnye-tamponiv-z-konoplyanoho-volokna.md"
+    },
+    {
+      "id": "8c03a65bdec2",
+      "type": "video",
+      "title": "Як коноплі можуть замінити природний газ?",
+      "link": "https://www.youtube.com/watch?v=6YlbFt7QcEQ",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Нове відео від «Радіо Технічних Конопель» досліджує потенціал промислових конопель як альтернативного джерела енергії для опалення.",
+      "image_url": "https://i.ytimg.com/vi/6YlbFt7QcEQ/hqdefault.jpg",
+      "date": "2026-05-21T09:40:52Z",
+      "hash": "yt_6YlbFt7QcEQ",
+      "content_preview": "Нове відео від «Радіо Технічних Конопель» досліджує потенціал промислових конопель як альтернативного джерела енергії для опалення.",
+      "added_at": "2026-05-21T11:34:05.084968+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "6YlbFt7QcEQ",
+      "draft_filename": "20260521-113405-yak-konopli-mozhut-zaminyty-pryrodnyy-haz.md"
+    },
+    {
+      "id": "993b8dc59c52",
+      "type": "video",
+      "title": "Бізнес-план: конопляне паливо за 100 днів",
+      "link": "https://www.youtube.com/watch?v=Qrd0QNVLD-Q",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Нове відео від «Радіо Технічних Конопель» представляє 100-денний бізнес-план вирощування промислових конопель для отримання паливної біомаси.",
+      "image_url": "https://i.ytimg.com/vi/Qrd0QNVLD-Q/hqdefault.jpg",
+      "date": "2026-05-21T09:38:35Z",
+      "hash": "yt_Qrd0QNVLD-Q",
+      "content_preview": "Нове відео від «Радіо Технічних Конопель» представляє 100-денний бізнес-план вирощування промислових конопель для отримання паливної біомаси.",
+      "added_at": "2026-05-21T11:34:41.328476+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "Qrd0QNVLD-Q",
+      "draft_filename": "20260521-113441-biznes-plan-konoplyane-palyvo-za-100-dniv.md"
+    },
+    {
+      "id": "7b931e4c2c8c",
+      "type": "video",
+      "title": "Золота жила: Чому промислові коноплі — майбутнє бізнесу",
+      "link": "https://www.youtube.com/watch?v=oohAD8vfwRA",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Портал Konopla.UA представляє відео від «Радіо Технічних Конопель», що розкриває величезний бізнес-потенціал українських сортів промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/oohAD8vfwRA/hqdefault.jpg",
+      "date": "2026-05-21T09:35:21Z",
+      "hash": "yt_oohAD8vfwRA",
+      "content_preview": "Портал Konopla.UA представляє відео від «Радіо Технічних Конопель», що розкриває величезний бізнес-потенціал українських сортів промислових конопель.",
+      "added_at": "2026-05-21T11:34:58.373744+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "oohAD8vfwRA",
+      "draft_filename": "20260521-113458-zolota-zhyla-chomu-promyslovi-konopli-maybutnye-biznesu.md"
     },
     {
       "id": "206b0a42cc50",
@@ -2451,5 +2514,5 @@
       "category_hint": "агро"
     }
   ],
-  "updated_at": "2026-05-20T22:01:44.640397+00:00"
+  "updated_at": "2026-05-21T11:34:58.377420+00:00"
 }
