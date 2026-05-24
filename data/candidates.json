@@ -1,24 +1,88 @@
 {
   "items": [
     {
-      "id": "2e3bfdf47b04",
-      "type": "article",
-      "title": "Canapa industriale nella PAC, fiori compresi: bocciato l’emendamento di FdI per bloccarla - dolcevitaonline.it",
-      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5QaG9TSnhiNEhNb0ZVLXgtaE5RUnp0MWl6TGwwZGN6N1FmeERZc1p4ZUVJd1o3NG9Bcks5MlNNTlJ1OHV4d3VWOER4NXV2ZHhkTDFGTXNCRFVFc3R3TXRJMl9LNGdGcWlsQVJiTWNULTBkUW1lWWxac1lDQ3Zhdw?oc=5",
-      "source": "\"canapa industriale italia\" - Google News",
-      "summary": "Canapa industriale nella PAC, fiori compresi: bocciato l’emendamento di FdI per bloccarla &nbsp;&nbsp; dolcevitaonline.it",
-      "image_url": "",
-      "date": "2026-05-24T06:31:28+00:00",
-      "hash": "b2fa5d0b06ae98b492281f4934d851a3",
-      "content_preview": "Canapa industriale nella PAC, fiori compresi: bocciato l’emendamento di FdI per bloccarla &nbsp;&nbsp; dolcevitaonline.it",
-      "added_at": "2026-05-24T21:02:06.070074+00:00",
-      "relevance_score": 0.5,
+      "id": "fee3fd2109c1",
+      "type": "video",
+      "title": "Конопляна мочалка для душу та сауни: огляд від HempMadeInUA",
+      "link": "https://www.youtube.com/watch?v=v3qyPdglyFU",
+      "source": "YouTube: HempMadeInUA",
+      "summary": "Дізнайтеся про натуральну конопляну мочалку від каналу HempMadeInUA, яка ідеально підходить для душу, ванни та сауни.",
+      "image_url": "https://i.ytimg.com/vi/v3qyPdglyFU/hqdefault.jpg",
+      "date": "2026-05-24T12:02:13Z",
+      "hash": "yt_v3qyPdglyFU",
+      "content_preview": "Дізнайтеся про натуральну конопляну мочалку від каналу HempMadeInUA, яка ідеально підходить для душу, ванни та сауни.",
+      "added_at": "2026-05-24T21:02:41.850481+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "автопром"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "v3qyPdglyFU",
+      "draft_filename": "20260524-210241-konoplyana-mochalka-dlya-dushu-ta-sauny-ohlyad-vid-hempmadeinua.md"
+    },
+    {
+      "id": "08db7bd8debe",
+      "type": "video",
+      "title": "Lirina проти Finola: Хто переможе на ринку?",
+      "link": "https://www.youtube.com/watch?v=s3l0Q5cYieo",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Канал «Радіо Технічних Конопель» представив відео, де порівнюються сорти промислових конопель Lirina та Finola за вмістом олії.",
+      "image_url": "https://i.ytimg.com/vi/s3l0Q5cYieo/hqdefault.jpg",
+      "date": "2026-05-24T20:53:26Z",
+      "hash": "yt_s3l0Q5cYieo",
+      "content_preview": "Канал «Радіо Технічних Конопель» представив відео, де порівнюються сорти промислових конопель Lirina та Finola за вмістом олії.",
+      "added_at": "2026-05-24T21:03:04.498401+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "s3l0Q5cYieo",
+      "draft_filename": "20260524-210304-lirina-proty-finola-khto-peremozhe-na-rynku.md"
+    },
+    {
+      "id": "a2646679b884",
+      "type": "video",
+      "title": "Коноплі: НЕОЧІКУВАНА культура, що змінює все!",
+      "link": "https://www.youtube.com/watch?v=u07_7Sfv6iU",
+      "source": "YouTube: Impact Masters",
+      "summary": "Огляд нового YouTube-відео від Impact Masters про потенціал промислових конопель як екологічної альтернативи деревині та нафті.",
+      "image_url": "https://i.ytimg.com/vi/u07_7Sfv6iU/hqdefault.jpg",
+      "date": "2026-05-24T19:55:36Z",
+      "hash": "yt_u07_7Sfv6iU",
+      "content_preview": "Огляд нового YouTube-відео від Impact Masters про потенціал промислових конопель як екологічної альтернативи деревині та нафті.",
+      "added_at": "2026-05-24T21:03:26.887479+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "u07_7Sfv6iU",
+      "draft_filename": "20260524-210326-konopli-neochikuvana-kultura-shcho-zminyuye-vse.md"
+    },
+    {
+      "id": "483a526e7048",
+      "type": "video",
+      "title": "Вони сміялися, коли вона посадила коноплі у 1990 — через чотири роки вона годувала весь округ",
+      "link": "https://www.youtube.com/watch?v=zy2s0vdFMNQ",
+      "source": "YouTube: The Last Field",
+      "summary": "Історія Надін Келлоуей, яка подолала скептицизм і довала ефективність вирощування промислових конопель у Джорджії.",
+      "image_url": "https://i.ytimg.com/vi/zy2s0vdFMNQ/hqdefault.jpg",
+      "date": "2026-05-24T16:01:07Z",
+      "hash": "yt_zy2s0vdFMNQ",
+      "content_preview": "Історія Надін Келлоуей, яка подолала скептицизм і довала ефективність вирощування промислових конопель у Джорджії.",
+      "added_at": "2026-05-24T21:06:01.223703+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "zy2s0vdFMNQ",
+      "draft_filename": "20260524-210601-vony-smiyalysya-koly-vona-posadyla-konopli-u-1990-cherez-chotyry-roky-vona-hoduv.md"
     },
     {
       "id": "532ee77329b2",
@@ -2622,5 +2686,5 @@
       "draft_filename": "20260517-210206-videoohlyad-moya-ostannya-chervona-etyketka-vid-jk-distro.md"
     }
   ],
-  "updated_at": "2026-05-24T10:03:42.727985+00:00"
+  "updated_at": "2026-05-24T21:06:06.228727+00:00"
 }
