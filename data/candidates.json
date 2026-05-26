@@ -1,6 +1,69 @@
 {
   "items": [
     {
+      "id": "f7918117cf12",
+      "type": "video",
+      "title": "Будівництво коноплебетонного будинку: Розблоковано 6-й рівень!",
+      "link": "https://www.youtube.com/watch?v=QmaKfSKGovA",
+      "source": "YouTube: Eco Endeavour",
+      "summary": "Канал Eco Endeavour опублікував нове відео, де показує прогрес у зведенні свого енергоефективного будинку з коноплебетону на острові Ванкувер, переходячи до будівництва другого поверху.",
+      "image_url": "https://i.ytimg.com/vi/QmaKfSKGovA/hqdefault.jpg",
+      "date": "2026-05-26T19:22:39Z",
+      "hash": "yt_QmaKfSKGovA",
+      "content_preview": "Канал Eco Endeavour опублікував нове відео, де показує прогрес у зведенні свого енергоефективного будинку з коноплебетону на острові Ванкувер, переходячи до будівництва другого поверху.",
+      "added_at": "2026-05-26T21:51:22.463558+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "QmaKfSKGovA",
+      "draft_filename": "20260526-215122-budivnytstvo-konoplebetonnoho-budynku-rozblokovano-6-y-riven.md"
+    },
+    {
+      "id": "c701f2ac2c5f",
+      "type": "video",
+      "title": "Непальська індустрія конопляного текстилю: відеоогляд",
+      "link": "https://www.youtube.com/watch?v=Fq0uKtejeK8",
+      "source": "YouTube: Ganesh Hemp",
+      "summary": "Дізнайтеся більше про розвиток конопляної текстильної промисловості в Непалі з нового відео від Ganesh Hemp.",
+      "image_url": "https://i.ytimg.com/vi/Fq0uKtejeK8/hqdefault.jpg",
+      "date": "2026-05-26T13:20:52Z",
+      "hash": "yt_Fq0uKtejeK8",
+      "content_preview": "Дізнайтеся більше про розвиток конопляної текстильної промисловості в Непалі з нового відео від Ganesh Hemp.",
+      "added_at": "2026-05-26T21:51:43.603683+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "Fq0uKtejeK8",
+      "draft_filename": "20260526-215143-nepalska-industriya-konoplyanoho-tekstylyu-videoohlyad.md"
+    },
+    {
+      "id": "7dae6e44d4d8",
+      "type": "video",
+      "title": "Секрети конопляного текстилю: як давні техніки поєднуються з високими технологіями",
+      "link": "https://www.youtube.com/watch?v=cPDlDTmO52Y",
+      "source": "YouTube: Hemp Impact",
+      "summary": "Відео від Hemp Impact розкриває унікальний підхід Kombinat Konopny до виробництва конопляної пряжі, поєднуючи давні техніки з сучасними технологіями.",
+      "image_url": "https://i.ytimg.com/vi/cPDlDTmO52Y/hqdefault.jpg",
+      "date": "2026-05-26T11:00:39Z",
+      "hash": "yt_cPDlDTmO52Y",
+      "content_preview": "Відео від Hemp Impact розкриває унікальний підхід Kombinat Konopny до виробництва конопляної пряжі, поєднуючи давні техніки з сучасними технологіями.",
+      "added_at": "2026-05-26T21:52:06.246399+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "cPDlDTmO52Y",
+      "draft_filename": "20260526-215206-sekrety-konoplyanoho-tekstylyu-yak-davni-tekhniky-poyednuyutsya-z-vysokymy-tekhn.md"
+    },
+    {
       "id": "c893746e3107",
       "type": "article",
       "title": "Konopie na polskich polach. Szansa na zysk czy ryzykowna nisza? - agronews.com.pl",
@@ -2211,5 +2274,5 @@
       "category_hint": "текстиль"
     }
   ],
-  "updated_at": "2026-05-25T21:17:15.507971+00:00"
+  "updated_at": "2026-05-26T21:52:17.158623+00:00"
 }
