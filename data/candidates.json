@@ -1,25 +1,46 @@
 {
   "items": [
     {
-      "id": "c22f1a642dc7",
+      "id": "c893746e3107",
+      "type": "article",
+      "title": "Konopie na polskich polach. Szansa na zysk czy ryzykowna nisza? - agronews.com.pl",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNaTgwUEJ4MEpKWHRJYU04ZFN3RWxEVTFqT3ZQYl9UcTRlUnhYa3JmMUwzS2xkczAtaTNfSXFFRVJzejBfdGlCUXJacE9GTUExcG1ZU1BNNnNFRHZOdW55YUtabFlRQk9ibExjN3ZHNGVrSGp2a3QyMmZwLVktZWNiUHdicEd4VWxrRTRVcklpdEV6YmVCOUt2VnZ3?oc=5",
+      "source": "\"konopie przemysłowe polska\" - Google News",
+      "summary": "Konopie na polskich polach. Szansa na zysk czy ryzykowna nisza? &nbsp;&nbsp; agronews.com.pl",
+      "image_url": "",
+      "date": "2026-05-25T04:31:00+00:00",
+      "hash": "63aef03991fec37001245501dc7a6e7f",
+      "content_preview": "Konopie na polskich polach. Szansa na zysk czy ryzykowna nisza? &nbsp;&nbsp; agronews.com.pl",
+      "added_at": "2026-05-26T06:13:08.023760+00:00",
+      "relevance_score": 0.6,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title",
+        "2 hemp keywords"
+      ],
+      "source_trusted": false,
+      "category_hint": "інше"
+    },
+    {
+      "id": "fe68cd8c30dd",
       "type": "video",
-      "title": "Український конопляний ренесанс: відеоогляд від «Радіо Технічних Конопель»",
-      "link": "https://www.youtube.com/watch?v=3j6Q1POig0Y",
-      "source": "YouTube: Радіо Технічних Конопель",
-      "summary": "Відео від «Радіо Технічних Конопель» розкриває відродження промислового коноплярства в Україні, зосереджуючись на унікальному сорті «Мрія» та його стратегічній ролі.",
-      "image_url": "https://i.ytimg.com/vi/3j6Q1POig0Y/hqdefault.jpg",
-      "date": "2026-05-25T17:17:07Z",
-      "hash": "yt_3j6Q1POig0Y",
-      "content_preview": "Відео від «Радіо Технічних Конопель» розкриває відродження промислового коноплярства в Україні, зосереджуючись на унікальному сорті «Мрія» та його стратегічній ролі.",
-      "added_at": "2026-05-25T21:16:09.172242+00:00",
+      "title": "Огляд Vital Hemp Gummies: правда про конопляні жувальні цукерки",
+      "link": "https://www.youtube.com/watch?v=KGWRrsDVcI8",
+      "source": "YouTube: Marcante 10",
+      "summary": "Відеоогляд від каналу Marcante 10 розкриває всі деталі про популярні конопляні жувальні цукерки Vital Hemp Gummies, їхні переваги, ціну та доступність.",
+      "image_url": "https://i.ytimg.com/vi/KGWRrsDVcI8/hqdefault.jpg",
+      "date": "2026-05-25T16:43:47Z",
+      "hash": "yt_KGWRrsDVcI8",
+      "content_preview": "Відеоогляд від каналу Marcante 10 розкриває всі деталі про популярні конопляні жувальні цукерки Vital Hemp Gummies, їхні переваги, ціну та доступність.",
+      "added_at": "2026-05-25T21:17:10.503231+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "3j6Q1POig0Y",
-      "draft_filename": "20260525-211609-ukrayinskyy-konoplyanyy-renesans-videoohlyad-vid-radio-tekhnichnykh-konopel.md"
+      "youtube_id": "KGWRrsDVcI8",
+      "draft_filename": "20260525-211710-ohlyad-vital-hemp-gummies-pravda-pro-konoplyani-zhuvalni-tsukerky.md"
     },
     {
       "id": "5693a579c3c1",
@@ -43,25 +64,25 @@
       "draft_filename": "20260525-211642-maga-man-proty-dea-lehalizatsiya-konopel-koly-liberaly-ne-zmohly-80-rokiv.md"
     },
     {
-      "id": "fe68cd8c30dd",
+      "id": "c22f1a642dc7",
       "type": "video",
-      "title": "Огляд Vital Hemp Gummies: правда про конопляні жувальні цукерки",
-      "link": "https://www.youtube.com/watch?v=KGWRrsDVcI8",
-      "source": "YouTube: Marcante 10",
-      "summary": "Відеоогляд від каналу Marcante 10 розкриває всі деталі про популярні конопляні жувальні цукерки Vital Hemp Gummies, їхні переваги, ціну та доступність.",
-      "image_url": "https://i.ytimg.com/vi/KGWRrsDVcI8/hqdefault.jpg",
-      "date": "2026-05-25T16:43:47Z",
-      "hash": "yt_KGWRrsDVcI8",
-      "content_preview": "Відеоогляд від каналу Marcante 10 розкриває всі деталі про популярні конопляні жувальні цукерки Vital Hemp Gummies, їхні переваги, ціну та доступність.",
-      "added_at": "2026-05-25T21:17:10.503231+00:00",
+      "title": "Український конопляний ренесанс: відеоогляд від «Радіо Технічних Конопель»",
+      "link": "https://www.youtube.com/watch?v=3j6Q1POig0Y",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Відео від «Радіо Технічних Конопель» розкриває відродження промислового коноплярства в Україні, зосереджуючись на унікальному сорті «Мрія» та його стратегічній ролі.",
+      "image_url": "https://i.ytimg.com/vi/3j6Q1POig0Y/hqdefault.jpg",
+      "date": "2026-05-25T17:17:07Z",
+      "hash": "yt_3j6Q1POig0Y",
+      "content_preview": "Відео від «Радіо Технічних Конопель» розкриває відродження промислового коноплярства в Україні, зосереджуючись на унікальному сорті «Мрія» та його стратегічній ролі.",
+      "added_at": "2026-05-25T21:16:09.172242+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "KGWRrsDVcI8",
-      "draft_filename": "20260525-211710-ohlyad-vital-hemp-gummies-pravda-pro-konoplyani-zhuvalni-tsukerky.md"
+      "youtube_id": "3j6Q1POig0Y",
+      "draft_filename": "20260525-211609-ukrayinskyy-konoplyanyy-renesans-videoohlyad-vid-radio-tekhnichnykh-konopel.md"
     },
     {
       "id": "8e3d7d8c633a",
@@ -2560,111 +2581,6 @@
       ],
       "source_trusted": false,
       "category_hint": "інше"
-    },
-    {
-      "id": "92e90665ce29",
-      "type": "video",
-      "title": "Супербустер з клітковини: відеорецепт з конопляним насінням",
-      "link": "https://www.youtube.com/watch?v=djr7D3rvNy0",
-      "source": "YouTube: Arianne Jones",
-      "summary": "Дізнайтеся, як приготувати поживний супер-мікс насіння з коноплями від Arianne Jones, що ідеально підходить для смузі, салатів та йогуртів.",
-      "image_url": "https://i.ytimg.com/vi/djr7D3rvNy0/hqdefault.jpg",
-      "date": "2026-05-18T20:10:34Z",
-      "hash": "yt_djr7D3rvNy0",
-      "content_preview": "Дізнайтеся, як приготувати поживний супер-мікс насіння з коноплями від Arianne Jones, що ідеально підходить для смузі, салатів та йогуртів.",
-      "added_at": "2026-05-18T21:20:05.063676+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "djr7D3rvNy0",
-      "draft_filename": "20260518-212005-superbuster-z-klitkovyny-videoretsept-z-konoplyanym-nasinnyam.md"
-    },
-    {
-      "id": "34c6d504e02c",
-      "type": "video",
-      "title": "MJ 🆚️ Hemp: Роз'яснення відмінностей промислових конопель",
-      "link": "https://www.youtube.com/watch?v=BxKXgJ5ZBd8",
-      "source": "YouTube: Chris 420 Blaze It",
-      "summary": "Дізнайтеся про ключові відмінності між промисловими коноплями та марихуаною у новому відео від Chris 420 Blaze It.",
-      "image_url": "https://i.ytimg.com/vi/BxKXgJ5ZBd8/hqdefault.jpg",
-      "date": "2026-05-18T20:36:04Z",
-      "hash": "yt_BxKXgJ5ZBd8",
-      "content_preview": "Дізнайтеся про ключові відмінності між промисловими коноплями та марихуаною у новому відео від Chris 420 Blaze It.",
-      "added_at": "2026-05-18T21:19:44.290506+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "BxKXgJ5ZBd8",
-      "draft_filename": "20260518-211944-mj-hemp-rozyasnennya-vidminnostey-promyslovykh-konopel.md"
-    },
-    {
-      "id": "b2fa2101f8f0",
-      "type": "video",
-      "title": "Створіть щось чудове з конопляної тканини: огляд відео",
-      "link": "https://www.youtube.com/watch?v=89XRlw2C1tQ",
-      "source": "YouTube: Bulk Hemp Warehouse",
-      "summary": "Представляємо відео від Bulk Hemp Warehouse, що надихає на створення продуктів з екологічної конопляної тканини та демонструє її потенціал у текстильній промисловості.",
-      "image_url": "https://i.ytimg.com/vi/89XRlw2C1tQ/hqdefault.jpg",
-      "date": "2026-05-18T15:13:37Z",
-      "hash": "yt_89XRlw2C1tQ",
-      "content_preview": "Представляємо відео від Bulk Hemp Warehouse, що надихає на створення продуктів з екологічної конопляної тканини та демонструє її потенціал у текстильній промисловості.",
-      "added_at": "2026-05-18T21:19:19.547837+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "89XRlw2C1tQ",
-      "draft_filename": "20260518-211919-stvorit-shchos-chudove-z-konoplyanoyi-tkanyny-ohlyad-video.md"
-    },
-    {
-      "id": "1ed186aef5cf",
-      "type": "video",
-      "title": "Конопляний одяг, стійка мода та зелений бізнес: інтерв'ю з Майлзом Лазаром з Airetage",
-      "link": "https://www.youtube.com/watch?v=veBW8ljIhS4",
-      "source": "YouTube: Bookkeeping Made Simple",
-      "summary": "На Konopla.UA вийшов огляд відеоінтерв'ю з Майлзом Лазаром, засновником бренду конопляного одягу Airetage, про його шлях у стійкій моді та екологічні переваги конопель.",
-      "image_url": "https://i.ytimg.com/vi/veBW8ljIhS4/hqdefault.jpg",
-      "date": "2026-05-18T19:15:26Z",
-      "hash": "yt_veBW8ljIhS4",
-      "content_preview": "На Konopla.UA вийшов огляд відеоінтерв'ю з Майлзом Лазаром, засновником бренду конопляного одягу Airetage, про його шлях у стійкій моді та екологічні переваги конопель.",
-      "added_at": "2026-05-18T21:18:56.435751+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "veBW8ljIhS4",
-      "draft_filename": "20260518-211856-konoplyanyy-odyah-stiyka-moda-ta-zelenyy-biznes-intervyu-z-maylzom-lazarom-z-air.md"
-    },
-    {
-      "id": "a33ece9a3013",
-      "type": "video",
-      "title": "Коноплі, ШІ та 6G: як промислові коноплі захистять нас у майбутньому",
-      "link": "https://www.youtube.com/watch?v=Sm0jLlmJo24",
-      "source": "YouTube: J. Nayer Hardin",
-      "summary": "Відео від J. Nayer Hardin досліджує, як конопляні матеріали можуть стати ключовим елементом у створенні стійких та безпечних житлових просторів в еру розширення мереж 6G та штучного інтелекту.",
-      "image_url": "https://i.ytimg.com/vi/Sm0jLlmJo24/hqdefault.jpg",
-      "date": "2026-05-18T17:03:07Z",
-      "hash": "yt_Sm0jLlmJo24",
-      "content_preview": "Відео від J. Nayer Hardin досліджує, як конопляні матеріали можуть стати ключовим елементом у створенні стійких та безпечних житлових просторів в еру розширення мереж 6G та штучного інтелекту.",
-      "added_at": "2026-05-18T21:18:36.037447+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "Sm0jLlmJo24",
-      "draft_filename": "20260518-211836-konopli-shi-ta-6g-yak-promyslovi-konopli-zakhystyat-nas-u-maybutnomu.md"
     }
   ],
   "updated_at": "2026-05-25T21:17:15.507971+00:00"
