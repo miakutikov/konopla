@@ -1,6 +1,69 @@
 {
   "items": [
     {
+      "id": "0f44f3d99a96",
+      "type": "video",
+      "title": "«Конопляна Революція»: Відеоогляд від «Радіо Технічних Конопель»",
+      "link": "https://www.youtube.com/watch?v=uaA54zA1jzM",
+      "source": "YouTube: Радіо Технічних Конопель",
+      "summary": "Дізнайтеся про відродження промислових конопель в Україні та потенціал вітчизняних сортів «Золотоніські 11» і «Золотоніські 15» у новому відео від «Радіо Технічних Конопель».",
+      "image_url": "https://i.ytimg.com/vi/uaA54zA1jzM/hqdefault.jpg",
+      "date": "2026-05-28T13:09:12Z",
+      "hash": "yt_uaA54zA1jzM",
+      "content_preview": "Дізнайтеся про відродження промислових конопель в Україні та потенціал вітчизняних сортів «Золотоніські 11» і «Золотоніські 15» у новому відео від «Радіо Технічних Конопель».",
+      "added_at": "2026-05-28T22:01:12.432623+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "uaA54zA1jzM",
+      "draft_filename": "20260528-220112-konoplyana-revolyutsiya-videoohlyad-vid-radio-tekhnichnykh-konopel.md"
+    },
+    {
+      "id": "d65b12762347",
+      "type": "video",
+      "title": "Коноплі для Перемоги: Забутий фільм Другої світової війни",
+      "link": "https://www.youtube.com/watch?v=-VIBuzjBkMQ",
+      "source": "YouTube: Terra stories",
+      "summary": "Відкрийте для себе історичний документальний фільм «Коноплі для Перемоги» від Terra stories, що розкриває життєво важливу роль промислових конопель у військових зусиллях США під час Другої світової війни.",
+      "image_url": "https://i.ytimg.com/vi/-VIBuzjBkMQ/hqdefault.jpg",
+      "date": "2026-05-28T21:36:47Z",
+      "hash": "yt_-VIBuzjBkMQ",
+      "content_preview": "Відкрийте для себе історичний документальний фільм «Коноплі для Перемоги» від Terra stories, що розкриває життєво важливу роль промислових конопель у військових зусиллях США під час Другої світової війни.",
+      "added_at": "2026-05-28T22:01:32.832979+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "-VIBuzjBkMQ",
+      "draft_filename": "20260528-220132-konopli-dlya-peremohy-zabutyy-film-druhoyi-svitovoyi-viyny.md"
+    },
+    {
+      "id": "85dc018a96ef",
+      "type": "video",
+      "title": "Еліксир Єрусалиму тамплієрів: Коноплі та давні секрети здоров'я",
+      "link": "https://www.youtube.com/watch?v=sIDaXX9EBWE",
+      "source": "YouTube: United States of Stoners",
+      "summary": "Нове відео від каналу United States of Stoners розкриває гіпотези щодо використання конопель тамплієрами в їхньому легендарному «Еліксирі Єрусалиму» для підтримки здоров'я та довголіття.",
+      "image_url": "https://i.ytimg.com/vi/sIDaXX9EBWE/hqdefault.jpg",
+      "date": "2026-05-28T21:35:22Z",
+      "hash": "yt_sIDaXX9EBWE",
+      "content_preview": "Нове відео від каналу United States of Stoners розкриває гіпотези щодо використання конопель тамплієрами в їхньому легендарному «Еліксирі Єрусалиму» для підтримки здоров'я та довголіття.",
+      "added_at": "2026-05-28T22:01:54.873565+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "sIDaXX9EBWE",
+      "draft_filename": "20260528-220154-eliksyr-yerusalymu-tampliyeriv-konopli-ta-davni-sekrety-zdorovya.md"
+    },
+    {
       "id": "7ee5b0e2eb53",
       "type": "article",
       "title": "Manufacturing shift: Vital Chemical brings hemp and wool geotextiles to Australia - Australian Manufacturing",
@@ -2164,5 +2227,5 @@
       "category_hint": "законодавство"
     }
   ],
-  "updated_at": "2026-05-28T11:47:52.559018+00:00"
+  "updated_at": "2026-05-28T22:01:59.878716+00:00"
 }
