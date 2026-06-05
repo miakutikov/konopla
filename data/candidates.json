@@ -1,24 +1,88 @@
 {
   "items": [
     {
-      "id": "01d8598fdd41",
-      "type": "article",
-      "title": "У Чернівцях затримали чоловіка, який вирощував коноплі - Молодий буковинець",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOUGdjZEh5bG1tczZYeXN5OVZkN0FaeGJGZE8yMVA0YTg0ekZjQWRicnBma003SW81LTE3dDZVNTV3cUprdWZlQ1FVdzhKTmVrdkx4SzZPb19fMEN4c3R2RkJ2bG03Z2w3cVBCVWtwM1p5NUowYUtWbnFLVVpHZGJxSEtpNkJ4Vk5nWVUxY1paMU15eDBkUFRVQnFmMDg5OXhZN0dYYXVBdXdBMDQ?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "У Чернівцях затримали чоловіка, який вирощував коноплі &nbsp;&nbsp; Молодий буковинець",
-      "image_url": "",
-      "date": "2026-06-05T08:31:58+00:00",
-      "hash": "0519e8e51770dbad9aea73a454b4c221",
-      "content_preview": "У Чернівцях затримали чоловіка, який вирощував коноплі &nbsp;&nbsp; Молодий буковинець",
-      "added_at": "2026-06-05T21:29:50.778967+00:00",
-      "relevance_score": 0.5,
+      "id": "ea580ad4a116",
+      "type": "video",
+      "title": "Виробництво конопляної пряжі двома технологіями в Непалі",
+      "link": "https://www.youtube.com/watch?v=rm-WBjZ8eKg",
+      "source": "YouTube: Ganesh Hemp",
+      "summary": "Дізнайтеся про процес виготовлення конопляної пряжі за допомогою двох різних технологій у Непалі з нового відео від Ganesh Hemp.",
+      "image_url": "https://i.ytimg.com/vi/rm-WBjZ8eKg/hqdefault.jpg",
+      "date": "2026-06-03T13:09:42Z",
+      "hash": "yt_rm-WBjZ8eKg",
+      "content_preview": "Дізнайтеся про процес виготовлення конопляної пряжі за допомогою двох різних технологій у Непалі з нового відео від Ganesh Hemp.",
+      "added_at": "2026-06-05T21:30:32.820836+00:00",
+      "relevance_score": 0.9,
       "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
+        "YouTube video (AI-vetted)"
       ],
-      "source_trusted": false,
-      "category_hint": "агро"
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "rm-WBjZ8eKg",
+      "draft_filename": "20260605-213032-vyrobnytstvo-konoplyanoyi-pryazhi-dvoma-tekhnolohiyamy-v-nepali.md"
+    },
+    {
+      "id": "354bb72a926e",
+      "type": "video",
+      "title": "Вебінар: промислові коноплі в сучасному будівництві та індустрії",
+      "link": "https://www.youtube.com/watch?v=3FBa3oHs3Ow",
+      "source": "YouTube: Effingham Regional Growth Alliance",
+      "summary": "Дізнайтеся про застосування промислових конопель у будівництві та їхні економічні й екологічні переваги з вебінару від Effingham Regional Growth Alliance.",
+      "image_url": "https://i.ytimg.com/vi/3FBa3oHs3Ow/hqdefault.jpg",
+      "date": "2026-06-05T21:17:18Z",
+      "hash": "yt_3FBa3oHs3Ow",
+      "content_preview": "Дізнайтеся про застосування промислових конопель у будівництві та їхні економічні й екологічні переваги з вебінару від Effingham Regional Growth Alliance.",
+      "added_at": "2026-06-05T21:30:55.148352+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "3FBa3oHs3Ow",
+      "draft_filename": "20260605-213055-vebinar-promyslovi-konopli-v-suchasnomu-budivnytstvi-ta-industriyi.md"
+    },
+    {
+      "id": "e79373a35c8d",
+      "type": "video",
+      "title": "Under Armour представив конопляну пряжу для спортивного одягу",
+      "link": "https://www.youtube.com/watch?v=9h-ZOJ7LpYk",
+      "source": "YouTube: BODY GANJA",
+      "summary": "Відео від каналу BODY GANJA про використання конопель у спортивному одязі та моді.",
+      "image_url": "https://i.ytimg.com/vi/9h-ZOJ7LpYk/hqdefault.jpg",
+      "date": "2026-06-05T21:18:13Z",
+      "hash": "yt_9h-ZOJ7LpYk",
+      "content_preview": "Відео від каналу BODY GANJA про використання конопель у спортивному одязі та моді.",
+      "added_at": "2026-06-05T21:32:50.562378+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "9h-ZOJ7LpYk",
+      "draft_filename": "20260605-213250-under-armour-predstavyv-konoplyanu-pryazhu-dlya-sportyvnoho-odyahu.md"
+    },
+    {
+      "id": "3ef23dc45d46",
+      "type": "video",
+      "title": "Технічні коноплі: Дозвіл на вирощування",
+      "link": "https://www.youtube.com/watch?v=W6KAyxoK5O8",
+      "source": "YouTube: PRO AGRO",
+      "summary": "Канал PRO AGRO опублікував відео, присвячене питанням отримання дозволів на вирощування промислових конопель.",
+      "image_url": "https://i.ytimg.com/vi/W6KAyxoK5O8/hqdefault.jpg",
+      "date": "2026-06-05T21:07:57Z",
+      "hash": "yt_W6KAyxoK5O8",
+      "content_preview": "Канал PRO AGRO опублікував відео, присвячене питанням отримання дозволів на вирощування промислових конопель.",
+      "added_at": "2026-06-05T21:33:11.389774+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "W6KAyxoK5O8",
+      "draft_filename": "20260605-213311-tekhnichni-konopli-dozvil-na-vyroshchuvannya.md"
     },
     {
       "id": "92cd6c421665",
@@ -1917,5 +1981,5 @@
       "draft_filename": "20260529-215801-navchannya-tekhnikiv-z-konoplyanoho-betonu-ereasy-2026.md"
     }
   ],
-  "updated_at": "2026-06-05T11:36:01.857449+00:00"
+  "updated_at": "2026-06-05T21:33:16.395827+00:00"
 }
