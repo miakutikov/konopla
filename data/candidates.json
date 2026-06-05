@@ -1,46 +1,85 @@
 {
   "items": [
     {
-      "id": "c9b2f11e74cc",
-      "type": "video",
-      "title": "Збірні конопляні панелі для будинків: монтаж за один день",
-      "link": "https://www.youtube.com/watch?v=IrqMSgKzxCw",
-      "source": "YouTube: Anubis Communications Wyoming",
-      "summary": "Нове відео від Anubis Communications Wyoming демонструє технологію швидкого будівництва з використанням збірних панелей з конопляного бетону.",
-      "image_url": "https://i.ytimg.com/vi/IrqMSgKzxCw/hqdefault.jpg",
-      "date": "2026-06-05T02:39:07Z",
-      "hash": "yt_IrqMSgKzxCw",
-      "content_preview": "Нове відео від Anubis Communications Wyoming демонструє технологію швидкого будівництва з використанням збірних панелей з конопляного бетону.",
-      "added_at": "2026-06-05T11:34:47.026207+00:00",
-      "relevance_score": 0.9,
+      "id": "92cd6c421665",
+      "type": "article",
+      "title": "У Чернівцях затримали чоловіка, який вирощував коноплі - Молодий буковинець",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOOTg2aTVRUnhnUjhwQXVoMEZKMEtieTE1VEFYLTVSSTRpOE9HTzI4UkxMZmZtN2F6aFhwZk9iVTBHRUl3MG0xYUtSOThHMEowS1pHRktQNUViTWh0SUZpX2ExVHdpV3AzM09XRVFXTE1JcHZnODZ4WnpEd3pGX1pJUWpoaUNvakZDdWhFLWxWMG1yX2pia25QX21tckN0anNNa05wckpzSk94ZnNqbk5UNA?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "У Чернівцях затримали чоловіка, який вирощував коноплі &nbsp;&nbsp; Молодий буковинець",
+      "image_url": "",
+      "date": "2026-06-05T08:32:46+00:00",
+      "hash": "c191d79ba8d3a8cdeabb0fed214055e3",
+      "content_preview": "У Чернівцях затримали чоловіка, який вирощував коноплі &nbsp;&nbsp; Молодий буковинець",
+      "added_at": "2026-06-05T16:36:54.920665+00:00",
+      "relevance_score": 0.5,
       "relevance_reasons": [
-        "YouTube video (AI-vetted)"
+        "passed hemp filter",
+        "hemp keyword in title"
       ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "IrqMSgKzxCw",
-      "draft_filename": "20260605-113446-zbirni-konoplyani-paneli-dlya-budynkiv-montazh-za-odyn-den.md"
+      "source_trusted": false,
+      "category_hint": "агро"
     },
     {
-      "id": "e9035991f6a2",
+      "id": "a1099be947f5",
+      "type": "article",
+      "title": "У Чернівцях судитимуть чоловіка за вирощування конопель та зберігання канабісу - Медіа гарячих новин",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNbXpqSVUtUWl4c2hHblpoV094ODRCOUg5VHRUYUpNUE1yNk9kRjVPNnU0WUoxYXBRclBhbTJ3SDJOZlBxdXNCR0EwNHNrR01CSGZ2WDNGazFPeFFXYUVIMjAwN0JzNkZ5Q3lPQ0RrRjlBeEZmcEdOUUZnNlFObFR3eTFvZV9fMFFkby1Ya0xyV0lYb2FGNlE3SmhNREtRRy1IVWNHWWRJREh5SkhibFE?oc=5",
+      "source": "\"вирощування конопель\" - Google Новини",
+      "summary": "У Чернівцях судитимуть чоловіка за вирощування конопель та зберігання канабісу &nbsp;&nbsp; Медіа гарячих новин",
+      "image_url": "",
+      "date": "2026-06-05T09:47:18+00:00",
+      "hash": "c357b951b56ed5db226e38a33a0cdbc9",
+      "content_preview": "У Чернівцях судитимуть чоловіка за вирощування конопель та зберігання канабісу &nbsp;&nbsp; Медіа гарячих новин",
+      "added_at": "2026-06-05T16:36:54.920480+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "агро"
+    },
+    {
+      "id": "88ec3939e5a0",
+      "type": "article",
+      "title": "Circular Hemp Solutions Reinvent Europe’s Construction Industry - AZoBuild",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9CcERPdkVDUFJvaUdsc09GaHpRdUJKcnNFOFFUSy13UWlGNkFqM1RIT3p5UUo3MXhDbjZNT2w4bzVtZDJGSjdxZ0dkeUtkZWo3bVRNRkJGQVlsSjA?oc=5",
+      "source": "\"hemp europe industry\" - Google News",
+      "summary": "Circular Hemp Solutions Reinvent Europe’s Construction Industry &nbsp;&nbsp; AZoBuild",
+      "image_url": "",
+      "date": "2026-06-05T11:33:00+00:00",
+      "hash": "88c8f50e616deb57ddd35281a4b46844",
+      "content_preview": "Circular Hemp Solutions Reinvent Europe’s Construction Industry &nbsp;&nbsp; AZoBuild",
+      "added_at": "2026-06-05T16:36:54.920256+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "будівництво"
+    },
+    {
+      "id": "08f245d7a35e",
       "type": "video",
-      "title": "Коноплебетон підтримує комфортну температуру в будинку навіть у мороз",
-      "link": "https://www.youtube.com/watch?v=ZvvP-rGJhag",
-      "source": "YouTube: Anubis Communications Wyoming",
-      "summary": "Нове відео від Anubis Communications Wyoming показує, як коноплебетон підтримує комфортну температуру в будинку, навіть коли на вулиці мороз.",
-      "image_url": "https://i.ytimg.com/vi/ZvvP-rGJhag/hqdefault.jpg",
-      "date": "2026-06-05T02:38:10Z",
-      "hash": "yt_ZvvP-rGJhag",
-      "content_preview": "Нове відео від Anubis Communications Wyoming показує, як коноплебетон підтримує комфортну температуру в будинку, навіть коли на вулиці мороз.",
-      "added_at": "2026-06-05T11:35:10.979588+00:00",
+      "title": "Легкі літні настрої: конопляна тканина HEMP FORTEX вже на складі",
+      "link": "https://www.youtube.com/watch?v=R7T8ACwpA94",
+      "source": "YouTube: HEMP FORTEX",
+      "summary": "Konopla.UA представляє відеоогляд легкої конопляно-органічної бавовняної тканини від HEMP FORTEX, ідеальної для літнього одягу.",
+      "image_url": "https://i.ytimg.com/vi/R7T8ACwpA94/hqdefault.jpg",
+      "date": "2026-06-03T18:00:28Z",
+      "hash": "yt_R7T8ACwpA94",
+      "content_preview": "Konopla.UA представляє відеоогляд легкої конопляно-органічної бавовняної тканини від HEMP FORTEX, ідеальної для літнього одягу.",
+      "added_at": "2026-06-05T11:35:56.851372+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "ZvvP-rGJhag",
-      "draft_filename": "20260605-113510-konoplebeton-pidtrymuye-komfortnu-temperaturu-v-budynku-navit-u-moroz.md"
+      "youtube_id": "R7T8ACwpA94",
+      "draft_filename": "20260605-113556-lehki-litni-nastroyi-konoplyana-tkanyna-hemp-fortex-vzhe-na-skladi.md"
     },
     {
       "id": "0304d44b676e",
@@ -64,25 +103,46 @@
       "draft_filename": "20260605-113533-vyrobnytstvo-nepalskoyi-pryazhi-z-konopel-ta-kropyvy-vid-ganesh-hemp.md"
     },
     {
-      "id": "08f245d7a35e",
+      "id": "e9035991f6a2",
       "type": "video",
-      "title": "Легкі літні настрої: конопляна тканина HEMP FORTEX вже на складі",
-      "link": "https://www.youtube.com/watch?v=R7T8ACwpA94",
-      "source": "YouTube: HEMP FORTEX",
-      "summary": "Konopla.UA представляє відеоогляд легкої конопляно-органічної бавовняної тканини від HEMP FORTEX, ідеальної для літнього одягу.",
-      "image_url": "https://i.ytimg.com/vi/R7T8ACwpA94/hqdefault.jpg",
-      "date": "2026-06-03T18:00:28Z",
-      "hash": "yt_R7T8ACwpA94",
-      "content_preview": "Konopla.UA представляє відеоогляд легкої конопляно-органічної бавовняної тканини від HEMP FORTEX, ідеальної для літнього одягу.",
-      "added_at": "2026-06-05T11:35:56.851372+00:00",
+      "title": "Коноплебетон підтримує комфортну температуру в будинку навіть у мороз",
+      "link": "https://www.youtube.com/watch?v=ZvvP-rGJhag",
+      "source": "YouTube: Anubis Communications Wyoming",
+      "summary": "Нове відео від Anubis Communications Wyoming показує, як коноплебетон підтримує комфортну температуру в будинку, навіть коли на вулиці мороз.",
+      "image_url": "https://i.ytimg.com/vi/ZvvP-rGJhag/hqdefault.jpg",
+      "date": "2026-06-05T02:38:10Z",
+      "hash": "yt_ZvvP-rGJhag",
+      "content_preview": "Нове відео від Anubis Communications Wyoming показує, як коноплебетон підтримує комфортну температуру в будинку, навіть коли на вулиці мороз.",
+      "added_at": "2026-06-05T11:35:10.979588+00:00",
       "relevance_score": 0.9,
       "relevance_reasons": [
         "YouTube video (AI-vetted)"
       ],
       "source_trusted": true,
       "category_hint": "відео",
-      "youtube_id": "R7T8ACwpA94",
-      "draft_filename": "20260605-113556-lehki-litni-nastroyi-konoplyana-tkanyna-hemp-fortex-vzhe-na-skladi.md"
+      "youtube_id": "ZvvP-rGJhag",
+      "draft_filename": "20260605-113510-konoplebeton-pidtrymuye-komfortnu-temperaturu-v-budynku-navit-u-moroz.md"
+    },
+    {
+      "id": "c9b2f11e74cc",
+      "type": "video",
+      "title": "Збірні конопляні панелі для будинків: монтаж за один день",
+      "link": "https://www.youtube.com/watch?v=IrqMSgKzxCw",
+      "source": "YouTube: Anubis Communications Wyoming",
+      "summary": "Нове відео від Anubis Communications Wyoming демонструє технологію швидкого будівництва з використанням збірних панелей з конопляного бетону.",
+      "image_url": "https://i.ytimg.com/vi/IrqMSgKzxCw/hqdefault.jpg",
+      "date": "2026-06-05T02:39:07Z",
+      "hash": "yt_IrqMSgKzxCw",
+      "content_preview": "Нове відео від Anubis Communications Wyoming демонструє технологію швидкого будівництва з використанням збірних панелей з конопляного бетону.",
+      "added_at": "2026-06-05T11:34:47.026207+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "IrqMSgKzxCw",
+      "draft_filename": "20260605-113446-zbirni-konoplyani-paneli-dlya-budynkiv-montazh-za-odyn-den.md"
     },
     {
       "id": "2bc5109d0b3d",
@@ -2138,69 +2198,6 @@
       ],
       "source_trusted": false,
       "category_hint": "інше"
-    },
-    {
-      "id": "0e794d6cc3d9",
-      "type": "video",
-      "title": "Гімалайські конопляні капелюхи з принтом грибів: відеоогляд",
-      "link": "https://www.youtube.com/watch?v=JMEnot3GVH4",
-      "source": "YouTube: Amazing Hands Nepal (HANDMADE MATTERS)",
-      "summary": "Дізнайтеся більше про унікальні конопляні капелюхи ручної роботи з Гімалаїв у новому відео від Amazing Hands Nepal.",
-      "image_url": "https://i.ytimg.com/vi/JMEnot3GVH4/hqdefault.jpg",
-      "date": "2026-05-29T06:17:44Z",
-      "hash": "yt_JMEnot3GVH4",
-      "content_preview": "Дізнайтеся більше про унікальні конопляні капелюхи ручної роботи з Гімалаїв у новому відео від Amazing Hands Nepal.",
-      "added_at": "2026-05-29T11:41:29.445113+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "JMEnot3GVH4",
-      "draft_filename": "20260529-114129-himalayski-konoplyani-kapelyukhy-z-pryntom-hrybiv-videoohlyad.md"
-    },
-    {
-      "id": "c12a6efd23d6",
-      "type": "video",
-      "title": "Відеоогляд: «Flax and Hemp!» – промислові коноплі від Oscar Koech",
-      "link": "https://www.youtube.com/watch?v=mEbVYVyGzBo",
-      "source": "YouTube: Oscar Koech",
-      "summary": "Представляємо відео від Oscar Koech під назвою «Flax and Hemp!», що присвячене промисловим коноплям та льону.",
-      "image_url": "https://i.ytimg.com/vi/mEbVYVyGzBo/hqdefault.jpg",
-      "date": "2026-05-28T05:11:19Z",
-      "hash": "yt_mEbVYVyGzBo",
-      "content_preview": "Представляємо відео від Oscar Koech під назвою «Flax and Hemp!», що присвячене промисловим коноплям та льону.",
-      "added_at": "2026-05-29T11:40:58.613369+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "mEbVYVyGzBo",
-      "draft_filename": "20260529-114058-videoohlyad-flax-and-hemp-promyslovi-konopli-vid-oscar-koech.md"
-    },
-    {
-      "id": "234bdd499ce9",
-      "type": "video",
-      "title": "Фермер збирає стебла конопель вручну: традиційний збір волокна",
-      "link": "https://www.youtube.com/watch?v=FdhPD0i-dZ8",
-      "source": "YouTube: Daily learning",
-      "summary": "Konopla.UA представляє відео від каналу Daily learning, що демонструє традиційний ручний збір промислових конопель для отримання волокна в Південному Китаї.",
-      "image_url": "https://i.ytimg.com/vi/FdhPD0i-dZ8/hqdefault.jpg",
-      "date": "2026-05-29T05:00:01Z",
-      "hash": "yt_FdhPD0i-dZ8",
-      "content_preview": "Konopla.UA представляє відео від каналу Daily learning, що демонструє традиційний ручний збір промислових конопель для отримання волокна в Південному Китаї.",
-      "added_at": "2026-05-29T11:40:32.398432+00:00",
-      "relevance_score": 0.9,
-      "relevance_reasons": [
-        "YouTube video (AI-vetted)"
-      ],
-      "source_trusted": true,
-      "category_hint": "відео",
-      "youtube_id": "FdhPD0i-dZ8",
-      "draft_filename": "20260529-114032-fermer-zbyraye-stebla-konopel-vruchnu-tradytsiynyy-zbir-volokna.md"
     }
   ],
   "updated_at": "2026-06-05T11:36:01.857449+00:00"
