@@ -1,6 +1,48 @@
 {
   "items": [
     {
+      "id": "093337238874",
+      "type": "video",
+      "title": "Ліна та гірський млин: Відродження текстилю з конопель",
+      "link": "https://www.youtube.com/watch?v=k56mzJs3zaA",
+      "source": "YouTube: SheMeansBusiness",
+      "summary": "Дізнайтеся про Ліну, яка перетворює старий гірський млин на кооперативну студію, створюючи екологічний одяг з конопляної тканини.",
+      "image_url": "https://i.ytimg.com/vi/k56mzJs3zaA/hqdefault.jpg",
+      "date": "2026-06-07T00:00:11Z",
+      "hash": "yt_k56mzJs3zaA",
+      "content_preview": "Дізнайтеся про Ліну, яка перетворює старий гірський млин на кооперативну студію, створюючи екологічний одяг з конопляної тканини.",
+      "added_at": "2026-06-07T10:36:06.357322+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "k56mzJs3zaA",
+      "draft_filename": "20260607-103606-lina-ta-hirskyy-mlyn-vidrodzhennya-tekstylyu-z-konopel.md"
+    },
+    {
+      "id": "7bfc899ebe6a",
+      "type": "video",
+      "title": "Коноплі дають більше волокна: нове відео від BODY GANJA",
+      "link": "https://www.youtube.com/watch?v=HZNu1m63crs",
+      "source": "YouTube: BODY GANJA",
+      "summary": "Нове відео від BODY GANJA демонструє, як промислові коноплі перевершують бавовну у виробництві волокна та сприяють сталому розвитку текстильної промисловості.",
+      "image_url": "https://i.ytimg.com/vi/HZNu1m63crs/hqdefault.jpg",
+      "date": "2026-06-06T18:55:47Z",
+      "hash": "yt_HZNu1m63crs",
+      "content_preview": "Нове відео від BODY GANJA демонструє, як промислові коноплі перевершують бавовну у виробництві волокна та сприяють сталому розвитку текстильної промисловості.",
+      "added_at": "2026-06-07T10:36:26.213860+00:00",
+      "relevance_score": 0.9,
+      "relevance_reasons": [
+        "YouTube video (AI-vetted)"
+      ],
+      "source_trusted": true,
+      "category_hint": "відео",
+      "youtube_id": "HZNu1m63crs",
+      "draft_filename": "20260607-103626-konopli-dayut-bilshe-volokna-nove-video-vid-body-ganja.md"
+    },
+    {
       "id": "a950d94c7456",
       "type": "article",
       "title": "Переробив револьвер Флобера та сушив коноплі: на Житомирщині засудили жителя села Бистрик - UKR.NET",
@@ -1710,5 +1752,5 @@
       "draft_filename": "20260531-210655-tsey-konoplyanyy-blok-za-1-buduye-stiny-shcho-stoyat-600-rokiv-chomu-vin-buv-poz.md"
     }
   ],
-  "updated_at": "2026-06-06T21:15:21.654915+00:00"
+  "updated_at": "2026-06-07T10:36:31.220110+00:00"
 }
