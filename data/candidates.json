@@ -1,6 +1,26 @@
 {
   "items": [
     {
+      "id": "c098cb0c0a3c",
+      "type": "article",
+      "title": "У Хмільницькому районі чоловік вдома вирощував рослини коноплі - UKR.NET",
+      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9WdFhDWEszbUd4NXJ6bDhTS011Ym0xYUhaclhrLTVmNEhKNWJ2RkZRcVJGaHpUd0ZLTldHMXdMdlFEMHhQVno0VDczX2RDNl9sQ1ZnM3FNdlhlZUdqbFpNa1Jnd1pKdTB4?oc=5",
+      "source": "\"коноплі\" - Google Новини",
+      "summary": "У Хмільницькому районі чоловік вдома вирощував рослини коноплі &nbsp;&nbsp; UKR.NET",
+      "image_url": "",
+      "date": "2026-07-17T15:02:06+00:00",
+      "hash": "04a34ea937f7d87f470fa7184a999ae3",
+      "content_preview": "У Хмільницькому районі чоловік вдома вирощував рослини коноплі &nbsp;&nbsp; UKR.NET",
+      "added_at": "2026-07-18T20:55:34.877072+00:00",
+      "relevance_score": 0.5,
+      "relevance_reasons": [
+        "passed hemp filter",
+        "hemp keyword in title"
+      ],
+      "source_trusted": false,
+      "category_hint": "агро"
+    },
+    {
       "id": "c6d352590d85",
       "type": "article",
       "title": "Плантація конопель у дворі: поліція Харківщини відкрила кримінальне провадження | Новини Харкова та України - АТН",
@@ -1221,26 +1241,6 @@
       ],
       "source_trusted": false,
       "category_hint": "агро"
-    },
-    {
-      "id": "aa5e59a6d3c6",
-      "type": "article",
-      "title": "Коноплі замість бетону: як канабіс допомагає будувати екологічні будинки - DW Ukrainian. - UAZMI",
-      "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5iZzBnTGdCNU9JZEY2WDAyWTBvRHgyaXBIRkc4bFF6Tzg2ZjJHekIzMkJMRHBxc2ZQQTdLeGJ1elFuN3FXNnc1M3VlTEdHZzJyb1E?oc=5",
-      "source": "\"коноплі\" - Google Новини",
-      "summary": "Коноплі замість бетону: як канабіс допомагає будувати екологічні будинки - DW Ukrainian. &nbsp;&nbsp; UAZMI",
-      "image_url": "",
-      "date": "2026-07-11T17:00:06+00:00",
-      "hash": "52e7961d7778e8217dfba295176697cb",
-      "content_preview": "Коноплі замість бетону: як канабіс допомагає будувати екологічні будинки - DW Ukrainian. &nbsp;&nbsp; UAZMI",
-      "added_at": "2026-07-11T20:54:58.837076+00:00",
-      "relevance_score": 0.5,
-      "relevance_reasons": [
-        "passed hemp filter",
-        "hemp keyword in title"
-      ],
-      "source_trusted": false,
-      "category_hint": "будівництво"
     }
   ],
   "updated_at": "2026-06-09T11:24:54.658951+00:00"
