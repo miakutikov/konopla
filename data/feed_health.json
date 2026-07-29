@@ -1,14 +1,14 @@
 {
   "https://hemptoday.net/feed/": {
-    "last_ok": "2026-07-29T10:39:50.499009+00:00",
+    "last_ok": "2026-07-29T15:49:29.284098+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
-    "articles_found": 625,
-    "hemp_relevant": 625
+    "articles_found": 626,
+    "hemp_relevant": 626
   },
   "https://hempgazette.com/feed/": {
-    "last_ok": "2026-07-29T10:39:49.520646+00:00",
+    "last_ok": "2026-07-29T15:49:28.123462+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -16,7 +16,7 @@
     "hemp_relevant": 241
   },
   "https://www.newcannabisventures.com/feed/": {
-    "last_ok": "2026-07-29T10:39:50.401059+00:00",
+    "last_ok": "2026-07-29T15:49:29.177297+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -24,7 +24,7 @@
     "hemp_relevant": 0
   },
   "https://cannabislaw.report/rss-feed/": {
-    "last_ok": "2026-07-29T10:39:50.910652+00:00",
+    "last_ok": "2026-07-29T15:49:28.963498+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -32,7 +32,7 @@
     "hemp_relevant": 0
   },
   "https://indhemp.com/feed": {
-    "last_ok": "2026-07-29T10:39:50.058931+00:00",
+    "last_ok": "2026-07-29T15:49:29.035430+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -40,7 +40,7 @@
     "hemp_relevant": 82
   },
   "https://news.google.com/rss/search?q=industrial+hemp+technology&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:12.277812+00:00",
+    "last_ok": "2026-07-29T15:49:48.344189+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -48,7 +48,7 @@
     "hemp_relevant": 252
   },
   "https://news.google.com/rss/search?q=hemp+innovation+research&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:11.062852+00:00",
+    "last_ok": "2026-07-29T15:49:47.275958+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -56,7 +56,7 @@
     "hemp_relevant": 72
   },
   "https://news.google.com/rss/search?q=hemp+patent+invention&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:04.612928+00:00",
+    "last_ok": "2026-07-29T15:49:41.439993+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -64,7 +64,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=hempcrete+hemp+construction+building&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:28.317869+00:00",
+    "last_ok": "2026-07-29T15:50:05.742284+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -72,7 +72,7 @@
     "hemp_relevant": 78
   },
   "https://news.google.com/rss/search?q=hemp+fashion+sustainable&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:11.439323+00:00",
+    "last_ok": "2026-07-29T15:49:50.660553+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -80,7 +80,7 @@
     "hemp_relevant": 13
   },
   "https://news.google.com/rss/search?q=hemp+textile+fabric+clothing&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:10.679391+00:00",
+    "last_ok": "2026-07-29T15:49:48.706584+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -88,7 +88,7 @@
     "hemp_relevant": 40
   },
   "https://earthmerchant.com/feed": {
-    "last_ok": "2026-07-29T10:39:50.929875+00:00",
+    "last_ok": "2026-07-29T15:49:30.929536+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -96,7 +96,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=hemp+insulation+building+material&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:30.919001+00:00",
+    "last_ok": "2026-07-29T15:50:07.159168+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -104,7 +104,7 @@
     "hemp_relevant": 90
   },
   "https://news.google.com/rss/search?q=hemp+fiber+biocomposite&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:20.442685+00:00",
+    "last_ok": "2026-07-29T15:49:57.771173+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -112,7 +112,7 @@
     "hemp_relevant": 83
   },
   "https://news.google.com/rss/search?q=hemp+bioplastic+composite+material&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:22.558312+00:00",
+    "last_ok": "2026-07-29T15:49:59.916997+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -120,7 +120,7 @@
     "hemp_relevant": 85
   },
   "https://news.google.com/rss/search?q=hemp+agriculture+farming+crop&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:31.057553+00:00",
+    "last_ok": "2026-07-29T15:50:09.702182+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -128,7 +128,7 @@
     "hemp_relevant": 15
   },
   "https://news.google.com/rss/search?q=hemp+cultivation+harvest&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:44.259258+00:00",
+    "last_ok": "2026-07-29T15:50:22.138202+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -136,7 +136,7 @@
     "hemp_relevant": 26
   },
   "https://news.google.com/rss/search?q=hemp+protein+oil+food&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:45.383222+00:00",
+    "last_ok": "2026-07-29T15:50:23.394162+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -144,7 +144,7 @@
     "hemp_relevant": 6
   },
   "https://news.google.com/rss/search?q=hemp+automotive+car+industry&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:48.227595+00:00",
+    "last_ok": "2026-07-29T15:50:26.204698+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -152,7 +152,7 @@
     "hemp_relevant": 17
   },
   "https://news.google.com/rss/search?q=hemp+battery+supercapacitor+energy&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:34.958761+00:00",
+    "last_ok": "2026-07-29T15:50:13.654955+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -160,7 +160,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=hemp+seed+food+nutrition&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:40.581584+00:00",
+    "last_ok": "2026-07-29T15:50:18.470228+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -168,7 +168,7 @@
     "hemp_relevant": 64
   },
   "https://news.google.com/rss/search?q=hemp+paper+pulp+packaging&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:44.713992+00:00",
+    "last_ok": "2026-07-29T15:50:23.925641+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -176,7 +176,7 @@
     "hemp_relevant": 73
   },
   "https://news.google.com/rss/search?q=hemp+cosmetics+skincare+beauty&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:53.801796+00:00",
+    "last_ok": "2026-07-29T15:50:32.655891+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -184,7 +184,7 @@
     "hemp_relevant": 15
   },
   "https://news.google.com/rss/search?q=hemp+environment+green+planet&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:00.101720+00:00",
+    "last_ok": "2026-07-29T15:50:40.415076+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -192,7 +192,7 @@
     "hemp_relevant": 16
   },
   "https://news.google.com/rss/search?q=hemp+sustainability+eco+carbon&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:40:57.942006+00:00",
+    "last_ok": "2026-07-29T15:50:37.911821+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -200,7 +200,7 @@
     "hemp_relevant": 34
   },
   "https://news.google.com/rss/search?q=hemp+legislation+regulation+farm+bill&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:35.107558+00:00",
+    "last_ok": "2026-07-29T15:50:46.716976+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -208,7 +208,7 @@
     "hemp_relevant": 356
   },
   "https://news.google.com/rss/search?q=hemp+industry+market+business&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:13.264004+00:00",
+    "last_ok": "2026-07-29T15:51:24.238566+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -216,7 +216,7 @@
     "hemp_relevant": 118
   },
   "https://news.google.com/rss/search?q=hemp+battery+graphene+supercapacitor&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:08.126506+00:00",
+    "last_ok": "2026-07-29T15:50:49.033586+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -224,7 +224,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=hemp+bioplastic+automotive+composite&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:05.556867+00:00",
+    "last_ok": "2026-07-29T15:50:46.108235+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -232,7 +232,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=hemp+startup+investment+funding&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:41:21.766693+00:00",
+    "last_ok": "2026-07-29T15:50:50.680892+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -240,7 +240,7 @@
     "hemp_relevant": 29
   },
   "https://news.google.com/rss/search?q=hemp+legislation+law+2025+2026&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:42:10.293548+00:00",
+    "last_ok": "2026-07-29T15:51:27.066863+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -248,7 +248,7 @@
     "hemp_relevant": 13
   },
   "https://news.google.com/rss/search?q=hemp+canada+industry&hl=en&gl=CA&ceid=CA:en": {
-    "last_ok": "2026-07-29T10:42:23.647833+00:00",
+    "last_ok": "2026-07-29T15:51:45.376276+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -256,7 +256,7 @@
     "hemp_relevant": 73
   },
   "https://news.google.com/rss/search?q=hemp+uk+industry&hl=en&gl=GB&ceid=GB:en": {
-    "last_ok": "2026-07-29T10:42:20.092796+00:00",
+    "last_ok": "2026-07-29T15:51:45.102640+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -264,7 +264,7 @@
     "hemp_relevant": 20
   },
   "https://news.google.com/rss/search?q=hemp+farming+canada&hl=en&gl=CA&ceid=CA:en": {
-    "last_ok": "2026-07-29T10:42:20.227730+00:00",
+    "last_ok": "2026-07-29T15:51:46.751067+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -272,7 +272,7 @@
     "hemp_relevant": 58
   },
   "https://news.google.com/rss/search?q=industrial+hemp+EU+regulation&hl=en&gl=GB&ceid=GB:en": {
-    "last_ok": "2026-07-29T10:41:47.463652+00:00",
+    "last_ok": "2026-07-29T15:51:53.226414+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -280,7 +280,7 @@
     "hemp_relevant": 71
   },
   "https://news.google.com/rss/search?q=hemp+europe+industry&hl=en&gl=GB&ceid=GB:en": {
-    "last_ok": "2026-07-29T10:41:41.282671+00:00",
+    "last_ok": "2026-07-29T15:52:03.224460+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -288,7 +288,7 @@
     "hemp_relevant": 183
   },
   "https://news.google.com/rss/search?q=hemp+netherlands+industry&hl=en&gl=NL&ceid=NL:en": {
-    "last_ok": "2026-07-29T10:42:21.113740+00:00",
+    "last_ok": "2026-07-29T15:52:03.307930+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -296,7 +296,7 @@
     "hemp_relevant": 36
   },
   "https://news.google.com/rss/search?q=Hanf+Industrie+Deutschland&hl=de&gl=DE&ceid=DE:de": {
-    "last_ok": "2026-07-29T10:42:17.565634+00:00",
+    "last_ok": "2026-07-29T15:51:53.745612+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -304,7 +304,7 @@
     "hemp_relevant": 50
   },
   "https://news.google.com/rss/search?q=konop%C3%AD+pr%C5%AFmyslov%C3%A9&hl=cs&gl=CZ&ceid=CZ:cs": {
-    "last_ok": "2026-07-29T10:42:32.197855+00:00",
+    "last_ok": "2026-07-29T15:52:15.950677+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -312,7 +312,7 @@
     "hemp_relevant": 27
   },
   "https://news.google.com/rss/search?q=chanvre+industriel+france&hl=fr&gl=FR&ceid=FR:fr": {
-    "last_ok": "2026-07-29T10:42:33.588444+00:00",
+    "last_ok": "2026-07-29T15:52:08.457952+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -320,7 +320,7 @@
     "hemp_relevant": 70
   },
   "https://news.google.com/rss/search?q=hemp+germany+industry&hl=en&gl=DE&ceid=DE:en": {
-    "last_ok": "2026-07-29T10:42:36.507636+00:00",
+    "last_ok": "2026-07-29T15:52:08.097377+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -328,15 +328,15 @@
     "hemp_relevant": 16
   },
   "https://news.google.com/rss/search?q=canapa+industriale+italia&hl=it&gl=IT&ceid=IT:it": {
-    "last_ok": "2026-07-29T10:42:41.275256+00:00",
+    "last_ok": "2026-07-29T15:52:17.489019+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
-    "articles_found": 152,
-    "hemp_relevant": 152
+    "articles_found": 153,
+    "hemp_relevant": 153
   },
   "https://news.google.com/rss/search?q=hemp+czech+republic&hl=en&gl=CZ&ceid=CZ:en": {
-    "last_ok": "2026-07-29T10:42:38.399386+00:00",
+    "last_ok": "2026-07-29T15:52:20.609450+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -344,7 +344,7 @@
     "hemp_relevant": 18
   },
   "https://news.google.com/rss/search?q=konopie+przemys%C5%82owe+polska&hl=pl&gl=PL&ceid=PL:pl": {
-    "last_ok": "2026-07-29T10:42:40.460025+00:00",
+    "last_ok": "2026-07-29T15:52:18.057628+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -352,7 +352,7 @@
     "hemp_relevant": 45
   },
   "https://news.google.com/rss/search?q=china+hemp+textile+production&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:42:47.678244+00:00",
+    "last_ok": "2026-07-29T15:52:29.046893+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -360,7 +360,7 @@
     "hemp_relevant": 126
   },
   "https://news.google.com/rss/search?q=hemp+china+industry&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:42:49.802235+00:00",
+    "last_ok": "2026-07-29T15:52:26.111751+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -368,7 +368,7 @@
     "hemp_relevant": 51
   },
   "https://news.google.com/rss/search?q=hemp+india+industry&hl=en&gl=IN&ceid=IN:en": {
-    "last_ok": "2026-07-29T10:42:56.833634+00:00",
+    "last_ok": "2026-07-29T15:52:38.289363+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -376,7 +376,7 @@
     "hemp_relevant": 105
   },
   "https://news.google.com/rss/search?q=hemp+india+textile+agriculture&hl=en&gl=IN&ceid=IN:en": {
-    "last_ok": "2026-07-29T10:42:51.411866+00:00",
+    "last_ok": "2026-07-29T15:52:30.119659+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -384,7 +384,7 @@
     "hemp_relevant": 106
   },
   "https://news.google.com/rss/search?q=hemp+industry+korea&hl=en&gl=KR&ceid=KR:en": {
-    "last_ok": "2026-07-29T10:43:07.040322+00:00",
+    "last_ok": "2026-07-29T15:52:47.774504+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -392,7 +392,7 @@
     "hemp_relevant": 92
   },
   "https://news.google.com/rss/search?q=hemp+industry+japan&hl=en&gl=JP&ceid=JP:en": {
-    "last_ok": "2026-07-29T10:43:03.954614+00:00",
+    "last_ok": "2026-07-29T15:52:43.846361+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -400,7 +400,7 @@
     "hemp_relevant": 6
   },
   "https://news.google.com/rss/search?q=c%C3%A2nhamo+industrial+brasil&hl=pt&gl=BR&ceid=BR:pt": {
-    "last_ok": "2026-07-29T10:43:12.406086+00:00",
+    "last_ok": "2026-07-29T15:52:53.659436+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -408,7 +408,7 @@
     "hemp_relevant": 135
   },
   "https://news.google.com/rss/search?q=hemp%20Ukraine%20investment&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:43:02.921399+00:00",
+    "last_ok": "2026-07-29T15:52:45.062462+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -416,7 +416,7 @@
     "hemp_relevant": 28
   },
   "https://news.google.com/rss/search?q=EIHA%20hemp%20Europe&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:43:06.632482+00:00",
+    "last_ok": "2026-07-29T15:52:48.750859+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -424,7 +424,7 @@
     "hemp_relevant": 2
   },
   "https://news.google.com/rss/search?q=hemp%20Ukraine%20export&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:43:09.955880+00:00",
+    "last_ok": "2026-07-29T15:52:51.891594+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -432,7 +432,7 @@
     "hemp_relevant": 29
   },
   "https://news.google.com/rss/search?q=hemp%20Spain%20industry&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:44:27.199404+00:00",
+    "last_ok": "2026-07-29T15:53:15.915864+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -440,15 +440,15 @@
     "hemp_relevant": 74
   },
   "https://news.google.com/rss/search?q=hemp+australia+industry&hl=en&gl=AU&ceid=AU:en": {
-    "last_ok": "2026-07-29T10:43:03.630984+00:00",
+    "last_ok": "2026-07-29T15:52:45.866343+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
-    "articles_found": 368,
-    "hemp_relevant": 368
+    "articles_found": 369,
+    "hemp_relevant": 369
   },
   "https://news.google.com/rss/search?q=hemp%20Romania%20industry&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:43:33.791958+00:00",
+    "last_ok": "2026-07-29T15:53:42.603646+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -456,7 +456,7 @@
     "hemp_relevant": 129
   },
   "https://news.google.com/rss/search?q=hemp+ukraine+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:43:43.785053+00:00",
+    "last_ok": "2026-07-29T15:53:07.821302+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -464,7 +464,7 @@
     "hemp_relevant": 18
   },
   "https://news.google.com/rss/search?q=hemp%20Lithuania%20Latvia%20hemp&hl=en&gl=US&ceid=US:en": {
-    "last_ok": "2026-07-29T10:43:09.235205+00:00",
+    "last_ok": "2026-07-29T15:52:51.289879+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -472,7 +472,7 @@
     "hemp_relevant": 2
   },
   "https://news.google.com/rss/search?q=%D0%BF%D1%80%D0%BE%D0%BC%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:18.360339+00:00",
+    "last_ok": "2026-07-29T15:53:47.654417+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -480,7 +480,7 @@
     "hemp_relevant": 63
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9+%D0%B1%D0%B5%D1%82%D0%BE%D0%BD&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:07.633532+00:00",
+    "last_ok": "2026-07-29T15:53:51.422633+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -488,7 +488,7 @@
     "hemp_relevant": 20
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:43:43.060421+00:00",
+    "last_ok": "2026-07-29T15:53:56.690864+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -496,15 +496,15 @@
     "hemp_relevant": 61
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:45:35.854511+00:00",
+    "last_ok": "2026-07-29T15:54:56.467506+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
-    "articles_found": 3864,
-    "hemp_relevant": 3864
+    "articles_found": 3911,
+    "hemp_relevant": 3911
   },
   "https://news.google.com/rss/search?q=hemp+ukraine&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:22.673372+00:00",
+    "last_ok": "2026-07-29T15:54:06.650158+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -512,7 +512,7 @@
     "hemp_relevant": 45
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B5%20%D0%B2%D0%BE%D0%BB%D0%BE%D0%BA%D0%BD%D0%BE&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:19.384302+00:00",
+    "last_ok": "2026-07-29T15:53:53.907226+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -520,7 +520,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=%D1%82%D0%B5%D1%85%D0%BD%D1%96%D1%87%D0%BD%D1%96+%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:17.222304+00:00",
+    "last_ok": "2026-07-29T15:54:10.887349+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -528,7 +528,7 @@
     "hemp_relevant": 64
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BE%D0%BB%D1%96%D1%8F&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:22.958896+00:00",
+    "last_ok": "2026-07-29T15:53:59.136517+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -536,7 +536,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B8%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:21.452325+00:00",
+    "last_ok": "2026-07-29T15:53:58.955860+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -544,7 +544,7 @@
     "hemp_relevant": 69
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B8%D0%B9%20%D0%B1%D1%96%D0%B7%D0%BD%D0%B5%D1%81&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:27.164840+00:00",
+    "last_ok": "2026-07-29T15:54:04.069742+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -552,7 +552,7 @@
     "hemp_relevant": 20
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D0%B5%D0%BF%D0%B5%D1%80%D0%B5%D1%80%D0%BE%D0%B1%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:23.189300+00:00",
+    "last_ok": "2026-07-29T15:54:04.281798+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -560,7 +560,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%96%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:41.206015+00:00",
+    "last_ok": "2026-07-29T15:54:22.139569+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -568,7 +568,7 @@
     "hemp_relevant": 20
   },
   "https://news.google.com/rss/search?q=%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D0%B0%20%D0%BA%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:37.861202+00:00",
+    "last_ok": "2026-07-29T15:54:20.838529+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -576,7 +576,7 @@
     "hemp_relevant": 0
   },
   "https://news.google.com/rss/search?q=%D0%BD%D0%B0%D1%81%D1%96%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:36.640276+00:00",
+    "last_ok": "2026-07-29T15:54:19.660732+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -584,7 +584,7 @@
     "hemp_relevant": 152
   },
   "https://news.google.com/rss/search?q=CBD%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:39.078999+00:00",
+    "last_ok": "2026-07-29T15:54:24.151234+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -592,7 +592,7 @@
     "hemp_relevant": 0
   },
   "https://agroportal.ua/rss": {
-    "last_ok": "2026-07-29T10:44:40.186907+00:00",
+    "last_ok": "2026-07-29T15:54:23.201181+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -600,7 +600,7 @@
     "hemp_relevant": 0
   },
   "https://superagronom.com/rss": {
-    "last_ok": "2026-07-29T10:44:41.147399+00:00",
+    "last_ok": "2026-07-29T15:54:24.232994+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -608,7 +608,7 @@
     "hemp_relevant": 0
   },
   "https://agrotimes.ua/feed/": {
-    "last_ok": "2026-07-29T10:44:39.079671+00:00",
+    "last_ok": "2026-07-29T15:54:21.986993+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -616,15 +616,15 @@
     "hemp_relevant": 28
   },
   "https://news.google.com/rss/search?q=%D0%B2%D0%B8%D1%80%D0%BE%D1%89%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%BA%D0%BE%D0%BD%D0%BE%D0%BF%D0%B5%D0%BB%D1%8C&hl=uk&gl=UA&ceid=UA:uk": {
-    "last_ok": "2026-07-29T10:44:47.946769+00:00",
+    "last_ok": "2026-07-29T15:54:35.204241+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
-    "articles_found": 968,
-    "hemp_relevant": 968
+    "articles_found": 976,
+    "hemp_relevant": 976
   },
   "https://hempbuildermag.com/feed/": {
-    "last_ok": "2026-07-29T10:39:49.164822+00:00",
+    "last_ok": "2026-07-29T15:49:28.014971+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -632,7 +632,7 @@
     "hemp_relevant": 0
   },
   "https://www.hemptodaymag.com/feed/": {
-    "last_ok": "2026-07-29T10:39:49.155730+00:00",
+    "last_ok": "2026-07-29T15:49:27.993992+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -640,7 +640,7 @@
     "hemp_relevant": 0
   },
   "https://www.mjbizdaily.com/hemp/feed/": {
-    "last_ok": "2026-07-29T10:39:50.897735+00:00",
+    "last_ok": "2026-07-29T15:49:29.537911+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
@@ -648,7 +648,7 @@
     "hemp_relevant": 0
   },
   "https://latifundist.com/feed": {
-    "last_ok": "2026-07-29T10:44:40.666133+00:00",
+    "last_ok": "2026-07-29T15:54:23.259339+00:00",
     "last_fail": null,
     "fail_count": 0,
     "consecutive_fails": 0,
